@@ -7,36 +7,39 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'NXKit'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of NXKit.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
-
-  s.homepage         = 'https://github.com/niegaotao/NXKit'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'niegaotao' => 'niegaotao@163.com' }
-  s.source           = { :git => 'https://github.com/niegaotao/NXKit.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
-  s.ios.deployment_target = '8.0'
-
-  s.source_files = 'NXKit/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'NXKit' => ['NXKit/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+    s.name             = 'NXKit'
+    s.version          = '0.1.0'
+    s.summary          = 'A short description of NXKit.'
+    
+    # This description is used to generate tags and improve search results.
+    #   * Think: What does it do? Why did you write it? What is the focus?
+    #   * Try to keep it short, snappy and to the point.
+    #   * Write the description between the DESC delimiters below.
+    #   * Finally, don't worry about the indent, CocoaPods strips it!
+    
+    s.description      = <<-DESC
+    这是一个工具库集合，主要包括如下内容：
+    1.功能1-功能1描述
+    2.功能2-功能1描述
+    3.功能3-功能1描述
+    DESC
+    
+    s.homepage         = 'https://github.com/niegaotao/NXKit'
+    # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+    s.license          = { :type => 'MIT', :file => 'LICENSE' }
+    s.author           = { 'niegaotao' => 'niegaotao@163.com' }
+    s.source           = { :git => 'https://github.com/niegaotao/NXKit.git', :tag => s.version.to_s }
+    # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+    
+    s.ios.deployment_target = '8.0'
+    
+    s.source_files = 'NXKit/Classes/**/*'
+    
+    # s.resource_bundles = {
+    #   'NXKit' => ['NXKit/Assets/*.png']
+    # }
+    
+    # s.public_header_files = 'Pod/Classes/**/*.h'
+    # s.frameworks = 'UIKit', 'MapKit'
+    # s.dependency 'AFNetworking', '~> 2.3'
 end
