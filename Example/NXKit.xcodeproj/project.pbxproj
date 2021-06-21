@@ -16,7 +16,7 @@
 		C9F562EF26807A9300C864E4 /* RRXCAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562EA26807A9200C864E4 /* RRXCAnimationView.swift */; };
 		C9F562F026807A9300C864E4 /* NXMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562EB26807A9200C864E4 /* NXMasterViewController.swift */; };
 		C9F562F126807A9300C864E4 /* NXDesktopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562EC26807A9200C864E4 /* NXDesktopViewController.swift */; };
-		C9F562F226807A9300C864E4 /* NXToolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562ED26807A9300C864E4 /* NXToolViewController.swift */; };
+		C9F562F226807A9300C864E4 /* NXSubdesktopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562ED26807A9300C864E4 /* NXSubdesktopViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +33,7 @@
 		C9F562EA26807A9200C864E4 /* RRXCAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRXCAnimationView.swift; sourceTree = "<group>"; };
 		C9F562EB26807A9200C864E4 /* NXMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXMasterViewController.swift; sourceTree = "<group>"; };
 		C9F562EC26807A9200C864E4 /* NXDesktopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXDesktopViewController.swift; sourceTree = "<group>"; };
-		C9F562ED26807A9300C864E4 /* NXToolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXToolViewController.swift; sourceTree = "<group>"; };
+		C9F562ED26807A9300C864E4 /* NXSubdesktopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXSubdesktopViewController.swift; sourceTree = "<group>"; };
 		E87B81609140EAE65B0F6F8A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		EAB4E1DCC4FA419B807E249C /* Pods-NXKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NXKit_Example.release.xcconfig"; path = "Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		F52578292D8536F89334B186 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				C9F562EC26807A9200C864E4 /* NXDesktopViewController.swift */,
 				C9F562EB26807A9200C864E4 /* NXMasterViewController.swift */,
-				C9F562ED26807A9300C864E4 /* NXToolViewController.swift */,
+				C9F562ED26807A9300C864E4 /* NXSubdesktopViewController.swift */,
 				C9F562EA26807A9200C864E4 /* RRXCAnimationView.swift */,
 				C9F562E926807A9200C864E4 /* RRXCAuthorizeManager.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -242,7 +242,7 @@
 			files = (
 				C9F562F026807A9300C864E4 /* NXMasterViewController.swift in Sources */,
 				C9F562EE26807A9300C864E4 /* RRXCAuthorizeManager.swift in Sources */,
-				C9F562F226807A9300C864E4 /* NXToolViewController.swift in Sources */,
+				C9F562F226807A9300C864E4 /* NXSubdesktopViewController.swift in Sources */,
 				C9F562F126807A9300C864E4 /* NXDesktopViewController.swift in Sources */,
 				C9F562EF26807A9300C864E4 /* RRXCAnimationView.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,

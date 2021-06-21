@@ -23,26 +23,26 @@ extension RRXCAuthorizeManager {
 
 open class RRXCAuthorizeManager {
     //获取授权/请求授权入口
-    open class func authorization(_ type: LEYApp.AuthorizeType, _ queue:DispatchQueue, _ completion:((LEYApp.AuthorizeState) -> ())?, _ alert: Bool = true){
-        if type == LEYApp.AuthorizeType.album {
+    open class func authorization(_ type: NXApp.AuthorizeType, _ queue:DispatchQueue, _ completion:((NXApp.AuthorizeState) -> ())?, _ alert: Bool = true){
+        if type == NXApp.AuthorizeType.album {
             self.albumAuthorization(queue, alert, completion)
         }
-        else if type == LEYApp.AuthorizeType.camera {
+        else if type == NXApp.AuthorizeType.camera {
             self.cameraAuthorization(queue, alert, completion)
         }
-        else if type == LEYApp.AuthorizeType.microphone {
+        else if type == NXApp.AuthorizeType.microphone {
             self.microphoneAuthorization(queue, alert, completion)
         }
-        else if type == LEYApp.AuthorizeType.apns {
+        else if type == NXApp.AuthorizeType.apns {
             self.apnsAuthorization(queue, alert, completion)
         }
-        else if type == LEYApp.AuthorizeType.network {
+        else if type == NXApp.AuthorizeType.network {
             self.networkAuthorization(queue, alert,  completion)
         }
     }
     
     
-    private class func albumAuthorization(_ queue:DispatchQueue, _ alert:Bool, _ completion:((LEYApp.AuthorizeState) -> ())?){
+    private class func albumAuthorization(_ queue:DispatchQueue, _ alert:Bool, _ completion:((NXApp.AuthorizeState) -> ())?){
         let status = PHPhotoLibrary.authorizationStatus()
         if status == .authorized {
             queue.async {
@@ -77,7 +77,7 @@ open class RRXCAuthorizeManager {
         }
     }
     
-    private class func cameraAuthorization(_ queue:DispatchQueue, _ alert: Bool, _ completion:((LEYApp.AuthorizeState) -> ())?){
+    private class func cameraAuthorization(_ queue:DispatchQueue, _ alert: Bool, _ completion:((NXApp.AuthorizeState) -> ())?){
         let status = AVCaptureDevice.authorizationStatus(for: .video)
         if status ==  .authorized{
             queue.async {
@@ -107,7 +107,7 @@ open class RRXCAuthorizeManager {
         }
     }
     
-    private class func microphoneAuthorization(_ queue:DispatchQueue, _ alert: Bool, _ completion:((LEYApp.AuthorizeState) -> ())?) {
+    private class func microphoneAuthorization(_ queue:DispatchQueue, _ alert: Bool, _ completion:((NXApp.AuthorizeState) -> ())?) {
         let status = AVCaptureDevice.authorizationStatus(for: .audio)
         if status ==  .authorized{
             queue.async {
@@ -138,7 +138,7 @@ open class RRXCAuthorizeManager {
     }
 
     
-    private class func apnsAuthorization(_ queue:DispatchQueue, _ alert: Bool, _ completion:((LEYApp.AuthorizeState) -> ())?){
+    private class func apnsAuthorization(_ queue:DispatchQueue, _ alert: Bool, _ completion:((NXApp.AuthorizeState) -> ())?){
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().getNotificationSettings{(setting) in
                 if setting.authorizationStatus == .authorized {
@@ -179,32 +179,32 @@ open class RRXCAuthorizeManager {
         }
     }
     
-    private class func networkAuthorization(_ queue:DispatchQueue, _ alert: Bool, _ completion:((LEYApp.AuthorizeState) -> ())?) {
+    private class func networkAuthorization(_ queue:DispatchQueue, _ alert: Bool, _ completion:((NXApp.AuthorizeState) -> ())?) {
         queue.async {
             completion?(.authorized)
         }
     }
     
-    open class func description(_ type: LEYApp.AuthorizeType) -> (title:String,subtitle:String,content:String){
-        if type == LEYApp.AuthorizeType.album {
+    open class func description(_ type: NXApp.AuthorizeType) -> (title:String,subtitle:String,content:String){
+        if type == NXApp.AuthorizeType.album {
             return RRXCAuthorizeManager.Popup.album
         }
-        else if type == LEYApp.AuthorizeType.camera{
+        else if type == NXApp.AuthorizeType.camera{
             return RRXCAuthorizeManager.Popup.camera
         }
-        else if type == LEYApp.AuthorizeType.apns {
+        else if type == NXApp.AuthorizeType.apns {
             return RRXCAuthorizeManager.Popup.apns
         }
-        else if type == LEYApp.AuthorizeType.network {
+        else if type == NXApp.AuthorizeType.network {
             return RRXCAuthorizeManager.Popup.network
         }
-        else if type == LEYApp.AuthorizeType.microphone {
+        else if type == NXApp.AuthorizeType.microphone {
             return RRXCAuthorizeManager.Popup.microphone
         }
         return ("", "", "")
     }
     
-    open class func authorizationViewDisplay(_ type: LEYApp.AuthorizeType, _ completion:((_ index:Int) -> ())? = nil){
+    open class func authorizationViewDisplay(_ type: NXApp.AuthorizeType, _ completion:((_ index:Int) -> ())? = nil){
         
         
     }
