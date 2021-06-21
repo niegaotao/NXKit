@@ -7,16 +7,104 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0EB6D6DD83FEE796708EE82DCDFDFCED /* Pods-NXKit_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B1A79B6E69DAF41BBDF6EFD304C81947 /* Pods-NXKit_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2630CCAF1A302D1327BBD595CCE0BACF /* Pods-NXKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 10AE93655ACEEC00134C8920111E764A /* Pods-NXKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2686171CBEFAAA74EB21A9AD0D39B06B /* Pods-NXKit_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CA57B290C63922ECD0FBB8FEE78CF798 /* Pods-NXKit_Tests-dummy.m */; };
 		2AD777DCEB3C754790DCDE1464B2C06E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
 		2D0C0C49DE6CDA2722D1CCD3F9D53C64 /* NXKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 998F1AE90A73D129A821063D7432258A /* NXKit-dummy.m */; };
 		301AA2D5C66784CE5C1F250CC13063F7 /* NXKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 49EDB61DDB99ECFC61FBB91157D6400B /* NXKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3F9F9D0A58B30779D3E297C865313BCE /* Pods-NXKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2772E81E7729184016253D7BE0AFBC1C /* Pods-NXKit_Example-dummy.m */; };
 		8A58FC49744A16F194CDC06299FABC99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
 		BCEDF78A270E95D18A4C4D31ECC187BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
-		C90440742266D57800205F69 /* NXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90440732266D57800205F69 /* NXViewController.swift */; };
+		C9F56241268074F000C864E4 /* navi_close_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56231268074EF00C864E4 /* navi_close_black@3x.png */; };
+		C9F56242268074F000C864E4 /* navi_more_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56232268074EF00C864E4 /* navi_more_white@2x.png */; };
+		C9F56243268074F000C864E4 /* navi_close_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56233268074EF00C864E4 /* navi_close_black@2x.png */; };
+		C9F56244268074F000C864E4 /* uiapp_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56234268074EF00C864E4 /* uiapp_arrow@2x.png */; };
+		C9F56245268074F000C864E4 /* navi_more_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56235268074F000C864E4 /* navi_more_black@2x.png */; };
+		C9F56246268074F000C864E4 /* navi_more_white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56236268074F000C864E4 /* navi_more_white@3x.png */; };
+		C9F56247268074F000C864E4 /* navi_more_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56237268074F000C864E4 /* navi_more_gray@2x.png */; };
+		C9F56248268074F000C864E4 /* navi_more_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56238268074F000C864E4 /* navi_more_black@3x.png */; };
+		C9F56249268074F000C864E4 /* uiapp_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56239268074F000C864E4 /* uiapp_arrow@3x.png */; };
+		C9F5624A268074F000C864E4 /* uiapp_overlay_close_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F5623A268074F000C864E4 /* uiapp_overlay_close_black@3x.png */; };
+		C9F5624B268074F000C864E4 /* navi_back_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F5623B268074F000C864E4 /* navi_back_black@2x.png */; };
+		C9F5624C268074F000C864E4 /* navi_more_gray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F5623C268074F000C864E4 /* navi_more_gray@3x.png */; };
+		C9F5624D268074F000C864E4 /* navi_back_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F5623D268074F000C864E4 /* navi_back_black@3x.png */; };
+		C9F5624E268074F000C864E4 /* uiapp_overlay_close_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F5623E268074F000C864E4 /* uiapp_overlay_close_black@2x.png */; };
+		C9F5624F268074F000C864E4 /* uiapp_overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F5623F268074F000C864E4 /* uiapp_overlay@2x.png */; };
+		C9F56250268074F000C864E4 /* uiapp_overlay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56240268074F000C864E4 /* uiapp_overlay@3x.png */; };
+		C9F5629E2680763600C864E4 /* LEYLRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562522680763500C864E4 /* LEYLRView.swift */; };
+		C9F5629F2680763600C864E4 /* LEYTransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562532680763500C864E4 /* LEYTransitionView.swift */; };
+		C9F562A02680763600C864E4 /* LEYActionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562542680763500C864E4 /* LEYActionViewCell.swift */; };
+		C9F562A12680763600C864E4 /* LEYRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562552680763500C864E4 /* LEYRouter.swift */; };
+		C9F562A22680763600C864E4 /* LEYNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562562680763500C864E4 /* LEYNavigationController.swift */; };
+		C9F562A32680763600C864E4 /* LEYWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562572680763500C864E4 /* LEYWebView.swift */; };
+		C9F562A42680763600C864E4 /* LEYNaviView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562582680763500C864E4 /* LEYNaviView.swift */; };
+		C9F562A52680763600C864E4 /* LEYString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562592680763500C864E4 /* LEYString.swift */; };
+		C9F562A62680763600C864E4 /* LEYLCRView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5625A2680763500C864E4 /* LEYLCRView+.swift */; };
+		C9F562A72680763600C864E4 /* LEYCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5625B2680763500C864E4 /* LEYCollectionReusableView.swift */; };
+		C9F562A82680763600C864E4 /* LEYSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5625C2680763500C864E4 /* LEYSerialization.swift */; };
+		C9F562A92680763600C864E4 /* LEYCollectionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5625D2680763500C864E4 /* LEYCollectionWrapper.swift */; };
+		C9F562AA2680763600C864E4 /* LEYShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5625E2680763500C864E4 /* LEYShadow.swift */; };
+		C9F562AB2680763600C864E4 /* LEYApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5625F2680763500C864E4 /* LEYApp.swift */; };
+		C9F562AC2680763600C864E4 /* LEYViewProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562602680763500C864E4 /* LEYViewProxy.swift */; };
+		C9F562AD2680763600C864E4 /* LEYToolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562612680763500C864E4 /* LEYToolViewController.swift */; };
+		C9F562AE2680763600C864E4 /* LEYActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562622680763600C864E4 /* LEYActionView.swift */; };
+		C9F562AF2680763600C864E4 /* LEYWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562632680763600C864E4 /* LEYWebViewController.swift */; };
+		C9F562B02680763600C864E4 /* LEYSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562642680763600C864E4 /* LEYSwitch.swift */; };
+		C9F562B12680763600C864E4 /* LEYOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562652680763600C864E4 /* LEYOverlay.swift */; };
+		C9F562B22680763600C864E4 /* LEYTableWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562662680763600C864E4 /* LEYTableWrapper.swift */; };
+		C9F562B32680763600C864E4 /* LEYCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562672680763600C864E4 /* LEYCollectionViewCell.swift */; };
+		C9F562B42680763600C864E4 /* String+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562682680763600C864E4 /* String+LEYFoundation.swift */; };
+		C9F562B52680763600C864E4 /* LEYButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562692680763600C864E4 /* LEYButton.swift */; };
+		C9F562B62680763600C864E4 /* UILabel+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5626A2680763600C864E4 /* UILabel+LEYFoundation.swift */; };
+		C9F562B72680763600C864E4 /* LEYAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5626B2680763600C864E4 /* LEYAction.swift */; };
+		C9F562B82680763600C864E4 /* LEYAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5626C2680763600C864E4 /* LEYAnimator.swift */; };
+		C9F562B92680763600C864E4 /* LEYXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5626D2680763600C864E4 /* LEYXView.swift */; };
+		C9F562BA2680763600C864E4 /* LEYApp+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5626E2680763600C864E4 /* LEYApp+.swift */; };
+		C9F562BB2680763600C864E4 /* LEYCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5626F2680763600C864E4 /* LEYCollectionViewController.swift */; };
+		C9F562BC2680763600C864E4 /* LEYDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562702680763600C864E4 /* LEYDevice.swift */; };
+		C9F562BD2680763600C864E4 /* LEYAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562712680763600C864E4 /* LEYAnimationView.swift */; };
+		C9F562BE2680763600C864E4 /* LEYObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562722680763600C864E4 /* LEYObject.swift */; };
+		C9F562BF2680763600C864E4 /* LEYSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562732680763600C864E4 /* LEYSubscriber.swift */; };
+		C9F562C02680763600C864E4 /* LEYTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562742680763600C864E4 /* LEYTableViewController.swift */; };
+		C9F562C12680763600C864E4 /* LEYHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562752680763600C864E4 /* LEYHUD.swift */; };
+		C9F562C22680763600C864E4 /* LEYItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562762680763600C864E4 /* LEYItem.swift */; };
+		C9F562C32680763600C864E4 /* LEYImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562772680763600C864E4 /* LEYImageView.swift */; };
+		C9F562C42680763600C864E4 /* UIButton+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562782680763600C864E4 /* UIButton+LEYFoundation.swift */; };
+		C9F562C52680763600C864E4 /* LEYTableReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562792680763600C864E4 /* LEYTableReusableView.swift */; };
+		C9F562C62680763600C864E4 /* LEYCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5627A2680763600C864E4 /* LEYCView.swift */; };
+		C9F562C72680763600C864E4 /* LEYToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5627B2680763600C864E4 /* LEYToolView.swift */; };
+		C9F562C82680763600C864E4 /* LEYControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5627C2680763600C864E4 /* LEYControl.swift */; };
+		C9F562C92680763600C864E4 /* LEYDrawableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5627D2680763600C864E4 /* LEYDrawableView.swift */; };
+		C9F562CA2680763600C864E4 /* LEYLRView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5627E2680763600C864E4 /* LEYLRView+.swift */; };
+		C9F562CB2680763600C864E4 /* CAAnimation+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5627F2680763600C864E4 /* CAAnimation+LEYFoundation.swift */; };
+		C9F562CC2680763600C864E4 /* UIView+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562802680763600C864E4 /* UIView+LEYFoundation.swift */; };
+		C9F562CD2680763600C864E4 /* LEYLCRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562812680763600C864E4 /* LEYLCRView.swift */; };
+		C9F562CE2680763600C864E4 /* LEYBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562822680763600C864E4 /* LEYBackgroundView.swift */; };
+		C9F562CF2680763600C864E4 /* UserDefaults+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562832680763600C864E4 /* UserDefaults+LEYFoundation.swift */; };
+		C9F562D02680763600C864E4 /* LEYActionView+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562842680763600C864E4 /* LEYActionView+LEYFoundation.swift */; };
+		C9F562D12680763600C864E4 /* LEYSuspendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562852680763600C864E4 /* LEYSuspendView.swift */; };
+		C9F562D22680763600C864E4 /* LEYTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562862680763600C864E4 /* LEYTableViewCell.swift */; };
+		C9F562D32680763600C864E4 /* LEYFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562872680763600C864E4 /* LEYFS.swift */; };
+		C9F562D42680763600C864E4 /* LEYPrintf.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562882680763600C864E4 /* LEYPrintf.swift */; };
+		C9F562D52680763600C864E4 /* LEYViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562892680763600C864E4 /* LEYViewControllerView.swift */; };
+		C9F562D62680763600C864E4 /* LEYRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5628A2680763600C864E4 /* LEYRuntime.swift */; };
+		C9F562D72680763600C864E4 /* LEYView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5628B2680763600C864E4 /* LEYView.swift */; };
+		C9F562D82680763600C864E4 /* DispatchQueue+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5628C2680763600C864E4 /* DispatchQueue+LEYFoundation.swift */; };
+		C9F562D92680763600C864E4 /* LEYShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5628D2680763600C864E4 /* LEYShadowView.swift */; };
+		C9F562DA2680763600C864E4 /* LEYTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5628E2680763600C864E4 /* LEYTableView.swift */; };
+		C9F562DB2680763600C864E4 /* LEYViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5628F2680763600C864E4 /* LEYViewController.swift */; };
+		C9F562DC2680763600C864E4 /* LEYPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562902680763600C864E4 /* LEYPlaceholderView.swift */; };
+		C9F562DD2680763600C864E4 /* LEYSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562912680763600C864E4 /* LEYSwipeView.swift */; };
+		C9F562DE2680763600C864E4 /* LEYApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562922680763600C864E4 /* LEYApplicationView.swift */; };
+		C9F562DF2680763600C864E4 /* LEYSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562932680763600C864E4 /* LEYSwipeViewController.swift */; };
+		C9F562E02680763600C864E4 /* LEYCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562942680763600C864E4 /* LEYCollectionView.swift */; };
+		C9F562E12680763600C864E4 /* LEYContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562952680763600C864E4 /* LEYContainerController.swift */; };
+		C9F562E22680763600C864E4 /* LEYLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562962680763600C864E4 /* LEYLabel.swift */; };
+		C9F562E32680763600C864E4 /* Timer+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562972680763600C864E4 /* Timer+LEYFoundation.swift */; };
+		C9F562E42680763600C864E4 /* UIImage+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562982680763600C864E4 /* UIImage+LEYFoundation.swift */; };
+		C9F562E52680763600C864E4 /* LEYAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5629A2680763600C864E4 /* LEYAsset.swift */; };
+		C9F562E62680763600C864E4 /* LEYAssetClipImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5629B2680763600C864E4 /* LEYAssetClipImageViewController.swift */; };
+		C9F562E72680763600C864E4 /* LEYAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5629C2680763600C864E4 /* LEYAssetsViewController.swift */; };
+		C9F562E82680763600C864E4 /* LEYClipboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5629D2680763600C864E4 /* LEYClipboardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,16 +126,12 @@
 
 /* Begin PBXFileReference section */
 		011EC4DE3BF9C1050C97BACCCD33DC39 /* Pods-NXKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NXKit_Example.release.xcconfig"; sourceTree = "<group>"; };
-		046C73D758D638FC5785966B911C7B87 /* Pods-NXKit_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NXKit_Tests-Info.plist"; sourceTree = "<group>"; };
 		076CE9DEF0C0982952FE37826E9616C9 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		08667C3F2C632EA4436D54A0654F988A /* Pods-NXKit_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NXKit_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		10561807FA129E04281F0F6AEFE6BEB2 /* Pods-NXKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NXKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		10AE93655ACEEC00134C8920111E764A /* Pods-NXKit_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NXKit_Example-umbrella.h"; sourceTree = "<group>"; };
 		1184A3E5BB124475966ACF8383FB5B48 /* Pods-NXKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-NXKit_Example-frameworks.sh"; sourceTree = "<group>"; };
-		1CD69B9E9D4191487D051E4B9FAAB114 /* Pods-NXKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NXKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		235EF42B613390CE422A045FC45432C0 /* NXKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NXKit.modulemap; sourceTree = "<group>"; };
 		2772E81E7729184016253D7BE0AFBC1C /* Pods-NXKit_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NXKit_Example-dummy.m"; sourceTree = "<group>"; };
-		31A306DFA8B30C722A35D4DD5EF2BB41 /* Pods-NXKit_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NXKit_Tests.modulemap"; sourceTree = "<group>"; };
 		3BD96E84F3ABDF2B22B63A8CF3AB8971 /* Pods_NXKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NXKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		415C38653D88C0784B20A0719DC297EF /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		49EDB61DDB99ECFC61FBB91157D6400B /* NXKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NXKit-umbrella.h"; sourceTree = "<group>"; };
@@ -57,18 +141,104 @@
 		998F1AE90A73D129A821063D7432258A /* NXKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NXKit-dummy.m"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A8BC07488F3612E840171A56CE49B6DC /* Pods-NXKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NXKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		B1A79B6E69DAF41BBDF6EFD304C81947 /* Pods-NXKit_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NXKit_Tests-umbrella.h"; sourceTree = "<group>"; };
 		B340AE6599E4C4437AD50227DF883537 /* NXKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = NXKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B43C398372F5B8CBD14579E29EFF5F69 /* NXKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NXKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C086046D8B7A39DB7662C29BBB3058C0 /* NXKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NXKit.xcconfig; sourceTree = "<group>"; };
-		C90440732266D57800205F69 /* NXViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NXViewController.swift; path = NXKit/Classes/NXViewController.swift; sourceTree = "<group>"; };
-		CA57B290C63922ECD0FBB8FEE78CF798 /* Pods-NXKit_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NXKit_Tests-dummy.m"; sourceTree = "<group>"; };
+		C9F56231268074EF00C864E4 /* navi_close_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_close_black@3x.png"; path = "NXKit/Assets/navi_close_black@3x.png"; sourceTree = "<group>"; };
+		C9F56232268074EF00C864E4 /* navi_more_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_more_white@2x.png"; path = "NXKit/Assets/navi_more_white@2x.png"; sourceTree = "<group>"; };
+		C9F56233268074EF00C864E4 /* navi_close_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_close_black@2x.png"; path = "NXKit/Assets/navi_close_black@2x.png"; sourceTree = "<group>"; };
+		C9F56234268074EF00C864E4 /* uiapp_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "uiapp_arrow@2x.png"; path = "NXKit/Assets/uiapp_arrow@2x.png"; sourceTree = "<group>"; };
+		C9F56235268074F000C864E4 /* navi_more_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_more_black@2x.png"; path = "NXKit/Assets/navi_more_black@2x.png"; sourceTree = "<group>"; };
+		C9F56236268074F000C864E4 /* navi_more_white@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_more_white@3x.png"; path = "NXKit/Assets/navi_more_white@3x.png"; sourceTree = "<group>"; };
+		C9F56237268074F000C864E4 /* navi_more_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_more_gray@2x.png"; path = "NXKit/Assets/navi_more_gray@2x.png"; sourceTree = "<group>"; };
+		C9F56238268074F000C864E4 /* navi_more_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_more_black@3x.png"; path = "NXKit/Assets/navi_more_black@3x.png"; sourceTree = "<group>"; };
+		C9F56239268074F000C864E4 /* uiapp_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "uiapp_arrow@3x.png"; path = "NXKit/Assets/uiapp_arrow@3x.png"; sourceTree = "<group>"; };
+		C9F5623A268074F000C864E4 /* uiapp_overlay_close_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "uiapp_overlay_close_black@3x.png"; path = "NXKit/Assets/uiapp_overlay_close_black@3x.png"; sourceTree = "<group>"; };
+		C9F5623B268074F000C864E4 /* navi_back_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_back_black@2x.png"; path = "NXKit/Assets/navi_back_black@2x.png"; sourceTree = "<group>"; };
+		C9F5623C268074F000C864E4 /* navi_more_gray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_more_gray@3x.png"; path = "NXKit/Assets/navi_more_gray@3x.png"; sourceTree = "<group>"; };
+		C9F5623D268074F000C864E4 /* navi_back_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_back_black@3x.png"; path = "NXKit/Assets/navi_back_black@3x.png"; sourceTree = "<group>"; };
+		C9F5623E268074F000C864E4 /* uiapp_overlay_close_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "uiapp_overlay_close_black@2x.png"; path = "NXKit/Assets/uiapp_overlay_close_black@2x.png"; sourceTree = "<group>"; };
+		C9F5623F268074F000C864E4 /* uiapp_overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "uiapp_overlay@2x.png"; path = "NXKit/Assets/uiapp_overlay@2x.png"; sourceTree = "<group>"; };
+		C9F56240268074F000C864E4 /* uiapp_overlay@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "uiapp_overlay@3x.png"; path = "NXKit/Assets/uiapp_overlay@3x.png"; sourceTree = "<group>"; };
+		C9F562522680763500C864E4 /* LEYLRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYLRView.swift; sourceTree = "<group>"; };
+		C9F562532680763500C864E4 /* LEYTransitionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYTransitionView.swift; sourceTree = "<group>"; };
+		C9F562542680763500C864E4 /* LEYActionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYActionViewCell.swift; sourceTree = "<group>"; };
+		C9F562552680763500C864E4 /* LEYRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYRouter.swift; sourceTree = "<group>"; };
+		C9F562562680763500C864E4 /* LEYNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYNavigationController.swift; sourceTree = "<group>"; };
+		C9F562572680763500C864E4 /* LEYWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYWebView.swift; sourceTree = "<group>"; };
+		C9F562582680763500C864E4 /* LEYNaviView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYNaviView.swift; sourceTree = "<group>"; };
+		C9F562592680763500C864E4 /* LEYString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYString.swift; sourceTree = "<group>"; };
+		C9F5625A2680763500C864E4 /* LEYLCRView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LEYLCRView+.swift"; sourceTree = "<group>"; };
+		C9F5625B2680763500C864E4 /* LEYCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYCollectionReusableView.swift; sourceTree = "<group>"; };
+		C9F5625C2680763500C864E4 /* LEYSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYSerialization.swift; sourceTree = "<group>"; };
+		C9F5625D2680763500C864E4 /* LEYCollectionWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYCollectionWrapper.swift; sourceTree = "<group>"; };
+		C9F5625E2680763500C864E4 /* LEYShadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYShadow.swift; sourceTree = "<group>"; };
+		C9F5625F2680763500C864E4 /* LEYApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYApp.swift; sourceTree = "<group>"; };
+		C9F562602680763500C864E4 /* LEYViewProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYViewProxy.swift; sourceTree = "<group>"; };
+		C9F562612680763500C864E4 /* LEYToolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYToolViewController.swift; sourceTree = "<group>"; };
+		C9F562622680763600C864E4 /* LEYActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYActionView.swift; sourceTree = "<group>"; };
+		C9F562632680763600C864E4 /* LEYWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYWebViewController.swift; sourceTree = "<group>"; };
+		C9F562642680763600C864E4 /* LEYSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYSwitch.swift; sourceTree = "<group>"; };
+		C9F562652680763600C864E4 /* LEYOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYOverlay.swift; sourceTree = "<group>"; };
+		C9F562662680763600C864E4 /* LEYTableWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYTableWrapper.swift; sourceTree = "<group>"; };
+		C9F562672680763600C864E4 /* LEYCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYCollectionViewCell.swift; sourceTree = "<group>"; };
+		C9F562682680763600C864E4 /* String+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+LEYFoundation.swift"; sourceTree = "<group>"; };
+		C9F562692680763600C864E4 /* LEYButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYButton.swift; sourceTree = "<group>"; };
+		C9F5626A2680763600C864E4 /* UILabel+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+LEYFoundation.swift"; sourceTree = "<group>"; };
+		C9F5626B2680763600C864E4 /* LEYAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYAction.swift; sourceTree = "<group>"; };
+		C9F5626C2680763600C864E4 /* LEYAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYAnimator.swift; sourceTree = "<group>"; };
+		C9F5626D2680763600C864E4 /* LEYXView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYXView.swift; sourceTree = "<group>"; };
+		C9F5626E2680763600C864E4 /* LEYApp+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LEYApp+.swift"; sourceTree = "<group>"; };
+		C9F5626F2680763600C864E4 /* LEYCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYCollectionViewController.swift; sourceTree = "<group>"; };
+		C9F562702680763600C864E4 /* LEYDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYDevice.swift; sourceTree = "<group>"; };
+		C9F562712680763600C864E4 /* LEYAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYAnimationView.swift; sourceTree = "<group>"; };
+		C9F562722680763600C864E4 /* LEYObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYObject.swift; sourceTree = "<group>"; };
+		C9F562732680763600C864E4 /* LEYSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYSubscriber.swift; sourceTree = "<group>"; };
+		C9F562742680763600C864E4 /* LEYTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYTableViewController.swift; sourceTree = "<group>"; };
+		C9F562752680763600C864E4 /* LEYHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYHUD.swift; sourceTree = "<group>"; };
+		C9F562762680763600C864E4 /* LEYItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYItem.swift; sourceTree = "<group>"; };
+		C9F562772680763600C864E4 /* LEYImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYImageView.swift; sourceTree = "<group>"; };
+		C9F562782680763600C864E4 /* UIButton+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+LEYFoundation.swift"; sourceTree = "<group>"; };
+		C9F562792680763600C864E4 /* LEYTableReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYTableReusableView.swift; sourceTree = "<group>"; };
+		C9F5627A2680763600C864E4 /* LEYCView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYCView.swift; sourceTree = "<group>"; };
+		C9F5627B2680763600C864E4 /* LEYToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYToolView.swift; sourceTree = "<group>"; };
+		C9F5627C2680763600C864E4 /* LEYControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYControl.swift; sourceTree = "<group>"; };
+		C9F5627D2680763600C864E4 /* LEYDrawableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYDrawableView.swift; sourceTree = "<group>"; };
+		C9F5627E2680763600C864E4 /* LEYLRView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LEYLRView+.swift"; sourceTree = "<group>"; };
+		C9F5627F2680763600C864E4 /* CAAnimation+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAAnimation+LEYFoundation.swift"; sourceTree = "<group>"; };
+		C9F562802680763600C864E4 /* UIView+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+LEYFoundation.swift"; sourceTree = "<group>"; };
+		C9F562812680763600C864E4 /* LEYLCRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYLCRView.swift; sourceTree = "<group>"; };
+		C9F562822680763600C864E4 /* LEYBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYBackgroundView.swift; sourceTree = "<group>"; };
+		C9F562832680763600C864E4 /* UserDefaults+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+LEYFoundation.swift"; sourceTree = "<group>"; };
+		C9F562842680763600C864E4 /* LEYActionView+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LEYActionView+LEYFoundation.swift"; sourceTree = "<group>"; };
+		C9F562852680763600C864E4 /* LEYSuspendView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYSuspendView.swift; sourceTree = "<group>"; };
+		C9F562862680763600C864E4 /* LEYTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYTableViewCell.swift; sourceTree = "<group>"; };
+		C9F562872680763600C864E4 /* LEYFS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYFS.swift; sourceTree = "<group>"; };
+		C9F562882680763600C864E4 /* LEYPrintf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYPrintf.swift; sourceTree = "<group>"; };
+		C9F562892680763600C864E4 /* LEYViewControllerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYViewControllerView.swift; sourceTree = "<group>"; };
+		C9F5628A2680763600C864E4 /* LEYRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYRuntime.swift; sourceTree = "<group>"; };
+		C9F5628B2680763600C864E4 /* LEYView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYView.swift; sourceTree = "<group>"; };
+		C9F5628C2680763600C864E4 /* DispatchQueue+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+LEYFoundation.swift"; sourceTree = "<group>"; };
+		C9F5628D2680763600C864E4 /* LEYShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYShadowView.swift; sourceTree = "<group>"; };
+		C9F5628E2680763600C864E4 /* LEYTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYTableView.swift; sourceTree = "<group>"; };
+		C9F5628F2680763600C864E4 /* LEYViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYViewController.swift; sourceTree = "<group>"; };
+		C9F562902680763600C864E4 /* LEYPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYPlaceholderView.swift; sourceTree = "<group>"; };
+		C9F562912680763600C864E4 /* LEYSwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYSwipeView.swift; sourceTree = "<group>"; };
+		C9F562922680763600C864E4 /* LEYApplicationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYApplicationView.swift; sourceTree = "<group>"; };
+		C9F562932680763600C864E4 /* LEYSwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYSwipeViewController.swift; sourceTree = "<group>"; };
+		C9F562942680763600C864E4 /* LEYCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYCollectionView.swift; sourceTree = "<group>"; };
+		C9F562952680763600C864E4 /* LEYContainerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYContainerController.swift; sourceTree = "<group>"; };
+		C9F562962680763600C864E4 /* LEYLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYLabel.swift; sourceTree = "<group>"; };
+		C9F562972680763600C864E4 /* Timer+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+LEYFoundation.swift"; sourceTree = "<group>"; };
+		C9F562982680763600C864E4 /* UIImage+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+LEYFoundation.swift"; sourceTree = "<group>"; };
+		C9F5629A2680763600C864E4 /* LEYAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYAsset.swift; sourceTree = "<group>"; };
+		C9F5629B2680763600C864E4 /* LEYAssetClipImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYAssetClipImageViewController.swift; sourceTree = "<group>"; };
+		C9F5629C2680763600C864E4 /* LEYAssetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYAssetsViewController.swift; sourceTree = "<group>"; };
+		C9F5629D2680763600C864E4 /* LEYClipboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYClipboardView.swift; sourceTree = "<group>"; };
 		CA7D081AC3B40C84FAA319BCF765FD04 /* Pods-NXKit_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NXKit_Example-Info.plist"; sourceTree = "<group>"; };
 		CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		D9A688F11B79D1D009DE15EF42BFA49A /* Pods-NXKit_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NXKit_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		DB3D46F292C76CA154A8C09F61F0AE9B /* Pods-NXKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NXKit_Example.modulemap"; sourceTree = "<group>"; };
 		DE2D9CEC38B84C0ED1D800D68D3DC599 /* NXKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "NXKit-Info.plist"; sourceTree = "<group>"; };
-		E00B23E2C4117CDED40D0F8A31E31C8D /* Pods-NXKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NXKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,28 +289,29 @@
 		3D4C4E840272E066815C8596EB20426A /* NXKit */ = {
 			isa = PBXGroup;
 			children = (
-				C90440732266D57800205F69 /* NXViewController.swift */,
+				C9F562992680763600C864E4 /* Extend */,
+				C9F562512680763500C864E4 /* Source */,
+				C9F5623B268074F000C864E4 /* navi_back_black@2x.png */,
+				C9F5623D268074F000C864E4 /* navi_back_black@3x.png */,
+				C9F56233268074EF00C864E4 /* navi_close_black@2x.png */,
+				C9F56231268074EF00C864E4 /* navi_close_black@3x.png */,
+				C9F56235268074F000C864E4 /* navi_more_black@2x.png */,
+				C9F56238268074F000C864E4 /* navi_more_black@3x.png */,
+				C9F56237268074F000C864E4 /* navi_more_gray@2x.png */,
+				C9F5623C268074F000C864E4 /* navi_more_gray@3x.png */,
+				C9F56232268074EF00C864E4 /* navi_more_white@2x.png */,
+				C9F56236268074F000C864E4 /* navi_more_white@3x.png */,
+				C9F56234268074EF00C864E4 /* uiapp_arrow@2x.png */,
+				C9F56239268074F000C864E4 /* uiapp_arrow@3x.png */,
+				C9F5623E268074F000C864E4 /* uiapp_overlay_close_black@2x.png */,
+				C9F5623A268074F000C864E4 /* uiapp_overlay_close_black@3x.png */,
+				C9F5623F268074F000C864E4 /* uiapp_overlay@2x.png */,
+				C9F56240268074F000C864E4 /* uiapp_overlay@3x.png */,
 				6B7E61630C7F390C98C605704E311E93 /* Pod */,
 				6DC104EFCA940790C62282CF40A6D87B /* Support Files */,
 			);
 			name = NXKit;
 			path = ../..;
-			sourceTree = "<group>";
-		};
-		68C89228338CB8F135B3D981147AE3C9 /* Pods-NXKit_Tests */ = {
-			isa = PBXGroup;
-			children = (
-				31A306DFA8B30C722A35D4DD5EF2BB41 /* Pods-NXKit_Tests.modulemap */,
-				08667C3F2C632EA4436D54A0654F988A /* Pods-NXKit_Tests-acknowledgements.markdown */,
-				D9A688F11B79D1D009DE15EF42BFA49A /* Pods-NXKit_Tests-acknowledgements.plist */,
-				CA57B290C63922ECD0FBB8FEE78CF798 /* Pods-NXKit_Tests-dummy.m */,
-				046C73D758D638FC5785966B911C7B87 /* Pods-NXKit_Tests-Info.plist */,
-				B1A79B6E69DAF41BBDF6EFD304C81947 /* Pods-NXKit_Tests-umbrella.h */,
-				E00B23E2C4117CDED40D0F8A31E31C8D /* Pods-NXKit_Tests.debug.xcconfig */,
-				1CD69B9E9D4191487D051E4B9FAAB114 /* Pods-NXKit_Tests.release.xcconfig */,
-			);
-			name = "Pods-NXKit_Tests";
-			path = "Target Support Files/Pods-NXKit_Tests";
 			sourceTree = "<group>";
 		};
 		6B7E61630C7F390C98C605704E311E93 /* Pod */ = {
@@ -171,7 +342,6 @@
 			isa = PBXGroup;
 			children = (
 				17C351B0C221CCE4831883D9B87F99FE /* Pods-NXKit_Example */,
-				68C89228338CB8F135B3D981147AE3C9 /* Pods-NXKit_Tests */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
@@ -202,6 +372,97 @@
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
+		C9F562512680763500C864E4 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				C9F562522680763500C864E4 /* LEYLRView.swift */,
+				C9F562532680763500C864E4 /* LEYTransitionView.swift */,
+				C9F562542680763500C864E4 /* LEYActionViewCell.swift */,
+				C9F562552680763500C864E4 /* LEYRouter.swift */,
+				C9F562562680763500C864E4 /* LEYNavigationController.swift */,
+				C9F562572680763500C864E4 /* LEYWebView.swift */,
+				C9F562582680763500C864E4 /* LEYNaviView.swift */,
+				C9F562592680763500C864E4 /* LEYString.swift */,
+				C9F5625A2680763500C864E4 /* LEYLCRView+.swift */,
+				C9F5625B2680763500C864E4 /* LEYCollectionReusableView.swift */,
+				C9F5625C2680763500C864E4 /* LEYSerialization.swift */,
+				C9F5625D2680763500C864E4 /* LEYCollectionWrapper.swift */,
+				C9F5625E2680763500C864E4 /* LEYShadow.swift */,
+				C9F5625F2680763500C864E4 /* LEYApp.swift */,
+				C9F562602680763500C864E4 /* LEYViewProxy.swift */,
+				C9F562612680763500C864E4 /* LEYToolViewController.swift */,
+				C9F562622680763600C864E4 /* LEYActionView.swift */,
+				C9F562632680763600C864E4 /* LEYWebViewController.swift */,
+				C9F562642680763600C864E4 /* LEYSwitch.swift */,
+				C9F562652680763600C864E4 /* LEYOverlay.swift */,
+				C9F562662680763600C864E4 /* LEYTableWrapper.swift */,
+				C9F562672680763600C864E4 /* LEYCollectionViewCell.swift */,
+				C9F562682680763600C864E4 /* String+LEYFoundation.swift */,
+				C9F562692680763600C864E4 /* LEYButton.swift */,
+				C9F5626A2680763600C864E4 /* UILabel+LEYFoundation.swift */,
+				C9F5626B2680763600C864E4 /* LEYAction.swift */,
+				C9F5626C2680763600C864E4 /* LEYAnimator.swift */,
+				C9F5626D2680763600C864E4 /* LEYXView.swift */,
+				C9F5626E2680763600C864E4 /* LEYApp+.swift */,
+				C9F5626F2680763600C864E4 /* LEYCollectionViewController.swift */,
+				C9F562702680763600C864E4 /* LEYDevice.swift */,
+				C9F562712680763600C864E4 /* LEYAnimationView.swift */,
+				C9F562722680763600C864E4 /* LEYObject.swift */,
+				C9F562732680763600C864E4 /* LEYSubscriber.swift */,
+				C9F562742680763600C864E4 /* LEYTableViewController.swift */,
+				C9F562752680763600C864E4 /* LEYHUD.swift */,
+				C9F562762680763600C864E4 /* LEYItem.swift */,
+				C9F562772680763600C864E4 /* LEYImageView.swift */,
+				C9F562782680763600C864E4 /* UIButton+LEYFoundation.swift */,
+				C9F562792680763600C864E4 /* LEYTableReusableView.swift */,
+				C9F5627A2680763600C864E4 /* LEYCView.swift */,
+				C9F5627B2680763600C864E4 /* LEYToolView.swift */,
+				C9F5627C2680763600C864E4 /* LEYControl.swift */,
+				C9F5627D2680763600C864E4 /* LEYDrawableView.swift */,
+				C9F5627E2680763600C864E4 /* LEYLRView+.swift */,
+				C9F5627F2680763600C864E4 /* CAAnimation+LEYFoundation.swift */,
+				C9F562802680763600C864E4 /* UIView+LEYFoundation.swift */,
+				C9F562812680763600C864E4 /* LEYLCRView.swift */,
+				C9F562822680763600C864E4 /* LEYBackgroundView.swift */,
+				C9F562832680763600C864E4 /* UserDefaults+LEYFoundation.swift */,
+				C9F562842680763600C864E4 /* LEYActionView+LEYFoundation.swift */,
+				C9F562852680763600C864E4 /* LEYSuspendView.swift */,
+				C9F562862680763600C864E4 /* LEYTableViewCell.swift */,
+				C9F562872680763600C864E4 /* LEYFS.swift */,
+				C9F562882680763600C864E4 /* LEYPrintf.swift */,
+				C9F562892680763600C864E4 /* LEYViewControllerView.swift */,
+				C9F5628A2680763600C864E4 /* LEYRuntime.swift */,
+				C9F5628B2680763600C864E4 /* LEYView.swift */,
+				C9F5628C2680763600C864E4 /* DispatchQueue+LEYFoundation.swift */,
+				C9F5628D2680763600C864E4 /* LEYShadowView.swift */,
+				C9F5628E2680763600C864E4 /* LEYTableView.swift */,
+				C9F5628F2680763600C864E4 /* LEYViewController.swift */,
+				C9F562902680763600C864E4 /* LEYPlaceholderView.swift */,
+				C9F562912680763600C864E4 /* LEYSwipeView.swift */,
+				C9F562922680763600C864E4 /* LEYApplicationView.swift */,
+				C9F562932680763600C864E4 /* LEYSwipeViewController.swift */,
+				C9F562942680763600C864E4 /* LEYCollectionView.swift */,
+				C9F562952680763600C864E4 /* LEYContainerController.swift */,
+				C9F562962680763600C864E4 /* LEYLabel.swift */,
+				C9F562972680763600C864E4 /* Timer+LEYFoundation.swift */,
+				C9F562982680763600C864E4 /* UIImage+LEYFoundation.swift */,
+			);
+			name = Source;
+			path = NXKit/Classes/Source;
+			sourceTree = "<group>";
+		};
+		C9F562992680763600C864E4 /* Extend */ = {
+			isa = PBXGroup;
+			children = (
+				C9F5629A2680763600C864E4 /* LEYAsset.swift */,
+				C9F5629B2680763600C864E4 /* LEYAssetClipImageViewController.swift */,
+				C9F5629C2680763600C864E4 /* LEYAssetsViewController.swift */,
+				C9F5629D2680763600C864E4 /* LEYClipboardView.swift */,
+			);
+			name = Extend;
+			path = NXKit/Classes/Extend;
+			sourceTree = "<group>";
+		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
@@ -228,7 +489,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EB6D6DD83FEE796708EE82DCDFDFCED /* Pods-NXKit_Tests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +615,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9F5624A268074F000C864E4 /* uiapp_overlay_close_black@3x.png in Resources */,
+				C9F56249268074F000C864E4 /* uiapp_arrow@3x.png in Resources */,
+				C9F56250268074F000C864E4 /* uiapp_overlay@3x.png in Resources */,
+				C9F56248268074F000C864E4 /* navi_more_black@3x.png in Resources */,
+				C9F56246268074F000C864E4 /* navi_more_white@3x.png in Resources */,
+				C9F56244268074F000C864E4 /* uiapp_arrow@2x.png in Resources */,
+				C9F5624F268074F000C864E4 /* uiapp_overlay@2x.png in Resources */,
+				C9F5624D268074F000C864E4 /* navi_back_black@3x.png in Resources */,
+				C9F56241268074F000C864E4 /* navi_close_black@3x.png in Resources */,
+				C9F56247268074F000C864E4 /* navi_more_gray@2x.png in Resources */,
+				C9F5624B268074F000C864E4 /* navi_back_black@2x.png in Resources */,
+				C9F56243268074F000C864E4 /* navi_close_black@2x.png in Resources */,
+				C9F5624C268074F000C864E4 /* navi_more_gray@3x.png in Resources */,
+				C9F56242268074F000C864E4 /* navi_more_white@2x.png in Resources */,
+				C9F5624E268074F000C864E4 /* uiapp_overlay_close_black@2x.png in Resources */,
+				C9F56245268074F000C864E4 /* navi_more_black@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,8 +641,82 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9F562D12680763600C864E4 /* LEYSuspendView.swift in Sources */,
+				C9F562B42680763600C864E4 /* String+LEYFoundation.swift in Sources */,
+				C9F562B92680763600C864E4 /* LEYXView.swift in Sources */,
+				C9F562E12680763600C864E4 /* LEYContainerController.swift in Sources */,
+				C9F562E62680763600C864E4 /* LEYAssetClipImageViewController.swift in Sources */,
+				C9F562A72680763600C864E4 /* LEYCollectionReusableView.swift in Sources */,
+				C9F562D22680763600C864E4 /* LEYTableViewCell.swift in Sources */,
+				C9F562BF2680763600C864E4 /* LEYSubscriber.swift in Sources */,
+				C9F562DE2680763600C864E4 /* LEYApplicationView.swift in Sources */,
+				C9F5629F2680763600C864E4 /* LEYTransitionView.swift in Sources */,
+				C9F562D62680763600C864E4 /* LEYRuntime.swift in Sources */,
+				C9F562BC2680763600C864E4 /* LEYDevice.swift in Sources */,
+				C9F562AD2680763600C864E4 /* LEYToolViewController.swift in Sources */,
+				C9F562AE2680763600C864E4 /* LEYActionView.swift in Sources */,
+				C9F562BA2680763600C864E4 /* LEYApp+.swift in Sources */,
+				C9F562DA2680763600C864E4 /* LEYTableView.swift in Sources */,
+				C9F562D52680763600C864E4 /* LEYViewControllerView.swift in Sources */,
+				C9F562A02680763600C864E4 /* LEYActionViewCell.swift in Sources */,
+				C9F562B22680763600C864E4 /* LEYTableWrapper.swift in Sources */,
+				C9F562C32680763600C864E4 /* LEYImageView.swift in Sources */,
+				C9F562A12680763600C864E4 /* LEYRouter.swift in Sources */,
+				C9F562AF2680763600C864E4 /* LEYWebViewController.swift in Sources */,
+				C9F562DD2680763600C864E4 /* LEYSwipeView.swift in Sources */,
+				C9F562DF2680763600C864E4 /* LEYSwipeViewController.swift in Sources */,
+				C9F562AC2680763600C864E4 /* LEYViewProxy.swift in Sources */,
+				C9F562E02680763600C864E4 /* LEYCollectionView.swift in Sources */,
+				C9F562CE2680763600C864E4 /* LEYBackgroundView.swift in Sources */,
+				C9F562AA2680763600C864E4 /* LEYShadow.swift in Sources */,
+				C9F562A32680763600C864E4 /* LEYWebView.swift in Sources */,
+				C9F562C92680763600C864E4 /* LEYDrawableView.swift in Sources */,
+				C9F562BD2680763600C864E4 /* LEYAnimationView.swift in Sources */,
+				C9F562E72680763600C864E4 /* LEYAssetsViewController.swift in Sources */,
+				C9F562C52680763600C864E4 /* LEYTableReusableView.swift in Sources */,
+				C9F562D72680763600C864E4 /* LEYView.swift in Sources */,
+				C9F562DC2680763600C864E4 /* LEYPlaceholderView.swift in Sources */,
+				C9F562C12680763600C864E4 /* LEYHUD.swift in Sources */,
+				C9F562D82680763600C864E4 /* DispatchQueue+LEYFoundation.swift in Sources */,
+				C9F562A92680763600C864E4 /* LEYCollectionWrapper.swift in Sources */,
+				C9F562E82680763600C864E4 /* LEYClipboardView.swift in Sources */,
+				C9F562BB2680763600C864E4 /* LEYCollectionViewController.swift in Sources */,
+				C9F562CD2680763600C864E4 /* LEYLCRView.swift in Sources */,
+				C9F562C82680763600C864E4 /* LEYControl.swift in Sources */,
+				C9F562E22680763600C864E4 /* LEYLabel.swift in Sources */,
+				C9F562B12680763600C864E4 /* LEYOverlay.swift in Sources */,
+				C9F562CA2680763600C864E4 /* LEYLRView+.swift in Sources */,
+				C9F562C72680763600C864E4 /* LEYToolView.swift in Sources */,
+				C9F562CB2680763600C864E4 /* CAAnimation+LEYFoundation.swift in Sources */,
+				C9F562A82680763600C864E4 /* LEYSerialization.swift in Sources */,
+				C9F562D92680763600C864E4 /* LEYShadowView.swift in Sources */,
 				2D0C0C49DE6CDA2722D1CCD3F9D53C64 /* NXKit-dummy.m in Sources */,
-				C90440742266D57800205F69 /* NXViewController.swift in Sources */,
+				C9F562B32680763600C864E4 /* LEYCollectionViewCell.swift in Sources */,
+				C9F562A22680763600C864E4 /* LEYNavigationController.swift in Sources */,
+				C9F562B62680763600C864E4 /* UILabel+LEYFoundation.swift in Sources */,
+				C9F562B72680763600C864E4 /* LEYAction.swift in Sources */,
+				C9F562D32680763600C864E4 /* LEYFS.swift in Sources */,
+				C9F562BE2680763600C864E4 /* LEYObject.swift in Sources */,
+				C9F5629E2680763600C864E4 /* LEYLRView.swift in Sources */,
+				C9F562A62680763600C864E4 /* LEYLCRView+.swift in Sources */,
+				C9F562A42680763600C864E4 /* LEYNaviView.swift in Sources */,
+				C9F562A52680763600C864E4 /* LEYString.swift in Sources */,
+				C9F562B02680763600C864E4 /* LEYSwitch.swift in Sources */,
+				C9F562C02680763600C864E4 /* LEYTableViewController.swift in Sources */,
+				C9F562B82680763600C864E4 /* LEYAnimator.swift in Sources */,
+				C9F562E52680763600C864E4 /* LEYAsset.swift in Sources */,
+				C9F562D42680763600C864E4 /* LEYPrintf.swift in Sources */,
+				C9F562CF2680763600C864E4 /* UserDefaults+LEYFoundation.swift in Sources */,
+				C9F562CC2680763600C864E4 /* UIView+LEYFoundation.swift in Sources */,
+				C9F562C22680763600C864E4 /* LEYItem.swift in Sources */,
+				C9F562C42680763600C864E4 /* UIButton+LEYFoundation.swift in Sources */,
+				C9F562B52680763600C864E4 /* LEYButton.swift in Sources */,
+				C9F562DB2680763600C864E4 /* LEYViewController.swift in Sources */,
+				C9F562E42680763600C864E4 /* UIImage+LEYFoundation.swift in Sources */,
+				C9F562D02680763600C864E4 /* LEYActionView+LEYFoundation.swift in Sources */,
+				C9F562E32680763600C864E4 /* Timer+LEYFoundation.swift in Sources */,
+				C9F562AB2680763600C864E4 /* LEYApp.swift in Sources */,
+				C9F562C62680763600C864E4 /* LEYCView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,7 +724,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2686171CBEFAAA74EB21A9AD0D39B06B /* Pods-NXKit_Tests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,7 +821,6 @@
 		};
 		71760D1AD32E1DD292CD7D826B4EFB3E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1CD69B9E9D4191487D051E4B9FAAB114 /* Pods-NXKit_Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -506,7 +854,6 @@
 		};
 		96BE38604EC37A6ECB597761A34B5F73 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E00B23E2C4117CDED40D0F8A31E31C8D /* Pods-NXKit_Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";

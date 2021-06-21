@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'NXKit'
-    s.version          = '0.1.0'
+    s.version          = '0.1.1'
     s.summary          = 'NXKit.'
     
     # This description is used to generate tags and improve search results.
@@ -36,11 +36,11 @@ Pod::Spec.new do |s|
     
     s.source_files = 'NXKit/Classes/**/*'
     
-    # s.resource_bundles = {
-    #   'NXKit' => ['NXKit/Assets/*.png']
-    # }
+     s.resource_bundles = {
+       'NXKit' => ['NXKit/Assets/*.png']
+     }
     
     # s.public_header_files = 'Pod/Classes/**/*.h'
-    # s.frameworks = 'UIKit', 'MapKit'
+     s.frameworks = ['UIKit', 'Foundation']
     # s.dependency 'AFNetworking', '~> 2.3'
 end
