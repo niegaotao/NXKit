@@ -3,568 +3,567 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2630CCAF1A302D1327BBD595CCE0BACF /* Pods-NXKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 10AE93655ACEEC00134C8920111E764A /* Pods-NXKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2AD777DCEB3C754790DCDE1464B2C06E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
-		2D0C0C49DE6CDA2722D1CCD3F9D53C64 /* NXKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 998F1AE90A73D129A821063D7432258A /* NXKit-dummy.m */; };
-		301AA2D5C66784CE5C1F250CC13063F7 /* NXKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 49EDB61DDB99ECFC61FBB91157D6400B /* NXKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3F9F9D0A58B30779D3E297C865313BCE /* Pods-NXKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2772E81E7729184016253D7BE0AFBC1C /* Pods-NXKit_Example-dummy.m */; };
-		8A58FC49744A16F194CDC06299FABC99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
-		BCEDF78A270E95D18A4C4D31ECC187BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
-		C9F56241268074F000C864E4 /* navi_close_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56231268074EF00C864E4 /* navi_close_black@3x.png */; };
-		C9F56242268074F000C864E4 /* navi_more_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56232268074EF00C864E4 /* navi_more_white@2x.png */; };
-		C9F56243268074F000C864E4 /* navi_close_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56233268074EF00C864E4 /* navi_close_black@2x.png */; };
-		C9F56244268074F000C864E4 /* uiapp_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56234268074EF00C864E4 /* uiapp_arrow@2x.png */; };
-		C9F56245268074F000C864E4 /* navi_more_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56235268074F000C864E4 /* navi_more_black@2x.png */; };
-		C9F56246268074F000C864E4 /* navi_more_white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56236268074F000C864E4 /* navi_more_white@3x.png */; };
-		C9F56247268074F000C864E4 /* navi_more_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56237268074F000C864E4 /* navi_more_gray@2x.png */; };
-		C9F56248268074F000C864E4 /* navi_more_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56238268074F000C864E4 /* navi_more_black@3x.png */; };
-		C9F56249268074F000C864E4 /* uiapp_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56239268074F000C864E4 /* uiapp_arrow@3x.png */; };
-		C9F5624A268074F000C864E4 /* uiapp_overlay_close_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F5623A268074F000C864E4 /* uiapp_overlay_close_black@3x.png */; };
-		C9F5624B268074F000C864E4 /* navi_back_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F5623B268074F000C864E4 /* navi_back_black@2x.png */; };
-		C9F5624C268074F000C864E4 /* navi_more_gray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F5623C268074F000C864E4 /* navi_more_gray@3x.png */; };
-		C9F5624D268074F000C864E4 /* navi_back_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F5623D268074F000C864E4 /* navi_back_black@3x.png */; };
-		C9F5624E268074F000C864E4 /* uiapp_overlay_close_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F5623E268074F000C864E4 /* uiapp_overlay_close_black@2x.png */; };
-		C9F5624F268074F000C864E4 /* uiapp_overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F5623F268074F000C864E4 /* uiapp_overlay@2x.png */; };
-		C9F56250268074F000C864E4 /* uiapp_overlay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9F56240268074F000C864E4 /* uiapp_overlay@3x.png */; };
-		C9F5629E2680763600C864E4 /* LEYLRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562522680763500C864E4 /* LEYLRView.swift */; };
-		C9F5629F2680763600C864E4 /* LEYTransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562532680763500C864E4 /* LEYTransitionView.swift */; };
-		C9F562A02680763600C864E4 /* LEYActionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562542680763500C864E4 /* LEYActionViewCell.swift */; };
-		C9F562A12680763600C864E4 /* LEYRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562552680763500C864E4 /* LEYRouter.swift */; };
-		C9F562A22680763600C864E4 /* LEYNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562562680763500C864E4 /* LEYNavigationController.swift */; };
-		C9F562A32680763600C864E4 /* LEYWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562572680763500C864E4 /* LEYWebView.swift */; };
-		C9F562A42680763600C864E4 /* LEYNaviView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562582680763500C864E4 /* LEYNaviView.swift */; };
-		C9F562A52680763600C864E4 /* LEYString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562592680763500C864E4 /* LEYString.swift */; };
-		C9F562A62680763600C864E4 /* LEYLCRView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5625A2680763500C864E4 /* LEYLCRView+.swift */; };
-		C9F562A72680763600C864E4 /* LEYCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5625B2680763500C864E4 /* LEYCollectionReusableView.swift */; };
-		C9F562A82680763600C864E4 /* LEYSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5625C2680763500C864E4 /* LEYSerialization.swift */; };
-		C9F562A92680763600C864E4 /* LEYCollectionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5625D2680763500C864E4 /* LEYCollectionWrapper.swift */; };
-		C9F562AA2680763600C864E4 /* LEYShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5625E2680763500C864E4 /* LEYShadow.swift */; };
-		C9F562AB2680763600C864E4 /* LEYApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5625F2680763500C864E4 /* LEYApp.swift */; };
-		C9F562AC2680763600C864E4 /* LEYViewProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562602680763500C864E4 /* LEYViewProxy.swift */; };
-		C9F562AD2680763600C864E4 /* LEYToolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562612680763500C864E4 /* LEYToolViewController.swift */; };
-		C9F562AE2680763600C864E4 /* LEYActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562622680763600C864E4 /* LEYActionView.swift */; };
-		C9F562AF2680763600C864E4 /* LEYWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562632680763600C864E4 /* LEYWebViewController.swift */; };
-		C9F562B02680763600C864E4 /* LEYSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562642680763600C864E4 /* LEYSwitch.swift */; };
-		C9F562B12680763600C864E4 /* LEYOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562652680763600C864E4 /* LEYOverlay.swift */; };
-		C9F562B22680763600C864E4 /* LEYTableWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562662680763600C864E4 /* LEYTableWrapper.swift */; };
-		C9F562B32680763600C864E4 /* LEYCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562672680763600C864E4 /* LEYCollectionViewCell.swift */; };
-		C9F562B42680763600C864E4 /* String+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562682680763600C864E4 /* String+LEYFoundation.swift */; };
-		C9F562B52680763600C864E4 /* LEYButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562692680763600C864E4 /* LEYButton.swift */; };
-		C9F562B62680763600C864E4 /* UILabel+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5626A2680763600C864E4 /* UILabel+LEYFoundation.swift */; };
-		C9F562B72680763600C864E4 /* LEYAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5626B2680763600C864E4 /* LEYAction.swift */; };
-		C9F562B82680763600C864E4 /* LEYAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5626C2680763600C864E4 /* LEYAnimator.swift */; };
-		C9F562B92680763600C864E4 /* LEYXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5626D2680763600C864E4 /* LEYXView.swift */; };
-		C9F562BA2680763600C864E4 /* LEYApp+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5626E2680763600C864E4 /* LEYApp+.swift */; };
-		C9F562BB2680763600C864E4 /* LEYCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5626F2680763600C864E4 /* LEYCollectionViewController.swift */; };
-		C9F562BC2680763600C864E4 /* LEYDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562702680763600C864E4 /* LEYDevice.swift */; };
-		C9F562BD2680763600C864E4 /* LEYAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562712680763600C864E4 /* LEYAnimationView.swift */; };
-		C9F562BE2680763600C864E4 /* LEYObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562722680763600C864E4 /* LEYObject.swift */; };
-		C9F562BF2680763600C864E4 /* LEYSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562732680763600C864E4 /* LEYSubscriber.swift */; };
-		C9F562C02680763600C864E4 /* LEYTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562742680763600C864E4 /* LEYTableViewController.swift */; };
-		C9F562C12680763600C864E4 /* LEYHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562752680763600C864E4 /* LEYHUD.swift */; };
-		C9F562C22680763600C864E4 /* LEYItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562762680763600C864E4 /* LEYItem.swift */; };
-		C9F562C32680763600C864E4 /* LEYImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562772680763600C864E4 /* LEYImageView.swift */; };
-		C9F562C42680763600C864E4 /* UIButton+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562782680763600C864E4 /* UIButton+LEYFoundation.swift */; };
-		C9F562C52680763600C864E4 /* LEYTableReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562792680763600C864E4 /* LEYTableReusableView.swift */; };
-		C9F562C62680763600C864E4 /* LEYCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5627A2680763600C864E4 /* LEYCView.swift */; };
-		C9F562C72680763600C864E4 /* LEYToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5627B2680763600C864E4 /* LEYToolView.swift */; };
-		C9F562C82680763600C864E4 /* LEYControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5627C2680763600C864E4 /* LEYControl.swift */; };
-		C9F562C92680763600C864E4 /* LEYDrawableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5627D2680763600C864E4 /* LEYDrawableView.swift */; };
-		C9F562CA2680763600C864E4 /* LEYLRView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5627E2680763600C864E4 /* LEYLRView+.swift */; };
-		C9F562CB2680763600C864E4 /* CAAnimation+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5627F2680763600C864E4 /* CAAnimation+LEYFoundation.swift */; };
-		C9F562CC2680763600C864E4 /* UIView+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562802680763600C864E4 /* UIView+LEYFoundation.swift */; };
-		C9F562CD2680763600C864E4 /* LEYLCRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562812680763600C864E4 /* LEYLCRView.swift */; };
-		C9F562CE2680763600C864E4 /* LEYBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562822680763600C864E4 /* LEYBackgroundView.swift */; };
-		C9F562CF2680763600C864E4 /* UserDefaults+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562832680763600C864E4 /* UserDefaults+LEYFoundation.swift */; };
-		C9F562D02680763600C864E4 /* LEYActionView+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562842680763600C864E4 /* LEYActionView+LEYFoundation.swift */; };
-		C9F562D12680763600C864E4 /* LEYSuspendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562852680763600C864E4 /* LEYSuspendView.swift */; };
-		C9F562D22680763600C864E4 /* LEYTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562862680763600C864E4 /* LEYTableViewCell.swift */; };
-		C9F562D32680763600C864E4 /* LEYFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562872680763600C864E4 /* LEYFS.swift */; };
-		C9F562D42680763600C864E4 /* LEYPrintf.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562882680763600C864E4 /* LEYPrintf.swift */; };
-		C9F562D52680763600C864E4 /* LEYViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562892680763600C864E4 /* LEYViewControllerView.swift */; };
-		C9F562D62680763600C864E4 /* LEYRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5628A2680763600C864E4 /* LEYRuntime.swift */; };
-		C9F562D72680763600C864E4 /* LEYView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5628B2680763600C864E4 /* LEYView.swift */; };
-		C9F562D82680763600C864E4 /* DispatchQueue+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5628C2680763600C864E4 /* DispatchQueue+LEYFoundation.swift */; };
-		C9F562D92680763600C864E4 /* LEYShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5628D2680763600C864E4 /* LEYShadowView.swift */; };
-		C9F562DA2680763600C864E4 /* LEYTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5628E2680763600C864E4 /* LEYTableView.swift */; };
-		C9F562DB2680763600C864E4 /* LEYViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5628F2680763600C864E4 /* LEYViewController.swift */; };
-		C9F562DC2680763600C864E4 /* LEYPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562902680763600C864E4 /* LEYPlaceholderView.swift */; };
-		C9F562DD2680763600C864E4 /* LEYSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562912680763600C864E4 /* LEYSwipeView.swift */; };
-		C9F562DE2680763600C864E4 /* LEYApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562922680763600C864E4 /* LEYApplicationView.swift */; };
-		C9F562DF2680763600C864E4 /* LEYSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562932680763600C864E4 /* LEYSwipeViewController.swift */; };
-		C9F562E02680763600C864E4 /* LEYCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562942680763600C864E4 /* LEYCollectionView.swift */; };
-		C9F562E12680763600C864E4 /* LEYContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562952680763600C864E4 /* LEYContainerController.swift */; };
-		C9F562E22680763600C864E4 /* LEYLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562962680763600C864E4 /* LEYLabel.swift */; };
-		C9F562E32680763600C864E4 /* Timer+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562972680763600C864E4 /* Timer+LEYFoundation.swift */; };
-		C9F562E42680763600C864E4 /* UIImage+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562982680763600C864E4 /* UIImage+LEYFoundation.swift */; };
-		C9F562E52680763600C864E4 /* LEYAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5629A2680763600C864E4 /* LEYAsset.swift */; };
-		C9F562E62680763600C864E4 /* LEYAssetClipImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5629B2680763600C864E4 /* LEYAssetClipImageViewController.swift */; };
-		C9F562E72680763600C864E4 /* LEYAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5629C2680763600C864E4 /* LEYAssetsViewController.swift */; };
-		C9F562E82680763600C864E4 /* LEYClipboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F5629D2680763600C864E4 /* LEYClipboardView.swift */; };
+		024BD37B1FFFF6B2E5A6FB842C2448A1 /* LEYWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBC54C25F31F700EEE625729F4731FA /* LEYWebViewController.swift */; };
+		025AE5FA4A4647CD49AAFDA6EED3E477 /* uiapp_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3144D7CA7407E5F1CD2449FEB24B0638 /* uiapp_arrow@2x.png */; };
+		026011C59A2EECE289084DE709EE7B91 /* LEYTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BE13C88E9F5CDF82098552597D0410 /* LEYTableViewController.swift */; };
+		029E6FA1C0EEA37E0C8844C05DD3E6B4 /* LEYLCRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D552B56AB5A1ADF41967349A4875FB2A /* LEYLCRView.swift */; };
+		0379925D5A297A62AE3E04AE308D15E8 /* UILabel+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50753BF5EFB8C0A7E69638677F4C38A9 /* UILabel+LEYFoundation.swift */; };
+		0B936FBF190EA351A86884CC1A140DF2 /* LEYFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D15B4B643770E899B8D0AAE141200 /* LEYFS.swift */; };
+		0F8F8BE1B9F42BE1D73B33985F1F57C1 /* navi_more_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F46AC8B711EEEAB7E0138F497E5B90 /* navi_more_black@2x.png */; };
+		14E2C98A741A3FDBCAD4D2B018D8BA0F /* LEYLCRView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B8921A9F4344D91A5B9F649AB5A54A /* LEYLCRView+.swift */; };
+		15D695D79C787232C507F96D304B5724 /* LEYButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D613738BAD7BD74B3D266536A3F7DA29 /* LEYButton.swift */; };
+		1B9DA52D5E1A40A92C999F1C1277D5AC /* LEYAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A645E4C38B7CEFE9481482FD96F63B0 /* LEYAction.swift */; };
+		1DD8894B3790456EFEC935625D87FB85 /* LEYCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BED521AFA3E1E37D7C80F3AA83C357B /* LEYCollectionViewCell.swift */; };
+		1E8E51642192E15AC50FCA2C1FDA79D7 /* uiapp_overlay_close_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A7ABF025F83073E37476C4B06592710 /* uiapp_overlay_close_black@2x.png */; };
+		2081B99DD668F8EFBF0FF137E515B654 /* DispatchQueue+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC813C56CE1330FFF9C5A1F4C46A0DD5 /* DispatchQueue+LEYFoundation.swift */; };
+		213F3CE90C783877A92CD4A371B11FB4 /* LEYClipboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9AA2B5122642EDF7C29D7D4B12B8E4 /* LEYClipboardView.swift */; };
+		23BE88FEC0D817BCD9D8E3C867A1814C /* LEYToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF1EB31954DD283409D342C3E0E642 /* LEYToolView.swift */; };
+		24A6D6DF0511DF41E6B4C969551D990F /* Timer+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF949622CCC0042E8928D81A77C218C /* Timer+LEYFoundation.swift */; };
+		289C2EB15E316A4A87805DA2F85C8A22 /* LEYTableReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132BEC757684AC676E2E49B705308F86 /* LEYTableReusableView.swift */; };
+		2D27E025201F6A1CAD3F1142F0CCFCDF /* uiapp_overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2A8E0E1E3B9D0C90A8C3899D6A85ABB /* uiapp_overlay@2x.png */; };
+		2D31546225F283291D91A86B84FACE6D /* LEYNaviView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0060828023F9C1D5AD2360596C6DD2BA /* LEYNaviView.swift */; };
+		30C67E6447BEE1F97B5FA2116B0F1682 /* LEYActionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F451785D85B382E069E52739ED9B9DD /* LEYActionViewCell.swift */; };
+		324D3BB56A71B3C6CC0718AE0F7266EA /* LEYAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F49A40F2E1BE1EE9903B4B6BEF1C3A /* LEYAnimator.swift */; };
+		34B605A63EE516342D5FBBE6EC1DA24B /* NXKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E63DF99DCD4379F20D3F2B193AA61FC9 /* NXKit.bundle */; };
+		34FDE1F92B4B538D5FCC2731FCF9F5B7 /* LEYPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795CF0A89C8133493A6233CAC7EFEBAA /* LEYPlaceholderView.swift */; };
+		362E817AD7A1D387F85BFF50A3E25D7D /* navi_more_gray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9505AD19295A92C91728BCDDFED70984 /* navi_more_gray@3x.png */; };
+		36BDD787DBD9FC31EFB0EC6B5B931BA8 /* LEYCollectionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FA6F99CAC03D396FC4D416BF6B5F88 /* LEYCollectionWrapper.swift */; };
+		37076907183DEFE57FD822C60BD5A996 /* LEYCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782F92AB8576C681B821660E66347FBE /* LEYCollectionReusableView.swift */; };
+		37E1A177501862D90475CF0C1387DC0D /* LEYPrintf.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDE170763258B7BC9458400ECB10F51 /* LEYPrintf.swift */; };
+		443BC1A47DBC9AA42413C1EB43F2CAFE /* CAAnimation+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3B8AB9EC763F6A8BBA79EE5C64EB0 /* CAAnimation+LEYFoundation.swift */; };
+		46CBA8180EBA69F27947FF871B0EE1BB /* LEYHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDF10F5BA7FE75A173D6ECDDBE6CF04 /* LEYHUD.swift */; };
+		47660ACEC35F4084108E522741A8ADB0 /* LEYToolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DAC4B53C78D49A169D5443C60A6E80 /* LEYToolViewController.swift */; };
+		482E0FE4B4DE07CFE0C3033A72625DAC /* NXKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC056866E27039101E3384BE533EBF6 /* NXKit-dummy.m */; };
+		496CADFC077A7944ACA931A3B3492637 /* LEYContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D23D3014E3CF0BCDB3EC3E7E5F925FD /* LEYContainerController.swift */; };
+		5381656E87661A811AA2A7911A68EDAD /* Pods-NXKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A1D0F9E4D64BFFAADBB98E017589C5 /* Pods-NXKit_Example-dummy.m */; };
+		5DC0926457FA7505E9126758D0719BC6 /* LEYApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A9CABB9188ECCBEF5539D43FBC81C0 /* LEYApp.swift */; };
+		630BC5D0F3534A9CCAB92860C1CB1E4F /* LEYTransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E71FF1657217A6EDD86FDB7AC7C149 /* LEYTransitionView.swift */; };
+		633D2A87B75A0BD41E879A3A8851AB64 /* LEYAssetClipImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3636D3179B77CFA1C36DCD4DC2FFA4 /* LEYAssetClipImageViewController.swift */; };
+		6459B22F3FB8D185DCEA0AF215163321 /* LEYSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E6A65C23AEE2011A2078891535F63D /* LEYSubscriber.swift */; };
+		6725B51D4E21A9E23CED74324FC10DBD /* LEYViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF5854C8E9FC1EF588B4C3436737AEF /* LEYViewControllerView.swift */; };
+		68E02229C2964C2A438F283A472D0C20 /* navi_more_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D7CEDD0E115CFD4CD95DD758D27963 /* navi_more_black@3x.png */; };
+		6B8E52D8B546C83A66960862BD277BC7 /* Pods-NXKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 64EF34CC54C1F46726361D12D570644C /* Pods-NXKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		70660273AC02E59210BEE19C9971A260 /* navi_more_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9201AD1DEBCE7D8F05C62E4825017761 /* navi_more_white@2x.png */; };
+		70F2FC5B4411AE95A22F9E801F1A80AD /* LEYShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5340F9326DF710B8F5104998A06A7298 /* LEYShadow.swift */; };
+		72D07045F717CAFE86E886AB5020EAF7 /* LEYView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D355C845AE54839061F21C70F3B2DD /* LEYView.swift */; };
+		732FDA7E9EEEEAA9AE99CDF781921708 /* String+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387F58EC89E34EE88F3E295EE173644A /* String+LEYFoundation.swift */; };
+		741D5EE12FC3B0534787CDAA4A6AC6F4 /* LEYBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79426E8681F5368F31D9E1179CB3D62 /* LEYBackgroundView.swift */; };
+		74573CD35A58642534270D2CD7CAF1B2 /* navi_more_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 079A7C631EA7F50B161623DB30C615D5 /* navi_more_gray@2x.png */; };
+		78870D9E9788810631CB42D1C2F9FDF8 /* LEYSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335FD5A95C2FEF2FD28166109D444F38 /* LEYSwipeView.swift */; };
+		78E7F4A8EF3774B448BFC257B4FBB735 /* uiapp_overlay_close_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE102AF9EBA08E49BC7D3B68C8E3911 /* uiapp_overlay_close_black@3x.png */; };
+		7DE62AF293F86CD540C809BFA4857C44 /* LEYAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E91A9C1544895FAE7702FB826C7CC4 /* LEYAnimationView.swift */; };
+		85BB9B2B448DD52AB31462897D3B2E0B /* navi_back_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BC2A76063CEA8897B6A2CE3280E3B9C /* navi_back_black@2x.png */; };
+		8D4D3567A519BE51131CD214E8F3B59F /* LEYLRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23ED01D14DB886275E12A4CF5FFD2F7 /* LEYLRView.swift */; };
+		91C764B59581751D13CCF7A3098BC74F /* LEYViewProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FD0F05763844E2CCCFDAF1C27E8DC9 /* LEYViewProxy.swift */; };
+		93B48F00609CDD2518C204DCA8528F07 /* LEYImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E137595DC52C0BBF9E28B85F8D9D0A /* LEYImageView.swift */; };
+		93EC81E572459E4497CA8C908F6CC598 /* LEYSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = F818E87F31E58B515D2086DCA416CD12 /* LEYSerialization.swift */; };
+		97A8AB8980662C8983A2024B1E180C28 /* LEYWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB91B7F328A9A5F60F1B57E4759FB76 /* LEYWebView.swift */; };
+		97D608301F21CE8F1A940C1F0A846942 /* LEYViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0CA56A4F07B3DA4912B1E03B510D5E /* LEYViewController.swift */; };
+		9B4A75E63DE3A8178CE9E5339F98148C /* LEYXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED78851DF02EB23C5CCB07F4FBF094A1 /* LEYXView.swift */; };
+		9DF2AFB4EA296F01B3723A0F9E443D65 /* LEYItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F45FDD1AFAEAF44CDF9ACC677D0CA /* LEYItem.swift */; };
+		A41357A692F5C7157ABE394B259543B8 /* LEYRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B4629ACDE234A3BDF4CE867F2AF826 /* LEYRouter.swift */; };
+		A4AD467E2B245656FFE481AF591A12F0 /* LEYDrawableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DD1DD0DB8EB987F37CED90DCAA8A2B /* LEYDrawableView.swift */; };
+		A641FC482C8784D1996BE08E0A1FF5E3 /* LEYTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6829E84758C134C8F31D224DB49B70D /* LEYTableView.swift */; };
+		A91379E6F4185552F0DA6D260D5C2D27 /* LEYApp+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C8C54FD97DDF8A33082D16B7162FF /* LEYApp+.swift */; };
+		AD8A42AFEE47F6627283ED44C792922B /* navi_more_white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C077762B28D2B6165036B9FB7BEC405D /* navi_more_white@3x.png */; };
+		AE389A53A230B5801B854095B24ADD0C /* LEYRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FA9901B0426E37E3C22C4D1243633E /* LEYRuntime.swift */; };
+		B072CB62EBD46E18B1B7591A40DB3BA5 /* LEYSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798DBA9CC86156ADC7C35ED6301C589C /* LEYSwipeViewController.swift */; };
+		B0832FD27232EB0F9AAA41C9F7F94D40 /* LEYOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34CC5924FB80E0A544389123F2ECEF7 /* LEYOverlay.swift */; };
+		B2024647438FB9C17DB0B7A07B808CF3 /* LEYObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493FE65474DB54967783173A4DE055F8 /* LEYObject.swift */; };
+		B3A6BCF467C44B245DC89F0BA6A405B4 /* uiapp_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283B90BC34123B44652FA69C3DB9780C /* uiapp_arrow@3x.png */; };
+		B6430F9CCA2B2F375C7502B2A813B110 /* LEYLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7FAB812C7ED1C3138D176144F566BA /* LEYLabel.swift */; };
+		BAD2F79B89CD6EC008616AA54982590A /* LEYCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F66FD03DE44CE85429CF557D387C8E /* LEYCView.swift */; };
+		BE1D8F109525D750CC7E9D21BE6B38E6 /* LEYLRView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9597F222CBD858A178EBBF2FE5D27B /* LEYLRView+.swift */; };
+		C02F507249021A19FDF331D31FD8225C /* LEYString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70DC6DA7AB0615D155E61018B847E20 /* LEYString.swift */; };
+		C2C5707E445D7D2D60C14CBE83210B48 /* UIImage+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B3BB6CD3B5E6B992A7F931D3DA62A /* UIImage+LEYFoundation.swift */; };
+		C330DC74C28BBD8A4DF4FD1B8E25CBAF /* uiapp_overlay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 681F5356DBAFEA3B919FE9F97C3ACFD8 /* uiapp_overlay@3x.png */; };
+		C530E1F3CAB39F2CE97B4838B1CA9FBA /* LEYCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4F5ECCD4D4B7CAF6230194AA7B65F9 /* LEYCollectionViewController.swift */; };
+		C5D33BA6FF7B9CCE92943BA748E38986 /* LEYSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1343327B9D37058745C8EBBFEFC11CB /* LEYSwitch.swift */; };
+		C5E14924D5355D21402796F0522CEE15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */; };
+		CA480A55FAD10D8F24C4BE32E8F22CF7 /* UIButton+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EF37E6D62EF15AC1B031C776BCC9FF /* UIButton+LEYFoundation.swift */; };
+		CAEC758C689785AB2BCB9A1D6C5BEE4C /* navi_close_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FDEEA3EF4FA94D4E3367729432E30D7 /* navi_close_black@2x.png */; };
+		CCDB26B5957B98F0DFAAD11212621A40 /* LEYAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557A3EE2EEB73541A347A5A1389A3A8C /* LEYAssetsViewController.swift */; };
+		CCFE29F9FF1FF67682CCF603ABA95DB5 /* LEYControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E1A24414CCB2C4DFB88244B56A64E /* LEYControl.swift */; };
+		CE2053EF4E380659026450AF398EED07 /* LEYSuspendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34A0038775BD6123A5269EEE867D7C7 /* LEYSuspendView.swift */; };
+		D034DA033EDBBC7BF9B9BE0C10B6A61F /* navi_close_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA7CE2D44B9603380FCF2F844747C2F /* navi_close_black@3x.png */; };
+		D32C5FE09F9AD64C49170853C9A373D8 /* LEYAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B983C319B88EE0E662295565D9A310 /* LEYAsset.swift */; };
+		D6F50EE53E4903D43BA1B528DDAB8F27 /* LEYTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD718C5B99F7F1B5DDD9C8931FCF068A /* LEYTableViewCell.swift */; };
+		D86436CA4B8280D6B6ADABAF54C51B63 /* LEYCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7210FDBBC12D7DEED3E7A0B44E6CDDCE /* LEYCollectionView.swift */; };
+		DBDB2082FD2D0454F7561BF493E37EDE /* LEYApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F160F504F73021AE47D4147B99C277D /* LEYApplicationView.swift */; };
+		E0DB51C7AFC9B091ECBC8C19C71C9208 /* LEYTableWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D127A99ED136DCC6E9CC83FE71B805C /* LEYTableWrapper.swift */; };
+		E0DBBCCEDD2DDE0B10E31862ED11C7E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */; };
+		E18F8F5FA161BBF041CD49B672FADE4C /* UIView+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4002A6AF70658EC96A19E56924B1B008 /* UIView+LEYFoundation.swift */; };
+		E28AAE15A1A616010DE8507DDEDE3E31 /* LEYNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9F70F3D190C1344ED1700D2A336399 /* LEYNavigationController.swift */; };
+		E87ED608BA6CF50894C79B8CC5F2B2FF /* LEYActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0B1D30E57D1AF51C2EFE1A4E769F0 /* LEYActionView.swift */; };
+		EBA10FD26C692DC0B7A9F4B3EE117A08 /* LEYShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B41424A9CF7239F6CE6099889E7447E /* LEYShadowView.swift */; };
+		F19B81977014A253BE8B50D0624645AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D245E0514AAC1A2B9A6D5EA2F383E90F /* UIKit.framework */; };
+		F1EA4C18EB871160527F639135279FEC /* NXKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DC7618E13DCE8B243FA4D94A4A77950E /* NXKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F2A961C2ECAF25884C327760A0750834 /* LEYDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8838EE8ECE13E2941194EF9E4088B74 /* LEYDevice.swift */; };
+		F2C9B94FCACD4EDD3BE86D086F9FBB2A /* LEYActionView+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BA023E3BD9E29FE9FD10AC6455212D /* LEYActionView+LEYFoundation.swift */; };
+		F54EAB0A450D5F5CBACAF1A5D5DDE7B7 /* UserDefaults+LEYFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D7156F9A9AAA59972B65A10E5A1E7 /* UserDefaults+LEYFoundation.swift */; };
+		FD8D2BF0D62271411A94101149808D50 /* navi_back_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADE224744D3DE5537FA038D12350F31 /* navi_back_black@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		149D015A20F91120F0F8B8DB5DD94EC1 /* PBXContainerItemProxy */ = {
+		478529F26FCDC7DC43992CBD4E76DECD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5964122AEE7F2052A3199ED235D5E05A;
+			remoteGlobalIDString = 65356E389A75B118329D272175C636AA;
 			remoteInfo = NXKit;
 		};
-		9CC0E7BA9725EE470B1E8FAD8C22AE25 /* PBXContainerItemProxy */ = {
+		5B457E01DA8307962B280A18C6A9FCB8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 20FFBBC9C2BD1B0849641F6B6CEEFF04;
-			remoteInfo = "Pods-NXKit_Example";
+			remoteGlobalIDString = 4E8176B9C15F8A61E959200B92017EE1;
+			remoteInfo = "NXKit-NXKit";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		011EC4DE3BF9C1050C97BACCCD33DC39 /* Pods-NXKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NXKit_Example.release.xcconfig"; sourceTree = "<group>"; };
-		076CE9DEF0C0982952FE37826E9616C9 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		10561807FA129E04281F0F6AEFE6BEB2 /* Pods-NXKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NXKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		10AE93655ACEEC00134C8920111E764A /* Pods-NXKit_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NXKit_Example-umbrella.h"; sourceTree = "<group>"; };
-		1184A3E5BB124475966ACF8383FB5B48 /* Pods-NXKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-NXKit_Example-frameworks.sh"; sourceTree = "<group>"; };
-		235EF42B613390CE422A045FC45432C0 /* NXKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NXKit.modulemap; sourceTree = "<group>"; };
-		2772E81E7729184016253D7BE0AFBC1C /* Pods-NXKit_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NXKit_Example-dummy.m"; sourceTree = "<group>"; };
-		3BD96E84F3ABDF2B22B63A8CF3AB8971 /* Pods_NXKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NXKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		415C38653D88C0784B20A0719DC297EF /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		49EDB61DDB99ECFC61FBB91157D6400B /* NXKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NXKit-umbrella.h"; sourceTree = "<group>"; };
-		7152238D4BCC9CEF9EEFD7AEABC6B654 /* NXKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NXKit-prefix.pch"; sourceTree = "<group>"; };
-		86ACDAD96D914BDCBF9515393B1822D7 /* Pods_NXKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NXKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E034D675F6D47AF4E452EE8B2471BFE /* Pods-NXKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NXKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		998F1AE90A73D129A821063D7432258A /* NXKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NXKit-dummy.m"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A8BC07488F3612E840171A56CE49B6DC /* Pods-NXKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NXKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		B340AE6599E4C4437AD50227DF883537 /* NXKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = NXKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		B43C398372F5B8CBD14579E29EFF5F69 /* NXKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NXKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C086046D8B7A39DB7662C29BBB3058C0 /* NXKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NXKit.xcconfig; sourceTree = "<group>"; };
-		C9F56231268074EF00C864E4 /* navi_close_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_close_black@3x.png"; path = "NXKit/Assets/navi_close_black@3x.png"; sourceTree = "<group>"; };
-		C9F56232268074EF00C864E4 /* navi_more_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_more_white@2x.png"; path = "NXKit/Assets/navi_more_white@2x.png"; sourceTree = "<group>"; };
-		C9F56233268074EF00C864E4 /* navi_close_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_close_black@2x.png"; path = "NXKit/Assets/navi_close_black@2x.png"; sourceTree = "<group>"; };
-		C9F56234268074EF00C864E4 /* uiapp_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "uiapp_arrow@2x.png"; path = "NXKit/Assets/uiapp_arrow@2x.png"; sourceTree = "<group>"; };
-		C9F56235268074F000C864E4 /* navi_more_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_more_black@2x.png"; path = "NXKit/Assets/navi_more_black@2x.png"; sourceTree = "<group>"; };
-		C9F56236268074F000C864E4 /* navi_more_white@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_more_white@3x.png"; path = "NXKit/Assets/navi_more_white@3x.png"; sourceTree = "<group>"; };
-		C9F56237268074F000C864E4 /* navi_more_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_more_gray@2x.png"; path = "NXKit/Assets/navi_more_gray@2x.png"; sourceTree = "<group>"; };
-		C9F56238268074F000C864E4 /* navi_more_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_more_black@3x.png"; path = "NXKit/Assets/navi_more_black@3x.png"; sourceTree = "<group>"; };
-		C9F56239268074F000C864E4 /* uiapp_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "uiapp_arrow@3x.png"; path = "NXKit/Assets/uiapp_arrow@3x.png"; sourceTree = "<group>"; };
-		C9F5623A268074F000C864E4 /* uiapp_overlay_close_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "uiapp_overlay_close_black@3x.png"; path = "NXKit/Assets/uiapp_overlay_close_black@3x.png"; sourceTree = "<group>"; };
-		C9F5623B268074F000C864E4 /* navi_back_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_back_black@2x.png"; path = "NXKit/Assets/navi_back_black@2x.png"; sourceTree = "<group>"; };
-		C9F5623C268074F000C864E4 /* navi_more_gray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_more_gray@3x.png"; path = "NXKit/Assets/navi_more_gray@3x.png"; sourceTree = "<group>"; };
-		C9F5623D268074F000C864E4 /* navi_back_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navi_back_black@3x.png"; path = "NXKit/Assets/navi_back_black@3x.png"; sourceTree = "<group>"; };
-		C9F5623E268074F000C864E4 /* uiapp_overlay_close_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "uiapp_overlay_close_black@2x.png"; path = "NXKit/Assets/uiapp_overlay_close_black@2x.png"; sourceTree = "<group>"; };
-		C9F5623F268074F000C864E4 /* uiapp_overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "uiapp_overlay@2x.png"; path = "NXKit/Assets/uiapp_overlay@2x.png"; sourceTree = "<group>"; };
-		C9F56240268074F000C864E4 /* uiapp_overlay@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "uiapp_overlay@3x.png"; path = "NXKit/Assets/uiapp_overlay@3x.png"; sourceTree = "<group>"; };
-		C9F562522680763500C864E4 /* LEYLRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYLRView.swift; sourceTree = "<group>"; };
-		C9F562532680763500C864E4 /* LEYTransitionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYTransitionView.swift; sourceTree = "<group>"; };
-		C9F562542680763500C864E4 /* LEYActionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYActionViewCell.swift; sourceTree = "<group>"; };
-		C9F562552680763500C864E4 /* LEYRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYRouter.swift; sourceTree = "<group>"; };
-		C9F562562680763500C864E4 /* LEYNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYNavigationController.swift; sourceTree = "<group>"; };
-		C9F562572680763500C864E4 /* LEYWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYWebView.swift; sourceTree = "<group>"; };
-		C9F562582680763500C864E4 /* LEYNaviView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYNaviView.swift; sourceTree = "<group>"; };
-		C9F562592680763500C864E4 /* LEYString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYString.swift; sourceTree = "<group>"; };
-		C9F5625A2680763500C864E4 /* LEYLCRView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LEYLCRView+.swift"; sourceTree = "<group>"; };
-		C9F5625B2680763500C864E4 /* LEYCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYCollectionReusableView.swift; sourceTree = "<group>"; };
-		C9F5625C2680763500C864E4 /* LEYSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYSerialization.swift; sourceTree = "<group>"; };
-		C9F5625D2680763500C864E4 /* LEYCollectionWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYCollectionWrapper.swift; sourceTree = "<group>"; };
-		C9F5625E2680763500C864E4 /* LEYShadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYShadow.swift; sourceTree = "<group>"; };
-		C9F5625F2680763500C864E4 /* LEYApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYApp.swift; sourceTree = "<group>"; };
-		C9F562602680763500C864E4 /* LEYViewProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYViewProxy.swift; sourceTree = "<group>"; };
-		C9F562612680763500C864E4 /* LEYToolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYToolViewController.swift; sourceTree = "<group>"; };
-		C9F562622680763600C864E4 /* LEYActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYActionView.swift; sourceTree = "<group>"; };
-		C9F562632680763600C864E4 /* LEYWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYWebViewController.swift; sourceTree = "<group>"; };
-		C9F562642680763600C864E4 /* LEYSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYSwitch.swift; sourceTree = "<group>"; };
-		C9F562652680763600C864E4 /* LEYOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYOverlay.swift; sourceTree = "<group>"; };
-		C9F562662680763600C864E4 /* LEYTableWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYTableWrapper.swift; sourceTree = "<group>"; };
-		C9F562672680763600C864E4 /* LEYCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYCollectionViewCell.swift; sourceTree = "<group>"; };
-		C9F562682680763600C864E4 /* String+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+LEYFoundation.swift"; sourceTree = "<group>"; };
-		C9F562692680763600C864E4 /* LEYButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYButton.swift; sourceTree = "<group>"; };
-		C9F5626A2680763600C864E4 /* UILabel+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+LEYFoundation.swift"; sourceTree = "<group>"; };
-		C9F5626B2680763600C864E4 /* LEYAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYAction.swift; sourceTree = "<group>"; };
-		C9F5626C2680763600C864E4 /* LEYAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYAnimator.swift; sourceTree = "<group>"; };
-		C9F5626D2680763600C864E4 /* LEYXView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYXView.swift; sourceTree = "<group>"; };
-		C9F5626E2680763600C864E4 /* LEYApp+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LEYApp+.swift"; sourceTree = "<group>"; };
-		C9F5626F2680763600C864E4 /* LEYCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYCollectionViewController.swift; sourceTree = "<group>"; };
-		C9F562702680763600C864E4 /* LEYDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYDevice.swift; sourceTree = "<group>"; };
-		C9F562712680763600C864E4 /* LEYAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYAnimationView.swift; sourceTree = "<group>"; };
-		C9F562722680763600C864E4 /* LEYObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYObject.swift; sourceTree = "<group>"; };
-		C9F562732680763600C864E4 /* LEYSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYSubscriber.swift; sourceTree = "<group>"; };
-		C9F562742680763600C864E4 /* LEYTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYTableViewController.swift; sourceTree = "<group>"; };
-		C9F562752680763600C864E4 /* LEYHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYHUD.swift; sourceTree = "<group>"; };
-		C9F562762680763600C864E4 /* LEYItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYItem.swift; sourceTree = "<group>"; };
-		C9F562772680763600C864E4 /* LEYImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYImageView.swift; sourceTree = "<group>"; };
-		C9F562782680763600C864E4 /* UIButton+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+LEYFoundation.swift"; sourceTree = "<group>"; };
-		C9F562792680763600C864E4 /* LEYTableReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYTableReusableView.swift; sourceTree = "<group>"; };
-		C9F5627A2680763600C864E4 /* LEYCView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYCView.swift; sourceTree = "<group>"; };
-		C9F5627B2680763600C864E4 /* LEYToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYToolView.swift; sourceTree = "<group>"; };
-		C9F5627C2680763600C864E4 /* LEYControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYControl.swift; sourceTree = "<group>"; };
-		C9F5627D2680763600C864E4 /* LEYDrawableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYDrawableView.swift; sourceTree = "<group>"; };
-		C9F5627E2680763600C864E4 /* LEYLRView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LEYLRView+.swift"; sourceTree = "<group>"; };
-		C9F5627F2680763600C864E4 /* CAAnimation+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAAnimation+LEYFoundation.swift"; sourceTree = "<group>"; };
-		C9F562802680763600C864E4 /* UIView+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+LEYFoundation.swift"; sourceTree = "<group>"; };
-		C9F562812680763600C864E4 /* LEYLCRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYLCRView.swift; sourceTree = "<group>"; };
-		C9F562822680763600C864E4 /* LEYBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYBackgroundView.swift; sourceTree = "<group>"; };
-		C9F562832680763600C864E4 /* UserDefaults+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+LEYFoundation.swift"; sourceTree = "<group>"; };
-		C9F562842680763600C864E4 /* LEYActionView+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LEYActionView+LEYFoundation.swift"; sourceTree = "<group>"; };
-		C9F562852680763600C864E4 /* LEYSuspendView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYSuspendView.swift; sourceTree = "<group>"; };
-		C9F562862680763600C864E4 /* LEYTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYTableViewCell.swift; sourceTree = "<group>"; };
-		C9F562872680763600C864E4 /* LEYFS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYFS.swift; sourceTree = "<group>"; };
-		C9F562882680763600C864E4 /* LEYPrintf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYPrintf.swift; sourceTree = "<group>"; };
-		C9F562892680763600C864E4 /* LEYViewControllerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYViewControllerView.swift; sourceTree = "<group>"; };
-		C9F5628A2680763600C864E4 /* LEYRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYRuntime.swift; sourceTree = "<group>"; };
-		C9F5628B2680763600C864E4 /* LEYView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYView.swift; sourceTree = "<group>"; };
-		C9F5628C2680763600C864E4 /* DispatchQueue+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+LEYFoundation.swift"; sourceTree = "<group>"; };
-		C9F5628D2680763600C864E4 /* LEYShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYShadowView.swift; sourceTree = "<group>"; };
-		C9F5628E2680763600C864E4 /* LEYTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYTableView.swift; sourceTree = "<group>"; };
-		C9F5628F2680763600C864E4 /* LEYViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYViewController.swift; sourceTree = "<group>"; };
-		C9F562902680763600C864E4 /* LEYPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYPlaceholderView.swift; sourceTree = "<group>"; };
-		C9F562912680763600C864E4 /* LEYSwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYSwipeView.swift; sourceTree = "<group>"; };
-		C9F562922680763600C864E4 /* LEYApplicationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYApplicationView.swift; sourceTree = "<group>"; };
-		C9F562932680763600C864E4 /* LEYSwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYSwipeViewController.swift; sourceTree = "<group>"; };
-		C9F562942680763600C864E4 /* LEYCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYCollectionView.swift; sourceTree = "<group>"; };
-		C9F562952680763600C864E4 /* LEYContainerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYContainerController.swift; sourceTree = "<group>"; };
-		C9F562962680763600C864E4 /* LEYLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYLabel.swift; sourceTree = "<group>"; };
-		C9F562972680763600C864E4 /* Timer+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+LEYFoundation.swift"; sourceTree = "<group>"; };
-		C9F562982680763600C864E4 /* UIImage+LEYFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+LEYFoundation.swift"; sourceTree = "<group>"; };
-		C9F5629A2680763600C864E4 /* LEYAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYAsset.swift; sourceTree = "<group>"; };
-		C9F5629B2680763600C864E4 /* LEYAssetClipImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYAssetClipImageViewController.swift; sourceTree = "<group>"; };
-		C9F5629C2680763600C864E4 /* LEYAssetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYAssetsViewController.swift; sourceTree = "<group>"; };
-		C9F5629D2680763600C864E4 /* LEYClipboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LEYClipboardView.swift; sourceTree = "<group>"; };
-		CA7D081AC3B40C84FAA319BCF765FD04 /* Pods-NXKit_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NXKit_Example-Info.plist"; sourceTree = "<group>"; };
-		CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		DB3D46F292C76CA154A8C09F61F0AE9B /* Pods-NXKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NXKit_Example.modulemap"; sourceTree = "<group>"; };
-		DE2D9CEC38B84C0ED1D800D68D3DC599 /* NXKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "NXKit-Info.plist"; sourceTree = "<group>"; };
+		0060828023F9C1D5AD2360596C6DD2BA /* LEYNaviView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYNaviView.swift; sourceTree = "<group>"; };
+		02FD0F05763844E2CCCFDAF1C27E8DC9 /* LEYViewProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYViewProxy.swift; sourceTree = "<group>"; };
+		079A7C631EA7F50B161623DB30C615D5 /* navi_more_gray@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_more_gray@2x.png"; path = "NXKit/Assets/navi_more_gray@2x.png"; sourceTree = "<group>"; };
+		09B983C319B88EE0E662295565D9A310 /* LEYAsset.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYAsset.swift; sourceTree = "<group>"; };
+		0A645E4C38B7CEFE9481482FD96F63B0 /* LEYAction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYAction.swift; sourceTree = "<group>"; };
+		0B41424A9CF7239F6CE6099889E7447E /* LEYShadowView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYShadowView.swift; sourceTree = "<group>"; };
+		0BB91B7F328A9A5F60F1B57E4759FB76 /* LEYWebView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYWebView.swift; sourceTree = "<group>"; };
+		0D127A99ED136DCC6E9CC83FE71B805C /* LEYTableWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYTableWrapper.swift; sourceTree = "<group>"; };
+		0D4F5ECCD4D4B7CAF6230194AA7B65F9 /* LEYCollectionViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYCollectionViewController.swift; sourceTree = "<group>"; };
+		132BEC757684AC676E2E49B705308F86 /* LEYTableReusableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYTableReusableView.swift; sourceTree = "<group>"; };
+		1405B606F01CCC7786B234DF9003AA25 /* Pods-NXKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NXKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		18EF1EB31954DD283409D342C3E0E642 /* LEYToolView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYToolView.swift; sourceTree = "<group>"; };
+		1CF949622CCC0042E8928D81A77C218C /* Timer+LEYFoundation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Timer+LEYFoundation.swift"; sourceTree = "<group>"; };
+		1D23D3014E3CF0BCDB3EC3E7E5F925FD /* LEYContainerController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYContainerController.swift; sourceTree = "<group>"; };
+		1F9B3BB6CD3B5E6B992A7F931D3DA62A /* UIImage+LEYFoundation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIImage+LEYFoundation.swift"; sourceTree = "<group>"; };
+		24AC9A736650C8FD3B937395005C9FB6 /* NXKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NXKit.release.xcconfig; sourceTree = "<group>"; };
+		24F46AC8B711EEEAB7E0138F497E5B90 /* navi_more_black@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_more_black@2x.png"; path = "NXKit/Assets/navi_more_black@2x.png"; sourceTree = "<group>"; };
+		24FB5BA1302A12D8E8344B0F2E5A7144 /* Pods-NXKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NXKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		283B90BC34123B44652FA69C3DB9780C /* uiapp_arrow@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "uiapp_arrow@3x.png"; path = "NXKit/Assets/uiapp_arrow@3x.png"; sourceTree = "<group>"; };
+		2F160F504F73021AE47D4147B99C277D /* LEYApplicationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYApplicationView.swift; sourceTree = "<group>"; };
+		3144D7CA7407E5F1CD2449FEB24B0638 /* uiapp_arrow@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "uiapp_arrow@2x.png"; path = "NXKit/Assets/uiapp_arrow@2x.png"; sourceTree = "<group>"; };
+		335FD5A95C2FEF2FD28166109D444F38 /* LEYSwipeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYSwipeView.swift; sourceTree = "<group>"; };
+		34EF37E6D62EF15AC1B031C776BCC9FF /* UIButton+LEYFoundation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIButton+LEYFoundation.swift"; sourceTree = "<group>"; };
+		387F58EC89E34EE88F3E295EE173644A /* String+LEYFoundation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "String+LEYFoundation.swift"; sourceTree = "<group>"; };
+		38B8921A9F4344D91A5B9F649AB5A54A /* LEYLCRView+.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "LEYLCRView+.swift"; sourceTree = "<group>"; };
+		3F4C8C54FD97DDF8A33082D16B7162FF /* LEYApp+.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "LEYApp+.swift"; sourceTree = "<group>"; };
+		3FC8FE57E46DBC64FB15F58E3AE58AA1 /* NXKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = NXKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		4002A6AF70658EC96A19E56924B1B008 /* UIView+LEYFoundation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIView+LEYFoundation.swift"; sourceTree = "<group>"; };
+		44B3B8AB9EC763F6A8BBA79EE5C64EB0 /* CAAnimation+LEYFoundation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "CAAnimation+LEYFoundation.swift"; sourceTree = "<group>"; };
+		493FE65474DB54967783173A4DE055F8 /* LEYObject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYObject.swift; sourceTree = "<group>"; };
+		4A3636D3179B77CFA1C36DCD4DC2FFA4 /* LEYAssetClipImageViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYAssetClipImageViewController.swift; sourceTree = "<group>"; };
+		4A7ABF025F83073E37476C4B06592710 /* uiapp_overlay_close_black@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "uiapp_overlay_close_black@2x.png"; path = "NXKit/Assets/uiapp_overlay_close_black@2x.png"; sourceTree = "<group>"; };
+		4ADE224744D3DE5537FA038D12350F31 /* navi_back_black@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_back_black@3x.png"; path = "NXKit/Assets/navi_back_black@3x.png"; sourceTree = "<group>"; };
+		4BED521AFA3E1E37D7C80F3AA83C357B /* LEYCollectionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYCollectionViewCell.swift; sourceTree = "<group>"; };
+		50753BF5EFB8C0A7E69638677F4C38A9 /* UILabel+LEYFoundation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UILabel+LEYFoundation.swift"; sourceTree = "<group>"; };
+		50FA9901B0426E37E3C22C4D1243633E /* LEYRuntime.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYRuntime.swift; sourceTree = "<group>"; };
+		5340F9326DF710B8F5104998A06A7298 /* LEYShadow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYShadow.swift; sourceTree = "<group>"; };
+		53BE13C88E9F5CDF82098552597D0410 /* LEYTableViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYTableViewController.swift; sourceTree = "<group>"; };
+		5440B40E69CE90ACF6D459D400FE6ED7 /* Pods-NXKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NXKit_Example.release.xcconfig"; sourceTree = "<group>"; };
+		557A3EE2EEB73541A347A5A1389A3A8C /* LEYAssetsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYAssetsViewController.swift; sourceTree = "<group>"; };
+		58E6A65C23AEE2011A2078891535F63D /* LEYSubscriber.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYSubscriber.swift; sourceTree = "<group>"; };
+		5F69386CF41B131FB792226AAC642EE0 /* NXKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = NXKit.framework; path = NXKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F9AA2B5122642EDF7C29D7D4B12B8E4 /* LEYClipboardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYClipboardView.swift; sourceTree = "<group>"; };
+		61A9CABB9188ECCBEF5539D43FBC81C0 /* LEYApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYApp.swift; sourceTree = "<group>"; };
+		626D15B4B643770E899B8D0AAE141200 /* LEYFS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYFS.swift; sourceTree = "<group>"; };
+		64EF34CC54C1F46726361D12D570644C /* Pods-NXKit_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NXKit_Example-umbrella.h"; sourceTree = "<group>"; };
+		681F5356DBAFEA3B919FE9F97C3ACFD8 /* uiapp_overlay@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "uiapp_overlay@3x.png"; path = "NXKit/Assets/uiapp_overlay@3x.png"; sourceTree = "<group>"; };
+		6BC2A76063CEA8897B6A2CE3280E3B9C /* navi_back_black@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_back_black@2x.png"; path = "NXKit/Assets/navi_back_black@2x.png"; sourceTree = "<group>"; };
+		7210FDBBC12D7DEED3E7A0B44E6CDDCE /* LEYCollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYCollectionView.swift; sourceTree = "<group>"; };
+		76CB207E6FDD5636AECB4B7E45AD3BC8 /* NXKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NXKit.debug.xcconfig; sourceTree = "<group>"; };
+		782F92AB8576C681B821660E66347FBE /* LEYCollectionReusableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYCollectionReusableView.swift; sourceTree = "<group>"; };
+		784E1A24414CCB2C4DFB88244B56A64E /* LEYControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYControl.swift; sourceTree = "<group>"; };
+		78BAFE4FC54880F30EDF0C721CA6B172 /* Pods-NXKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NXKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		795CF0A89C8133493A6233CAC7EFEBAA /* LEYPlaceholderView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYPlaceholderView.swift; sourceTree = "<group>"; };
+		798DBA9CC86156ADC7C35ED6301C589C /* LEYSwipeViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYSwipeViewController.swift; sourceTree = "<group>"; };
+		7EA0B1D30E57D1AF51C2EFE1A4E769F0 /* LEYActionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYActionView.swift; sourceTree = "<group>"; };
+		7F451785D85B382E069E52739ED9B9DD /* LEYActionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYActionViewCell.swift; sourceTree = "<group>"; };
+		7FDEEA3EF4FA94D4E3367729432E30D7 /* navi_close_black@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_close_black@2x.png"; path = "NXKit/Assets/navi_close_black@2x.png"; sourceTree = "<group>"; };
+		82B4629ACDE234A3BDF4CE867F2AF826 /* LEYRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYRouter.swift; sourceTree = "<group>"; };
+		82F66FD03DE44CE85429CF557D387C8E /* LEYCView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYCView.swift; sourceTree = "<group>"; };
+		842D7156F9A9AAA59972B65A10E5A1E7 /* UserDefaults+LEYFoundation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UserDefaults+LEYFoundation.swift"; sourceTree = "<group>"; };
+		86EC9D27703AACB5EF9A9A9E42FEF4F1 /* Pods-NXKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-NXKit_Example-frameworks.sh"; sourceTree = "<group>"; };
+		8746C9474F4EB32873B294BCC92D5BB1 /* NXKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "NXKit-Info.plist"; sourceTree = "<group>"; };
+		89FA6F99CAC03D396FC4D416BF6B5F88 /* LEYCollectionWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYCollectionWrapper.swift; sourceTree = "<group>"; };
+		8DA7CE2D44B9603380FCF2F844747C2F /* navi_close_black@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_close_black@3x.png"; path = "NXKit/Assets/navi_close_black@3x.png"; sourceTree = "<group>"; };
+		8E319E774F25B338510210752CF0296F /* ResourceBundle-NXKit-NXKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-NXKit-NXKit-Info.plist"; sourceTree = "<group>"; };
+		90936AFF3024B48FA786D7EBDDD869F6 /* NXKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NXKit.modulemap; sourceTree = "<group>"; };
+		9201AD1DEBCE7D8F05C62E4825017761 /* navi_more_white@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_more_white@2x.png"; path = "NXKit/Assets/navi_more_white@2x.png"; sourceTree = "<group>"; };
+		9505AD19295A92C91728BCDDFED70984 /* navi_more_gray@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_more_gray@3x.png"; path = "NXKit/Assets/navi_more_gray@3x.png"; sourceTree = "<group>"; };
+		96F49A40F2E1BE1EE9903B4B6BEF1C3A /* LEYAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYAnimator.swift; sourceTree = "<group>"; };
+		99D355C845AE54839061F21C70F3B2DD /* LEYView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYView.swift; sourceTree = "<group>"; };
+		9CDF10F5BA7FE75A173D6ECDDBE6CF04 /* LEYHUD.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYHUD.swift; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9EBC54C25F31F700EEE625729F4731FA /* LEYWebViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYWebViewController.swift; sourceTree = "<group>"; };
+		9EE102AF9EBA08E49BC7D3B68C8E3911 /* uiapp_overlay_close_black@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "uiapp_overlay_close_black@3x.png"; path = "NXKit/Assets/uiapp_overlay_close_black@3x.png"; sourceTree = "<group>"; };
+		A1343327B9D37058745C8EBBFEFC11CB /* LEYSwitch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYSwitch.swift; sourceTree = "<group>"; };
+		A2A8E0E1E3B9D0C90A8C3899D6A85ABB /* uiapp_overlay@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "uiapp_overlay@2x.png"; path = "NXKit/Assets/uiapp_overlay@2x.png"; sourceTree = "<group>"; };
+		A2DD1DD0DB8EB987F37CED90DCAA8A2B /* LEYDrawableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYDrawableView.swift; sourceTree = "<group>"; };
+		A41B110D04C4973F89C050B29C3728FF /* Pods-NXKit_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NXKit_Example-Info.plist"; sourceTree = "<group>"; };
+		A4E137595DC52C0BBF9E28B85F8D9D0A /* LEYImageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYImageView.swift; sourceTree = "<group>"; };
+		AD9F70F3D190C1344ED1700D2A336399 /* LEYNavigationController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYNavigationController.swift; sourceTree = "<group>"; };
+		B80A13553E4A390902591C5427FF658D /* Pods-NXKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NXKit_Example.modulemap"; sourceTree = "<group>"; };
+		BA0CA56A4F07B3DA4912B1E03B510D5E /* LEYViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYViewController.swift; sourceTree = "<group>"; };
+		BC813C56CE1330FFF9C5A1F4C46A0DD5 /* DispatchQueue+LEYFoundation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+LEYFoundation.swift"; sourceTree = "<group>"; };
+		BD718C5B99F7F1B5DDD9C8931FCF068A /* LEYTableViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYTableViewCell.swift; sourceTree = "<group>"; };
+		BD7FAB812C7ED1C3138D176144F566BA /* LEYLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYLabel.swift; sourceTree = "<group>"; };
+		C077762B28D2B6165036B9FB7BEC405D /* navi_more_white@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_more_white@3x.png"; path = "NXKit/Assets/navi_more_white@3x.png"; sourceTree = "<group>"; };
+		C0DAC4B53C78D49A169D5443C60A6E80 /* LEYToolViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYToolViewController.swift; sourceTree = "<group>"; };
+		C23ED01D14DB886275E12A4CF5FFD2F7 /* LEYLRView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYLRView.swift; sourceTree = "<group>"; };
+		C34A0038775BD6123A5269EEE867D7C7 /* LEYSuspendView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYSuspendView.swift; sourceTree = "<group>"; };
+		C34CC5924FB80E0A544389123F2ECEF7 /* LEYOverlay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYOverlay.swift; sourceTree = "<group>"; };
+		C70DC6DA7AB0615D155E61018B847E20 /* LEYString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYString.swift; sourceTree = "<group>"; };
+		C8838EE8ECE13E2941194EF9E4088B74 /* LEYDevice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYDevice.swift; sourceTree = "<group>"; };
+		C9A1D0F9E4D64BFFAADBB98E017589C5 /* Pods-NXKit_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NXKit_Example-dummy.m"; sourceTree = "<group>"; };
+		CCF5854C8E9FC1EF588B4C3436737AEF /* LEYViewControllerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYViewControllerView.swift; sourceTree = "<group>"; };
+		CEC056866E27039101E3384BE533EBF6 /* NXKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NXKit-dummy.m"; sourceTree = "<group>"; };
+		CF9597F222CBD858A178EBBF2FE5D27B /* LEYLRView+.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "LEYLRView+.swift"; sourceTree = "<group>"; };
+		D0E91A9C1544895FAE7702FB826C7CC4 /* LEYAnimationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYAnimationView.swift; sourceTree = "<group>"; };
+		D245E0514AAC1A2B9A6D5EA2F383E90F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		D552B56AB5A1ADF41967349A4875FB2A /* LEYLCRView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYLCRView.swift; sourceTree = "<group>"; };
+		D613738BAD7BD74B3D266536A3F7DA29 /* LEYButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYButton.swift; sourceTree = "<group>"; };
+		D6829E84758C134C8F31D224DB49B70D /* LEYTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYTableView.swift; sourceTree = "<group>"; };
+		D79426E8681F5368F31D9E1179CB3D62 /* LEYBackgroundView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYBackgroundView.swift; sourceTree = "<group>"; };
+		D7CDFB074555F9748A4F511D395F79C6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		DC7618E13DCE8B243FA4D94A4A77950E /* NXKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NXKit-umbrella.h"; sourceTree = "<group>"; };
+		E26F45FDD1AFAEAF44CDF9ACC677D0CA /* LEYItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYItem.swift; sourceTree = "<group>"; };
+		E4E71FF1657217A6EDD86FDB7AC7C149 /* LEYTransitionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYTransitionView.swift; sourceTree = "<group>"; };
+		E63DF99DCD4379F20D3F2B193AA61FC9 /* NXKit.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = NXKit.bundle; path = "NXKit-NXKit.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6D7CEDD0E115CFD4CD95DD758D27963 /* navi_more_black@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_more_black@3x.png"; path = "NXKit/Assets/navi_more_black@3x.png"; sourceTree = "<group>"; };
+		EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		EB17C0E675035DFC9E8607FA570E5F65 /* Pods_NXKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_NXKit_Example.framework; path = "Pods-NXKit_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED78851DF02EB23C5CCB07F4FBF094A1 /* LEYXView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYXView.swift; sourceTree = "<group>"; };
+		F3BA023E3BD9E29FE9FD10AC6455212D /* LEYActionView+LEYFoundation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "LEYActionView+LEYFoundation.swift"; sourceTree = "<group>"; };
+		F818E87F31E58B515D2086DCA416CD12 /* LEYSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYSerialization.swift; sourceTree = "<group>"; };
+		FC9489CC21A57B99EE549A47D7AE1DF7 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		FDC7A68CF10E556078169EDBF64DED81 /* NXKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NXKit-prefix.pch"; sourceTree = "<group>"; };
+		FEDE170763258B7BC9458400ECB10F51 /* LEYPrintf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LEYPrintf.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		196F44EEF1ED1A966C10BFF49FC5E7DB /* Frameworks */ = {
+		73329B76D515F7CCCAEA8E7A2A61381B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A58FC49744A16F194CDC06299FABC99 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1F41E39AE5096C3EC0505A38F98611A6 /* Frameworks */ = {
+		BE675DA98242C76A3C267D80C6686E02 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCEDF78A270E95D18A4C4D31ECC187BA /* Foundation.framework in Frameworks */,
+				E0DBBCCEDD2DDE0B10E31862ED11C7E5 /* Foundation.framework in Frameworks */,
+				F19B81977014A253BE8B50D0624645AF /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B4CF36FF0FB587ECC0D0D6AC92DB7DD0 /* Frameworks */ = {
+		FAF48FFE75BDE571174EAE358CE2D4FB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AD777DCEB3C754790DCDE1464B2C06E /* Foundation.framework in Frameworks */,
+				C5E14924D5355D21402796F0522CEE15 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		17C351B0C221CCE4831883D9B87F99FE /* Pods-NXKit_Example */ = {
+		018B384786EF4FE8D765E782C98D0FF3 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				DB3D46F292C76CA154A8C09F61F0AE9B /* Pods-NXKit_Example.modulemap */,
-				10561807FA129E04281F0F6AEFE6BEB2 /* Pods-NXKit_Example-acknowledgements.markdown */,
-				8E034D675F6D47AF4E452EE8B2471BFE /* Pods-NXKit_Example-acknowledgements.plist */,
-				2772E81E7729184016253D7BE0AFBC1C /* Pods-NXKit_Example-dummy.m */,
-				1184A3E5BB124475966ACF8383FB5B48 /* Pods-NXKit_Example-frameworks.sh */,
-				CA7D081AC3B40C84FAA319BCF765FD04 /* Pods-NXKit_Example-Info.plist */,
-				10AE93655ACEEC00134C8920111E764A /* Pods-NXKit_Example-umbrella.h */,
-				A8BC07488F3612E840171A56CE49B6DC /* Pods-NXKit_Example.debug.xcconfig */,
-				011EC4DE3BF9C1050C97BACCCD33DC39 /* Pods-NXKit_Example.release.xcconfig */,
+				D7CDFB074555F9748A4F511D395F79C6 /* LICENSE */,
+				3FC8FE57E46DBC64FB15F58E3AE58AA1 /* NXKit.podspec */,
+				FC9489CC21A57B99EE549A47D7AE1DF7 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		0857F2116A10BAA1856C7BE3BF4624DD /* Extend */ = {
+			isa = PBXGroup;
+			children = (
+				09B983C319B88EE0E662295565D9A310 /* LEYAsset.swift */,
+				4A3636D3179B77CFA1C36DCD4DC2FFA4 /* LEYAssetClipImageViewController.swift */,
+				557A3EE2EEB73541A347A5A1389A3A8C /* LEYAssetsViewController.swift */,
+				5F9AA2B5122642EDF7C29D7D4B12B8E4 /* LEYClipboardView.swift */,
+			);
+			name = Extend;
+			path = NXKit/Classes/Extend;
+			sourceTree = "<group>";
+		};
+		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				59DA5C1F72E1D5BABC43EACBA672C3BA /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		344B3C18BE2B5609C32F57862205E200 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B321C1B4B0409251B4852560810DBBD8 /* NXKit */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		36C9DE353D4DC3697B288A4C27AFE504 /* Pods-NXKit_Example */ = {
+			isa = PBXGroup;
+			children = (
+				B80A13553E4A390902591C5427FF658D /* Pods-NXKit_Example.modulemap */,
+				24FB5BA1302A12D8E8344B0F2E5A7144 /* Pods-NXKit_Example-acknowledgements.markdown */,
+				1405B606F01CCC7786B234DF9003AA25 /* Pods-NXKit_Example-acknowledgements.plist */,
+				C9A1D0F9E4D64BFFAADBB98E017589C5 /* Pods-NXKit_Example-dummy.m */,
+				86EC9D27703AACB5EF9A9A9E42FEF4F1 /* Pods-NXKit_Example-frameworks.sh */,
+				A41B110D04C4973F89C050B29C3728FF /* Pods-NXKit_Example-Info.plist */,
+				64EF34CC54C1F46726361D12D570644C /* Pods-NXKit_Example-umbrella.h */,
+				78BAFE4FC54880F30EDF0C721CA6B172 /* Pods-NXKit_Example.debug.xcconfig */,
+				5440B40E69CE90ACF6D459D400FE6ED7 /* Pods-NXKit_Example.release.xcconfig */,
 			);
 			name = "Pods-NXKit_Example";
 			path = "Target Support Files/Pods-NXKit_Example";
 			sourceTree = "<group>";
 		};
-		3D4C4E840272E066815C8596EB20426A /* NXKit */ = {
+		4D5AA507840E44A59FD4A554A5E4B780 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				C9F562992680763600C864E4 /* Extend */,
-				C9F562512680763500C864E4 /* Source */,
-				C9F5623B268074F000C864E4 /* navi_back_black@2x.png */,
-				C9F5623D268074F000C864E4 /* navi_back_black@3x.png */,
-				C9F56233268074EF00C864E4 /* navi_close_black@2x.png */,
-				C9F56231268074EF00C864E4 /* navi_close_black@3x.png */,
-				C9F56235268074F000C864E4 /* navi_more_black@2x.png */,
-				C9F56238268074F000C864E4 /* navi_more_black@3x.png */,
-				C9F56237268074F000C864E4 /* navi_more_gray@2x.png */,
-				C9F5623C268074F000C864E4 /* navi_more_gray@3x.png */,
-				C9F56232268074EF00C864E4 /* navi_more_white@2x.png */,
-				C9F56236268074F000C864E4 /* navi_more_white@3x.png */,
-				C9F56234268074EF00C864E4 /* uiapp_arrow@2x.png */,
-				C9F56239268074F000C864E4 /* uiapp_arrow@3x.png */,
-				C9F5623E268074F000C864E4 /* uiapp_overlay_close_black@2x.png */,
-				C9F5623A268074F000C864E4 /* uiapp_overlay_close_black@3x.png */,
-				C9F5623F268074F000C864E4 /* uiapp_overlay@2x.png */,
-				C9F56240268074F000C864E4 /* uiapp_overlay@3x.png */,
-				6B7E61630C7F390C98C605704E311E93 /* Pod */,
-				6DC104EFCA940790C62282CF40A6D87B /* Support Files */,
-			);
-			name = NXKit;
-			path = ../..;
-			sourceTree = "<group>";
-		};
-		6B7E61630C7F390C98C605704E311E93 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				415C38653D88C0784B20A0719DC297EF /* LICENSE */,
-				B340AE6599E4C4437AD50227DF883537 /* NXKit.podspec */,
-				076CE9DEF0C0982952FE37826E9616C9 /* README.md */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
-		6DC104EFCA940790C62282CF40A6D87B /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				235EF42B613390CE422A045FC45432C0 /* NXKit.modulemap */,
-				C086046D8B7A39DB7662C29BBB3058C0 /* NXKit.xcconfig */,
-				998F1AE90A73D129A821063D7432258A /* NXKit-dummy.m */,
-				DE2D9CEC38B84C0ED1D800D68D3DC599 /* NXKit-Info.plist */,
-				7152238D4BCC9CEF9EEFD7AEABC6B654 /* NXKit-prefix.pch */,
-				49EDB61DDB99ECFC61FBB91157D6400B /* NXKit-umbrella.h */,
+				90936AFF3024B48FA786D7EBDDD869F6 /* NXKit.modulemap */,
+				CEC056866E27039101E3384BE533EBF6 /* NXKit-dummy.m */,
+				8746C9474F4EB32873B294BCC92D5BB1 /* NXKit-Info.plist */,
+				FDC7A68CF10E556078169EDBF64DED81 /* NXKit-prefix.pch */,
+				DC7618E13DCE8B243FA4D94A4A77950E /* NXKit-umbrella.h */,
+				76CB207E6FDD5636AECB4B7E45AD3BC8 /* NXKit.debug.xcconfig */,
+				24AC9A736650C8FD3B937395005C9FB6 /* NXKit.release.xcconfig */,
+				8E319E774F25B338510210752CF0296F /* ResourceBundle-NXKit-NXKit-Info.plist */,
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/NXKit";
 			sourceTree = "<group>";
 		};
-		879E535BE1825EF711D3F5A01AF48566 /* Targets Support Files */ = {
+		59DA5C1F72E1D5BABC43EACBA672C3BA /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				17C351B0C221CCE4831883D9B87F99FE /* Pods-NXKit_Example */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		983744EDC93CD1114B520960C6A1D3AB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B43C398372F5B8CBD14579E29EFF5F69 /* NXKit.framework */,
-				3BD96E84F3ABDF2B22B63A8CF3AB8971 /* Pods_NXKit_Example.framework */,
-				86ACDAD96D914BDCBF9515393B1822D7 /* Pods_NXKit_Tests.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		9B055D0CFEA43187E72B03DED11F5662 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */,
+				EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */,
+				D245E0514AAC1A2B9A6D5EA2F383E90F /* UIKit.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		B4B28A05951B5499EBD83158398564F9 /* Development Pods */ = {
+		67C41A44096A8B36927923C32CDB3BF7 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				3D4C4E840272E066815C8596EB20426A /* NXKit */,
-			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		C9F562512680763500C864E4 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				C9F562522680763500C864E4 /* LEYLRView.swift */,
-				C9F562532680763500C864E4 /* LEYTransitionView.swift */,
-				C9F562542680763500C864E4 /* LEYActionViewCell.swift */,
-				C9F562552680763500C864E4 /* LEYRouter.swift */,
-				C9F562562680763500C864E4 /* LEYNavigationController.swift */,
-				C9F562572680763500C864E4 /* LEYWebView.swift */,
-				C9F562582680763500C864E4 /* LEYNaviView.swift */,
-				C9F562592680763500C864E4 /* LEYString.swift */,
-				C9F5625A2680763500C864E4 /* LEYLCRView+.swift */,
-				C9F5625B2680763500C864E4 /* LEYCollectionReusableView.swift */,
-				C9F5625C2680763500C864E4 /* LEYSerialization.swift */,
-				C9F5625D2680763500C864E4 /* LEYCollectionWrapper.swift */,
-				C9F5625E2680763500C864E4 /* LEYShadow.swift */,
-				C9F5625F2680763500C864E4 /* LEYApp.swift */,
-				C9F562602680763500C864E4 /* LEYViewProxy.swift */,
-				C9F562612680763500C864E4 /* LEYToolViewController.swift */,
-				C9F562622680763600C864E4 /* LEYActionView.swift */,
-				C9F562632680763600C864E4 /* LEYWebViewController.swift */,
-				C9F562642680763600C864E4 /* LEYSwitch.swift */,
-				C9F562652680763600C864E4 /* LEYOverlay.swift */,
-				C9F562662680763600C864E4 /* LEYTableWrapper.swift */,
-				C9F562672680763600C864E4 /* LEYCollectionViewCell.swift */,
-				C9F562682680763600C864E4 /* String+LEYFoundation.swift */,
-				C9F562692680763600C864E4 /* LEYButton.swift */,
-				C9F5626A2680763600C864E4 /* UILabel+LEYFoundation.swift */,
-				C9F5626B2680763600C864E4 /* LEYAction.swift */,
-				C9F5626C2680763600C864E4 /* LEYAnimator.swift */,
-				C9F5626D2680763600C864E4 /* LEYXView.swift */,
-				C9F5626E2680763600C864E4 /* LEYApp+.swift */,
-				C9F5626F2680763600C864E4 /* LEYCollectionViewController.swift */,
-				C9F562702680763600C864E4 /* LEYDevice.swift */,
-				C9F562712680763600C864E4 /* LEYAnimationView.swift */,
-				C9F562722680763600C864E4 /* LEYObject.swift */,
-				C9F562732680763600C864E4 /* LEYSubscriber.swift */,
-				C9F562742680763600C864E4 /* LEYTableViewController.swift */,
-				C9F562752680763600C864E4 /* LEYHUD.swift */,
-				C9F562762680763600C864E4 /* LEYItem.swift */,
-				C9F562772680763600C864E4 /* LEYImageView.swift */,
-				C9F562782680763600C864E4 /* UIButton+LEYFoundation.swift */,
-				C9F562792680763600C864E4 /* LEYTableReusableView.swift */,
-				C9F5627A2680763600C864E4 /* LEYCView.swift */,
-				C9F5627B2680763600C864E4 /* LEYToolView.swift */,
-				C9F5627C2680763600C864E4 /* LEYControl.swift */,
-				C9F5627D2680763600C864E4 /* LEYDrawableView.swift */,
-				C9F5627E2680763600C864E4 /* LEYLRView+.swift */,
-				C9F5627F2680763600C864E4 /* CAAnimation+LEYFoundation.swift */,
-				C9F562802680763600C864E4 /* UIView+LEYFoundation.swift */,
-				C9F562812680763600C864E4 /* LEYLCRView.swift */,
-				C9F562822680763600C864E4 /* LEYBackgroundView.swift */,
-				C9F562832680763600C864E4 /* UserDefaults+LEYFoundation.swift */,
-				C9F562842680763600C864E4 /* LEYActionView+LEYFoundation.swift */,
-				C9F562852680763600C864E4 /* LEYSuspendView.swift */,
-				C9F562862680763600C864E4 /* LEYTableViewCell.swift */,
-				C9F562872680763600C864E4 /* LEYFS.swift */,
-				C9F562882680763600C864E4 /* LEYPrintf.swift */,
-				C9F562892680763600C864E4 /* LEYViewControllerView.swift */,
-				C9F5628A2680763600C864E4 /* LEYRuntime.swift */,
-				C9F5628B2680763600C864E4 /* LEYView.swift */,
-				C9F5628C2680763600C864E4 /* DispatchQueue+LEYFoundation.swift */,
-				C9F5628D2680763600C864E4 /* LEYShadowView.swift */,
-				C9F5628E2680763600C864E4 /* LEYTableView.swift */,
-				C9F5628F2680763600C864E4 /* LEYViewController.swift */,
-				C9F562902680763600C864E4 /* LEYPlaceholderView.swift */,
-				C9F562912680763600C864E4 /* LEYSwipeView.swift */,
-				C9F562922680763600C864E4 /* LEYApplicationView.swift */,
-				C9F562932680763600C864E4 /* LEYSwipeViewController.swift */,
-				C9F562942680763600C864E4 /* LEYCollectionView.swift */,
-				C9F562952680763600C864E4 /* LEYContainerController.swift */,
-				C9F562962680763600C864E4 /* LEYLabel.swift */,
-				C9F562972680763600C864E4 /* Timer+LEYFoundation.swift */,
-				C9F562982680763600C864E4 /* UIImage+LEYFoundation.swift */,
+				44B3B8AB9EC763F6A8BBA79EE5C64EB0 /* CAAnimation+LEYFoundation.swift */,
+				BC813C56CE1330FFF9C5A1F4C46A0DD5 /* DispatchQueue+LEYFoundation.swift */,
+				0A645E4C38B7CEFE9481482FD96F63B0 /* LEYAction.swift */,
+				7EA0B1D30E57D1AF51C2EFE1A4E769F0 /* LEYActionView.swift */,
+				F3BA023E3BD9E29FE9FD10AC6455212D /* LEYActionView+LEYFoundation.swift */,
+				7F451785D85B382E069E52739ED9B9DD /* LEYActionViewCell.swift */,
+				D0E91A9C1544895FAE7702FB826C7CC4 /* LEYAnimationView.swift */,
+				96F49A40F2E1BE1EE9903B4B6BEF1C3A /* LEYAnimator.swift */,
+				61A9CABB9188ECCBEF5539D43FBC81C0 /* LEYApp.swift */,
+				3F4C8C54FD97DDF8A33082D16B7162FF /* LEYApp+.swift */,
+				2F160F504F73021AE47D4147B99C277D /* LEYApplicationView.swift */,
+				D79426E8681F5368F31D9E1179CB3D62 /* LEYBackgroundView.swift */,
+				D613738BAD7BD74B3D266536A3F7DA29 /* LEYButton.swift */,
+				782F92AB8576C681B821660E66347FBE /* LEYCollectionReusableView.swift */,
+				7210FDBBC12D7DEED3E7A0B44E6CDDCE /* LEYCollectionView.swift */,
+				4BED521AFA3E1E37D7C80F3AA83C357B /* LEYCollectionViewCell.swift */,
+				0D4F5ECCD4D4B7CAF6230194AA7B65F9 /* LEYCollectionViewController.swift */,
+				89FA6F99CAC03D396FC4D416BF6B5F88 /* LEYCollectionWrapper.swift */,
+				1D23D3014E3CF0BCDB3EC3E7E5F925FD /* LEYContainerController.swift */,
+				784E1A24414CCB2C4DFB88244B56A64E /* LEYControl.swift */,
+				82F66FD03DE44CE85429CF557D387C8E /* LEYCView.swift */,
+				C8838EE8ECE13E2941194EF9E4088B74 /* LEYDevice.swift */,
+				A2DD1DD0DB8EB987F37CED90DCAA8A2B /* LEYDrawableView.swift */,
+				626D15B4B643770E899B8D0AAE141200 /* LEYFS.swift */,
+				9CDF10F5BA7FE75A173D6ECDDBE6CF04 /* LEYHUD.swift */,
+				A4E137595DC52C0BBF9E28B85F8D9D0A /* LEYImageView.swift */,
+				E26F45FDD1AFAEAF44CDF9ACC677D0CA /* LEYItem.swift */,
+				BD7FAB812C7ED1C3138D176144F566BA /* LEYLabel.swift */,
+				D552B56AB5A1ADF41967349A4875FB2A /* LEYLCRView.swift */,
+				38B8921A9F4344D91A5B9F649AB5A54A /* LEYLCRView+.swift */,
+				C23ED01D14DB886275E12A4CF5FFD2F7 /* LEYLRView.swift */,
+				CF9597F222CBD858A178EBBF2FE5D27B /* LEYLRView+.swift */,
+				AD9F70F3D190C1344ED1700D2A336399 /* LEYNavigationController.swift */,
+				0060828023F9C1D5AD2360596C6DD2BA /* LEYNaviView.swift */,
+				493FE65474DB54967783173A4DE055F8 /* LEYObject.swift */,
+				C34CC5924FB80E0A544389123F2ECEF7 /* LEYOverlay.swift */,
+				795CF0A89C8133493A6233CAC7EFEBAA /* LEYPlaceholderView.swift */,
+				FEDE170763258B7BC9458400ECB10F51 /* LEYPrintf.swift */,
+				82B4629ACDE234A3BDF4CE867F2AF826 /* LEYRouter.swift */,
+				50FA9901B0426E37E3C22C4D1243633E /* LEYRuntime.swift */,
+				F818E87F31E58B515D2086DCA416CD12 /* LEYSerialization.swift */,
+				5340F9326DF710B8F5104998A06A7298 /* LEYShadow.swift */,
+				0B41424A9CF7239F6CE6099889E7447E /* LEYShadowView.swift */,
+				C70DC6DA7AB0615D155E61018B847E20 /* LEYString.swift */,
+				58E6A65C23AEE2011A2078891535F63D /* LEYSubscriber.swift */,
+				C34A0038775BD6123A5269EEE867D7C7 /* LEYSuspendView.swift */,
+				335FD5A95C2FEF2FD28166109D444F38 /* LEYSwipeView.swift */,
+				798DBA9CC86156ADC7C35ED6301C589C /* LEYSwipeViewController.swift */,
+				A1343327B9D37058745C8EBBFEFC11CB /* LEYSwitch.swift */,
+				132BEC757684AC676E2E49B705308F86 /* LEYTableReusableView.swift */,
+				D6829E84758C134C8F31D224DB49B70D /* LEYTableView.swift */,
+				BD718C5B99F7F1B5DDD9C8931FCF068A /* LEYTableViewCell.swift */,
+				53BE13C88E9F5CDF82098552597D0410 /* LEYTableViewController.swift */,
+				0D127A99ED136DCC6E9CC83FE71B805C /* LEYTableWrapper.swift */,
+				18EF1EB31954DD283409D342C3E0E642 /* LEYToolView.swift */,
+				C0DAC4B53C78D49A169D5443C60A6E80 /* LEYToolViewController.swift */,
+				E4E71FF1657217A6EDD86FDB7AC7C149 /* LEYTransitionView.swift */,
+				99D355C845AE54839061F21C70F3B2DD /* LEYView.swift */,
+				BA0CA56A4F07B3DA4912B1E03B510D5E /* LEYViewController.swift */,
+				CCF5854C8E9FC1EF588B4C3436737AEF /* LEYViewControllerView.swift */,
+				02FD0F05763844E2CCCFDAF1C27E8DC9 /* LEYViewProxy.swift */,
+				0BB91B7F328A9A5F60F1B57E4759FB76 /* LEYWebView.swift */,
+				9EBC54C25F31F700EEE625729F4731FA /* LEYWebViewController.swift */,
+				ED78851DF02EB23C5CCB07F4FBF094A1 /* LEYXView.swift */,
+				387F58EC89E34EE88F3E295EE173644A /* String+LEYFoundation.swift */,
+				1CF949622CCC0042E8928D81A77C218C /* Timer+LEYFoundation.swift */,
+				34EF37E6D62EF15AC1B031C776BCC9FF /* UIButton+LEYFoundation.swift */,
+				1F9B3BB6CD3B5E6B992A7F931D3DA62A /* UIImage+LEYFoundation.swift */,
+				50753BF5EFB8C0A7E69638677F4C38A9 /* UILabel+LEYFoundation.swift */,
+				4002A6AF70658EC96A19E56924B1B008 /* UIView+LEYFoundation.swift */,
+				842D7156F9A9AAA59972B65A10E5A1E7 /* UserDefaults+LEYFoundation.swift */,
 			);
 			name = Source;
 			path = NXKit/Classes/Source;
 			sourceTree = "<group>";
 		};
-		C9F562992680763600C864E4 /* Extend */ = {
+		7D01732F11582A1E559C4E9CED718B0A /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				C9F5629A2680763600C864E4 /* LEYAsset.swift */,
-				C9F5629B2680763600C864E4 /* LEYAssetClipImageViewController.swift */,
-				C9F5629C2680763600C864E4 /* LEYAssetsViewController.swift */,
-				C9F5629D2680763600C864E4 /* LEYClipboardView.swift */,
+				36C9DE353D4DC3697B288A4C27AFE504 /* Pods-NXKit_Example */,
 			);
-			name = Extend;
-			path = NXKit/Classes/Extend;
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		B321C1B4B0409251B4852560810DBBD8 /* NXKit */ = {
+			isa = PBXGroup;
+			children = (
+				6BC2A76063CEA8897B6A2CE3280E3B9C /* navi_back_black@2x.png */,
+				4ADE224744D3DE5537FA038D12350F31 /* navi_back_black@3x.png */,
+				7FDEEA3EF4FA94D4E3367729432E30D7 /* navi_close_black@2x.png */,
+				8DA7CE2D44B9603380FCF2F844747C2F /* navi_close_black@3x.png */,
+				24F46AC8B711EEEAB7E0138F497E5B90 /* navi_more_black@2x.png */,
+				E6D7CEDD0E115CFD4CD95DD758D27963 /* navi_more_black@3x.png */,
+				079A7C631EA7F50B161623DB30C615D5 /* navi_more_gray@2x.png */,
+				9505AD19295A92C91728BCDDFED70984 /* navi_more_gray@3x.png */,
+				9201AD1DEBCE7D8F05C62E4825017761 /* navi_more_white@2x.png */,
+				C077762B28D2B6165036B9FB7BEC405D /* navi_more_white@3x.png */,
+				3144D7CA7407E5F1CD2449FEB24B0638 /* uiapp_arrow@2x.png */,
+				283B90BC34123B44652FA69C3DB9780C /* uiapp_arrow@3x.png */,
+				A2A8E0E1E3B9D0C90A8C3899D6A85ABB /* uiapp_overlay@2x.png */,
+				681F5356DBAFEA3B919FE9F97C3ACFD8 /* uiapp_overlay@3x.png */,
+				4A7ABF025F83073E37476C4B06592710 /* uiapp_overlay_close_black@2x.png */,
+				9EE102AF9EBA08E49BC7D3B68C8E3911 /* uiapp_overlay_close_black@3x.png */,
+				0857F2116A10BAA1856C7BE3BF4624DD /* Extend */,
+				018B384786EF4FE8D765E782C98D0FF3 /* Pod */,
+				67C41A44096A8B36927923C32CDB3BF7 /* Source */,
+				4D5AA507840E44A59FD4A554A5E4B780 /* Support Files */,
+			);
+			name = NXKit;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				B4B28A05951B5499EBD83158398564F9 /* Development Pods */,
-				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				983744EDC93CD1114B520960C6A1D3AB /* Products */,
-				879E535BE1825EF711D3F5A01AF48566 /* Targets Support Files */,
+				344B3C18BE2B5609C32F57862205E200 /* Development Pods */,
+				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
+				D81056CBD2B097F0FE789D28F57F9DA8 /* Products */,
+				7D01732F11582A1E559C4E9CED718B0A /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+		D81056CBD2B097F0FE789D28F57F9DA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9B055D0CFEA43187E72B03DED11F5662 /* iOS */,
+				E63DF99DCD4379F20D3F2B193AA61FC9 /* NXKit.bundle */,
+				5F69386CF41B131FB792226AAC642EE0 /* NXKit.framework */,
+				EB17C0E675035DFC9E8607FA570E5F65 /* Pods_NXKit_Example.framework */,
 			);
-			name = Frameworks;
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		6295694346CDB42124073506D1FC1E1C /* Headers */ = {
+		3C26BEFDD3C8430E43BE5F0C6E4D3806 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B8E52D8B546C83A66960862BD277BC7 /* Pods-NXKit_Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E1EB686728ACED5B492B8C68904FA367 /* Headers */ = {
+		A268140787DC75A8D416B39DAC725D1B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2630CCAF1A302D1327BBD595CCE0BACF /* Pods-NXKit_Example-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E7ADB3EC3CBB325C95B22A3671DC8E1B /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				301AA2D5C66784CE5C1F250CC13063F7 /* NXKit-umbrella.h in Headers */,
+				F1EA4C18EB871160527F639135279FEC /* NXKit-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		20FFBBC9C2BD1B0849641F6B6CEEFF04 /* Pods-NXKit_Example */ = {
+		4E8176B9C15F8A61E959200B92017EE1 /* NXKit-NXKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D1EB802653C2BAA68F5DC6C7CAAD307A /* Build configuration list for PBXNativeTarget "Pods-NXKit_Example" */;
+			buildConfigurationList = B352453A52E03E6EC677552E12AF7687 /* Build configuration list for PBXNativeTarget "NXKit-NXKit" */;
 			buildPhases = (
-				E1EB686728ACED5B492B8C68904FA367 /* Headers */,
-				BF7CDF956C389C181B3868C3401CEDB8 /* Sources */,
-				1F41E39AE5096C3EC0505A38F98611A6 /* Frameworks */,
-				0F85E6C1A6D97FE4CDF73CB7962F9A0B /* Resources */,
+				4469B3949B8661C188119FCDB861067F /* Sources */,
+				73329B76D515F7CCCAEA8E7A2A61381B /* Frameworks */,
+				6377F87B0C0EB26DA81B211D638B793B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				638CC0B70F71B8C2BC5BDD806C5F9D3F /* PBXTargetDependency */,
 			);
-			name = "Pods-NXKit_Example";
-			productName = "Pods-NXKit_Example";
-			productReference = 3BD96E84F3ABDF2B22B63A8CF3AB8971 /* Pods_NXKit_Example.framework */;
-			productType = "com.apple.product-type.framework";
+			name = "NXKit-NXKit";
+			productName = "NXKit-NXKit";
+			productReference = E63DF99DCD4379F20D3F2B193AA61FC9 /* NXKit.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
-		32FE141BC6F908F5A38F0626A137C354 /* Pods-NXKit_Tests */ = {
+		65356E389A75B118329D272175C636AA /* NXKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 329ABB1632B4C69DC3487433C32A8E40 /* Build configuration list for PBXNativeTarget "Pods-NXKit_Tests" */;
+			buildConfigurationList = 787EA10AE7D2CDD817BDF48C3B95963C /* Build configuration list for PBXNativeTarget "NXKit" */;
 			buildPhases = (
-				6295694346CDB42124073506D1FC1E1C /* Headers */,
-				ACC4709497180FB8721CB2AA94211E99 /* Sources */,
-				B4CF36FF0FB587ECC0D0D6AC92DB7DD0 /* Frameworks */,
-				706D5642A7ACA89C979C416E3A801782 /* Resources */,
+				A268140787DC75A8D416B39DAC725D1B /* Headers */,
+				724676A1B900FCCA28BC01E0EB6B613F /* Sources */,
+				BE675DA98242C76A3C267D80C6686E02 /* Frameworks */,
+				BB3695F8F7948CF4A89BBDBBDC9F1275 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				73B69CF3D4EF9B0CD453E22F1E7FC86B /* PBXTargetDependency */,
-			);
-			name = "Pods-NXKit_Tests";
-			productName = "Pods-NXKit_Tests";
-			productReference = 86ACDAD96D914BDCBF9515393B1822D7 /* Pods_NXKit_Tests.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		5964122AEE7F2052A3199ED235D5E05A /* NXKit */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E29FD2D26DC0C8E3C2A4703CA837072D /* Build configuration list for PBXNativeTarget "NXKit" */;
-			buildPhases = (
-				E7ADB3EC3CBB325C95B22A3671DC8E1B /* Headers */,
-				513EB08327C5DBE3165D03572D7CEC0E /* Sources */,
-				196F44EEF1ED1A966C10BFF49FC5E7DB /* Frameworks */,
-				E7527CF5B4FFCD4BA21BF5A6CB1EF0FF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
+				BA04A3DB1EED6908DDE4011879C73B71 /* PBXTargetDependency */,
 			);
 			name = NXKit;
 			productName = NXKit;
-			productReference = B43C398372F5B8CBD14579E29EFF5F69 /* NXKit.framework */;
+			productReference = 5F69386CF41B131FB792226AAC642EE0 /* NXKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A27922037616902C383BEB287333A082 /* Pods-NXKit_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD94D510BE2DAAE69725E46A2F9F909C /* Build configuration list for PBXNativeTarget "Pods-NXKit_Example" */;
+			buildPhases = (
+				3C26BEFDD3C8430E43BE5F0C6E4D3806 /* Headers */,
+				9D5E742A37F083648D1966756E927C23 /* Sources */,
+				FAF48FFE75BDE571174EAE358CE2D4FB /* Frameworks */,
+				3069F72B4C1303C10B83EAF79DC2911F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				57B6AAF7EC189DFA49039D8F57CFAFE5 /* PBXTargetDependency */,
+			);
+			name = "Pods-NXKit_Example";
+			productName = "Pods-NXKit_Example";
+			productReference = EB17C0E675035DFC9E8607FA570E5F65 /* Pods_NXKit_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -573,192 +572,208 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			compatibilityVersion = "Xcode 12.0";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 983744EDC93CD1114B520960C6A1D3AB /* Products */;
+			productRefGroup = D81056CBD2B097F0FE789D28F57F9DA8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5964122AEE7F2052A3199ED235D5E05A /* NXKit */,
-				20FFBBC9C2BD1B0849641F6B6CEEFF04 /* Pods-NXKit_Example */,
-				32FE141BC6F908F5A38F0626A137C354 /* Pods-NXKit_Tests */,
+				65356E389A75B118329D272175C636AA /* NXKit */,
+				4E8176B9C15F8A61E959200B92017EE1 /* NXKit-NXKit */,
+				A27922037616902C383BEB287333A082 /* Pods-NXKit_Example */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0F85E6C1A6D97FE4CDF73CB7962F9A0B /* Resources */ = {
+		3069F72B4C1303C10B83EAF79DC2911F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		706D5642A7ACA89C979C416E3A801782 /* Resources */ = {
+		6377F87B0C0EB26DA81B211D638B793B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85BB9B2B448DD52AB31462897D3B2E0B /* navi_back_black@2x.png in Resources */,
+				FD8D2BF0D62271411A94101149808D50 /* navi_back_black@3x.png in Resources */,
+				CAEC758C689785AB2BCB9A1D6C5BEE4C /* navi_close_black@2x.png in Resources */,
+				D034DA033EDBBC7BF9B9BE0C10B6A61F /* navi_close_black@3x.png in Resources */,
+				0F8F8BE1B9F42BE1D73B33985F1F57C1 /* navi_more_black@2x.png in Resources */,
+				68E02229C2964C2A438F283A472D0C20 /* navi_more_black@3x.png in Resources */,
+				74573CD35A58642534270D2CD7CAF1B2 /* navi_more_gray@2x.png in Resources */,
+				362E817AD7A1D387F85BFF50A3E25D7D /* navi_more_gray@3x.png in Resources */,
+				70660273AC02E59210BEE19C9971A260 /* navi_more_white@2x.png in Resources */,
+				AD8A42AFEE47F6627283ED44C792922B /* navi_more_white@3x.png in Resources */,
+				025AE5FA4A4647CD49AAFDA6EED3E477 /* uiapp_arrow@2x.png in Resources */,
+				B3A6BCF467C44B245DC89F0BA6A405B4 /* uiapp_arrow@3x.png in Resources */,
+				2D27E025201F6A1CAD3F1142F0CCFCDF /* uiapp_overlay@2x.png in Resources */,
+				C330DC74C28BBD8A4DF4FD1B8E25CBAF /* uiapp_overlay@3x.png in Resources */,
+				1E8E51642192E15AC50FCA2C1FDA79D7 /* uiapp_overlay_close_black@2x.png in Resources */,
+				78E7F4A8EF3774B448BFC257B4FBB735 /* uiapp_overlay_close_black@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E7527CF5B4FFCD4BA21BF5A6CB1EF0FF /* Resources */ = {
+		BB3695F8F7948CF4A89BBDBBDC9F1275 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9F5624A268074F000C864E4 /* uiapp_overlay_close_black@3x.png in Resources */,
-				C9F56249268074F000C864E4 /* uiapp_arrow@3x.png in Resources */,
-				C9F56250268074F000C864E4 /* uiapp_overlay@3x.png in Resources */,
-				C9F56248268074F000C864E4 /* navi_more_black@3x.png in Resources */,
-				C9F56246268074F000C864E4 /* navi_more_white@3x.png in Resources */,
-				C9F56244268074F000C864E4 /* uiapp_arrow@2x.png in Resources */,
-				C9F5624F268074F000C864E4 /* uiapp_overlay@2x.png in Resources */,
-				C9F5624D268074F000C864E4 /* navi_back_black@3x.png in Resources */,
-				C9F56241268074F000C864E4 /* navi_close_black@3x.png in Resources */,
-				C9F56247268074F000C864E4 /* navi_more_gray@2x.png in Resources */,
-				C9F5624B268074F000C864E4 /* navi_back_black@2x.png in Resources */,
-				C9F56243268074F000C864E4 /* navi_close_black@2x.png in Resources */,
-				C9F5624C268074F000C864E4 /* navi_more_gray@3x.png in Resources */,
-				C9F56242268074F000C864E4 /* navi_more_white@2x.png in Resources */,
-				C9F5624E268074F000C864E4 /* uiapp_overlay_close_black@2x.png in Resources */,
-				C9F56245268074F000C864E4 /* navi_more_black@2x.png in Resources */,
+				34B605A63EE516342D5FBBE6EC1DA24B /* NXKit.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		513EB08327C5DBE3165D03572D7CEC0E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C9F562D12680763600C864E4 /* LEYSuspendView.swift in Sources */,
-				C9F562B42680763600C864E4 /* String+LEYFoundation.swift in Sources */,
-				C9F562B92680763600C864E4 /* LEYXView.swift in Sources */,
-				C9F562E12680763600C864E4 /* LEYContainerController.swift in Sources */,
-				C9F562E62680763600C864E4 /* LEYAssetClipImageViewController.swift in Sources */,
-				C9F562A72680763600C864E4 /* LEYCollectionReusableView.swift in Sources */,
-				C9F562D22680763600C864E4 /* LEYTableViewCell.swift in Sources */,
-				C9F562BF2680763600C864E4 /* LEYSubscriber.swift in Sources */,
-				C9F562DE2680763600C864E4 /* LEYApplicationView.swift in Sources */,
-				C9F5629F2680763600C864E4 /* LEYTransitionView.swift in Sources */,
-				C9F562D62680763600C864E4 /* LEYRuntime.swift in Sources */,
-				C9F562BC2680763600C864E4 /* LEYDevice.swift in Sources */,
-				C9F562AD2680763600C864E4 /* LEYToolViewController.swift in Sources */,
-				C9F562AE2680763600C864E4 /* LEYActionView.swift in Sources */,
-				C9F562BA2680763600C864E4 /* LEYApp+.swift in Sources */,
-				C9F562DA2680763600C864E4 /* LEYTableView.swift in Sources */,
-				C9F562D52680763600C864E4 /* LEYViewControllerView.swift in Sources */,
-				C9F562A02680763600C864E4 /* LEYActionViewCell.swift in Sources */,
-				C9F562B22680763600C864E4 /* LEYTableWrapper.swift in Sources */,
-				C9F562C32680763600C864E4 /* LEYImageView.swift in Sources */,
-				C9F562A12680763600C864E4 /* LEYRouter.swift in Sources */,
-				C9F562AF2680763600C864E4 /* LEYWebViewController.swift in Sources */,
-				C9F562DD2680763600C864E4 /* LEYSwipeView.swift in Sources */,
-				C9F562DF2680763600C864E4 /* LEYSwipeViewController.swift in Sources */,
-				C9F562AC2680763600C864E4 /* LEYViewProxy.swift in Sources */,
-				C9F562E02680763600C864E4 /* LEYCollectionView.swift in Sources */,
-				C9F562CE2680763600C864E4 /* LEYBackgroundView.swift in Sources */,
-				C9F562AA2680763600C864E4 /* LEYShadow.swift in Sources */,
-				C9F562A32680763600C864E4 /* LEYWebView.swift in Sources */,
-				C9F562C92680763600C864E4 /* LEYDrawableView.swift in Sources */,
-				C9F562BD2680763600C864E4 /* LEYAnimationView.swift in Sources */,
-				C9F562E72680763600C864E4 /* LEYAssetsViewController.swift in Sources */,
-				C9F562C52680763600C864E4 /* LEYTableReusableView.swift in Sources */,
-				C9F562D72680763600C864E4 /* LEYView.swift in Sources */,
-				C9F562DC2680763600C864E4 /* LEYPlaceholderView.swift in Sources */,
-				C9F562C12680763600C864E4 /* LEYHUD.swift in Sources */,
-				C9F562D82680763600C864E4 /* DispatchQueue+LEYFoundation.swift in Sources */,
-				C9F562A92680763600C864E4 /* LEYCollectionWrapper.swift in Sources */,
-				C9F562E82680763600C864E4 /* LEYClipboardView.swift in Sources */,
-				C9F562BB2680763600C864E4 /* LEYCollectionViewController.swift in Sources */,
-				C9F562CD2680763600C864E4 /* LEYLCRView.swift in Sources */,
-				C9F562C82680763600C864E4 /* LEYControl.swift in Sources */,
-				C9F562E22680763600C864E4 /* LEYLabel.swift in Sources */,
-				C9F562B12680763600C864E4 /* LEYOverlay.swift in Sources */,
-				C9F562CA2680763600C864E4 /* LEYLRView+.swift in Sources */,
-				C9F562C72680763600C864E4 /* LEYToolView.swift in Sources */,
-				C9F562CB2680763600C864E4 /* CAAnimation+LEYFoundation.swift in Sources */,
-				C9F562A82680763600C864E4 /* LEYSerialization.swift in Sources */,
-				C9F562D92680763600C864E4 /* LEYShadowView.swift in Sources */,
-				2D0C0C49DE6CDA2722D1CCD3F9D53C64 /* NXKit-dummy.m in Sources */,
-				C9F562B32680763600C864E4 /* LEYCollectionViewCell.swift in Sources */,
-				C9F562A22680763600C864E4 /* LEYNavigationController.swift in Sources */,
-				C9F562B62680763600C864E4 /* UILabel+LEYFoundation.swift in Sources */,
-				C9F562B72680763600C864E4 /* LEYAction.swift in Sources */,
-				C9F562D32680763600C864E4 /* LEYFS.swift in Sources */,
-				C9F562BE2680763600C864E4 /* LEYObject.swift in Sources */,
-				C9F5629E2680763600C864E4 /* LEYLRView.swift in Sources */,
-				C9F562A62680763600C864E4 /* LEYLCRView+.swift in Sources */,
-				C9F562A42680763600C864E4 /* LEYNaviView.swift in Sources */,
-				C9F562A52680763600C864E4 /* LEYString.swift in Sources */,
-				C9F562B02680763600C864E4 /* LEYSwitch.swift in Sources */,
-				C9F562C02680763600C864E4 /* LEYTableViewController.swift in Sources */,
-				C9F562B82680763600C864E4 /* LEYAnimator.swift in Sources */,
-				C9F562E52680763600C864E4 /* LEYAsset.swift in Sources */,
-				C9F562D42680763600C864E4 /* LEYPrintf.swift in Sources */,
-				C9F562CF2680763600C864E4 /* UserDefaults+LEYFoundation.swift in Sources */,
-				C9F562CC2680763600C864E4 /* UIView+LEYFoundation.swift in Sources */,
-				C9F562C22680763600C864E4 /* LEYItem.swift in Sources */,
-				C9F562C42680763600C864E4 /* UIButton+LEYFoundation.swift in Sources */,
-				C9F562B52680763600C864E4 /* LEYButton.swift in Sources */,
-				C9F562DB2680763600C864E4 /* LEYViewController.swift in Sources */,
-				C9F562E42680763600C864E4 /* UIImage+LEYFoundation.swift in Sources */,
-				C9F562D02680763600C864E4 /* LEYActionView+LEYFoundation.swift in Sources */,
-				C9F562E32680763600C864E4 /* Timer+LEYFoundation.swift in Sources */,
-				C9F562AB2680763600C864E4 /* LEYApp.swift in Sources */,
-				C9F562C62680763600C864E4 /* LEYCView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		ACC4709497180FB8721CB2AA94211E99 /* Sources */ = {
+		4469B3949B8661C188119FCDB861067F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BF7CDF956C389C181B3868C3401CEDB8 /* Sources */ = {
+		724676A1B900FCCA28BC01E0EB6B613F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F9F9D0A58B30779D3E297C865313BCE /* Pods-NXKit_Example-dummy.m in Sources */,
+				443BC1A47DBC9AA42413C1EB43F2CAFE /* CAAnimation+LEYFoundation.swift in Sources */,
+				2081B99DD668F8EFBF0FF137E515B654 /* DispatchQueue+LEYFoundation.swift in Sources */,
+				1B9DA52D5E1A40A92C999F1C1277D5AC /* LEYAction.swift in Sources */,
+				F2C9B94FCACD4EDD3BE86D086F9FBB2A /* LEYActionView+LEYFoundation.swift in Sources */,
+				E87ED608BA6CF50894C79B8CC5F2B2FF /* LEYActionView.swift in Sources */,
+				30C67E6447BEE1F97B5FA2116B0F1682 /* LEYActionViewCell.swift in Sources */,
+				7DE62AF293F86CD540C809BFA4857C44 /* LEYAnimationView.swift in Sources */,
+				324D3BB56A71B3C6CC0718AE0F7266EA /* LEYAnimator.swift in Sources */,
+				A91379E6F4185552F0DA6D260D5C2D27 /* LEYApp+.swift in Sources */,
+				5DC0926457FA7505E9126758D0719BC6 /* LEYApp.swift in Sources */,
+				DBDB2082FD2D0454F7561BF493E37EDE /* LEYApplicationView.swift in Sources */,
+				D32C5FE09F9AD64C49170853C9A373D8 /* LEYAsset.swift in Sources */,
+				633D2A87B75A0BD41E879A3A8851AB64 /* LEYAssetClipImageViewController.swift in Sources */,
+				CCDB26B5957B98F0DFAAD11212621A40 /* LEYAssetsViewController.swift in Sources */,
+				741D5EE12FC3B0534787CDAA4A6AC6F4 /* LEYBackgroundView.swift in Sources */,
+				15D695D79C787232C507F96D304B5724 /* LEYButton.swift in Sources */,
+				213F3CE90C783877A92CD4A371B11FB4 /* LEYClipboardView.swift in Sources */,
+				37076907183DEFE57FD822C60BD5A996 /* LEYCollectionReusableView.swift in Sources */,
+				D86436CA4B8280D6B6ADABAF54C51B63 /* LEYCollectionView.swift in Sources */,
+				1DD8894B3790456EFEC935625D87FB85 /* LEYCollectionViewCell.swift in Sources */,
+				C530E1F3CAB39F2CE97B4838B1CA9FBA /* LEYCollectionViewController.swift in Sources */,
+				36BDD787DBD9FC31EFB0EC6B5B931BA8 /* LEYCollectionWrapper.swift in Sources */,
+				496CADFC077A7944ACA931A3B3492637 /* LEYContainerController.swift in Sources */,
+				CCFE29F9FF1FF67682CCF603ABA95DB5 /* LEYControl.swift in Sources */,
+				BAD2F79B89CD6EC008616AA54982590A /* LEYCView.swift in Sources */,
+				F2A961C2ECAF25884C327760A0750834 /* LEYDevice.swift in Sources */,
+				A4AD467E2B245656FFE481AF591A12F0 /* LEYDrawableView.swift in Sources */,
+				0B936FBF190EA351A86884CC1A140DF2 /* LEYFS.swift in Sources */,
+				46CBA8180EBA69F27947FF871B0EE1BB /* LEYHUD.swift in Sources */,
+				93B48F00609CDD2518C204DCA8528F07 /* LEYImageView.swift in Sources */,
+				9DF2AFB4EA296F01B3723A0F9E443D65 /* LEYItem.swift in Sources */,
+				B6430F9CCA2B2F375C7502B2A813B110 /* LEYLabel.swift in Sources */,
+				14E2C98A741A3FDBCAD4D2B018D8BA0F /* LEYLCRView+.swift in Sources */,
+				029E6FA1C0EEA37E0C8844C05DD3E6B4 /* LEYLCRView.swift in Sources */,
+				BE1D8F109525D750CC7E9D21BE6B38E6 /* LEYLRView+.swift in Sources */,
+				8D4D3567A519BE51131CD214E8F3B59F /* LEYLRView.swift in Sources */,
+				E28AAE15A1A616010DE8507DDEDE3E31 /* LEYNavigationController.swift in Sources */,
+				2D31546225F283291D91A86B84FACE6D /* LEYNaviView.swift in Sources */,
+				B2024647438FB9C17DB0B7A07B808CF3 /* LEYObject.swift in Sources */,
+				B0832FD27232EB0F9AAA41C9F7F94D40 /* LEYOverlay.swift in Sources */,
+				34FDE1F92B4B538D5FCC2731FCF9F5B7 /* LEYPlaceholderView.swift in Sources */,
+				37E1A177501862D90475CF0C1387DC0D /* LEYPrintf.swift in Sources */,
+				A41357A692F5C7157ABE394B259543B8 /* LEYRouter.swift in Sources */,
+				AE389A53A230B5801B854095B24ADD0C /* LEYRuntime.swift in Sources */,
+				93EC81E572459E4497CA8C908F6CC598 /* LEYSerialization.swift in Sources */,
+				70F2FC5B4411AE95A22F9E801F1A80AD /* LEYShadow.swift in Sources */,
+				EBA10FD26C692DC0B7A9F4B3EE117A08 /* LEYShadowView.swift in Sources */,
+				C02F507249021A19FDF331D31FD8225C /* LEYString.swift in Sources */,
+				6459B22F3FB8D185DCEA0AF215163321 /* LEYSubscriber.swift in Sources */,
+				CE2053EF4E380659026450AF398EED07 /* LEYSuspendView.swift in Sources */,
+				78870D9E9788810631CB42D1C2F9FDF8 /* LEYSwipeView.swift in Sources */,
+				B072CB62EBD46E18B1B7591A40DB3BA5 /* LEYSwipeViewController.swift in Sources */,
+				C5D33BA6FF7B9CCE92943BA748E38986 /* LEYSwitch.swift in Sources */,
+				289C2EB15E316A4A87805DA2F85C8A22 /* LEYTableReusableView.swift in Sources */,
+				A641FC482C8784D1996BE08E0A1FF5E3 /* LEYTableView.swift in Sources */,
+				D6F50EE53E4903D43BA1B528DDAB8F27 /* LEYTableViewCell.swift in Sources */,
+				026011C59A2EECE289084DE709EE7B91 /* LEYTableViewController.swift in Sources */,
+				E0DB51C7AFC9B091ECBC8C19C71C9208 /* LEYTableWrapper.swift in Sources */,
+				23BE88FEC0D817BCD9D8E3C867A1814C /* LEYToolView.swift in Sources */,
+				47660ACEC35F4084108E522741A8ADB0 /* LEYToolViewController.swift in Sources */,
+				630BC5D0F3534A9CCAB92860C1CB1E4F /* LEYTransitionView.swift in Sources */,
+				72D07045F717CAFE86E886AB5020EAF7 /* LEYView.swift in Sources */,
+				97D608301F21CE8F1A940C1F0A846942 /* LEYViewController.swift in Sources */,
+				6725B51D4E21A9E23CED74324FC10DBD /* LEYViewControllerView.swift in Sources */,
+				91C764B59581751D13CCF7A3098BC74F /* LEYViewProxy.swift in Sources */,
+				97A8AB8980662C8983A2024B1E180C28 /* LEYWebView.swift in Sources */,
+				024BD37B1FFFF6B2E5A6FB842C2448A1 /* LEYWebViewController.swift in Sources */,
+				9B4A75E63DE3A8178CE9E5339F98148C /* LEYXView.swift in Sources */,
+				482E0FE4B4DE07CFE0C3033A72625DAC /* NXKit-dummy.m in Sources */,
+				732FDA7E9EEEEAA9AE99CDF781921708 /* String+LEYFoundation.swift in Sources */,
+				24A6D6DF0511DF41E6B4C969551D990F /* Timer+LEYFoundation.swift in Sources */,
+				CA480A55FAD10D8F24C4BE32E8F22CF7 /* UIButton+LEYFoundation.swift in Sources */,
+				C2C5707E445D7D2D60C14CBE83210B48 /* UIImage+LEYFoundation.swift in Sources */,
+				0379925D5A297A62AE3E04AE308D15E8 /* UILabel+LEYFoundation.swift in Sources */,
+				E18F8F5FA161BBF041CD49B672FADE4C /* UIView+LEYFoundation.swift in Sources */,
+				F54EAB0A450D5F5CBACAF1A5D5DDE7B7 /* UserDefaults+LEYFoundation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9D5E742A37F083648D1966756E927C23 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5381656E87661A811AA2A7911A68EDAD /* Pods-NXKit_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		638CC0B70F71B8C2BC5BDD806C5F9D3F /* PBXTargetDependency */ = {
+		57B6AAF7EC189DFA49039D8F57CFAFE5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = NXKit;
-			target = 5964122AEE7F2052A3199ED235D5E05A /* NXKit */;
-			targetProxy = 149D015A20F91120F0F8B8DB5DD94EC1 /* PBXContainerItemProxy */;
+			target = 65356E389A75B118329D272175C636AA /* NXKit */;
+			targetProxy = 478529F26FCDC7DC43992CBD4E76DECD /* PBXContainerItemProxy */;
 		};
-		73B69CF3D4EF9B0CD453E22F1E7FC86B /* PBXTargetDependency */ = {
+		BA04A3DB1EED6908DDE4011879C73B71 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-NXKit_Example";
-			target = 20FFBBC9C2BD1B0849641F6B6CEEFF04 /* Pods-NXKit_Example */;
-			targetProxy = 9CC0E7BA9725EE470B1E8FAD8C22AE25 /* PBXContainerItemProxy */;
+			name = "NXKit-NXKit";
+			target = 4E8176B9C15F8A61E959200B92017EE1 /* NXKit-NXKit */;
+			targetProxy = 5B457E01DA8307962B280A18C6A9FCB8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1294F514C8BAEC4315D9EF48BABABEDB /* Release */ = {
+		1EA08D74672BAAF5CC7E5A8BA3BCD85E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 011EC4DE3BF9C1050C97BACCCD33DC39 /* Pods-NXKit_Example.release.xcconfig */;
+			baseConfigurationReference = 24AC9A736650C8FD3B937395005C9FB6 /* NXKit.release.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/NXKit";
+				IBSC_MODULE = NXKit;
+				INFOPLIST_FILE = "Target Support Files/NXKit/ResourceBundle-NXKit-NXKit-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = NXKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		333F53702A28727AD7ED99305BED085C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 78BAFE4FC54880F30EDF0C721CA6B172 /* Pods-NXKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -770,7 +785,11 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example.modulemap";
 				OTHER_LDFLAGS = "";
@@ -781,144 +800,16 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		3732F397D5723313C9BB443CA5C56C62 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C086046D8B7A39DB7662C29BBB3058C0 /* NXKit.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/NXKit/NXKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/NXKit/NXKit-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/NXKit/NXKit.modulemap";
-				PRODUCT_MODULE_NAME = NXKit;
-				PRODUCT_NAME = NXKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		71760D1AD32E1DD292CD7D826B4EFB3E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-NXKit_Tests/Pods-NXKit_Tests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-NXKit_Tests/Pods-NXKit_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		96BE38604EC37A6ECB597761A34B5F73 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-NXKit_Tests/Pods-NXKit_Tests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-NXKit_Tests/Pods-NXKit_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		995AC38F1624FCB979805A6D5CFFE67D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C086046D8B7A39DB7662C29BBB3058C0 /* NXKit.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/NXKit/NXKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/NXKit/NXKit-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/NXKit/NXKit.modulemap";
-				PRODUCT_MODULE_NAME = NXKit;
-				PRODUCT_NAME = NXKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		AB4D69770D8ACE3A05E80BB3502666F6 /* Debug */ = {
+		431BA2B8298F0EE71735B9E0114E1955 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -941,6 +832,120 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		58AE3AF23DC19DE9E0744F497776E2F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76CB207E6FDD5636AECB4B7E45AD3BC8 /* NXKit.debug.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/NXKit";
+				IBSC_MODULE = NXKit;
+				INFOPLIST_FILE = "Target Support Files/NXKit/ResourceBundle-NXKit-NXKit-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = NXKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		7003627F932F9971829BD24674775D3F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24AC9A736650C8FD3B937395005C9FB6 /* NXKit.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/NXKit/NXKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/NXKit/NXKit-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/NXKit/NXKit.modulemap";
+				PRODUCT_MODULE_NAME = NXKit;
+				PRODUCT_NAME = NXKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		79759604D78320E712558F49DF19AA9F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -974,76 +979,50 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		F232B5ECA11A71BFA199A229B323F454 /* Release */ = {
+		82A380144D55776C4DABD076A36B95B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76CB207E6FDD5636AECB4B7E45AD3BC8 /* NXKit.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/NXKit/NXKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/NXKit/NXKit-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
 				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
-				SYMROOT = "${SRCROOT}/../build";
+				MODULEMAP_FILE = "Target Support Files/NXKit/NXKit.modulemap";
+				PRODUCT_MODULE_NAME = NXKit;
+				PRODUCT_NAME = NXKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
-		FAC3008AA0550D4F45DFE6E735A86514 /* Debug */ = {
+		F2CCE3D424220BC91A390C12B6C96525 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A8BC07488F3612E840171A56CE49B6DC /* Pods-NXKit_Example.debug.xcconfig */;
+			baseConfigurationReference = 5440B40E69CE90ACF6D459D400FE6ED7 /* Pods-NXKit_Example.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -1055,7 +1034,11 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example.modulemap";
 				OTHER_LDFLAGS = "";
@@ -1066,46 +1049,47 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		329ABB1632B4C69DC3487433C32A8E40 /* Build configuration list for PBXNativeTarget "Pods-NXKit_Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				96BE38604EC37A6ECB597761A34B5F73 /* Debug */,
-				71760D1AD32E1DD292CD7D826B4EFB3E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AB4D69770D8ACE3A05E80BB3502666F6 /* Debug */,
-				F232B5ECA11A71BFA199A229B323F454 /* Release */,
+				79759604D78320E712558F49DF19AA9F /* Debug */,
+				431BA2B8298F0EE71735B9E0114E1955 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D1EB802653C2BAA68F5DC6C7CAAD307A /* Build configuration list for PBXNativeTarget "Pods-NXKit_Example" */ = {
+		787EA10AE7D2CDD817BDF48C3B95963C /* Build configuration list for PBXNativeTarget "NXKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FAC3008AA0550D4F45DFE6E735A86514 /* Debug */,
-				1294F514C8BAEC4315D9EF48BABABEDB /* Release */,
+				82A380144D55776C4DABD076A36B95B8 /* Debug */,
+				7003627F932F9971829BD24674775D3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E29FD2D26DC0C8E3C2A4703CA837072D /* Build configuration list for PBXNativeTarget "NXKit" */ = {
+		B352453A52E03E6EC677552E12AF7687 /* Build configuration list for PBXNativeTarget "NXKit-NXKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				995AC38F1624FCB979805A6D5CFFE67D /* Debug */,
-				3732F397D5723313C9BB443CA5C56C62 /* Release */,
+				58AE3AF23DC19DE9E0744F497776E2F3 /* Debug */,
+				1EA08D74672BAAF5CC7E5A8BA3BCD85E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FD94D510BE2DAAE69725E46A2F9F909C /* Build configuration list for PBXNativeTarget "Pods-NXKit_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				333F53702A28727AD7ED99305BED085C /* Debug */,
+				F2CCE3D424220BC91A390C12B6C96525 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

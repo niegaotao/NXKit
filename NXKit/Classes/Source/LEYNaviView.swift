@@ -75,7 +75,7 @@ open class LEYNaviView: LEYBackgroundView<UIImageView, UIView> {
         self.titleView.frame = CGRect(x: 75.0, y: LEYDevice.insets.top, width: self.contentView.w-75.0*2, height: self.contentView.h-LEYDevice.insets.top)
         self.titleView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.titleView.textColor = LEYApp.darkBlackColor
-        self.titleView.font = LEYApp.font(17)
+        self.titleView.font = LEYApp.font(17, true)
         self.titleView.textAlignment = .center
         self.contentView.addSubview(self.titleView)
         
@@ -211,7 +211,7 @@ extension LEYNaviView {
             self.frame.size = CGSize(width:70.0, height:44.0)
             self.setTitleColor(LEYApp.darkBlackColor, for: .normal)
             self.setTitleColor(LEYApp.darkGrayColor, for: .highlighted)
-            self.titleLabel?.font = LEYApp.font(16)
+            self.titleLabel?.font = LEYApp.font(17)
         }
         
         open class  func back(image: UIImage?, title: String?) -> LEYNaviView.Bar {

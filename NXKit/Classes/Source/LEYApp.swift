@@ -377,7 +377,7 @@ extension LEYApp {
     
     public class Asset {
         //默认使用的bundle图片的path
-        static public var path = Bundle(for: LEYApp.self).bundlePath + "/LEYFoundation.bundle/"
+        static public var path = Bundle(for: LEYApp.self).bundlePath + "/NXKit.bundle/"
 
         //处理图片浏览
         static public var showAssets:((_ type:String, _ assets:[Any]) -> ())?
