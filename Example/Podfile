@@ -1,5 +1,0 @@
-use_frameworks!
-
-target 'NXKit_Example' do
-  pod 'NXKit', :path => '../'
-end
