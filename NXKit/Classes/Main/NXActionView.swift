@@ -87,58 +87,58 @@ extension NXActionView {
                 if appearance.actions.count == 2 {
                     for index in 0...1 {
                         let action = appearance.actions[index]
-                        action.ctxs.w = appearance.frame.width * 0.5
-                        action.title.frame = CGRect(x: 0, y: 0, width: action.ctxs.w, height: action.ctxs.h)
+                        action.ctxs.width = appearance.frame.width * 0.5
+                        action.title.frame = CGRect(x: 0, y: 0, width: action.ctxs.width, height: action.ctxs.height)
                         action.appearance.isHighlighted = true
                         action.appearance.isEnabled = true
                         if(index == 0){
-                            action.separator.side = .right
+                            action.separator.ats = .maxX
                         }
                         else{
-                            action.separator.side = []
+                            action.separator.ats = []
                         }
-                        contentSize.height = action.ctxs.h
+                        contentSize.height = action.ctxs.height
                     }
                 }
                 else {
                     //1个/3个/4个
                     for index in 0...appearance.actions.count-1 {
                         let action = appearance.actions[index]
-                        action.ctxs.w = appearance.frame.width
-                        action.title.frame = CGRect(x: 0, y: 0, width: action.ctxs.w, height: action.ctxs.h)
+                        action.ctxs.width = appearance.frame.width
+                        action.title.frame = CGRect(x: 0, y: 0, width: action.ctxs.width, height: action.ctxs.height)
                         action.appearance.isHighlighted = true
                         action.appearance.isEnabled = true
-                        action.separator.side = (index == appearance.actions.count-1) ? [] : .bottom;
+                        action.separator.ats = (index == appearance.actions.count-1) ? [] : .maxY;
                         
-                        contentSize.height = contentSize.height + action.ctxs.h
+                        contentSize.height = contentSize.height + action.ctxs.height
                     }
                 }
                 appearance.isAnimation = false
             }
             else if appearance.attributeKey == NXActionView.Key.Footer.action.rawValue {
                 for (index, action) in appearance.actions.enumerated() {
-                    action.ctxs.w = appearance.frame.width;
-                    action.separator.side = (index == appearance.actions.count-1) ? []: .bottom;
+                    action.ctxs.width = appearance.frame.width;
+                    action.separator.ats = (index == appearance.actions.count-1) ? []: .maxY;
                     
-                    contentSize.height = contentSize.height + action.ctxs.h
+                    contentSize.height = contentSize.height + action.ctxs.height
                 }
             }
             else if appearance.attributeKey == NXActionView.Key.Footer.mix.rawValue {
                 var offsetValue : (x:CGFloat, y:CGFloat, max:CGFloat) = (0,0,0)
                 for (idx, action) in appearance.actions.enumerated() {
-                    if offsetValue.x + action.ctxs.w <= appearance.frame.width {
+                    if offsetValue.x + action.ctxs.width <= appearance.frame.width {
                         //可以排在同一行
-                        offsetValue.x = offsetValue.x + action.ctxs.w
-                        if offsetValue.max < action.ctxs.h {
-                            offsetValue.max = action.ctxs.h
+                        offsetValue.x = offsetValue.x + action.ctxs.width
+                        if offsetValue.max < action.ctxs.height {
+                            offsetValue.max = action.ctxs.height
                         }
                     }
                     else {
                         //新开一行
                         offsetValue.y = offsetValue.y + offsetValue.max
                         
-                        offsetValue.x = action.ctxs.w
-                        offsetValue.max = action.ctxs.h
+                        offsetValue.x = action.ctxs.width
+                        offsetValue.max = action.ctxs.height
                     }
                     if idx == appearance.actions.count - 1 {
                         offsetValue.y = offsetValue.y + offsetValue.max

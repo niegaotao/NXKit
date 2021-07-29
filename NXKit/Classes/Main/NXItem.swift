@@ -10,67 +10,26 @@ import UIKit
 
 extension NXItem {
     //记录单元格类型和重用ID的对象
-    open class Wrapped {
+    open class Wrapped : NX.Rect {
         open var value : [String: Any]? = nil
         
         open var cls : AnyClass?        //单元格/视图类型, e.g. NXTableViewCell.self
         open var reuse : String = ""    //单元格重用ID
         open var type: Int = 0          //根据不同id来做不同单元格的区分
         
-        open var x : CGFloat = 0.0
-        open var y : CGFloat = 0.0
-        open var w : CGFloat = 0.0
-        open var h : CGFloat = 0.0
-        
         open var completion : NX.Completion<String, Any?>? = nil  //点击等回调
         
         open var backgroundColor: UIColor? = nil //头部尾部的背景色
         open var at : (first:Bool, last:Bool) = (false, false) //是否是第一个，是否是最后一个
         
-        public init(_ cls: AnyClass, _ reuse: String) {
+        convenience public init(_ cls: AnyClass, _ reuse: String) {
+            self.init()
             self.update(cls, reuse)
-        }
-        
-        public init(){
         }
         
         open func update(_ cls: AnyClass, _ reuse: String){
             self.cls = cls
             self.reuse = reuse
-        }
-    }
-}
-
-extension NXItem.Wrapped {
-    open var origin : CGPoint {
-        set {
-            self.x = newValue.x
-            self.y = newValue.y
-        }
-        get {
-            return CGPoint(x: self.x, y: self.y)
-        }
-    }
-    
-    open var size : CGSize {
-        set {
-            self.w = newValue.width
-            self.h = newValue.height
-        }
-        get {
-            return CGSize(width: self.w, height: self.h)
-        }
-    }
-    
-    open var frame : CGRect {
-        set {
-            self.x = newValue.origin.x
-            self.y = newValue.origin.y
-            self.w = newValue.size.width
-            self.h = newValue.size.height
-        }
-        get {
-            return CGRect(x: self.x, y: self.y, width: self.w, height: self.h)
         }
     }
 }
@@ -98,10 +57,10 @@ open class NXSection<Element: NXItem> : NXItem {
     open var footer: NXItem? = nil              //尾部应该用不到，默认为nil
     
     //+便利构造函数
-    public convenience init(_ cls: AnyClass, _ reuse:String, _ h: CGFloat) {
+    public convenience init(_ cls: AnyClass, _ reuse:String, _ height: CGFloat) {
         self.init()
         self.header.ctxs.update(cls, reuse)
-        self.header.ctxs.h = h
+        self.header.ctxs.height = height
     }
     
     //+便利构造函数

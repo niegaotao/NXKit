@@ -22,43 +22,8 @@ open class NX {
     public typealias Completion<Action, Value> = (_ action:Action, _ value:Value)  -> ()
 }
 
-
-//空页面加载动画类型
-extension NX {
-    open class Animation {
-        static public var animationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self
-    }
-}
-
-
 //内容横向纵向边缘缩进
 extension NX {
-    static public var insets = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
-    
-    public struct Side : OptionSet {
-        public let rawValue : Int
-        public init(rawValue:Int) {
-            self.rawValue = rawValue
-        }
-        
-        public static var top =  NX.Side(rawValue: 1)
-        public static var left = NX.Side(rawValue: 2)
-        public static var bottom = NX.Side(rawValue: 4)
-        public static var right = NX.Side(rawValue: 8)
-    }
-    
-    public enum AT : Int {
-        case unspecified = 0
-
-        case center = 10
-        
-        case minX = 11
-        case maxX = 12
-
-        case minY = 13
-        case maxY = 14
-    }
-    
     open class Rect {
         open var x = CGFloat.zero
         open var y = CGFloat.zero
@@ -97,19 +62,44 @@ extension NX {
             }
         }
         
+        public init(){}
+        
         public init(completion: NX.Completion<String, NX.Rect>?){
             completion?("", self)
         }
-        
-        
-        public enum Side : Int {
-            case unspefified = 0
-            case center = 10
-            case minX = 11
-            case maxX = 12
-            case minY = 13
-            case maxY = 14
+    }
+}
+
+
+//空页面加载动画类型
+extension NX {
+    open class Animation {
+        static public var animationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self
+    }
+}
+
+
+//内容横向纵向边缘缩进
+extension NX {
+    static public var insets = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
+    
+    public struct Ats : OptionSet {
+        public let rawValue : Int
+        public init(rawValue:Int) {
+            self.rawValue = rawValue
         }
+        
+        public static var unspefified = NX.Ats(rawValue: 0)
+        
+        public static var minX = NX.Ats(rawValue: 1)
+        public static var centerX = NX.Ats(rawValue: 2)
+        public static var maxX = NX.Ats(rawValue: 4)
+        
+        public static var minY =  NX.Ats(rawValue: 8)
+        public static var centerY =  NX.Ats(rawValue: 16)
+        public static var maxY = NX.Ats(rawValue: 32)
+        
+        public static var center = NX.Ats(rawValue: 64)
     }
 }
 
@@ -562,7 +552,7 @@ extension NX {
         //alert/action的单元格最大宽度、高度
         static public var size = CGSize(width: NXDevice.width*0.8, height: 48.0)
         //处理toast
-        static public var showToast:((_ message:String, _ at:NX.AT , _ superview:UIView?) -> ())?
+        static public var showToast:((_ message:String, _ ats:NX.Ats , _ superview:UIView?) -> ())?
         
         //处理animation
         static public var showAnimation:((_ message:String, _ superview:UIView?) -> ())?
@@ -572,8 +562,8 @@ extension NX {
     }
     
     //处理图片浏览
-    class public func showToast(message:String, _ at:NX.AT = .center , _ superview:UIView? = UIApplication.shared.keyWindow){
-        NX.Overlay.showToast?(message, at, superview)
+    class public func showToast(message:String, _ ats:NX.Ats = .center , _ superview:UIView? = UIApplication.shared.keyWindow){
+        NX.Overlay.showToast?(message, ats, superview)
     }
     
     //处理animation

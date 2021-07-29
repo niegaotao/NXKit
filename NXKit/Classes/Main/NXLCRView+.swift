@@ -55,6 +55,6 @@ open class NXFooterView: NXLCRView<NXButton, NXButton, NXButton> {
         self.addSubview(centerView)
         
         //设置顶部分割线
-        self.setupSeparator(color: NX.separatorColor, side: .top)
+        self.setupSeparator(color: NX.separatorColor, ats: .minY)
     }
 }

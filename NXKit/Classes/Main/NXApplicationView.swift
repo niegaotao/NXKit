@@ -139,7 +139,7 @@ open class NXApplicationView: NXView {
             self.arrowView.isHidden = true
         }
         
-        if __wrapped.separator.side.isEmpty {
+        if __wrapped.separator.ats.isEmpty {
             self.separator.isHidden = true
         }
         else{
@@ -147,16 +147,16 @@ open class NXApplicationView: NXView {
             let __separator = __wrapped.separator
             
             var __frame = CGRect.zero
-            if __separator.side.contains(.top) || __separator.side.contains(.bottom) {
-                __frame = CGRect(x: __separator.insets.left, y: 0, width: __wrapped.ctxs.w-__separator.insets.left-__separator.insets.right, height: NXDevice.pixel)
-                if __wrapped.separator.side.contains(.bottom) {
-                    __frame.origin.y = __wrapped.ctxs.h-NXDevice.pixel
+            if __separator.ats.contains(.minY) || __separator.ats.contains(.maxY) {
+                __frame = CGRect(x: __separator.insets.left, y: 0, width: __wrapped.ctxs.width-__separator.insets.left-__separator.insets.right, height: NXDevice.pixel)
+                if __wrapped.separator.ats.contains(.maxY) {
+                    __frame.origin.y = __wrapped.ctxs.height-NXDevice.pixel
                 }
             }
             else {
-                __frame = CGRect(x: 0, y: __separator.insets.top, width: NXDevice.pixel, height: __wrapped.ctxs.h-__separator.insets.top-__separator.insets.bottom)
-                if __separator.side.contains(.right) {
-                    __frame.origin.x = __wrapped.ctxs.w-NXDevice.pixel
+                __frame = CGRect(x: 0, y: __separator.insets.top, width: NXDevice.pixel, height: __wrapped.ctxs.height-__separator.insets.top-__separator.insets.bottom)
+                if __separator.ats.contains(.maxX) {
+                    __frame.origin.x = __wrapped.ctxs.width-NXDevice.pixel
                 }
             }
             self.separator.frame = __frame

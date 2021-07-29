@@ -19,10 +19,10 @@ extension NXActionView {
                 __action.asset.isHidden = true
                 __action.title.isHidden = false
                 if options.count == 2 {
-                    __action.title.frame = CGRect(x: 0, y: 0, width: NX.Overlay.size.width*0.5, height: __action.ctxs.h)
+                    __action.title.frame = CGRect(x: 0, y: 0, width: NX.Overlay.size.width*0.5, height: __action.ctxs.height)
                 }
                 else {
-                    __action.title.frame = CGRect(x: 0, y: 0, width: NX.Overlay.size.width, height: __action.ctxs.h)
+                    __action.title.frame = CGRect(x: 0, y: 0, width: NX.Overlay.size.width, height: __action.ctxs.height)
                 }
                 __action.title.color = NX.darkBlackColor
                 __action.title.font = NX.font(16, true)
@@ -44,7 +44,7 @@ extension NXActionView {
         size.height = ceil(max(20.0, size.height*1.25)) + 2.0
         
         alertView.wrapped.header.frame.size = CGSize(width: NXDevice.width * 0.8, height: 80.0 + size.height)
-        alertView.wrapped.header.separator.side = NX.Side.bottom
+        alertView.wrapped.header.separator.ats = NX.Ats.maxY
         alertView.wrapped.header.backgroundColor = NX.backgroundColor
         alertView.wrapped.header.isHidden = false
         
@@ -107,7 +107,7 @@ extension NXActionView {
         let alertView = NXActionView(frame: UIScreen.main.bounds)
         //header
         alertView.wrapped.header.frame.size = CGSize(width: NXDevice.width, height: 60)
-        alertView.wrapped.header.separator.side = NX.Side.bottom
+        alertView.wrapped.header.separator.ats = NX.Ats.maxY
         if case .components(let lhs, let center, let rhs, let title) = header.style {
             if lhs == false && center == false && rhs == false && title == false {
                 alertView.wrapped.header.isHidden = true
@@ -163,7 +163,7 @@ extension NXActionView {
 
         //footer
         alertView.wrapped.footer.isHidden = false
-        alertView.wrapped.footer.separator.side = []
+        alertView.wrapped.footer.separator.ats = []
         alertView.wrapped.footer.center.value = footer.title.count > 0 ? footer.title : "取消"
         if case .components(let lhs, let center, let rhs) = footer.style {
             alertView.wrapped.footer.frame.size = CGSize(width: NXDevice.width, height: 60+NXDevice.bottomOffset)
@@ -316,8 +316,8 @@ extension NXActionView {
                 self.rhsView.isHidden = true
             }
             
-            if appearance.separator.side == NX.Side.bottom {
-                self.setupSeparator(color: appearance.separator.backgroundColor, side: .bottom)
+            if appearance.separator.ats == NX.Ats.maxY {
+                self.setupSeparator(color: appearance.separator.backgroundColor, ats: .maxY)
                 self.proxy?.separator?.isHidden = false
             }
             else{
@@ -492,8 +492,8 @@ extension NXActionView {
                 self.rhsView.isHidden = true
             }
             
-            if appearance.separator.side == NX.Side.top {
-                self.setupSeparator(color: NX.separatorColor, side: .top)
+            if appearance.separator.ats == NX.Ats.minY {
+                self.setupSeparator(color: NX.separatorColor, ats: .minY)
                 self.proxy?.separator?.isHidden = false
             }
             else{

@@ -45,7 +45,7 @@ open class NXAssetClipImageViewController: NXViewController {
         self.footerView.frame = CGRect(x: 0, y: self.contentView.h-self.footerView.h, width: self.footerView.w, height: self.footerView.h)
         self.footerView.backgroundColor = NX.color(0x181818)
         self.footerView.contentView.backgroundColor = NX.color(0x181818)
-        self.footerView.setupSeparator(color: nil, side: [])
+        self.footerView.setupSeparator(color: nil, ats: [])
         self.contentView.addSubview(self.footerView)
         
         if let image = self.image, image.size.width > 0 && image.size.height > 0, self.clips.value.count >= 1 {

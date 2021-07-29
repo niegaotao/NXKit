@@ -139,20 +139,20 @@ extension UIView {
     }
     
     //添加上下/左右的边缘分割线
-    public func addBorder(color: UIColor?, side: NX.Side, insets: UIEdgeInsets = UIEdgeInsets.zero){
-        self.setupSeparator(color: color, side: side, insets: insets)
+    public func addBorder(color: UIColor?, ats: NX.Ats, insets: UIEdgeInsets = UIEdgeInsets.zero){
+        self.setupSeparator(color: color, ats: ats, insets: insets)
     }
     
-    public func setupSeparator(color:UIColor?, side: NX.Side, insets: UIEdgeInsets = UIEdgeInsets.zero){
+    public func setupSeparator(color:UIColor?, ats: NX.Ats, insets: UIEdgeInsets = UIEdgeInsets.zero){
         let color = color ?? NX.separatorColor
         
         
-        if side.contains(.top) && side.contains(.left) && side.contains(.bottom) && side.contains(.right) {
+        if ats.contains(.minY) && ats.contains(.minX) && ats.contains(.maxY) && ats.contains(.maxX) {
             ///四周都添加分割线
             self.proxy?.separator?.isHidden = true
             self.setupBorder(color: color, width: NXDevice.pixel, radius: 0)
         }
-        else if side.isEmpty {
+        else if ats.isEmpty {
             ///无分割线
             self.proxy?.separator?.isHidden = true
         }
@@ -171,16 +171,16 @@ extension UIView {
             separator?.isHidden = false
             separator?.backgroundColor = color.cgColor;
 
-            if side.contains(.top) {
+            if ats.contains(.minY) {
                 separator?.frame = CGRect(x: insets.left, y: 0, width: self.w-insets.left-insets.right, height: NXDevice.pixel)
             }
-            else if side.contains(.left) {
+            else if ats.contains(.minX) {
                 separator?.frame = CGRect(x: 0, y: insets.top, width: NXDevice.pixel, height: self.h-insets.top-insets.bottom)
             }
-            else if side.contains(.bottom) {
+            else if ats.contains(.maxY) {
                 separator?.frame = CGRect(x: insets.left, y: self.h-NXDevice.pixel, width: self.w-insets.left-insets.right, height: NXDevice.pixel)
             }
-            else if side.contains(.right) {
+            else if ats.contains(.maxX) {
                 separator?.frame = CGRect(x: self.w-NXDevice.pixel, y: 0, width: NXDevice.pixel, height: self.h-insets.top-insets.bottom)
             }
         }
@@ -228,7 +228,7 @@ extension UIView {
 
 //添加虚线边框
 extension UIView {
-    public func drawDashLine(strokeColor: UIColor, lineWidth: CGFloat = 1, lineLength: Int = 3, lineSpacing: Int = 3, side: NX.Side) {
+    public func drawDashLine(strokeColor: UIColor, lineWidth: CGFloat = 1, lineLength: Int = 3, lineSpacing: Int = 3, ats: NX.Ats) {
         
         let shapeLayer = CAShapeLayer()
         shapeLayer.bounds = self.bounds
@@ -242,22 +242,22 @@ extension UIView {
         shapeLayer.lineDashPattern = [NSNumber(value: lineLength), NSNumber(value: lineSpacing)]
 
         let path = CGMutablePath()
-        if side.contains(.left) {
+        if ats.contains(.minX) {
             path.move(to: CGPoint(x: 0, y: self.layer.bounds.height))
             path.addLine(to: CGPoint(x: 0, y: 0))
         }
         
-        if side.contains(.top){
+        if ats.contains(.minY){
             path.move(to: CGPoint(x: 0, y: 0))
             path.addLine(to: CGPoint(x: self.layer.bounds.width, y: 0))
         }
         
-        if side.contains(.right){
+        if ats.contains(.maxX){
             path.move(to: CGPoint(x: self.layer.bounds.width, y: 0))
             path.addLine(to: CGPoint(x: self.layer.bounds.width, y: self.layer.bounds.height))
         }
         
-        if side.contains(.bottom){
+        if ats.contains(.maxY){
             path.move(to: CGPoint(x: self.layer.bounds.width, y: self.layer.bounds.height))
             path.addLine(to: CGPoint(x: 0, y: self.layer.bounds.height))
         }
@@ -268,8 +268,8 @@ extension UIView {
     }
     
     ///画实线边框
-    func drawLine(strokeColor: UIColor, lineWidth: CGFloat, side: NX.Side) {
-        if side.contains(.top) && side.contains(.left) && side.contains(.bottom) && side.contains(.right) {
+    func drawLine(strokeColor: UIColor, lineWidth: CGFloat, ats: NX.Ats) {
+        if ats.contains(.minY) && ats.contains(.minX) && ats.contains(.maxY) && ats.contains(.maxX) {
             self.layer.borderWidth = lineWidth
             self.layer.borderColor = strokeColor.cgColor
         }
@@ -284,22 +284,22 @@ extension UIView {
             shapeLayer.lineJoin = CAShapeLayerLineJoin.round
 
             let path = CGMutablePath()
-            if side.contains(.left) {
+            if ats.contains(.minX) {
                 path.move(to: CGPoint(x: 0, y: self.layer.bounds.height))
                 path.addLine(to: CGPoint(x: 0, y: 0))
             }
             
-            if side.contains(.top){
+            if ats.contains(.minY){
                 path.move(to: CGPoint(x: 0, y: 0))
                 path.addLine(to: CGPoint(x: self.layer.bounds.width, y: 0))
             }
             
-            if side.contains(.right){
+            if ats.contains(.maxX){
                 path.move(to: CGPoint(x: self.layer.bounds.width, y: 0))
                 path.addLine(to: CGPoint(x: self.layer.bounds.width, y: self.layer.bounds.height))
             }
             
-            if side.contains(.bottom){
+            if ats.contains(.maxY){
                 path.move(to: CGPoint(x: self.layer.bounds.width, y: self.layer.bounds.height))
                 path.addLine(to: CGPoint(x: 0, y: self.layer.bounds.height))
             }

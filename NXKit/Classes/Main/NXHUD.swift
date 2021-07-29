@@ -25,7 +25,7 @@ extension NXHUD {
         open var shadowOpacity : Float = 0.15
         open var shadowOffset = CGSize.zero
         
-        open var at = NX.AT.center   //位置默认居中
+        open var ats = NX.Ats.center   //位置默认居中
         
         open var font = NX.font(14)
         open var textColor = UIColor.white        //文字颜色
@@ -54,7 +54,7 @@ extension NXHUD {
     
     open class ToastView : NXHUD.WrappedView {
         public let wrapped = NXHUD.Wrapped { (_, __sender) in
-            __sender.at = .maxY
+            __sender.ats = .maxY
             __sender.backgroundColor = UIColor.black.withAlphaComponent(0.8)
             __sender.textColor = UIColor.white
             __sender.insets = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 20)
@@ -101,13 +101,13 @@ extension NXHUD {
                 __super = __superview.frame.size
             }
             __frame.origin.x = (__super.width -  __frame.size.width)/2.0
-            if wrapped.at == .minY {
+            if wrapped.ats == .minY {
                 __frame.origin.y = __super.height * 0.20 - __frame.size.height/2.0
             }
-            else if wrapped.at == .center {
+            else if wrapped.ats == .center {
                 __frame.origin.y = __super.height * 0.5 - __frame.size.height/2.0
             }
-            else if wrapped.at == .maxY {
+            else if wrapped.ats == .maxY {
                 __frame.origin.y = __super.height * 0.78 - __frame.size.height/2.0
             }
             self.frame = __frame
@@ -122,12 +122,12 @@ extension NXHUD {
     
     
     @discardableResult
-    open class func makeToast(message: String, at: NX.AT, duration: TimeInterval, superview:UIView) -> NXHUD.ToastView? {
+    open class func makeToast(message: String, ats: NX.Ats, duration: TimeInterval, superview:UIView) -> NXHUD.ToastView? {
         if message.count > 0 {
             let wrapperView = NXHUD.ToastView(frame: CGRect(x: 0, y: 0, width: 100, height: 36))
             superview.addSubview(wrapperView)
             
-            wrapperView.wrapped.at = at
+            wrapperView.wrapped.ats = ats
             wrapperView.wrapped.duration = duration
             wrapperView.update(description: message)
                         
@@ -158,7 +158,7 @@ extension NXHUD {
     
     open class ProgressView : NXHUD.WrappedView {
         public let wrapped = NXHUD.Wrapped { (_, __sender) in
-            __sender.at = .center
+            __sender.ats = .center
             __sender.backgroundColor = UIColor.black.withAlphaComponent(0.8)
             __sender.textColor = UIColor.white
             __sender.insets = UIEdgeInsets(top: 16, left: 20, bottom: 16, right: 20)
@@ -211,13 +211,13 @@ extension NXHUD {
                     __super = __superview.frame.size
                 }
                 __frame.origin.x = (__super.width -  __frame.size.width)/2.0
-                if wrapped.at == .minY {
+                if wrapped.ats == .minY {
                     __frame.origin.y = __super.height * 0.20 - __frame.size.height/2.0
                 }
-                else if wrapped.at == .center {
+                else if wrapped.ats == .center {
                     __frame.origin.y = __super.height * 0.5 - __frame.size.height/2.0
                 }
-                else if wrapped.at == .maxY {
+                else if wrapped.ats == .maxY {
                     __frame.origin.y = __super.height * 0.78 - __frame.size.height/2.0
                 }
                 self.frame = __frame
@@ -241,13 +241,13 @@ extension NXHUD {
                     __super = __superview.frame.size
                 }
                 __frame.origin.x = (__super.width -  __frame.size.width)/2.0
-                if wrapped.at == .minY {
+                if wrapped.ats == .minY {
                     __frame.origin.y = __super.height * 0.20 - __frame.size.height/2.0
                 }
-                else if wrapped.at == .center {
+                else if wrapped.ats == .center {
                     __frame.origin.y = __super.height * 0.5 - __frame.size.height/2.0
                 }
-                else if wrapped.at == .maxY {
+                else if wrapped.ats == .maxY {
                     __frame.origin.y = __super.height * 0.78 - __frame.size.height/2.0
                 }
                 self.frame = __frame
@@ -261,7 +261,7 @@ extension NXHUD {
     }
     
     @discardableResult
-    open class func makeProgress(message: String, at: NX.AT, superview:UIView) -> NXHUD.ProgressView? {
+    open class func makeProgress(message: String, ats: NX.Ats, superview:UIView) -> NXHUD.ProgressView? {
         if let _ = objc_getAssociatedObject(superview, &NXHUD.Wrapped.wrappedViewKey) as? NXHUD.ProgressView  {
             return nil
         }
@@ -269,7 +269,7 @@ extension NXHUD {
         let wrapperView = NXHUD.ProgressView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         superview.addSubview(wrapperView)
         objc_setAssociatedObject(superview, &NXHUD.Wrapped.wrappedViewKey, wrapperView, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        wrapperView.wrapped.at = at
+        wrapperView.wrapped.ats = ats
         
         wrapperView.animationView.frame = CGRect(x: (wrapperView.bounds.size.width - 44)/2, y: (wrapperView.bounds.size.height - 44)/2, width: 44, height: 44)
         wrapperView.animationView.startAnimating()
@@ -308,13 +308,13 @@ extension NXHUD {
 extension UIView {
     
     @discardableResult
-    open func ex_makeToast(message: String, at: NX.AT = .maxY, duration: TimeInterval = 2.0) -> NXHUD.ToastView? {
-        return NXHUD.makeToast(message: message, at: at, duration: duration, superview: self)
+    open func ex_makeToast(message: String, ats: NX.Ats = .maxY, duration: TimeInterval = 2.0) -> NXHUD.ToastView? {
+        return NXHUD.makeToast(message: message, ats: ats, duration: duration, superview: self)
     }
 
     @discardableResult
-    open func ex_makeProgress(message: String = "", at: NX.AT = .center) -> NXHUD.ProgressView? {
-        return NXHUD.makeProgress(message: message, at: at, superview: self)
+    open func ex_makeProgress(message: String = "", ats: NX.Ats = .center) -> NXHUD.ProgressView? {
+        return NXHUD.makeProgress(message: message, ats: ats, superview: self)
     }
 
     @discardableResult

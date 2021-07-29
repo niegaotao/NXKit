@@ -104,7 +104,7 @@ extension NXPlaceholderView {
             guard let item = value as? NXPlaceholderView.Element, let placeholderView = item.placeholderView  else {
                 return;
             }
-            placeholderView.frame = CGRect(x: 0, y: 0, width: item.ctxs.w, height: item.ctxs.h)
+            placeholderView.frame = CGRect(x: 0, y: 0, width: item.ctxs.width, height: item.ctxs.height)
             placeholderView.updateSubviews(action, value)
             self.backgroundView?.backgroundColor = placeholderView.backgroundColor
             self.contentView.addSubview(placeholderView)
@@ -121,7 +121,7 @@ extension NXPlaceholderView {
                 return;
             }
             
-            placeholderView.frame = CGRect(x: 0, y: 0, width: item.ctxs.w, height: item.ctxs.h)
+            placeholderView.frame = CGRect(x: 0, y: 0, width: item.ctxs.width, height: item.ctxs.height)
             placeholderView.updateSubviews(action, value)
             self.backgroundView?.backgroundColor = placeholderView.backgroundColor
             self.contentView.addSubview(placeholderView)

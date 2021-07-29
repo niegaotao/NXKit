@@ -25,8 +25,8 @@ open class NXTableWrapper : NXCollection {
         if let header = self[index]?.header {
             
             //1.根据自身的高度赋值拿到header的高度
-            if header.ctxs.h > 0 {
-                return header.ctxs.h
+            if header.ctxs.height > 0 {
+                return header.ctxs.height
             }
         }
         return 0.0
@@ -37,8 +37,8 @@ open class NXTableWrapper : NXCollection {
         if let element = self[indexPath] {
             
             //1.根据自己对高度的赋值拿到相应的高度
-            if element.ctxs.h > 0 {
-                return element.ctxs.h
+            if element.ctxs.height > 0 {
+                return element.ctxs.height
             }
             
             //2.根据FD中的自适应返回单元格的高度
@@ -54,8 +54,8 @@ open class NXTableWrapper : NXCollection {
     open func heightForFooter(at index: Int) -> CGFloat {
         if let footer = self[index]?.footer {
             //1.根据自身的高度赋值拿到header的高度
-            if footer.ctxs.h > 0 {
-                return footer.ctxs.h
+            if footer.ctxs.height > 0 {
+                return footer.ctxs.height
             }
         }
         return 0.0

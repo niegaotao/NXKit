@@ -17,7 +17,7 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
     override open func setupSubviews() {
         super.setupSubviews()
         
-        self.contentView.setupSeparator(color: self.wrapped.separator.backgroundColor, side: .top, insets: .zero)
+        self.contentView.setupSeparator(color: self.wrapped.separator.backgroundColor, ats: .minY, insets: .zero)
         self.contentView.addSubview(centerView)
     }
     
@@ -260,7 +260,7 @@ extension NXToolView {
             }
             
             let space : CGFloat = __raw.size.height + element.space + __raw.height
-            assetView.frame = CGRect(x: (element.ctxs.w-__raw.size.width)/2.0, y: (element.ctxs.h - space)/2.0, width: __raw.size.width, height: __raw.size.height)
+            assetView.frame = CGRect(x: (element.ctxs.width-__raw.size.width)/2.0, y: (element.ctxs.height - space)/2.0, width: __raw.size.width, height: __raw.size.height)
             titleView.frame = CGRect(x: 0, y: assetView.frame.maxY + element.space, width: self.w, height: __raw.height)
             
             

@@ -84,7 +84,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         self.filterView.contentView.frame = CGRect(x: 0, y: 0, width: NXDevice.width, height: 40)
         self.filterView.contentView.titleLabel?.font = NX.font(13, false)
         self.filterView.contentView.contentHorizontalAlignment = .center
-        self.filterView.setupSeparator(color: NX.separatorColor, side: .bottom)
+        self.filterView.setupSeparator(color: NX.separatorColor, ats: .maxY)
         self.filterView.contentView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
             self?.dispose("filter", nil)
         }

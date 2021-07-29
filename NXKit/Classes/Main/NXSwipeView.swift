@@ -30,7 +30,7 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
         if #available(iOS 11.0, *) {
             contentView.contentInsetAdjustmentBehavior = .never
         }
-        self.setupSeparator(color: NX.separatorColor, side: .bottom, insets: UIEdgeInsets.zero)
+        self.setupSeparator(color: NX.separatorColor, ats: .maxY, insets: UIEdgeInsets.zero)
         self.wrapped.slider.sliderView.layer.masksToBounds = true
         self.contentView.addSubview(self.wrapped.slider.sliderView)
     }

@@ -1,5 +1,5 @@
 //
-//  NXAttribute.swift
+//  NX.swift
 //  NXKit
 //
 //  Created by firelonely on 2020/2/20.
@@ -69,7 +69,7 @@ extension NX {
     
     open class Separator : NX.View {
         open var insets = UIEdgeInsets.zero
-        open var side : NX.Side = []
+        open var ats : NX.Ats = []
         
         public override init(){
             super.init()

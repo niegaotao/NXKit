@@ -28,7 +28,7 @@ open class NXClipboardView: NXView {
         //线条相关属性
         open var line = NXClipboardView.Line()
         //边
-        open var side = NX.Rect.Side.unspefified
+        open var ats = NX.Ats.unspefified
         //框选区域的frame
         public let frame = NX.Wrapped<Bool, CGRect> { (_, __sender) in
             __sender.initialValue = CGRect.zero;__sender.value = CGRect.zero;}
@@ -241,28 +241,28 @@ open class NXClipboardView: NXView {
             if self.point.index == .began {
                 
                 if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.minXView.frame, to: self).contains(self.point.initialValue) {
-                    self.wrapped.side = .minX
+                    self.wrapped.ats = .minX
                 }
                 else if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.maxXView.frame, to: self).contains(self.point.initialValue) {
-                    self.wrapped.side = .maxX
+                    self.wrapped.ats = .maxX
                 }
                 else if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.minYView.frame, to: self).contains(self.point.initialValue) {
-                    self.wrapped.side = .minY
+                    self.wrapped.ats = .minY
                 }
                 else if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.maxYView.frame, to: self).contains(self.point.initialValue) {
-                    self.wrapped.side = .maxY
+                    self.wrapped.ats = .maxY
                 }
                 else {
-                    self.wrapped.side = .center
+                    self.wrapped.ats = .center
                 }
             }
             
             if self.point.index == .began || self.point.index == .changed {
-                if self.wrapped.side == .center {
+                if self.wrapped.ats == .center {
                     self.wrappedView.center = CGPoint(x: self.wrappedView.center.x + __translation.x, y: self.wrappedView.center.y + __translation.y)
                     self.wrapped.frame.value = self.wrappedView.frame
                 }
-                else if self.wrapped.side == .minX {
+                else if self.wrapped.ats == .minX {
                     var __frame = self.wrappedView.frame
                     __frame.origin.x = __frame.origin.x + __translation.x
                     __frame.size.width = __frame.size.width - __translation.x
@@ -272,7 +272,7 @@ open class NXClipboardView: NXView {
                         self.wrappedView.frame = __frame
                     }
                 }
-                else if self.wrapped.side == .maxX {
+                else if self.wrapped.ats == .maxX {
                     var __frame = self.wrappedView.frame
                     __frame.size.width = __frame.size.width + __translation.x
                     if __frame.size.width >= self.wrapped.line.width * 2.0
@@ -281,7 +281,7 @@ open class NXClipboardView: NXView {
                         self.wrappedView.frame = __frame
                     }
                 }
-                else if self.wrapped.side == .minY {
+                else if self.wrapped.ats == .minY {
                     var __frame = self.wrappedView.frame
                     __frame.origin.y = __frame.origin.y + __translation.y
                     __frame.size.height = __frame.size.height - __translation.y
@@ -291,7 +291,7 @@ open class NXClipboardView: NXView {
                         self.wrappedView.frame = __frame
                     }
                 }
-                else if self.wrapped.side == .maxY {
+                else if self.wrapped.ats == .maxY {
                     var __frame = self.wrappedView.frame
                     __frame.size.height = __frame.size.height + __translation.y
                     if __frame.size.height >= self.wrapped.line.width * 2.0

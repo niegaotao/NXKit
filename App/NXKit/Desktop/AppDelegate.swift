@@ -46,7 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.weakView = testView
         print("testView=\(testView.hash);strongView=\(self.strongView!.hash);weakView=\(self.weakView!.hash)")
         print("testView=\(testView.hashValue);strongView=\(self.strongView!.hashValue);weakView=\(self.weakView!.hashValue)")
-
         return true
     }
 
