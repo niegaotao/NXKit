@@ -80,7 +80,7 @@ open class NXSerialization {
         if let value = value {
             var newValue = value
             if decode {
-                newValue = NXApp.decodeURIComponent(newValue)
+                newValue = NX.decodeURIComponent(newValue)
             }
             guard let data = newValue.data(using: String.Encoding.utf8) else {return [:]}
             return NXSerialization.data(toDictionary: data)
@@ -93,7 +93,7 @@ open class NXSerialization {
         if let value = value {
             var newValue = value
             if decode {
-                newValue = NXApp.decodeURIComponent(newValue)
+                newValue = NX.decodeURIComponent(newValue)
             }
             guard let data = newValue.data(using: String.Encoding.utf8) else {return []}
             return NXSerialization.data(toArray: data)
@@ -107,7 +107,7 @@ open class NXSerialization {
         if let data = NXSerialization.JSONObject(toData: jsonObject, options: []) {
             let output = NXSerialization.data(toString: data)
             if encode {
-                if let encodeOutput = NXApp.encodeURIComponent(output) {
+                if let encodeOutput = NX.encodeURIComponent(output) {
                     return encodeOutput
                 }
             }
@@ -146,11 +146,11 @@ open class NXSerialization {
     
     //生成路由URL
     public class func createURL(path:String, action:String, param:[String:Any]) -> String {
-        return NXSerialization.createURL(scheme: NXApp.URI.scheme, path: path, action: action, param: param)
+        return NXSerialization.createURL(scheme: NX.URI.scheme, path: path, action: action, param: param)
     }
     
     public class func createURL(scheme:String, path:String, action:String, param:[String:Any]) -> String {
-        let __action = NXApp.encodeURIComponent(action) ?? action
+        let __action = NX.encodeURIComponent(action) ?? action
         if param.count > 0 {
             let __param = NXSerialization.JSONObject(toString:param, encode:true)
             return "\(scheme)://\(path)?action=\(__action)&param=\(__param)"
@@ -162,8 +162,8 @@ open class NXSerialization {
     public class func createURL(scheme:String, path:String, query:[String:String], encode:Bool) -> String {
         var __querys = [String]()
         for (queryKey, queryKalue) in query {
-            let __queryKey = encode ? NXApp.get(string:NXApp.encodeURIComponent(queryKey), ""): queryKey
-            let __queryValue = encode ? NXApp.get(string:NXApp.encodeURIComponent(queryKalue), ""): queryKalue
+            let __queryKey = encode ? NX.get(string:NX.encodeURIComponent(queryKey), ""): queryKey
+            let __queryValue = encode ? NX.get(string:NX.encodeURIComponent(queryKalue), ""): queryKalue
             __querys.append("\(__queryKey)=\(__queryValue)")
         }
         var __actionURL = "\(scheme)://\(path)"

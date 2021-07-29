@@ -96,7 +96,7 @@
 		DBDECB7DA287F193A517B1DB4A615DCC /* NXActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D820EC43D9B2E26180F1F87AC3FC0 /* NXActionView.swift */; };
 		DCE71679450CF4DDDEA090451501DFED /* NXAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52882DF257AE9C4F3521C9A15C6CB631 /* NXAnimator.swift */; };
 		E3C6F973E68116F1851A561A8565639E /* NXWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B158A3AEFB86947076CB63416C1A1842 /* NXWebView.swift */; };
-		E64B5B97D95627974C5B0EDBDCFF61F8 /* NXApp+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FFCF626C2EE81F90D8F4B93AC827 /* NXApp+.swift */; };
+		E64B5B97D95627974C5B0EDBDCFF61F8 /* NX+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FFCF626C2EE81F90D8F4B93AC827 /* NX+.swift */; };
 		E6FCDA18DF5D947D16915830BB39B284 /* navi_more_white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE96DF53D7E4AE2FA041601FBB9703F1 /* navi_more_white@3x.png */; };
 		EA789D25CD7DE59943905E9B5930F23F /* navi_more_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F1AB78AF5DB3102BE33E76A660ACE276 /* navi_more_black@2x.png */; };
 		F51FB32429AEDD04AE8956A9C358B2E8 /* NXCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80511D9BE0998CF2F9057B561A7B1 /* NXCView.swift */; };
@@ -105,7 +105,7 @@
 		F84D49354EE183D057D133A90D1B5DB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */; };
 		FCE2CCBB14705814932BC7B14DA749A4 /* uiapp_overlay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E236AB2A5CB0AC20742BE1F7933AACF /* uiapp_overlay@3x.png */; };
 		FD2128B97B9243CABB734263D94B21AB /* NXString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20173D0AB0A262424FC794E375E5CC79 /* NXString.swift */; };
-		FD578EC1468C7878F13BC7B8D59A1EA6 /* NXApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F92946049F6DAB3C614CFA4C04921 /* NXApp.swift */; };
+		FD578EC1468C7878F13BC7B8D59A1EA6 /* NX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F92946049F6DAB3C614CFA4C04921 /* NX.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,7 +151,7 @@
 		42C80B456744CE83E43611ED092365D6 /* NXContainerController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXContainerController.swift; sourceTree = "<group>"; };
 		4495A3300936DD10A3765030A878E9AA /* NXViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXViewController.swift; sourceTree = "<group>"; };
 		4D3E7456E2A7FE307D008FA91F5C7CD5 /* ResourceBundle-NXKit-NXKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-NXKit-NXKit-Info.plist"; sourceTree = "<group>"; };
-		4D56FFCF626C2EE81F90D8F4B93AC827 /* NXApp+.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NXApp+.swift"; sourceTree = "<group>"; };
+		4D56FFCF626C2EE81F90D8F4B93AC827 /* NX+.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NX+.swift"; sourceTree = "<group>"; };
 		4E61B5575B7501F0DC3ACE3168223BA4 /* NXOverlay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXOverlay.swift; sourceTree = "<group>"; };
 		500B67BDFC9C4AD3CD3E418C42A31BD3 /* NXSuspendView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXSuspendView.swift; sourceTree = "<group>"; };
 		52882DF257AE9C4F3521C9A15C6CB631 /* NXAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXAnimator.swift; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 		A24539AAC52C038378FBA89C1B1E3483 /* NXTransitionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXTransitionView.swift; sourceTree = "<group>"; };
 		A32623186A9705EEDC99E24E8136181C /* NXButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXButton.swift; sourceTree = "<group>"; };
 		A3AEDC9FD9FB5A6477AA5A883BCBE1D0 /* uiapp_arrow@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "uiapp_arrow@2x.png"; path = "NXKit/Assets/uiapp_arrow@2x.png"; sourceTree = "<group>"; };
-		A50F92946049F6DAB3C614CFA4C04921 /* NXApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXApp.swift; sourceTree = "<group>"; };
+		A50F92946049F6DAB3C614CFA4C04921 /* NX.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NX.swift; sourceTree = "<group>"; };
 		A53433FBA5BCC035FE43DB2F4836EF88 /* NXSubscriber.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXSubscriber.swift; sourceTree = "<group>"; };
 		AC2D68EDC4055005813D941BBA853E16 /* NXLCRView+.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NXLCRView+.swift"; sourceTree = "<group>"; };
 		B0724FE77389606B6C13492A8DE11176 /* NXActionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXActionViewCell.swift; sourceTree = "<group>"; };
@@ -421,8 +421,8 @@
 				B0724FE77389606B6C13492A8DE11176 /* NXActionViewCell.swift */,
 				9266E44F38C238B78711D5F8892E6EE9 /* NXAnimationView.swift */,
 				52882DF257AE9C4F3521C9A15C6CB631 /* NXAnimator.swift */,
-				A50F92946049F6DAB3C614CFA4C04921 /* NXApp.swift */,
-				4D56FFCF626C2EE81F90D8F4B93AC827 /* NXApp+.swift */,
+				A50F92946049F6DAB3C614CFA4C04921 /* NX.swift */,
+				4D56FFCF626C2EE81F90D8F4B93AC827 /* NX+.swift */,
 				2CDFE4A1FA4DB7DEFE2E767EE50052C1 /* NXApplicationView.swift */,
 				64C5121F63D12DB2C864CB35B6BC7096 /* NXBackgroundView.swift */,
 				A32623186A9705EEDC99E24E8136181C /* NXButton.swift */,
@@ -657,8 +657,8 @@
 				7A54EEA80012EB92B367F5E41310B56A /* NXActionViewCell.swift in Sources */,
 				5E124C80E5D2BB603E2F3B1F11DEBE02 /* NXAnimationView.swift in Sources */,
 				DCE71679450CF4DDDEA090451501DFED /* NXAnimator.swift in Sources */,
-				E64B5B97D95627974C5B0EDBDCFF61F8 /* NXApp+.swift in Sources */,
-				FD578EC1468C7878F13BC7B8D59A1EA6 /* NXApp.swift in Sources */,
+				E64B5B97D95627974C5B0EDBDCFF61F8 /* NX+.swift in Sources */,
+				FD578EC1468C7878F13BC7B8D59A1EA6 /* NX.swift in Sources */,
 				858E5A49D526702A1C1DC1E9DB27E691 /* NXApplicationView.swift in Sources */,
 				0A6D2515F66F56B53DC32EF2EEB410B2 /* NXAsset.swift in Sources */,
 				3ECC632FCEDE5E568B0FC615BC987706 /* NXAssetClipImageViewController.swift in Sources */,

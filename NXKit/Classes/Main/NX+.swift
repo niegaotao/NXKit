@@ -8,17 +8,17 @@
 import UIKit
 import AVFoundation
 
-extension NXApp {
+extension NX {
     
     open class View {
         open var isHidden = false
         open var frame = CGRect.zero
-        open var backgroundColor = NXApp.backgroundColor
+        open var backgroundColor = NX.backgroundColor
         public init() {}
     }
     
-    open class Appearance : NXApp.View {
-        open var selectedBackgroundColor = NXApp.selectedBackgroundColor
+    open class Appearance : NX.View {
+        open var selectedBackgroundColor = NX.selectedBackgroundColor
         open var isHighlighted = true
         open var isEnabled = true
         open var isCloseable = true
@@ -29,20 +29,20 @@ extension NXApp {
             super.init()
         }
         
-        public init(completion:NXApp.Completion<String, NXApp.Appearance>?){
+        public init(completion:NX.Completion<String, NX.Appearance>?){
             super.init()
             completion?("", self)
         }
     }
 
-    open class Attribute : NXApp.View {
-        open var color  = NXApp.darkBlackColor
+    open class Attribute : NX.View {
+        open var color  = NX.darkBlackColor
         open var textAlignment = NSTextAlignment.center
         open var numberOfLines: Int = 1
         open var lineSpacing : CGFloat = 2.5
         open var isAttributed : Bool = false
         open var value = ""
-        open var font = NXApp.font(15)
+        open var font = NX.font(15)
         
         open var image : UIImage? = nil
         open var radius : CGFloat = 0
@@ -51,7 +51,7 @@ extension NXApp {
             super.init()
         }
         
-        public init(completion:NXApp.Completion<String, NXApp.Attribute>?){
+        public init(completion:NX.Completion<String, NX.Attribute>?){
             super.init()
             completion?("", self)
         }
@@ -67,32 +67,32 @@ extension NXApp {
         }
     }
     
-    open class Separator : NXApp.View {
+    open class Separator : NX.View {
         open var insets = UIEdgeInsets.zero
-        open var side : NXApp.Side = []
+        open var side : NX.Side = []
         
         public override init(){
             super.init()
             self.isHidden = true
-            self.backgroundColor = NXApp.separatorColor
+            self.backgroundColor = NX.separatorColor
         }
         
-        public init(completion:NXApp.Completion<String, NXApp.Separator>?){
+        public init(completion:NX.Completion<String, NX.Separator>?){
             super.init()
             self.isHidden = true
-            self.backgroundColor = NXApp.separatorColor
+            self.backgroundColor = NX.separatorColor
             completion?("", self)
         }
     }
     
-    open class Widget<T:UIView> : NXApp.View  {
+    open class Widget<T:UIView> : NX.View  {
         open var widgetView = T()
         
         public override init(){
             super.init()
         }
         
-        public init(completion:NXApp.Completion<String, NXApp.Widget<T>>?){
+        public init(completion:NX.Completion<String, NX.Widget<T>>?){
             super.init()
             completion?("", self)
         }
@@ -105,7 +105,7 @@ extension NXApp {
         
         public init(){}
         
-        public init(completion:NXApp.Completion<String, NXApp.Border>?){
+        public init(completion:NX.Completion<String, NX.Border>?){
             completion?("", self)
         }
     }
@@ -114,13 +114,13 @@ extension NXApp {
     open class Shadow {
         open var isHidden = false
         open var radius : CGFloat = 0.0
-        open var color =  NXApp.shadowColor
+        open var color =  NX.shadowColor
         open var opacity : CGFloat = 0.0
         open var offset = CGSize.zero
         
         public init(){}
         
-        public init(completion:NXApp.Completion<String, NXApp.Shadow>?){
+        public init(completion:NX.Completion<String, NX.Shadow>?){
             completion?("", self)
         }
     }
@@ -129,13 +129,13 @@ extension NXApp {
         open var index = Index.initialValue
         open var initialValue = Value.initialValue
         open var value = Value.initialValue
-        open var completion : ((_ action:String, _ value:Any?, _ completion:NXApp.Completion<String, NXApp.Wrapped<Index, Value>>?) -> ())? = nil
+        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrapped<Index, Value>>?) -> ())? = nil
         
-        public init(completion:NXApp.Completion<String, NXApp.Wrapped<Index, Value>>?) {
+        public init(completion:NX.Completion<String, NX.Wrapped<Index, Value>>?) {
             completion?("", self)
         }
         
-        open func dispose(_ action:String, _ value:Any?, _ completion:NXApp.Completion<String, NXApp.Wrapped<Index, Value>>? = nil){
+        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrapped<Index, Value>>? = nil){
             self.completion?(action, value, completion)
         }
     }
@@ -144,13 +144,13 @@ extension NXApp {
         open var isCompleted = false
         open var value = Value.initialValue
         
-        open var completion : ((_ action:String, _ value:Any?, _ completion:NXApp.Completion<String, NXApp.Completed<Value>>?) -> ())? = nil
+        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Completed<Value>>?) -> ())? = nil
         
-        public init(completion:NXApp.Completion<String, NXApp.Completed<Value>>?) {
+        public init(completion:NX.Completion<String, NX.Completed<Value>>?) {
             completion?("", self)
         }
         
-        open func dispose(_ action:String, _ value:Any?, _ completion:NXApp.Completion<String, NXApp.Completed<Value>>? = nil){
+        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Completed<Value>>? = nil){
             self.completion?(action, value, completion)
         }
     }
@@ -158,26 +158,26 @@ extension NXApp {
     open class Compared<Value:Any> where Value : NXInitialValue {
         open var minValue = Value.initialValue
         open var maxValue = Value.initialValue
-        open var completion : ((_ action:String, _ value:Any?, _ completion:NXApp.Completion<String, NXApp.Compared<Value>>?) -> ())? = nil
+        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Compared<Value>>?) -> ())? = nil
         
-        public init(completion:NXApp.Completion<String, NXApp.Compared<Value>>?) {
+        public init(completion:NX.Completion<String, NX.Compared<Value>>?) {
             completion?("", self)
         }
         
-        open func dispose(_ action:String, _ value:Any?, _ completion:NXApp.Completion<String, NXApp.Compared<Value>>? = nil){
+        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Compared<Value>>? = nil){
             self.completion?(action, value, completion)
         }
     }
     
     open class Specified<Value:Any> {
         open var value : Value? = nil
-        open var completion : ((_ action:String, _ value:Any?, _ completion:NXApp.Completion<String, NXApp.Specified<Value>>?) -> ())? = nil
+        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Specified<Value>>?) -> ())? = nil
         
-        public init(completion:NXApp.Completion<String, NXApp.Specified<Value>>?) {
+        public init(completion:NX.Completion<String, NX.Specified<Value>>?) {
             completion?("", self)
         }
         
-        open func dispose(_ action:String, _ value:Any?, _ completion:NXApp.Completion<String, NXApp.Specified<Value>>? = nil){
+        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Specified<Value>>? = nil){
             self.completion?(action, value, completion)
         }
     }
@@ -186,7 +186,7 @@ extension NXApp {
         open var selected = T.initialValue
         open var unselected = T.initialValue
                     
-        public init(completion:NXApp.Completion<String, NXApp.Selectable<T>>?){
+        public init(completion:NX.Completion<String, NX.Selectable<T>>?){
             completion?("", self)
         }
         
@@ -200,7 +200,7 @@ extension NXApp {
         open var selected : T? = nil
         open var unselected : T? = nil
         
-        public init(completion:NXApp.Completion<String, NXApp.SelectableAnyValue<T>>?){
+        public init(completion:NX.Completion<String, NX.SelectableAnyValue<T>>?){
             completion?("", self)
         }
         
@@ -214,7 +214,7 @@ extension NXApp {
         open var selected = T()
         open var unselected = T()
                     
-        public init(completion:NXApp.Completion<String, NXApp.SelectableObjectValue<T>>?){
+        public init(completion:NX.Completion<String, NX.SelectableObjectValue<T>>?){
             completion?("", self)
         }
         

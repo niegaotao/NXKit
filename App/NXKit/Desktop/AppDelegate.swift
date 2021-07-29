@@ -22,15 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        NXApp.viewBackgroundColor = NXApp.color(NXApp.color(247, 247, 247), NXApp.color(0, 0, 0))
-        NXApp.backgroundColor = NXApp.color(NXApp.color(255, 255, 255), NXApp.color(28, 28, 28))
-        NXApp.darkBlackColor = NXApp.color(NXApp.color(30, 30, 30), NXApp.color(255, 255, 255))
+        NX.viewBackgroundColor = NX.color(NX.color(247, 247, 247), NX.color(0, 0, 0))
+        NX.backgroundColor = NX.color(NX.color(255, 255, 255), NX.color(28, 28, 28))
+        NX.darkBlackColor = NX.color(NX.color(30, 30, 30), NX.color(255, 255, 255))
 
-        NXApp.Authorize.authorization = {
-            (_ type: NXApp.AuthorizeType,
+        NX.Authorize.authorization = {
+            (_ type: NX.AuthorizeType,
             _ queue:DispatchQueue,
             _ alert: Bool,
-            _ completion:((NXApp.AuthorizeState) -> ())?) in
+            _ completion:((NX.AuthorizeState) -> ())?) in
             
             RRXCAuthorizeManager.authorization(type, queue, completion, alert)
         }

@@ -149,7 +149,7 @@ extension NXFS {
 }
 
 extension NXFS {
-    public static let file = NXApp.namespace
+    public static let file = NX.namespace
 
     //setValue:写入数据
     open class func setValue(_ value: Any, forKey: String, directory: NXFS.Directory, filename: String) {
@@ -168,19 +168,19 @@ extension NXFS {
             
             let data = NXSerialization.JSONObject(toData: map, options: [.prettyPrinted]) as NSData?
             let result = data?.write(toFile: path, atomically: true) ?? false
-            NXApp.print("JSON:save result is: \(String(describing: result))")
+            NX.print("JSON:save result is: \(String(describing: result))")
         }
         else{
             //存储的key不存在，则将内容直接存入该文件[这种需要验证传入值的类型为数组或者map
             if let mapValue = value as? [String:Any] {
                 let data = NXSerialization.JSONObject(toData: mapValue, options: [.prettyPrinted]) as NSData?
                 let result = data?.write(toFile: path, atomically: true) ?? false
-                NXApp.print("JSON:save result is: \(String(describing: result))")
+                NX.print("JSON:save result is: \(String(describing: result))")
             }
             else if let arrValue = value as? [Any?] {
                 let data = NXSerialization.JSONObject(toData: arrValue, options: [.prettyPrinted]) as NSData?
                 let result = data?.write(toFile: path, atomically: true) ?? false
-                NXApp.print("JSON:save result is: \(String(describing: result))")
+                NX.print("JSON:save result is: \(String(describing: result))")
             }
         }
     }
@@ -239,7 +239,7 @@ extension NXFS {
             if filename.hasPrefix("http") == false {
                 url = URL(fileURLWithPath: filename)
             }
-            return NXFS.MIME.fetchMIME(NXApp.get(string:url?.pathExtension, ""))
+            return NXFS.MIME.fetchMIME(NX.get(string:url?.pathExtension, ""))
         }
         
         public class func fetchMIME(_ fileExtension:String) -> String {

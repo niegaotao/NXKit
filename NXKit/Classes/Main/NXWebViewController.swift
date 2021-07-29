@@ -19,14 +19,14 @@ extension NXWebViewController {
         override open func setupSubviews() {
             super.setupSubviews()
             self.lhsView.frame = CGRect(x: 0, y: 0, width: 32, height: 44)
-            self.lhsView.setImage(NXApp.image(named:"navi_back_black.png"), for: .normal)
+            self.lhsView.setImage(NX.image(named:"navi_back_black.png"), for: .normal)
             self.lhsView.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -4, bottom: 0, right: 4)
             
             self.centerView.frame = CGRect(x: 32, y: 14, width: NXDevice.pixel, height: 16)
             self.centerView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             
             self.rhsView.frame = CGRect(x: 33, y: 0, width: 32, height: 44)
-            self.rhsView.setImage(NXApp.image(named:"navi_close_black.png"), for: .normal)
+            self.rhsView.setImage(NX.image(named:"navi_close_black.png"), for: .normal)
             self.rhsView.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: 4, bottom: 0, right: -4)
         }
         
@@ -123,7 +123,7 @@ open class NXWebViewController: NXViewController {
         
         self.progressView.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.size.width, height: self.progressView.frame.size.height)
         self.progressView.autoresizingMask = [.flexibleWidth]
-        self.progressView.progressTintColor = NXApp.mainColor
+        self.progressView.progressTintColor = NX.mainColor
         self.progressView.trackTintColor = UIColor.clear
         self.progressView.alpha = 0.0
         self.contentView.addSubview(self.progressView)
@@ -191,7 +191,7 @@ open class NXWebViewController: NXViewController {
     }
     
     open func callbackWithCompletion(_ isCompleted: Bool, _ error:Error?){
-        NXApp.log { return "isCompleted = \(isCompleted)"}
+        NX.log { return "isCompleted = \(isCompleted)"}
         
         //在这里做导航栏返回按钮
         if isCompleted && self.backbarView.isAutoable {
@@ -204,7 +204,7 @@ open class NXWebViewController: NXViewController {
                 self.backbarView.updateSubviews("", true)
                 self.naviView.titleView.x = 15.0 + 44.0 + 1.0
                 self.naviView.titleView.w = self.naviView.w - self.naviView.titleView.x * 2.0
-                NXApp.print("t.f=\(self.naviView.titleView.frame)")
+                NX.print("t.f=\(self.naviView.titleView.frame)")
             }
         }
     }

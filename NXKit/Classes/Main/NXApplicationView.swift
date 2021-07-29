@@ -20,21 +20,21 @@ open class NXApplicationView: NXView {
         assetView.layer.masksToBounds = true
         self.addSubview(assetView)
         
-        titleView.font = NXApp.font(16)
+        titleView.font = NX.font(16)
         titleView.textAlignment = .left
-        titleView.textColor = NXApp.darkBlackColor
+        titleView.textColor = NX.darkBlackColor
         titleView.layer.masksToBounds = true
         self.addSubview(titleView)
         
-        subtitleView.font = NXApp.font(14)
+        subtitleView.font = NX.font(14)
         subtitleView.textAlignment = .left
-        subtitleView.textColor = NXApp.darkGrayColor
+        subtitleView.textColor = NX.darkGrayColor
         subtitleView.layer.masksToBounds = true
         self.addSubview(subtitleView)
         
-        accessView.font = NXApp.font(14)
+        accessView.font = NX.font(14)
         accessView.textAlignment = .right
-        accessView.textColor = NXApp.darkGrayColor
+        accessView.textColor = NX.darkGrayColor
         accessView.layer.masksToBounds = true
         self.addSubview(accessView)
         
@@ -42,7 +42,7 @@ open class NXApplicationView: NXView {
         arrowView.layer.masksToBounds = true
         self.addSubview(arrowView)
         
-        separator.backgroundColor = NXApp.separatorColor.cgColor
+        separator.backgroundColor = NX.separatorColor.cgColor
         separator.isHidden = true
         self.layer.addSublayer(separator)
     }
@@ -59,7 +59,7 @@ open class NXApplicationView: NXView {
                 self.assetView.image = __wrapped.asset.image
             }
             else if __wrapped.asset.value.contains("http") {
-                NXApp.image(self.assetView, __wrapped.asset.value)
+                NX.image(self.assetView, __wrapped.asset.value)
             }
             else if !__wrapped.asset.value.isEmpty {
                 self.assetView.image = UIImage(named: __wrapped.asset.value)
@@ -125,7 +125,7 @@ open class NXApplicationView: NXView {
                 self.arrowView.image = __wrapped.arrow.image
             }
             else if __wrapped.arrow.value.contains("http") {
-                NXApp.image(self.arrowView, __wrapped.arrow.value)
+                NX.image(self.arrowView, __wrapped.arrow.value)
             }
             else if !__wrapped.arrow.value.isEmpty {
                 self.arrowView.image = UIImage(named: __wrapped.arrow.value)

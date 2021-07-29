@@ -15,9 +15,9 @@ open class NXSubscriber  {
     open class Item : NSObject {
         weak open var observer : NSObject? = nil
         open var name = ""
-        open var dispose : NXApp.Completion<String, Any?>? = nil
+        open var dispose : NX.Completion<String, Any?>? = nil
 
-        public init(observer:NSObject, name:String, dispose:NXApp.Completion<String, Any?>?) {
+        public init(observer:NSObject, name:String, dispose:NX.Completion<String, Any?>?) {
             super.init()
             self.observer = observer
             self.name = name
@@ -25,11 +25,11 @@ open class NXSubscriber  {
         }
         
         deinit {
-            NXApp.log { return "NXSubscriber.Item"}
+            NX.log { return "NXSubscriber.Item"}
         }
     }
     
-    open class func add(observer:NSObject?, name:String, dispose:NXApp.Completion<String, Any?>?){
+    open class func add(observer:NSObject?, name:String, dispose:NX.Completion<String, Any?>?){
         self.clear()
         guard let __observer = observer, name.count > 0 else {
             return
@@ -44,7 +44,7 @@ open class NXSubscriber  {
         }
     }
     
-    open class func add(observer:NSObject?, names:[String], dispose:NXApp.Completion<String, Any?>?){
+    open class func add(observer:NSObject?, names:[String], dispose:NX.Completion<String, Any?>?){
         names.forEach { (name) in
             self.add(observer: observer, name:name, dispose:dispose)
         }

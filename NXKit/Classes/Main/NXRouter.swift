@@ -13,14 +13,14 @@ extension NXRouter {
         public var url: String = ""
         public var query: [String: String]? = nil                   //URL对应解析的参数，输出
         public var info: [String: Any]? = nil                      //打开URL传入的参数，输入
-        public var completion: NXApp.Completion<Bool, [String: Any]?>? = nil//打开URL后的回调
+        public var completion: NX.Completion<Bool, [String: Any]?>? = nil//打开URL后的回调
     }
     
     //*这里采用类对象的方式保存注册信息*/
     open class URI : NSObject {
         open var url : String = ""                                    //scheme+host+path
         open var components: (scheme:String, path:String) = ("","")   //各部分的值
-        open var completion: NXApp.Completion<Bool, NXRouter.Wrapped?>? = nil//注册后的回调action
+        open var completion: NX.Completion<Bool, NXRouter.Wrapped?>? = nil//注册后的回调action
     }
 }
 
@@ -37,7 +37,7 @@ open class NXRouter {
     
     /*新增URL*/
     @discardableResult
-    public func add(_ url: String, completion:@escaping NXApp.Completion<Bool, NXRouter.Wrapped?>) -> NXRouter.URI? {
+    public func add(_ url: String, completion:@escaping NX.Completion<Bool, NXRouter.Wrapped?>) -> NXRouter.URI? {
         let components = self.components(url: url)
         if components.scheme.count > 0 || components.path.count > 0 {
             return self.add(scheme:components.scheme, path:components.path, completion: completion)
@@ -47,7 +47,7 @@ open class NXRouter {
     
     /*新增URL*/
     @discardableResult
-    public func add(schemes:[String], paths: [String], completion:@escaping NXApp.Completion<Bool, NXRouter.Wrapped?>) -> [NXRouter.URI?] {
+    public func add(schemes:[String], paths: [String], completion:@escaping NX.Completion<Bool, NXRouter.Wrapped?>) -> [NXRouter.URI?] {
         var currentURIs = [NXRouter.URI?]()
         for scheme in schemes {
             if paths.count > 0 {
@@ -65,7 +65,7 @@ open class NXRouter {
     
     /*新增URL*/
     @discardableResult
-    public func add(scheme:String, path: String, completion:@escaping NXApp.Completion<Bool, NXRouter.Wrapped?>) -> NXRouter.URI? {
+    public func add(scheme:String, path: String, completion:@escaping NX.Completion<Bool, NXRouter.Wrapped?>) -> NXRouter.URI? {
         let compatible = self.compatibleURI(url: scheme + "://" + path)
         
         if compatible.components.isValid == false {
@@ -124,12 +124,12 @@ open class NXRouter {
     }
     
     //open(_ url: String, info: [String: Any]?, completion: NXRouter.RawValue.Completion?)
-    public func open(_ url: String, params: [String: Any]?, completion: NXApp.Completion<Bool, [String: Any]?>?) {
+    public func open(_ url: String, params: [String: Any]?, completion: NX.Completion<Bool, [String: Any]?>?) {
         self.open(url, info: params, completion: completion)
     }
     
     //打开链接
-    public func open(_ url: String, info: [String: Any]?, completion: NXApp.Completion<Bool, [String: Any]?>?) {
+    public func open(_ url: String, info: [String: Any]?, completion: NX.Completion<Bool, [String: Any]?>?) {
         let compatible = self.compatibleURI(url: url)
         if compatible.components.isValid, let uri = compatible.uri{
             var rawValue = NXRouter.Wrapped()

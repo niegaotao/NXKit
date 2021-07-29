@@ -27,9 +27,9 @@ open class NXTableView: UITableView {
         self.estimatedRowHeight = 0
         self.estimatedSectionFooterHeight = 0
         self.estimatedSectionHeaderHeight = 0
-        self.backgroundColor = NXApp.tableViewBackgroundColor
+        self.backgroundColor = NX.tableViewBackgroundColor
         self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.separatorColor = NXApp.separatorColor
+        self.separatorColor = NX.separatorColor
         if #available(iOS 11.0, *) {
             self.contentInsetAdjustmentBehavior = .never
         }

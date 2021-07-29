@@ -21,13 +21,13 @@ extension NXHUD {
         
         open var cornerRadius : CGFloat = 6.0
         open var shadowRadius : CGFloat = 6.0
-        open var shadowColor = NXApp.shadowColor.cgColor
+        open var shadowColor = NX.shadowColor.cgColor
         open var shadowOpacity : Float = 0.15
         open var shadowOffset = CGSize.zero
         
-        open var at = NXApp.AT.center   //位置默认居中
+        open var at = NX.AT.center   //位置默认居中
         
-        open var font = NXApp.font(14)
+        open var font = NX.font(14)
         open var textColor = UIColor.white        //文字颜色
         open var numberOfLines : Int = 0
         open var text = ""
@@ -38,14 +38,14 @@ extension NXHUD {
         open var size = CGSize(width: 100.0, height: 100.0)//最小大小
         static var wrappedViewKey = "wrappedViewKey"
         
-        init(completion:NXApp.Completion<String, NXHUD.Wrapped>?) {
+        init(completion:NX.Completion<String, NXHUD.Wrapped>?) {
             completion?("", self)
         }
     }
     
     open class WrappedView : NXView {
         deinit {
-            NXApp.log{""}
+            NX.log{""}
         }
     }
 }
@@ -122,7 +122,7 @@ extension NXHUD {
     
     
     @discardableResult
-    open class func makeToast(message: String, at: NXApp.AT, duration: TimeInterval, superview:UIView) -> NXHUD.ToastView? {
+    open class func makeToast(message: String, at: NX.AT, duration: TimeInterval, superview:UIView) -> NXHUD.ToastView? {
         if message.count > 0 {
             let wrapperView = NXHUD.ToastView(frame: CGRect(x: 0, y: 0, width: 100, height: 36))
             superview.addSubview(wrapperView)
@@ -165,7 +165,7 @@ extension NXHUD {
             __sender.size = CGSize(width: 140.0, height: 92.0)
         }
         
-        open var animationView = NXApp.Animation.animationClass.init(frame:CGRect(x: 0, y: 0, width: 44, height: 44))
+        open var animationView = NX.Animation.animationClass.init(frame:CGRect(x: 0, y: 0, width: 44, height: 44))
         open var descriptionView = UILabel(frame: CGRect.zero)
         
         open override func setupSubviews() {
@@ -261,7 +261,7 @@ extension NXHUD {
     }
     
     @discardableResult
-    open class func makeProgress(message: String, at: NXApp.AT, superview:UIView) -> NXHUD.ProgressView? {
+    open class func makeProgress(message: String, at: NX.AT, superview:UIView) -> NXHUD.ProgressView? {
         if let _ = objc_getAssociatedObject(superview, &NXHUD.Wrapped.wrappedViewKey) as? NXHUD.ProgressView  {
             return nil
         }
@@ -308,12 +308,12 @@ extension NXHUD {
 extension UIView {
     
     @discardableResult
-    open func ex_makeToast(message: String, at: NXApp.AT = .maxY, duration: TimeInterval = 2.0) -> NXHUD.ToastView? {
+    open func ex_makeToast(message: String, at: NX.AT = .maxY, duration: TimeInterval = 2.0) -> NXHUD.ToastView? {
         return NXHUD.makeToast(message: message, at: at, duration: duration, superview: self)
     }
 
     @discardableResult
-    open func ex_makeProgress(message: String = "", at: NXApp.AT = .center) -> NXHUD.ProgressView? {
+    open func ex_makeProgress(message: String = "", at: NX.AT = .center) -> NXHUD.ProgressView? {
         return NXHUD.makeProgress(message: message, at: at, superview: self)
     }
 

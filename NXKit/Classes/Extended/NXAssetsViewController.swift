@@ -26,14 +26,14 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         ///每次进来同步一下目标类型
         self.naviView.title = "我的相册"
         self.naviView.backBar.isHidden = false
-        self.naviView.backBar.updateSubviews(NXApp.image(named: "navi_close_black.png"), nil)
+        self.naviView.backBar.updateSubviews(NX.image(named: "navi_close_black.png"), nil)
         
         /** 加载图片数据:
          1.创建一个串行队列：不在主队列，不回阻塞主线程。
          2.串行队列保证队列内的任务按顺序执行，即先夹在完图片数据，再刷新UI显示
          3.采用异步的方式，不影响主线程的其他操作
          */
-        NXApp.authorization(NXApp.AuthorizeType.album, DispatchQueue.main, true) {[weak self] (state) in
+        NX.authorization(NX.AuthorizeType.album, DispatchQueue.main, true) {[weak self] (state) in
             if state == .authorized, let self = self {
                 self.contentView.addSubview(self.animationView!)
                 self.animationView?.startAnimating()
@@ -49,7 +49,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                                 self?.showAlbumAssets(at: 0)
                             }
                             else{
-                                NXApp.showToast(message: "您的相册没有图片或视频", .center, self?.contentView)
+                                NX.showToast(message: "您的相册没有图片或视频", .center, self?.contentView)
                             }
                         }
                     })
@@ -66,7 +66,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         self.collectionView.wrapped?.scrollDirection = .vertical
         self.collectionView.wrapped?.itemSize = CGSize(width: (NXDevice.width-12*2-2*3)/4, height: (NXDevice.width-12*2-2*3)/4)
         self.collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.collectionView.backgroundColor = NXApp.backgroundColor
+        self.collectionView.backgroundColor = NX.backgroundColor
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.register(NXAssetViewCell.self, forCellWithReuseIdentifier: "NXAssetViewCell")
@@ -78,26 +78,26 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         self.naviView.forwardBar = NXNaviView.Bar.forward(image: nil, title: "预览(0)", completion: {[weak self] (_) in
             self?.dispose("forward", nil)
         })
-        self.naviView.forwardBar?.setTitleColor(NXApp.mainColor, for: .normal)
+        self.naviView.forwardBar?.setTitleColor(NX.mainColor, for: .normal)
         self.naviView.forwardBar?.isHidden = !self.wrapped.outputUIImage
         
         self.filterView.contentView.frame = CGRect(x: 0, y: 0, width: NXDevice.width, height: 40)
-        self.filterView.contentView.titleLabel?.font = NXApp.font(13, false)
+        self.filterView.contentView.titleLabel?.font = NX.font(13, false)
         self.filterView.contentView.contentHorizontalAlignment = .center
-        self.filterView.setupSeparator(color: NXApp.separatorColor, side: .bottom)
+        self.filterView.setupSeparator(color: NX.separatorColor, side: .bottom)
         self.filterView.contentView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
             self?.dispose("filter", nil)
         }
-        self.filterView.backgroundColor = NXApp.backgroundColor
+        self.filterView.backgroundColor = NX.backgroundColor
         self.contentView.addSubview(self.filterView)
         self.filterView.updateSubviews("", false)
         
         self.footerView.frame = CGRect(x: 0, y: self.contentView.h-60-NXDevice.bottomOffset, width: self.contentView.w, height: 60+NXDevice.bottomOffset)
         self.footerView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
-        self.footerView.backgroundColor = NXApp.backgroundColor
+        self.footerView.backgroundColor = NX.backgroundColor
         self.footerView.lhsView.frame = CGRect(x: 15, y: 12, width: 144, height: 36)
-        self.footerView.lhsView.setTitleColor(NXApp.darkBlackColor, for: .normal)
-        self.footerView.lhsView.titleLabel?.font = NXApp.font(16, false)
+        self.footerView.lhsView.setTitleColor(NX.darkBlackColor, for: .normal)
+        self.footerView.lhsView.titleLabel?.font = NX.font(16, false)
         self.footerView.lhsView.contentHorizontalAlignment = .left
         self.footerView.lhsView.isHidden = self.wrapped.footer.lhs
         self.footerView.lhsView.setTitle("我的相册", for: .normal)
@@ -116,8 +116,8 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         self.footerView.rhsView.layer.cornerRadius = 18
         self.footerView.rhsView.layer.masksToBounds = true
         self.footerView.rhsView.setTitleColor(UIColor.white, for: .normal)
-        self.footerView.rhsView.setBackgroundImage(UIImage.image(color: NXApp.mainColor), for: .normal)
-        self.footerView.rhsView.titleLabel?.font = NXApp.font(15, false)
+        self.footerView.rhsView.setBackgroundImage(UIImage.image(color: NX.mainColor), for: .normal)
+        self.footerView.rhsView.titleLabel?.font = NX.font(15, false)
         self.footerView.rhsView.isHidden = self.wrapped.footer.rhs
         self.footerView.rhsView.setTitle("完成(0/\(self.wrapped.output.maxOfAssets))", for: .normal)
         self.footerView.rhsView.setupEvents([.touchUpInside], action: {[weak self] (e, v) in
@@ -147,9 +147,9 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                 subfix = "智能隐藏"
             }
             let attris = NSMutableAttributedString(string: prefix+subfix)
-            attris.setAttributes([NSAttributedString.Key.font:NXApp.font(13, false)], range: NSRange(location: 0, length: prefix.count+subfix.count))
-            attris.setAttributes([NSAttributedString.Key.foregroundColor:NXApp.darkGrayColor], range: NSRange(location: 0, length: prefix.count))
-            attris.setAttributes([NSAttributedString.Key.foregroundColor:NXApp.mainColor], range: NSRange(location: prefix.count, length: subfix.count))
+            attris.setAttributes([NSAttributedString.Key.font:NX.font(13, false)], range: NSRange(location: 0, length: prefix.count+subfix.count))
+            attris.setAttributes([NSAttributedString.Key.foregroundColor:NX.darkGrayColor], range: NSRange(location: 0, length: prefix.count))
+            attris.setAttributes([NSAttributedString.Key.foregroundColor:NX.mainColor], range: NSRange(location: prefix.count, length: subfix.count))
             self.filterView.contentView.setAttributedTitle(attris, for: .normal)
             
             
@@ -165,7 +165,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         }
     }
     
-    open override func dispose(_ action: String, _ value: Any?, _ completion: NXApp.Completion<String, Any?>? = nil) {
+    open override func dispose(_ action: String, _ value: Any?, _ completion: NX.Completion<String, Any?>? = nil) {
         if action == "footer.lhs" {
             NXActionView.action(options: self.wrapped.albums, header: (.components(false, true, true, false), "请选择相册"), footer: (.whitespace, "")) { (_, index) in
                 guard index != self.ctxs.index else {
@@ -181,10 +181,10 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         else if action == "footer.rhs" {
             if self.wrapped.output.assets.count < self.wrapped.output.minOfAssets {
                 if self.wrapped.output.image.minOfAssets > 0 {
-                    NXApp.showToast(message: "请至少选择\(self.wrapped.output.image.minOfAssets)张图片", .center, self.contentView)
+                    NX.showToast(message: "请至少选择\(self.wrapped.output.image.minOfAssets)张图片", .center, self.contentView)
                 }
                 else if self.wrapped.output.video.minOfAssets > 0 {
-                    NXApp.showToast(message: "请至少选择\(self.wrapped.output.video.minOfAssets)个视频", .center, self.contentView)
+                    NX.showToast(message: "请至少选择\(self.wrapped.output.video.minOfAssets)个视频", .center, self.contentView)
                 }
                 return
             }
@@ -229,7 +229,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         else if action == "forward" {
             if self.wrapped.outputUIImage {
                 if self.wrapped.output.assets.count == 0 {
-                    NXApp.showToast(message: "请选择图片或视频后再预览哦", .center, self.contentView)
+                    NX.showToast(message: "请选择图片或视频后再预览哦", .center, self.contentView)
                     return;
                 }
                 
@@ -240,11 +240,11 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                 
                 NXAsset.outputAssets(self.wrapped) {[weak self] (assets, outputs) in
                     self?.wrapped.output.isOutputting = false
-                    NXApp.showAssets(type: "UIImage", assets: outputs)
+                    NX.showAssets(type: "UIImage", assets: outputs)
                 }
             }
             else{
-                NXApp.showToast(message: "不支持图片预览哦", .center, self.contentView)
+                NX.showToast(message: "不支持图片预览哦", .center, self.contentView)
                 return;
             }
         }
@@ -271,7 +271,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                     __description = "完成(\(self.wrapped.output.assets.count)/\(self.wrapped.output.video.maxOfAssets))"
                 }
             }
-            var __size = String.size(of: __description, size: CGSize(width: 200, height: 36), font: NXApp.font(15))
+            var __size = String.size(of: __description, size: CGSize(width: 200, height: 36), font: NX.font(15))
             __size.width = __size.width + 24
             __size.height = 36
             self.footerView.rhsView.frame = CGRect(x: NXDevice.width-15-__size.width, y: 12, width: __size.width, height: __size.height)
@@ -332,25 +332,25 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         
         if asset.mediaType == .image {
             if __wrapped.output.image.maxOfAssets <= 0 {
-                NXApp.showToast(message: "不支持选择图片", .center, self.contentView)
+                NX.showToast(message: "不支持选择图片", .center, self.contentView)
                 return
             }
             
             if __wrapped.output.isMixable {
                 if __wrapped.output.assets.count >= __wrapped.output.maxOfAssets {
-                    NXApp.showToast(message: "最多只能选择\(__wrapped.output.maxOfAssets)张图片和视频哦", .center, self.contentView)
+                    NX.showToast(message: "最多只能选择\(__wrapped.output.maxOfAssets)张图片和视频哦", .center, self.contentView)
                     return
                 }
             }
             else {
                 if __wrapped.output.video.assets.count > 0  {
-                    NXApp.showToast(message: "不支持同时选择图片和视频", .center, self.contentView)
+                    NX.showToast(message: "不支持同时选择图片和视频", .center, self.contentView)
                     return
                 }
             }
         
             if __wrapped.output.image.assets.count >= __wrapped.output.image.maxOfAssets {
-                NXApp.showToast(message: "最多只能选择\(__wrapped.output.image.maxOfAssets)张图片哦", .center, self.contentView)
+                NX.showToast(message: "最多只能选择\(__wrapped.output.image.maxOfAssets)张图片哦", .center, self.contentView)
                 return
             }
             
@@ -366,30 +366,30 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                 self.dispose("subcomponents", nil)
             }
             else {
-                NXApp.showToast(message: "不支持选择图片", .center, self.contentView)
+                NX.showToast(message: "不支持选择图片", .center, self.contentView)
             }
         }
         else if asset.mediaType == .video {
             if __wrapped.output.video.maxOfAssets <= 0 {
-                NXApp.showToast(message: "不支持选择视频", .center, self.contentView)
+                NX.showToast(message: "不支持选择视频", .center, self.contentView)
                 return
             }
             
             if __wrapped.output.isMixable {
                 if __wrapped.output.assets.count >= __wrapped.output.maxOfAssets {
-                    NXApp.showToast(message: "最多只能选择\(__wrapped.output.maxOfAssets)张图片和视频哦", .center, self.contentView)
+                    NX.showToast(message: "最多只能选择\(__wrapped.output.maxOfAssets)张图片和视频哦", .center, self.contentView)
                     return
                 }
             }
             else {
                 if __wrapped.output.image.assets.count > 0 {
-                    NXApp.showToast(message: "不支持同时选择图片和视频", .center, self.contentView)
+                    NX.showToast(message: "不支持同时选择图片和视频", .center, self.contentView)
                     return
                 }
             }
             
             if __wrapped.output.video.assets.count >= __wrapped.output.video.maxOfAssets {
-                NXApp.showToast(message: "最多只能选择\(__wrapped.output.video.maxOfAssets)个视频哦", .center, self.contentView)
+                NX.showToast(message: "最多只能选择\(__wrapped.output.video.maxOfAssets)个视频哦", .center, self.contentView)
                 return
             }
             
@@ -397,7 +397,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                 
                 //格式有效：检测一下如果视频超长但是又不支持裁减的话就不能选中
                 if asset.duration > __wrapped.videoClipsDuration && __wrapped.videoClipsAllowed == false {
-                    NXApp.showToast(message: "暂时只支持\(__wrapped.videoClipsDuration)秒以内的视频", .center, self.contentView)
+                    NX.showToast(message: "暂时只支持\(__wrapped.videoClipsDuration)秒以内的视频", .center, self.contentView)
                     return
                 }
                 
@@ -411,11 +411,11 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                 self.dispose("subcomponents", nil)
             }
             else {
-                NXApp.showToast(message: "暂时只支持MP4格式的视频", .center, self.contentView)
+                NX.showToast(message: "暂时只支持MP4格式的视频", .center, self.contentView)
             }
         }
         else if asset.mediaType == .audio {
-            NXApp.showToast(message: "不支持选择音频哦", .center, self.contentView)
+            NX.showToast(message: "不支持选择音频哦", .center, self.contentView)
         }
     }
     
@@ -511,7 +511,7 @@ extension NXAssetsViewController : UIImagePickerControllerDelegate, UINavigation
     
     func openCamera(){
         
-        NXApp.authorization(NXApp.AuthorizeType.camera, DispatchQueue.main, true) {[weak self] (status) in
+        NX.authorization(NX.AuthorizeType.camera, DispatchQueue.main, true) {[weak self] (status) in
             if status == .authorized, let self = self {
                 let picker = UIImagePickerController()
                 picker.allowsEditing = false
@@ -533,11 +533,11 @@ extension NXAssetsViewController : UIImagePickerControllerDelegate, UINavigation
         }
         
         if let __output = image {
-            NXApp.showAnimation("正在保存", self.view)
+            NX.showAnimation("正在保存", self.view)
             NXAsset.saveImage(image: __output, completion: {[weak self] (state, asset) in
                 guard let self = self else {return}
                 
-                NXApp.hideAnimation(superview: self.view)
+                NX.hideAnimation(superview: self.view)
                 
                 if let __asset = asset {
                     let leyAsset = NXAsset(asset: __asset)

@@ -8,5 +8,5 @@
 import UIKit
 
 open class NXXView: NXView {
-    open var completion : NXApp.Completion<String, Any?>? = nil
+    open var completion : NX.Completion<String, Any?>? = nil
 }

@@ -140,23 +140,23 @@ extension NXToolView {
         public fileprivate(set) var index : Int = 0
         public fileprivate(set) var width : CGFloat = 0
         public fileprivate(set) var elements = [NXToolView.Element]()
-        open var didSelectElement : NXApp.Completion<NXToolView, Int>? = nil //没次点击都会调用
-        open var didReselectElement : NXApp.Completion<NXToolView, Int>? = nil //已经选中的再次点击
+        open var didSelectElement : NX.Completion<NXToolView, Int>? = nil //没次点击都会调用
+        open var didReselectElement : NX.Completion<NXToolView, Int>? = nil //已经选中的再次点击
         
-        public let separator = NXApp.Separator { (_, __sender) in
+        public let separator = NX.Separator { (_, __sender) in
             __sender.isHidden = false
-            __sender.backgroundColor = NXApp.separatorColor
+            __sender.backgroundColor = NX.separatorColor
         }
         
-        public let shadow = NXApp.Shadow { (_, __sender) in
-            __sender.color = NXApp.shadowColor
+        public let shadow = NX.Shadow { (_, __sender) in
+            __sender.color = NX.shadowColor
             __sender.isHidden = true
             __sender.offset = CGSize(width: 0, height: -2)
             __sender.radius = 2.0
             __sender.opacity = 0.15
         }
         
-        public let center = NXApp.Attribute { (_, __sender) in
+        public let center = NX.Attribute { (_, __sender) in
             __sender.isHidden = true
         }
     }
@@ -182,17 +182,17 @@ extension NXToolView {
     open class Element : NXItem {
         open var accessKey : String = ""
         
-        open var title = NXApp.Selectable<String>(completion: { (_, __sender) in
+        open var title = NX.Selectable<String>(completion: { (_, __sender) in
             __sender.selected = ""
             __sender.unselected = ""
         })
         
-        open var color = NXApp.SelectableObjectValue<UIColor>(completion: { (_, __sender) in
-            __sender.selected = NXApp.mainColor
-            __sender.unselected = NXApp.darkGrayColor
+        open var color = NX.SelectableObjectValue<UIColor>(completion: { (_, __sender) in
+            __sender.selected = NX.mainColor
+            __sender.unselected = NX.darkGrayColor
         })
         
-        open var image = NXApp.SelectableAnyValue<UIImage>(completion:  { (_, __sender) in
+        open var image = NX.SelectableAnyValue<UIImage>(completion:  { (_, __sender) in
             __sender.selected = nil
             __sender.unselected = nil
         })
@@ -230,7 +230,7 @@ extension NXToolView {
             super.setupSubviews()
             self.addSubview(assetView)
             
-            titleView.font = NXApp.font(11)
+            titleView.font = NX.font(11)
             titleView.textAlignment = .center
             self.addSubview(titleView)
             
@@ -284,7 +284,7 @@ extension NXToolView {
                         attachmentValue = "99+"
                     }
                     //6.87, 13.13
-                    var __size = attachmentValue.stringSize(font: NXApp.font(element.attachment.size), size: CGSize(width: 100, height: 100))
+                    var __size = attachmentValue.stringSize(font: NX.font(element.attachment.size), size: CGSize(width: 100, height: 100))
                     __size.width = max(element.attachment.insets.left, 0) + __size.width + max(element.attachment.insets.right, 0)
                     __size.height = max(element.attachment.insets.top, 0) + __size.height + max(element.attachment.insets.bottom, 0)
                     if __size.width < __size.height {
@@ -296,7 +296,7 @@ extension NXToolView {
                     markupView.backgroundColor = element.attachment.backgroundColor
                     markupView.text = attachmentValue
                     markupView.textColor = element.attachment.color
-                    markupView.font = NXApp.font(element.attachment.size)
+                    markupView.font = NX.font(element.attachment.size)
                     markupView.frame = CGRect(x: assetView.frame.maxX-__size.width/2.0, y: assetView.frame.minY, width: __size.width, height: __size.height)
                 }
                 else {

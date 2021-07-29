@@ -31,11 +31,11 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         self.tableView = NXTableView(frame: self.contentView.bounds, style: tableWrapper.tableViewStyle)
         self.tableView?.frame = self.contentView.bounds
         self.tableView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.tableView?.backgroundColor = NXApp.tableViewBackgroundColor
-        self.tableView?.separatorColor = NXApp.separatorColor
+        self.tableView?.backgroundColor = NX.tableViewBackgroundColor
+        self.tableView?.separatorColor = NX.separatorColor
         self.tableView?.delegate = self
         self.tableView?.dataSource = self
-        self.tableView?.separatorStyle = NXApp.Table.separatorStyle
+        self.tableView?.separatorStyle = NX.Table.separatorStyle
         self.tableView?.tableFooterView?.frame = CGRect(x: 0, y: 0, width: self.contentView.w, height: 24)
         if #available(iOS 11.0, *) {
             self.tableView?.contentInsetAdjustmentBehavior = .never

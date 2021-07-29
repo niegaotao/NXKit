@@ -19,14 +19,14 @@ open class NXCollectionReusableView: UICollectionReusableView {
     }
     
     @objc open func setup(){
-        arrowView.frame = CGRect(x: self.w-NXApp.insets.right-6, y: (self.h-12)/2, width: 6, height: 12)
-        arrowView.image = NXApp.image(named:"uiapp_arrow.png")
+        arrowView.frame = CGRect(x: self.w-NX.insets.right-6, y: (self.h-12)/2, width: 6, height: 12)
+        arrowView.image = NX.image(named:"uiapp_arrow.png")
         arrowView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin]
         arrowView.contentMode = .scaleAspectFill
         arrowView.isHidden = true
         self.addSubview(arrowView)
         
-        separator.backgroundColor = NXApp.separatorColor.cgColor
+        separator.backgroundColor = NX.separatorColor.cgColor
         separator.isHidden = true
         self.layer.addSublayer(separator)
     }

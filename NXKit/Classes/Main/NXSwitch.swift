@@ -33,14 +33,14 @@ open class NXSwitch: NXControl {
     public final var tapRecongizer = UITapGestureRecognizer()
     
     //未选中颜色后背景色   默认0xFFFFFF
-    open var offTintColor: UIColor = NXApp.color(0xFFFFFF, 1) {
+    open var offTintColor: UIColor = NX.color(0xFFFFFF, 1) {
         didSet {
             offBackgroundView.backgroundColor = offTintColor
         }
     }
     
     //选中颜色后背景色   默认0xFFFFFF
-    open var onTintColor: UIColor = NXApp.color(0xFFFFFF, 1) {
+    open var onTintColor: UIColor = NX.color(0xFFFFFF, 1) {
         didSet {
             onBackgroundView.backgroundColor = onTintColor
         }
@@ -166,14 +166,14 @@ open class NXSwitch: NXControl {
                 offBackgroundView.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
                 
                 thumbView.center = CGPoint(x: onBackgroundView.w - (thumbView.w + horizontalAdjustment) / 2.0, y: thumbView.center.y)
-                thumbView.backgroundColor = onThumbTintColor ?? NXApp.mainColor
+                thumbView.backgroundColor = onThumbTintColor ?? NX.mainColor
                 
             } else {
                 onBackgroundView.alpha = 0.0
                 offBackgroundView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 
                 thumbView.center = CGPoint(x: (thumbView.w + horizontalAdjustment) / 2.0, y: thumbView.center.y)
-                thumbView.backgroundColor = offThumbTintColor ?? NXApp.darkGrayColor
+                thumbView.backgroundColor = offThumbTintColor ?? NX.darkGrayColor
             }
         }
     }

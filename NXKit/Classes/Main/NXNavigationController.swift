@@ -92,7 +92,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     
     /// 重写父类push方法
     override open func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        NXApp.log { return "class=\(viewController.self)"}
+        NX.log { return "class=\(viewController.self)"}
         if let viewController = viewController as? NXViewController {
             viewController.ctxs.operation = .push
             viewController.ctxs.oriention = .right
@@ -173,7 +173,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
         viewController.view.backgroundColor = UIColor.clear
         
         viewController.ctxs.transitionView = NXTransitionView(frame: to.view.bounds, owner:viewController)
-        viewController.ctxs.transitionView?.backgroundColor = NXApp.minAlphaOfColor
+        viewController.ctxs.transitionView?.backgroundColor = NX.minAlphaOfColor
         to.view.addSubview(viewController.ctxs.transitionView!)
         viewController.ctxs.transitionView?.addSubview(viewController.view)
         
@@ -184,7 +184,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NXApp.maxAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.maxAlphaOfColor
             },completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
@@ -196,7 +196,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NXApp.maxAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.maxAlphaOfColor
             }, completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
@@ -208,7 +208,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NXApp.maxAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.maxAlphaOfColor
             }, completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
@@ -220,7 +220,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NXApp.maxAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.maxAlphaOfColor
             }, completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
@@ -247,7 +247,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = -viewController.view.w
-                            viewController.ctxs.transitionView?.backgroundColor = NXApp.minAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.minAlphaOfColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -268,7 +268,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = viewController.view.w
-                            viewController.ctxs.transitionView?.backgroundColor = NXApp.minAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.minAlphaOfColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -289,7 +289,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = -viewController.view.h
-                            viewController.ctxs.transitionView?.backgroundColor = NXApp.minAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.minAlphaOfColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -310,7 +310,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = viewController.view.h
-                            viewController.ctxs.transitionView?.backgroundColor = NXApp.minAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.minAlphaOfColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -385,7 +385,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     }
     
     deinit {
-        NXApp.log { return String(describing: self)}
+        NX.log { return String(describing: self)}
     }
 }
 

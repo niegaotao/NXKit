@@ -21,12 +21,12 @@ extension NXOverlay {
         case footer = "footer"   //从下方进入->从下方退出[在屏幕底部显示]
     }
     
-    public static let frame = NXApp.Rect { (_, __sender) in
+    public static let frame = NX.Rect { (_, __sender) in
         __sender.width = max(min(350.0, NXDevice.width * 0.8), 300.0)
         __sender.x = (NXDevice.width - __sender.width)/2.0
     }
     
-    public static let inset = NXApp.Rect { (_, __sender) in
+    public static let inset = NX.Rect { (_, __sender) in
         __sender.x = 20.0
         __sender.width = NXOverlay.frame.width - __sender.x * 2.0
     }
@@ -75,10 +75,10 @@ extension NXOverlay {
 
 open class NXOverlay: NXBackgroundView<UIControl, UIView> {
     //关闭的回调, background,lhs,rhs,close,footer
-    open var closeCompletion : NXApp.Completion<String, Any?>? = nil
+    open var closeCompletion : NX.Completion<String, Any?>? = nil
     
     //点击选项或者左右按钮消失的回调
-    open var completion : NXApp.Completion<String, Int>? = nil
+    open var completion : NX.Completion<String, Int>? = nil
     
     //弹框打开/关闭的动画
     open var animation = NXOverlay.Animation.center.rawValue
@@ -266,6 +266,6 @@ open class NXOverlay: NXBackgroundView<UIControl, UIView> {
     }
     
     deinit {
-        NXApp.log { return ""}
+        NX.log { return ""}
     }
 }

@@ -44,7 +44,7 @@ open class NXAsset: NSObject {
             self.size = CGSize(width: __asset.pixelWidth, height: __asset.pixelHeight)
             self.duration = __asset.duration
             
-            self.name = NXApp.get(string: __asset.value(forKey: "filename") as? String, "")
+            self.name = NX.get(string: __asset.value(forKey: "filename") as? String, "")
             if __asset.mediaType == .video {
                 let __filename = self.name.lowercased()
                 if fileExtensions.count > 0 {
@@ -65,12 +65,12 @@ open class NXAsset: NSObject {
         }
     }
     
-    open var completion: NXApp.Completion<Bool, Any?>? = nil
+    open var completion: NX.Completion<Bool, Any?>? = nil
 }
 
 extension NXAsset {
     
-    open func startRequest(_ request:NXAsset.Request, _ completion:@escaping NXApp.Completion<Bool, Any?>){
+    open func startRequest(_ request:NXAsset.Request, _ completion:@escaping NX.Completion<Bool, Any?>){
         if self.completion == nil {
             self.value.removeAll()
         }
@@ -96,7 +96,7 @@ extension NXAsset {
             }
             else {
                 //返回的是本地的大图或者缩略图
-                let isRequesting = NXApp.get(bool: self?.value["isRequesting"] as? Bool, false)
+                let isRequesting = NX.get(bool: self?.value["isRequesting"] as? Bool, false)
                 if isRequesting {
                     return
                 }
@@ -280,7 +280,7 @@ extension NXAsset {
         open var videoFileExtensions = [".mp4"]//支持的视频格式
         
         //最后的回调
-        open var completion : NXApp.Completion<Bool, NXAsset.Output>? = nil
+        open var completion : NX.Completion<Bool, NXAsset.Output>? = nil
         //最初的打开方式
         open var operation = NXViewController.Operation.present
         //是否打开页面
@@ -412,8 +412,8 @@ extension NXAsset {
 
 extension NXAsset {
     @discardableResult
-    open class func open(album: NXApp.Completion<Bool, NXAssetsViewController>?,
-                         completion: NXApp.Completion<Bool, NXAsset.Output>?) -> NXMixedViewController<NXMixedNavigationController<NXAssetsViewController>> {
+    open class func open(album: NX.Completion<Bool, NXAssetsViewController>?,
+                         completion: NX.Completion<Bool, NXAsset.Output>?) -> NXMixedViewController<NXMixedNavigationController<NXAssetsViewController>> {
         let vc = NXMixedViewController<NXMixedNavigationController<NXAssetsViewController>>()
         vc.modalPresentationStyle = .fullScreen
         vc.viewController.viewController.wrapped.completion = completion
@@ -452,7 +452,7 @@ extension NXAsset {
                               isOpenable:Bool,
                               isCloseable:Bool,
                               isAnimated:Bool,
-                              completion:NXApp.Completion<Bool, NXAsset.Output>?) -> NXMixedViewController<NXMixedNavigationController<NXAssetsViewController>> {
+                              completion:NX.Completion<Bool, NXAsset.Output>?) -> NXMixedViewController<NXMixedNavigationController<NXAssetsViewController>> {
         
         return NXAsset.open(album: {(state:Bool, vc:NXAssetsViewController) in
             //基础配置
@@ -498,16 +498,16 @@ extension NXAsset {
     }
     
     @discardableResult
-    open class func open(camera:NXApp.Completion<Bool, NXImagePickerController>?,
-                         completion:NXApp.Completion<Bool, NXAsset.Output>?) -> NXImagePickerController {
+    open class func open(camera:NX.Completion<Bool, NXImagePickerController>?,
+                         completion:NX.Completion<Bool, NXAsset.Output>?) -> NXImagePickerController {
         
         let vc = NXImagePickerController()
         vc.wrapped.completion = completion
         vc.delegate = vc
         vc.modalPresentationStyle = .fullScreen
         camera?(true, vc)
-        NXApp.authorization(NXApp.AuthorizeType.camera, DispatchQueue.main, true) {[weak vc] (state) in
-            guard let __vc = vc, state == NXApp.AuthorizeState.authorized else {return}
+        NX.authorization(NX.AuthorizeType.camera, DispatchQueue.main, true) {[weak vc] (state) in
+            guard let __vc = vc, state == NX.AuthorizeState.authorized else {return}
             __vc.wrapped.naviController?.currentViewController?.present(__vc, animated: true, completion: nil)
         }
         return vc
@@ -582,14 +582,14 @@ extension NXAsset {
     }
     
     //5.保存图片到相册
-    open class func saveImage(image: UIImage, name: String = NXApp.name, queue:DispatchQueue = DispatchQueue.main, completion: ((_ state: NXAsset.State, _ asset:PHAsset?) -> ())?) {
+    open class func saveImage(image: UIImage, name: String = NX.name, queue:DispatchQueue = DispatchQueue.main, completion: ((_ state: NXAsset.State, _ asset:PHAsset?) -> ())?) {
         NXAsset.save(assets: [image], name: name, queue:queue, completion:{ (state, assets) in
             completion?(state, assets.first)
         })
     }
     
     //保存视频到相册
-    open class func saveVideo(fileURL:URL, name: String = NXApp.name, queue:DispatchQueue = DispatchQueue.main, completion: ((_ state: NXAsset.State, _ asset:PHAsset?) -> ())?){
+    open class func saveVideo(fileURL:URL, name: String = NX.name, queue:DispatchQueue = DispatchQueue.main, completion: ((_ state: NXAsset.State, _ asset:PHAsset?) -> ())?){
         NXAsset.save(assets: [fileURL], name: name, queue:queue, completion:{ (state, assets) in
             completion?(state, assets.first)
         })
@@ -598,7 +598,7 @@ extension NXAsset {
     //保存视频/图片到系统相册
     open class func save(assets:[Any], name: String, queue:DispatchQueue, completion: ((_ state: NXAsset.State, _ assets:[PHAsset]) -> ())?) {
         //相册授权
-        NXApp.authorization(.album, queue, false) { (status) in
+        NX.authorization(.album, queue, false) { (status) in
             guard status == .authorized else {
                 queue.async {
                     completion?(.denied, [])
@@ -735,7 +735,7 @@ extension NXAsset {
         completion?(accessAlbums)
     }
     
-    public class  func outputAssets(_ wrapped: NXAsset.Wrapped, completion:NXApp.Completion<Bool, [NXAsset]>?){
+    public class  func outputAssets(_ wrapped: NXAsset.Wrapped, completion:NX.Completion<Bool, [NXAsset]>?){
         let outputAssets = wrapped.output.assets.map { (__leyAsset) -> NXAsset in
             let __outputAsset = NXAsset(asset: __leyAsset.asset, fileExtensions:wrapped.videoFileExtensions)
             __outputAsset.thumbnail = __leyAsset.thumbnail
@@ -744,7 +744,7 @@ extension NXAsset {
         }
         
         DispatchQueue.main.async {
-            NXApp.showAnimation("")
+            NX.showAnimation("")
         }
         
         DispatchQueue.global().async {
@@ -780,7 +780,7 @@ extension NXAsset {
             }
             
             group.notify(queue: DispatchQueue.main, execute: {
-                NXApp.hideAnimation(superview: UIApplication.shared.keyWindow)
+                NX.hideAnimation(superview: UIApplication.shared.keyWindow)
                 completion?(true, outputAssets)
             })
         }
@@ -788,7 +788,7 @@ extension NXAsset {
     
     
     @discardableResult
-    open class func requestImageData(_ asset: PHAsset, _ isNetworkAccessAllowed:Bool, _ size:CGSize,  _ options:PHImageRequestOptions?, _ completion:NXApp.Completion<Bool, UIImage?>?) -> PHImageRequestID {
+    open class func requestImageData(_ asset: PHAsset, _ isNetworkAccessAllowed:Bool, _ size:CGSize,  _ options:PHImageRequestOptions?, _ completion:NX.Completion<Bool, UIImage?>?) -> PHImageRequestID {
         if isNetworkAccessAllowed {
             var __options : PHImageRequestOptions? = options
             if __options == nil {
@@ -799,14 +799,14 @@ extension NXAsset {
                 }
                 __options?.deliveryMode = .highQualityFormat
                 __options?.progressHandler = {(progress, error, stop, info) in
-                    NXApp.log{return "inCloud progressValue=\(progress)"}
+                    NX.log{return "inCloud progressValue=\(progress)"}
                 }
             }
             
             return PHImageManager.default().requestImageData(for: asset, options: __options) { (data, dataUTI, orientation, info) in
-                if NXApp.isLoggable, var info = info {
+                if NX.isLoggable, var info = info {
                     info.removeValue(forKey: "PHImageFileDataKey")
-                    NXApp.log{return info}
+                    NX.log{return info}
                 }
                 
                 if let __data = data, let image = UIImage(data: __data) {
@@ -828,31 +828,31 @@ extension NXAsset {
             __options?.isNetworkAccessAllowed = false
             
             return PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: __options) {(result, info) in
-                if NXApp.isLoggable, let info = info {
-                    NXApp.log{return info}
+                if NX.isLoggable, let info = info {
+                    NX.log{return info}
                 }
                 let dicValue = info as? [String:Any] ?? [:]
-                //let isInCloud = NXApp.get(bool: dicValue["PHImageResultIsInCloudKey"] as? Bool, false)
-                let isDegraded = NXApp.get(bool: dicValue["PHImageResultIsDegradedKey"] as? Bool, false)
+                //let isInCloud = NX.get(bool: dicValue["PHImageResultIsInCloudKey"] as? Bool, false)
+                let isDegraded = NX.get(bool: dicValue["PHImageResultIsDegradedKey"] as? Bool, false)
                 completion?(isDegraded, result)
             }
         }
     }
     
     @discardableResult
-    open class func requestAVAsset(_ asset: PHAsset, _ options:PHVideoRequestOptions?, _ completion:NXApp.Completion<Bool, AVAsset?>?) -> PHImageRequestID {
+    open class func requestAVAsset(_ asset: PHAsset, _ options:PHVideoRequestOptions?, _ completion:NX.Completion<Bool, AVAsset?>?) -> PHImageRequestID {
         var __options : PHVideoRequestOptions? = options
         if __options == nil {
             __options = PHVideoRequestOptions()
             __options?.deliveryMode = .automatic
             __options?.isNetworkAccessAllowed = true
             __options?.progressHandler = { (progress, error, stop, info) in
-                NXApp.log{return "inCloud progressValue=\(progress)"}
+                NX.log{return "inCloud progressValue=\(progress)"}
             }
         }
         return PHImageManager.default().requestAVAsset(forVideo: asset, options: __options) { (avasset, mix, info) in
-            if NXApp.isLoggable, let info = info {
-                NXApp.log{return info}
+            if NX.isLoggable, let info = info {
+                NX.log{return info}
             }
             completion?(true, avasset)
         }
@@ -873,10 +873,10 @@ open class NXImagePickerController : UIImagePickerController, UIImagePickerContr
         }
         
         if let __image = image {
-            NXApp.showAnimation("正在保存", self.view)
+            NX.showAnimation("正在保存", self.view)
             NXAsset.saveImage(image: __image) {[weak self] (state, asset) in
                 guard let self = self else {return}
-                NXApp.hideAnimation(superview: self.view)
+                NX.hideAnimation(superview: self.view)
                 
                 if let __asset = asset {
                     let leyAsset = NXAsset(asset: __asset)
@@ -921,7 +921,7 @@ open class NXAssetViewCell: NXCollectionViewCell{
         
         durationView.textAlignment = .right
         durationView.textColor = UIColor.white
-        durationView.font = NXApp.font(12, false)
+        durationView.font = NX.font(12, false)
         durationView.isHidden = true
         contentView.addSubview(durationView)
         
@@ -929,7 +929,7 @@ open class NXAssetViewCell: NXCollectionViewCell{
         indexView.layer.masksToBounds = true
         indexView.textColor = UIColor.white
         indexView.alpha = 0.85
-        indexView.font = NXApp.font(12, true)
+        indexView.font = NX.font(12, true)
         indexView.textAlignment = .center
         indexView.isUserInteractionEnabled = false
         contentView.addSubview(indexView)
@@ -982,7 +982,7 @@ open class NXAssetViewCell: NXCollectionViewCell{
             }
             else {
                 indexView.text = asset.index
-                indexView.backgroundColor = NXApp.mainColor
+                indexView.backgroundColor = NX.mainColor
             }
             maskedView.isHidden = true
         }
@@ -1050,12 +1050,12 @@ public class NXAlbum : NXAction {
         self.title.frame = CGRect(x: 106, y: 19, width: NXDevice.width-136, height: 22)
         self.title.value = title
         self.title.textAlignment = .left
-        self.title.font = NXApp.font(16, true)
+        self.title.font = NX.font(16, true)
         self.title.isHidden = false
         
         self.subtitle.frame = CGRect(x: 106, y: 43, width: NXDevice.width-136, height: 18)
         self.subtitle.value = "\(self.assets.count)张"
-        self.subtitle.font = NXApp.font(14, false)
+        self.subtitle.font = NX.font(14, false)
         self.subtitle.textAlignment = .left
         self.subtitle.isHidden = false
         
@@ -1063,7 +1063,7 @@ public class NXAlbum : NXAction {
         
         self.arrow.isHidden = false
         self.arrow.frame = CGRect(x: self.ctxs.w - 16 - 6, y: (self.ctxs.h - 12)/2.0, width: 6, height: 12)
-        self.arrow.image = NXApp.image(named:"uiapp_arrow.png")
+        self.arrow.image = NX.image(named:"uiapp_arrow.png")
         
         self.separator.insets = UIEdgeInsets(top: 0, left: 106, bottom: 0, right: 0)
         self.separator.side = .bottom

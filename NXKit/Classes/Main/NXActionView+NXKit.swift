@@ -11,21 +11,21 @@ import UIKit
 extension NXActionView {
     
     @discardableResult
-    class public func alert(title: String, subtitle:String, options:[String], completion:NXApp.Completion<String, Int>?) -> NXActionView {
+    class public func alert(title: String, subtitle:String, options:[String], completion:NX.Completion<String, Int>?) -> NXActionView {
         var optionWrappers = [NXAction]()
         for option in options {
             optionWrappers.append(NXAction(title:option, value: nil, completion: {(_, __action) in
-                __action.ctxs.size = CGSize(width: NXApp.Overlay.size.width, height: NXApp.Overlay.size.height)
+                __action.ctxs.size = CGSize(width: NX.Overlay.size.width, height: NX.Overlay.size.height)
                 __action.asset.isHidden = true
                 __action.title.isHidden = false
                 if options.count == 2 {
-                    __action.title.frame = CGRect(x: 0, y: 0, width: NXApp.Overlay.size.width*0.5, height: __action.ctxs.h)
+                    __action.title.frame = CGRect(x: 0, y: 0, width: NX.Overlay.size.width*0.5, height: __action.ctxs.h)
                 }
                 else {
-                    __action.title.frame = CGRect(x: 0, y: 0, width: NXApp.Overlay.size.width, height: __action.ctxs.h)
+                    __action.title.frame = CGRect(x: 0, y: 0, width: NX.Overlay.size.width, height: __action.ctxs.h)
                 }
-                __action.title.color = NXApp.darkBlackColor
-                __action.title.font = NXApp.font(16, true)
+                __action.title.color = NX.darkBlackColor
+                __action.title.font = NX.font(16, true)
                 __action.title.textAlignment = .center
                 __action.subtitle.isHidden = true
             }))
@@ -40,24 +40,24 @@ extension NXActionView {
          */
         let alertView = NXActionView(frame: UIScreen.main.bounds)
         //header
-        var size = subtitle.stringSize(font: NXApp.font(15, false), size: CGSize(width: NXApp.Overlay.size.width-40, height: NXDevice.height*0.6))
+        var size = subtitle.stringSize(font: NX.font(15, false), size: CGSize(width: NX.Overlay.size.width-40, height: NXDevice.height*0.6))
         size.height = ceil(max(20.0, size.height*1.25)) + 2.0
         
         alertView.wrapped.header.frame.size = CGSize(width: NXDevice.width * 0.8, height: 80.0 + size.height)
-        alertView.wrapped.header.separator.side = NXApp.Side.bottom
-        alertView.wrapped.header.backgroundColor = NXApp.backgroundColor
+        alertView.wrapped.header.separator.side = NX.Side.bottom
+        alertView.wrapped.header.backgroundColor = NX.backgroundColor
         alertView.wrapped.header.isHidden = false
         
         alertView.wrapped.header.title.isHidden = false
         alertView.wrapped.header.title.value = (title.count > 0) ? title : "温馨提示"
         alertView.wrapped.header.title.frame = CGRect(x: 20, y: 20, width: alertView.wrapped.header.frame.width - 40, height: 30)
-        alertView.wrapped.header.title.font = NXApp.font(17, true)
+        alertView.wrapped.header.title.font = NX.font(17, true)
         
         alertView.wrapped.header.lhs.isHidden = true
         
         alertView.wrapped.header.center.isHidden = false
         alertView.wrapped.header.center.frame = CGRect(x: 20, y: 60, width: alertView.wrapped.header.frame.width - 40, height: size.height)
-        alertView.wrapped.header.center.font = NXApp.font(15, false)
+        alertView.wrapped.header.center.font = NX.font(15, false)
         alertView.wrapped.header.center.value = subtitle
         alertView.wrapped.header.center.isAttributed = true
         alertView.wrapped.header.center.numberOfLines = 0
@@ -78,7 +78,7 @@ extension NXActionView {
     }
     
     @discardableResult
-    class public func action(titles: [String], completion:NXApp.Completion<String, Int>?) -> NXActionView {
+    class public func action(titles: [String], completion:NX.Completion<String, Int>?) -> NXActionView {
         let options = titles.map { (title) -> NXAction in
             
             return NXAction(title:title, value: nil, completion: { (_,  __action) in
@@ -91,23 +91,23 @@ extension NXActionView {
     }
     
     @discardableResult
-    class public func action(options: [NXAction], completion:NXApp.Completion<String, Int>?) -> NXActionView {
+    class public func action(options: [NXAction], completion:NX.Completion<String, Int>?) -> NXActionView {
         return NXActionView.action(style: NXActionView.Key.Footer.action.rawValue, options: options, header:(.none, ""), footer: (.components(false, true, false), "取消"), completion: completion)
     }
     
     @discardableResult
-    class public func action(options: [NXAction], header:NXActionView.HeaderView.Wrapped, footer: NXActionView.FooterView.Wrapped, completion:NXApp.Completion<String, Int>?) -> NXActionView {
+    class public func action(options: [NXAction], header:NXActionView.HeaderView.Wrapped, footer: NXActionView.FooterView.Wrapped, completion:NX.Completion<String, Int>?) -> NXActionView {
         return NXActionView.action(style: NXActionView.Key.Footer.action.rawValue, options: options, header:header, footer:footer, completion: completion)
     }
     
     
     @discardableResult
-    class public func action(style: NXActionView.Key.RawValue, options: [NXAction], header:NXActionView.HeaderView.Wrapped, footer: NXActionView.FooterView.Wrapped, completion:NXApp.Completion<String, Int>?) -> NXActionView {
+    class public func action(style: NXActionView.Key.RawValue, options: [NXAction], header:NXActionView.HeaderView.Wrapped, footer: NXActionView.FooterView.Wrapped, completion:NX.Completion<String, Int>?) -> NXActionView {
         
         let alertView = NXActionView(frame: UIScreen.main.bounds)
         //header
         alertView.wrapped.header.frame.size = CGSize(width: NXDevice.width, height: 60)
-        alertView.wrapped.header.separator.side = NXApp.Side.bottom
+        alertView.wrapped.header.separator.side = NX.Side.bottom
         if case .components(let lhs, let center, let rhs, let title) = header.style {
             if lhs == false && center == false && rhs == false && title == false {
                 alertView.wrapped.header.isHidden = true
@@ -130,7 +130,7 @@ extension NXActionView {
                 }
                 
                 alertView.wrapped.header.rhs.isHidden = !rhs
-                alertView.wrapped.header.rhs.image = UIImage.image(image:NXApp.image(named:"uiapp_overlay_close_black.png"), color:NXApp.darkGrayColor)
+                alertView.wrapped.header.rhs.image = UIImage.image(image:NX.image(named:"uiapp_overlay_close_black.png"), color:NX.darkGrayColor)
 
                 alertView.wrapped.header.title.isHidden = !title
             }
@@ -171,8 +171,8 @@ extension NXActionView {
             alertView.wrapped.footer.lhs.isHidden = !lhs
             alertView.wrapped.footer.center.isHidden = !center
             alertView.wrapped.footer.center.frame = CGRect(x: 0, y: 0, width: NXDevice.width, height: 60)
-            alertView.wrapped.footer.center.font = NXApp.font(17)
-            alertView.wrapped.footer.center.color = NXApp.mainColor
+            alertView.wrapped.footer.center.font = NX.font(17)
+            alertView.wrapped.footer.center.color = NX.mainColor
             alertView.wrapped.footer.rhs.isHidden = !rhs
         }
         else if case .whitespace = footer.style {
@@ -228,9 +228,9 @@ extension NXActionView {
             
             titleView.isHidden = true
             titleView.textAlignment = .center
-            titleView.font = NXApp.font(18, true)
+            titleView.font = NX.font(18, true)
             titleView.numberOfLines = 1
-            titleView.textColor = NXApp.darkBlackColor
+            titleView.textColor = NX.darkBlackColor
             titleView.layer.masksToBounds = true
             self.addSubview(titleView)
         }
@@ -269,7 +269,7 @@ extension NXActionView {
                 self.lhsView.setTitleColor(appearance.lhs.color, for: .normal)
                 self.lhsView.titleLabel?.font = appearance.lhs.font
                 self.lhsView.layer.cornerRadius = appearance.lhs.radius
-                self.lhsView.contentHorizontalAlignment = NXApp.Attribute.contentHorizontalAlignment(appearance.lhs.textAlignment)
+                self.lhsView.contentHorizontalAlignment = NX.Attribute.contentHorizontalAlignment(appearance.lhs.textAlignment)
             }
             else {
                 self.lhsView.isHidden = true
@@ -310,13 +310,13 @@ extension NXActionView {
                 self.rhsView.setTitleColor(appearance.rhs.color, for: .normal)
                 self.rhsView.titleLabel?.font = appearance.rhs.font
                 self.rhsView.layer.cornerRadius = appearance.rhs.radius
-                self.rhsView.contentHorizontalAlignment = NXApp.Attribute.contentHorizontalAlignment(appearance.rhs.textAlignment)
+                self.rhsView.contentHorizontalAlignment = NX.Attribute.contentHorizontalAlignment(appearance.rhs.textAlignment)
             }
             else {
                 self.rhsView.isHidden = true
             }
             
-            if appearance.separator.side == NXApp.Side.bottom {
+            if appearance.separator.side == NX.Side.bottom {
                 self.setupSeparator(color: appearance.separator.backgroundColor, side: .bottom)
                 self.proxy?.separator?.isHidden = false
             }
@@ -330,7 +330,7 @@ extension NXActionView {
 extension NXActionView {
     open class CenterView : NXCView<NXCollectionView>, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         private(set) var appearance = NXActionView.Component()
-        open var completion : NXApp.Completion<NXAction, Int>? = nil
+        open var completion : NX.Completion<NXAction, Int>? = nil
         
         open override func setupSubviews() {
             super.setupSubviews()
@@ -341,7 +341,7 @@ extension NXActionView {
             self.contentView.wrapped?.scrollDirection = .vertical
             self.contentView.wrapped?.sectionInset = UIEdgeInsets.zero
             self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            self.contentView.backgroundColor = NXApp.backgroundColor
+            self.contentView.backgroundColor = NX.backgroundColor
             self.contentView.register(NXActionViewCell.self, forCellWithReuseIdentifier: "NXActionViewCell")
             self.contentView.delaysContentTouches = false
         }
@@ -456,7 +456,7 @@ extension NXActionView {
                 self.lhsView.setTitleColor(appearance.lhs.color, for: .normal)
                 self.lhsView.titleLabel?.font = appearance.lhs.font
                 self.lhsView.layer.cornerRadius = appearance.lhs.radius
-                self.lhsView.contentHorizontalAlignment = NXApp.Attribute.contentHorizontalAlignment(appearance.lhs.textAlignment)
+                self.lhsView.contentHorizontalAlignment = NX.Attribute.contentHorizontalAlignment(appearance.lhs.textAlignment)
             }
             else {
                 self.lhsView.isHidden = true
@@ -471,7 +471,7 @@ extension NXActionView {
                 self.centerView.setTitle(appearance.center.value, for: .normal)
                 self.centerView.setTitleColor(appearance.center.color, for: .normal)
                 self.centerView.titleLabel?.font = appearance.center.font
-                self.centerView.contentHorizontalAlignment = NXApp.Attribute.contentHorizontalAlignment(appearance.center.textAlignment)
+                self.centerView.contentHorizontalAlignment = NX.Attribute.contentHorizontalAlignment(appearance.center.textAlignment)
             }
             else {
                 self.centerView.isHidden = true
@@ -486,14 +486,14 @@ extension NXActionView {
                 self.rhsView.setTitleColor(appearance.rhs.color, for: .normal)
                 self.rhsView.titleLabel?.font = appearance.rhs.font
                 self.rhsView.layer.cornerRadius = appearance.rhs.radius
-                self.rhsView.contentHorizontalAlignment = NXApp.Attribute.contentHorizontalAlignment(appearance.rhs.textAlignment)
+                self.rhsView.contentHorizontalAlignment = NX.Attribute.contentHorizontalAlignment(appearance.rhs.textAlignment)
             }
             else {
                 self.rhsView.isHidden = true
             }
             
-            if appearance.separator.side == NXApp.Side.top {
-                self.setupSeparator(color: NXApp.separatorColor, side: .top)
+            if appearance.separator.side == NX.Side.top {
+                self.setupSeparator(color: NX.separatorColor, side: .top)
                 self.proxy?.separator?.isHidden = false
             }
             else{

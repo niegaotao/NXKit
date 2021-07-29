@@ -26,8 +26,8 @@ class NXSubdesktopViewController : NXToolViewController {
             let element = NXToolView.Element()
             element.title.selected = tab["name"] as? String ?? ""
             element.title.unselected = tab["name"] as? String ?? ""
-            element.color.selected = NXApp.color(0x5C5B60)
-            element.color.unselected = NXApp.color(0x5C5B60)
+            element.color.selected = NX.color(0x5C5B60)
+            element.color.unselected = NX.color(0x5C5B60)
             element.image.selected = UIImage(named: tab["selected"] as? String ?? "")
             element.image.unselected = UIImage(named: tab["unselected"] as? String ?? "")
             if index == 0 {
@@ -70,13 +70,13 @@ class NXSubdesktopViewController : NXToolViewController {
         
         let e = self.elements[idx]
         if e.isSelectable == false {
-            NXApp.log { return "这个按钮不能点击啊"}
+            NX.log { return "这个按钮不能点击啊"}
         }
     }
     
     //连续双击
     override open func didReselectElement(at index:Int){
-        NXApp.log { return "__index=\(index)"}
+        NX.log { return "__index=\(index)"}
         if let tvc = self.selectedViewController as? NXTableViewController {
             guard let tv = tvc.tableView, tv.scrollsToTop else {
                 return

@@ -20,8 +20,8 @@ open class NXCollectionViewCell: UICollectionViewCell {
     }
     
     @objc open func setup(){
-        arrowView.frame = CGRect(x: contentView.w-NXApp.insets.right-6, y: (contentView.h-12)/2, width: 6, height: 12)
-        arrowView.image = NXApp.image(named:"uiapp_arrow.png")
+        arrowView.frame = CGRect(x: contentView.w-NX.insets.right-6, y: (contentView.h-12)/2, width: 6, height: 12)
+        arrowView.image = NX.image(named:"uiapp_arrow.png")
         arrowView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin]
         arrowView.contentMode = .scaleAspectFill
         arrowView.isHidden = true
@@ -29,11 +29,11 @@ open class NXCollectionViewCell: UICollectionViewCell {
         
         if self.backgroundView == nil {
             self.backgroundView = UIView(frame: CGRect.zero)
-            self.backgroundView?.backgroundColor = NXApp.backgroundColor
+            self.backgroundView?.backgroundColor = NX.backgroundColor
             self.backgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
         
-        separator.backgroundColor = NXApp.separatorColor.cgColor
+        separator.backgroundColor = NX.separatorColor.cgColor
         separator.isHidden = true
         self.contentView.layer.addSublayer(separator)
     }

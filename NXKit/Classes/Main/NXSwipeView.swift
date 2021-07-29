@@ -19,7 +19,7 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
         
         contentView.wrapped?.scrollDirection = .horizontal
         contentView.frame = self.bounds
-        contentView.backgroundColor = NXApp.backgroundColor
+        contentView.backgroundColor = NX.backgroundColor
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         contentView.showsHorizontalScrollIndicator = false
         contentView.showsVerticalScrollIndicator = false
@@ -30,7 +30,7 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
         if #available(iOS 11.0, *) {
             contentView.contentInsetAdjustmentBehavior = .never
         }
-        self.setupSeparator(color: NXApp.separatorColor, side: .bottom, insets: UIEdgeInsets.zero)
+        self.setupSeparator(color: NX.separatorColor, side: .bottom, insets: UIEdgeInsets.zero)
         self.wrapped.slider.sliderView.layer.masksToBounds = true
         self.contentView.addSubview(self.wrapped.slider.sliderView)
     }
@@ -38,7 +38,7 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
         guard let dicValue = value as? [String:Any] else {
             return
         }
-        self.wrapped.index = NXApp.get(int:dicValue["index"] as? Int, 0)
+        self.wrapped.index = NX.get(int:dicValue["index"] as? Int, 0)
         
         self.wrapped.removeAll()
         if let elements = dicValue["elements"] as? [String] {
@@ -243,15 +243,15 @@ extension NXSwipeView {
         open var index = 0
         
         //字体
-        open var font  = NXApp.SelectableObjectValue<UIFont> { (_, __sender) in
-            __sender.selected = NXApp.font(15, true)
-            __sender.unselected = NXApp.font(15)
+        open var font  = NX.SelectableObjectValue<UIFont> { (_, __sender) in
+            __sender.selected = NX.font(15, true)
+            __sender.unselected = NX.font(15)
         }
         
         //颜色
-        open var color = NXApp.SelectableObjectValue<UIColor>{ (_, __sender) in
-            __sender.selected = NXApp.darkBlackColor
-            __sender.unselected = NXApp.darkGrayColor
+        open var color = NX.SelectableObjectValue<UIColor>{ (_, __sender) in
+            __sender.selected = NX.darkBlackColor
+            __sender.unselected = NX.darkGrayColor
         }
         
         //是否等分
@@ -273,7 +273,7 @@ extension NXSwipeView {
         open var width : CGFloat = 0.0
         open var height : CGFloat = 3.0
         open var insets = UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0)
-        open var backgroundColor = NXApp.mainColor
+        open var backgroundColor = NX.mainColor
         open var radius : CGFloat = 0.0
     }
     
@@ -281,29 +281,29 @@ extension NXSwipeView {
         open var isSelected = false
         open var isSelectable = true
 
-        open var title =  NXApp.Selectable<String>(completion: nil)
+        open var title =  NX.Selectable<String>(completion: nil)
         
-        open var font  = NXApp.SelectableObjectValue<UIFont> { (_, __sender) in
-            __sender.selected = NXApp.font(15, true)
-            __sender.unselected = NXApp.font(15)
+        open var font  = NX.SelectableObjectValue<UIFont> { (_, __sender) in
+            __sender.selected = NX.font(15, true)
+            __sender.unselected = NX.font(15)
         }
         
-        open var color = NXApp.SelectableObjectValue<UIColor>{ (_, __sender) in
-            __sender.selected = NXApp.darkBlackColor
-            __sender.unselected = NXApp.darkGrayColor
+        open var color = NX.SelectableObjectValue<UIColor>{ (_, __sender) in
+            __sender.selected = NX.darkBlackColor
+            __sender.unselected = NX.darkGrayColor
         }
         
-        open var size = NXApp.Selectable<CGSize>{ (_, __sender) in
+        open var size = NX.Selectable<CGSize>{ (_, __sender) in
             __sender.selected = CGSize.zero
             __sender.unselected = CGSize.zero
         }
         
-        open var width = NXApp.Selectable<CGFloat> {(_, __sender) in
+        open var width = NX.Selectable<CGFloat> {(_, __sender) in
             __sender.selected = 0.0
             __sender.unselected = 0.0
         }
         
-        open var textAlignment = NXApp.Selectable<NSTextAlignment> {(_, __sender) in
+        open var textAlignment = NX.Selectable<NSTextAlignment> {(_, __sender) in
             __sender.selected = NSTextAlignment.center
             __sender.unselected = NSTextAlignment.center
         }
@@ -317,8 +317,8 @@ extension NXSwipeView {
             
             self.titleView.frame = self.bounds
             self.titleView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            self.titleView.font = NXApp.font(16, true)
-            self.titleView.textColor = NXApp.darkBlackColor
+            self.titleView.font = NX.font(16, true)
+            self.titleView.textColor = NX.darkBlackColor
             self.titleView.textAlignment = .center
             self.contentView.addSubview(self.titleView)
         }

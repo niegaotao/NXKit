@@ -24,16 +24,16 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
         
         self.layer.masksToBounds = true
         self.contentView.frame = self.wrapped.frame
-        self.contentView.lhsView.frame = NXApp.Placeholder.m.frame
-        if NXApp.Placeholder.m.image != nil {
-            self.contentView.lhsView.image = NXApp.Placeholder.m.image
+        self.contentView.lhsView.frame = NX.Placeholder.m.frame
+        if NX.Placeholder.m.image != nil {
+            self.contentView.lhsView.image = NX.Placeholder.m.image
         }
-        else if NXApp.Placeholder.m.value.count > 0 {
-            if NXApp.Placeholder.t.value.hasPrefix("http") {
-                NXApp.image(self.contentView.lhsView, NXApp.Placeholder.m.value)
+        else if NX.Placeholder.m.value.count > 0 {
+            if NX.Placeholder.t.value.hasPrefix("http") {
+                NX.image(self.contentView.lhsView, NX.Placeholder.m.value)
             }
             else {
-                self.contentView.lhsView.image = UIImage(named: NXApp.Placeholder.m.value)
+                self.contentView.lhsView.image = UIImage(named: NX.Placeholder.m.value)
             }
         }
         else {
@@ -41,12 +41,12 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
         }
         self.contentView.lhsView.contentMode = .scaleAspectFit
             
-        self.contentView.centerView.frame = NXApp.Placeholder.t.frame
-        self.contentView.centerView.text = NXApp.Placeholder.t.value
-        self.contentView.centerView.textAlignment = NXApp.Placeholder.t.textAlignment
-        self.contentView.centerView.numberOfLines = NXApp.Placeholder.t.numberOfLines
-        self.contentView.centerView.font = NXApp.Placeholder.t.font
-        self.contentView.centerView.textColor = NXApp.Placeholder.t.color
+        self.contentView.centerView.frame = NX.Placeholder.t.frame
+        self.contentView.centerView.text = NX.Placeholder.t.value
+        self.contentView.centerView.textAlignment = NX.Placeholder.t.textAlignment
+        self.contentView.centerView.numberOfLines = NX.Placeholder.t.numberOfLines
+        self.contentView.centerView.font = NX.Placeholder.t.font
+        self.contentView.centerView.textColor = NX.Placeholder.t.color
         
         self.contentView.rhsView.isHidden = true
         
@@ -83,8 +83,8 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
 extension NXPlaceholderView {
     open class Wrapped : NSObject {
         open var isHidden = true
-        open var completion : NXApp.Completion<String, Any?>? = nil
-        open var frame = NXApp.Placeholder.frame
+        open var completion : NX.Completion<String, Any?>? = nil
+        open var frame = NX.Placeholder.frame
     }
     
     open class Element : NXItem {

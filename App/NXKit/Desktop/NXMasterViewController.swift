@@ -16,7 +16,7 @@ class NXMasterViewController: NXSwipeViewController {
 
 //        self.swipeView.wrapped.isEqually = true
 //        self.swipeView.wrapped.color.selected = UIColor.red
-//        self.swipeView.wrapped.font.selected = NXApp.font(18, true)
+//        self.swipeView.wrapped.font.selected = NX.font(18, true)
 //        self.swipeView.wrapped.maximumOfComponents = 4.0
         self.setupSubviews([NXMasterSubviewController(),NXMasterSubviewController(),NXMasterSubviewController(),NXMasterSubviewController(),NXMasterSubviewController(),NXMasterSubviewController(),NXMasterSubviewController()], elements: ["精华精华","动态","收藏","精华精华","动态","收藏","精华精华"])
     }
@@ -35,12 +35,12 @@ class NXMasterSubviewController : NXViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NXApp.log { return "viewWillAppear:\(self)"}
+        NX.log { return "viewWillAppear:\(self)"}
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NXApp.log { return "viewWillDisappear:\(self)"}
+        NX.log { return "viewWillDisappear:\(self)"}
     }
 }
 

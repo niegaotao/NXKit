@@ -9,10 +9,10 @@ import UIKit
 
 open class NXString {
     open var frame = CGRect.zero
-    open var color  = NXApp.darkBlackColor
+    open var color  = NX.darkBlackColor
     open var lineSpacing : CGFloat = 0.0
     open var text = ""
-    open var font = NXApp.font(15)
+    open var font = NX.font(15)
     open var query = [String:Any]()
     public init(){}
 }

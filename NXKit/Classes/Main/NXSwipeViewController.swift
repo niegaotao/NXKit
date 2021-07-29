@@ -30,7 +30,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
         collectionView?.wrapped?.minimumLineSpacing = 0.0
         collectionView?.wrapped?.minimumInteritemSpacing = 0.0
         collectionView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView?.backgroundColor = NXApp.collectionViewBackgroundColor
+        collectionView?.backgroundColor = NX.collectionViewBackgroundColor
         collectionView?.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
         collectionView?.delegate = self
         collectionView?.dataSource = self
@@ -77,7 +77,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
         //拼接新数据
         self.subviewControllers.append(contentsOf: subviewControllers)
         for (idx, vc) in self.subviewControllers.enumerated() {
-            NXApp.log { return "vc:\(vc)"}
+            NX.log { return "vc:\(vc)"}
             vc.ctxs.isWrapped = true
             vc.ctxs.superviewController = self
             
@@ -111,7 +111,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
                     __owner.view.frame = cell.contentView.bounds
                     cell.contentView.addSubview(__owner.view)
                 }
-                NXApp.log { return "index=\(indexPath),self.view=\(self.view.frame), \ncontent=\(self.contentView.frame),\ncollection=\(self.collectionView?.frame ?? CGRect.zero), \ncell=\(cell.frame), \ncell.content=\(cell.contentView.frame)"}
+                NX.log { return "index=\(indexPath),self.view=\(self.view.frame), \ncontent=\(self.contentView.frame),\ncollection=\(self.collectionView?.frame ?? CGRect.zero), \ncell=\(cell.frame), \ncell.content=\(cell.contentView.frame)"}
             }
             else {
                 rs.cell.updateSubviews("update", rs.element)

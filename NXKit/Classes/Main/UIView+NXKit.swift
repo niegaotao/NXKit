@@ -139,12 +139,12 @@ extension UIView {
     }
     
     //添加上下/左右的边缘分割线
-    public func addBorder(color: UIColor?, side: NXApp.Side, insets: UIEdgeInsets = UIEdgeInsets.zero){
+    public func addBorder(color: UIColor?, side: NX.Side, insets: UIEdgeInsets = UIEdgeInsets.zero){
         self.setupSeparator(color: color, side: side, insets: insets)
     }
     
-    public func setupSeparator(color:UIColor?, side: NXApp.Side, insets: UIEdgeInsets = UIEdgeInsets.zero){
-        let color = color ?? NXApp.separatorColor
+    public func setupSeparator(color:UIColor?, side: NX.Side, insets: UIEdgeInsets = UIEdgeInsets.zero){
+        let color = color ?? NX.separatorColor
         
         
         if side.contains(.top) && side.contains(.left) && side.contains(.bottom) && side.contains(.right) {
@@ -188,7 +188,7 @@ extension UIView {
     
     //设置阴影效果
     public func setShadow(color: UIColor?, offset: CGSize, radius: CGFloat = 6.0){
-        let color = color ?? NXApp.shadowColor
+        let color = color ?? NX.shadowColor
         
         //设置阴影
         self.layer.shadowColor = color.cgColor;
@@ -228,7 +228,7 @@ extension UIView {
 
 //添加虚线边框
 extension UIView {
-    public func drawDashLine(strokeColor: UIColor, lineWidth: CGFloat = 1, lineLength: Int = 3, lineSpacing: Int = 3, side: NXApp.Side) {
+    public func drawDashLine(strokeColor: UIColor, lineWidth: CGFloat = 1, lineLength: Int = 3, lineSpacing: Int = 3, side: NX.Side) {
         
         let shapeLayer = CAShapeLayer()
         shapeLayer.bounds = self.bounds
@@ -268,7 +268,7 @@ extension UIView {
     }
     
     ///画实线边框
-    func drawLine(strokeColor: UIColor, lineWidth: CGFloat, side: NXApp.Side) {
+    func drawLine(strokeColor: UIColor, lineWidth: CGFloat, side: NX.Side) {
         if side.contains(.top) && side.contains(.left) && side.contains(.bottom) && side.contains(.right) {
             self.layer.borderWidth = lineWidth
             self.layer.borderColor = strokeColor.cgColor

@@ -10,7 +10,7 @@ import UIKit
 
 open class NXTableWrapper : NXCollection {
     //表视图样式
-    open var tableViewStyle = NXApp.Table.tableViewStyle
+    open var tableViewStyle = NX.Table.tableViewStyle
     //视图
     open weak var tableView : NXTableView?
     //是否展示第一个section的头部
@@ -42,7 +42,7 @@ open class NXTableWrapper : NXCollection {
             }
             
             //2.根据FD中的自适应返回单元格的高度
-            if let height = NXApp.heightForRow(self.tableView, element, indexPath), height > 0 {
+            if let height = NX.heightForRow(self.tableView, element, indexPath), height > 0 {
                 return height
             }
         }

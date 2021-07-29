@@ -24,11 +24,11 @@ open class NXWebView: WKWebView {
     open var callbackWithNavigation: ((_ navigation: WKNavigation, _ action:String, _ isCompleted:Bool, _ error:Error?) -> ())? = nil
     
     //弹框的处理:actions表示一个或者多个按钮
-    open var callbackWithAlert:((_ text:String, _ actions:[String], _  completion: @escaping NXApp.Completion<String, Int>) -> ())? = nil
+    open var callbackWithAlert:((_ text:String, _ actions:[String], _  completion: @escaping NX.Completion<String, Int>) -> ())? = nil
     //重定向判断
-    open var navigationAction:((_ navigation:WKNavigationAction, _ completion: @escaping NXApp.Completion<String, WKNavigationActionPolicy>) -> ())? = nil
+    open var navigationAction:((_ navigation:WKNavigationAction, _ completion: @escaping NX.Completion<String, WKNavigationActionPolicy>) -> ())? = nil
     //重定向响应
-    open var navigationResponse:((_ navigation:WKNavigationResponse, _ completion: @escaping NXApp.Completion<String, WKNavigationResponsePolicy>) -> ())? = nil
+    open var navigationResponse:((_ navigation:WKNavigationResponse, _ completion: @escaping NX.Completion<String, WKNavigationResponsePolicy>) -> ())? = nil
     //被持有的viewcontroller
     open weak var attachedViewController : NXWebViewController? = nil
     //内部处理代理的类
@@ -39,7 +39,7 @@ open class NXWebView: WKWebView {
         
         let __config = WKWebViewConfiguration()
         if #available(iOS 11.0, *) {
-            for scheme in NXApp.Web.schemes {
+            for scheme in NX.Web.schemes {
                 __config.setURLSchemeHandler(__wrapped, forURLScheme: scheme)
             }
         }
@@ -74,15 +74,15 @@ open class NXWebView: WKWebView {
             
             //注册js对象，设置UI和导航的代理
             //window.webkit.messageHandlers.rrxc.postMessage({"action":"rrxc://"})
-            if NXApp.Web.names.count > 0 {
-                for name in NXApp.Web.names {
+            if NX.Web.names.count > 0 {
+                for name in NX.Web.names {
                     self.configuration.userContentController.add(__wrapped, name: name)
                 }
             }
             
             //注入js脚本
-            if NXApp.Web.scripts.count > 0 {
-                for script in NXApp.Web.scripts {
+            if NX.Web.scripts.count > 0 {
+                for script in NX.Web.scripts {
                     self.configuration.userContentController.addUserScript(WKUserScript(source: script.source, injectionTime: script.injectionTime, forMainFrameOnly: script.isForMainFrameOnly))
                 }
             }
@@ -94,7 +94,7 @@ open class NXWebView: WKWebView {
             guard error == nil, let ua = retValue as? String, ua.count > 0 else {
                 return
             }
-            NXApp.log { return "navigator.userAgent=\(ua)"}
+            NX.log { return "navigator.userAgent=\(ua)"}
         }
     }
     
@@ -105,8 +105,8 @@ open class NXWebView: WKWebView {
     }
     
     deinit {
-        NXApp.log { return "NXWebView"}
-        for name in NXApp.Web.names {
+        NX.log { return "NXWebView"}
+        for name in NX.Web.names {
             self.configuration.userContentController.removeScriptMessageHandler(forName: name)
         }
     }
@@ -123,8 +123,8 @@ extension NXWebView {
         
         //WKScriptMessageHandler
         public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage){
-            if NXApp.Web.names.contains(message.name) {
-                NXApp.log { return "message.name=\(message.name),\nmessage.body=\(message.body)"}
+            if NX.Web.names.contains(message.name) {
+                NX.log { return "message.name=\(message.name),\nmessage.body=\(message.body)"}
                 // 依据协定好的数据格式将参数转成dic
                 if let value = message.body as? [String:Any] {
                     //1.支持未经处理的[String:Any]结构
@@ -258,14 +258,14 @@ extension NXWebView {
                 //处理白名单/黑名单的业务
                 completion(WKNavigationActionPolicy.allow)
             }
-            else if NXApp.URI.scheme == scheme {
+            else if NX.URI.scheme == scheme {
                 //这种事通过自定义url重定向打开页面的或常用操作的
-                self.dispose(scheme:NXApp.URI.scheme, mapValue: ["action":url.absoluteString])
+                self.dispose(scheme:NX.URI.scheme, mapValue: ["action":url.absoluteString])
                 completion(WKNavigationActionPolicy.cancel)
             }
-            else if NXApp.Web.openURLs.contains(scheme) {
+            else if NX.Web.openURLs.contains(scheme) {
                 //这种是在网页中通过重定向的方式：常用App的，目前支持一下微信/AppStore
-                NXApp.open(url, [:])
+                NX.open(url, [:])
                 completion(WKNavigationActionPolicy.cancel)
             }
             else{
@@ -283,7 +283,7 @@ extension NXWebView {
             
             //如果返回true，则NXURLNavigator自己有能力处理本次操作，反之返回false
             //如果返回false，则回调给具体的业务模块去处理
-            if let isDisposed = NXApp.dispose("action", __contentView, mapValue, self.contentView?.attachedViewController), isDisposed == true {
+            if let isDisposed = NX.dispose("action", __contentView, mapValue, self.contentView?.attachedViewController), isDisposed == true {
                 //如果能处理
             }
             else {
@@ -307,16 +307,16 @@ extension NXWebView {
         
         @available(iOS 11.0, *)
         public func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
-            NXApp.dispose("task", webView, ["task":urlSchemeTask,"status":"start"], self.contentView?.attachedViewController)
+            NX.dispose("task", webView, ["task":urlSchemeTask,"status":"start"], self.contentView?.attachedViewController)
         }
         
         @available(iOS 11.0, *)
         public func webView(_ webView: WKWebView, stop urlSchemeTask: WKURLSchemeTask) {
-            NXApp.dispose("task", webView, ["task":urlSchemeTask,"status":"stop"], self.contentView?.attachedViewController)
+            NX.dispose("task", webView, ["task":urlSchemeTask,"status":"stop"], self.contentView?.attachedViewController)
         }
         
         deinit {
-            NXApp.log { return "NXWebView.Wrapped"}
+            NX.log { return "NXWebView.Wrapped"}
         }
     }
 }

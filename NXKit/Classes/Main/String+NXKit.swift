@@ -186,7 +186,7 @@ extension String {
      */
     public func classFromString() -> UIViewController? {
         //Swift中命名空间的概念
-        let namespace = NXApp.namespace
+        let namespace = NX.namespace
         if namespace.isEmpty {
             return nil
         }

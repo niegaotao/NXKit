@@ -14,26 +14,26 @@ open class NXActionViewCell : NXCollectionViewCell {
         
         self.selectedBackgroundView = UIView(frame: self.bounds)
         self.selectedBackgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.selectedBackgroundView?.backgroundColor = NXApp.selectedBackgroundColor
+        self.selectedBackgroundView?.backgroundColor = NX.selectedBackgroundColor
         
         applicationView.assetView.backgroundColor = UIColor.white
         applicationView.assetView.layer.cornerRadius = 12
         applicationView.assetView.layer.masksToBounds = true
         applicationView.assetView.contentMode = .scaleAspectFill
         applicationView.titleView.textAlignment = .center
-        applicationView.titleView.textColor = NXApp.darkBlackColor
-        applicationView.titleView.font = NXApp.font(16)
+        applicationView.titleView.textColor = NX.darkBlackColor
+        applicationView.titleView.font = NX.font(16)
         applicationView.titleView.numberOfLines = 0
         applicationView.subtitleView.textAlignment = .center
-        applicationView.subtitleView.textColor = NXApp.darkGrayColor
-        applicationView.subtitleView.font = NXApp.font(13)
+        applicationView.subtitleView.textColor = NX.darkGrayColor
+        applicationView.subtitleView.font = NX.font(13)
         applicationView.subtitleView.numberOfLines = 0
         applicationView.subtitleView.isHidden = true
         self.contentView.addSubview(self.applicationView)
         
         self.contentView.bringSubviewToFront(self.arrowView)
         
-        separator.backgroundColor = NXApp.separatorColor.cgColor
+        separator.backgroundColor = NX.separatorColor.cgColor
         separator.isHidden = true
     }
     

@@ -16,9 +16,9 @@ class NXDesktopViewController: NXCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NXApp.log { return "size=\(UIScreen.main.bounds.size), scale=\(UIScreen.main.scale)______insets=\(NXDevice.insets)"}
+        NX.log { return "size=\(UIScreen.main.bounds.size), scale=\(UIScreen.main.scale)______insets=\(NXDevice.insets)"}
         DispatchQueue.main.after(10) {
-            NXApp.log { return "______insets=\(NXDevice.insets)"}
+            NX.log { return "______insets=\(NXDevice.insets)"}
         }
 //        self.naviView.backgroundView.image = UIImage.image(colors: [UIColor.red, UIColor.blue], size: CGSize(width: NXDevice.width, height: 64), start: CGPoint.zero, end: CGPoint(x: NXDevice.width, y: 0))
         self.naviView.title = "NXFoundation"
@@ -37,8 +37,8 @@ class NXDesktopViewController: NXCollectionViewController {
         //NXARC.center().testBuffer()
 
         //处理toast
-        NXApp.Overlay.showToast = {(message:String, at:NXApp.AT,superview:UIView?) in
-            NXApp.log { return "__________\(message)"}
+        NX.Overlay.showToast = {(message:String, at:NX.AT,superview:UIView?) in
+            NX.log { return "__________\(message)"}
         }
     }
     
@@ -55,7 +55,7 @@ class NXDesktopViewController: NXCollectionViewController {
         let section = NXSection()
         self.collectionWrapper.append(section)
         
-        NXApp.Overlay.size.height = 52
+        NX.Overlay.size.height = 52
         
 //        self.values.removeAll()
 //        self.values.append(["accessKey":"NXToolViewController","title":"NXToolViewController"])
@@ -78,7 +78,7 @@ class NXDesktopViewController: NXCollectionViewController {
             action.title.textAlignment = .left
             action.separator.side = .bottom
             action.separator.insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-            action.arrow.image = NXApp.image(named: "uiapp_arrow.png")
+            action.arrow.image = NX.image(named: "uiapp_arrow.png")
             action.arrow.frame = CGRect(x: action.ctxs.w-16-6, y: (action.ctxs.h-12)/2.0, width: 6, height: 12)
             action.arrow.isHidden = false
             section.append(action)
@@ -100,7 +100,7 @@ class NXDesktopViewController: NXCollectionViewController {
         self.dispose(accessKey, nil)
     }
     
-    override func dispose(_ action: String, _ value: Any?, _ completion: NXApp.Completion<String, Any?>? = nil) {
+    override func dispose(_ action: String, _ value: Any?, _ completion: NX.Completion<String, Any?>? = nil) {
         if action == "NXToolViewController" {
             let vc = NXSubdesktopViewController()
             self.navigationController?.pushViewController(vc, animated: true)

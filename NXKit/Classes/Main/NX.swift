@@ -1,5 +1,5 @@
 //
-//  NXApp.swift
+//  NX.swift
 //  NXKit
 //
 //  Created by firelonely on 2019/1/23.
@@ -10,13 +10,13 @@ import UIKit
 import WebKit
 
 //应用程序信息
-open class NXApp {
+open class NX {
     static public let infoDictionary = Bundle.main.infoDictionary ?? [:]
-    static public let namespace = NXApp.infoDictionary["CFBundleExecutable"] as? String ?? ""
-    static public let name = NXApp.infoDictionary["CFBundleDisplayName"] as? String ?? ""
-    static public let version = NXApp.infoDictionary["CFBundleShortVersionString"] as? String ?? ""
-    static public let build = NXApp.infoDictionary["CFBundleVersion"] as? String ?? ""
-    static public let isViewControllerBasedStatusBarAppearance = NXApp.get(bool: NXApp.infoDictionary["UIViewControllerBasedStatusBarAppearance"] as? Bool, true)
+    static public let namespace = NX.infoDictionary["CFBundleExecutable"] as? String ?? ""
+    static public let name = NX.infoDictionary["CFBundleDisplayName"] as? String ?? ""
+    static public let version = NX.infoDictionary["CFBundleShortVersionString"] as? String ?? ""
+    static public let build = NX.infoDictionary["CFBundleVersion"] as? String ?? ""
+    static public let isViewControllerBasedStatusBarAppearance = NX.get(bool: NX.infoDictionary["UIViewControllerBasedStatusBarAppearance"] as? Bool, true)
     static public var isSeparatorHidden = false
     
     public typealias Completion<Action, Value> = (_ action:Action, _ value:Value)  -> ()
@@ -24,7 +24,7 @@ open class NXApp {
 
 
 //空页面加载动画类型
-extension NXApp {
+extension NX {
     open class Animation {
         static public var animationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self
     }
@@ -32,7 +32,7 @@ extension NXApp {
 
 
 //内容横向纵向边缘缩进
-extension NXApp {
+extension NX {
     static public var insets = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
     
     public struct Side : OptionSet {
@@ -41,10 +41,10 @@ extension NXApp {
             self.rawValue = rawValue
         }
         
-        public static var top =  NXApp.Side(rawValue: 1)
-        public static var left = NXApp.Side(rawValue: 2)
-        public static var bottom = NXApp.Side(rawValue: 4)
-        public static var right = NXApp.Side(rawValue: 8)
+        public static var top =  NX.Side(rawValue: 1)
+        public static var left = NX.Side(rawValue: 2)
+        public static var bottom = NX.Side(rawValue: 4)
+        public static var right = NX.Side(rawValue: 8)
     }
     
     public enum AT : Int {
@@ -97,7 +97,7 @@ extension NXApp {
             }
         }
         
-        public init(completion: NXApp.Completion<String, NXApp.Rect>?){
+        public init(completion: NX.Completion<String, NX.Rect>?){
             completion?("", self)
         }
         
@@ -113,7 +113,7 @@ extension NXApp {
     }
 }
 
-extension NXApp {
+extension NX {
     open class func scale(size:CGSize, to:CGSize, mode:UIView.ContentMode) -> CGRect {
         var __frame = CGRect.zero
         if size.width <= 0 || size.height <= 0 || to.width <= 0 || to.height <= 0 {
@@ -163,7 +163,7 @@ extension NXApp {
 
 
 //状态栏效果
-extension NXApp {
+extension NX {
     final public class UI {
         //用户可选的暗黑模式的类型-枚举
         public enum Value : String {
@@ -173,28 +173,28 @@ extension NXApp {
         }
         
         //用户设定的暗黑模式类型
-        static public private(set) var setupValue = NXApp.UI.Value.light
-        public class func setup(_ action: String, _ newValue: NXApp.UI.Value){
-            NXApp.UI.setupValue = newValue
+        static public private(set) var setupValue = NX.UI.Value.light
+        public class func setup(_ action: String, _ newValue: NX.UI.Value){
+            NX.UI.setupValue = newValue
         }
         
-        public class var currentValue : NXApp.UI.Value {
-            if NXApp.UI.setupValue == NXApp.UI.Value.light {
-                return NXApp.UI.Value.light
+        public class var currentValue : NX.UI.Value {
+            if NX.UI.setupValue == NX.UI.Value.light {
+                return NX.UI.Value.light
             }
-            else if NXApp.UI.setupValue == NXApp.UI.Value.dark {
+            else if NX.UI.setupValue == NX.UI.Value.dark {
                 if #available(iOS 13.0, *) {
-                    return NXApp.UI.Value.dark
+                    return NX.UI.Value.dark
                 }
-                return NXApp.UI.Value.light
+                return NX.UI.Value.light
             }
             else {
                 if #available(iOS 13.0, *) {
                     if UITraitCollection.current.userInterfaceStyle == .dark {
-                        return NXApp.UI.Value.dark
+                        return NX.UI.Value.dark
                     }
                 }
-                return NXApp.UI.Value.light
+                return NX.UI.Value.light
             }
         }
     }
@@ -209,35 +209,35 @@ extension NXApp {
             case dark = "dark"
         }
                 
-        static public private(set) var currentValue = NXApp.Bar.Value.none
+        static public private(set) var currentValue = NX.Bar.Value.none
         static public private(set) var currentOrientation = UIInterfaceOrientation.portrait
         
-        public class func update(_ newValue: NXApp.Bar.Value, _ animated:Bool = true){
-            if NXApp.isViewControllerBasedStatusBarAppearance {
+        public class func update(_ newValue: NX.Bar.Value, _ animated:Bool = true){
+            if NX.isViewControllerBasedStatusBarAppearance {
                 if newValue !=  .none {
-                    NXApp.Bar.currentValue = newValue
+                    NX.Bar.currentValue = newValue
                 }
             }
             else {
-                if newValue == NXApp.Bar.Value.hidden {
-                    NXApp.Bar.currentValue = newValue
+                if newValue == NX.Bar.Value.hidden {
+                    NX.Bar.currentValue = newValue
                     UIApplication.shared.isStatusBarHidden = true
                 }
-                else if newValue == NXApp.Bar.Value.unspecified {
-                    NXApp.Bar.currentValue = newValue
+                else if newValue == NX.Bar.Value.unspecified {
+                    NX.Bar.currentValue = newValue
                     UIApplication.shared.isStatusBarHidden = false
                     UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.default, animated: animated)
                 }
-                else if newValue == NXApp.Bar.Value.light {
-                    NXApp.Bar.currentValue = newValue
+                else if newValue == NX.Bar.Value.light {
+                    NX.Bar.currentValue = newValue
                     UIApplication.shared.isStatusBarHidden = false
                     UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: animated)
                 }
-                else if newValue == NXApp.Bar.Value.dark {
-                    NXApp.Bar.currentValue = newValue
+                else if newValue == NX.Bar.Value.dark {
+                    NX.Bar.currentValue = newValue
                     UIApplication.shared.isStatusBarHidden = false
                     if #available(iOS 13.0, *) {
-                        if NXApp.UI.currentValue == NXApp.UI.Value.dark {
+                        if NX.UI.currentValue == NX.UI.Value.dark {
                             UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: animated)
                         }
                         else {
@@ -255,7 +255,7 @@ extension NXApp {
 
 
 // 颜色和字体
-extension NXApp {
+extension NX {
     //字体:
     public class func font(_ size: CGFloat, _ blod:Bool = false) -> UIFont {
         if blod {
@@ -269,11 +269,11 @@ extension NXApp {
         if let font =  UIFont(name: name, size: size) {
             return font
         }
-        return NXApp.font(size, blod)
+        return NX.font(size, blod)
     }
 }
 
-extension NXApp {
+extension NX {
     
     //颜色:rgb+alpha, rgb:[0,255],a:[0,1]
     public class func color(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat, _ a:CGFloat = 1.0) -> UIColor{
@@ -282,14 +282,14 @@ extension NXApp {
     
     //颜色：hex+alpha
     public class func color(_ hex:Int, _ a: CGFloat = 1.0) -> UIColor {
-        return NXApp.color(((CGFloat)((hex & 0xFF0000) >> 16)), ((CGFloat)((hex & 0xFF00) >> 8)), ((CGFloat)(hex & 0xFF)), a)
+        return NX.color(((CGFloat)((hex & 0xFF0000) >> 16)), ((CGFloat)((hex & 0xFF00) >> 8)), ((CGFloat)(hex & 0xFF)), a)
     }
     
     //创建浅色/暗黑模式的颜色
     public class func color(_ lightColor:UIColor, _ darkColor:UIColor? = nil) -> UIColor {
         if #available(iOS 13.0, *) {
             return UIColor.init { (__collection) -> UIColor in
-                if let __darkColor = darkColor, NXApp.UI.currentValue == NXApp.UI.Value.dark {
+                if let __darkColor = darkColor, NX.UI.currentValue == NX.UI.Value.dark {
                     return __darkColor
                 }
                 return lightColor
@@ -298,53 +298,53 @@ extension NXApp {
         return lightColor;
     }
     //window背景色
-    static public var windowBackgroundColor = NXApp.color(247, 247, 247)
+    static public var windowBackgroundColor = NX.color(247, 247, 247)
     //view背景色
-    static public var viewBackgroundColor = NXApp.color(247, 247, 247)
+    static public var viewBackgroundColor = NX.color(247, 247, 247)
     //contentView背景色
-    static public var contentViewBackgroundColor = NXApp.color(247, 247, 247)
+    static public var contentViewBackgroundColor = NX.color(247, 247, 247)
     //tableView背景色
-    static public var tableViewBackgroundColor = NXApp.color(247, 247, 247)
+    static public var tableViewBackgroundColor = NX.color(247, 247, 247)
     //collectionView背景色
-    static public var collectionViewBackgroundColor = NXApp.color(247, 247, 247)
+    static public var collectionViewBackgroundColor = NX.color(247, 247, 247)
     //overlay背景色
-    static public var overlayBackgroundColor = NXApp.color(255, 225, 225)
+    static public var overlayBackgroundColor = NX.color(255, 225, 225)
     //背景色
-    static public var backgroundColor = NXApp.color(255, 255, 255)
+    static public var backgroundColor = NX.color(255, 255, 255)
     //选中背景色
-    static public var selectedBackgroundColor = NXApp.color(218.0, 218.0, 218.0, 0.3)
+    static public var selectedBackgroundColor = NX.color(218.0, 218.0, 218.0, 0.3)
     //分割线颜色
-    static public var separatorColor = NXApp.color(235, 235, 240)
+    static public var separatorColor = NX.color(235, 235, 240)
     //阴影颜色
-    static public var shadowColor = NXApp.color(56, 79, 134)
+    static public var shadowColor = NX.color(56, 79, 134)
     // 主色
-    static public var mainColor = NXApp.color(51, 120, 246)
+    static public var mainColor = NX.color(51, 120, 246)
     // 深黑
-    static public var darkBlackColor = NXApp.color(51, 51, 51)
+    static public var darkBlackColor = NX.color(51, 51, 51)
     // 浅黑
-    static public var lightBlackColor = NXApp.color(102, 102, 102)
+    static public var lightBlackColor = NX.color(102, 102, 102)
     // 深灰
-    static public var darkGrayColor = NXApp.color(153, 153, 153)
+    static public var darkGrayColor = NX.color(153, 153, 153)
     // 浅灰
-    static public var lightGrayColor = NXApp.color(192, 192, 192)
+    static public var lightGrayColor = NX.color(192, 192, 192)
     // 转场前容器视图的Alpha值
     static public var minAlphaOfColor = UIColor.black.withAlphaComponent(0.01)
     // 转场后容器视图的Alpha值
     static public var maxAlphaOfColor = UIColor.black.withAlphaComponent(0.30)
 }
 
-extension NXApp {
+extension NX {
     public static var isLoggable : Bool = true
     
     public class func print(_ items:Any?, _ file:String = #file, _ method: String = #function, _ line: Int = #line) {
-        guard NXApp.isLoggable, let value = items else {
+        guard NX.isLoggable, let value = items else {
             return
         }
         Swift.print("\((file as NSString).lastPathComponent)[\(line)],\(method):\n\(value)\n")
     }
     
     public class func log(_ file:String = #file, _ method: String = #function, _ line: Int = #line, _ get:(()->(Any?))?){
-        guard NXApp.isLoggable, let value = get?() else {
+        guard NX.isLoggable, let value = get?() else {
             return
         }
         let format = "YYYY-MM-dd HH:mm:ss SSS"
@@ -353,7 +353,7 @@ extension NXApp {
     }
     
     public class func error(_ file:String = #file, _ method: String = #function, _ line: Int = #line, _ get:(()->(Any?))?){
-        guard NXApp.isLoggable, let value = get?() else {
+        guard NX.isLoggable, let value = get?() else {
             return
         }
         let format = "YYYY-MM-dd HH:mm:ss SSS"
@@ -362,7 +362,7 @@ extension NXApp {
     }
     
     public class func warn(_ file:String = #file, _ method: String = #function, _ line: Int = #line, _ get:(()->(Any?))?){
-        guard NXApp.isLoggable, let value = get?() else {
+        guard NX.isLoggable, let value = get?() else {
             return
         }
         let format = "YYYY-MM-dd HH:mm:ss SSS"
@@ -373,11 +373,11 @@ extension NXApp {
 
 
 // 图片
-extension NXApp {
+extension NX {
     
     public class Asset {
         //默认使用的bundle图片的path
-        static public var path = Bundle(for: NXApp.self).bundlePath + "/NXKit.bundle/"
+        static public var path = Bundle(for: NX.self).bundlePath + "/NXKit.bundle/"
 
         //处理图片浏览
         static public var showAssets:((_ type:String, _ assets:[Any]) -> ())?
@@ -391,7 +391,7 @@ extension NXApp {
         guard name.count > 0 else {return nil}
 
         var __name = name
-        if NXApp.Asset.path.count > 0 {
+        if NX.Asset.path.count > 0 {
             if __name.contains("@2x.") || __name.contains("@3x.")  {
                 
             }
@@ -400,23 +400,23 @@ extension NXApp {
                     __name = __name.replacingOccurrences(of: ".png", with: "@\(scale)x.png")
                 }
             }
-            __name = NXApp.Asset.path + __name
+            __name = NX.Asset.path + __name
         }
         return UIImage(named: __name)
     }
     
     //处理图片浏览
     class public func showAssets(type:String, assets:[Any]){
-        NXApp.Asset.showAssets?(type, assets)
+        NX.Asset.showAssets?(type, assets)
     }
     
     //设置图像
     open class func image(_ targetView:UIView?, _ url:String, _ state:UIControl.State = UIControl.State.normal){
-        NXApp.Asset.image?(targetView, url, state)
+        NX.Asset.image?(targetView, url, state)
     }
 }
 
-extension NXApp {
+extension NX {
     
     public class Codable {
         //进行urlcomponent编码的字符
@@ -431,19 +431,19 @@ extension NXApp {
     
     //encodeURIComponent
     class public func encodeURIComponent(_ uri:String) -> String? {
-        if NXApp.Codable.encodeURIComponent != nil {
-            return NXApp.Codable.encodeURIComponent?(uri)
+        if NX.Codable.encodeURIComponent != nil {
+            return NX.Codable.encodeURIComponent?(uri)
         }
         /*!*'();:@&=+$,/?%#[]{}   增加了对"和\ --> !*'();:@&=+$,/?%#[]{}\"\\ */
-        let allowedCharacters = CharacterSet(charactersIn: NXApp.Codable.characters).inverted
+        let allowedCharacters = CharacterSet(charactersIn: NX.Codable.characters).inverted
         let retValue = uri.addingPercentEncoding(withAllowedCharacters: allowedCharacters)
         return retValue ?? ""
     }
     
     //decodeURIComponent
     class public func decodeURIComponent(_ uri:String) -> String {
-        if NXApp.Codable.decodeURIComponent != nil {
-            return NXApp.Codable.decodeURIComponent?(uri) ?? uri
+        if NX.Codable.decodeURIComponent != nil {
+            return NX.Codable.decodeURIComponent?(uri) ?? uri
         }
         let retValue = uri.removingPercentEncoding
         return retValue ?? ""
@@ -452,7 +452,7 @@ extension NXApp {
 
 
 //网页/导航中的相关配置
-extension NXApp {
+extension NX {
     public class URI {
         //根据scheme处理
         //使用NXSerialization生成actionURL时带的前缀
@@ -471,11 +471,11 @@ extension NXApp {
     }
 }
 
-extension NXApp {
+extension NX {
     //授权
     open class Authorize {
         //授权的回调
-        static public var authorization:((_ type: NXApp.AuthorizeType, _ queue:DispatchQueue, _ isAlertable: Bool, _ completion:((NXApp.AuthorizeState) -> ())?) ->())?
+        static public var authorization:((_ type: NX.AuthorizeType, _ queue:DispatchQueue, _ isAlertable: Bool, _ completion:((NX.AuthorizeState) -> ())?) ->())?
     }
     
     //授权类型
@@ -506,12 +506,12 @@ extension NXApp {
     }
     
     //获取授权/请求授权入口
-    open class func authorization(_ type: NXApp.AuthorizeType, _ queue:DispatchQueue, _ isAlertable: Bool, _ completion:((NXApp.AuthorizeState) -> ())?){
-        NXApp.Authorize.authorization?(type, queue, isAlertable, completion)
+    open class func authorization(_ type: NX.AuthorizeType, _ queue:DispatchQueue, _ isAlertable: Bool, _ completion:((NX.AuthorizeState) -> ())?){
+        NX.Authorize.authorization?(type, queue, isAlertable, completion)
     }
 }
 
-extension NXApp {
+extension NX {
     public class Web {
         
         //网页中注册的js方法，例如rrxc,则js通过window.webkit.messageHandlers.rrxc.postMessage(map/string)
@@ -539,11 +539,11 @@ extension NXApp {
     //这里处理网页中回调的js桥接
     @discardableResult
     class public func dispose(_ action:String, _ webView:WKWebView, _ value:[String:Any], _ viewController:NXWebViewController?) -> Bool? {
-        return NXApp.Web.webView?(action, webView, value, viewController)
+        return NX.Web.webView?(action, webView, value, viewController)
     }
 }
 
-extension NXApp {
+extension NX {
     public class Table {
         static public var tableViewStyle = UITableView.Style.grouped
         static public var separatorStyle = UITableViewCell.SeparatorStyle.singleLine
@@ -553,16 +553,16 @@ extension NXApp {
     
     //这里处理单元格高度的通过autoLayout计算的一种回调
     class public func heightForRow(_ tableView:UITableView?, _ value:NXItem, _ indexPath:IndexPath) -> CGFloat? {
-        return NXApp.Table.tableView?(tableView, value, indexPath)
+        return NX.Table.tableView?(tableView, value, indexPath)
     }
 }
 
-extension NXApp {
+extension NX {
     public class Overlay {
         //alert/action的单元格最大宽度、高度
         static public var size = CGSize(width: NXDevice.width*0.8, height: 48.0)
         //处理toast
-        static public var showToast:((_ message:String, _ at:NXApp.AT , _ superview:UIView?) -> ())?
+        static public var showToast:((_ message:String, _ at:NX.AT , _ superview:UIView?) -> ())?
         
         //处理animation
         static public var showAnimation:((_ message:String, _ superview:UIView?) -> ())?
@@ -572,41 +572,41 @@ extension NXApp {
     }
     
     //处理图片浏览
-    class public func showToast(message:String, _ at:NXApp.AT = .center , _ superview:UIView? = UIApplication.shared.keyWindow){
-        NXApp.Overlay.showToast?(message, at, superview)
+    class public func showToast(message:String, _ at:NX.AT = .center , _ superview:UIView? = UIApplication.shared.keyWindow){
+        NX.Overlay.showToast?(message, at, superview)
     }
     
     //处理animation
     class public func showAnimation(_ message:String, _ superview:UIView? = UIApplication.shared.keyWindow){
-        NXApp.Overlay.showAnimation?(message, superview)
+        NX.Overlay.showAnimation?(message, superview)
     }
     
     //处理toast
     class public func hideAnimation(superview:UIView? = UIApplication.shared.keyWindow){
-        NXApp.Overlay.hideAnimation?(superview)
+        NX.Overlay.hideAnimation?(superview)
     }
 }
 
-extension NXApp {
+extension NX {
     public class Placeholder {
         static public var frame = CGRect(x: 0, y: 0, width: 320, height: 256)
         
-        static public var m = NXApp.Attribute { (_, __sender) in
+        static public var m = NX.Attribute { (_, __sender) in
             __sender.frame = CGRect(x: 0, y: 0, width: 320, height: 170)
         }
         
-        static public var t = NXApp.Attribute { (_, __sender) in
+        static public var t = NX.Attribute { (_, __sender) in
             __sender.frame = CGRect(x: 0, y: 175, width: 320, height: 55)
             __sender.value = "暂无数据～"
             __sender.textAlignment = .center
             __sender.numberOfLines = 0
-            __sender.font = NXApp.font(16)
-            __sender.color = NXApp.darkGrayColor
+            __sender.font = NX.font(16)
+            __sender.color = NX.darkGrayColor
         }
     }
 }
 
-extension NXApp {
+extension NX {
     open class func get(dictionary:[String:Any]?, _ nonnullValue:[String:Any] = [:]) -> [String:Any] {
         if let __value = dictionary, __value.count > 0 {
             return __value

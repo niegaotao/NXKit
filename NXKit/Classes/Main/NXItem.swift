@@ -22,7 +22,7 @@ extension NXItem {
         open var w : CGFloat = 0.0
         open var h : CGFloat = 0.0
         
-        open var completion : NXApp.Completion<String, Any?>? = nil  //点击等回调
+        open var completion : NX.Completion<String, Any?>? = nil  //点击等回调
         
         open var backgroundColor: UIColor? = nil //头部尾部的背景色
         open var at : (first:Bool, last:Bool) = (false, false) //是否是第一个，是否是最后一个

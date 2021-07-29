@@ -36,37 +36,37 @@ extension NXActionView {
     open class Component : NSObject {
         open var attributeKey = NXActionView.Key.Footer.action.rawValue
         open var frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-        open var backgroundColor : UIColor = NXApp.backgroundColor
+        open var backgroundColor : UIColor = NX.backgroundColor
         open var isHidden : Bool = false
         open var isAnimation : Bool = true
         
-        public let title = NXApp.Attribute { (_, __attribute) in
+        public let title = NX.Attribute { (_, __attribute) in
             __attribute.textAlignment = .center
-            __attribute.font = NXApp.font(18, true)
-            __attribute.color = NXApp.darkBlackColor
+            __attribute.font = NX.font(18, true)
+            __attribute.color = NX.darkBlackColor
         }
         
-        public let lhs = NXApp.Attribute { (_, __attribute) in
+        public let lhs = NX.Attribute { (_, __attribute) in
             __attribute.frame = CGRect(x: 16, y: (60-44)/2, width: 84, height: 44)
-            __attribute.font = NXApp.font(16, false)
-            __attribute.color = NXApp.mainColor
+            __attribute.font = NX.font(16, false)
+            __attribute.color = NX.mainColor
             __attribute.textAlignment = .left
         }
         
-        public let center = NXApp.Attribute { (_, __attribute) in
+        public let center = NX.Attribute { (_, __attribute) in
             __attribute.frame = CGRect(x: 100, y: (60-44)/2, width: NXDevice.width-200, height: 44)
-            __attribute.font = NXApp.font(16, true)
-            __attribute.color = NXApp.darkBlackColor
+            __attribute.font = NX.font(16, true)
+            __attribute.color = NX.darkBlackColor
             __attribute.textAlignment = .center
         }
         
-        public let rhs = NXApp.Attribute { (_, __attribute) in
+        public let rhs = NX.Attribute { (_, __attribute) in
             __attribute.frame = CGRect(x: NXDevice.width-16-84, y: (60-44)/2, width: 84, height: 44)
-            __attribute.color = NXApp.mainColor
+            __attribute.color = NX.mainColor
             __attribute.textAlignment = .right
         }
         
-        public let separator = NXApp.Separator{(_, __attribute) in
+        public let separator = NX.Separator{(_, __attribute) in
             
         }
         
@@ -249,15 +249,15 @@ open class NXActionView: NXOverlay {
             self.wrapped.size = CGSize(width: NXDevice.width * 0.8, height: 0.0)
             self.contentView.layer.cornerRadius = 8
             self.contentView.layer.masksToBounds = true
-            self.contentView.backgroundColor = NXApp.backgroundColor
+            self.contentView.backgroundColor = NX.backgroundColor
             self.backgroundView.isUserInteractionEnabled = false
         }
         else if self.wrapped.attributeKey.contains("footer"){
             if self.wrapped.devide > 0 {
-                self.contentView.backgroundColor = NXApp.contentViewBackgroundColor
+                self.contentView.backgroundColor = NX.contentViewBackgroundColor
             }
             else {
-                self.contentView.backgroundColor = NXApp.backgroundColor
+                self.contentView.backgroundColor = NX.backgroundColor
             }
             self.wrapped.size = CGSize(width: NXDevice.width * 1.0, height: 0.0)
         }
