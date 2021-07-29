@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
     s.name             = 'NXKit'
     s.version          = '0.1.1'
-    s.summary          = 'NXKit.'
+    s.summary          = 'NXKit is a Swift UI framework for iOS.'
     
     # This description is used to generate tags and improve search results.
     #   * Think: What does it do? Why did you write it? What is the focus?

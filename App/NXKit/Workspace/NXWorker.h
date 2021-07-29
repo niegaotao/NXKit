@@ -10,13 +10,33 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/*====================================================*/
 @interface NXWorker : NSObject {
-    NSString *name;
+    NSString *_uuid;
 }
-@property (nonatomic, copy) NSString *code;
+@property (nonatomic, copy) NSString *name;
 - (void)run;
 - (void)debug;
 + (void)classDebug;
 @end
 
+/*====================================================*/
+@interface NXEMWorker : NXWorker {
+    NSString *_union;
+}
+@property (nonatomic, copy) NSString *title;
+- (void)work;
++ (void)classWork;
+@end
+
+@interface NXEMWorker (Category)
+@end
+
+/*====================================================*/
+@interface NXMobileWorker : NXEMWorker
+@end
+
+@interface NXMobileWorker(Category)
+@end
+/*====================================================*/
 NS_ASSUME_NONNULL_END

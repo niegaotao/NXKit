@@ -22,11 +22,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NXApi : NSObject
 + (void)swizzleClass:(Class)cls original:(SEL)originalSelector swizzle:(SEL)swizzleSelector;
-+ (NSArray *)propertyList:(Class)cls;
-+ (NSArray *)varList:(Class)cls;
-+ (NSArray *)methodList:(Class)cls;
-+ (NSArray *)protocolList:(Class)cls;
-+ (void)sizeOf:(Class)cls;
++ (NSArray *)propertyList:(Class)cls forward:(BOOL)forward;
++ (NSArray *)varList:(Class)cls forward:(BOOL)forward;
++ (NSArray *)methodList:(Class)cls forward:(BOOL)forward;
++ (NSArray *)classMethodList:(Class)cls forward:(BOOL)forward;
++ (NSArray *)protocolList:(Class)cls forward:(BOOL)forward;
++ (NSInteger)sizeOf:(Class)cls;
 @end
 
 NS_ASSUME_NONNULL_END

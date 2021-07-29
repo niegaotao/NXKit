@@ -225,11 +225,53 @@ void handleSignalException(int signal){
 
 
 - (void)testClass{
-    NSLog(@"--porperty=%@", [NXApi propertyList:[NXWorker class]]);
-    NSLog(@"--var=%@", [NXApi varList:[NXWorker class]]);
-    NSLog(@"--method=%@", [NXApi methodList:[NXWorker class]]);
-    NSLog(@"--protocol=%@", [NXApi protocolList:[NXWorker class]]);
-    [NXApi sizeOf:[NXWorker class]];
+    NXEMWorker *worker = [[NXEMWorker alloc] init];
+    worker.name = @"__Null";
+    worker.title = @"开发工程师";
+    Class class = worker.class;
+    NSMutableDictionary *dicValue = [NSMutableDictionary dictionaryWithCapacity:5];
+    while (class && class != [NSObject class]) {
+        NSMutableDictionary *dicSubvalue = [NSMutableDictionary dictionaryWithCapacity:5];
+        dicSubvalue[@"propertyList"] = [NXApi propertyList:class forward:false];
+        dicSubvalue[@"varList"] = [NXApi varList:class forward:false];
+        dicSubvalue[@"methodList"] = [NXApi methodList:class forward:false];
+        dicSubvalue[@"protocolList"] = [NXApi protocolList:class forward:false];
+        dicSubvalue[@"size"] = @([NXApi sizeOf:class]);
+        [dicValue setObject:dicSubvalue forKey:[NSString stringWithCString:class_getName(class) encoding:NSUTF8StringEncoding]];
+        class = class_getSuperclass(class);
+    }
+    NSLog(@"%@", dicValue);
+}
+
+- (void)testBuffer{
+    NSInteger header = 0;
+    NSInteger headerLength = sizeof(header);
+
+    NSMutableData *buffer = [[NSMutableData alloc] init];
+    [self append:buffer message:@"?" headerLength:headerLength];
+    [self append:buffer message:@"你几点到家" headerLength:headerLength];
+    [self append:buffer message:@"你几点到家?" headerLength:headerLength];
+    [self append:buffer message:@"幼儿园几点放学?" headerLength:headerLength];
+    [self append:buffer message:@"我们社会主义大中国啊啊啊，我们都是好样的啊啊啊啊楠楠" headerLength:headerLength];
+    [self append:buffer message:@"1" headerLength:headerLength];
+    [self append:buffer message:@"88888888888888" headerLength:headerLength];
+
+    while (buffer.length > headerLength) {
+        NSInteger contentLength = 0;
+        [buffer getBytes:&contentLength range:NSMakeRange(0, headerLength)];
+        
+        NSData *data = [buffer subdataWithRange:NSMakeRange(headerLength, contentLength)];
+        NSLog(@"%@;%@", @(contentLength),[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        
+        [buffer setData:[buffer subdataWithRange:NSMakeRange(headerLength+contentLength, buffer.length-headerLength-contentLength)]];
+    }
+}
+
+- (void)append:(NSMutableData *)buffer message:(NSString *)message headerLength:(NSInteger)headerLength{
+    NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
+    NSInteger dataLength = data.length;
+    [buffer appendData:[NSData dataWithBytes:&dataLength length:headerLength]];
+    [buffer appendData:data];
 }
 
 - (void)dispatchQueue {

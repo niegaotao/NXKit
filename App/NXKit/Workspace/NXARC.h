@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)testClass;
 - (void)dispatchQueue;
-
+- (void)testBuffer;
 @end
 
 NS_ASSUME_NONNULL_END

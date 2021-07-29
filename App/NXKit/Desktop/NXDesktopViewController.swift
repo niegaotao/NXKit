@@ -25,16 +25,16 @@ class NXDesktopViewController: NXCollectionViewController {
         self.setupSubviews()
         self.updateSubviews("", nil)
         
-        NXARC.test()
-        NXARC.center().testLock();
-        NXARC.center().testStringCopy();
-        NXARC.center().testDictionaryCopy();
-        NXARC.center().testArrayCopy();
-        NXARC.center().signal();
+        //NXARC.test()
+        //NXARC.center().testLock();
+        //NXARC.center().testStringCopy();
+        //NXARC.center().testDictionaryCopy();
+        //NXARC.center().testArrayCopy();
+        //NXARC.center().signal();
         NXARC.center().testClass();
         //NXMRC.center().testZombie();
-        NXARC.center().dispatchQueue();
-        
+        //NXARC.center().dispatchQueue();
+        //NXARC.center().testBuffer()
 
         //处理toast
         NXApp.Overlay.showToast = {(message:String, at:NXApp.AT,superview:UIView?) in

@@ -8,8 +8,6 @@
 
 #import "NXMRC.h"
 #import "NXWorker.h"
-#import "NXEMWorker.h"
-#import "NXMobileWorker.h"
 #import <objc/message.h>
 
 @interface NSObject(A)
@@ -45,7 +43,7 @@
     
 #else
     NXMobileWorker *worker = [[NXMobileWorker alloc] init];
-    worker.code = @"Worker";
+    worker.name = @"Worker";
     [worker run];
     
     NSLog(@"");
@@ -69,8 +67,6 @@
     
     [NXMobileWorker sleep];
     [[NXMobileWorker new] sleep];
-    
-    
 #endif
 }
 

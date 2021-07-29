@@ -184,6 +184,7 @@ extension NXWebView {
         }
         
         //WKNavigationDelegate
+        //询问是否允许加载：允许则webView(:didStartProvisionalNavigation:);反之结束
         public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
             if let callback = self.contentView?.navigationAction {
                 callback(navigationAction) { (_, policy) in
@@ -196,6 +197,9 @@ extension NXWebView {
         }
         
         
+        //上一步allow且是非universallink后会触发didStartProvisionalNavigation，表示即将开始开始加载主文档
+        //Provisional：页面开始加载后为了更好的区分加载的各个阶段，会讲网络加载的初始阶段命名为临时状态，此时的页面是不会计入历史的。
+        //直到接受到第一个数据包，才会对当前的页面进行committed提交，并触发didCommitNavigation方法通知UIProcess进程改时间，同时将网络data给WebContent进行渲染树生成。
         public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation) {
             self.contentView?.callbackWithProvisionalNavigation?(navigation, "start", false, nil)
         }
@@ -204,6 +208,8 @@ extension NXWebView {
             self.contentView?.callbackWithProvisionalNavigation?(navigation, "redirect", false, nil)
         }
         
+        //当NetworkProcess进程发生网络错误的时候，错误首先有NSURLSession回调到WebContent层。
+        //WebContent会判断当前主文档加载状态，如果处于临时态，则错误会毁掉给didFailProvisionalNavigation方法；如果处于提交态，则错误会回调给didFailNavigation方法。
         public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation, withError error: Error) {
             self.contentView?.callbackWithProvisionalNavigation?(navigation, "result", false, error)
         }
@@ -224,6 +230,7 @@ extension NXWebView {
             self.contentView?.callbackWithNavigation?(navigation, "start", false, nil)
         }
         
+        //我们已经理解了 NetworkProcess 层也是使用 NSURLSession 加载主文档的。当 NSURLSession 接收到 finish 事件时，会将该消息通过进程通信方式传递给 WebContent 进程，WebContent 进程再传递给 UIProcess 进程，直到被我们的代理方法响应。因此 didFinishNavigation 在 NSURLSession 的网络加载结束时就会触发，但因为跨了两次进程通信，因此对比网络层，实际上是有一定的延迟的。与子资源加载和页面上屏无时间先后关系。
         public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
             //执行加载成功的回调<可选>
             self.contentView?.callbackWithNavigation?(navigation, "result", true, nil)

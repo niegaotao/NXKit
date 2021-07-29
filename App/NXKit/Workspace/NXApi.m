@@ -23,7 +23,7 @@
 }
 
 
-+ (NSArray *)propertyList:(Class)cls{
++ (NSArray *)propertyList:(Class)cls forward:(BOOL)forward{
     if(!cls || [cls isEqual:[NSObject class]]){
         return @[];
     }
@@ -38,14 +38,14 @@
     free(rss);
     
     Class superclass = [cls superclass];
-    if(superclass){
-        [retValue addObjectsFromArray:[NXApi propertyList:superclass]];
+    if(superclass && forward){
+        [retValue addObjectsFromArray:[NXApi propertyList:superclass forward:forward]];
     }
     
     return retValue;
 }
 
-+ (NSArray *)varList:(Class)cls{
++ (NSArray *)varList:(Class)cls forward:(BOOL)forward{
     if(!cls || [cls isEqual:[NSObject class]]){
         return @[];
     }
@@ -60,15 +60,15 @@
     free(rss);
     
     Class superclass = [cls superclass];
-    if(superclass){
-        [retValue addObjectsFromArray:[NXApi varList:superclass]];
+    if(superclass && forward){
+        [retValue addObjectsFromArray:[NXApi varList:superclass forward:forward]];
     }
     
     return retValue;
 }
 
 
-+ (NSArray *)methodList:(Class)cls{
++ (NSArray *)methodList:(Class)cls forward:(BOOL)forward{
     if(!cls || [cls isEqual:[NSObject class]]){
         return @[];
     }
@@ -83,14 +83,36 @@
     free(rss);
     
     Class superclass = [cls superclass];
-    if(superclass){
-        [retValue addObjectsFromArray:[NXApi methodList:superclass]];
+    if(superclass && forward){
+        [retValue addObjectsFromArray:[NXApi methodList:superclass forward:forward]];
     }
     
     return retValue;
 }
 
-+ (NSArray *)protocolList:(Class)cls{
++ (NSArray *)classMethodList:(Class)cls forward:(BOOL)forward{
+    if(!cls || [cls isEqual:[NSObject class]]){
+        return @[];
+    }
+    NSMutableArray *retValue = [NSMutableArray arrayWithCapacity:2];
+    unsigned int count;
+    Method *rss = class_getClassMethod(cls, &count);
+    for (unsigned int i = 0; i < count; i++) {
+        Method rs = rss[i];
+        NSString *name = [NSString stringWithFormat:@"%s", sel_getName(method_getName(rs))];
+        [retValue addObject:name];
+    }
+    free(rss);
+    
+    Class superclass = [cls superclass];
+    if(superclass && forward){
+        [retValue addObjectsFromArray:[NXApi classMethodList:superclass forward:forward]];
+    }
+    
+    return retValue;
+}
+
++ (NSArray *)protocolList:(Class)cls forward:(BOOL)forward{
     if(!cls || [cls isEqual:[NSObject class]]){
         return @[];
     }
@@ -105,18 +127,19 @@
 //    free(rss);
 //
 //    Class superclass = [cls superclass];
-//    if(superclass){
-//        [retValue addObjectsFromArray:[NXApi methodList:superclass]];
+//    if(superclass && forward){
+//        [retValue addObjectsFromArray:[NXApi methodList:superclass forward:forward]];
 //    }
     
     return retValue;
 }
 
-+ (void)sizeOf:(Class)cls{
++ (NSInteger)sizeOf:(Class)cls{
     size_t __instanceSize = class_getInstanceSize(cls);//字节对齐后的占用空间大小【至少需要这么多的内存空间】
     size_t __mallocSize = malloc_size((__bridge const void *)([[cls alloc] init]));//字节对齐后按照16的倍数处理，【实际分配的内存大小】
     size_t __sizeofSize = sizeof(cls);//类型的大小
-    NSLog(@"instanceSize=%@; sizeofSize=%@; mallocSize=%@", @(__instanceSize), @(__mallocSize), @(__sizeofSize));
+    //NSLog(@"instanceSize=%@; sizeofSize=%@; mallocSize=%@", @(__instanceSize), @(__mallocSize), @(__sizeofSize));
+    return __mallocSize;
 }
 
 @end
