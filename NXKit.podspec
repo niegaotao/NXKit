@@ -19,9 +19,7 @@ Pod::Spec.new do |s|
     
     s.description      = <<-DESC
     这是一个工具库集合，主要包括如下内容：
-    1.功能1-功能1描述
-    2.功能2-功能1描述
-    3.功能3-功能1描述
+    1.NXKit is a Swift UI framework for iOS.
     DESC
     
     s.homepage         = 'https://github.com/niegaotao/NXKit'

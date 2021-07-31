@@ -40,12 +40,12 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
                 self.wrapped.center.isHidden = (self.wrapped.elements.count % 2 != 0)
             }
             
-            if self.wrapped.shadow.isHidden == false {
+            if self.wrapped.layer.isHidden == false {
                 //设置阴影
-                self.layer.shadowColor = self.wrapped.shadow.color.cgColor;
-                self.layer.shadowOffset = self.wrapped.shadow.offset
-                self.layer.shadowRadius = self.wrapped.shadow.radius
-                self.layer.shadowOpacity = Float(self.wrapped.shadow.opacity)
+                self.layer.shadowColor = self.wrapped.layer.shadowColor.cgColor;
+                self.layer.shadowOffset = self.wrapped.layer.shadowOffset
+                self.layer.shadowRadius = self.wrapped.layer.shadowRadius
+                self.layer.shadowOpacity = Float(self.wrapped.layer.shadowOpacity)
                 self.layer.cornerRadius = self.layer.shadowRadius
                 self.layer.masksToBounds = false
             }
@@ -148,12 +148,12 @@ extension NXToolView {
             __sender.backgroundColor = NX.separatorColor
         }
         
-        public let shadow = NX.Shadow { (_, __sender) in
-            __sender.color = NX.shadowColor
+        public let layer = NX.Layer { (_, __sender) in
             __sender.isHidden = true
-            __sender.offset = CGSize(width: 0, height: -2)
-            __sender.radius = 2.0
-            __sender.opacity = 0.15
+            __sender.shadowColor = NX.shadowColor
+            __sender.shadowOffset = CGSize(width: 0, height: -2)
+            __sender.shadowRadius = 2.0
+            __sender.shadowOpacity = 0.15
         }
         
         public let center = NX.Attribute { (_, __sender) in

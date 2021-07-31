@@ -54,7 +54,7 @@ class NXSubdesktopViewController : NXToolViewController {
         self.index = 0
         
         self.toolView.wrapped.separator.isHidden = true
-        self.toolView.wrapped.shadow.isHidden = false
+        self.toolView.wrapped.layer.isHidden = false
         
         
         self.toolView.wrapped.center.isHidden = false

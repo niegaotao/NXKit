@@ -91,15 +91,15 @@ extension NX {
         
         public static var unspefified = NX.Ats(rawValue: 0)
         
-        public static var minX = NX.Ats(rawValue: 1)
-        public static var centerX = NX.Ats(rawValue: 2)
-        public static var maxX = NX.Ats(rawValue: 4)
+        public static var minX = NX.Ats(rawValue: 1)        //2^0
+        public static var centerX = NX.Ats(rawValue: 2)     //2^1
+        public static var maxX = NX.Ats(rawValue: 4)        //2^2
         
-        public static var minY =  NX.Ats(rawValue: 8)
-        public static var centerY =  NX.Ats(rawValue: 16)
-        public static var maxY = NX.Ats(rawValue: 32)
+        public static var minY =  NX.Ats(rawValue: 16)      //2^4
+        public static var centerY =  NX.Ats(rawValue: 32)   //2^5
+        public static var maxY = NX.Ats(rawValue: 64)       //2^6
         
-        public static var center = NX.Ats(rawValue: 64)
+        public static var center = NX.Ats(rawValue: 256)    //2^8
     }
 }
 
@@ -266,7 +266,7 @@ extension NX {
 extension NX {
     
     //颜色:rgb+alpha, rgb:[0,255],a:[0,1]
-    public class func color(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat, _ a:CGFloat = 1.0) -> UIColor{
+    public class func color(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat, _ a:CGFloat = 1.0) -> UIColor {
         return UIColor(red: (r)/255.0, green: (g)/255.0, blue: (b)/255.0, alpha: a)
     }
     

@@ -17,8 +17,7 @@
 		C93A574F2689E7BA00787D4B /* NXMRC.m in Sources */ = {isa = PBXBuildFile; fileRef = C93A574E2689E7BA00787D4B /* NXMRC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C93AA2A8268C443A00DE0EA4 /* NXApi.m in Sources */ = {isa = PBXBuildFile; fileRef = C93AA2A7268C443A00DE0EA4 /* NXApi.m */; };
 		C93AA2AB268C46A300DE0EA4 /* NXWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = C93AA2AA268C46A300DE0EA4 /* NXWorker.m */; };
-		C9F562EE26807A9300C864E4 /* RRXCAuthorizeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562E926807A9200C864E4 /* RRXCAuthorizeManager.swift */; };
-		C9F562EF26807A9300C864E4 /* RRXCAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562EA26807A9200C864E4 /* RRXCAnimationView.swift */; };
+		C9F562EE26807A9300C864E4 /* NXAuthority.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562E926807A9200C864E4 /* NXAuthority.swift */; };
 		C9F562F026807A9300C864E4 /* NXMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562EB26807A9200C864E4 /* NXMasterViewController.swift */; };
 		C9F562F126807A9300C864E4 /* NXDesktopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562EC26807A9200C864E4 /* NXDesktopViewController.swift */; };
 		C9F562F226807A9300C864E4 /* NXSubdesktopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562ED26807A9300C864E4 /* NXSubdesktopViewController.swift */; };
@@ -45,8 +44,7 @@
 		C93AA2A7268C443A00DE0EA4 /* NXApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXApi.m; sourceTree = "<group>"; };
 		C93AA2A9268C46A300DE0EA4 /* NXWorker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXWorker.h; sourceTree = "<group>"; };
 		C93AA2AA268C46A300DE0EA4 /* NXWorker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXWorker.m; sourceTree = "<group>"; };
-		C9F562E926807A9200C864E4 /* RRXCAuthorizeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRXCAuthorizeManager.swift; sourceTree = "<group>"; };
-		C9F562EA26807A9200C864E4 /* RRXCAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRXCAnimationView.swift; sourceTree = "<group>"; };
+		C9F562E926807A9200C864E4 /* NXAuthority.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXAuthority.swift; sourceTree = "<group>"; };
 		C9F562EB26807A9200C864E4 /* NXMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXMasterViewController.swift; sourceTree = "<group>"; };
 		C9F562EC26807A9200C864E4 /* NXDesktopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXDesktopViewController.swift; sourceTree = "<group>"; };
 		C9F562ED26807A9300C864E4 /* NXSubdesktopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXSubdesktopViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +127,7 @@
 		C93AA2AF268C4DAD00DE0EA4 /* Workspace */ = {
 			isa = PBXGroup;
 			children = (
+				C9F562E926807A9200C864E4 /* NXAuthority.swift */,
 				C93AA2A6268C443A00DE0EA4 /* NXApi.h */,
 				C93AA2A7268C443A00DE0EA4 /* NXApi.m */,
 				C93AA2A9268C46A300DE0EA4 /* NXWorker.h */,
@@ -147,10 +146,8 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				C9F562EC26807A9200C864E4 /* NXDesktopViewController.swift */,
-				C9F562EB26807A9200C864E4 /* NXMasterViewController.swift */,
 				C9F562ED26807A9300C864E4 /* NXSubdesktopViewController.swift */,
-				C9F562E926807A9200C864E4 /* RRXCAuthorizeManager.swift */,
-				C9F562EA26807A9200C864E4 /* RRXCAnimationView.swift */,
+				C9F562EB26807A9200C864E4 /* NXMasterViewController.swift */,
 			);
 			path = Desktop;
 			sourceTree = "<group>";
@@ -281,14 +278,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9F562F026807A9300C864E4 /* NXMasterViewController.swift in Sources */,
-				C9F562EE26807A9300C864E4 /* RRXCAuthorizeManager.swift in Sources */,
+				C9F562EE26807A9300C864E4 /* NXAuthority.swift in Sources */,
 				C93A574F2689E7BA00787D4B /* NXMRC.m in Sources */,
 				C920C53626831B9A00258187 /* NXARC.m in Sources */,
 				C9F562F226807A9300C864E4 /* NXSubdesktopViewController.swift in Sources */,
 				C93AA2AB268C46A300DE0EA4 /* NXWorker.m in Sources */,
 				C9F562F126807A9300C864E4 /* NXDesktopViewController.swift in Sources */,
 				C93AA2A8268C443A00DE0EA4 /* NXApi.m in Sources */,
-				C9F562EF26807A9300C864E4 /* RRXCAnimationView.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				C91EEEB0268B224800CF0F90 /* NXSwift.swift in Sources */,
 			);

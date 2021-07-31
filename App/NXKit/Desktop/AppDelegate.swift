@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             _ alert: Bool,
             _ completion:((NX.AuthorizeState) -> ())?) in
             
-            RRXCAuthorizeManager.authorization(type, queue, completion, alert)
+            NXAuthority.authorization(type, queue, completion, alert)
         }
         
         let nav = NXNavigationController()

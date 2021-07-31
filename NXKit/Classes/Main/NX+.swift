@@ -85,8 +85,31 @@ extension NX {
         }
     }
     
+    open class Layer : NX.View {
+        open var opacity : CGFloat = 0.0
+        open var masksToBounds : Bool = false
+        open var cornerRadius : CGFloat = 0.0
+        
+        open var borderWidth : CGFloat = 0.0
+        open var borderColor = NX.separatorColor
+        
+        open var shadowOpacity : CGFloat = 0.0
+        open var shadowRadius : CGFloat = 0.0
+        open var shadowOffset = CGSize.zero
+        open var shadowColor = NX.shadowColor
+        
+        public override init(){
+            super.init()
+        }
+        
+        public init(completion:NX.Completion<String, NX.Layer>?){
+            super.init()
+            completion?("", self)
+        }
+    }
+    
     open class Widget<T:UIView> : NX.View  {
-        open var widgetView = T()
+        open var view = T()
         
         public override init(){
             super.init()
@@ -98,32 +121,6 @@ extension NX {
         }
     }
     
-    open class Border {
-        open var color = UIColor.clear
-        open var width : CGFloat = 0.0
-        open var radius : CGFloat = 0.0
-        
-        public init(){}
-        
-        public init(completion:NX.Completion<String, NX.Border>?){
-            completion?("", self)
-        }
-    }
-    
-    
-    open class Shadow {
-        open var isHidden = false
-        open var radius : CGFloat = 0.0
-        open var color =  NX.shadowColor
-        open var opacity : CGFloat = 0.0
-        open var offset = CGSize.zero
-        
-        public init(){}
-        
-        public init(completion:NX.Completion<String, NX.Shadow>?){
-            completion?("", self)
-        }
-    }
     
     open class Wrapped<Index: Any, Value:Any> where Index : NXInitialValue, Value : NXInitialValue {
         open var index = Index.initialValue

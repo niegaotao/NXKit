@@ -1,5 +1,5 @@
 //
-//  RRXCAuthorizeManager.swift
+//  NXAuthority.swift
 //  rrxc
 //
 //  Created by niegaotao on 2018/5/11.
@@ -11,7 +11,7 @@ import Photos
 import AVFoundation
 import NXKit
 
-extension RRXCAuthorizeManager {
+extension NXAuthority {
     open class Popup {
         static public var album :(title:String,subtitle:String, content:String) = ("权限不足","无法访问照片，请按以下提示设置","请在iPhone-设置(下滑找到)-人人相册-照片，设置为“读取和写入”后，即可使用、选择、保存照片啦～")
         static public var camera :(title:String,subtitle:String, content:String) = ("权限不足","无法访问相机，请按以下提示设置","请在iPhone-设置(下滑找到)-人人相册-相机，设置为打开后，即可使用相机拍摄照片和视频啦～")
@@ -21,7 +21,7 @@ extension RRXCAuthorizeManager {
     }
 }
 
-open class RRXCAuthorizeManager {
+open class NXAuthority {
     //获取授权/请求授权入口
     open class func authorization(_ type: NX.AuthorizeType, _ queue:DispatchQueue, _ completion:((NX.AuthorizeState) -> ())?, _ alert: Bool = true){
         if type == NX.AuthorizeType.album {
@@ -62,7 +62,7 @@ open class RRXCAuthorizeManager {
                     }
                     
                     if alert {
-                        RRXCAuthorizeManager.authorizationViewDisplay(.album)
+                        NXAuthority.authorizationViewDisplay(.album)
                     }
                 }
             }
@@ -72,7 +72,7 @@ open class RRXCAuthorizeManager {
                 completion?(.denied)
             }
             if alert {
-                RRXCAuthorizeManager.authorizationViewDisplay(.album)
+                NXAuthority.authorizationViewDisplay(.album)
             }
         }
     }
@@ -95,7 +95,7 @@ open class RRXCAuthorizeManager {
                     queue.async {
                         completion?(.denied)
                     }
-                    RRXCAuthorizeManager.authorizationViewDisplay(.camera)
+                    NXAuthority.authorizationViewDisplay(.camera)
                 }
             }
         }
@@ -103,7 +103,7 @@ open class RRXCAuthorizeManager {
             queue.async {
                 completion?(.denied)
             }
-            RRXCAuthorizeManager.authorizationViewDisplay(.camera)
+            NXAuthority.authorizationViewDisplay(.camera)
         }
     }
     
@@ -125,7 +125,7 @@ open class RRXCAuthorizeManager {
                     queue.async {
                         completion?(.denied)
                     }
-                    RRXCAuthorizeManager.authorizationViewDisplay(.microphone)
+                    NXAuthority.authorizationViewDisplay(.microphone)
                 }
             }
         }
@@ -133,7 +133,7 @@ open class RRXCAuthorizeManager {
             queue.async {
                 completion?(.denied)
             }
-            RRXCAuthorizeManager.authorizationViewDisplay(.microphone)
+            NXAuthority.authorizationViewDisplay(.microphone)
         }
     }
 
@@ -187,19 +187,19 @@ open class RRXCAuthorizeManager {
     
     open class func description(_ type: NX.AuthorizeType) -> (title:String,subtitle:String,content:String){
         if type == NX.AuthorizeType.album {
-            return RRXCAuthorizeManager.Popup.album
+            return NXAuthority.Popup.album
         }
         else if type == NX.AuthorizeType.camera{
-            return RRXCAuthorizeManager.Popup.camera
+            return NXAuthority.Popup.camera
         }
         else if type == NX.AuthorizeType.apns {
-            return RRXCAuthorizeManager.Popup.apns
+            return NXAuthority.Popup.apns
         }
         else if type == NX.AuthorizeType.network {
-            return RRXCAuthorizeManager.Popup.network
+            return NXAuthority.Popup.network
         }
         else if type == NX.AuthorizeType.microphone {
-            return RRXCAuthorizeManager.Popup.microphone
+            return NXAuthority.Popup.microphone
         }
         return ("", "", "")
     }
