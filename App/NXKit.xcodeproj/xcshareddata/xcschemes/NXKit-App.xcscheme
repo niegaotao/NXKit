@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-               BuildableName = "NXKit_App.app"
-               BlueprintName = "NXKit_App"
+               BuildableName = "NXApp.app"
+               BlueprintName = "NXApp"
                ReferencedContainer = "container:NXKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "NXKit_App.app"
-            BlueprintName = "NXKit_App"
+            BuildableName = "NXApp.app"
+            BlueprintName = "NXApp"
             ReferencedContainer = "container:NXKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -78,8 +78,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "NXKit_App.app"
-            BlueprintName = "NXKit_App"
+            BuildableName = "NXApp.app"
+            BlueprintName = "NXApp"
             ReferencedContainer = "container:NXKit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -95,8 +95,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "NXKit_App.app"
-            BlueprintName = "NXKit_App"
+            BuildableName = "NXApp.app"
+            BlueprintName = "NXApp"
             ReferencedContainer = "container:NXKit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

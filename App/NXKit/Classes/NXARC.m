@@ -7,11 +7,20 @@
 //
 
 #import "NXARC.h"
+#import <UIKit/UIKit.h>
 #import <libkern/OSAtomic.h>
 #include <execinfo.h>
 #import "NXWorker.h"
 #import "NXApi.h"
 
+//@interface NSKVONotifying_NXWorker : NXWorker
+//
+//@end
+//
+//@implementation NSKVONotifying_NXWorker
+//
+//
+//@end
 
 @interface NXARC()
 @property (nonatomic, assign) OSSpinLock lock;
@@ -32,6 +41,14 @@
         self.lock = OS_SPINLOCK_INIT;
     }
     return self;
+}
+
++ (void)testPtr{
+    UIView *testView = [UIView alloc];
+    UIView *weakView = testView;
+    
+    NSLog(@"testView:%@;%p;%p",testView, testView, &testView);
+    NSLog(@"weakView;%@;%p;%p",weakView, weakView, &weakView);
 }
 
 
@@ -228,7 +245,11 @@ void handleSignalException(int signal){
     NXEMWorker *worker = [[NXEMWorker alloc] init];
     worker.name = @"__Null";
     worker.title = @"开发工程师";
-    Class class = worker.class;
+    NSMutableDictionary *dicValue = [self descriptionClass:worker.class];
+    NSLog(@"%@", dicValue);
+}
+
+- (NSMutableDictionary *)descriptionClass:(Class)class {
     NSMutableDictionary *dicValue = [NSMutableDictionary dictionaryWithCapacity:5];
     while (class && class != [NSObject class]) {
         NSMutableDictionary *dicSubvalue = [NSMutableDictionary dictionaryWithCapacity:5];
@@ -240,7 +261,47 @@ void handleSignalException(int signal){
         [dicValue setObject:dicSubvalue forKey:[NSString stringWithCString:class_getName(class) encoding:NSUTF8StringEncoding]];
         class = class_getSuperclass(class);
     }
-    NSLog(@"%@", dicValue);
+    return dicValue;
+}
+
+- (void)testKVO{
+    NXWorker *worker = [[NXWorker alloc] init];
+    worker.name = @"__Null";
+    {
+        for(Class cls = object_getClass(worker); cls; cls = class_getSuperclass(cls)){
+            NSString *name = NSStringFromClass(cls);
+            NSLog(@"0-0:%@,%@", name, objc_getMetaClass(name.UTF8String));
+        }
+        NSMutableDictionary *dicValue = [self descriptionClass:object_getClass(worker)];
+        NSLog(@"0-1:%@", dicValue);
+    }
+    
+    [worker addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew context:NULL];
+    worker.name = @"NXWorker";
+    
+    {
+        for(Class cls = object_getClass(worker); cls; cls = class_getSuperclass(cls)){
+            NSString *name = NSStringFromClass(cls);
+            NSLog(@"1-0:%@,%@", name, objc_getMetaClass(name.UTF8String));
+        }
+        NSMutableDictionary *dicValue = [self descriptionClass:object_getClass(worker)];
+        NSLog(@"1-1:%@", dicValue);
+    }
+    
+    [worker removeObserver:self forKeyPath:@"name"];
+    
+    {
+        for(Class cls = object_getClass(worker); cls; cls = class_getSuperclass(cls)){
+            NSString *name = NSStringFromClass(cls);
+            NSLog(@"2-0:%@,%@", name, objc_getMetaClass(name.UTF8String));
+        }
+        NSMutableDictionary *dicValue = [self descriptionClass:object_getClass(worker)];
+        NSLog(@"2-1:%@", dicValue);
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    NSLog(@"observeValueForKeyPath:");
 }
 
 - (void)testBuffer{

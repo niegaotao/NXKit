@@ -25,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSArray *)propertyList:(Class)cls forward:(BOOL)forward;
 + (NSArray *)varList:(Class)cls forward:(BOOL)forward;
 + (NSArray *)methodList:(Class)cls forward:(BOOL)forward;
-+ (NSArray *)classMethodList:(Class)cls forward:(BOOL)forward;
 + (NSArray *)protocolList:(Class)cls forward:(BOOL)forward;
 + (NSInteger)sizeOf:(Class)cls;
 @end

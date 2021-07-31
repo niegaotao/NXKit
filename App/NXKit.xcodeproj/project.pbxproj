@@ -18,14 +18,14 @@
 		C93AA2A8268C443A00DE0EA4 /* NXApi.m in Sources */ = {isa = PBXBuildFile; fileRef = C93AA2A7268C443A00DE0EA4 /* NXApi.m */; };
 		C93AA2AB268C46A300DE0EA4 /* NXWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = C93AA2AA268C46A300DE0EA4 /* NXWorker.m */; };
 		C9F562EE26807A9300C864E4 /* NXAuthority.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562E926807A9200C864E4 /* NXAuthority.swift */; };
-		C9F562F126807A9300C864E4 /* NXDesktopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562EC26807A9200C864E4 /* NXDesktopViewController.swift */; };
+		C9F562F126807A9300C864E4 /* NXAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562EC26807A9200C864E4 /* NXAppViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0D3EF0A469B22D541BB2BAC4 /* NXKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NXKit.podspec; path = ../NXKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		11F4D78D026E5C509B3B377E /* Pods-NXKit_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NXKit_App.release.xcconfig"; path = "Target Support Files/Pods-NXKit_App/Pods-NXKit_App.release.xcconfig"; sourceTree = "<group>"; };
 		27BA7DF614EF9528E1A0F637 /* Pods_NXKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NXKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		607FACD01AFB9204008FA782 /* NXKit_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NXKit_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		607FACD01AFB9204008FA782 /* NXApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NXApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -43,7 +43,7 @@
 		C93AA2A9268C46A300DE0EA4 /* NXWorker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXWorker.h; sourceTree = "<group>"; };
 		C93AA2AA268C46A300DE0EA4 /* NXWorker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXWorker.m; sourceTree = "<group>"; };
 		C9F562E926807A9200C864E4 /* NXAuthority.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXAuthority.swift; sourceTree = "<group>"; };
-		C9F562EC26807A9200C864E4 /* NXDesktopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXDesktopViewController.swift; sourceTree = "<group>"; };
+		C9F562EC26807A9200C864E4 /* NXAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXAppViewController.swift; sourceTree = "<group>"; };
 		E87B81609140EAE65B0F6F8A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F52578292D8536F89334B186 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,7 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
-				607FACD21AFB9204008FA782 /* App */,
+				607FACD21AFB9204008FA782 /* NXApp */,
 				607FACD11AFB9204008FA782 /* Products */,
 				CDB0BCCB0EFEA029F96C723A /* Pods */,
 				7A21DF4C4AFC7DD034C25347 /* Frameworks */,
@@ -74,23 +74,23 @@
 		607FACD11AFB9204008FA782 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD01AFB9204008FA782 /* NXKit_App.app */,
+				607FACD01AFB9204008FA782 /* NXApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		607FACD21AFB9204008FA782 /* App */ = {
+		607FACD21AFB9204008FA782 /* NXApp */ = {
 			isa = PBXGroup;
 			children = (
 				C93AA2B0268C4E3600DE0EA4 /* Desktop */,
-				C93AA2AF268C4DAD00DE0EA4 /* Workspace */,
+				C93AA2AF268C4DAD00DE0EA4 /* Classes */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 				C920C53326831B9A00258187 /* NXKit_App-Bridging-Header.h */,
 			);
-			name = App;
+			name = NXApp;
 			path = NXKit;
 			sourceTree = "<group>";
 		};
@@ -120,7 +120,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C93AA2AF268C4DAD00DE0EA4 /* Workspace */ = {
+		C93AA2AF268C4DAD00DE0EA4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				C9F562E926807A9200C864E4 /* NXAuthority.swift */,
@@ -134,14 +134,14 @@
 				C920C53426831B9A00258187 /* NXARC.h */,
 				C920C53526831B9A00258187 /* NXARC.m */,
 			);
-			path = Workspace;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		C93AA2B0268C4E3600DE0EA4 /* Desktop */ = {
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				C9F562EC26807A9200C864E4 /* NXDesktopViewController.swift */,
+				C9F562EC26807A9200C864E4 /* NXAppViewController.swift */,
 			);
 			path = Desktop;
 			sourceTree = "<group>";
@@ -158,9 +158,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		607FACCF1AFB9204008FA782 /* NXKit_App */ = {
+		607FACCF1AFB9204008FA782 /* NXApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "NXKit_App" */;
+			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "NXApp" */;
 			buildPhases = (
 				DC32EDA51AD08B87781B408F /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
@@ -172,9 +172,9 @@
 			);
 			dependencies = (
 			);
-			name = NXKit_App;
+			name = NXApp;
 			productName = NXKit;
-			productReference = 607FACD01AFB9204008FA782 /* NXKit_App.app */;
+			productReference = 607FACD01AFB9204008FA782 /* NXApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -206,7 +206,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				607FACCF1AFB9204008FA782 /* NXKit_App */,
+				607FACCF1AFB9204008FA782 /* NXApp */,
 			);
 		};
 /* End PBXProject section */
@@ -275,7 +275,7 @@
 				C93A574F2689E7BA00787D4B /* NXMRC.m in Sources */,
 				C920C53626831B9A00258187 /* NXARC.m in Sources */,
 				C93AA2AB268C46A300DE0EA4 /* NXWorker.m in Sources */,
-				C9F562F126807A9300C864E4 /* NXDesktopViewController.swift in Sources */,
+				C9F562F126807A9300C864E4 /* NXAppViewController.swift in Sources */,
 				C93AA2A8268C443A00DE0EA4 /* NXApi.m in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				C91EEEB0268B224800CF0F90 /* NXSwift.swift in Sources */,
@@ -465,7 +465,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "NXKit_App" */ = {
+		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "NXApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				607FACF01AFB9204008FA782 /* Debug */,

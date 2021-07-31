@@ -9,37 +9,37 @@
 import UIKit
 import NXKit
 
-class NXDesktopViewController: NXCollectionViewController {
+class NXAppViewController: NXCollectionViewController {
     
     var values = [[String:Any]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NX.log { return "size=\(UIScreen.main.bounds.size), scale=\(UIScreen.main.scale)______insets=\(NXDevice.insets)"}
-        DispatchQueue.main.after(10) {
-            NX.log { return "______insets=\(NXDevice.insets)"}
-        }
-//        self.naviView.backgroundView.image = UIImage.image(colors: [UIColor.red, UIColor.blue], size: CGSize(width: NXDevice.width, height: 64), start: CGPoint.zero, end: CGPoint(x: NXDevice.width, y: 0))
-        self.naviView.title = "NXFoundation"
+//        NX.log { return "size=\(UIScreen.main.bounds.size), scale=\(UIScreen.main.scale)______insets=\(NXDevice.insets)"}
+//        DispatchQueue.main.after(10) {
+//            NX.log { return "______insets=\(NXDevice.insets)"}
+//        }
+//        NX.Overlay.showToast = {(message:String, ats:NX.Ats,superview:UIView?) in
+//            NX.log { return "__________\(message)"}
+//        }
+        
+        self.naviView.title = "NXApp"
         self.setupSubviews()
         self.updateSubviews("", nil)
         
         //NXARC.test()
+        NXARC.testPtr()
         //NXARC.center().testLock();
         //NXARC.center().testStringCopy();
         //NXARC.center().testDictionaryCopy();
         //NXARC.center().testArrayCopy();
         //NXARC.center().signal();
-        NXARC.center().testClass();
+        //NXARC.center().testClass();
+        //NXARC.center().testKVO();
         //NXMRC.center().testZombie();
         //NXARC.center().dispatchQueue();
         //NXARC.center().testBuffer()
-
-        //处理toast
-        NX.Overlay.showToast = {(message:String, ats:NX.Ats,superview:UIView?) in
-            NX.log { return "__________\(message)"}
-        }
     }
     
     override func setupSubviews() {

@@ -90,28 +90,6 @@
     return retValue;
 }
 
-+ (NSArray *)classMethodList:(Class)cls forward:(BOOL)forward{
-    if(!cls || [cls isEqual:[NSObject class]]){
-        return @[];
-    }
-    NSMutableArray *retValue = [NSMutableArray arrayWithCapacity:2];
-    unsigned int count;
-    Method *rss = class_getClassMethod(cls, &count);
-    for (unsigned int i = 0; i < count; i++) {
-        Method rs = rss[i];
-        NSString *name = [NSString stringWithFormat:@"%s", sel_getName(method_getName(rs))];
-        [retValue addObject:name];
-    }
-    free(rss);
-    
-    Class superclass = [cls superclass];
-    if(superclass && forward){
-        [retValue addObjectsFromArray:[NXApi classMethodList:superclass forward:forward]];
-    }
-    
-    return retValue;
-}
-
 + (NSArray *)protocolList:(Class)cls forward:(BOOL)forward{
     if(!cls || [cls isEqual:[NSObject class]]){
         return @[];

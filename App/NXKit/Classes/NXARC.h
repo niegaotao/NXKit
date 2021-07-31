@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NXARC : NSObject
 + (NXARC *)center;
+
++ (void)testPtr;
 + (void)test;
 - (void)testLock;
 - (void)testStringCopy;
@@ -20,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)signal;
 
 - (void)testClass;
+- (void)testKVO;
 - (void)dispatchQueue;
 - (void)testBuffer;
 @end

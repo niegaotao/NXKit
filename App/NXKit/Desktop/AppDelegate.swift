@@ -14,9 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var strongView : UIView? = nil
     
-    weak var weakView : UIView? = nil
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -36,16 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let nav = NXNavigationController()
-        nav.pushViewController(NXDesktopViewController(), animated: true)
+        nav.pushViewController(NXAppViewController(), animated: true)
         self.window?.rootViewController = nav
         self.window?.makeKeyAndVisible()
         
-        
-        let testView = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
-        self.strongView = testView
-        self.weakView = testView
-        print("testView=\(testView.hash);strongView=\(self.strongView!.hash);weakView=\(self.weakView!.hash)")
-        print("testView=\(testView.hashValue);strongView=\(self.strongView!.hashValue);weakView=\(self.weakView!.hashValue)")
         return true
     }
 
