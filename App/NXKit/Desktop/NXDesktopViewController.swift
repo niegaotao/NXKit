@@ -297,17 +297,143 @@ class NXDesktopViewController: NXCollectionViewController {
             }
         }
         else if action == "NXViewController" {
-            let vc = RRXCViewController()
+            let vc = NXViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
 
-class RRXCViewController : NXViewController {
+class NXSubdesktopViewController : NXToolViewController {
+    override func setup() {
+        super.setup()
+        
+        var tabs = [[String:Any]]()
+        tabs.append(["name":"相册","selected":"rrxc_app_album_selected.png","unselected":"rrxc_app_album_unselected.png","vc":NXViewController()])
+        tabs.append(["name":"工具","selected":"rrxc_app_toolbox_selected.png","unselected":"rrxc_app_toolbox_unselected.png","vc":NXViewController()])
+        tabs.append(["name":"消息","selected":"rrxc_app_team_selected.png","unselected":"rrxc_app_team_unselected.png","vc":NXViewController()])
+        tabs.append(["name":"我的","selected":"rrxc_app_owner_selected.png","unselected":"rrxc_app_owner_unselected.png","vc":NXViewController()])
+        
+        self.elements.removeAll()
+        self.subviewControllers.removeAll()
+        for (index, tab) in tabs.enumerated() {
+            let element = NXToolView.Element()
+            element.title.selected = tab["name"] as? String ?? ""
+            element.title.unselected = tab["name"] as? String ?? ""
+            element.color.selected = NX.color(0x5C5B60)
+            element.color.unselected = NX.color(0x5C5B60)
+            element.image.selected = UIImage(named: tab["selected"] as? String ?? "")
+            element.image.unselected = UIImage(named: tab["unselected"] as? String ?? "")
+            if index == 0 {
+                element.attachment.isValue = false
+                element.attachment.value = 1
+            }
+            else if index == 1 {
+                element.attachment.value = 5
+            }
+            else if index == 2 {
+                element.attachment.value = 59
+                element.isSelectable = false
+            }
+            else if index == 3 {
+                element.attachment.value = 102
+            }
+            self.elements.append(element)
+            
+            if let vc = tab["vc"] as? NXViewController {
+                vc.title = String(index)
+                self.subviewControllers.append(vc)
+            }
+        }
+        self.index = 0
+        
+        self.toolView.wrapped.separator.isHidden = true
+        self.toolView.wrapped.layer.isHidden = false
+        
+        
+        self.toolView.wrapped.center.isHidden = false
+        self.toolView.wrapped.center.frame = CGRect(x: (NXDevice.width-52)/2.0, y: 8, width: 52, height: 36)
+        self.toolView.wrapped.center.image = UIImage(named: "rrxc_+.png")
+        self.toolView.centerView.setupEvents([.touchUpInside]) { (e, v) in
+            
+        }
+    }
+    
+    override func didSelectViewController(at idx: Int, animated: Bool) {
+        super.didSelectViewController(at: idx, animated: animated)
+        
+        let e = self.elements[idx]
+        if e.isSelectable == false {
+            NX.log { return "这个按钮不能点击啊"}
+        }
+    }
+    
+    //连续双击
+    override open func didReselectElement(at index:Int){
+        NX.log { return "__index=\(index)"}
+        if let tvc = self.selectedViewController as? NXTableViewController {
+            guard let tv = tvc.tableView, tv.scrollsToTop else {
+                return
+            }
+            //tv.scrollToTop()
+        }
+        else if let cvc = self.selectedViewController as? NXCollectionViewController {
+            guard let cv = cvc.collectionView, cv.scrollsToTop else {
+                return
+            }
+            //cv.scrollToTop()
+        }
+        else if let swipe = self.selectedViewController as? NXContainerController {
+            if let tvc = swipe.selectedViewController as? NXTableViewController {
+                guard let tv = tvc.tableView, tv.scrollsToTop else {
+                    return
+                }
+                //tv.scrollToTop()
+            }
+            else if let cvc = swipe.selectedViewController as? NXCollectionViewController {
+                guard let cv = cvc.collectionView, cv.scrollsToTop else {
+                    return
+                }
+                //cv.scrollToTop()
+            }
+        }
+    }
+}
+
+
+class NXMasterViewController: NXSwipeViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+//        self.swipeView.wrapped.isEqually = true
+//        self.swipeView.wrapped.color.selected = UIColor.red
+//        self.swipeView.wrapped.font.selected = NX.font(18, true)
+//        self.swipeView.wrapped.maximumOfComponents = 4.0
+        self.setupSubviews([NXMasterSubviewController(),NXMasterSubviewController(),NXMasterSubviewController(),NXMasterSubviewController(),NXMasterSubviewController(),NXMasterSubviewController(),NXMasterSubviewController()], elements: ["精华精华","动态","收藏","精华精华","动态","收藏","精华精华"])
+    }
+}
+
+class NXMasterSubviewController : NXViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.naviView.forwardBar = NXNaviView.Bar.forward(image: nil, title: "框架", completion: nil)
+        if self.ctxs.isWrapped {
+            self.naviView.isHidden = true
+            self.contentView.frame = self.view.bounds
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NX.log { return "viewWillAppear:\(self)"}
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NX.log { return "viewWillDisappear:\(self)"}
     }
 }
+
+
+
