@@ -28,18 +28,9 @@ class NXAppViewController: NXCollectionViewController {
         self.setupSubviews()
         self.updateSubviews("", nil)
         
-        //NXARC.test()
-        NXARC.testPtr()
-        //NXARC.center().testLock();
-        //NXARC.center().testStringCopy();
-        //NXARC.center().testDictionaryCopy();
-        //NXARC.center().testArrayCopy();
-        //NXARC.center().signal();
-        //NXARC.center().testClass();
-        //NXARC.center().testKVO();
-        //NXMRC.center().testZombie();
-        //NXARC.center().dispatchQueue();
-        //NXARC.center().testBuffer()
+        //NXTester.center().debug()
+        
+        
     }
     
     override func setupSubviews() {
@@ -102,6 +93,7 @@ class NXAppViewController: NXCollectionViewController {
     
     override func dispose(_ action: String, _ value: Any?, _ completion: NX.Completion<String, Any?>? = nil) {
         if action == "NXToolViewController" {
+            NSLog("NXAppViewController-dispose:%@", NXObserver.sets);
             let vc = NXSubdesktopViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -356,6 +348,28 @@ class NXSubdesktopViewController : NXToolViewController {
         self.toolView.centerView.setupEvents([.touchUpInside]) { (e, v) in
             
         }
+        
+        NXObserver.add(observer: self, name: "Test1") { _, _ in
+            NX.print("----1")
+        }
+        NXObserver.add(observer: self, name: "Test2") { _, _ in
+            NX.print("----2")
+        }
+        
+        NXObserver.post(name: "Test1", info: "")
+        NXObserver.post(name: "Test1", info: "")
+        NXObserver.post(name: "Test2", info: "")
+        NXObserver.post(name: "Test2", info: "")
+        
+        NSLog("NXSubdesktopViewController-setup:%@", NXObserver.sets);
+        
+//        NX.print("----")
+//        NXObserver.remove(observer: self, name: "Test1")
+//
+//        NXObserver.post(name: "Test1", info: "")
+//        NXObserver.post(name: "Test1", info: "")
+//        NXObserver.post(name: "Test2", info: "")
+//        NXObserver.post(name: "Test2", info: "")
     }
     
     override func didSelectViewController(at idx: Int, animated: Bool) {
@@ -396,6 +410,10 @@ class NXSubdesktopViewController : NXToolViewController {
                 //cv.scrollToTop()
             }
         }
+    }
+    
+    deinit {
+        NSLog("NXSubdesktopViewController-deinit:%@", NXObserver.sets);
     }
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import "NXMRC.h"
-#import "NXWorker.h"
+#import "NXPerson.h"
 #import <objc/message.h>
 
 @interface NSObject(A)
@@ -42,21 +42,21 @@
 #if __has_feature(objc_arc)
     
 #else
-    NXMobileWorker *worker = [[NXMobileWorker alloc] init];
+    NXCollegeStudent *worker = [[NXCollegeStudent alloc] init];
     worker.name = @"Worker";
     [worker run];
     
     NSLog(@"");
     
-    NXMobileWorker *__worker = ((NXMobileWorker *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("NXMobileWorker"), sel_registerName("alloc"));
-    __worker = ((NXMobileWorker *(*)(id, SEL))(void *)objc_msgSend)((id)__worker, sel_registerName("init"));
+    NXCollegeStudent *__worker = ((NXCollegeStudent *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("NXCollegeStudent"), sel_registerName("alloc"));
+    __worker = ((NXCollegeStudent *(*)(id, SEL))(void *)objc_msgSend)((id)__worker, sel_registerName("init"));
     ((void (*)(id, SEL))(void *)objc_msgSend)((id)__worker, sel_registerName("run"));
     
     NSLog(@"");
 
     
-    //((void (*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("NXMobileWorker"), sel_registerName("run"));
-    //((void (*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("NXMobileWorker"), sel_registerName("classDebug"));
+    //((void (*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("NXCollegeStudent"), sel_registerName("run"));
+    //((void (*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("NXCollegeStudent"), sel_registerName("classDebug"));
 
     //((void (*)(id, SEL))(void *)objc_msgSend)((id)__worker, sel_registerName("_runApp"));
 
@@ -65,8 +65,8 @@
 //    [worker release];
 //    NSLog(@"%@", @(worker.retainCount));
     
-    [NXMobileWorker sleep];
-    [[NXMobileWorker new] sleep];
+    [NXCollegeStudent sleep];
+    [[NXCollegeStudent new] sleep];
 #endif
 }
 

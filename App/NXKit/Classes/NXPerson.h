@@ -1,5 +1,5 @@
 //
-//  NXWorker.h
+//  NXPerson.h
 //  NXKit_Example
 //
 //  Created by niegaotao on 2021/6/30.
@@ -10,8 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+
+
+
 /*====================================================*/
-@interface NXWorker : NSObject {
+@interface NXPerson : NSObject {
     NSString *_uuid;
 }
 @property (nonatomic, copy) NSString *name;
@@ -21,22 +25,33 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /*====================================================*/
-@interface NXEMWorker : NXWorker {
+@interface NXTeacher : NXPerson {
     NSString *_union;
 }
-@property (nonatomic, copy) NSString *title;
 - (void)work;
 + (void)classWork;
 @end
 
-@interface NXEMWorker (Category)
-@end
 
 /*====================================================*/
-@interface NXMobileWorker : NXEMWorker
+@interface NXStudent : NXPerson {
+    NSString *_union;
+}
+@property (nonatomic, copy) NSString *college;
+- (void)work;
++ (void)classWork;
 @end
 
-@interface NXMobileWorker(Category)
+@interface NXStudent (Category)
+@end
+
+
+
+
+/*====================================================*/
+@interface NXCollegeStudent : NXStudent
 @end
 /*====================================================*/
 NS_ASSUME_NONNULL_END
+
+

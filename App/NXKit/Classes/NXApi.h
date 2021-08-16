@@ -23,10 +23,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NXApi : NSObject
 + (void)swizzleClass:(Class)cls original:(SEL)originalSelector swizzle:(SEL)swizzleSelector;
 + (NSArray *)propertyList:(Class)cls forward:(BOOL)forward;
+/*获取成员变量列表:cls当前类，forward是否向上查询父类*/
 + (NSArray *)varList:(Class)cls forward:(BOOL)forward;
+/*获取方法变量列表:cls当前类，forward是否向上查询父类*/
 + (NSArray *)methodList:(Class)cls forward:(BOOL)forward;
++ (NSArray *)metaClass:(Class)cls forward:(BOOL)forward;
 + (NSArray *)protocolList:(Class)cls forward:(BOOL)forward;
 + (NSInteger)sizeOf:(Class)cls;
++ (NSMutableDictionary *)descriptionClass:(Class)cls;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -13,10 +13,13 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		C91EEEB0268B224800CF0F90 /* NXSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91EEEAF268B224800CF0F90 /* NXSwift.swift */; };
-		C920C53626831B9A00258187 /* NXARC.m in Sources */ = {isa = PBXBuildFile; fileRef = C920C53526831B9A00258187 /* NXARC.m */; };
+		C920C53626831B9A00258187 /* NXTester.m in Sources */ = {isa = PBXBuildFile; fileRef = C920C53526831B9A00258187 /* NXTester.m */; };
 		C93A574F2689E7BA00787D4B /* NXMRC.m in Sources */ = {isa = PBXBuildFile; fileRef = C93A574E2689E7BA00787D4B /* NXMRC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C93AA2A8268C443A00DE0EA4 /* NXApi.m in Sources */ = {isa = PBXBuildFile; fileRef = C93AA2A7268C443A00DE0EA4 /* NXApi.m */; };
-		C93AA2AB268C46A300DE0EA4 /* NXWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = C93AA2AA268C46A300DE0EA4 /* NXWorker.m */; };
+		C93AA2AB268C46A300DE0EA4 /* NXPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = C93AA2AA268C46A300DE0EA4 /* NXPerson.m */; };
+		C9D7810326BCE0B400625E54 /* NXKVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7810226BCE0B400625E54 /* NXKVC.m */; };
+		C9D7810626BCE7D300625E54 /* NSObject+.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7810426BCE7D200625E54 /* NSObject+.m */; };
+		C9D7810926BCE8D800625E54 /* NXKVO.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7810826BCE8D800625E54 /* NXKVO.m */; };
 		C9F562EE26807A9300C864E4 /* NXAuthority.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562E926807A9200C864E4 /* NXAuthority.swift */; };
 		C9F562F126807A9300C864E4 /* NXAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F562EC26807A9200C864E4 /* NXAppViewController.swift */; };
 /* End PBXBuildFile section */
@@ -34,14 +37,20 @@
 		B511540DD1D7B3580B5D4325 /* Pods-NXKit_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NXKit_App.debug.xcconfig"; path = "Target Support Files/Pods-NXKit_App/Pods-NXKit_App.debug.xcconfig"; sourceTree = "<group>"; };
 		C91EEEAF268B224800CF0F90 /* NXSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NXSwift.swift; sourceTree = "<group>"; };
 		C920C53326831B9A00258187 /* NXKit_App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NXKit_App-Bridging-Header.h"; sourceTree = "<group>"; };
-		C920C53426831B9A00258187 /* NXARC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXARC.h; sourceTree = "<group>"; };
-		C920C53526831B9A00258187 /* NXARC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXARC.m; sourceTree = "<group>"; };
+		C920C53426831B9A00258187 /* NXTester.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXTester.h; sourceTree = "<group>"; };
+		C920C53526831B9A00258187 /* NXTester.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXTester.m; sourceTree = "<group>"; };
 		C93A574D2689E7BA00787D4B /* NXMRC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXMRC.h; sourceTree = "<group>"; };
 		C93A574E2689E7BA00787D4B /* NXMRC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXMRC.m; sourceTree = "<group>"; };
 		C93AA2A6268C443A00DE0EA4 /* NXApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXApi.h; sourceTree = "<group>"; };
 		C93AA2A7268C443A00DE0EA4 /* NXApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXApi.m; sourceTree = "<group>"; };
-		C93AA2A9268C46A300DE0EA4 /* NXWorker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXWorker.h; sourceTree = "<group>"; };
-		C93AA2AA268C46A300DE0EA4 /* NXWorker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXWorker.m; sourceTree = "<group>"; };
+		C93AA2A9268C46A300DE0EA4 /* NXPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXPerson.h; sourceTree = "<group>"; };
+		C93AA2AA268C46A300DE0EA4 /* NXPerson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXPerson.m; sourceTree = "<group>"; };
+		C9D7810126BCE0B400625E54 /* NXKVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXKVC.h; sourceTree = "<group>"; };
+		C9D7810226BCE0B400625E54 /* NXKVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXKVC.m; sourceTree = "<group>"; };
+		C9D7810426BCE7D200625E54 /* NSObject+.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+.m"; sourceTree = "<group>"; };
+		C9D7810526BCE7D200625E54 /* NSObject+.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+.h"; sourceTree = "<group>"; };
+		C9D7810726BCE8D800625E54 /* NXKVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXKVO.h; sourceTree = "<group>"; };
+		C9D7810826BCE8D800625E54 /* NXKVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXKVO.m; sourceTree = "<group>"; };
 		C9F562E926807A9200C864E4 /* NXAuthority.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXAuthority.swift; sourceTree = "<group>"; };
 		C9F562EC26807A9200C864E4 /* NXAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXAppViewController.swift; sourceTree = "<group>"; };
 		E87B81609140EAE65B0F6F8A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -126,13 +135,19 @@
 				C9F562E926807A9200C864E4 /* NXAuthority.swift */,
 				C93AA2A6268C443A00DE0EA4 /* NXApi.h */,
 				C93AA2A7268C443A00DE0EA4 /* NXApi.m */,
-				C93AA2A9268C46A300DE0EA4 /* NXWorker.h */,
-				C93AA2AA268C46A300DE0EA4 /* NXWorker.m */,
+				C9D7810526BCE7D200625E54 /* NSObject+.h */,
+				C9D7810426BCE7D200625E54 /* NSObject+.m */,
+				C93AA2A9268C46A300DE0EA4 /* NXPerson.h */,
+				C93AA2AA268C46A300DE0EA4 /* NXPerson.m */,
 				C91EEEAF268B224800CF0F90 /* NXSwift.swift */,
 				C93A574D2689E7BA00787D4B /* NXMRC.h */,
 				C93A574E2689E7BA00787D4B /* NXMRC.m */,
-				C920C53426831B9A00258187 /* NXARC.h */,
-				C920C53526831B9A00258187 /* NXARC.m */,
+				C920C53426831B9A00258187 /* NXTester.h */,
+				C920C53526831B9A00258187 /* NXTester.m */,
+				C9D7810126BCE0B400625E54 /* NXKVC.h */,
+				C9D7810226BCE0B400625E54 /* NXKVC.m */,
+				C9D7810726BCE8D800625E54 /* NXKVO.h */,
+				C9D7810826BCE8D800625E54 /* NXKVO.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -271,13 +286,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9D7810926BCE8D800625E54 /* NXKVO.m in Sources */,
 				C9F562EE26807A9300C864E4 /* NXAuthority.swift in Sources */,
 				C93A574F2689E7BA00787D4B /* NXMRC.m in Sources */,
-				C920C53626831B9A00258187 /* NXARC.m in Sources */,
-				C93AA2AB268C46A300DE0EA4 /* NXWorker.m in Sources */,
+				C920C53626831B9A00258187 /* NXTester.m in Sources */,
+				C93AA2AB268C46A300DE0EA4 /* NXPerson.m in Sources */,
 				C9F562F126807A9300C864E4 /* NXAppViewController.swift in Sources */,
+				C9D7810626BCE7D300625E54 /* NSObject+.m in Sources */,
 				C93AA2A8268C443A00DE0EA4 /* NXApi.m in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				C9D7810326BCE0B400625E54 /* NXKVC.m in Sources */,
 				C91EEEB0268B224800CF0F90 /* NXSwift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

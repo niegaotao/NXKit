@@ -23,6 +23,7 @@
 }
 
 
+
 + (NSArray *)propertyList:(Class)cls forward:(BOOL)forward{
     if(!cls || [cls isEqual:[NSObject class]]){
         return @[];
@@ -90,6 +91,16 @@
     return retValue;
 }
 
++ (NSArray *)metaClass:(Class)cls forward:(BOOL)forward{
+    NSMutableArray *retValue = [NSMutableArray arrayWithCapacity:2];
+    [retValue addObject:objc_getMetaClass(NSStringFromClass(cls).UTF8String)];
+    Class superclass = [cls superclass];
+    if(superclass && forward){
+        [retValue addObjectsFromArray:[NXApi metaClass:superclass forward:forward]];
+    }
+    return retValue;
+}
+
 + (NSArray *)protocolList:(Class)cls forward:(BOOL)forward{
     if(!cls || [cls isEqual:[NSObject class]]){
         return @[];
@@ -118,6 +129,23 @@
     size_t __sizeofSize = sizeof(cls);//类型的大小
     //NSLog(@"instanceSize=%@; sizeofSize=%@; mallocSize=%@", @(__instanceSize), @(__mallocSize), @(__sizeofSize));
     return __mallocSize;
+}
+
+
++ (NSMutableDictionary *)descriptionClass:(Class)cls {
+    NSMutableDictionary *dicValue = [NSMutableDictionary dictionaryWithCapacity:5];
+    while (cls && cls != [NSObject class]) {
+        NSMutableDictionary *dicSubvalue = [NSMutableDictionary dictionaryWithCapacity:5];
+        dicSubvalue[@"varList"] = [NXApi varList:cls forward:false];
+        dicSubvalue[@"methodList"] = [NXApi methodList:cls forward:false];
+        //dicSubvalue[@"protocolList"] = [NXApi protocolList:cls forward:false];
+        dicSubvalue[@"propertyList"] = [NXApi propertyList:cls forward:false];
+        dicSubvalue[@"metaClass"] = [NXApi metaClass:cls forward:false];
+        //dicSubvalue[@"size"] = @([NXApi sizeOf:cls]);
+        [dicValue setObject:dicSubvalue forKey:[NSString stringWithCString:class_getName(cls) encoding:NSUTF8StringEncoding]];
+        cls = class_getSuperclass(cls);
+    }
+    return dicValue;
 }
 
 @end
