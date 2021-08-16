@@ -16,21 +16,11 @@ class NXAppViewController: NXCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        NX.log { return "size=\(UIScreen.main.bounds.size), scale=\(UIScreen.main.scale)______insets=\(NXDevice.insets)"}
-//        DispatchQueue.main.after(10) {
-//            NX.log { return "______insets=\(NXDevice.insets)"}
-//        }
-//        NX.Overlay.showToast = {(message:String, ats:NX.Ats,superview:UIView?) in
-//            NX.log { return "__________\(message)"}
-//        }
-        
         self.naviView.title = "NXApp"
         self.setupSubviews()
         self.updateSubviews("", nil)
         
-        //NXTester.center().debug()
-        
-        
+        NXTester.center().debug()
     }
     
     override func setupSubviews() {
@@ -49,30 +39,67 @@ class NXAppViewController: NXCollectionViewController {
         NX.Overlay.size.height = 52
         
         self.values.removeAll()
-        self.values.append(["accessKey":"NXToolViewController","title":"NXToolViewController"])
-        self.values.append(["accessKey":"NXMasterViewController","title":"NXMasterViewController"])
-        self.values.append(["accessKey":"NXWebViewController","title":"NXWebViewController"])
-        self.values.append(["accessKey":"NXActionView","title":"NXActionView"])
-        self.values.append(["accessKey":"NXPopupView","title":"NXPopupView"])
-        self.values.append(["accessKey":"NXPopupView2","title":"NXPopupView2"])
-        self.values.append(["accessKey":"NXPopupView3","title":"NXPopupView3"])
-        self.values.append(["accessKey":"NXAsset_UIImage1","title":"NXAsset_UIImage1"])
-        self.values.append(["accessKey":"NXAsset_UIImage1-9","title":"NXAsset_UIImage1-9"])
-        self.values.append(["accessKey":"NXAsset_UIVideo1-1","title":"NXAsset_UIVideo1-1"])
-        self.values.append(["accessKey":"NXAsset_UIVideo1-1+UIImage1-20","title":"NXAsset_UIVideo1-1+UIImage1-20"])
-        self.values.append(["accessKey":"NXAsset_UIVideo1-9||UIImage1-9","title":"NXAsset_UIVideo1-9||UIImage1-9"])
-        self.values.append(["accessKey":"NXViewController","title":"NXViewController"])
-
-        for (_, subvalue) in values.enumerated() {
-            let action = NXAction(title: subvalue["title"] as? String ?? "",value: subvalue, completion: nil)
-            action.title.isHidden = false
-            action.title.textAlignment = .left
-            action.separator.ats = .maxY
-            action.separator.insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-            action.arrow.image = NX.image(named: "uiapp_arrow.png")
-            action.arrow.frame = CGRect(x: action.ctxs.width-16-6, y: (action.ctxs.height-12)/2.0, width: 6, height: 12)
-            action.arrow.isHidden = false
-            section.append(action)
+        
+        self.values.append(["access":"access","title":"视图控制器",
+                            "body":[
+                                ["access":"NXViewController","title":"NXViewController"],
+                                ["access":"NXWebViewController","title":"NXWebViewController"],
+                                ["access":"NXSubtoolViewController","title":"NXSubtoolViewController"],
+                                ["access":"NXSubswipeViewController","title":"NXSubswipeViewController"]
+                            ]])
+        
+        self.values.append(["access":"access","title":"弹框",
+                            "body":[["access":"NXActionView","title":"NXActionView"],
+                                    ["access":"NXPopupView","title":"NXPopupView"],
+                                    ["access":"NXPopupView2","title":"NXPopupView2"],
+                                    ["access":"NXPopupView3","title":"NXPopupView3"]
+                            ]])
+        
+        self.values.append(["access":"access","title":"选图",
+                            "body":[["access":"NXAsset_UIImage1","title":"NXAsset_UIImage1"],
+                                    ["access":"NXAsset_UIImage1-9","title":"NXAsset_UIImage1-9"],
+                                    ["access":"NXAsset_UIVideo1-1","title":"NXAsset_UIVideo1-1"],
+                                    ["access":"NXAsset_UIVideo1-1+UIImage1-20","title":"NXAsset_UIVideo1-1+UIImage1-20"],
+                                    ["access":"NXAsset_UIVideo1-9||UIImage1-9","title":"NXAsset_UIVideo1-9||UIImage1-9"],
+                            ]])
+        
+        for (_, value) in values.enumerated() {
+            
+            if let access = value["access"] as? String, access == "access" {
+                let action = NXAction(title: value["title"] as? String ?? "",value: value, completion: nil)
+                action.ctxs.size = CGSize(width: NXDevice.width, height: 40)
+                action.title.frame = CGRect(x: 16, y: 0, width: NXDevice.width-32, height: action.ctxs.height)
+                action.title.isHidden = false
+                action.title.textAlignment = .left
+                action.title.color = NX.lightBlackColor
+                action.title.font = NX.font(14)
+                
+                action.separator.ats = []
+                action.arrow.isHidden = true
+                action.arrow.isHidden = true
+                
+                action.appearance.isHighlighted = false
+                action.appearance.backgroundColor = NX.viewBackgroundColor
+                section.append(action)
+            }
+            
+            if let body = value["body"] as? [[String:Any]], body.count > 0 {
+                for (index, subvalue) in body.enumerated() {
+                    let action = NXAction(title: subvalue["title"] as? String ?? "",value: subvalue, completion: nil)
+                    action.title.isHidden = false
+                    action.title.textAlignment = .left
+                    action.separator.ats = .maxY
+                    if index == body.count - 1 {
+                        action.separator.ats = []
+                    }
+                    action.separator.insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+                    action.arrow.image = NX.image(named: "uiapp_arrow.png")
+                    action.arrow.frame = CGRect(x: action.ctxs.width-16-6, y: (action.ctxs.height-12)/2.0, width: 6, height: 12)
+                    action.arrow.isHidden = false
+                    
+                    section.append(action)
+                }
+            }
         }
         
         self.collectionView?.reloadData()
@@ -84,29 +111,32 @@ class NXAppViewController: NXCollectionViewController {
         guard let action = self.collectionWrapper[indexPath] else {
             return
         }
-        guard let accessKey = action.ctxs.value?["accessKey"] as? String else {
+        guard let access = action.ctxs.value?["access"] as? String else {
             return
         }
         
-        self.dispose(accessKey, nil)
+        self.dispose(access, nil)
     }
     
     override func dispose(_ action: String, _ value: Any?, _ completion: NX.Completion<String, Any?>? = nil) {
-        if action == "NXToolViewController" {
-            NSLog("NXAppViewController-dispose:%@", NXObserver.sets);
-            let vc = NXSubdesktopViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        else if action == "NXMasterViewController" {
-            let vc = NXMasterViewController()
+        if action == "NXViewController" {
+            let vc = NXViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
         else if action == "NXWebViewController" {
             let vc = NXWebViewController()
-            //vc.url = "http://ghost.yyshouyou.net/fxdx41"
             vc.url = "https://www.baidu.com"
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        else if action == "NXSubtoolViewController" {
+            let vc = NXSubtoolViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        else if action == "NXSubswipeViewController" {
+            let vc = NXSubswipeViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
         else if action == "NXActionView" {
             let actions = [["action":"","name":"滤镜·特效"],
                            ["action":"","name":"插入"],
@@ -288,14 +318,10 @@ class NXAppViewController: NXCollectionViewController {
                 
             }
         }
-        else if action == "NXViewController" {
-            let vc = NXViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
     }
 }
 
-class NXSubdesktopViewController : NXToolViewController {
+class NXSubtoolViewController : NXToolViewController {
     override func setup() {
         super.setup()
         
@@ -348,28 +374,6 @@ class NXSubdesktopViewController : NXToolViewController {
         self.toolView.centerView.setupEvents([.touchUpInside]) { (e, v) in
             
         }
-        
-        NXObserver.add(observer: self, name: "Test1") { _, _ in
-            NX.print("----1")
-        }
-        NXObserver.add(observer: self, name: "Test2") { _, _ in
-            NX.print("----2")
-        }
-        
-        NXObserver.post(name: "Test1", info: "")
-        NXObserver.post(name: "Test1", info: "")
-        NXObserver.post(name: "Test2", info: "")
-        NXObserver.post(name: "Test2", info: "")
-        
-        NSLog("NXSubdesktopViewController-setup:%@", NXObserver.sets);
-        
-//        NX.print("----")
-//        NXObserver.remove(observer: self, name: "Test1")
-//
-//        NXObserver.post(name: "Test1", info: "")
-//        NXObserver.post(name: "Test1", info: "")
-//        NXObserver.post(name: "Test2", info: "")
-//        NXObserver.post(name: "Test2", info: "")
     }
     
     override func didSelectViewController(at idx: Int, animated: Bool) {
@@ -411,47 +415,45 @@ class NXSubdesktopViewController : NXToolViewController {
             }
         }
     }
-    
-    deinit {
-        NSLog("NXSubdesktopViewController-deinit:%@", NXObserver.sets);
-    }
 }
 
 
-class NXMasterViewController: NXSwipeViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-//        self.swipeView.wrapped.isEqually = true
-//        self.swipeView.wrapped.color.selected = UIColor.red
-//        self.swipeView.wrapped.font.selected = NX.font(18, true)
-//        self.swipeView.wrapped.maximumOfComponents = 4.0
-        self.setupSubviews([NXMasterSubviewController(),NXMasterSubviewController(),NXMasterSubviewController(),NXMasterSubviewController(),NXMasterSubviewController(),NXMasterSubviewController(),NXMasterSubviewController()], elements: ["精华精华","动态","收藏","精华精华","动态","收藏","精华精华"])
-    }
-}
-
-class NXMasterSubviewController : NXViewController {
+class NXSubswipeViewController: NXSwipeViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    class Child : NXViewController {
         
-        if self.ctxs.isWrapped {
-            self.naviView.isHidden = true
-            self.contentView.frame = self.view.bounds
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            
+            if self.ctxs.isWrapped {
+                self.naviView.isHidden = true
+                self.contentView.frame = self.view.bounds
+            }
+        }
+        
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            NX.log { return "viewWillAppear:\(self)"}
+        }
+        
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            NX.log { return "viewWillDisappear:\(self)"}
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NX.log { return "viewWillAppear:\(self)"}
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.naviView.title = "NXSubswipeViewController"
+        
+        self.setupSubviews([Child(),Child(),Child(),Child(),Child(),Child(),Child()], elements: ["精华精华","动态","收藏","精华精华","动态","收藏","精华精华"])
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NX.log { return "viewWillDisappear:\(self)"}
-    }
 }
+
+
 
 
 

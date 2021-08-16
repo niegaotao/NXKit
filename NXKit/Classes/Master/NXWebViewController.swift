@@ -11,23 +11,20 @@ import WebKit
 
 extension NXWebViewController {
     open class BackbarWrapperView: NXLCRView<NXButton, UIView, NXButton> {
-        open var backBar : NXButton {return self.lhsView }
-        open var separatorView : UIView {return self.centerView }
-        open var closeBar : NXButton {return self.rhsView }
         open var isAutoable = true
         
         override open func setupSubviews() {
             super.setupSubviews()
             self.lhsView.frame = CGRect(x: 0, y: 0, width: 32, height: 44)
             self.lhsView.setImage(NX.image(named:"navi_back_black.png"), for: .normal)
-            self.lhsView.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -4, bottom: 0, right: 4)
+            self.lhsView.contentHorizontalAlignment = .left
             
             self.centerView.frame = CGRect(x: 32, y: 14, width: NXDevice.pixel, height: 16)
             self.centerView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             
             self.rhsView.frame = CGRect(x: 33, y: 0, width: 32, height: 44)
             self.rhsView.setImage(NX.image(named:"navi_close_black.png"), for: .normal)
-            self.rhsView.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: 4, bottom: 0, right: -4)
+            self.rhsView.contentHorizontalAlignment = .right
         }
         
         open override func updateSubviews(_ action: String, _ value: Any?) {
@@ -114,8 +111,8 @@ open class NXWebViewController: NXViewController {
         }
         
         self.backbarView.frame = CGRect(x: 0, y: 0, width: 65, height: 44)
-        self.backbarView.backBar.addTarget(self, action: #selector(onBackAction), for: .touchUpInside)
-        self.backbarView.closeBar.addTarget(self, action: #selector(onCloseAction), for: .touchUpInside)
+        self.backbarView.lhsView.addTarget(self, action: #selector(onBackAction), for: .touchUpInside)
+        self.backbarView.rhsView.addTarget(self, action: #selector(onCloseAction), for: .touchUpInside)
         self.backbarView.updateSubviews("", true)
         self.naviView.backView = backbarView
         self.naviView.titleView.x = 15.0 + 44.0 + 1.0
