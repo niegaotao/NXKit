@@ -2,7 +2,7 @@
 //  NXAssetClipImageViewController.swift
 //  NXKit
 //
-//  Created by firelonely on 2018/11/1.
+//  Created by niegaotao on 2018/11/1.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 

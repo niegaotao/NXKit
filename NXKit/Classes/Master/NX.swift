@@ -2,7 +2,7 @@
 //  NX.swift
 //  NXKit
 //
-//  Created by firelonely on 2019/1/23.
+//  Created by niegaotao on 2019/1/23.
 //  Copyright © 2019年 无码科技. All rights reserved.
 //
 
@@ -287,8 +287,7 @@ extension NX {
         }
         return lightColor;
     }
-    //window背景色
-    static public var windowBackgroundColor = NX.color(247, 247, 247)
+    
     //view背景色
     static public var viewBackgroundColor = NX.color(247, 247, 247)
     //contentView背景色

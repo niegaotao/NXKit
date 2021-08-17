@@ -2,7 +2,7 @@
 //  NX.swift
 //  NXKit
 //
-//  Created by firelonely on 2020/2/20.
+//  Created by niegaotao on 2020/2/20.
 //
 
 import UIKit

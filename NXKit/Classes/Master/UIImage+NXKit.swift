@@ -2,7 +2,7 @@
 //  UIImage+NXFoundation.swift
 //  NXKit
 //
-//  Created by firelonely on 2018/5/4.
+//  Created by niegaotao on 2018/5/4.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 

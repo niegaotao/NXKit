@@ -2,7 +2,7 @@
 //  UIButton+NXFoundation.swift
 //  NXKit
 //
-//  Created by firelonely on 2019/5/15.
+//  Created by niegaotao on 2019/5/15.
 //
 
 import UIKit

@@ -2,7 +2,7 @@
 //  NXViewControllerView.swift
 //  NXKit
 //
-//  Created by firelonely on 2020/9/1.
+//  Created by niegaotao on 2020/9/1.
 //  Copyright © 2020 无码科技. All rights reserved.
 //
 

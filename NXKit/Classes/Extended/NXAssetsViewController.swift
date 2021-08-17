@@ -167,7 +167,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     
     open override func dispose(_ action: String, _ value: Any?, _ completion: NX.Completion<String, Any?>? = nil) {
         if action == "footer.lhs" {
-            NXActionView.action(options: self.wrapped.albums, header: (.components(false, true, true, false), "请选择相册"), footer: (.whitespace, "")) { (_, index) in
+            NXActionView.action(actions: self.wrapped.albums, header: (.components(false, true, true, false), "请选择相册"), footer: (.whitespace, "")) { (_, index) in
                 guard index != self.ctxs.index else {
                     return;
                 }

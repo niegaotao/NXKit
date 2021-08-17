@@ -2,7 +2,7 @@
 //  NXSerialization.swift
 //  NXSerialization
 //
-//  Created by firelonely on 2018/8/3.
+//  Created by niegaotao on 2018/8/3.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 

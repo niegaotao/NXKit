@@ -2,7 +2,7 @@
 //  NXCView.swift
 //  NXKit
 //
-//  Created by firelonely on 2020/6/4.
+//  Created by niegaotao on 2020/6/4.
 //
 
 import UIKit

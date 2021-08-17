@@ -2,7 +2,7 @@
 //  NXToolView.swift
 //  NXKit
 //
-//  Created by firelonely on 2018/7/2.
+//  Created by niegaotao on 2018/7/2.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 

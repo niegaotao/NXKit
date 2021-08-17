@@ -2,7 +2,7 @@
 //  NXWebView.swift
 //  NXKit
 //
-//  Created by firelonely on 2018/5/30.
+//  Created by niegaotao on 2018/5/30.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 
@@ -155,7 +155,7 @@ extension NXWebView {
                 })
             }
             else {
-                NXActionView.alert(title: "温馨提示", subtitle: message, options: ["确定"]) { (action, index) in
+                NXActionView.alert(title: "温馨提示", subtitle: message, actions: ["确定"]) { (action, index) in
                     completionHandler()
                 }
             }
@@ -169,7 +169,7 @@ extension NXWebView {
                 })
             }
             else {
-                NXActionView.alert(title: "温馨提示", subtitle: message, options: ["取消","确定"]) { (action, index) in
+                NXActionView.alert(title: "温馨提示", subtitle: message, actions: ["取消","确定"]) { (action, index) in
                     completionHandler(index == 1)
                 }
             }

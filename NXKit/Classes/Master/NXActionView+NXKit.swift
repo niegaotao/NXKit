@@ -2,8 +2,8 @@
 //  NXActionView+NXFoundation.swift
 //  NXKit
 //
-//  Created by firelonely on 2019/2/15.
-//  Copyright © 2019 firelonely. All rights reserved.
+//  Created by niegaotao on 2019/2/15.
+//  Copyright © 2019 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -11,197 +11,206 @@ import UIKit
 extension NXActionView {
     
     @discardableResult
-    class public func alert(title: String, subtitle:String, options:[String], completion:NX.Completion<String, Int>?) -> NXActionView {
-        var optionWrappers = [NXAction]()
-        for option in options {
-            optionWrappers.append(NXAction(title:option, value: nil, completion: {(_, __action) in
-                __action.ctxs.size = CGSize(width: NX.Overlay.size.width, height: NX.Overlay.size.height)
+    class public func alert(title: String, subtitle:String, actions:[String], completion:NX.Completion<String, Int>?) -> NXActionView {
+        let __actions = actions.map { (title) -> NXAction in
+            return NXAction(title:title, value: nil, completion: {(_, __action) in
                 __action.asset.isHidden = true
                 __action.title.isHidden = false
-                if options.count == 2 {
-                    __action.title.frame = CGRect(x: 0, y: 0, width: NX.Overlay.size.width*0.5, height: __action.ctxs.height)
+                if actions.count == 2 {
+                    __action.ctxs.size = CGSize(width: NX.Overlay.size.width*0.5, height: NX.Overlay.size.height)
+                    __action.title.frame = CGRect(x: 0, y: 0, width: __action.ctxs.width, height: __action.ctxs.height)
                 }
                 else {
-                    __action.title.frame = CGRect(x: 0, y: 0, width: NX.Overlay.size.width, height: __action.ctxs.height)
+                    __action.ctxs.size = CGSize(width: NX.Overlay.size.width, height: NX.Overlay.size.height)
+                    __action.title.frame = CGRect(x: 0, y: 0, width: __action.ctxs.width, height: __action.ctxs.height)
                 }
                 __action.title.color = NX.darkBlackColor
                 __action.title.font = NX.font(16, true)
                 __action.title.textAlignment = .center
                 __action.subtitle.isHidden = true
-            }))
+            })
+        }
+        
+        return NXActionView.alert(title: title, subtitle: subtitle, actions: __actions, completion: completion)
+    }
+    
+    @discardableResult
+    class public func alert(title: String, subtitle:String, actions:[NXAction], completion:NX.Completion<String, Int>?) -> NXActionView {
+        for (_, action) in actions.enumerated() {
+            if actions.count == 2 {
+                action.ctxs.size = CGSize(width: NX.Overlay.size.width*0.5, height: NX.Overlay.size.height)
+                action.title.frame = CGRect(x: 0, y: 0, width: action.ctxs.width, height: action.ctxs.height)
+            }
+            else {
+                action.ctxs.size = CGSize(width: NX.Overlay.size.width, height: NX.Overlay.size.height)
+                action.title.frame = CGRect(x: 0, y: 0, width: NX.Overlay.size.width, height: action.ctxs.height)
+            }
         }
         
         /*
          空白：20
-         title:20,20,alertView.wrapped.header.frame.width - 40, 30
+         title:20,20,actionView.wrapped.header.frame.width - 40, 30
          空白10
-         center:20,60,alertView.wrapped.header.frame.width - 40, __height
+         center:20,60,actionView.wrapped.header.frame.width - 40, __height
          空白20
          */
-        let alertView = NXActionView(frame: UIScreen.main.bounds)
+        let actionView = NXActionView(frame: UIScreen.main.bounds)
         //header
         var size = subtitle.stringSize(font: NX.font(15, false), size: CGSize(width: NX.Overlay.size.width-40, height: NXDevice.height*0.6))
         size.height = ceil(max(20.0, size.height*1.25)) + 2.0
         
-        alertView.wrapped.header.frame.size = CGSize(width: NXDevice.width * 0.8, height: 80.0 + size.height)
-        alertView.wrapped.header.separator.ats = NX.Ats.maxY
-        alertView.wrapped.header.backgroundColor = NX.backgroundColor
-        alertView.wrapped.header.isHidden = false
+        actionView.wrapped.header.frame.size = CGSize(width: NXDevice.width * 0.8, height: 80.0 + size.height)
+        actionView.wrapped.header.separator.ats = NX.Ats.maxY
+        actionView.wrapped.header.backgroundColor = NX.backgroundColor
+        actionView.wrapped.header.isHidden = false
         
-        alertView.wrapped.header.title.isHidden = false
-        alertView.wrapped.header.title.value = (title.count > 0) ? title : "温馨提示"
-        alertView.wrapped.header.title.frame = CGRect(x: 20, y: 20, width: alertView.wrapped.header.frame.width - 40, height: 30)
-        alertView.wrapped.header.title.font = NX.font(17, true)
+        actionView.wrapped.header.title.isHidden = false
+        actionView.wrapped.header.title.value = (title.count > 0) ? title : "温馨提示"
+        actionView.wrapped.header.title.frame = CGRect(x: 20, y: 20, width: actionView.wrapped.header.frame.width - 40, height: 30)
+        actionView.wrapped.header.title.font = NX.font(17, true)
         
-        alertView.wrapped.header.lhs.isHidden = true
+        actionView.wrapped.header.lhs.isHidden = true
         
-        alertView.wrapped.header.center.isHidden = false
-        alertView.wrapped.header.center.frame = CGRect(x: 20, y: 60, width: alertView.wrapped.header.frame.width - 40, height: size.height)
-        alertView.wrapped.header.center.font = NX.font(15, false)
-        alertView.wrapped.header.center.value = subtitle
-        alertView.wrapped.header.center.isAttributed = true
-        alertView.wrapped.header.center.numberOfLines = 0
+        actionView.wrapped.header.center.isHidden = false
+        actionView.wrapped.header.center.frame = CGRect(x: 20, y: 60, width: actionView.wrapped.header.frame.width - 40, height: size.height)
+        actionView.wrapped.header.center.font = NX.font(15, false)
+        actionView.wrapped.header.center.value = subtitle
+        actionView.wrapped.header.center.isAttributed = true
+        actionView.wrapped.header.center.numberOfLines = 0
         
-        alertView.wrapped.header.rhs.isHidden = true
+        actionView.wrapped.header.rhs.isHidden = true
         
         //center
-        alertView.wrapped.center.actions = optionWrappers
+        actionView.wrapped.center.actions = actions
         
         //footer
-        alertView.wrapped.footer.isHidden = true
-        alertView.wrapped.footer.frame.size = CGSize.zero
+        actionView.wrapped.footer.isHidden = true
+        actionView.wrapped.footer.frame.size = CGSize.zero
                 
-        alertView.updateSubviews(NXActionView.Key.Center.alert.rawValue, nil)
-        alertView.completion = completion
-        alertView.open(animation: alertView.animation, completion: nil)
-        return alertView
+        actionView.updateSubviews(NXActionView.Key.Center.alert.rawValue, nil)
+        actionView.completion = completion
+        actionView.open(animation: actionView.animation, completion: nil)
+        return actionView
     }
     
     @discardableResult
-    class public func action(titles: [String], completion:NX.Completion<String, Int>?) -> NXActionView {
-        let options = titles.map { (title) -> NXAction in
-            
+    class public func action(actions: [String], completion:NX.Completion<String, Int>?) -> NXActionView {
+        let __actions = actions.map { (title) -> NXAction in
             return NXAction(title:title, value: nil, completion: { (_,  __action) in
                 __action.asset.isHidden = true
                 __action.title.isHidden = false
                 __action.subtitle.isHidden = true
             })
         }
-        return NXActionView.action(options: options, completion: completion)
+        return NXActionView.action(actions: __actions, completion: completion)
     }
     
     @discardableResult
-    class public func action(options: [NXAction], completion:NX.Completion<String, Int>?) -> NXActionView {
-        return NXActionView.action(style: NXActionView.Key.Footer.action.rawValue, options: options, header:(.none, ""), footer: (.components(false, true, false), "取消"), completion: completion)
+    class public func action(actions: [NXAction], completion:NX.Completion<String, Int>?) -> NXActionView {
+        return NXActionView.action(actions: actions, header:(.none, ""), footer: (.components(false, true, false), "取消"), completion: completion)
     }
     
     @discardableResult
-    class public func action(options: [NXAction], header:NXActionView.HeaderView.Wrapped, footer: NXActionView.FooterView.Wrapped, completion:NX.Completion<String, Int>?) -> NXActionView {
-        return NXActionView.action(style: NXActionView.Key.Footer.action.rawValue, options: options, header:header, footer:footer, completion: completion)
-    }
-    
-    
-    @discardableResult
-    class public func action(style: NXActionView.Key.RawValue, options: [NXAction], header:NXActionView.HeaderView.Wrapped, footer: NXActionView.FooterView.Wrapped, completion:NX.Completion<String, Int>?) -> NXActionView {
+    class public func action(actions: [NXAction], header:NXActionView.HeaderView.Wrapped, footer: NXActionView.FooterView.Wrapped, completion:NX.Completion<String, Int>?) -> NXActionView {
         
-        let alertView = NXActionView(frame: UIScreen.main.bounds)
+        let actionView = NXActionView(frame: UIScreen.main.bounds)
         //header
-        alertView.wrapped.header.frame.size = CGSize(width: NXDevice.width, height: 60)
-        alertView.wrapped.header.separator.ats = NX.Ats.maxY
+        actionView.wrapped.header.frame.size = CGSize(width: NXDevice.width, height: 60)
+        actionView.wrapped.header.separator.ats = NX.Ats.maxY
         if case .components(let lhs, let center, let rhs, let title) = header.style {
             if lhs == false && center == false && rhs == false && title == false {
-                alertView.wrapped.header.isHidden = true
-                alertView.wrapped.header.lhs.isHidden = true
-                alertView.wrapped.header.center.isHidden = true
-                alertView.wrapped.header.rhs.isHidden = true
-                alertView.wrapped.header.title.isHidden = true
+                actionView.wrapped.header.isHidden = true
+                actionView.wrapped.header.lhs.isHidden = true
+                actionView.wrapped.header.center.isHidden = true
+                actionView.wrapped.header.rhs.isHidden = true
+                actionView.wrapped.header.title.isHidden = true
             }
             else {
-                alertView.wrapped.header.isHidden = false
+                actionView.wrapped.header.isHidden = false
                 
-                alertView.wrapped.header.lhs.isHidden = !lhs
-                if alertView.wrapped.header.lhs.isHidden == false {
-                    alertView.wrapped.header.lhs.value = "确定"
+                actionView.wrapped.header.lhs.isHidden = !rhs
+                actionView.wrapped.header.lhs.image = UIImage.image(image:NX.image(named:"uiapp_overlay_close_black.png"), color:NX.darkGrayColor)
+                
+                actionView.wrapped.header.center.isHidden = !center
+                if actionView.wrapped.header.center.isHidden == false {
+                    actionView.wrapped.header.center.value = header.title
                 }
                 
-                alertView.wrapped.header.center.isHidden = !center
-                if alertView.wrapped.header.center.isHidden == false {
-                    alertView.wrapped.header.center.value = header.title
+                actionView.wrapped.header.rhs.isHidden = !lhs
+                if actionView.wrapped.header.rhs.isHidden == false {
+                    actionView.wrapped.header.rhs.value = "确定"
                 }
-                
-                alertView.wrapped.header.rhs.isHidden = !rhs
-                alertView.wrapped.header.rhs.image = UIImage.image(image:NX.image(named:"uiapp_overlay_close_black.png"), color:NX.darkGrayColor)
 
-                alertView.wrapped.header.title.isHidden = !title
+                actionView.wrapped.header.title.isHidden = !title
             }
         }
         else if case .whitespace = header.style{
-            alertView.wrapped.header.isHidden = false
-            alertView.wrapped.header.title.isHidden = true
-            alertView.wrapped.header.lhs.isHidden = true
-            alertView.wrapped.header.center.isHidden = true
-            alertView.wrapped.header.rhs.isHidden = true
+            actionView.wrapped.header.isHidden = false
+            actionView.wrapped.header.title.isHidden = true
+            actionView.wrapped.header.lhs.isHidden = true
+            actionView.wrapped.header.center.isHidden = true
+            actionView.wrapped.header.rhs.isHidden = true
         }
         else if case .custom = header.style {
-            alertView.wrapped.header.isHidden = false
-            alertView.wrapped.header.title.isHidden = true
-            alertView.wrapped.header.lhs.isHidden = true
-            alertView.wrapped.header.center.isHidden = true
-            alertView.wrapped.header.rhs.isHidden = true
+            actionView.wrapped.header.isHidden = false
+            actionView.wrapped.header.title.isHidden = true
+            actionView.wrapped.header.lhs.isHidden = true
+            actionView.wrapped.header.center.isHidden = true
+            actionView.wrapped.header.rhs.isHidden = true
         }
         else if case .none = header.style {
-            alertView.wrapped.header.frame.size = CGSize(width: NXDevice.width, height: 0)
-            alertView.wrapped.header.isHidden = true
-            alertView.wrapped.header.title.isHidden = true
-            alertView.wrapped.header.lhs.isHidden = true
-            alertView.wrapped.header.center.isHidden = true
-            alertView.wrapped.header.rhs.isHidden = true
+            actionView.wrapped.header.frame.size = CGSize(width: NXDevice.width, height: 0)
+            actionView.wrapped.header.isHidden = true
+            actionView.wrapped.header.title.isHidden = true
+            actionView.wrapped.header.lhs.isHidden = true
+            actionView.wrapped.header.center.isHidden = true
+            actionView.wrapped.header.rhs.isHidden = true
         }
         
         //center
-        alertView.wrapped.center.actions = options
+        actionView.wrapped.center.actions = actions
 
         //footer
-        alertView.wrapped.footer.isHidden = false
-        alertView.wrapped.footer.separator.ats = []
-        alertView.wrapped.footer.center.value = footer.title.count > 0 ? footer.title : "取消"
+        actionView.wrapped.footer.isHidden = false
+        actionView.wrapped.footer.separator.ats = []
+        actionView.wrapped.footer.center.value = footer.title.count > 0 ? footer.title : "取消"
         if case .components(let lhs, let center, let rhs) = footer.style {
-            alertView.wrapped.footer.frame.size = CGSize(width: NXDevice.width, height: 60+NXDevice.bottomOffset)
-            alertView.wrapped.footer.title.isHidden = true
-            alertView.wrapped.footer.lhs.isHidden = !lhs
-            alertView.wrapped.footer.center.isHidden = !center
-            alertView.wrapped.footer.center.frame = CGRect(x: 0, y: 0, width: NXDevice.width, height: 60)
-            alertView.wrapped.footer.center.font = NX.font(17)
-            alertView.wrapped.footer.center.color = NX.mainColor
-            alertView.wrapped.footer.rhs.isHidden = !rhs
+            actionView.wrapped.footer.frame.size = CGSize(width: NXDevice.width, height: 60+NXDevice.bottomOffset)
+            actionView.wrapped.footer.title.isHidden = true
+            actionView.wrapped.footer.lhs.isHidden = !lhs
+            actionView.wrapped.footer.center.isHidden = !center
+            actionView.wrapped.footer.center.frame = CGRect(x: 0, y: 0, width: NXDevice.width, height: 60)
+            actionView.wrapped.footer.center.font = NX.font(17)
+            actionView.wrapped.footer.center.color = NX.mainColor
+            actionView.wrapped.footer.rhs.isHidden = !rhs
         }
         else if case .whitespace = footer.style {
-            alertView.wrapped.footer.frame.size = CGSize(width: NXDevice.width, height: 32.0+NXDevice.bottomOffset)
-            alertView.wrapped.footer.title.isHidden = true
-            alertView.wrapped.footer.lhs.isHidden = true
-            alertView.wrapped.footer.center.isHidden = true
-            alertView.wrapped.footer.rhs.isHidden = true
+            actionView.wrapped.footer.frame.size = CGSize(width: NXDevice.width, height: 32.0+NXDevice.bottomOffset)
+            actionView.wrapped.footer.title.isHidden = true
+            actionView.wrapped.footer.lhs.isHidden = true
+            actionView.wrapped.footer.center.isHidden = true
+            actionView.wrapped.footer.rhs.isHidden = true
         }
         else if case .none = footer.style{
-            alertView.wrapped.footer.frame.size = CGSize(width: NXDevice.width, height: NXDevice.bottomOffset)
-            alertView.wrapped.footer.title.isHidden = true
-            alertView.wrapped.footer.lhs.isHidden = true
-            alertView.wrapped.footer.center.isHidden = true
-            alertView.wrapped.footer.rhs.isHidden = true
+            actionView.wrapped.footer.frame.size = CGSize(width: NXDevice.width, height: NXDevice.bottomOffset)
+            actionView.wrapped.footer.title.isHidden = true
+            actionView.wrapped.footer.lhs.isHidden = true
+            actionView.wrapped.footer.center.isHidden = true
+            actionView.wrapped.footer.rhs.isHidden = true
         }
         
         //
         if case .whitespace = footer.style  {
-            alertView.wrapped.devide = 0.0
+            actionView.wrapped.devide = 0.0
         }
         else if case .none = footer.style {
-            alertView.wrapped.devide = 0.0
+            actionView.wrapped.devide = 0.0
         }
         
-        alertView.updateSubviews(style, nil)
-        alertView.completion = completion
-        alertView.open(animation: alertView.animation, completion: nil)
-        return alertView
+        actionView.updateSubviews(NXActionView.Key.Footer.action.rawValue, nil)
+        actionView.completion = completion
+        actionView.open(animation: actionView.animation, completion: nil)
+        return actionView
     }
 }
 
@@ -285,7 +294,7 @@ extension NXActionView {
                     let attributedText = NSAttributedString(string: appearance.center.value,
                                                             attributes: [NSAttributedString.Key.font:appearance.center.font,
                                                                          NSAttributedString.Key.foregroundColor:appearance.center.color,
-                                                                         NSAttributedString.Key.paragraphStyle:paragraph,])
+                                                                         NSAttributedString.Key.paragraphStyle:paragraph])
                     self.centerView.attributedText = attributedText
                 }
                 else {

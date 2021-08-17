@@ -2,7 +2,7 @@
 //  NXClipboardView.swift
 //  NXKit
 //
-//  Created by firelonely on 2020/11/26.
+//  Created by niegaotao on 2020/11/26.
 //
 
 import UIKit

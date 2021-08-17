@@ -2,7 +2,7 @@
 //  NXNaviView.swift
 //  NXKit
 //
-//  Created by firelonely on 2018/6/23.
+//  Created by niegaotao on 2018/6/23.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 

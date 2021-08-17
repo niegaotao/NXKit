@@ -148,8 +148,7 @@ class NXAppViewController: NXCollectionViewController {
                     __action.subtitle.isHidden = true
                 })
             }
-            NXActionView.action(style: NXActionView.Key.Footer.action.rawValue,
-                                options: options,
+            NXActionView.action(actions: options,
                                 header: (.components(true, true, true, false),"你好呀"),
                                 footer: (.components(false, true, false), "取消"),
                                 completion: { (a, index) in
@@ -160,13 +159,13 @@ class NXAppViewController: NXCollectionViewController {
             })
         }
         else if action == "NXPopupView" {
-            NXActionView.alert(title: "温馨提示", subtitle: "我们生活真的很幸福，珍惜现在报效祖国是我们肩负的使命", options: ["我知道了"], completion: nil)
+            NXActionView.alert(title: "温馨提示", subtitle: "我们生活真的很幸福，珍惜现在报效祖国是我们肩负的使命", actions: ["我知道了"], completion: nil)
         }
         else if action == "NXPopupView2" {
-            NXActionView.alert(title: "温馨提示", subtitle: "我们生活真的很幸福，珍惜现在报效祖国是我们肩负的使命", options: ["我知道了","好的"], completion: nil)
+            NXActionView.alert(title: "温馨提示", subtitle: "我们生活真的很幸福，珍惜现在报效祖国是我们肩负的使命", actions: ["我知道了","好的"], completion: nil)
         }
         else if action == "NXPopupView3" {
-            NXActionView.alert(title: "温馨提示", subtitle: "我们生活真的很幸福，珍惜现在报效祖国是我们肩负的使命", options: ["我知道了","好的","是的"], completion: nil)
+            NXActionView.alert(title: "温馨提示", subtitle: "我们生活真的很幸福，珍惜现在报效祖国是我们肩负的使命", actions: ["我知道了","好的","是的"], completion: nil)
         }
         else if action == "NXAsset_UIImage1" {
             guard let nav = self.navigationController as? NXNavigationController else {

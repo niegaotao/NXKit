@@ -2,7 +2,7 @@
 //  CAAnimation+NXKit.swift
 //  NXKit
 //
-//  Created by firelonely on 2019/6/17.
+//  Created by niegaotao on 2019/6/17.
 //
 
 import UIKit

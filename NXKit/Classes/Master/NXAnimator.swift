@@ -2,7 +2,7 @@
 //  NXAnimator.swift
 //  NXKit
 //
-//  Created by firelonely on 2019/5/18.
+//  Created by niegaotao on 2019/5/18.
 //
 
 import UIKit

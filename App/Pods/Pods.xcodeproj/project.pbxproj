@@ -84,6 +84,7 @@
 		C1258C26EC5FE2F1E7E7ECCC93188270 /* NXItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1F782B0801FC9AB896A8CF8183833 /* NXItem.swift */; };
 		C962EE74E2D52A10783041BC2AE7CE42 /* NXXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4638E285C1FB0008770B3FAA94B6ED8 /* NXXView.swift */; };
 		C978586E269D4CCF00D8D23B /* NXWrappedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C978586D269D4CCF00D8D23B /* NXWrappedViewController.swift */; };
+		C97C2D5726CB40BB00D80CC9 /* NXApplicationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C2D5626CB40BB00D80CC9 /* NXApplicationViewCell.swift */; };
 		C9ABEA85D63AA3588AA94948C60A107F /* NXLRView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BE760FD611C309A5CD6CD3B7E9026F /* NXLRView+.swift */; };
 		CBDCF5AE5D64F820491BDFDF936C566D /* NXWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C93DD3F568F875304E421B0FCA63FC /* NXWebViewController.swift */; };
 		CC15A030876B3DE3A4D8CC444642CBE1 /* DispatchQueue+NXKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3288022C89173645525EEAAD6D1FA775 /* DispatchQueue+NXKit.swift */; };
@@ -213,6 +214,7 @@
 		C4BE760FD611C309A5CD6CD3B7E9026F /* NXLRView+.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NXLRView+.swift"; sourceTree = "<group>"; };
 		C5424C557E424C4C7C65518C8B3BBC76 /* navi_back_black@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_back_black@3x.png"; path = "NXKit/Assets/navi_back_black@3x.png"; sourceTree = "<group>"; };
 		C978586D269D4CCF00D8D23B /* NXWrappedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NXWrappedViewController.swift; sourceTree = "<group>"; };
+		C97C2D5626CB40BB00D80CC9 /* NXApplicationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NXApplicationViewCell.swift; sourceTree = "<group>"; };
 		CAF282A636BAC9906101064EF1062357 /* NXPlaceholderView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXPlaceholderView.swift; sourceTree = "<group>"; };
 		CC02677F996EE96123B4F9434D955C9B /* navi_more_gray@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_more_gray@3x.png"; path = "NXKit/Assets/navi_more_gray@3x.png"; sourceTree = "<group>"; };
 		CE33A4E0C8FFE1172D5CFC94C4DB90DE /* NXToolViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXToolViewController.swift; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 				A50F92946049F6DAB3C614CFA4C04921 /* NX.swift */,
 				4D56FFCF626C2EE81F90D8F4B93AC827 /* NX+.swift */,
 				2CDFE4A1FA4DB7DEFE2E767EE50052C1 /* NXApplicationView.swift */,
+				C97C2D5626CB40BB00D80CC9 /* NXApplicationViewCell.swift */,
 				64C5121F63D12DB2C864CB35B6BC7096 /* NXBackgroundView.swift */,
 				A32623186A9705EEDC99E24E8136181C /* NXButton.swift */,
 				772D5394A4324B325D3D1455E5233C45 /* NXCollectionReusableView.swift */,
@@ -689,6 +692,7 @@
 				5C816408871903A84F1561641E89357B /* NXOverlay.swift in Sources */,
 				D8E9CC8F5FE6C184E8B771A3F67A780B /* NXPlaceholderView.swift in Sources */,
 				B3E8D746990BA0C78DF8DE6AA1ED3B99 /* NXPrintf.swift in Sources */,
+				C97C2D5726CB40BB00D80CC9 /* NXApplicationViewCell.swift in Sources */,
 				2BFB91231CA53FE1697782CE33E973C9 /* NXRouter.swift in Sources */,
 				15B8D6CAFC4223C07E32EC747CAA44E7 /* NXRuntime.swift in Sources */,
 				1518A9DC374F59705EB68857484523AB /* NXSerialization.swift in Sources */,

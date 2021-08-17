@@ -2,7 +2,7 @@
 //  NXApplicationView.swift
 //  NXKit
 //
-//  Created by firelonely on 2020/4/7.
+//  Created by niegaotao on 2020/4/7.
 //
 
 import UIKit
@@ -16,6 +16,7 @@ open class NXApplicationView: NXView {
     public let separator = CALayer()
 
     open override func setupSubviews() {
+        
         assetView.contentMode = .scaleAspectFill
         assetView.layer.masksToBounds = true
         self.addSubview(assetView)

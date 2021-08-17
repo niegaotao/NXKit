@@ -2,7 +2,7 @@
 //  NXDrawableView.swift
 //  NXKit
 //
-//  Created by firelonely on 2020/3/11.
+//  Created by niegaotao on 2020/3/11.
 //
 
 import UIKit
