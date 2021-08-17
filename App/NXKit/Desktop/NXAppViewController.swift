@@ -137,35 +137,38 @@ class NXAppViewController: NXCollectionViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
-        else if action == "NXActionView" {
-            let actions = [["action":"","name":"滤镜·特效"],
-                           ["action":"","name":"插入"],
-                           ["action":"","name":"更换"],
-                           ["action":"","name":"反转"]]
-            let options = actions.map { (a) -> NXAction in
-                return NXAction(title:a["name"] ?? "--", value: a, completion: { (_, __action:NXAction) in
+        else if ["NXActionView", "NXPopupView", "NXPopupView2", "NXPopupView3"].contains(action) {
+            var strings = ["设置", "删除", "我再想想"];
+            if action == "NXPopupView" {
+                strings = ["确定"];
+            }
+            else if action == "NXPopupView2" {
+                strings = ["删除", "我再想想"];
+            }
+            
+            let actions = strings.map { (a) -> NXAction in
+                return NXAction(title:a, value: nil, completion: { (_, __action:NXAction) in
                     __action.asset.isHidden = true
                     __action.subtitle.isHidden = true
+                    if(__action.title.value == "删除"){
+                        __action.title.color = UIColor.red
+                    }
                 })
             }
-            NXActionView.action(actions: options,
-                                header: (.components(true, true, true, false),"你好呀"),
-                                footer: (.components(false, true, false), "取消"),
-                                completion: { (a, index) in
-                                    
-                                    let vc = NXWebViewController()
-                                    vc.url = "http://www.bao66.cn/web/"
-                                    self.navigationController?.pushViewController(vc, animated: true)
-            })
-        }
-        else if action == "NXPopupView" {
-            NXActionView.alert(title: "温馨提示", subtitle: "我们生活真的很幸福，珍惜现在报效祖国是我们肩负的使命", actions: ["我知道了"], completion: nil)
-        }
-        else if action == "NXPopupView2" {
-            NXActionView.alert(title: "温馨提示", subtitle: "我们生活真的很幸福，珍惜现在报效祖国是我们肩负的使命", actions: ["我知道了","好的"], completion: nil)
-        }
-        else if action == "NXPopupView3" {
-            NXActionView.alert(title: "温馨提示", subtitle: "我们生活真的很幸福，珍惜现在报效祖国是我们肩负的使命", actions: ["我知道了","好的","是的"], completion: nil)
+            if action == "NXActionView" {
+                NXActionView.action(actions: actions,
+                                    header: (.components(true, true, true, false),"你好呀"),
+                                    footer: (.components(false, true, false), "取消"),
+                                    completion: { (a, index) in
+                                        
+                                        let vc = NXWebViewController()
+                                        vc.url = "http://www.bao66.cn/web/"
+                                        self.navigationController?.pushViewController(vc, animated: true)
+                })
+            }
+            else {
+                NXActionView.alert(title: "温馨提示", subtitle: "我们生活真的很幸福，珍惜现在报效祖国是我们肩负的使命", actions: actions, completion: nil)
+            }
         }
         else if action == "NXAsset_UIImage1" {
             guard let nav = self.navigationController as? NXNavigationController else {

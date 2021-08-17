@@ -24,7 +24,7 @@ extension NXActionView {
     }
     
     open class Wrapped<H:NXActionView.HeaderView, C:NXActionView.CenterView, F:NXActionView.FooterView> {
-        open var attributeKey = NXActionView.Key.Footer.action.rawValue
+        open var key = NXActionView.Key.Footer.action.rawValue
         open var header = NXActionView.Appearance<H>()
         open var center = NXActionView.Appearance<C>()
         open var footer = NXActionView.Appearance<F>()
@@ -33,8 +33,8 @@ extension NXActionView {
         open var max = NXDevice.height * 0.80
     }
     
-    open class Component : NSObject {
-        open var attributeKey = NXActionView.Key.Footer.action.rawValue
+    open class Metadata : NSObject {
+        open var key = NXActionView.Key.Footer.action.rawValue
         open var frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         open var backgroundColor : UIColor = NX.backgroundColor
         open var isHidden : Bool = false
@@ -81,9 +81,9 @@ extension NXActionView {
             self.frame.size = CGSize(width: NXDevice.width, height: 0)
         }
         
-        open class func size(_ appearance:NXActionView.Component) -> CGSize {
+        open class func size(_ appearance:NXActionView.Metadata) -> CGSize {
             var contentSize = CGSize(width: appearance.frame.width, height: 0)
-            if appearance.attributeKey == NXActionView.Key.Center.alert.rawValue {
+            if appearance.key == NXActionView.Key.Center.alert.rawValue {
                 if appearance.actions.count == 2 {
                     for index in 0...1 {
                         let action = appearance.actions[index]
@@ -115,7 +115,7 @@ extension NXActionView {
                 }
                 appearance.isAnimation = false
             }
-            else if appearance.attributeKey == NXActionView.Key.Footer.action.rawValue {
+            else if appearance.key == NXActionView.Key.Footer.action.rawValue {
                 for (index, action) in appearance.actions.enumerated() {
                     action.ctxs.width = appearance.frame.width;
                     action.separator.ats = (index == appearance.actions.count-1) ? []: .maxY;
@@ -123,7 +123,7 @@ extension NXActionView {
                     contentSize.height = contentSize.height + action.ctxs.height
                 }
             }
-            else if appearance.attributeKey == NXActionView.Key.Footer.mix.rawValue {
+            else if appearance.key == NXActionView.Key.Footer.mix.rawValue {
                 var offsetValue : (x:CGFloat, y:CGFloat, max:CGFloat) = (0,0,0)
                 for (idx, action) in appearance.actions.enumerated() {
                     if offsetValue.x + action.ctxs.width <= appearance.frame.width {
@@ -157,7 +157,7 @@ extension NXActionView {
         }
     }
     
-    open class Appearance<ComponentView:UIView> : Component {
+    open class Appearance<ComponentView:UIView> : Metadata {
         public let componentView = ComponentView(frame:CGRect.zero)
     }
 }
@@ -231,28 +231,28 @@ open class NXActionView: NXOverlay {
     }
     
     open override func updateSubviews(_ action: NXActionView.Key.RawValue, _ value: Any?) {
-        self.wrapped.attributeKey = action
-        self.wrapped.footer.attributeKey = action
-        self.wrapped.center.attributeKey = action
-        self.wrapped.footer.attributeKey = action
+        self.wrapped.key = action
+        self.wrapped.footer.key = action
+        self.wrapped.center.key = action
+        self.wrapped.footer.key = action
         
-        if self.wrapped.attributeKey.contains("center") {
+        if self.wrapped.key.contains("center") {
             self.animation = NXOverlay.Animation.center.rawValue
         }
-        else if self.wrapped.attributeKey.contains("footer"){
+        else if self.wrapped.key.contains("footer"){
             self.animation = NXOverlay.Animation.footer.rawValue
         }
         
         
         //1-1.顶部视图部分
-        if self.wrapped.attributeKey.contains("center") {
+        if self.wrapped.key.contains("center") {
             self.wrapped.size = CGSize(width: NXDevice.width * 0.8, height: 0.0)
             self.contentView.layer.cornerRadius = 8
             self.contentView.layer.masksToBounds = true
             self.contentView.backgroundColor = NX.backgroundColor
             self.backgroundView.isUserInteractionEnabled = false
         }
-        else if self.wrapped.attributeKey.contains("footer"){
+        else if self.wrapped.key.contains("footer"){
             if self.wrapped.devide > 0 {
                 self.contentView.backgroundColor = NX.contentViewBackgroundColor
             }
@@ -267,7 +267,7 @@ open class NXActionView: NXOverlay {
         self.wrapped.center.frame.size.width = self.wrapped.size.width
         
         
-        self.wrapped.center.frame.size.height = NXActionView.Component.size(self.wrapped.center).height
+        self.wrapped.center.frame.size.height = NXActionView.Metadata.size(self.wrapped.center).height
         self.wrapped.center.frame.size.height = min(self.wrapped.center.frame.height, self.wrapped.max - wrapped.header.frame.size.height - self.wrapped.footer.frame.height) //最优高度
 
         //1
@@ -311,10 +311,10 @@ open class NXActionView: NXOverlay {
             self.wrapped.footer.componentView.isHidden = true
         }
         
-        if self.wrapped.attributeKey.contains("center") {
+        if self.wrapped.key.contains("center") {
             self.contentView.frame = CGRect(x: (self.frame.size.width - self.wrapped.size.width)/2.0, y: (self.frame.size.height-self.wrapped.size.height)/2.0, width: self.wrapped.size.width, height: self.wrapped.size.height)
         }
-        else if self.wrapped.attributeKey.contains("footer"){
+        else if self.wrapped.key.contains("footer"){
             self.contentView.frame = CGRect(x: (self.frame.size.width - self.wrapped.size.width)/2.0, y: self.frame.size.height-self.wrapped.size.height, width: self.wrapped.size.width, height: self.wrapped.size.height)
         }
     }

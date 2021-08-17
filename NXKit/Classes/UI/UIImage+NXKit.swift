@@ -10,17 +10,6 @@
 import Foundation
 import UIKit
 
-
-
-/*
- 渐变颜色方向
- 
- landscape 横向
- vertical  竖向
- */
-
-
-
 /*
  颜色生成图片
  */

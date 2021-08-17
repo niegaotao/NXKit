@@ -338,7 +338,7 @@ extension NXActionView {
 
 extension NXActionView {
     open class CenterView : NXCView<NXCollectionView>, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-        private(set) var appearance = NXActionView.Component()
+        private(set) var appearance = NXActionView.Metadata()
         open var completion : NX.Completion<NXAction, Int>? = nil
         
         open override func setupSubviews() {

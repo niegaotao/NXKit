@@ -15,7 +15,7 @@ extension NXItem {
         
         open var cls : AnyClass?        //单元格/视图类型, e.g. NXTableViewCell.self
         open var reuse : String = ""    //单元格重用ID
-        open var type: Int = 0          //根据不同id来做不同单元格的区分
+        open var tag: Int = 0           //根据不同tag来做不同单元格的区分
         
         open var completion : NX.Completion<String, Any?>? = nil  //点击等回调
         
