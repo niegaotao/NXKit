@@ -2,7 +2,7 @@
 //  NXAssetsViewController.swift
 //  NXKit
 //
-//  Created by 聂高涛 on 2018/5/24.
+//  Created by 聂高涛 on 2020/5/24.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 
@@ -168,10 +168,10 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     open override func dispose(_ action: String, _ value: Any?, _ completion: NX.Completion<String, Any?>? = nil) {
         if action == "footer.lhs" {
             NXActionView.action(actions: self.wrapped.albums, header: (.components(false, true, true, false), "请选择相册"), footer: (.whitespace, "")) { (_, index) in
-                guard index != self.ctxs.index else {
+                guard index != self.ctxs.x else {
                     return;
                 }
-                self.ctxs.index = index
+                self.ctxs.x = index
                 self.showAlbumAssets(at: index)
             }
         }
@@ -249,11 +249,11 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
             }
         }
         else if action == "filter" {
-            if self.ctxs.index < self.wrapped.albums.count {
-                let album = self.wrapped.albums[self.ctxs.index]
+            if self.ctxs.x < self.wrapped.albums.count {
+                let album = self.wrapped.albums[self.ctxs.x]
                 if album.isBlockable {
                     album.isBlocked = !album.isBlocked
-                    self.showAlbumAssets(at: self.ctxs.index)
+                    self.showAlbumAssets(at: self.ctxs.x)
                 }
             }
         }
@@ -468,7 +468,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == self.collectionView {
-            if self.wrapped.albums[self.ctxs.index].isBlockable {
+            if self.wrapped.albums[self.ctxs.x].isBlockable {
                 self.filterView.updateSubviews("animation", false)
             }
         }
@@ -476,7 +476,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     
     public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         if scrollView == self.collectionView {
-            if self.wrapped.albums[self.ctxs.index].isBlockable {
+            if self.wrapped.albums[self.ctxs.x].isBlockable {
                 self.filterView.updateSubviews("animation", true)
             }
         }
@@ -484,7 +484,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == self.collectionView {
-            if self.wrapped.albums[self.ctxs.index].isBlockable {
+            if self.wrapped.albums[self.ctxs.x].isBlockable {
                 self.filterView.updateSubviews("animation", true)
             }
         }
@@ -492,7 +492,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if scrollView == self.collectionView {
-            if self.wrapped.albums[self.ctxs.index].isBlockable {
+            if self.wrapped.albums[self.ctxs.x].isBlockable {
                 self.filterView.updateSubviews("animation", true)
             }
         }
@@ -500,7 +500,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     
     public func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
         if scrollView == self.collectionView {
-            if self.wrapped.albums[self.ctxs.index].isBlockable {
+            if self.wrapped.albums[self.ctxs.x].isBlockable {
                 self.filterView.updateSubviews("animation", true)
             }
         }

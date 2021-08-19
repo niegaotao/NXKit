@@ -2,7 +2,7 @@
 //  NXButton.swift
 //  NXKit
 //
-//  Created by niegaotao on 2018/4/28.
+//  Created by niegaotao on 2020/4/28.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 

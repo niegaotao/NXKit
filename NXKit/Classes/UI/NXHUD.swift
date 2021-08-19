@@ -165,7 +165,7 @@ extension NXHUD {
             __sender.size = CGSize(width: 140.0, height: 92.0)
         }
         
-        open var animationView = NX.Animation.animationClass.init(frame:CGRect(x: 0, y: 0, width: 44, height: 44))
+        open var animationView = NX.UI.AnimationClass.init(frame:CGRect(x: 0, y: 0, width: 44, height: 44))
         open var descriptionView = UILabel(frame: CGRect.zero)
         
         open override func setupSubviews() {

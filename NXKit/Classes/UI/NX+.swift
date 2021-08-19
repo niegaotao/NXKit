@@ -121,14 +121,13 @@ extension NX {
         }
     }
     
-    
     open class Wrapped<Index: Any, Value:Any> where Index : NXInitialValue, Value : NXInitialValue {
         open var index = Index.initialValue
         open var initialValue = Value.initialValue
         open var value = Value.initialValue
         open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrapped<Index, Value>>?) -> ())? = nil
         
-        public init(completion:NX.Completion<String, NX.Wrapped<Index, Value>>?) {
+        public init(completion: NX.Completion<String, NX.Wrapped<Index, Value>>?) {
             completion?("", self)
         }
         
@@ -143,7 +142,7 @@ extension NX {
         
         open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Completed<Value>>?) -> ())? = nil
         
-        public init(completion:NX.Completion<String, NX.Completed<Value>>?) {
+        public init(completion: NX.Completion<String, NX.Completed<Value>>?) {
             completion?("", self)
         }
         
@@ -157,7 +156,7 @@ extension NX {
         open var maxValue = Value.initialValue
         open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Compared<Value>>?) -> ())? = nil
         
-        public init(completion:NX.Completion<String, NX.Compared<Value>>?) {
+        public init(completion: NX.Completion<String, NX.Compared<Value>>?) {
             completion?("", self)
         }
         
@@ -170,7 +169,7 @@ extension NX {
         open var value : Value? = nil
         open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Specified<Value>>?) -> ())? = nil
         
-        public init(completion:NX.Completion<String, NX.Specified<Value>>?) {
+        public init(completion: NX.Completion<String, NX.Specified<Value>>?) {
             completion?("", self)
         }
         
@@ -183,7 +182,7 @@ extension NX {
         open var selected = T.initialValue
         open var unselected = T.initialValue
                     
-        public init(completion:NX.Completion<String, NX.Selectable<T>>?){
+        public init(completion: NX.Completion<String, NX.Selectable<T>>?){
             completion?("", self)
         }
         

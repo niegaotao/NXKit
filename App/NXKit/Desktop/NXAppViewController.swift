@@ -31,6 +31,9 @@ class NXAppViewController: NXCollectionViewController {
     }
     
     override func updateSubviews(_ action: String, _ entities: [String : Any]?) {
+        
+        NX.print("------\(self.ctxs.index)");
+        
         self.collectionWrapper.removeAll()
         
         let section = NXSection()

@@ -8,7 +8,7 @@
 import UIKit
 
 
-open class NXTableApplicationViewCell<T:UIView>: NXTableViewCell {
+open class NXTableUnspecifiedViewCell<T:UIView>: NXTableViewCell {
     public let applicationView = T(frame: CGRect.zero)
     
     open override func setupSubviews(){
@@ -68,7 +68,7 @@ open class NXTableApplicationViewCell<T:UIView>: NXTableViewCell {
     }
 }
 
-open class NXCollectionApplicationViewCell<T:UIView>: NXCollectionViewCell {
+open class NXCollectionUnspecifiedViewCell<T:UIView>: NXCollectionViewCell {
     public let applicationView = T(frame: CGRect.zero)
     
     open override func setupSubviews(){
@@ -127,3 +127,9 @@ open class NXCollectionApplicationViewCell<T:UIView>: NXCollectionViewCell {
         }
     }
 }
+
+open class NXApplicationViewCell : NXTableUnspecifiedViewCell<NXApplicationView> {}
+
+open class NXActionViewCell : NXCollectionUnspecifiedViewCell<NXApplicationView> {}
+
+

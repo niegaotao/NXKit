@@ -2,7 +2,7 @@
 //  NXDevice.swift
 //  NXKit
 //
-//  Created by niegaotao on 2018/5/18.
+//  Created by niegaotao on 2020/5/18.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 
@@ -189,27 +189,27 @@ open class NXDevice {
             "i386" : "Simulator x86",
             "x86_64" : "Simulator x64"]
     
-    public struct Typed {
+    public struct UI {
         public var width = CGFloat.zero
         public var height = CGFloat.zero
         public var scale = CGFloat.zero
         public var inches = [CGFloat]()
     }
     
-    public static var is320x480x1 = NXDevice.Typed(width: 320, height: 480, scale: 1, inches: [3.5]) ///[iPhone,iPhone3GS]
-    public static var is320x480x2 = NXDevice.Typed(width: 320, height: 480, scale: 2, inches: [3.5]) ///[iPhone4,iPhone4S]
-    public static var is320x568x2 = NXDevice.Typed(width: 320, height: 568, scale: 2, inches: [4.0]) ///[iPhone5,iPhone5c,iPhone5S,iPhoneSE1]
+    public static var is320x480x1 = NXDevice.UI(width: 320, height: 480, scale: 1, inches: [3.5]) ///[iPhone,iPhone3GS]
+    public static var is320x480x2 = NXDevice.UI(width: 320, height: 480, scale: 2, inches: [3.5]) ///[iPhone4,iPhone4S]
+    public static var is320x568x2 = NXDevice.UI(width: 320, height: 568, scale: 2, inches: [4.0]) ///[iPhone5,iPhone5c,iPhone5S,iPhoneSE1]
         
-    public static var is375x667x2 = NXDevice.Typed(width: 375, height: 667, scale: 2, inches: [4.7]) ///[iPhone6,iPhone6s,iPhone7,iPhone8,iPhoneSE2]
-    public static var is375x812x3 = NXDevice.Typed(width: 375, height: 812, scale: 3, inches: [5.4,5.8]) ///[iPhone12mini],[iPhoneX,iPhoneXs,iPhone11Pro]
+    public static var is375x667x2 = NXDevice.UI(width: 375, height: 667, scale: 2, inches: [4.7]) ///[iPhone6,iPhone6s,iPhone7,iPhone8,iPhoneSE2]
+    public static var is375x812x3 = NXDevice.UI(width: 375, height: 812, scale: 3, inches: [5.4,5.8]) ///[iPhone12mini],[iPhoneX,iPhoneXs,iPhone11Pro]
     
-    public static var is390x844x3 = NXDevice.Typed(width: 390, height: 844, scale: 3, inches: [6.1]) ///[iPhone12,iPhone12Pro]
+    public static var is390x844x3 = NXDevice.UI(width: 390, height: 844, scale: 3, inches: [6.1]) ///[iPhone12,iPhone12Pro]
     
-    public static var is414x736x3 = NXDevice.Typed(width: 414, height: 736, scale: 3, inches: [5.5]) ///[iPhone6Plus,iPhone6sPlus,iPhone7Plus,iPhone8Plus]
-    public static var is414x896x2 = NXDevice.Typed(width: 414, height: 896, scale: 2, inches: [6.1]) ///[iPhoneXr,iPhone11]
-    public static var is414x896x3 = NXDevice.Typed(width: 414, height: 896, scale: 3, inches: [6.5]) ///[iPhoneXs max,iPhone11ProMax]
+    public static var is414x736x3 = NXDevice.UI(width: 414, height: 736, scale: 3, inches: [5.5]) ///[iPhone6Plus,iPhone6sPlus,iPhone7Plus,iPhone8Plus]
+    public static var is414x896x2 = NXDevice.UI(width: 414, height: 896, scale: 2, inches: [6.1]) ///[iPhoneXr,iPhone11]
+    public static var is414x896x3 = NXDevice.UI(width: 414, height: 896, scale: 3, inches: [6.5]) ///[iPhoneXs max,iPhone11ProMax]
     
-    public static var is428x926x3 = NXDevice.Typed(width: 428, height: 926, scale: 3, inches: [6.7]) ///[iPhone12ProMax]
+    public static var is428x926x3 = NXDevice.UI(width: 428, height: 926, scale: 3, inches: [6.7]) ///[iPhone12ProMax]
 }
 
 

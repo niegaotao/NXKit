@@ -58,7 +58,6 @@
 		7057256D64EC39E5C491C37137AEFB07 /* NXSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9AD634256911033860764772C43062 /* NXSwitch.swift */; };
 		740339569BE6D109861D9F542A73EC48 /* NXCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F6085A97C4FA212CBFF8694A4758E6 /* NXCollectionView.swift */; };
 		79CD8B0BA56D50F4758542D2968BB476 /* CAAnimation+NXKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03497B92E8ADF2A2EC244034FFE8C0D /* CAAnimation+NXKit.swift */; };
-		7A54EEA80012EB92B367F5E41310B56A /* NXActionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0724FE77389606B6C13492A8DE11176 /* NXActionViewCell.swift */; };
 		7C942BFE9320C6B55C5F111811A664FD /* navi_close_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2A0D3EED659332C4086915483BA0C3 /* navi_close_black@2x.png */; };
 		7F810D76F04681D93EA54EA402E9D858 /* NXFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC6AAEC680690E0C94017BF5A107686 /* NXFS.swift */; };
 		858E5A49D526702A1C1DC1E9DB27E691 /* NXApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDFE4A1FA4DB7DEFE2E767EE50052C1 /* NXApplicationView.swift */; };
@@ -196,7 +195,6 @@
 		A50F92946049F6DAB3C614CFA4C04921 /* NX.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NX.swift; sourceTree = "<group>"; };
 		A53433FBA5BCC035FE43DB2F4836EF88 /* NXObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXObserver.swift; sourceTree = "<group>"; };
 		AC2D68EDC4055005813D941BBA853E16 /* NXLCRView+.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NXLCRView+.swift"; sourceTree = "<group>"; };
-		B0724FE77389606B6C13492A8DE11176 /* NXActionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXActionViewCell.swift; sourceTree = "<group>"; };
 		B0E83DF2439D6ED65F84DFAC6F1CD9E9 /* Pods_NXKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NXKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B158A3AEFB86947076CB63416C1A1842 /* NXWebView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXWebView.swift; sourceTree = "<group>"; };
 		B1EA9077DB59ABDCCB6A06492931F0AF /* NXShadowView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXShadowView.swift; sourceTree = "<group>"; };
@@ -416,7 +414,6 @@
 				8E91FD318901432E8DFAF3F94AD33616 /* NXAction.swift */,
 				5C9D820EC43D9B2E26180F1F87AC3FC0 /* NXActionView.swift */,
 				9D8F2CC9D6ABEBD9BFF57B9DBB0A3DC7 /* NXActionView+NXKit.swift */,
-				B0724FE77389606B6C13492A8DE11176 /* NXActionViewCell.swift */,
 				9266E44F38C238B78711D5F8892E6EE9 /* NXAnimationView.swift */,
 				52882DF257AE9C4F3521C9A15C6CB631 /* NXAnimator.swift */,
 				A50F92946049F6DAB3C614CFA4C04921 /* NX.swift */,
@@ -651,7 +648,6 @@
 				266E72825464285599AE77E5AEB430BB /* NXAction.swift in Sources */,
 				1A4F288BEE1F73BBBD4729C7BDD998D4 /* NXActionView+NXKit.swift in Sources */,
 				DBDECB7DA287F193A517B1DB4A615DCC /* NXActionView.swift in Sources */,
-				7A54EEA80012EB92B367F5E41310B56A /* NXActionViewCell.swift in Sources */,
 				5E124C80E5D2BB603E2F3B1F11DEBE02 /* NXAnimationView.swift in Sources */,
 				DCE71679450CF4DDDEA090451501DFED /* NXAnimator.swift in Sources */,
 				E64B5B97D95627974C5B0EDBDCFF61F8 /* NX+.swift in Sources */,

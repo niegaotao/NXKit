@@ -17,7 +17,6 @@ open class NX {
     static public let version = NX.infoDictionary["CFBundleShortVersionString"] as? String ?? ""
     static public let build = NX.infoDictionary["CFBundleVersion"] as? String ?? ""
     static public let isViewControllerBasedStatusBarAppearance = NX.get(bool: NX.infoDictionary["UIViewControllerBasedStatusBarAppearance"] as? Bool, true)
-    static public var isSeparatorHidden = false
     
     public typealias Completion<Action, Value> = (_ action:Action, _ value:Value)  -> ()
 }
@@ -69,15 +68,6 @@ extension NX {
         }
     }
 }
-
-
-//空页面加载动画类型
-extension NX {
-    open class Animation {
-        static public var animationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self
-    }
-}
-
 
 //内容横向纵向边缘缩进
 extension NX {
@@ -152,82 +142,79 @@ extension NX {
 }
 
 
-//状态栏效果
+
 extension NX {
-    final public class UI {
-        //用户可选的暗黑模式的类型-枚举
-        public enum Value : String {
-            case unspecified = "unspecified"
-            case light = "light"
-            case dark = "dark"
-        }
-        
+    //暗黑模式的类型
+    public enum Color : String {
+        case unspecified = "unspecified"
+        case light = "light"
+        case dark = "dark"
+    }
+    
+    //状态栏的样式
+    public enum Bar : String {
+        case none = "none"
+        case hidden = "hidden"
+        case unspecified = "unspecified"
+        case light = "light"
+        case dark = "dark"
+    }
+    
+    //状态栏效果
+    public class UI {
         //用户设定的暗黑模式类型
-        static public private(set) var setupValue = NX.UI.Value.light
-        public class func setup(_ action: String, _ newValue: NX.UI.Value){
-            NX.UI.setupValue = newValue
+        static public private(set) var setupColorValue = NX.Color.light
+        public class func update(_ newValue: NX.Color, _ animated:Bool = true){
+            NX.UI.setupColorValue = newValue
         }
         
-        public class var currentValue : NX.UI.Value {
-            if NX.UI.setupValue == NX.UI.Value.light {
-                return NX.UI.Value.light
+        public class var currentColor : NX.Color {
+            if NX.UI.setupColorValue == NX.Color.light {
+                return NX.Color.light
             }
-            else if NX.UI.setupValue == NX.UI.Value.dark {
+            else if NX.UI.setupColorValue == NX.Color.dark {
                 if #available(iOS 13.0, *) {
-                    return NX.UI.Value.dark
+                    return NX.Color.dark
                 }
-                return NX.UI.Value.light
+                return NX.Color.light
             }
             else {
                 if #available(iOS 13.0, *) {
                     if UITraitCollection.current.userInterfaceStyle == .dark {
-                        return NX.UI.Value.dark
+                        return NX.Color.dark
                     }
                 }
-                return NX.UI.Value.light
+                return NX.Color.light
             }
         }
-    }
-
-    final public class Bar {
-        //管理状态栏的样式
-        public enum Value : String {
-            case none = "none"
-            case hidden = "hidden"
-            case unspecified = "unspecified"
-            case light = "light"
-            case dark = "dark"
-        }
-                
-        static public private(set) var currentValue = NX.Bar.Value.none
-        static public private(set) var currentOrientation = UIInterfaceOrientation.portrait
         
-        public class func update(_ newValue: NX.Bar.Value, _ animated:Bool = true){
+        static public private(set) var setupBarValue = NX.Bar.none
+        public class func update(_ newValue: NX.Bar, _ animated:Bool = true){
             if NX.isViewControllerBasedStatusBarAppearance {
                 if newValue !=  .none {
-                    NX.Bar.currentValue = newValue
+                    NX.UI.setupBarValue = newValue
                 }
             }
             else {
-                if newValue == NX.Bar.Value.hidden {
-                    NX.Bar.currentValue = newValue
+                if newValue == NX.Bar.hidden {
+                    NX.UI.setupBarValue = newValue
                     UIApplication.shared.isStatusBarHidden = true
                 }
-                else if newValue == NX.Bar.Value.unspecified {
-                    NX.Bar.currentValue = newValue
+                else if newValue == NX.Bar.unspecified {
+                    NX.UI.setupBarValue = newValue
                     UIApplication.shared.isStatusBarHidden = false
                     UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.default, animated: animated)
                 }
-                else if newValue == NX.Bar.Value.light {
-                    NX.Bar.currentValue = newValue
+                else if newValue == NX.Bar.light {
+                    NX.UI.setupBarValue = newValue
                     UIApplication.shared.isStatusBarHidden = false
                     UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: animated)
                 }
-                else if newValue == NX.Bar.Value.dark {
-                    NX.Bar.currentValue = newValue
+                else if newValue == NX.Bar.dark {
+                    NX.UI.setupBarValue = newValue
                     UIApplication.shared.isStatusBarHidden = false
                     if #available(iOS 13.0, *) {
-                        if NX.UI.currentValue == NX.UI.Value.dark {
+                        if NX.UI.currentColor == NX.Color.dark {
                             UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: animated)
                         }
                         else {
@@ -240,6 +227,17 @@ extension NX {
                 }
             }
         }
+        
+        public class var currentBar : NX.Bar {
+            return NX.UI.setupBarValue
+        }
+        
+        
+        //空页面加载动画类型
+        static public var AnimationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self
+        static public var PagingClass : NXInitialValue.Type = Int.self
+        
+        static public var isSeparatorHidden = false
     }
 }
 
@@ -279,7 +277,7 @@ extension NX {
     public class func color(_ lightColor:UIColor, _ darkColor:UIColor? = nil) -> UIColor {
         if #available(iOS 13.0, *) {
             return UIColor.init { (__collection) -> UIColor in
-                if let __darkColor = darkColor, NX.UI.currentValue == NX.UI.Value.dark {
+                if let __darkColor = darkColor, NX.UI.currentColor == NX.Color.dark {
                     return __darkColor
                 }
                 return lightColor

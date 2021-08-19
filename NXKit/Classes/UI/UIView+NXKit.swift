@@ -2,7 +2,7 @@
 //  UIView+NXFoundation.swift
 //  NXKit
 //
-//  Created by niegaotao on 2018/5/19.
+//  Created by niegaotao on 2020/5/19.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 

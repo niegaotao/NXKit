@@ -2,7 +2,7 @@
 //  NXControl.swift
 //  NXKit
 //
-//  Created by niegaotao on 2018/8/12.
+//  Created by niegaotao on 2020/8/12.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 

@@ -2,16 +2,16 @@
 //  NXViewController.swift
 //  NXKit
 //
-//  Created by niegaotao on 2018/5/8.
+//  Created by niegaotao on 2020/5/8.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 
 import UIKit
 
+open class NXViewController: UIViewController  {
 
-open class NXViewController: UIViewController {
     ///ctxs.index用于记录分页加载的索引，xyz备用
-    public let ctxs = NXViewController.Associated()
+    public let ctxs = NXViewController.Associated<Int>()
     
     ///导航栏
     open var naviView = NXNaviView(frame: CGRect(x: 0, y: 0, width: NXDevice.width, height: NXDevice.topOffset))
@@ -45,7 +45,7 @@ open class NXViewController: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.view.backgroundColor = NX.viewBackgroundColor
         
         self.contentView.frame = CGRect(x: 0, y: NXDevice.topOffset, width: self.view.w, height: self.view.h-NXDevice.topOffset)
@@ -126,7 +126,7 @@ open class NXViewController: UIViewController {
     //更新导航栏：父类会自动调用
     open func updateNavigationBar() {
         if NX.isViewControllerBasedStatusBarAppearance == false {
-            NX.Bar.update(self.ctxs.statusBarStyle)
+            NX.UI.update(self.ctxs.statusBarStyle)
         }
         else if let superviewController = self.ctxs.superviewController {
             if let viewController = superviewController as? NXToolViewController, viewController.selectedViewController == self {
@@ -190,13 +190,13 @@ open class NXViewController: UIViewController {
             currentValue = viewController.ctxs.statusBarStyle
         }
         
-        if currentValue == NX.Bar.Value.unspecified {
+        if currentValue == NX.Bar.unspecified {
             return UIStatusBarStyle.default
         }
-        else if currentValue == NX.Bar.Value.light {
+        else if currentValue == NX.Bar.light {
             return UIStatusBarStyle.lightContent
         }
-        else if currentValue == NX.Bar.Value.dark {
+        else if currentValue == NX.Bar.dark {
             if #available(iOS 13.0, *) {
                 if UITraitCollection.current.userInterfaceStyle == .dark {
                     return UIStatusBarStyle.lightContent
@@ -221,7 +221,7 @@ open class NXViewController: UIViewController {
         else if let viewController = self.ctxs.subviewControllers.last, viewController.ctxs.statusBarStyle != .none {
             currentValue = viewController.ctxs.statusBarStyle
         }
-        return currentValue == NX.Bar.Value.hidden
+        return currentValue == NX.Bar.hidden
     }
     
     override open func present(_ viewController: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
@@ -239,15 +239,14 @@ open class NXViewController: UIViewController {
 
 
 extension NXViewController {
-    open class Associated {
-        open var index : Int = 0 ///用于记录当前正在请求或者展示的页面index，多用于分页加载
-        open var next : Int = 1  ///用于记录下一页的索引值
-        public let reload = NXViewController.Reload()///当前刷新状态
+    open class Associated<Index:NXInitialValue> {
+        open var index = Index.initialValue ///用于记录当前正在请求或者展示的页面index，多用于分页加载
+        open var next = Index.initialValue  ///用于记录下一页next，多用于分页加载
+        open var reload = NXViewController.Reload.initialized///当前刷新状态
         
-        ///是否被其他UIViewController包装了，某些情况被包装的需要隐藏掉导航栏
-        open var isWrapped : Bool = false
-        ///页面是否为空，如有缓存数据则可置为false。false不用展示加载动画
-        open var isEmpty : Bool = true
+        
+        open var isWrapped : Bool = false ///是否被其他UIViewController包装了，某些情况被包装的需要隐藏掉导航栏
+        open var isEmpty : Bool = true ///页面是否为空，如有缓存数据则可置为false。false不用展示加载动画
         
         ///以下三个备用，可以使用的场景比如存储分段选择控件的selectedIndex
         open var x: Int = 0
@@ -255,10 +254,10 @@ extension NXViewController {
         open var z: Int = 0
         
         ///状态栏样式
-        open var statusBarStyle = NX.Bar.Value.dark
+        open var statusBarStyle = NX.Bar.dark
         
         ///空页面加载动画
-        open var animationViewClass : NXAnimationWrappedView.Type? = NX.Animation.animationClass
+        open var animationViewClass : NXAnimationWrappedView.Type? = NX.UI.AnimationClass
         
         ///页面加载完毕触发(触发后会强制置为nil)
         open var callbackViewAppeared: (() -> ())?
@@ -275,9 +274,9 @@ extension NXViewController {
         open var completion : NX.Completion<String, Any?>? = nil
         ///导航栏顶部的分割线
         public let separator = NX.Separator { (_, __sender) in
-            __sender.insets = UIEdgeInsets.zero
-            __sender.isHidden = NX.isSeparatorHidden
-            __sender.backgroundColor = NX.separatorColor
+            __sender.insets = UIEdgeInsets.zero;
+            __sender.isHidden = NX.UI.isSeparatorHidden;
+            __sender.backgroundColor = NX.separatorColor;
         }
         ///覆盖的视图控制器
         public var subviewControllers = [NXViewController]()
@@ -301,17 +300,10 @@ extension NXViewController {
         case right      //从右侧进入
     }
     
-    open class Reload : NSObject{
-        open var index = ""//当前页面的id
-        open var next = ""//如果有下一页，则表示下一页的id
-        open var state = NXViewController.Reload.State.update //初始值刷新状态
-        open var isSupported = false
-        
-        public enum State : Int {
-            case initialized //初始状态
-            case update      //下拉刷新
-            case more        //上拉加载更多
-        }
+    public enum Reload : Int {
+        case initialized //初始状态
+        case update      //下拉刷新
+        case more        //上拉加载更多
     }
 }
 
