@@ -947,8 +947,11 @@ open class NXAssetViewCell: NXCollectionViewCell{
             self.assetView.image = __thumbnail
         }
         else{
+            var size = self.contentView.frame.size
+            size.width = round(size.width * NXDevice.scale)
+            size.height =  round(size.height * NXDevice.scale)
             PHCachingImageManager.default().requestImage(for: phasset,
-                                                         targetSize: self.contentView.frame.size,
+                                                         targetSize: size,
                                                          contentMode: .aspectFill,
                                                          options: nil) {[weak self](image, info) in
                                                             asset.thumbnail = image
