@@ -12,6 +12,8 @@ import Photos
 open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UICollectionViewDataSource {
     //配置信息
     public let wrapped = NXAsset.Wrapped()
+    //导航栏中间切换相册
+    public let centerView = NXButton(frame: CGRect(x: 75.0, y: NXDevice.insets.top, width: NXDevice.width-75.0*2, height: NXDevice.topOffset-NXDevice.insets.top))
     //顶部悬停过滤的
     public let filterView = NXSuspendView<UIButton>(frame: CGRect(x: 0, y: 0, width: NXDevice.width, height: 40))
     //展示图片
@@ -23,10 +25,18 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        ///每次进来同步一下目标类型
-        self.naviView.title = "我的相册"
+        self.centerView.setTitle("我的相册", for: .normal)
+        self.centerView.setImage(NX.image(named: "navi_arrow_down.png"), for: .normal)
+        self.centerView.setTitleColor(NX.darkBlackColor, for: .normal)
+        self.centerView.titleLabel?.font = NX.font(17, true)
+        self.centerView.contentHorizontalAlignment = .center
+        self.centerView.setupEvents([.touchUpInside]) {[weak self] _, _ in
+            self?.dispose("navi.center", nil, nil)
+        }
+        self.centerView.updateAlignment(.horizonontalReverse, 2)
+        self.naviView.centerView = self.centerView
         self.naviView.backBar.isHidden = false
-        self.naviView.backBar.updateSubviews(NX.image(named: "navi_close_black.png"), nil)
+        self.naviView.backBar.updateSubviews(NX.image(named: "navi_close.png"), nil)
         
         /** 加载图片数据:
          1.创建一个串行队列：不在主队列，不回阻塞主线程。
@@ -75,11 +85,6 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         if #available(iOS 11.0, *) {
             collectionView.contentInsetAdjustmentBehavior = .never
         }
-        self.naviView.forwardBar = NXNaviView.Bar.forward(image: nil, title: "预览(0)", completion: {[weak self] (_) in
-            self?.dispose("forward", nil)
-        })
-        self.naviView.forwardBar?.setTitleColor(NX.mainColor, for: .normal)
-        self.naviView.forwardBar?.isHidden = !self.wrapped.outputUIImage
         
         self.filterView.contentView.frame = CGRect(x: 0, y: 0, width: NXDevice.width, height: 40)
         self.filterView.contentView.titleLabel?.font = NX.font(13, false)
@@ -96,18 +101,18 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         self.footerView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.footerView.backgroundColor = NX.backgroundColor
         self.footerView.lhsView.frame = CGRect(x: 15, y: 12, width: 144, height: 36)
-        self.footerView.lhsView.setTitleColor(NX.darkBlackColor, for: .normal)
+        self.footerView.lhsView.setTitleColor(NX.mainColor, for: .normal)
         self.footerView.lhsView.titleLabel?.font = NX.font(16, false)
         self.footerView.lhsView.contentHorizontalAlignment = .left
-        self.footerView.lhsView.isHidden = self.wrapped.footer.lhs
-        self.footerView.lhsView.setTitle("我的相册", for: .normal)
+        self.footerView.lhsView.isHidden = !(self.wrapped.outputUIImage && self.wrapped.footer.lhs == false)
+        self.footerView.lhsView.setTitle("预览(0)", for: .normal)
         self.footerView.lhsView.setupEvents([.touchUpInside], action: {[weak self] (e, v) in
             self?.dispose("footer.lhs", nil)
         })
         
         self.footerView.centerView.frame = CGRect(x: (footerView.w-50)/2, y: 5, width: 50, height: 50)
         self.footerView.centerView.isHidden = self.wrapped.footer.center
-        self.footerView.centerView.setImage(UIImage(named: "rrxc_camera.png"), for: .normal)
+        self.footerView.centerView.setImage(NX.image(named: "uiapp_camera.png"), for: .normal)
         self.footerView.centerView.setupEvents([.touchUpInside], action: {[weak self] (e, v) in
             self?.dispose("footer.center", nil)
         })
@@ -132,9 +137,10 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         guard let album = value?["album"] as? NXAlbum else {
             return
         }
-        self.naviView.title = album.title.value
-        self.footerView.lhsView.setTitle(album.title.value + " ▼", for: .normal)
         
+        self.centerView.setTitle(album.title.value, for: .normal)
+        self.centerView.updateAlignment(.horizonontalReverse, 2)
+                
         if album.isBlockable {
             if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.sectionInset.top = 40
@@ -166,7 +172,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     }
     
     open override func dispose(_ action: String, _ value: Any?, _ completion: NX.Completion<String, Any?>? = nil) {
-        if action == "footer.lhs" {
+        if action == "navi.center" {
             NXActionView.action(actions: self.wrapped.albums, header: (.components(false, true, true, false), "请选择相册"), footer: (.whitespace, "")) { (_, index) in
                 guard index != self.ctxs.x else {
                     return;
@@ -175,8 +181,39 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                 self.showAlbumAssets(at: index)
             }
         }
+        else if action == "footer.lhs" {
+            if self.wrapped.outputUIImage {
+                if self.wrapped.output.assets.count == 0 {
+                    NX.showToast(message: "请选择图片或视频后再预览哦", .center, self.contentView)
+                    return;
+                }
+                
+                if wrapped.output.isOutputting {
+                    return;
+                }
+                wrapped.output.isOutputting = true
+                
+                NXAsset.outputAssets(self.wrapped) {[weak self] (assets, outputs) in
+                    self?.wrapped.output.isOutputting = false
+                    NX.showAssets(type: "UIImage", assets: outputs)
+                }
+            }
+            else{
+                NX.showToast(message: "不支持图片预览哦", .center, self.contentView)
+                return;
+            }
+        }
         else if action == "footer.center" {
-            self.openCamera()
+            NX.authorization(NX.AuthorizeType.camera, DispatchQueue.main, true) {[weak self] (status) in
+                if status == .authorized, let self = self {
+                    let picker = UIImagePickerController()
+                    picker.allowsEditing = false
+                    picker.delegate = self
+                    picker.sourceType = .camera
+                    picker.modalPresentationStyle = .fullScreen
+                    self.navigationController?.present(picker, animated: true, completion: nil)
+                }
+            }
         }
         else if action == "footer.rhs" {
             if self.wrapped.output.assets.count < self.wrapped.output.minOfAssets {
@@ -226,28 +263,6 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                 NXAsset.Wrapped.dispose(self.wrapped, assets: self.wrapped.output.assets)
             }
         }
-        else if action == "forward" {
-            if self.wrapped.outputUIImage {
-                if self.wrapped.output.assets.count == 0 {
-                    NX.showToast(message: "请选择图片或视频后再预览哦", .center, self.contentView)
-                    return;
-                }
-                
-                if wrapped.output.isOutputting {
-                    return;
-                }
-                wrapped.output.isOutputting = true
-                
-                NXAsset.outputAssets(self.wrapped) {[weak self] (assets, outputs) in
-                    self?.wrapped.output.isOutputting = false
-                    NX.showAssets(type: "UIImage", assets: outputs)
-                }
-            }
-            else{
-                NX.showToast(message: "不支持图片预览哦", .center, self.contentView)
-                return;
-            }
-        }
         else if action == "filter" {
             if self.ctxs.x < self.wrapped.albums.count {
                 let album = self.wrapped.albums[self.ctxs.x]
@@ -258,7 +273,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
             }
         }
         else if action == "subcomponents" {
-            self.naviView.forwardBar?.setTitle("预览(\(self.wrapped.output.assets.count))", for: .normal)
+            self.footerView.lhsView.setTitle("预览(\(self.wrapped.output.assets.count))", for: .normal)
             var __description = "完成(0/\(self.wrapped.output.maxOfAssets))"
             if self.wrapped.output.isMixable {
                 __description = "完成(\(self.wrapped.output.assets.count)/\(self.wrapped.output.maxOfAssets))"
@@ -508,20 +523,6 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
 }
 
 extension NXAssetsViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func openCamera(){
-        
-        NX.authorization(NX.AuthorizeType.camera, DispatchQueue.main, true) {[weak self] (status) in
-            if status == .authorized, let self = self {
-                let picker = UIImagePickerController()
-                picker.allowsEditing = false
-                picker.delegate = self
-                picker.sourceType = .camera
-                picker.modalPresentationStyle = .fullScreen
-                self.navigationController?.present(picker, animated: true, completion: nil)
-            }
-        }
-    }
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: false, completion: nil)

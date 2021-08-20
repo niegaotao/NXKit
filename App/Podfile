@@ -1,5 +1,5 @@
 use_frameworks!
 
-target 'NXKit_App' do
+target 'NXApp' do
   pod 'NXKit', :path => '../'
 end

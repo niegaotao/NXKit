@@ -129,7 +129,7 @@ extension NXActionView {
                 actionView.wrapped.header.isHidden = false
                 
                 actionView.wrapped.header.lhs.isHidden = !rhs
-                actionView.wrapped.header.lhs.image = UIImage.image(image:NX.image(named:"uiapp_overlay_close_black.png"), color:NX.darkGrayColor)
+                actionView.wrapped.header.lhs.image = UIImage.image(image:NX.image(named:"uiapp_overlay_close.png"), color:NX.darkGrayColor)
                 
                 actionView.wrapped.header.center.isHidden = !center
                 if actionView.wrapped.header.center.isHidden == false {

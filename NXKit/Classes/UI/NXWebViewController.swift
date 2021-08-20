@@ -9,48 +9,29 @@
 import UIKit
 import WebKit
 
-extension NXWebViewController {
-    open class BackbarWrapperView: NXLCRView<NXButton, UIView, NXButton> {
-        open var isAutoable = true
+open class NXBackbarWrappedView: NXLCRView<NXButton, UIView, NXButton> {
+    open var isAutoable = true
+    override open func setupSubviews() {
+        super.setupSubviews()
+        self.lhsView.frame = CGRect(x: 0, y: 0, width: 32, height: 44)
+        self.lhsView.setImage(NX.image(named:"navi_back.png"), for: .normal)
+        self.lhsView.contentHorizontalAlignment = .left
         
-        override open func setupSubviews() {
-            super.setupSubviews()
-            self.lhsView.frame = CGRect(x: 0, y: 0, width: 32, height: 44)
-            self.lhsView.setImage(NX.image(named:"navi_back_black.png"), for: .normal)
-            self.lhsView.contentHorizontalAlignment = .left
-            
-            self.centerView.frame = CGRect(x: 32, y: 14, width: NXDevice.pixel, height: 16)
-            self.centerView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-            
-            self.rhsView.frame = CGRect(x: 33, y: 0, width: 32, height: 44)
-            self.rhsView.setImage(NX.image(named:"navi_close_black.png"), for: .normal)
-            self.rhsView.contentHorizontalAlignment = .right
-        }
+        self.centerView.frame = CGRect(x: 32, y: 14, width: NXDevice.pixel, height: 16)
+        self.centerView.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         
-        open override func updateSubviews(_ action: String, _ value: Any?) {
-            let __isHidden = (value as? Bool) ?? true
-            self.rhsView.isHidden = __isHidden
-            self.centerView.isHidden = __isHidden
-        }
+        self.rhsView.frame = CGRect(x: 33, y: 0, width: 32, height: 44)
+        self.rhsView.setImage(NX.image(named:"navi_close.png"), for: .normal)
+        self.rhsView.contentHorizontalAlignment = .right
     }
     
-    open class KVO:NSObject {
-        open var access = ""
-        open var isObservable = true
-        open var isObserved = false
-        
-        override init() {
-            super.init()
-        }
-        
-        public init(access:String, isObservable:Bool, isObserved:Bool) {
-            super.init()
-            self.access = access
-            self.isObservable = isObservable
-            self.isObserved = isObserved
-        }
+    open override func updateSubviews(_ action: String, _ value: Any?) {
+        let __isHidden = (value as? Bool) ?? true
+        self.centerView.isHidden = __isHidden
+        self.rhsView.isHidden = __isHidden
     }
 }
+
  
 open class NXWebViewController: NXViewController {
     open var url: String = ""
@@ -63,10 +44,11 @@ open class NXWebViewController: NXViewController {
 
     open var webView = NXWebView(frame: CGRect.zero)
     open var progressView = UIProgressView(progressViewStyle: .bar)
-    open var backbarView = NXWebViewController.BackbarWrapperView(frame: CGRect(x: 0, y: 0, width: 65, height: 44))
+    open var backbarView = NXBackbarWrappedView(frame: CGRect(x: 0, y: 0, width: 65, height: 44))
+    lazy var observer : NXKVOObserver = {
+        return NXKVOObserver(observer: self)
+    }()
     
-    public let accesses = [KVO(access: "title", isObservable:true, isObserved: false),
-                           KVO(access: "estimatedProgress", isObservable:true, isObserved: false)]//通过KVO获取的相关属性
     override open func viewDidLoad() {
         super.viewDidLoad()
         
@@ -90,12 +72,8 @@ open class NXWebViewController: NXViewController {
         self.webView.backgroundColor = UIColor.white
         self.webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        for access in self.accesses {
-            if access.access.count > 0 && access.isObservable == true && access.isObserved == false {
-                access.isObserved = true
-                self.webView.addObserver(self, forKeyPath: access.access, options: [.new, .old], context: nil)
-            }
-        }
+        self.observer.add(object:self.webView, key: "title", options: [.new, .old], context: nil, completion: nil)
+        self.observer.add(object:self.webView, key: "estimatedProgress", options: [.new, .old], context: nil, completion: nil)
         
         self.webView.callbackWithNavigation = {[weak self](navigation, action, isCompleted, error) -> () in
             if action == "result" {
@@ -149,9 +127,7 @@ open class NXWebViewController: NXViewController {
             return
         }
         
-        if targetView == self.webView,
-           let access = self.accesses.first(where: {$0.access==accessKey}),
-           access.isObservable == true && access.isObserved == true {
+        if targetView == self.webView {
             if accessKey == "title" {
                 self.naviView.title = self.webView.title ?? ""
             }
@@ -212,10 +188,6 @@ open class NXWebViewController: NXViewController {
     
     deinit {
         self.webView.stopLoading()
-        for access in self.accesses {
-            if access.access.count > 0 && access.isObservable == true && access.isObserved == true {
-                self.webView.removeObserver(self, forKeyPath: access.access)
-            }
-        }
+        self.observer.removeAll()
     }
 }

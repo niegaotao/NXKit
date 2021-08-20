@@ -11,7 +11,7 @@ import UIKit
 open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
     open weak var controller : NXViewController?
     
-    open var backBar = NXNaviView.Bar.back(image:NX.image(named:"navi_back_black.png"), title: nil) //默认
+    open var backBar = NXNaviView.Bar.back(image:NX.image(named:"navi_back.png"), title: nil) //默认
     open var backView : UIView? {
         willSet{
             backView?.removeFromSuperview()

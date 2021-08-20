@@ -244,7 +244,6 @@ extension NXViewController {
         open var next = Index.initialValue  ///用于记录下一页next，多用于分页加载
         open var reload = NXViewController.Reload.initialized///当前刷新状态
         
-        
         open var isWrapped : Bool = false ///是否被其他UIViewController包装了，某些情况被包装的需要隐藏掉导航栏
         open var isEmpty : Bool = true ///页面是否为空，如有缓存数据则可置为false。false不用展示加载动画
         

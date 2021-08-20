@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_NXKit_AppVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_NXKit_AppVersionString[];
+FOUNDATION_EXPORT double Pods_NXAppVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_NXAppVersionString[];
 

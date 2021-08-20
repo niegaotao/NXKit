@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		37D36FCD0251B5E9271F938E /* Pods_NXKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27BA7DF614EF9528E1A0F637 /* Pods_NXKit_App.framework */; };
+		474C1C28C4B6F499DE60BBC8 /* Pods_NXApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFC532A4B7715A55FF5F116 /* Pods_NXApp.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -26,15 +26,15 @@
 
 /* Begin PBXFileReference section */
 		0D3EF0A469B22D541BB2BAC4 /* NXKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NXKit.podspec; path = ../NXKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		11F4D78D026E5C509B3B377E /* Pods-NXKit_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NXKit_App.release.xcconfig"; path = "Target Support Files/Pods-NXKit_App/Pods-NXKit_App.release.xcconfig"; sourceTree = "<group>"; };
-		27BA7DF614EF9528E1A0F637 /* Pods_NXKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NXKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		27F6806BFEEDF11126F97D71 /* Pods-NXApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NXApp.release.xcconfig"; path = "Target Support Files/Pods-NXApp/Pods-NXApp.release.xcconfig"; sourceTree = "<group>"; };
+		3EFC532A4B7715A55FF5F116 /* Pods_NXApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NXApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CED51FBE686748CDA706E58 /* Pods-NXApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NXApp.debug.xcconfig"; path = "Target Support Files/Pods-NXApp/Pods-NXApp.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* NXApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NXApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		B511540DD1D7B3580B5D4325 /* Pods-NXKit_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NXKit_App.debug.xcconfig"; path = "Target Support Files/Pods-NXKit_App/Pods-NXKit_App.debug.xcconfig"; sourceTree = "<group>"; };
 		C91EEEAF268B224800CF0F90 /* NXSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NXSwift.swift; sourceTree = "<group>"; };
 		C920C53326831B9A00258187 /* NXKit_App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NXKit_App-Bridging-Header.h"; sourceTree = "<group>"; };
 		C920C53426831B9A00258187 /* NXTester.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXTester.h; sourceTree = "<group>"; };
@@ -62,7 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37D36FCD0251B5E9271F938E /* Pods_NXKit_App.framework in Frameworks */,
+				474C1C28C4B6F499DE60BBC8 /* Pods_NXApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +124,7 @@
 		7A21DF4C4AFC7DD034C25347 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				27BA7DF614EF9528E1A0F637 /* Pods_NXKit_App.framework */,
+				3EFC532A4B7715A55FF5F116 /* Pods_NXApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -164,8 +164,8 @@
 		CDB0BCCB0EFEA029F96C723A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B511540DD1D7B3580B5D4325 /* Pods-NXKit_App.debug.xcconfig */,
-				11F4D78D026E5C509B3B377E /* Pods-NXKit_App.release.xcconfig */,
+				4CED51FBE686748CDA706E58 /* Pods-NXApp.debug.xcconfig */,
+				27F6806BFEEDF11126F97D71 /* Pods-NXApp.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -255,7 +255,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NXKit_App-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-NXApp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -268,15 +268,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NXKit_App/Pods-NXKit_App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-NXApp/Pods-NXApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NXKit_App/Pods-NXKit_App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-NXApp/Pods-NXApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NXKit_App/Pods-NXKit_App-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NXApp/Pods-NXApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -426,7 +426,7 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B511540DD1D7B3580B5D4325 /* Pods-NXKit_App.debug.xcconfig */;
+			baseConfigurationReference = 4CED51FBE686748CDA706E58 /* Pods-NXApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -450,7 +450,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11F4D78D026E5C509B3B377E /* Pods-NXKit_App.release.xcconfig */;
+			baseConfigurationReference = 27F6806BFEEDF11126F97D71 /* Pods-NXApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
