@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		004EF65D78CDE6E062D252BE94945EF9 /* navi_arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA9D38D74779970F05BFF2927ADFB54 /* navi_arrow_down@2x.png */; };
+		004EF65D78CDE6E062D252BE94945EF9 /* navi_dropdown_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA9D38D74779970F05BFF2927ADFB54 /* navi_dropdown_arrow@2x.png */; };
 		014234AB9D5ECBF75012734ABB7D67A7 /* NXLRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D61643F8388E4475250E6F2AE5DBBC /* NXLRView.swift */; };
 		01DF194695CE3A317DA258C697B6738D /* NXDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF0155C999626882A7CB87F378507F /* NXDevice.swift */; };
 		029C5E46CB425D2D5A02C60697D094BB /* NXAssetClipImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A65028DC81200187CDD4EB118926A89 /* NXAssetClipImageViewController.swift */; };
@@ -51,7 +51,7 @@
 		57031F7C5DF494E5A26F64341BF2BECB /* uiapp_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B0029585BAA1137A649E9D65FE759C5 /* uiapp_arrow@2x.png */; };
 		5EAD6A04530D2910F654983C9BBB66E5 /* NXAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239690E501159D9144E2A51B45B8E7A5 /* NXAction.swift */; };
 		5FF9747E4AB32933D668E15160FA7069 /* NXLCRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE669E0F4244597A27536039223B1AFA /* NXLCRView.swift */; };
-		61015B9E73E6B38E549FC06D5C23BCC7 /* uiapp_overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED033BADD57038554D8148C52C97156A /* uiapp_overlay@2x.png */; };
+		61015B9E73E6B38E549FC06D5C23BCC7 /* uiapp_animation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED033BADD57038554D8148C52C97156A /* uiapp_animation@2x.png */; };
 		617DC8FACE492F1C3000DA9F87FB33D2 /* NXFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193DEFCD15346368095213C0042F9368 /* NXFS.swift */; };
 		65995BF507293A9684024748FF95E409 /* NXKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 66286513797D1BA60F5C2959F9ECAAD8 /* NXKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		72FD0D4A4ECCAF5BC89F52388FCBAFD2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */; };
@@ -85,7 +85,7 @@
 		C166F079D5737130A0A6B67C955E9A49 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */; };
 		C75C49F8686BF42B54453F17313D191E /* NXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8574C0C610836EAA409A15FFA4EC7 /* NXCollectionViewCell.swift */; };
 		CF61BDA51EF1AF749A31450C56E77EFB /* NXAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089F20CB9EC9721D67B836EAC6FC981 /* NXAssetsViewController.swift */; };
-		D124D2E07FF695CEB51BF644C7A31888 /* uiapp_overlay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B25C58994580C7C11005732D337E72 /* uiapp_overlay@3x.png */; };
+		D124D2E07FF695CEB51BF644C7A31888 /* uiapp_animation@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9B25C58994580C7C11005732D337E72 /* uiapp_animation@3x.png */; };
 		D5C2CE34F1CACB2B8808CFBA5A894933 /* UILabel+NXKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6F1E442A123ADA80C030B7F0A6C633 /* UILabel+NXKit.swift */; };
 		DD077873F8CC5E2E8942FFDD536B7F21 /* NXLRView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E232B54C75FB8EC8B2CAF4A84E8AE /* NXLRView+.swift */; };
 		E1C96F0213CB9040C68DBA0438DBA2AD /* UIButton+NXKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DC9AC27E13A66C3BEF114228451DC3 /* UIButton+NXKit.swift */; };
@@ -98,7 +98,7 @@
 		EE2DC88FDBE7B04EA0DC5F66664216F1 /* NXKit-NXKit in Resources */ = {isa = PBXBuildFile; fileRef = E63DF99DCD4379F20D3F2B193AA61FC9 /* NXKit-NXKit */; };
 		F03D681CCD96281EB1A99697A20B3E02 /* NXCollectionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD93382EA1F230928A00D6121808060C /* NXCollectionWrapper.swift */; };
 		F18CF2665587892FA15EEF647935679E /* NXSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AC95B62BA1F68C3BB195F6D033C636 /* NXSwipeViewController.swift */; };
-		F29611A23F7A3DAD0EF8DDDA975958A2 /* navi_arrow_down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13867DFDD4148F4508077397A0E12E87 /* navi_arrow_down@3x.png */; };
+		F29611A23F7A3DAD0EF8DDDA975958A2 /* navi_dropdown_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13867DFDD4148F4508077397A0E12E87 /* navi_dropdown_arrow@3x.png */; };
 		F761479CC7D7FEA3791B95273D5CA6A6 /* NXSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F25D04AE21BC086E43D2BD75DAE9B0B /* NXSwipeView.swift */; };
 		F77129D2104E2B16659A6B52FE24F73B /* NXContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252C026C4C879E697BA0CAAEA9168376 /* NXContainerController.swift */; };
 		F93BA8A41393B108A4BBC691C5872836 /* uiapp_overlay_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B3D9E2A7A9677319CA7E5732C3FA669 /* uiapp_overlay_close@2x.png */; };
@@ -135,7 +135,7 @@
 		110EDAC14CAFAA8038E968D578BC4602 /* NXPlaceholderView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXPlaceholderView.swift; sourceTree = "<group>"; };
 		1286123978116E12740BD30900A57607 /* NXKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = NXKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		12B14B7C867617F5245A54E19813F18B /* NXToolViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXToolViewController.swift; sourceTree = "<group>"; };
-		13867DFDD4148F4508077397A0E12E87 /* navi_arrow_down@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_arrow_down@3x.png"; path = "NXKit/Assets/navi_arrow_down@3x.png"; sourceTree = "<group>"; };
+		13867DFDD4148F4508077397A0E12E87 /* navi_dropdown_arrow@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_dropdown_arrow@3x.png"; path = "NXKit/Assets/navi_dropdown_arrow@3x.png"; sourceTree = "<group>"; };
 		1781F6D45C5BE09E688C769C5EA0EFCC /* navi_close@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_close@3x.png"; path = "NXKit/Assets/navi_close@3x.png"; sourceTree = "<group>"; };
 		193DEFCD15346368095213C0042F9368 /* NXFS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXFS.swift; sourceTree = "<group>"; };
 		1B844633217916254A5DBF7E63F4F17A /* NXBackgroundView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXBackgroundView.swift; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 		27D3629B9EF85FC0FF8CB3B5A23E8FE6 /* NXKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NXKit.modulemap; sourceTree = "<group>"; };
 		2B2034DD2702271D0CBA2B21B23D17ED /* NXWebViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXWebViewController.swift; sourceTree = "<group>"; };
 		2D248E6ADB7ABADE404FCC7F112A1836 /* uiapp_camera@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "uiapp_camera@2x.png"; path = "NXKit/Assets/uiapp_camera@2x.png"; sourceTree = "<group>"; };
-		2DA9D38D74779970F05BFF2927ADFB54 /* navi_arrow_down@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_arrow_down@2x.png"; path = "NXKit/Assets/navi_arrow_down@2x.png"; sourceTree = "<group>"; };
+		2DA9D38D74779970F05BFF2927ADFB54 /* navi_dropdown_arrow@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_dropdown_arrow@2x.png"; path = "NXKit/Assets/navi_dropdown_arrow@2x.png"; sourceTree = "<group>"; };
 		2E5A0481D4DEC00DDC4B983B4C6DC4DE /* NXRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXRouter.swift; sourceTree = "<group>"; };
 		2E6F1E442A123ADA80C030B7F0A6C633 /* UILabel+NXKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UILabel+NXKit.swift"; sourceTree = "<group>"; };
 		2E865E0B88AE4F56FB803085984BBEE0 /* NXKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NXKit.release.xcconfig; sourceTree = "<group>"; };
@@ -216,7 +216,7 @@
 		C005575EBCA73B325369B10960CDEBDB /* UIImage+NXKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIImage+NXKit.swift"; sourceTree = "<group>"; };
 		C6F9B28D637DD3F4B4A26826E61EBE67 /* NXLCRView+.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NXLCRView+.swift"; sourceTree = "<group>"; };
 		C89687073397232B43A69570896AEEA9 /* NXXView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXXView.swift; sourceTree = "<group>"; };
-		C9B25C58994580C7C11005732D337E72 /* uiapp_overlay@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "uiapp_overlay@3x.png"; path = "NXKit/Assets/uiapp_overlay@3x.png"; sourceTree = "<group>"; };
+		C9B25C58994580C7C11005732D337E72 /* uiapp_animation@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "uiapp_animation@3x.png"; path = "NXKit/Assets/uiapp_animation@3x.png"; sourceTree = "<group>"; };
 		CC620D86C02F173DE52A6891DD0A3BEC /* NXObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXObserver.swift; sourceTree = "<group>"; };
 		CD93382EA1F230928A00D6121808060C /* NXCollectionWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXCollectionWrapper.swift; sourceTree = "<group>"; };
 		CE0F0B6F9084294632683CE5EE4499B4 /* NXKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NXKit-prefix.pch"; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 		EA2D2B3BBB9B9B20A1F13E0AD5A42C51 /* NXString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXString.swift; sourceTree = "<group>"; };
 		EA5782B5C2747BDCF4DFF133CAA567C2 /* navi_back@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_back@3x.png"; path = "NXKit/Assets/navi_back@3x.png"; sourceTree = "<group>"; };
 		EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		ED033BADD57038554D8148C52C97156A /* uiapp_overlay@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "uiapp_overlay@2x.png"; path = "NXKit/Assets/uiapp_overlay@2x.png"; sourceTree = "<group>"; };
+		ED033BADD57038554D8148C52C97156A /* uiapp_animation@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "uiapp_animation@2x.png"; path = "NXKit/Assets/uiapp_animation@2x.png"; sourceTree = "<group>"; };
 		ED79AF0ED087C36AB71DEDFC0070FB7A /* navi_more@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi_more@2x.png"; path = "NXKit/Assets/navi_more@2x.png"; sourceTree = "<group>"; };
 		EF5AAB13CBED21076E3710E68B562950 /* DispatchQueue+NXKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+NXKit.swift"; sourceTree = "<group>"; };
 		F47FD5588624BFAC7B2A8AE29F4DD7EA /* NX+.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NX+.swift"; sourceTree = "<group>"; };
@@ -272,8 +272,8 @@
 		0E16977E00210F9F4A1E6C3CAA1F2479 /* NXKit */ = {
 			isa = PBXGroup;
 			children = (
-				2DA9D38D74779970F05BFF2927ADFB54 /* navi_arrow_down@2x.png */,
-				13867DFDD4148F4508077397A0E12E87 /* navi_arrow_down@3x.png */,
+				2DA9D38D74779970F05BFF2927ADFB54 /* navi_dropdown_arrow@2x.png */,
+				13867DFDD4148F4508077397A0E12E87 /* navi_dropdown_arrow@3x.png */,
 				425B6F60F976692C8E425F7C66AE9BCF /* navi_back@2x.png */,
 				EA5782B5C2747BDCF4DFF133CAA567C2 /* navi_back@3x.png */,
 				0EF5B805334863A9EE6CADAD3EE34E4B /* navi_close@2x.png */,
@@ -284,11 +284,11 @@
 				9E56AEE0B9FCABA15B1D58039A537325 /* uiapp_arrow@3x.png */,
 				2D248E6ADB7ABADE404FCC7F112A1836 /* uiapp_camera@2x.png */,
 				6FEEF621D2BA3E7158C4A248BAAFD7AB /* uiapp_camera@3x.png */,
-				ED033BADD57038554D8148C52C97156A /* uiapp_overlay@2x.png */,
-				C9B25C58994580C7C11005732D337E72 /* uiapp_overlay@3x.png */,
+				ED033BADD57038554D8148C52C97156A /* uiapp_animation@2x.png */,
+				C9B25C58994580C7C11005732D337E72 /* uiapp_animation@3x.png */,
 				4B3D9E2A7A9677319CA7E5732C3FA669 /* uiapp_overlay_close@2x.png */,
 				5FD1CBC9A5BC0668ED0B05313853189C /* uiapp_overlay_close@3x.png */,
-				831857BE2F4114AE4B14D2D18E7319D6 /* Extended */,
+				831857BE2F4114AE4B14D2D18E7319D6 /* Components */,
 				2F8C2D07DE32E77D5FE125BC030D3A8F /* Pod */,
 				B40FF798FE12286A288EFED8FF39357F /* Support Files */,
 				6AD19FD998CAC1316DB801AB2F681342 /* UI */,
@@ -434,7 +434,7 @@
 			path = NXKit/Classes/UI;
 			sourceTree = "<group>";
 		};
-		831857BE2F4114AE4B14D2D18E7319D6 /* Extended */ = {
+		831857BE2F4114AE4B14D2D18E7319D6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				054C682F2C467A0BCF688926EAF51452 /* NXAsset.swift */,
@@ -442,8 +442,8 @@
 				8089F20CB9EC9721D67B836EAC6FC981 /* NXAssetsViewController.swift */,
 				10F42B3334A67C6BECA7B5C235E18423 /* NXClipboardView.swift */,
 			);
-			name = Extended;
-			path = NXKit/Classes/Extended;
+			name = Components;
+			path = NXKit/Classes/Components;
 			sourceTree = "<group>";
 		};
 		B40FF798FE12286A288EFED8FF39357F /* Support Files */ = {
@@ -609,8 +609,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				004EF65D78CDE6E062D252BE94945EF9 /* navi_arrow_down@2x.png in Resources */,
-				F29611A23F7A3DAD0EF8DDDA975958A2 /* navi_arrow_down@3x.png in Resources */,
+				004EF65D78CDE6E062D252BE94945EF9 /* navi_dropdown_arrow@2x.png in Resources */,
+				F29611A23F7A3DAD0EF8DDDA975958A2 /* navi_dropdown_arrow@3x.png in Resources */,
 				9A586A4D7D3C3E3A2784B8917B90DA0F /* navi_back@2x.png in Resources */,
 				B5F973685505A06DE8C20E929310AFBD /* navi_back@3x.png in Resources */,
 				75E023E28C29771C7A833112D06A0D8D /* navi_close@2x.png in Resources */,
@@ -621,8 +621,8 @@
 				A6A7B6D4606297B943AF9A016F4EDFB8 /* uiapp_arrow@3x.png in Resources */,
 				AA47A1C0F31F3B0A01C83151111E910D /* uiapp_camera@2x.png in Resources */,
 				E57C480208E650986E64EE276533C96A /* uiapp_camera@3x.png in Resources */,
-				61015B9E73E6B38E549FC06D5C23BCC7 /* uiapp_overlay@2x.png in Resources */,
-				D124D2E07FF695CEB51BF644C7A31888 /* uiapp_overlay@3x.png in Resources */,
+				61015B9E73E6B38E549FC06D5C23BCC7 /* uiapp_animation@2x.png in Resources */,
+				D124D2E07FF695CEB51BF644C7A31888 /* uiapp_animation@3x.png in Resources */,
 				F93BA8A41393B108A4BBC691C5872836 /* uiapp_overlay_close@2x.png in Resources */,
 				779697EEC88241EB129340168E79B1BD /* uiapp_overlay_close@3x.png in Resources */,
 			);

@@ -18,7 +18,7 @@ open class NXAnimationView: NXImageView {
         self.isHidden = true
         self.contentMode = .scaleAspectFill
         self.backgroundColor = UIColor.clear
-        self.image = NX.image(named:"uiapp_overlay.png")
+        self.image = NX.image(named:"uiapp_animation.png")
     }
     
     //开始动画
@@ -72,7 +72,7 @@ open class NXAnimationWrappedView: NXView {
         self.animationView.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleTopMargin, .flexibleBottomMargin]
         self.animationView.contentMode = .scaleAspectFill
         self.animationView.backgroundColor = UIColor.clear
-        self.animationView.image = NX.image(named:"uiapp_overlay.png")
+        self.animationView.image = NX.image(named:"uiapp_animation.png")
         self.animationView.isHidden = true
         self.addSubview(animationView)
     }

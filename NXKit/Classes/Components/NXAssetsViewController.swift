@@ -26,7 +26,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         super.viewDidLoad()
         
         self.centerView.setTitle("我的相册", for: .normal)
-        self.centerView.setImage(NX.image(named: "navi_arrow_down.png"), for: .normal)
+        self.centerView.setImage(NX.image(named: "navi_dropdown_arrow.png"), for: .normal)
         self.centerView.setTitleColor(NX.darkBlackColor, for: .normal)
         self.centerView.titleLabel?.font = NX.font(17, true)
         self.centerView.contentHorizontalAlignment = .center
