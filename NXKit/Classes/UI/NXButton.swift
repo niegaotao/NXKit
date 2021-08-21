@@ -9,10 +9,10 @@
 import UIKit
 
 open class NXButton: UIButton {
-    public enum Alignment {
-        case horizonontal
+    public enum Axis {
+        case horizontal
         case vertical
-        case horizonontalReverse
+        case horizontalReverse
         case verticalReverse
     }
     
@@ -78,23 +78,23 @@ open class NXButton: UIButton {
     }
     
     //设置icon/title的方位
-    open func updateAlignment(_ __aligment: NXButton.Alignment, _ space:CGFloat = 0.0){
+    open func updateAlignment(_ axis: NXButton.Axis, _ space:CGFloat = 0.0){
         let __size : (raw:CGSize, image:CGSize, title:CGSize) = (self.bounds.size, (self.imageView?.bounds.size ?? CGSize.zero), (self.titleLabel?.bounds.size ?? CGSize.zero))
         let __centerX : (raw:CGFloat, image:CGFloat, title:CGFloat) = (self.bounds.width/2.0, (self.bounds.width-__size.title.width)/2.0,(self.bounds.width+__size.image.width)/2.0)
         
-        if __aligment == .vertical {
+        if axis == .vertical {
             self.titleEdgeInsets = UIEdgeInsets(top: __size.image.height/2.0+space/2.0, left: -(__centerX.title-__centerX.raw), bottom: -(__size.image.height/2.0+space/2.0), right: __centerX.title-__centerX.raw)
             self.imageEdgeInsets = UIEdgeInsets(top: -(__size.title.height/2.0+space/2.0), left: __centerX.raw-__centerX.image, bottom: __size.title.height/2.0+space/2.0, right: -(__centerX.raw-__centerX.image))
         }
-        else if __aligment == .horizonontal {
+        else if axis == .horizontal {
             self.titleEdgeInsets = UIEdgeInsets(top:0, left:space/2.0, bottom:0, right:-space/2.0)
             self.imageEdgeInsets = UIEdgeInsets(top:0, left:-space/2.0, bottom:0, right:space/2.0)
         }
-        else if __aligment == .horizonontalReverse {
+        else if axis == .horizontalReverse {
             self.titleEdgeInsets = UIEdgeInsets(top: 0, left: -(__size.image.width+space/2.0), bottom: 0, right: __size.image.width+space/2.0)
             self.imageEdgeInsets = UIEdgeInsets(top: 0, left: __size.title.width+space/2.0, bottom: 0, right: -(__size.title.width+space/2.0))
         }
-        else if __aligment == .verticalReverse {
+        else if axis == .verticalReverse {
             self.titleEdgeInsets = UIEdgeInsets(top:-(__size.image.height/2+space/2), left:-(__centerX.title-__centerX.raw), bottom:__size.image.height/2.0+space/2.0, right:__centerX.title-__centerX.raw)
             self.imageEdgeInsets = UIEdgeInsets(top:__size.title.height/2+space/2, left:__centerX.raw-__centerX.image, bottom:-(__size.title.height/2.0+space/2.0), right:-(__centerX.raw-__centerX.image))
         }
@@ -110,16 +110,15 @@ open class NXButton: UIButton {
  */
 extension NXButton {
     override open func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        var widthDelta: CGFloat = 0
-        var heightDelta: CGFloat = 0
-        
         if allowsClickRange == true {
+            var widthDelta: CGFloat = 0
+            var heightDelta: CGFloat = 0
             widthDelta = max(36.0-self.bounds.size.width, 0) / 2
             heightDelta = max(36.0-self.bounds.size.height, 0) / 2
+            let area = self.bounds.insetBy(dx: -widthDelta, dy: -heightDelta)
+            return area.contains(point)
         }
-        
-        let area = self.bounds.insetBy(dx: -widthDelta, dy: -heightDelta)
-        return area.contains(point)
+        return super.point(inside: point, with: event)
     }
 }
 

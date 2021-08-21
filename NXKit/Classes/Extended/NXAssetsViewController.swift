@@ -33,7 +33,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         self.centerView.setupEvents([.touchUpInside]) {[weak self] _, _ in
             self?.dispose("navi.center", nil, nil)
         }
-        self.centerView.updateAlignment(.horizonontalReverse, 2)
+        self.centerView.updateAlignment(.horizontalReverse, 2)
         self.naviView.centerView = self.centerView
         self.naviView.backBar.isHidden = false
         self.naviView.backBar.updateSubviews(NX.image(named: "navi_close.png"), nil)
@@ -139,7 +139,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         }
         
         self.centerView.setTitle(album.title.value, for: .normal)
-        self.centerView.updateAlignment(.horizonontalReverse, 2)
+        self.centerView.updateAlignment(.horizontalReverse, 2)
                 
         if album.isBlockable {
             if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -173,7 +173,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     
     open override func dispose(_ action: String, _ value: Any?, _ completion: NX.Completion<String, Any?>? = nil) {
         if action == "navi.center" {
-            NXActionView.action(actions: self.wrapped.albums, header: (.components(false, true, true, false), "请选择相册"), footer: (.whitespace, "")) { (_, index) in
+            NXActionView.action(actions: self.wrapped.albums, header: (.header(false, true, true, false), "请选择相册"), footer: (.whitespace, ""), setup: nil) { (_, index) in
                 guard index != self.ctxs.x else {
                     return;
                 }
@@ -204,6 +204,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
             }
         }
         else if action == "footer.center" {
+            
             NX.authorization(NX.AuthorizeType.camera, DispatchQueue.main, true) {[weak self] (status) in
                 if status == .authorized, let self = self {
                     let picker = UIImagePickerController()

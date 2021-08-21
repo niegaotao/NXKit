@@ -16,13 +16,12 @@ extension UIControl.Event {
     public static var swipe = UIControl.Event(rawValue: 105)
 }
 
-open class NXViewProxy {
-    static var proxy = "proxy"
+open class NXViewAssociation {
+    static var key = "key"
     
-    public init(){}
-    
-    open weak var separator : CALayer? = nil
     open weak var sender : UIView? = nil
+    open weak var separator : CALayer? = nil
+
     public fileprivate(set) var action : ((_ event:UIControl.Event, _ sender:UIView) -> ())? = nil
 
     public fileprivate(set) var tapRecognizer : UITapGestureRecognizer? = nil
@@ -31,150 +30,152 @@ open class NXViewProxy {
     public fileprivate(set) var pinchRecognizer : UIPinchGestureRecognizer? = nil
     public fileprivate(set) var rotationRecognizer : UIRotationGestureRecognizer? = nil
     public fileprivate(set) var swipeRecognizer : UISwipeGestureRecognizer? = nil
-        
-    open func update(_ sender:UIView, _ events:[UIControl.Event], action:((_ event:UIControl.Event, _ sender:UIView) -> ())?) {
+    
+    public init(sender:UIView){
         self.sender = sender
+    }
+    
+    open func update(_ events:[UIControl.Event], action:((_ event:UIControl.Event, _ sender:UIView) -> ())?) {
         self.action = action
-        
         for event in events {
-            if event == .touchUpInside, let control = sender as? UIControl {
+            if event == .touchUpInside, let control = self.sender as? UIControl {
                 control.addTarget(self, action: #selector(touchUpInside), for: .touchUpInside)
             }
-            else if event == .touchDown, let control = sender as? UIControl  {
+            else if event == .touchDown, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(touchDown), for: .touchDown)
             }
-            else if event == .touchDownRepeat, let control = sender as? UIControl  {
+            else if event == .touchDownRepeat, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(touchDownRepeat), for: .touchDownRepeat)
             }
-            else if event == .touchDragInside, let control = sender as? UIControl  {
+            else if event == .touchDragInside, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(touchDragInside), for: .touchDragInside)
             }
-            else if event == .touchDragOutside, let control = sender as? UIControl  {
+            else if event == .touchDragOutside, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(touchDragOutside), for: .touchDragOutside)
             }
-            else if event == .touchDragEnter, let control = sender as? UIControl  {
+            else if event == .touchDragEnter, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(touchDragEnter), for: .touchDragEnter)
             }
-            else if event == .touchDragExit, let control = sender as? UIControl  {
+            else if event == .touchDragExit, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(touchDragExit), for: .touchDragExit)
             }
-            else if event == .touchUpOutside, let control = sender as? UIControl  {
+            else if event == .touchUpOutside, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(touchUpOutside), for: .touchUpOutside)
             }
-            else if event == .touchCancel, let control = sender as? UIControl  {
+            else if event == .touchCancel, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(touchCancel), for: .touchCancel)
             }
-            else if event == .valueChanged, let control = sender as? UIControl  {
+            else if event == .valueChanged, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
             }
-            else if event == .editingDidBegin, let control = sender as? UIControl  {
+            else if event == .editingDidBegin, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(editingDidBegin), for: .editingDidBegin)
             }
-            else if event == .editingChanged, let control = sender as? UIControl  {
+            else if event == .editingChanged, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
             }
-            else if event == .editingDidEnd, let control = sender as? UIControl  {
+            else if event == .editingDidEnd, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(editingDidEnd), for: .editingDidEnd)
             }
-            else if event == .editingDidEndOnExit, let control = sender as? UIControl  {
+            else if event == .editingDidEndOnExit, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(editingDidEndOnExit), for: .editingDidEndOnExit)
             }
-            else if event == .allTouchEvents, let control = sender as? UIControl  {
+            else if event == .allTouchEvents, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(allTouchEvents), for: .allTouchEvents)
             }
-            else if event == .allEditingEvents, let control = sender as? UIControl  {
+            else if event == .allEditingEvents, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(allEditingEvents), for: .allEditingEvents)
             }
-            else if event == .applicationReserved, let control = sender as? UIControl  {
+            else if event == .applicationReserved, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(applicationReserved), for: .applicationReserved)
             }
-            else if event == .systemReserved, let control = sender as? UIControl  {
+            else if event == .systemReserved, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(systemReserved), for: .systemReserved)
             }
-            else if event == .allEvents, let control = sender as? UIControl  {
+            else if event == .allEvents, let control = self.sender as? UIControl  {
                 control.addTarget(self, action: #selector(allEvents), for: .allEvents)
             }
             else if event == .tap {
-                sender.isUserInteractionEnabled = true
+                self.sender?.isUserInteractionEnabled = true
                 if let __recognizer = self.tapRecognizer {
                     __recognizer.addTarget(self, action: #selector(tapAction))
-                    sender.addGestureRecognizer(__recognizer)
+                    self.sender?.addGestureRecognizer(__recognizer)
                 }
                 else {
                     let __recognizer = UITapGestureRecognizer()
                     __recognizer.addTarget(self, action: #selector(tapAction))
-                    sender.addGestureRecognizer(__recognizer)
+                    self.sender?.addGestureRecognizer(__recognizer)
                     self.tapRecognizer = __recognizer
                 }
-                sender.isUserInteractionEnabled = true
+                self.sender?.isUserInteractionEnabled = true
             }
             else if event == .longPress {
                 if let __recognizer = self.longPressRecognizer {
                     __recognizer.addTarget(self, action: #selector(longPressAction))
-                    sender.addGestureRecognizer(__recognizer)
+                    self.sender?.addGestureRecognizer(__recognizer)
                 }
                 else {
                     let __recognizer = UILongPressGestureRecognizer()
                     __recognizer.addTarget(self, action: #selector(longPressAction))
-                    sender.addGestureRecognizer(__recognizer)
+                    self.sender?.addGestureRecognizer(__recognizer)
                     self.longPressRecognizer = __recognizer
                 }
-                sender.isUserInteractionEnabled = true
+                self.sender?.isUserInteractionEnabled = true
             }
             else if event == .pan {
                 if let __recognizer = self.panRecognizer {
                     __recognizer.addTarget(self, action: #selector(panAction))
-                    sender.addGestureRecognizer(__recognizer)
+                    self.sender?.addGestureRecognizer(__recognizer)
                 }
                 else {
                     let __recognizer = UIPanGestureRecognizer()
                     __recognizer.addTarget(self, action: #selector(panAction))
-                    sender.addGestureRecognizer(__recognizer)
+                    self.sender?.addGestureRecognizer(__recognizer)
                     self.panRecognizer = __recognizer
                 }
-                sender.isUserInteractionEnabled = true
+                self.sender?.isUserInteractionEnabled = true
             }
             else if event == .pinch {
                 if let __recognizer = self.pinchRecognizer {
                     __recognizer.addTarget(self, action: #selector(pinchAction))
-                    sender.addGestureRecognizer(__recognizer)
+                    self.sender?.addGestureRecognizer(__recognizer)
                 }
                 else {
                     let __recognizer = UIPinchGestureRecognizer()
                     __recognizer.addTarget(self, action: #selector(pinchAction))
-                    sender.addGestureRecognizer(__recognizer)
+                    self.sender?.addGestureRecognizer(__recognizer)
                     self.pinchRecognizer = __recognizer
                 }
-                sender.isUserInteractionEnabled = true
+                self.sender?.isUserInteractionEnabled = true
             }
             else if event == .rotation {
                 if let __recognizer = self.rotationRecognizer {
                     __recognizer.addTarget(self, action: #selector(rotationAction))
-                    sender.addGestureRecognizer(__recognizer)
+                    self.sender?.addGestureRecognizer(__recognizer)
                 }
                 else {
                     let __recognizer = UIRotationGestureRecognizer()
                     __recognizer.addTarget(self, action: #selector(rotationAction))
-                    sender.addGestureRecognizer(__recognizer)
+                    self.sender?.addGestureRecognizer(__recognizer)
                     self.rotationRecognizer = __recognizer
                 }
-                sender.isUserInteractionEnabled = true
+                self.sender?.isUserInteractionEnabled = true
             }
             else if event == .swipe {
                 if let __recognizer = self.swipeRecognizer {
                     __recognizer.addTarget(self, action: #selector(swipeAction))
-                    sender.addGestureRecognizer(__recognizer)
+                    self.sender?.addGestureRecognizer(__recognizer)
                 }
                 else {
                     let __recognizer = UISwipeGestureRecognizer()
                     __recognizer.addTarget(self, action: #selector(swipeAction))
-                    sender.addGestureRecognizer(__recognizer)
+                    self.sender?.addGestureRecognizer(__recognizer)
                     self.swipeRecognizer = __recognizer
                 }
-                sender.isUserInteractionEnabled = true
+                self.sender?.isUserInteractionEnabled = true
             }
             else if #available(iOS 9.0, *) {
-                if event == .primaryActionTriggered, let control = sender as? UIControl  {
+                if event == .primaryActionTriggered, let control = self.sender as? UIControl  {
                     control.addTarget(self, action: #selector(primaryActionTriggered), for: .primaryActionTriggered)
                 }
             }

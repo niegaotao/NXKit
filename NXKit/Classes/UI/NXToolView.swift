@@ -54,8 +54,8 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
                 self.layer.masksToBounds = true
             }
             
-            self.contentView.proxy?.separator?.isHidden = self.wrapped.separator.isHidden
-            self.contentView.proxy?.separator?.backgroundColor = self.wrapped.separator.backgroundColor.cgColor
+            self.contentView.association?.separator?.isHidden = self.wrapped.separator.isHidden
+            self.contentView.association?.separator?.backgroundColor = self.wrapped.separator.backgroundColor.cgColor
             
             self.centerView.centerView.image = self.wrapped.center.image
             self.centerView.isHidden = self.wrapped.center.isHidden

@@ -38,7 +38,7 @@ open class NXCopyLabel: NXLabel {
         isUserInteractionEnabled = true
         self.setupEvents([.longPress]) {[weak self] (e, v) in
             if e == UIControl.Event.tap {
-                if let longPress = self?.proxy?.longPressRecognizer {
+                if let longPress = self?.association?.longPressRecognizer {
                     self?.clickLabel(longPress: longPress)
                 }
             }

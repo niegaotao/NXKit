@@ -59,11 +59,12 @@ class NXAppViewController: NXCollectionViewController {
                             ]])
         
         self.values.append(["access":"access","title":"选图",
-                            "body":[["access":"NXAsset_UIImage1","title":"NXAsset_UIImage1"],
-                                    ["access":"NXAsset_UIImage1-9","title":"NXAsset_UIImage1-9"],
+                            "body":[["access":"NXAsset_UIImage1-1","title":"NXAsset_UIImage1-1"],
                                     ["access":"NXAsset_UIVideo1-1","title":"NXAsset_UIVideo1-1"],
-                                    ["access":"NXAsset_UIVideo1-1+UIImage1-20","title":"NXAsset_UIVideo1-1+UIImage1-20"],
-                                    ["access":"NXAsset_UIVideo1-9||UIImage1-9","title":"NXAsset_UIVideo1-9||UIImage1-9"],
+                                    ["access":"NXAsset_UIImage1-9","title":"NXAsset_UIImage1-9"],
+                                    ["access":"NXAsset_UIVideo1-9","title":"NXAsset_UIVideo1-9"],
+                                    ["access":"NXAsset_UIImage1-18+UIVideo1-18","title":"NXAsset_UIImage1-18+UIVideo1-18"],
+                                    ["access":"NXAsset_UIImage1-18/UIVideo1-18","title":"NXAsset_UIImage1-18/UIVideo1-18"],
                             ]])
         
         for (_, value) in values.enumerated() {
@@ -160,8 +161,9 @@ class NXAppViewController: NXCollectionViewController {
             }
             if action == "NXActionView" {
                 NXActionView.action(actions: actions,
-                                    header: (.components(true, true, true, false),"你好呀"),
-                                    footer: (.components(false, true, false), "取消"),
+                                    header: (.header(true, true, true, false),"你好呀"),
+                                    footer: (.footer(false, true, false), "取消"),
+                                    setup: nil,
                                     completion: { (a, index) in
                                         
                                         let vc = NXWebViewController()
@@ -170,157 +172,172 @@ class NXAppViewController: NXCollectionViewController {
                 })
             }
             else {
-                NXActionView.alert(title: "温馨提示", subtitle: "我们生活真的很幸福，珍惜现在报效祖国是我们肩负的使命", actions: actions, completion: nil)
+                NXActionView.alert(title: "温馨提示", subtitle: "我们生活真的很幸福，珍惜现在报效祖国是我们肩负的使命", actions: actions, setup:nil,completion: nil)
             }
         }
-        else if action == "NXAsset_UIImage1" {
+        else if ["NXAsset_UIImage1-1","NXAsset_UIVideo1-1",
+                 "NXAsset_UIImage1-9","NXAsset_UIVideo1-9",
+                 "NXAsset_UIImage1-18+UIVideo1-18","NXAsset_UIImage1-18/UIVideo1-18"].contains(action) {
+   
             guard let nav = self.navigationController as? NXNavigationController else {
                 return
             }
             
-            NXAsset.openAlbum(minOfAssets: 1,
-                                         maxOfAssets: 1,
-                                         image: (minOfAssets:1, maxOfAssets:1, isIndex:true),
-                                         video: (minOfAssets:0, maxOfAssets:0, isIndex:false),
-                                         isMixable: false,
-                                         isAutoclosed:true,
-                                         mediaType: .image,
-                                         selectedIdentifiers:[],
-                                         usedIdentifiers: [],
-                                         outputResize: CGSize(width: 1920, height: 1920),
-                                         outputResizeBy: NXAsset.Resize.area.rawValue,
-                                         outputUIImage: true,
-                                         imageClips: [NXAsset.Clip(isResizable: true, width: 1.0, height: 2.0, isHidden: false), NXAsset.Clip(isResizable: true, width: 1.0, height: 1.0, isHidden: false)],
-                                         videoClipsAllowed: false,
-                                         videoClipsDuration: 15.0,
-                                         videoFileExtensions: [".mp4", ".mov"],
-                                         footer: (false, false, false),
-                                         operation: .push,
-                                         naviController: nav,
-                                         isOpenable: true,
-                                         isCloseable: true,
-                                         isAnimated:true) { (_,output) in
-                
+            if action == "NXAsset_UIImage1-1" {
+                NXAsset.openAlbum(minOfAssets: 1,
+                                             maxOfAssets: 1,
+                                             image: (minOfAssets:1, maxOfAssets:1, isIndex:true),
+                                             video: (minOfAssets:0, maxOfAssets:0, isIndex:false),
+                                             isMixable: false,
+                                             isAutoclosed:true,
+                                             mediaType: .image,
+                                             selectedIdentifiers:[],
+                                             usedIdentifiers: [],
+                                             outputResize: CGSize(width: 1920, height: 1920),
+                                             outputResizeBy: NXAsset.Resize.area.rawValue,
+                                             outputUIImage: true,
+                                             imageClips: [NXAsset.Clip(isResizable: true, width: 1.0, height: 2.0, isHidden: false), NXAsset.Clip(isResizable: true, width: 1.0, height: 1.0, isHidden: false)],
+                                             videoClipsAllowed: false,
+                                             videoClipsDuration: 15.0,
+                                             videoFileExtensions: [".mp4", ".mov"],
+                                             footer: (false, false, false),
+                                             operation: .push,
+                                             naviController: nav,
+                                             isOpenable: true,
+                                             isCloseable: true,
+                                             isAnimated:true) { (_,output) in
+                    
+                }
             }
-        }
-        else if action == "NXAsset_UIImage1-9" {
-            guard let nav = self.navigationController as? NXNavigationController else {
-                return
+            else if action == "NXAsset_UIVideo1-1" {
+                NXAsset.openAlbum(minOfAssets: 1,
+                                             maxOfAssets: 1,
+                                             image: (minOfAssets:0, maxOfAssets:0, isIndex:true),
+                                             video: (minOfAssets:1, maxOfAssets:1, isIndex:false),
+                                             isMixable: false,
+                                             isAutoclosed:true,
+                                             mediaType: .video,
+                                             selectedIdentifiers:[],
+                                             usedIdentifiers: [],
+                                             outputResize: CGSize(width: 1920, height: 1920),
+                                             outputResizeBy: NXAsset.Resize.area.rawValue,
+                                             outputUIImage: true,
+                                             imageClips: [NXAsset.Clip(isResizable: true, width: 1.0, height: 2.0, isHidden: false), NXAsset.Clip(isResizable: true, width: 1.0, height: 1.0, isHidden: false)],
+                                             videoClipsAllowed: false,
+                                             videoClipsDuration: 15.0,
+                                             videoFileExtensions: [".mp4", ".mov"],
+                                             footer: (false, false, false),
+                                             operation: .push,
+                                             naviController: nav,
+                                             isOpenable: true,
+                                             isCloseable: true,
+                                             isAnimated:true) { (_,output) in
+                    
+                }
             }
-            
-            NXAsset.openAlbum(minOfAssets: 1,
-                                         maxOfAssets: 9,
-                                         image: (minOfAssets:1, maxOfAssets:9, isIndex:true),
-                                         video: (minOfAssets:0, maxOfAssets:0, isIndex:false),
-                                         isMixable: false,
-                                         isAutoclosed:true,
-                                         mediaType: .unknown,
-                                         selectedIdentifiers:[],
-                                         usedIdentifiers: [],
-                                         outputResize: CGSize(width: 1920, height: 1920),
-                                         outputResizeBy: NXAsset.Resize.area.rawValue,
-                                         outputUIImage: true,
-                                         imageClips: [],
-                                         videoClipsAllowed: false,
-                                         videoClipsDuration: 15.0,
-                                         videoFileExtensions: [".mp4", ".mov"],
-                                         footer: (false, false, false),
-                                         operation: .push,
-                                         naviController: nav,
-                                         isOpenable: true,
-                                         isCloseable: true,
-                                         isAnimated:true) { (_,output) in
-                
+            else if action == "NXAsset_UIImage1-9" {
+                NXAsset.openAlbum(minOfAssets: 1,
+                                             maxOfAssets: 9,
+                                             image: (minOfAssets:1, maxOfAssets:9, isIndex:true),
+                                             video: (minOfAssets:0, maxOfAssets:0, isIndex:false),
+                                             isMixable: false,
+                                             isAutoclosed:true,
+                                             mediaType: .image,
+                                             selectedIdentifiers:[],
+                                             usedIdentifiers: [],
+                                             outputResize: CGSize(width: 1920, height: 1920),
+                                             outputResizeBy: NXAsset.Resize.area.rawValue,
+                                             outputUIImage: true,
+                                             imageClips: [],
+                                             videoClipsAllowed: false,
+                                             videoClipsDuration: 15.0,
+                                             videoFileExtensions: [".mp4", ".mov"],
+                                             footer: (false, false, false),
+                                             operation: .push,
+                                             naviController: nav,
+                                             isOpenable: true,
+                                             isCloseable: true,
+                                             isAnimated:true) { (_,output) in
+                    
+                }
             }
-        }
-        else if action == "NXAsset_UIVideo1-1" {
-            guard let nav = self.navigationController as? NXNavigationController else {
-                return
+            else if action == "NXAsset_UIVideo1-9" {
+                NXAsset.openAlbum(minOfAssets: 1,
+                                             maxOfAssets: 9,
+                                             image: (minOfAssets:0, maxOfAssets:0, isIndex:true),
+                                             video: (minOfAssets:1, maxOfAssets:9, isIndex:false),
+                                             isMixable: false,
+                                             isAutoclosed:true,
+                                             mediaType: .video,
+                                             selectedIdentifiers: [],
+                                             usedIdentifiers: [],
+                                             outputResize: CGSize(width: 1920, height: 1920),
+                                             outputResizeBy: NXAsset.Resize.area.rawValue,
+                                             outputUIImage: true,
+                                             imageClips: [],
+                                             videoClipsAllowed: false,
+                                             videoClipsDuration: 15.0,
+                                             videoFileExtensions: [".mp4", ".mov"],
+                                             footer: (false, false, false),
+                                             operation: .push,
+                                             naviController: nav,
+                                             isOpenable: true,
+                                             isCloseable: true,
+                                             isAnimated:true) { (_,output) in
+                    
+                }
             }
-            
-            NXAsset.openAlbum(minOfAssets: 1,
-                                         maxOfAssets: 1,
-                                         image: (minOfAssets:0, maxOfAssets:0, isIndex:true),
-                                         video: (minOfAssets:1, maxOfAssets:1, isIndex:false),
-                                         isMixable: false,
-                                         isAutoclosed:true,
-                                         mediaType: .unknown,
-                                         selectedIdentifiers: [],
-                                         usedIdentifiers: [],
-                                         outputResize: CGSize(width: 1920, height: 1920),
-                                         outputResizeBy: NXAsset.Resize.area.rawValue,
-                                         outputUIImage: true,
-                                         imageClips: [],
-                                         videoClipsAllowed: false,
-                                         videoClipsDuration: 15.0,
-                                         videoFileExtensions: [".mp4", ".mov"],
-                                         footer: (false, false, false),
-                                         operation: .push,
-                                         naviController: nav,
-                                         isOpenable: true,
-                                         isCloseable: true,
-                                         isAnimated:true) { (_,output) in
-                
+            else if action == "NXAsset_UIImage1-18+UIVideo1-18" {
+                NXAsset.openAlbum(minOfAssets: 1,
+                                             maxOfAssets: 36,
+                                             image: (minOfAssets:1, maxOfAssets:18, isIndex:true),
+                                             video: (minOfAssets:1, maxOfAssets:18, isIndex:false),
+                                             isMixable: true,
+                                             isAutoclosed:false,
+                                             mediaType: .unknown,
+                                             selectedIdentifiers:[],
+                                             usedIdentifiers: [],
+                                             outputResize: CGSize(width: 1920, height: 1920),
+                                             outputResizeBy: NXAsset.Resize.area.rawValue,
+                                             outputUIImage: true,
+                                             imageClips: [],
+                                             videoClipsAllowed: false,
+                                             videoClipsDuration: 15.0,
+                                             videoFileExtensions: [".mp4", ".mov"],
+                                             footer: (false, false, false),
+                                             operation: .push,
+                                             naviController: nav,
+                                             isOpenable: true,
+                                             isCloseable: true,
+                                             isAnimated:true) { (_,output) in
+                    
+                }
             }
-        }
-        else if action == "NXAsset_UIVideo1-1+UIImage1-20" {
-            guard let nav = self.navigationController as? NXNavigationController else {
-                return
-            }
-            
-            NXAsset.openAlbum(minOfAssets: 1,
-                                         maxOfAssets: 21,
-                                         image: (minOfAssets:1, maxOfAssets:20, isIndex:true),
-                                         video: (minOfAssets:1, maxOfAssets:1, isIndex:false),
-                                         isMixable: false,
-                                         isAutoclosed:false,
-                                         mediaType: .unknown,
-                                         selectedIdentifiers:["1806C4B8-02A3-4F9F-87E8-D49BA0481951/L0/001", "83FD4EA1-285D-4812-9361-D50F78DD0010/L0/001", "5BAA18CB-2F60-4B27-8DEE-D4229E527424/L0/001", "5EBF50DF-7D2C-4E7F-9BA3-749B0B95FF58/L0/001"],
-                                         usedIdentifiers: [],
-                                         outputResize: CGSize(width: 1920, height: 1920),
-                                         outputResizeBy: NXAsset.Resize.area.rawValue,
-                                         outputUIImage: true,
-                                         imageClips: [],
-                                         videoClipsAllowed: false,
-                                         videoClipsDuration: 15.0,
-                                         videoFileExtensions: [".mp4", ".mov"],
-                                         footer: (false, false, false),
-                                         operation: .push,
-                                         naviController: nav,
-                                         isOpenable: true,
-                                         isCloseable: true,
-                                         isAnimated:true) { (_,output) in
-                
-            }
-        }
-        else if action == "NXAsset_UIVideo1-9||UIImage1-9" {
-            guard let nav = self.navigationController as? NXNavigationController else {
-                return
-            }
-            
-            NXAsset.openAlbum(minOfAssets: 1,
-                                         maxOfAssets: 9,
-                                         image: (minOfAssets:1, maxOfAssets:9, isIndex:true),
-                                         video: (minOfAssets:1, maxOfAssets:9, isIndex:false),
-                                         isMixable: true,
-                                         isAutoclosed:true,
-                                         mediaType: .unknown,
-                                         selectedIdentifiers:["1806C4B8-02A3-4F9F-87E8-D49BA0481951/L0/001", "83FD4EA1-285D-4812-9361-D50F78DD0010/L0/001", "5BAA18CB-2F60-4B27-8DEE-D4229E527424/L0/001", "5EBF50DF-7D2C-4E7F-9BA3-749B0B95FF58/L0/001"],
-                                         usedIdentifiers: [],
-                                         outputResize: CGSize(width: 1920, height: 1920),
-                                         outputResizeBy: NXAsset.Resize.area.rawValue,
-                                         outputUIImage: true,
-                                         imageClips: [],
-                                         videoClipsAllowed: false,
-                                         videoClipsDuration: 15.0,
-                                         videoFileExtensions: [".mp4", ".mov"],
-                                         footer: (false, false, false),
-                                         operation: .push,
-                                         naviController: nav,
-                                         isOpenable: true,
-                                         isCloseable: true,
-                                         isAnimated:true) { (_,output) in
-                
+            else if action == "NXAsset_UIImage1-18/UIVideo1-18" {
+                NXAsset.openAlbum(minOfAssets: 1,
+                                             maxOfAssets: 18,
+                                             image: (minOfAssets:1, maxOfAssets:18, isIndex:true),
+                                             video: (minOfAssets:1, maxOfAssets:18, isIndex:false),
+                                             isMixable: false,
+                                             isAutoclosed:false,
+                                             mediaType: .unknown,
+                                             selectedIdentifiers:[],
+                                             usedIdentifiers: [],
+                                             outputResize: CGSize(width: 1920, height: 1920),
+                                             outputResizeBy: NXAsset.Resize.area.rawValue,
+                                             outputUIImage: true,
+                                             imageClips: [],
+                                             videoClipsAllowed: false,
+                                             videoClipsDuration: 15.0,
+                                             videoFileExtensions: [".mp4", ".mov"],
+                                             footer: (false, false, false),
+                                             operation: .push,
+                                             naviController: nav,
+                                             isOpenable: true,
+                                             isCloseable: true,
+                                             isAnimated:true) { (_,output) in
+                    
+                }
             }
         }
     }

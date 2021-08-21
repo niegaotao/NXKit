@@ -90,12 +90,12 @@ extension UIView {
  UIView 的layer设置
  */
 extension UIView {
-    open var proxy : NXViewProxy? {
+    open var association : NXViewAssociation? {
         set(newValue) {
-            objc_setAssociatedObject(self, &NXViewProxy.proxy, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &NXViewAssociation.key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get{
-            return objc_getAssociatedObject(self, &NXViewProxy.proxy) as? NXViewProxy
+            return objc_getAssociatedObject(self, &NXViewAssociation.key) as? NXViewAssociation
         }
     }
     
@@ -105,11 +105,10 @@ extension UIView {
     }
     
     open func setupEvents(_ events:[UIControl.Event], action:((_ event:UIControl.Event, _ sender:UIView) -> ())?) {
-        if self.proxy == nil {
-            self.proxy = NXViewProxy()
-            self.proxy?.sender = self
+        if self.association == nil {
+            self.association = NXViewAssociation(sender: self)
         }
-        self.proxy?.update(self, events, action: action)
+        self.association?.update(events, action: action)
     }
     
     //设置圆角
@@ -149,24 +148,23 @@ extension UIView {
         
         if ats.contains(.minY) && ats.contains(.minX) && ats.contains(.maxY) && ats.contains(.maxX) {
             ///四周都添加分割线
-            self.proxy?.separator?.isHidden = true
+            self.association?.separator?.isHidden = true
             self.setupBorder(color: color, width: NXDevice.pixel, radius: 0)
         }
         else if ats.isEmpty {
             ///无分割线
-            self.proxy?.separator?.isHidden = true
+            self.association?.separator?.isHidden = true
         }
         else {
             ///只有一边添加分割线
-            var separator = self.proxy?.separator
+            var separator = self.association?.separator
             if separator == nil {
                 separator = CALayer()
                 self.layer.addSublayer(separator!)
-                if proxy == nil {
-                    self.proxy = NXViewProxy()
-                    self.proxy?.sender = self
+                if self.association == nil {
+                    self.association = NXViewAssociation(sender: self)
                 }
-                self.proxy?.separator = separator
+                self.association?.separator = separator
             }
             separator?.isHidden = false
             separator?.backgroundColor = color.cgColor;

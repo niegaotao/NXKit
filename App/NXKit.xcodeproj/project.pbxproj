@@ -45,6 +45,8 @@
 		C93AA2A7268C443A00DE0EA4 /* NXApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXApi.m; sourceTree = "<group>"; };
 		C93AA2A9268C46A300DE0EA4 /* NXPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXPerson.h; sourceTree = "<group>"; };
 		C93AA2AA268C46A300DE0EA4 /* NXPerson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXPerson.m; sourceTree = "<group>"; };
+		C979FFC026D0886E00D82C39 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		C979FFC126D0886F00D82C39 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		C9D7810126BCE0B400625E54 /* NXKVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXKVC.h; sourceTree = "<group>"; };
 		C9D7810226BCE0B400625E54 /* NXKVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXKVC.m; sourceTree = "<group>"; };
 		C9D7810426BCE7D200625E54 /* NSObject+.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+.m"; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
@@ -307,6 +310,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				607FACDA1AFB9204008FA782 /* Base */,
+				C979FFC026D0886E00D82C39 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -315,6 +319,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				607FACDF1AFB9204008FA782 /* Base */,
+				C979FFC126D0886F00D82C39 /* zh-Hans */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -326,6 +331,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -380,6 +386,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;

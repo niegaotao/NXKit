@@ -934,7 +934,7 @@ open class NXAssetViewCell: NXCollectionViewCell{
         indexView.isUserInteractionEnabled = false
         contentView.addSubview(indexView)
         
-        maskedView.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+        maskedView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         contentView.addSubview(maskedView)
     }
     
@@ -1032,7 +1032,7 @@ public class NXAlbum : NXAction {
         //获取封面
         if let asset = self.assets.first?.asset {
             var __size = CGSize.zero
-            __size.width = floor((NXDevice.width-12*2-2*3)/4.0)
+            __size.width = round((NXDevice.width-12*2-2*3)/4.0 * NXDevice.scale)
             __size.height = __size.width
             PHImageManager.default().requestImage(for: asset,
                                                   targetSize: __size,
