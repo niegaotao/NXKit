@@ -75,14 +75,23 @@ open class NXSerialization {
     
     
     //=========================================
-    //jsonstring->(decode->) data -> toDictionary
-    public class func JSONString(toDictionary value: String?, decode:Bool) -> [String:Any] {
+    //jsonstring->(decode->) data
+    public class func JSONString(toData value: String?, decode:Bool) -> Data? {
         if let value = value {
             var newValue = value
             if decode {
                 newValue = NX.decodeURIComponent(newValue)
             }
-            guard let data = newValue.data(using: String.Encoding.utf8) else {return [:]}
+            return newValue.data(using: String.Encoding.utf8)
+        }
+        return nil
+    }
+    
+    
+    //=========================================
+    //jsonstring->(decode->) data -> toDictionary
+    public class func JSONString(toDictionary value: String?, decode:Bool) -> [String:Any] {
+        if let data = NXSerialization.JSONString(toData: value, decode: decode) {
             return NXSerialization.data(toDictionary: data)
         }
         return [:]
@@ -90,12 +99,7 @@ open class NXSerialization {
     
     //jsonstring->(decode->) data -> toArray
     public class func JSONString(toArray value: String?, decode:Bool) -> [Any] {
-        if let value = value {
-            var newValue = value
-            if decode {
-                newValue = NX.decodeURIComponent(newValue)
-            }
-            guard let data = newValue.data(using: String.Encoding.utf8) else {return []}
+        if let data = NXSerialization.JSONString(toData: value, decode: decode) {
             return NXSerialization.data(toArray: data)
         }
         return []

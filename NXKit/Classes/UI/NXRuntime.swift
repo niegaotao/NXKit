@@ -1,5 +1,5 @@
 //
-//  NXApi.swift
+//  NXRuntime.swift
 //  NXKit
 //
 //  Created by niegaotao on 2020/10/1.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class NXApi {
+open class NXRuntime {
     public class func swizzle(_ cls: AnyClass?, _ originSelector: Selector, _ swizzleSelector: Selector)  {
         let originMethod = class_getInstanceMethod(cls, originSelector)
         let swizzleMethod = class_getInstanceMethod(cls, swizzleSelector)

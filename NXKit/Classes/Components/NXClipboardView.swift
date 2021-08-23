@@ -45,10 +45,10 @@ open class NXClipboardView: NXView {
         public let maxYLHSView = UIView(frame: CGRect.zero)
         public let maxYRHSView = UIView(frame: CGRect.zero)
         
-        public let minXView = NXCView<UIView>(frame: CGRect.zero)
-        public let maxXView = NXCView<UIView>(frame: CGRect.zero)
-        public let minYView = NXCView<UIView>(frame: CGRect.zero)
-        public let maxYView = NXCView<UIView>(frame: CGRect.zero)
+        public let minXView = NXAutoresizeView<UIView>(frame: CGRect.zero)
+        public let maxXView = NXAutoresizeView<UIView>(frame: CGRect.zero)
+        public let minYView = NXAutoresizeView<UIView>(frame: CGRect.zero)
+        public let maxYView = NXAutoresizeView<UIView>(frame: CGRect.zero)
         
         open override func setupSubviews() {
             self.minXTHSView.backgroundColor = NX.mainColor
@@ -83,22 +83,22 @@ open class NXClipboardView: NXView {
             self.maxYRHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxYRHSView)
             
-            self.minXView.autoinsetsSubviews = true
+            self.minXView.autoresizesSubviews = true
             self.minXView.backgroundColor = UIColor.clear
             self.minXView.contentView.backgroundColor = NX.mainColor
             self.addSubview(self.minXView)
             
-            self.maxXView.autoinsetsSubviews = true
+            self.maxXView.autoresizesSubviews = true
             self.maxXView.backgroundColor = UIColor.clear
             self.maxXView.contentView.backgroundColor = NX.mainColor
             self.addSubview(self.maxXView)
             
-            self.minYView.autoinsetsSubviews = true
+            self.minYView.autoresizesSubviews = true
             self.minYView.backgroundColor = UIColor.clear
             self.minYView.contentView.backgroundColor = NX.mainColor
             self.addSubview(self.minYView)
             
-            self.maxYView.autoinsetsSubviews = true
+            self.maxYView.autoresizesSubviews = true
             self.maxYView.backgroundColor = UIColor.clear
             self.maxYView.contentView.backgroundColor = NX.mainColor
             self.addSubview(self.maxYView)

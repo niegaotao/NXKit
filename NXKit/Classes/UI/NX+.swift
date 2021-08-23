@@ -392,4 +392,11 @@ extension CMTimeRange : NXInitialValue {
 }
 
 
+extension Data : NXInitialValue {
+    public static var initialValue: Data {
+        return Data()
+    }
+}
+
+
 

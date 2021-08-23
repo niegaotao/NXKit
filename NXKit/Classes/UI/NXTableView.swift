@@ -8,6 +8,11 @@
 
 import UIKit
 
+public struct NXTableDescriptor {
+    public var placeholderDisplay = true
+    public var calcAt = true
+}
+
 open class NXTableView: UITableView {
     open var backdropView : UIImageView? = nil
     weak open var tableWrapper : NXTableWrapper?
@@ -68,9 +73,16 @@ open class NXTableView: UITableView {
     }
     
     //是否显示默认图
-    open func updateSubviews(_ placeholderDisplay : Bool, _ calcAt:Bool) {
-        self.tableWrapper?.placeholderView.wrapped.isHidden = !placeholderDisplay
-        self.tableWrapper?.calcAt = calcAt
+    open func updateSubviews(_ action:String, _ value:Any?) {
+        if let __value = value as? NXTableDescriptor {
+            self.tableWrapper?.placeholderView.wrapped.isHidden = !__value.placeholderDisplay
+            self.tableWrapper?.calcAt = __value.calcAt
+        }
+        else {
+            self.tableWrapper?.placeholderView.wrapped.isHidden = false
+            self.tableWrapper?.calcAt = true
+        }
+        
         self.reloadData()
     }
     

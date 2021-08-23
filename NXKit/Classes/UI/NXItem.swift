@@ -372,7 +372,6 @@ extension NXCollection {
 
 //对分组操作的一层封装
 extension NXCollection {
-    
     //根据indexPath去删除单元格
     @discardableResult
     open func remove(at indexPath: IndexPath) -> Bool {

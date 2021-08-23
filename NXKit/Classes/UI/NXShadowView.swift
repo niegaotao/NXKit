@@ -10,17 +10,9 @@ import UIKit
 
 open class NXShadowView: NXCView<UIView> {
     
-    public convenience init(frame: CGRect, radius: CGFloat = 6.0) {
-        self.init(frame: frame)
-        self.layer.cornerRadius = radius
-        self.layer.shadowRadius = radius
-        self.contentView.layer.cornerRadius = radius
-    }
-    
     override open func setupSubviews() {
         super.setupSubviews()
         
-        self.autoinsetsSubviews = true
         self.backgroundColor = NX.backgroundColor
         self.layer.cornerRadius = 6.0
         self.layer.shadowRadius = 6.0
@@ -44,5 +36,12 @@ open class NXShadowView: NXCView<UIView> {
         else{
             self.contentView.addSubview(view)
         }
+    }
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.layer.shadowRadius = self.layer.cornerRadius
+        self.contentView.layer.cornerRadius = self.layer.cornerRadius
     }
 }
