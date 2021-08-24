@@ -9,8 +9,15 @@
 import UIKit
 
 public struct NXTableDescriptor {
-    public var placeholderDisplay = true
-    public var calcAt = true
+    public var placeholder = true
+    public var calc = true
+    
+    public init(){}
+    
+    public init(placeholder:Bool, calc:Bool) {
+        self.placeholder = placeholder
+        self.calc = calc
+    }
 }
 
 open class NXTableView: UITableView {
@@ -75,8 +82,8 @@ open class NXTableView: UITableView {
     //是否显示默认图
     open func updateSubviews(_ action:String, _ value:Any?) {
         if let __value = value as? NXTableDescriptor {
-            self.tableWrapper?.placeholderView.wrapped.isHidden = !__value.placeholderDisplay
-            self.tableWrapper?.calcAt = __value.calcAt
+            self.tableWrapper?.placeholderView.wrapped.isHidden = !__value.placeholder
+            self.tableWrapper?.calcAt = __value.calc
         }
         else {
             self.tableWrapper?.placeholderView.wrapped.isHidden = false

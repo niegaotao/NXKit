@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'NXKit'
-    s.version          = '0.5.4'
+    s.version          = '0.5.5'
     s.summary          = 'NXKit is a Swift UI framework for iOS.'
     s.description      = <<-DESC
         NXKit is a Swift UI framework for iOS.
