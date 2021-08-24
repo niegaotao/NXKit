@@ -14,14 +14,14 @@ open class NXBackbarWrappedView: NXLCRView<NXButton, UIView, NXButton> {
     override open func setupSubviews() {
         super.setupSubviews()
         self.lhsView.frame = CGRect(x: 0, y: 0, width: 32, height: 44)
-        self.lhsView.setImage(NX.image(named:"navi_back.png"), for: .normal)
+        self.lhsView.setImage(NX.image(named:"navi-back.png"), for: .normal)
         self.lhsView.contentHorizontalAlignment = .left
         
         self.centerView.frame = CGRect(x: 32, y: 14, width: NXDevice.pixel, height: 16)
         self.centerView.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         
         self.rhsView.frame = CGRect(x: 33, y: 0, width: 32, height: 44)
-        self.rhsView.setImage(NX.image(named:"navi_close.png"), for: .normal)
+        self.rhsView.setImage(NX.image(named:"navi-close.png"), for: .normal)
         self.rhsView.contentHorizontalAlignment = .right
     }
     

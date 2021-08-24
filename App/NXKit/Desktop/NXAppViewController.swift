@@ -97,7 +97,7 @@ class NXAppViewController: NXCollectionViewController {
                         action.separator.ats = []
                     }
                     action.separator.insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-                    action.arrow.image = NX.image(named: "uiapp_arrow.png")
+                    action.arrow.image = NX.image(named: "uiapp-arrow.png")
                     action.arrow.frame = CGRect(x: action.ctxs.width-16-6, y: (action.ctxs.height-12)/2.0, width: 6, height: 12)
                     action.arrow.isHidden = false
                     

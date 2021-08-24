@@ -26,7 +26,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         super.viewDidLoad()
         
         self.centerView.setTitle("我的相册", for: .normal)
-        self.centerView.setImage(NX.image(named: "navi_dropdown_arrow.png"), for: .normal)
+        self.centerView.setImage(NX.image(named: "navi-dropdown-arrow.png"), for: .normal)
         self.centerView.setTitleColor(NX.darkBlackColor, for: .normal)
         self.centerView.titleLabel?.font = NX.font(17, true)
         self.centerView.contentHorizontalAlignment = .center
@@ -36,7 +36,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         self.centerView.updateAlignment(.horizontalReverse, 2)
         self.naviView.centerView = self.centerView
         self.naviView.backBar.isHidden = false
-        self.naviView.backBar.updateSubviews(NX.image(named: "navi_close.png"), nil)
+        self.naviView.backBar.updateSubviews(NX.image(named: "navi-close.png"), nil)
         
         /** 加载图片数据:
          1.创建一个串行队列：不在主队列，不回阻塞主线程。
@@ -112,7 +112,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         
         self.footerView.centerView.frame = CGRect(x: (footerView.w-50)/2, y: 5, width: 50, height: 50)
         self.footerView.centerView.isHidden = self.wrapped.footer.center
-        self.footerView.centerView.setImage(NX.image(named: "uiapp_camera.png"), for: .normal)
+        self.footerView.centerView.setImage(NX.image(named: "uiapp-camera.png"), for: .normal)
         self.footerView.centerView.setupEvents([.touchUpInside], action: {[weak self] (e, v) in
             self?.dispose("footer.center", nil)
         })

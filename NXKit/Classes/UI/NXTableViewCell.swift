@@ -27,7 +27,7 @@ open class NXTableViewCell: UITableViewCell {
     
     @objc open func setup(){
         arrowView.frame = CGRect(x: contentView.w-NX.insets.right-6, y: (contentView.h-12)/2, width: 6, height: 12)
-        arrowView.image = NX.image(named:"uiapp_arrow.png")
+        arrowView.image = NX.image(named:"uiapp-arrow.png")
         arrowView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin]
         arrowView.contentMode = .scaleAspectFill
         arrowView.isHidden = true

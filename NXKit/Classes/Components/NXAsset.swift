@@ -1066,7 +1066,7 @@ public class NXAlbum : NXAction {
         
         self.arrow.isHidden = false
         self.arrow.frame = CGRect(x: self.ctxs.width - 16 - 6, y: (self.ctxs.height - 12)/2.0, width: 6, height: 12)
-        self.arrow.image = NX.image(named:"uiapp_arrow.png")
+        self.arrow.image = NX.image(named:"uiapp-arrow.png")
         
         self.separator.insets = UIEdgeInsets(top: 0, left: 106, bottom: 0, right: 0)
         self.separator.ats = .maxY
