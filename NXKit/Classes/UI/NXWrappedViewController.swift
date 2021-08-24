@@ -7,11 +7,11 @@
 
 import UIKit
 
-class NXWrappedViewController<WrappedView: UIView>: NXViewController {
+open class NXWrappedViewController<WrappedView: UIView>: NXViewController {
 
-    var wrappedView : WrappedView? = nil
+    open var wrappedView : WrappedView? = nil
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
 
     }

@@ -1,5 +1,5 @@
 PODS:
-  - NXKit (0.4.2)
+  - NXKit (0.5.3)
 
 DEPENDENCIES:
   - NXKit (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  NXKit: 3cd4ce425ebe1bdd1333fc336422eea4d1d98913
+  NXKit: 6a9d6151e1b8a4088566832c2fe38f96d753ea17
 
 PODFILE CHECKSUM: b2220cc7bd863a63ca1ebce05e831672307486bc
 
