@@ -53,92 +53,11 @@ open class NXApplicationView: NXView {
             return
         }
         
-        if __wrapped.asset.isHidden == false {
-            self.assetView.isHidden = false
-            self.assetView.frame = __wrapped.asset.frame
-            if __wrapped.asset.image != nil {
-                self.assetView.image = __wrapped.asset.image
-            }
-            else if __wrapped.asset.value.contains("http") {
-                NX.image(self.assetView, __wrapped.asset.value)
-            }
-            else if !__wrapped.asset.value.isEmpty {
-                self.assetView.image = UIImage(named: __wrapped.asset.value)
-            }
-            else {
-                self.assetView.image = nil
-            }
-            self.assetView.layer.cornerRadius = __wrapped.asset.radius
-        }
-        else {
-            self.assetView.isHidden = true
-        }
-        
-        if __wrapped.title.isHidden == false {
-            self.titleView.isHidden = false
-            self.titleView.frame = __wrapped.title.frame
-            self.titleView.backgroundColor = __wrapped.title.backgroundColor
-            self.titleView.layer.cornerRadius = __wrapped.title.radius
-            self.titleView.text = __wrapped.title.value
-            self.titleView.textColor = __wrapped.title.color
-            self.titleView.textAlignment = __wrapped.title.textAlignment
-            self.titleView.font = __wrapped.title.font
-            self.titleView.numberOfLines = __wrapped.title.numberOfLines
-        }
-        else {
-            self.titleView.isHidden = true
-        }
-        
-        if __wrapped.subtitle.isHidden == false {
-            self.subtitleView.isHidden = false
-            self.subtitleView.frame = __wrapped.subtitle.frame
-            self.subtitleView.backgroundColor = __wrapped.subtitle.backgroundColor
-            self.subtitleView.layer.cornerRadius = __wrapped.subtitle.radius
-            self.subtitleView.text = __wrapped.subtitle.value
-            self.subtitleView.textColor = __wrapped.subtitle.color
-            self.subtitleView.textAlignment = __wrapped.subtitle.textAlignment
-            self.subtitleView.font = __wrapped.subtitle.font
-            self.subtitleView.numberOfLines = __wrapped.subtitle.numberOfLines
-        }
-        else {
-            self.subtitleView.isHidden = true
-        }
-        
-        if __wrapped.access.isHidden == false {
-            self.accessView.isHidden = false
-            self.accessView.frame = __wrapped.access.frame
-            self.accessView.backgroundColor = __wrapped.access.backgroundColor
-            self.accessView.layer.cornerRadius = __wrapped.access.radius
-            self.accessView.text = __wrapped.access.value
-            self.accessView.textColor = __wrapped.access.color
-            self.accessView.textAlignment = __wrapped.access.textAlignment
-            self.accessView.font = __wrapped.access.font
-            self.accessView.numberOfLines = __wrapped.access.numberOfLines
-        }
-        else {
-            self.accessView.isHidden = true
-        }
-        
-        if __wrapped.arrow.isHidden == false {
-            self.arrowView.isHidden = false
-            self.arrowView.frame = __wrapped.arrow.frame
-            if __wrapped.arrow.image != nil {
-                self.arrowView.image = __wrapped.arrow.image
-            }
-            else if __wrapped.arrow.value.contains("http") {
-                NX.image(self.arrowView, __wrapped.arrow.value)
-            }
-            else if !__wrapped.arrow.value.isEmpty {
-                self.arrowView.image = UIImage(named: __wrapped.arrow.value)
-            }
-            else {
-                self.arrowView.image = nil
-            }
-            self.arrowView.layer.cornerRadius = __wrapped.arrow.radius
-        }
-        else {
-            self.arrowView.isHidden = true
-        }
+        NX.View.update(__wrapped.asset, self.assetView)
+        NX.View.update(__wrapped.title, self.titleView)
+        NX.View.update(__wrapped.subtitle, self.subtitleView)
+        NX.View.update(__wrapped.access, self.accessView)
+        NX.View.update(__wrapped.arrow, self.arrowView)
         
         if __wrapped.separator.ats.isEmpty {
             self.separator.isHidden = true

@@ -1047,7 +1047,7 @@ public class NXAlbum : NXAction {
         
         self.ctxs.size = CGSize(width: NXDevice.width, height: 80)
         self.asset.frame = CGRect(x: 16, y: 1, width: 78, height: 78)
-        self.asset.radius = 0.0
+        self.asset.cornerRadius = 0.0
         self.asset.isHidden = false
         
         self.title.frame = CGRect(x: 106, y: 19, width: NXDevice.width-136, height: 22)

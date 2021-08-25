@@ -565,75 +565,10 @@ extension NXActionView {
                 self.addSubview(__customView)
             }
             
-            if metadata.title.isHidden == false {
-                self.titleView.isHidden = false
-                self.titleView.frame = metadata.title.frame
-                self.titleView.backgroundColor = metadata.title.backgroundColor
-                self.titleView.text = metadata.title.value
-                self.titleView.textColor = metadata.title.color
-                self.titleView.font = metadata.title.font
-                self.titleView.layer.cornerRadius = metadata.title.radius
-                self.titleView.textAlignment = metadata.title.textAlignment
-            }
-            else {
-                self.titleView.isHidden = true
-            }
-            
-            if metadata.lhs.isHidden == false {
-                self.lhsView.isHidden = false
-                self.lhsView.frame = metadata.lhs.frame
-                self.lhsView.backgroundColor = metadata.lhs.backgroundColor
-                self.lhsView.setImage(metadata.lhs.image, for: .normal)
-                self.lhsView.setTitle(metadata.lhs.value, for: .normal)
-                self.lhsView.setTitleColor(metadata.lhs.color, for: .normal)
-                self.lhsView.titleLabel?.font = metadata.lhs.font
-                self.lhsView.layer.cornerRadius = metadata.lhs.radius
-                self.lhsView.contentHorizontalAlignment = NX.Attribute.contentHorizontalAlignment(metadata.lhs.textAlignment)
-            }
-            else {
-                self.lhsView.isHidden = true
-            }
-            
-            if metadata.center.isHidden == false {
-                self.centerView.isHidden = false
-                self.centerView.frame = metadata.center.frame
-                self.centerView.backgroundColor = metadata.center.backgroundColor
-                if metadata.center.isAttributed {
-                    let paragraph = NSMutableParagraphStyle()
-                    paragraph.lineSpacing = metadata.center.lineSpacing
-                    let attributedText = NSAttributedString(string: metadata.center.value,
-                                                            attributes: [NSAttributedString.Key.font:metadata.center.font,
-                                                                         NSAttributedString.Key.foregroundColor:metadata.center.color,
-                                                                         NSAttributedString.Key.paragraphStyle:paragraph])
-                    self.centerView.attributedText = attributedText
-                }
-                else {
-                    self.centerView.text = metadata.center.value
-                    self.centerView.textColor = metadata.center.color
-                    self.centerView.font = metadata.center.font
-                }
-                self.centerView.textAlignment = metadata.center.textAlignment
-                self.centerView.numberOfLines = metadata.center.numberOfLines
-                self.centerView.layer.cornerRadius = metadata.center.radius
-            }
-            else {
-                self.centerView.isHidden = true
-            }
-            
-            if metadata.rhs.isHidden == false {
-                self.rhsView.isHidden = false
-                self.rhsView.frame = metadata.rhs.frame
-                self.rhsView.backgroundColor = metadata.rhs.backgroundColor
-                self.rhsView.setImage(metadata.rhs.image, for: .normal)
-                self.rhsView.setTitle(metadata.rhs.value, for: .normal)
-                self.rhsView.setTitleColor(metadata.rhs.color, for: .normal)
-                self.rhsView.titleLabel?.font = metadata.rhs.font
-                self.rhsView.layer.cornerRadius = metadata.rhs.radius
-                self.rhsView.contentHorizontalAlignment = NX.Attribute.contentHorizontalAlignment(metadata.rhs.textAlignment)
-            }
-            else {
-                self.rhsView.isHidden = true
-            }
+            NX.View.update(metadata.title, self.titleView)
+            NX.View.update(metadata.lhs, self.lhsView)
+            NX.View.update(metadata.center, self.centerView)
+            NX.View.update(metadata.rhs, self.rhsView)
             
             if metadata.separator.ats == NX.Ats.maxY {
                 self.setupSeparator(color: metadata.separator.backgroundColor, ats: .maxY)
@@ -758,50 +693,9 @@ extension NXActionView {
                 self.addSubview(__customView)
             }
             
-            if metadata.lhs.isHidden == false {
-                self.lhsView.isHidden = false
-                self.lhsView.frame = metadata.lhs.frame
-                self.lhsView.backgroundColor = metadata.lhs.backgroundColor
-                self.lhsView.setImage(metadata.lhs.image, for: .normal)
-                self.lhsView.setTitle(metadata.lhs.value, for: .normal)
-                self.lhsView.setTitleColor(metadata.lhs.color, for: .normal)
-                self.lhsView.titleLabel?.font = metadata.lhs.font
-                self.lhsView.layer.cornerRadius = metadata.lhs.radius
-                self.lhsView.contentHorizontalAlignment = NX.Attribute.contentHorizontalAlignment(metadata.lhs.textAlignment)
-            }
-            else {
-                self.lhsView.isHidden = true
-            }
-            
-            if metadata.center.isHidden == false {
-                self.centerView.isHidden = false
-                self.centerView.frame = metadata.center.frame
-                self.centerView.backgroundColor = metadata.center.backgroundColor
-                self.centerView.setImage(metadata.center.image, for: .normal)
-                self.centerView.backgroundColor = metadata.center.backgroundColor
-                self.centerView.setTitle(metadata.center.value, for: .normal)
-                self.centerView.setTitleColor(metadata.center.color, for: .normal)
-                self.centerView.titleLabel?.font = metadata.center.font
-                self.centerView.contentHorizontalAlignment = NX.Attribute.contentHorizontalAlignment(metadata.center.textAlignment)
-            }
-            else {
-                self.centerView.isHidden = true
-            }
-            
-            if metadata.rhs.isHidden == false {
-                self.rhsView.isHidden = false
-                self.rhsView.frame = metadata.rhs.frame
-                self.rhsView.backgroundColor = metadata.rhs.backgroundColor
-                self.rhsView.setImage(metadata.rhs.image, for: .normal)
-                self.rhsView.setTitle(metadata.rhs.value, for: .normal)
-                self.rhsView.setTitleColor(metadata.rhs.color, for: .normal)
-                self.rhsView.titleLabel?.font = metadata.rhs.font
-                self.rhsView.layer.cornerRadius = metadata.rhs.radius
-                self.rhsView.contentHorizontalAlignment = NX.Attribute.contentHorizontalAlignment(metadata.rhs.textAlignment)
-            }
-            else {
-                self.rhsView.isHidden = true
-            }
+            NX.View.update(metadata.lhs, self.lhsView)
+            NX.View.update(metadata.center, self.centerView)
+            NX.View.update(metadata.rhs, self.rhsView)
             
             if metadata.separator.ats == NX.Ats.minY {
                 self.setupSeparator(color: NX.separatorColor, ats: .minY)
