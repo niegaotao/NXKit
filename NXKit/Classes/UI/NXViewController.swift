@@ -11,7 +11,7 @@ import UIKit
 open class NXViewController: UIViewController  {
 
     ///ctxs.index用于记录分页加载的索引，xyz备用
-    public let ctxs = NXViewController.Associated<Int>()
+    public let ctxs = NXViewController.Association<Int>()
     
     ///导航栏
     open var naviView = NXNaviView(frame: CGRect(x: 0, y: 0, width: NXDevice.width, height: NXDevice.topOffset))
@@ -224,6 +224,10 @@ open class NXViewController: UIViewController  {
         return currentValue == NX.Bar.hidden
     }
     
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return self.ctxs.orientationMask
+    }
+    
     override open func present(_ viewController: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         if let viewController = viewController as? NXViewController {
             viewController.ctxs.operation = .present
@@ -239,7 +243,7 @@ open class NXViewController: UIViewController  {
 
 
 extension NXViewController {
-    open class Associated<Index:NXInitialValue> {
+    open class Association<Index:NXInitialValue> {
         open var index = Index.initialValue ///用于记录当前正在请求或者展示的页面index，多用于分页加载
         open var next = Index.initialValue  ///用于记录下一页next，多用于分页加载
         open var reload = NXViewController.Reload.initialized///当前刷新状态
@@ -254,6 +258,8 @@ extension NXViewController {
         
         ///状态栏样式
         open var statusBarStyle = NX.Bar.dark
+        open var statusBarHidden = false
+        open var orientationMask = UIInterfaceOrientationMask.portrait
         
         ///空页面加载动画
         open var animationViewClass : NXAnimationWrappedView.Type? = NX.UI.AnimationClass

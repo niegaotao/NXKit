@@ -26,19 +26,19 @@ open class NXAnimationView: NXImageView {
         self.isHidden = false
         if !self.isAnimation {
             self.isAnimation = true
-            self.startAnimations()
+            self.addAnimations()
         }
     }
     
     //结束动画
-    open func stopAnimating(_ isCompleted:Bool = true) {
+    open override func stopAnimating() {
         self.isAnimation = false
-        self.layer.removeAllAnimations()
+        self.removeAnimations()
         self.isHidden = true
     }
     
-    //动画
-    open func startAnimations(){
+    //添加动画
+    open func addAnimations(){
         let animation = CABasicAnimation(keyPath: "transform.rotation.z")
         animation.toValue = NSNumber(value: Double.pi * 2)
         animation.duration = self.duration
@@ -48,12 +48,17 @@ open class NXAnimationView: NXImageView {
         animation.repeatCount = Float(Int.max)
         self.layer.add(animation, forKey: "rotate")
     }
+    
+    //移除动画
+    open func removeAnimations(){
+        self.layer.removeAllAnimations()
+    }
 }
 
 
-open class NXAnimationWrappedView: NXView {
+open class NXAnimationWrappedView: NXAutoresizeView<NXAnimationView> {
     //转圈的视图
-    open var animationView = NXAnimationView()
+    open var size = CGSize(width: 50, height: 50)
     
     required public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -64,28 +69,26 @@ open class NXAnimationWrappedView: NXView {
     }
     
     override open func setupSubviews() {
+        super.setupSubviews()
         self.isHidden = true
         self.backgroundColor = UIColor.clear
         self.contentMode = .center
-        
-        self.animationView.frame = CGRect(x: (self.w-50)/2, y: (self.h-50)/2, width: 50, height: 50)
-        self.animationView.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleTopMargin, .flexibleBottomMargin]
-        self.animationView.contentMode = .scaleAspectFill
-        self.animationView.backgroundColor = UIColor.clear
-        self.animationView.image = NX.image(named:"uiapp-animation.png")
-        self.animationView.isHidden = true
-        self.addSubview(animationView)
     }
     
     //开始动画
     open func startAnimating() {
         self.isHidden = false
-        self.animationView.startAnimating()
+        self.contentView.startAnimating()
     }
     
     //结束动画
     open func stopAnimating(_ isCompleted:Bool = true) {
-        self.animationView.stopAnimating()
+        self.contentView.stopAnimating()
         self.isHidden = true
+    }
+    
+    //布局
+    open override func layoutSubviews() {
+        self.contentView.frame = CGRect(x: (self.w-50)/2, y: (self.h-50)/2, width: 50, height: 50)
     }
 }
