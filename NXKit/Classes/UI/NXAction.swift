@@ -8,36 +8,37 @@
 import UIKit
 
 open class NXAction: NXItem {
-    public let appearance = NX.Appearance{(_, _) in
-        
+    
+    public let appearance = NX.Appearance{(_, __sender) in
+        __sender.isHighlighted = true
     }
     
-    public let asset = NX.Attribute(completion:{(_, __attribute) in
-        __attribute.color = NX.darkGrayColor
+    public let asset = NX.Attribute(completion:{(_, __sender) in
+        __sender.color = NX.darkGrayColor
     })
     
-    public let title = NX.Attribute(completion: {(_, __attribute) in
-        __attribute.font = NX.font(16)
-        __attribute.textAlignment = .left
-        __attribute.backgroundColor = UIColor.clear
+    public let title = NX.Attribute(completion: {(_, __sender) in
+        __sender.font = NX.font(16)
+        __sender.textAlignment = .left
+        __sender.backgroundColor = UIColor.clear
     })
     
-    public let subtitle = NX.Attribute(completion: {(_, __attribute) in
-        __attribute.font = NX.font(13)
-        __attribute.color = NX.darkGrayColor
-        __attribute.textAlignment = .left
-        __attribute.backgroundColor = UIColor.clear
+    public let subtitle = NX.Attribute(completion: {(_, __sender) in
+        __sender.font = NX.font(13)
+        __sender.color = NX.darkGrayColor
+        __sender.textAlignment = .left
+        __sender.backgroundColor = UIColor.clear
     })
     
-    public let access = NX.Attribute(completion: {(_, __attribute) in
-        __attribute.font = NX.font(13)
-        __attribute.color = NX.darkGrayColor
-        __attribute.textAlignment = .right
-        __attribute.backgroundColor = UIColor.clear
+    public let access = NX.Attribute(completion: {(_, __sender) in
+        __sender.font = NX.font(13)
+        __sender.color = NX.darkGrayColor
+        __sender.textAlignment = .right
+        __sender.backgroundColor = UIColor.clear
     })
     
-    public let arrow = NX.Attribute { (_, __attribute) in
-        __attribute.frame = CGRect(x: 0, y: 0, width: 6, height: 12)
+    public let arrow = NX.Attribute { (_, __sender) in
+        __sender.frame = CGRect(x: 0, y: 0, width: 6, height: 12)
     }
     
     public convenience init(completion:NX.Completion<String, NXAction>?) {

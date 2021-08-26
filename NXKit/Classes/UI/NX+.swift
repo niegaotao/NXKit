@@ -20,7 +20,7 @@ extension NX {
     
     open class Appearance : NX.View {
         open var selectedBackgroundColor = NX.selectedBackgroundColor
-        open var isHighlighted = true
+        open var isHighlighted = false
         open var isEnabled = true
         open var isCloseable = true
         
@@ -135,7 +135,9 @@ extension NX {
 extension NX.View {
     
     open class func update(_ metadata:NX.Appearance, _ view:UIView){
-        view.backgroundColor = metadata.backgroundColor
+        if metadata.isHighlighted == false {
+            view.backgroundColor = metadata.backgroundColor
+        }
         if let __layer = metadata.layer {
             view.layer.cornerRadius = __layer.cornerRadius
             view.layer.borderWidth = __layer.borderWidth
