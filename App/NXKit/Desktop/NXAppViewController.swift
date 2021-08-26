@@ -78,7 +78,7 @@ class NXAppViewController: NXCollectionViewController {
                 action.title.color = NX.lightBlackColor
                 action.title.font = NX.font(14)
                 
-                action.separator.ats = []
+                action.appearance.separator.ats = []
                 action.arrow.isHidden = true
                 action.arrow.isHidden = true
                 
@@ -92,11 +92,11 @@ class NXAppViewController: NXCollectionViewController {
                     let action = NXAction(title: subvalue["title"] as? String ?? "",value: subvalue, completion: nil)
                     action.title.isHidden = false
                     action.title.textAlignment = .left
-                    action.separator.ats = .maxY
+                    action.appearance.separator.ats = .maxY
                     if index == body.count - 1 {
-                        action.separator.ats = []
+                        action.appearance.separator.ats = []
                     }
-                    action.separator.insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+                    action.appearance.separator.insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
                     action.arrow.image = NX.image(named: "uiapp-arrow.png")
                     action.arrow.frame = CGRect(x: action.ctxs.width-16-6, y: (action.ctxs.height-12)/2.0, width: 6, height: 12)
                     action.arrow.isHidden = false
@@ -153,10 +153,13 @@ class NXAppViewController: NXCollectionViewController {
             let actions = strings.map { (a) -> NXAction in
                 return NXAction(title:a, value: nil, completion: { (_, __action:NXAction) in
                     __action.asset.isHidden = true
-                    __action.subtitle.isHidden = true
                     if(__action.title.value == "删除"){
                         __action.title.color = UIColor.red
                     }
+                    __action.title.isHidden = false
+                    __action.subtitle.isHidden = true
+                    __action.access.isHidden = true
+                    __action.arrow.isHidden = true
                 })
             }
             if action == "NXActionView" {

@@ -23,8 +23,13 @@ extension NX {
         open var isHighlighted = true
         open var isEnabled = true
         open var isCloseable = true
-        open var insets = UIEdgeInsets.zero
+        
         open var value : Any? = nil
+        
+        public let separator = NX.Separator{(_,_) in}
+        
+        open var cornerRadius : CGFloat = 0
+        open var layer : NX.Layer? = nil
 
         public override init(){
             super.init()
@@ -46,6 +51,7 @@ extension NX {
         open var font = NX.font(15)
         
         open var image : UIImage? = nil
+        
         open var cornerRadius : CGFloat = 0
         open var layer : NX.Layer? = nil
         
@@ -66,24 +72,6 @@ extension NX {
                 return UIControl.ContentHorizontalAlignment.right
             }
             return UIControl.ContentHorizontalAlignment.center
-        }
-    }
-    
-    open class Separator : NX.View {
-        open var insets = UIEdgeInsets.zero
-        open var ats : NX.Ats = []
-        
-        public override init(){
-            super.init()
-            self.isHidden = true
-            self.backgroundColor = NX.separatorColor
-        }
-        
-        public init(completion:NX.Completion<String, NX.Separator>?){
-            super.init()
-            self.isHidden = true
-            self.backgroundColor = NX.separatorColor
-            completion?("", self)
         }
     }
     
@@ -110,6 +98,26 @@ extension NX {
         }
     }
     
+    open class Separator : NX.View {
+        open var insets = UIEdgeInsets.zero
+        open var ats : NX.Ats = []
+        
+        public override init(){
+            super.init()
+            self.isHidden = true
+            self.backgroundColor = NX.separatorColor
+        }
+        
+        public init(completion:NX.Completion<String, NX.Separator>?){
+            super.init()
+            self.isHidden = true
+            self.backgroundColor = NX.separatorColor
+            completion?("", self)
+        }
+    }
+    
+    
+    
     open class Widget<T:UIView> : NX.View  {
         open var view = T()
         
@@ -122,6 +130,119 @@ extension NX {
             completion?("", self)
         }
     }
+}
+
+extension NX.View {
+    
+    open class func update(_ metadata:NX.Appearance, _ view:UIView){
+        view.backgroundColor = metadata.backgroundColor
+        if let __layer = metadata.layer {
+            view.layer.cornerRadius = __layer.cornerRadius
+            view.layer.borderWidth = __layer.borderWidth
+            view.layer.borderColor = __layer.borderColor.cgColor
+        }
+        else {
+            view.layer.cornerRadius = metadata.cornerRadius
+        }
+    }
+
+    open class func update(_ metadata:NX.Attribute, _ view:UIView){
+        if metadata.isHidden {
+            view.isHidden = true
+            return
+        }
+        if let view = view as? UILabel {
+            view.isHidden = false
+            view.frame = metadata.frame
+            view.backgroundColor = metadata.backgroundColor
+            view.numberOfLines = metadata.numberOfLines
+            if metadata.isAttributed {
+                let paragraph = NSMutableParagraphStyle()
+                paragraph.lineSpacing = metadata.lineSpacing
+                let attributedText = NSAttributedString(string: metadata.value,
+                                                        attributes: [NSAttributedString.Key.font:metadata.font,
+                                                                     NSAttributedString.Key.foregroundColor:metadata.color,
+                                                                     NSAttributedString.Key.paragraphStyle:paragraph])
+                view.attributedText = attributedText
+            }
+            else {
+                view.text = metadata.value
+                view.textColor = metadata.color
+                view.font = metadata.font
+            }
+            view.textAlignment = metadata.textAlignment
+            
+            if let __layer = metadata.layer {
+                view.layer.cornerRadius = __layer.cornerRadius
+                view.layer.borderWidth = __layer.borderWidth
+                view.layer.borderColor = __layer.borderColor.cgColor
+            }
+            else {
+                view.layer.cornerRadius = metadata.cornerRadius
+            }
+        }
+        else if let view = view as? UIButton {
+            view.isHidden = false
+            view.frame = metadata.frame
+            view.backgroundColor = metadata.backgroundColor
+            view.setImage(metadata.image, for: .normal)
+            view.setTitle(metadata.value, for: .normal)
+            view.setTitleColor(metadata.color, for: .normal)
+            view.titleLabel?.font = metadata.font
+            if let __layer = metadata.layer {
+                view.layer.cornerRadius = __layer.cornerRadius
+                view.layer.borderWidth = __layer.borderWidth
+                view.layer.borderColor = __layer.borderColor.cgColor
+            }
+            else {
+                view.layer.cornerRadius = metadata.cornerRadius
+            }
+            view.contentHorizontalAlignment = NX.Attribute.contentHorizontalAlignment(metadata.textAlignment)
+        }
+        else if let view = view as? UIImageView {
+            view.isHidden = false
+            view.frame = metadata.frame
+            view.backgroundColor = metadata.backgroundColor
+            if let image = metadata.image {
+                view.image = image
+            }
+            else if metadata.value.count > 0 {
+                if NX.Placeholder.t.value.hasPrefix("http") {
+                    NX.image(view, metadata.value)
+                }
+                else {
+                    view.image = UIImage(named: metadata.value)
+                }
+            }
+            else {
+                view.image = nil
+            }
+            if let __layer = metadata.layer {
+                view.layer.cornerRadius = __layer.cornerRadius
+                view.layer.borderWidth = __layer.borderWidth
+                view.layer.borderColor = __layer.borderColor.cgColor
+            }
+            else {
+                view.layer.cornerRadius = metadata.cornerRadius
+            }
+        }
+        else {
+            view.isHidden = false
+            view.frame = metadata.frame
+            view.backgroundColor = metadata.backgroundColor
+            if let __layer = metadata.layer {
+                view.layer.cornerRadius = __layer.cornerRadius
+                view.layer.borderWidth = __layer.borderWidth
+                view.layer.borderColor = __layer.borderColor.cgColor
+            }
+            else {
+                view.layer.cornerRadius = metadata.cornerRadius
+            }
+        }
+    }
+}
+
+extension NX {
     
     open class Wrapped<Index: Any, Value:Any> where Index : NXInitialValue, Value : NXInitialValue {
         open var index = Index.initialValue
@@ -223,102 +344,7 @@ extension NX {
     }
 }
 
-extension NX.View {
-    open class func update(_ metadata:NX.Attribute, _ view:UIView){
-        if metadata.isHidden {
-            view.isHidden = true
-            return
-        }
-        if let view = view as? UILabel {
-            view.isHidden = false
-            view.frame = metadata.frame
-            view.backgroundColor = metadata.backgroundColor
-            view.numberOfLines = metadata.numberOfLines
-            if metadata.isAttributed {
-                let paragraph = NSMutableParagraphStyle()
-                paragraph.lineSpacing = metadata.lineSpacing
-                let attributedText = NSAttributedString(string: metadata.value,
-                                                        attributes: [NSAttributedString.Key.font:metadata.font,
-                                                                     NSAttributedString.Key.foregroundColor:metadata.color,
-                                                                     NSAttributedString.Key.paragraphStyle:paragraph])
-                view.attributedText = attributedText
-            }
-            else {
-                view.text = metadata.value
-                view.textColor = metadata.color
-                view.font = metadata.font
-            }
-            view.textAlignment = metadata.textAlignment
-            
-            if let __layer = metadata.layer {
-                view.layer.cornerRadius = __layer.cornerRadius
-                view.layer.borderWidth = __layer.borderWidth
-                view.layer.borderColor = __layer.borderColor.cgColor
-            }
-            else {
-                view.layer.cornerRadius = metadata.cornerRadius
-            }
-        }
-        else if let view = view as? UIButton {
-            view.isHidden = false
-            view.frame = metadata.frame
-            view.backgroundColor = metadata.backgroundColor
-            view.setImage(metadata.image, for: .normal)
-            view.setTitle(metadata.value, for: .normal)
-            view.setTitleColor(metadata.color, for: .normal)
-            view.titleLabel?.font = metadata.font
-            if let __layer = metadata.layer {
-                view.layer.cornerRadius = __layer.cornerRadius
-                view.layer.borderWidth = __layer.borderWidth
-                view.layer.borderColor = __layer.borderColor.cgColor
-            }
-            else {
-                view.layer.cornerRadius = metadata.cornerRadius
-            }
-            view.contentHorizontalAlignment = NX.Attribute.contentHorizontalAlignment(metadata.textAlignment)
-        }
-        else if let view = view as? UIImageView {
-            view.isHidden = false
-            view.frame = metadata.frame
-            view.backgroundColor = metadata.backgroundColor
-            if let image = metadata.image {
-                view.image = image
-            }
-            else if metadata.value.count > 0 {
-                if NX.Placeholder.t.value.hasPrefix("http") {
-                    NX.image(view, metadata.value)
-                }
-                else {
-                    view.image = UIImage(named: metadata.value)
-                }
-            }
-            else {
-                view.image = nil
-            }
-            if let __layer = metadata.layer {
-                view.layer.cornerRadius = __layer.cornerRadius
-                view.layer.borderWidth = __layer.borderWidth
-                view.layer.borderColor = __layer.borderColor.cgColor
-            }
-            else {
-                view.layer.cornerRadius = metadata.cornerRadius
-            }
-        }
-        else {
-            view.isHidden = false
-            view.frame = metadata.frame
-            view.backgroundColor = metadata.backgroundColor
-            if let __layer = metadata.layer {
-                view.layer.cornerRadius = __layer.cornerRadius
-                view.layer.borderWidth = __layer.borderWidth
-                view.layer.borderColor = __layer.borderColor.cgColor
-            }
-            else {
-                view.layer.cornerRadius = metadata.cornerRadius
-            }
-        }
-    }
-}
+
 
 public protocol NXInitialValue {
     static var initialValue : Self { get }

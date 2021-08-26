@@ -29,6 +29,7 @@ extension NXActionView {
                 __action.title.font = NX.font(16, true)
                 __action.title.textAlignment = .center
                 __action.subtitle.isHidden = true
+                __action.arrow.isHidden = true
             })
         }
         
@@ -303,10 +304,10 @@ extension NXActionView {
                         action.appearance.isHighlighted = true
                         action.appearance.isEnabled = true
                         if(index == 0){
-                            action.separator.ats = .maxX
+                            action.appearance.separator.ats = .maxX
                         }
                         else{
-                            action.separator.ats = []
+                            action.appearance.separator.ats = []
                         }
                         contentSize.height = action.ctxs.height
                     }
@@ -319,7 +320,7 @@ extension NXActionView {
                         action.title.frame = CGRect(x: 0, y: 0, width: action.ctxs.width, height: action.ctxs.height)
                         action.appearance.isHighlighted = true
                         action.appearance.isEnabled = true
-                        action.separator.ats = (index == metadata.actions.count-1) ? [] : .maxY;
+                        action.appearance.separator.ats = (index == metadata.actions.count-1) ? [] : .maxY;
                         
                         contentSize.height = contentSize.height + action.ctxs.height
                     }
@@ -329,7 +330,7 @@ extension NXActionView {
             else if wrapped.key == NXActionView.Key.Footer.action.rawValue {
                 for (index, action) in metadata.actions.enumerated() {
                     action.ctxs.width = metadata.frame.width;
-                    action.separator.ats = (index == metadata.actions.count-1) ? []: .maxY;
+                    action.appearance.separator.ats = (index == metadata.actions.count-1) ? []: .maxY;
                     
                     contentSize.height = contentSize.height + action.ctxs.height
                 }

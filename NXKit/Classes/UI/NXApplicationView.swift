@@ -53,23 +53,24 @@ open class NXApplicationView: NXView {
             return
         }
         
+        NX.View.update(__wrapped.appearance, self)
         NX.View.update(__wrapped.asset, self.assetView)
         NX.View.update(__wrapped.title, self.titleView)
         NX.View.update(__wrapped.subtitle, self.subtitleView)
         NX.View.update(__wrapped.access, self.accessView)
         NX.View.update(__wrapped.arrow, self.arrowView)
         
-        if __wrapped.separator.ats.isEmpty {
+        
+        let __separator = __wrapped.appearance.separator
+        if __separator.ats.isEmpty {
             self.separator.isHidden = true
         }
         else{
             self.separator.isHidden = false
-            let __separator = __wrapped.separator
-            
             var __frame = CGRect.zero
             if __separator.ats.contains(.minY) || __separator.ats.contains(.maxY) {
                 __frame = CGRect(x: __separator.insets.left, y: 0, width: __wrapped.ctxs.width-__separator.insets.left-__separator.insets.right, height: NXDevice.pixel)
-                if __wrapped.separator.ats.contains(.maxY) {
+                if __wrapped.appearance.separator.ats.contains(.maxY) {
                     __frame.origin.y = __wrapped.ctxs.height-NXDevice.pixel
                 }
             }

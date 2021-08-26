@@ -8,8 +8,6 @@
 import UIKit
 
 open class NXAction: NXItem {
-    open var action : String = ""
-
     public let appearance = NX.Appearance{(_, _) in
         
     }
@@ -40,10 +38,6 @@ open class NXAction: NXItem {
     
     public let arrow = NX.Attribute { (_, __attribute) in
         __attribute.frame = CGRect(x: 0, y: 0, width: 6, height: 12)
-    }
-    
-    public let separator = NX.Separator{(_,_) in
-        
     }
     
     public convenience init(completion:NX.Completion<String, NXAction>?) {
