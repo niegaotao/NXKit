@@ -257,30 +257,34 @@ extension NXActionView {
     }
     
     open class Metadata : NX.View {
-        public let title = NX.Attribute { (_, __attribute) in
-            __attribute.textAlignment = .center
-            __attribute.font = NX.font(18, true)
-            __attribute.color = NX.darkBlackColor
+        public let title = NX.Attribute { (_, __sender) in
+            __sender.textAlignment = .center
+            __sender.font = NX.font(18, true)
+            __sender.color = NX.darkBlackColor
+            __sender.backgroundColor = .clear
         }
         
-        public let lhs = NX.Attribute { (_, __attribute) in
-            __attribute.frame = CGRect(x: 16, y: (60-44)/2, width: 84, height: 44)
-            __attribute.font = NX.font(16, false)
-            __attribute.color = NX.mainColor
-            __attribute.textAlignment = .left
+        public let lhs = NX.Attribute { (_, __sender) in
+            __sender.frame = CGRect(x: 16, y: (60-44)/2, width: 84, height: 44)
+            __sender.font = NX.font(16, false)
+            __sender.color = NX.mainColor
+            __sender.textAlignment = .left
+            __sender.backgroundColor = .clear
         }
         
-        public let center = NX.Attribute { (_, __attribute) in
-            __attribute.frame = CGRect(x: 100, y: (60-44)/2, width: NXDevice.width-200, height: 44)
-            __attribute.font = NX.font(16, true)
-            __attribute.color = NX.darkBlackColor
-            __attribute.textAlignment = .center
+        public let center = NX.Attribute { (_, __sender) in
+            __sender.frame = CGRect(x: 100, y: (60-44)/2, width: NXDevice.width-200, height: 44)
+            __sender.font = NX.font(16, true)
+            __sender.color = NX.darkBlackColor
+            __sender.textAlignment = .center
+            __sender.backgroundColor = .clear
         }
         
-        public let rhs = NX.Attribute { (_, __attribute) in
-            __attribute.frame = CGRect(x: NXDevice.width-16-84, y: (60-44)/2, width: 84, height: 44)
-            __attribute.color = NX.mainColor
-            __attribute.textAlignment = .right
+        public let rhs = NX.Attribute { (_, __sender) in
+            __sender.frame = CGRect(x: NXDevice.width-16-84, y: (60-44)/2, width: 84, height: 44)
+            __sender.color = NX.mainColor
+            __sender.textAlignment = .right
+            __sender.backgroundColor = .clear
         }
         
         public let separator = NX.Separator{(_, __attribute) in

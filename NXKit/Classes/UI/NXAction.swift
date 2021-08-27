@@ -15,6 +15,7 @@ open class NXAction: NXItem {
     
     public let asset = NX.Attribute(completion:{(_, __sender) in
         __sender.color = NX.darkGrayColor
+        __sender.backgroundColor = .clear
     })
     
     public let title = NX.Attribute(completion: {(_, __sender) in
@@ -39,6 +40,7 @@ open class NXAction: NXItem {
     
     public let arrow = NX.Attribute { (_, __sender) in
         __sender.frame = CGRect(x: 0, y: 0, width: 6, height: 12)
+        __sender.backgroundColor = .clear
     }
     
     public convenience init(completion:NX.Completion<String, NXAction>?) {
