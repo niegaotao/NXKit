@@ -23,20 +23,20 @@ extension NXAuthority {
 
 open class NXAuthority {
     //获取授权/请求授权入口
-    open class func authorization(_ type: NX.AuthorizeType, _ queue:DispatchQueue, _ completion:((NX.AuthorizeState) -> ())?, _ alert: Bool = true){
-        if type == NX.AuthorizeType.album {
+    open class func authorization(_ type: NX.Authorize, _ queue:DispatchQueue, _ completion:((NX.AuthorizeState) -> ())?, _ alert: Bool = true){
+        if type == NX.Authorize.album {
             self.albumAuthorization(queue, alert, completion)
         }
-        else if type == NX.AuthorizeType.camera {
+        else if type == NX.Authorize.camera {
             self.cameraAuthorization(queue, alert, completion)
         }
-        else if type == NX.AuthorizeType.microphone {
+        else if type == NX.Authorize.microphone {
             self.microphoneAuthorization(queue, alert, completion)
         }
-        else if type == NX.AuthorizeType.apns {
+        else if type == NX.Authorize.apns {
             self.apnsAuthorization(queue, alert, completion)
         }
-        else if type == NX.AuthorizeType.network {
+        else if type == NX.Authorize.network {
             self.networkAuthorization(queue, alert,  completion)
         }
     }
@@ -185,26 +185,26 @@ open class NXAuthority {
         }
     }
     
-    open class func description(_ type: NX.AuthorizeType) -> (title:String,subtitle:String,content:String){
-        if type == NX.AuthorizeType.album {
+    open class func description(_ type: NX.Authorize) -> (title:String,subtitle:String,content:String){
+        if type == NX.Authorize.album {
             return NXAuthority.Popup.album
         }
-        else if type == NX.AuthorizeType.camera{
+        else if type == NX.Authorize.camera{
             return NXAuthority.Popup.camera
         }
-        else if type == NX.AuthorizeType.apns {
+        else if type == NX.Authorize.apns {
             return NXAuthority.Popup.apns
         }
-        else if type == NX.AuthorizeType.network {
+        else if type == NX.Authorize.network {
             return NXAuthority.Popup.network
         }
-        else if type == NX.AuthorizeType.microphone {
+        else if type == NX.Authorize.microphone {
             return NXAuthority.Popup.microphone
         }
         return ("", "", "")
     }
     
-    open class func authorizationViewDisplay(_ type: NX.AuthorizeType, _ completion:((_ index:Int) -> ())? = nil){
+    open class func authorizationViewDisplay(_ type: NX.Authorize, _ completion:((_ index:Int) -> ())? = nil){
         
         
     }

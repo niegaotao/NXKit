@@ -39,7 +39,7 @@ open class NXWebView: WKWebView {
         
         let __config = WKWebViewConfiguration()
         if #available(iOS 11.0, *) {
-            for scheme in NX.Web.schemes {
+            for scheme in NX.Association.schemes {
                 __config.setURLSchemeHandler(__wrapped, forURLScheme: scheme)
             }
         }
@@ -74,15 +74,15 @@ open class NXWebView: WKWebView {
             
             //注册js对象，设置UI和导航的代理
             //window.webkit.messageHandlers.rrxc.postMessage({"action":"rrxc://"})
-            if NX.Web.names.count > 0 {
-                for name in NX.Web.names {
+            if NX.Association.names.count > 0 {
+                for name in NX.Association.names {
                     self.configuration.userContentController.add(__wrapped, name: name)
                 }
             }
             
             //注入js脚本
-            if NX.Web.scripts.count > 0 {
-                for script in NX.Web.scripts {
+            if NX.Association.scripts.count > 0 {
+                for script in NX.Association.scripts {
                     self.configuration.userContentController.addUserScript(WKUserScript(source: script.source, injectionTime: script.injectionTime, forMainFrameOnly: script.isForMainFrameOnly))
                 }
             }
@@ -106,7 +106,7 @@ open class NXWebView: WKWebView {
     
     deinit {
         NX.log { return "NXWebView"}
-        for name in NX.Web.names {
+        for name in NX.Association.names {
             self.configuration.userContentController.removeScriptMessageHandler(forName: name)
         }
     }
@@ -123,7 +123,7 @@ extension NXWebView {
         
         //WKScriptMessageHandler
         public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage){
-            if NX.Web.names.contains(message.name) {
+            if NX.Association.names.contains(message.name) {
                 NX.log { return "message.name=\(message.name),\nmessage.body=\(message.body)"}
                 // 依据协定好的数据格式将参数转成dic
                 if let value = message.body as? [String:Any] {
@@ -258,12 +258,12 @@ extension NXWebView {
                 //处理白名单/黑名单的业务
                 completion(WKNavigationActionPolicy.allow)
             }
-            else if NX.URI.scheme == scheme {
+            else if NX.Association.scheme == scheme {
                 //这种事通过自定义url重定向打开页面的或常用操作的
-                self.dispose(scheme:NX.URI.scheme, mapValue: ["action":url.absoluteString])
+                self.dispose(scheme:NX.Association.scheme, mapValue: ["action":url.absoluteString])
                 completion(WKNavigationActionPolicy.cancel)
             }
-            else if NX.Web.openURLs.contains(scheme) {
+            else if NX.Association.openURLs.contains(scheme) {
                 //这种是在网页中通过重定向的方式：常用App的，目前支持一下微信/AppStore
                 NX.open(url, [:])
                 completion(WKNavigationActionPolicy.cancel)

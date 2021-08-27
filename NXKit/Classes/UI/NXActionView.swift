@@ -18,11 +18,11 @@ extension NXActionView {
                 __action.asset.isHidden = true
                 __action.title.isHidden = false
                 if actions.count == 2 {
-                    __action.ctxs.size = CGSize(width: NX.Overlay.size.width*0.5, height: NX.Overlay.size.height)
+                    __action.ctxs.size = CGSize(width: NX.Association.size.width*0.5, height: NX.Association.size.height)
                     __action.title.frame = CGRect(x: 0, y: 0, width: __action.ctxs.width, height: __action.ctxs.height)
                 }
                 else {
-                    __action.ctxs.size = CGSize(width: NX.Overlay.size.width, height: NX.Overlay.size.height)
+                    __action.ctxs.size = CGSize(width: NX.Association.size.width, height: NX.Association.size.height)
                     __action.title.frame = CGRect(x: 0, y: 0, width: __action.ctxs.width, height: __action.ctxs.height)
                 }
                 __action.title.color = NX.darkBlackColor
@@ -45,12 +45,12 @@ extension NXActionView {
     class public func alert(title: String, subtitle:String, actions:[NXAction], setup:NX.Completion<String, NXActionView>?, completion:NX.Completion<String, Int>?) -> NXActionView {
         for (_, action) in actions.enumerated() {
             if actions.count == 2 {
-                action.ctxs.size = CGSize(width: NX.Overlay.size.width*0.5, height: NX.Overlay.size.height)
+                action.ctxs.size = CGSize(width: NX.Association.size.width*0.5, height: NX.Association.size.height)
                 action.title.frame = CGRect(x: 0, y: 0, width: action.ctxs.width, height: action.ctxs.height)
             }
             else {
-                action.ctxs.size = CGSize(width: NX.Overlay.size.width, height: NX.Overlay.size.height)
-                action.title.frame = CGRect(x: 0, y: 0, width: NX.Overlay.size.width, height: action.ctxs.height)
+                action.ctxs.size = CGSize(width: NX.Association.size.width, height: NX.Association.size.height)
+                action.title.frame = CGRect(x: 0, y: 0, width: NX.Association.size.width, height: action.ctxs.height)
             }
         }
         
@@ -63,7 +63,7 @@ extension NXActionView {
          */
         let actionView = NXActionView(frame: UIScreen.main.bounds)
         //header
-        var size = subtitle.stringSize(font: NX.font(15, false), size: CGSize(width: NX.Overlay.size.width-40, height: NXDevice.height*0.6))
+        var size = subtitle.stringSize(font: NX.font(15, false), size: CGSize(width: NX.Association.size.width-40, height: NXDevice.height*0.6))
         size.height = ceil(max(20.0, size.height*1.25)) + 2.0
         
         actionView.wrapped.header.frame.size = CGSize(width: NXDevice.width * 0.8, height: 80.0 + size.height)

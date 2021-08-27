@@ -92,7 +92,6 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     
     /// 重写父类push方法
     override open func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        NX.log { return "class=\(viewController.self)"}
         if let viewController = viewController as? NXViewController {
             viewController.ctxs.operation = .push
             viewController.ctxs.oriention = .right

@@ -39,7 +39,7 @@ class NXAppViewController: NXCollectionViewController {
         let section = NXSection()
         self.collectionWrapper.append(section)
         
-        NX.Overlay.size.height = 52
+        NX.Association.size.height = 52
         
         self.values.removeAll()
         

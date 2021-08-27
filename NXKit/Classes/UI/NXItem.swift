@@ -10,7 +10,7 @@ import UIKit
 
 extension NXItem {
     //记录单元格类型和重用ID的对象
-    open class Wrapped : NX.Rect {
+    open class Association : NX.Rect {
         open var value : [String: Any]? = nil
         
         open var cls : AnyClass?        //单元格/视图类型, e.g. NXTableViewCell.self
@@ -36,10 +36,16 @@ extension NXItem {
 
 //单元格model基类
 open class NXItem : NSObject {
-    public let ctxs = NXItem.Wrapped()
     
-    public convenience init(value: [String: Any]?) {
-        self.init()
+    public let ctxs = NXItem.Association()
+    
+    public override init() {
+        super.init()
+        self.setup()
+    }
+    
+    public init(value: [String: Any]?) {
+        super.init()
         self.ctxs.value = value
         self.setup()
     }

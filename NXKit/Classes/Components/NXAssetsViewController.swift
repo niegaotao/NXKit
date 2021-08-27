@@ -43,7 +43,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
          2.串行队列保证队列内的任务按顺序执行，即先夹在完图片数据，再刷新UI显示
          3.采用异步的方式，不影响主线程的其他操作
          */
-        NX.authorization(NX.AuthorizeType.album, DispatchQueue.main, true) {[weak self] (state) in
+        NX.authorization(NX.Authorize.album, DispatchQueue.main, true) {[weak self] (state) in
             if state == .authorized, let self = self {
                 self.contentView.addSubview(self.animationView!)
                 self.animationView?.startAnimating()
@@ -159,7 +159,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
             self.filterView.contentView.setAttributedTitle(attris, for: .normal)
             
             
-            DispatchQueue.main.after(time: .now()+0.2) {[weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {[weak self] in
                 self?.filterView.updateSubviews("animation", true)
             }
         }
@@ -205,7 +205,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         }
         else if action == "footer.center" {
             
-            NX.authorization(NX.AuthorizeType.camera, DispatchQueue.main, true) {[weak self] (status) in
+            NX.authorization(NX.Authorize.camera, DispatchQueue.main, true) {[weak self] (status) in
                 if status == .authorized, let self = self {
                     let picker = UIImagePickerController()
                     picker.allowsEditing = false

@@ -25,16 +25,8 @@ extension DispatchQueue {
         block()
     }
     
-    public func after(_ delay: TimeInterval, execute: @escaping () -> Void) {
+    public func asyncAfter(delay: TimeInterval, execute: @escaping () -> Void) {
         asyncAfter(deadline: .now() + delay, execute: execute)
-    }
-    
-    public func async(block: @escaping ()->()) {
-        self.async(execute: block)
-    }
-    
-    public func after(time: DispatchTime, block: @escaping ()->()) {
-        self.asyncAfter(deadline: time, execute: block)
     }
 }
 

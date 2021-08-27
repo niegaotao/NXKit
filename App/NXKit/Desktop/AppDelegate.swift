@@ -25,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NX.backgroundColor = NX.color(NX.color(255, 255, 255), NX.color(28, 28, 28))
         NX.darkBlackColor = NX.color(NX.color(30, 30, 30), NX.color(255, 255, 255))
 
-        NX.Authorize.authorization = {
-            (_ type: NX.AuthorizeType,
+        NX.Imp.authorization = {
+            (_ type: NX.Authorize,
             _ queue:DispatchQueue,
             _ alert: Bool,
             _ completion:((NX.AuthorizeState) -> ())?) in

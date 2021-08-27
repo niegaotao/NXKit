@@ -149,21 +149,16 @@ open class NXSerialization {
     }
     
     //生成路由URL
-    public class func createURL(path:String, action:String, param:[String:Any]) -> String {
-        return NXSerialization.createURL(scheme: NX.URI.scheme, path: path, action: action, param: param)
-    }
-    
-    public class func createURL(scheme:String, path:String, action:String, param:[String:Any]) -> String {
-        let __action = NX.encodeURIComponent(action) ?? action
-        if param.count > 0 {
-            let __param = NXSerialization.JSONObject(toString:param, encode:true)
-            return "\(scheme)://\(path)?action=\(__action)&param=\(__param)"
+    public class func createRouter(scheme:String, path:String, operation:String, data:[String:Any]) -> String {
+        let __operation = NX.encodeURIComponent(operation) ?? operation
+        if data.count > 0 {
+            let encode = NXSerialization.JSONObject(toString:data, encode:true)
+            return "\(scheme)://\(path)?operation=\(__operation)&data=\(encode)"
         }
-        return "\(scheme)://\(path)?action=\(__action)"
+        return "\(scheme)://\(path)?operation=\(__operation)"
     }
     
-    
-    public class func createURL(scheme:String, path:String, query:[String:String], encode:Bool) -> String {
+    public class func createRouter(scheme:String, path:String, query:[String:String], encode:Bool) -> String {
         var __querys = [String]()
         for (queryKey, queryKalue) in query {
             let __queryKey = encode ? NX.get(string:NX.encodeURIComponent(queryKey), ""): queryKey

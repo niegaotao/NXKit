@@ -359,114 +359,27 @@ extension NX {
 }
 
 
-// 图片
 extension NX {
-    
-    public class Asset {
-        //默认使用的bundle图片的path
-        static public var path = Bundle(for: NX.self).bundlePath + "/NXKit.bundle/"
-
-        //处理图片浏览
-        static public var showAssets:((_ type:String, _ assets:[Any]) -> ())?
+    //占位图
+    public class Placeholder {
+        static public var frame = CGRect(x: 0, y: 0, width: 320, height: 256)
         
-        //设置url
-        static public var image : ((_ targetView: UIView?, _ url:String, _ state:UIControl.State) -> ())?
-    }
-    
-    //加载获取bundle中图片
-    public class func image(named name:String, _ scale:Int = Int(UIScreen.main.scale)) -> UIImage? {
-        guard name.count > 0 else {return nil}
-
-        var __name = name
-        if NX.Asset.path.count > 0 {
-            if __name.contains("@2x.") || __name.contains("@3x.")  {
-                
-            }
-            else {
-                if scale == 2 || scale == 3 {
-                    __name = __name.replacingOccurrences(of: ".png", with: "@\(scale)x.png")
-                }
-            }
-            __name = NX.Asset.path + __name
+        static public var m = NX.Attribute { (_, __sender) in
+            __sender.frame = CGRect(x: 0, y: 0, width: 320, height: 170)
         }
-        return UIImage(named: __name)
-    }
-    
-    //处理图片浏览
-    class public func showAssets(type:String, assets:[Any]){
-        NX.Asset.showAssets?(type, assets)
-    }
-    
-    //设置图像
-    open class func image(_ targetView:UIView?, _ url:String, _ state:UIControl.State = UIControl.State.normal){
-        NX.Asset.image?(targetView, url, state)
-    }
-}
-
-extension NX {
-    
-    public class Codable {
-        //进行urlcomponent编码的字符
-        static public var characters = "!*'();:@&=+$,/?%#[]{}\"\\"
         
-        //encodeURIComponent
-        static public var encodeURIComponent:((_ uri:String) -> (String))?
-        
-        //decodeURIComponent
-        static public var decodeURIComponent:((_ uri:String) -> (String))?
-    }
-    
-    //encodeURIComponent
-    class public func encodeURIComponent(_ uri:String) -> String? {
-        if NX.Codable.encodeURIComponent != nil {
-            return NX.Codable.encodeURIComponent?(uri)
+        static public var t = NX.Attribute { (_, __sender) in
+            __sender.frame = CGRect(x: 0, y: 175, width: 320, height: 55)
+            __sender.value = "暂无数据～"
+            __sender.textAlignment = .center
+            __sender.numberOfLines = 0
+            __sender.font = NX.font(16)
+            __sender.color = NX.darkGrayColor
         }
-        /*!*'();:@&=+$,/?%#[]{}   增加了对"和\ --> !*'();:@&=+$,/?%#[]{}\"\\ */
-        let allowedCharacters = CharacterSet(charactersIn: NX.Codable.characters).inverted
-        let retValue = uri.addingPercentEncoding(withAllowedCharacters: allowedCharacters)
-        return retValue ?? ""
-    }
-    
-    //decodeURIComponent
-    class public func decodeURIComponent(_ uri:String) -> String {
-        if NX.Codable.decodeURIComponent != nil {
-            return NX.Codable.decodeURIComponent?(uri) ?? uri
-        }
-        let retValue = uri.removingPercentEncoding
-        return retValue ?? ""
-    }
-}
-
-
-//网页/导航中的相关配置
-extension NX {
-    public class URI {
-        //根据scheme处理
-        //使用NXSerialization生成actionURL时带的前缀
-        static public var scheme = ""
-    }
-    
-    //openURL
-    class public func open(_ url: URL, _ options: [UIApplication.OpenExternalURLOptionsKey : Any], completion: ((Bool) -> Void)? = nil) {
-        if #available(iOS 10.0, *) {
-            UIApplication.shared.open(url, options:options, completionHandler: completion)
-        }
-        else{
-            let isDisposed = UIApplication.shared.openURL(url)
-            completion?(isDisposed)
-        }
-    }
-}
-
-extension NX {
-    //授权
-    open class Authorize {
-        //授权的回调
-        static public var authorization:((_ type: NX.AuthorizeType, _ queue:DispatchQueue, _ isAlertable: Bool, _ completion:((NX.AuthorizeState) -> ())?) ->())?
     }
     
     //授权类型
-    public enum AuthorizeType {
+    public enum Authorize {
         case album          //系统相册
         case camera         //照相机
         case contacts       //通讯录
@@ -492,14 +405,16 @@ extension NX {
         case error          //其他错误
     }
     
-    //获取授权/请求授权入口
-    open class func authorization(_ type: NX.AuthorizeType, _ queue:DispatchQueue, _ isAlertable: Bool, _ completion:((NX.AuthorizeState) -> ())?){
-        NX.Authorize.authorization?(type, queue, isAlertable, completion)
-    }
-}
-
-extension NX {
-    public class Web {
+    public class Association {
+        //默认使用的bundle图片的path
+        static public var path = Bundle(for: NX.self).bundlePath + "/NXKit.bundle/"
+        
+        //进行urlcomponent编码的字符
+        static public var characters = "!*'();:@&=+$,/?%#[]{}\"\\"
+        
+        //根据scheme处理
+        //使用NXSerialization生成actionURL时带的前缀
+        static public var scheme = ""
         
         //网页中注册的js方法，例如rrxc,则js通过window.webkit.messageHandlers.rrxc.postMessage(map/string)
         static public var names = [String]()
@@ -519,35 +434,35 @@ extension NX {
         //js注入脚本
         static public var scripts = [WKUserScript]()
         
-        //这里处理网页中回调的js桥接
-        static public var webView : ((_ action:String, _ contentView: WKWebView, _ value:[String:Any],  _ viewController:NXWebViewController?) -> Bool)?
-    }
-    
-    //这里处理网页中回调的js桥接
-    @discardableResult
-    class public func dispose(_ action:String, _ webView:WKWebView, _ value:[String:Any], _ viewController:NXWebViewController?) -> Bool? {
-        return NX.Web.webView?(action, webView, value, viewController)
-    }
-}
-
-extension NX {
-    public class Table {
         static public var tableViewStyle = UITableView.Style.grouped
         static public var separatorStyle = UITableViewCell.SeparatorStyle.singleLine
-        //这里处理单元格高度的通过autoLayout计算的一种回调
-        static public var tableView : ((_ tableView: UITableView?, _ value:NXItem, _ indexPath:IndexPath) -> CGFloat)?
-    }
-    
-    //这里处理单元格高度的通过autoLayout计算的一种回调
-    class public func heightForRow(_ tableView:UITableView?, _ value:NXItem, _ indexPath:IndexPath) -> CGFloat? {
-        return NX.Table.tableView?(tableView, value, indexPath)
-    }
-}
-
-extension NX {
-    public class Overlay {
+        
         //alert/action的单元格最大宽度、高度
         static public var size = CGSize(width: NXDevice.width*0.8, height: 48.0)
+    }
+    
+    public class Imp {
+        //处理图片浏览
+        static public var showAssets:((_ type:String, _ assets:[Any]) -> ())?
+        
+        //设置url
+        static public var image : ((_ targetView: UIView?, _ url:String, _ state:UIControl.State) -> ())?
+        
+        //encodeURIComponent
+        static public var encodeURIComponent:((_ uri:String) -> (String))?
+        
+        //decodeURIComponent
+        static public var decodeURIComponent:((_ uri:String) -> (String))?
+        
+        //授权的回调
+        static public var authorization:((_ type: NX.Authorize, _ queue:DispatchQueue, _ isAlertable: Bool, _ completion:((NX.AuthorizeState) -> ())?) ->())?
+        
+        //这里处理网页中回调的js桥接
+        static public var webView : ((_ action:String, _ contentView: WKWebView, _ value:[String:Any],  _ viewController:NXWebViewController?) -> Bool)?
+        
+        //这里处理单元格高度的通过autoLayout计算的一种回调
+        static public var tableView : ((_ tableView: UITableView?, _ value:NXItem, _ indexPath:IndexPath) -> CGFloat)?
+        
         //处理toast
         static public var showToast:((_ message:String, _ ats:NX.Ats , _ superview:UIView?) -> ())?
         
@@ -557,39 +472,101 @@ extension NX {
         //处理toast
         static public var hideAnimation:((_ superview:UIView?) -> ())?
     }
+}
+
+
+// 图片
+extension NX {
+    //加载获取bundle中图片
+    public class func image(named name:String, _ scale:Int = Int(UIScreen.main.scale)) -> UIImage? {
+        guard name.count > 0 else {return nil}
+
+        var __name = name
+        if NX.Association.path.count > 0 {
+            if __name.contains("@2x.") || __name.contains("@3x.")  {
+                
+            }
+            else {
+                if scale == 2 || scale == 3 {
+                    __name = __name.replacingOccurrences(of: ".png", with: "@\(scale)x.png")
+                }
+            }
+            __name = NX.Association.path + __name
+        }
+        return UIImage(named: __name)
+    }
+    
+    //处理图片浏览
+    class public func showAssets(type:String, assets:[Any]){
+        NX.Imp.showAssets?(type, assets)
+    }
+    
+    //设置图像
+    open class func image(_ targetView:UIView?, _ url:String, _ state:UIControl.State = UIControl.State.normal){
+        NX.Imp.image?(targetView, url, state)
+    }
+
+    //encodeURIComponent
+    class public func encodeURIComponent(_ uri:String) -> String? {
+        if NX.Imp.encodeURIComponent != nil {
+            return NX.Imp.encodeURIComponent?(uri)
+        }
+        /*!*'();:@&=+$,/?%#[]{}   增加了对"和\ --> !*'();:@&=+$,/?%#[]{}\"\\ */
+        let allowedCharacters = CharacterSet(charactersIn: NX.Association.characters).inverted
+        let retValue = uri.addingPercentEncoding(withAllowedCharacters: allowedCharacters)
+        return retValue ?? ""
+    }
+    
+    //decodeURIComponent
+    class public func decodeURIComponent(_ uri:String) -> String {
+        if NX.Imp.decodeURIComponent != nil {
+            return NX.Imp.decodeURIComponent?(uri) ?? uri
+        }
+        let retValue = uri.removingPercentEncoding
+        return retValue ?? ""
+    }
+
+    //openURL
+    class public func open(_ url: URL, _ options: [UIApplication.OpenExternalURLOptionsKey : Any], completion: ((Bool) -> Void)? = nil) {
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options:options, completionHandler: completion)
+        }
+        else{
+            let isDisposed = UIApplication.shared.openURL(url)
+            completion?(isDisposed)
+        }
+    }
+    
+    //获取授权/请求授权入口
+    open class func authorization(_ type: NX.Authorize, _ queue:DispatchQueue, _ isAlertable: Bool, _ completion:((NX.AuthorizeState) -> ())?){
+        NX.Imp.authorization?(type, queue, isAlertable, completion)
+    }
+
+    
+    //这里处理网页中回调的js桥接
+    @discardableResult
+    class public func dispose(_ action:String, _ webView:WKWebView, _ value:[String:Any], _ viewController:NXWebViewController?) -> Bool? {
+        return NX.Imp.webView?(action, webView, value, viewController)
+    }
+    
+    //这里处理单元格高度的通过autoLayout计算的一种回调
+    class public func heightForRow(_ tableView:UITableView?, _ value:NXItem, _ indexPath:IndexPath) -> CGFloat? {
+        return NX.Imp.tableView?(tableView, value, indexPath)
+    }
     
     //处理图片浏览
     class public func showToast(message:String, _ ats:NX.Ats = .center , _ superview:UIView? = UIApplication.shared.keyWindow){
-        NX.Overlay.showToast?(message, ats, superview)
+        NX.Imp.showToast?(message, ats, superview)
     }
     
     //处理animation
     class public func showAnimation(_ message:String, _ superview:UIView? = UIApplication.shared.keyWindow){
-        NX.Overlay.showAnimation?(message, superview)
+        NX.Imp.showAnimation?(message, superview)
     }
     
     //处理toast
     class public func hideAnimation(superview:UIView? = UIApplication.shared.keyWindow){
-        NX.Overlay.hideAnimation?(superview)
-    }
-}
-
-extension NX {
-    public class Placeholder {
-        static public var frame = CGRect(x: 0, y: 0, width: 320, height: 256)
-        
-        static public var m = NX.Attribute { (_, __sender) in
-            __sender.frame = CGRect(x: 0, y: 0, width: 320, height: 170)
-        }
-        
-        static public var t = NX.Attribute { (_, __sender) in
-            __sender.frame = CGRect(x: 0, y: 175, width: 320, height: 55)
-            __sender.value = "暂无数据～"
-            __sender.textAlignment = .center
-            __sender.numberOfLines = 0
-            __sender.font = NX.font(16)
-            __sender.color = NX.darkGrayColor
-        }
+        NX.Imp.hideAnimation?(superview)
     }
 }
 

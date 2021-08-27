@@ -506,7 +506,7 @@ extension NXAsset {
         vc.delegate = vc
         vc.modalPresentationStyle = .fullScreen
         camera?(true, vc)
-        NX.authorization(NX.AuthorizeType.camera, DispatchQueue.main, true) {[weak vc] (state) in
+        NX.authorization(NX.Authorize.camera, DispatchQueue.main, true) {[weak vc] (state) in
             guard let __vc = vc, state == NX.AuthorizeState.authorized else {return}
             __vc.wrapped.naviController?.currentViewController?.present(__vc, animated: true, completion: nil)
         }

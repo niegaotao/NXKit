@@ -87,7 +87,7 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
         self.resizeSlider(at: self.wrapped.index, animated: false)
         
         //矫正位置
-        DispatchQueue.main.after(0.01) {
+        DispatchQueue.main.asyncAfter(delay:0.01) {
             if self.contentView.contentSize.width > self.contentView.w {
                 let indexPath = IndexPath(row: self.wrapped.index, section: 0)
                 self.contentView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)

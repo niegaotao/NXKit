@@ -35,7 +35,7 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         self.tableView?.separatorColor = NX.separatorColor
         self.tableView?.delegate = self
         self.tableView?.dataSource = self
-        self.tableView?.separatorStyle = NX.Table.separatorStyle
+        self.tableView?.separatorStyle = NX.Association.separatorStyle
         self.tableView?.tableFooterView?.frame = CGRect(x: 0, y: 0, width: self.contentView.w, height: 24)
         if #available(iOS 11.0, *) {
             self.tableView?.contentInsetAdjustmentBehavior = .never

@@ -10,7 +10,7 @@ import UIKit
 
 open class NXTableWrapper : NXCollection {
     //表视图样式
-    open var tableViewStyle = NX.Table.tableViewStyle
+    open var tableViewStyle = NX.Association.tableViewStyle
     //视图
     open weak var tableView : NXTableView?
     //是否展示第一个section的头部
