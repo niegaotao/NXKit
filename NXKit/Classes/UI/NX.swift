@@ -64,7 +64,7 @@ extension NX {
         public init(){}
         
         public init(completion: NX.Completion<String, NX.Rect>?){
-            completion?("", self)
+            completion?("init", self)
         }
     }
 }

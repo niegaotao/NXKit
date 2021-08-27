@@ -69,7 +69,7 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
             }
             
             for (index, element) in self.wrapped.elements.enumerated() {
-                element.ctxs.size = CGSize(width: self.wrapped.width, height: NXDevice.toolViewOffset)
+                element.size = CGSize(width: self.wrapped.width, height: NXDevice.toolViewOffset)
                 element.elementView.isHidden = false
                 element.elementView.frame = CGRect(x: self.wrapped.width * CGFloat(index), y: 0, width: self.wrapped.width, height: NXDevice.toolViewOffset)
                 if index >= self.wrapped.elements.count/2 && self.wrapped.center.isHidden == false {
@@ -87,17 +87,17 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
                     
                     if __elementView.tag != __ctxs.index {
                         //切换选中
-                        self?.didSelectElement(at: __elementView.tag)
+                        self?.didSelect(at: __elementView.tag)
                         self?.controller?.didSelectViewController(at: __elementView.tag, animated: false)
                         
                         //选中的回调
-                        self?.wrapped.didSelectElement?(__toolView, __elementView.tag)
+                        self?.wrapped.didSelect?(__toolView, __elementView.tag)
                     }
                     else{
                         //选中的回调
-                        self?.wrapped.didSelectElement?(__toolView, __elementView.tag)
+                        self?.wrapped.didSelect?(__toolView, __elementView.tag)
                         //处理连续的双击
-                        self?.wrapped.didReselectElement?(__toolView, __elementView.tag)
+                        self?.wrapped.didReselect?(__toolView, __elementView.tag)
                     }
                 }
                 self.contentView.addSubview(element.elementView)
@@ -118,7 +118,7 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
         }
     }
     
-    open func didSelectElement(at idx: Int){
+    open func didSelect(at idx: Int){
         let newValue = max(min(idx, self.wrapped.elements.count), 0)
         guard self.wrapped.index != newValue else {return}
         
@@ -140,8 +140,8 @@ extension NXToolView {
         public fileprivate(set) var index : Int = 0
         public fileprivate(set) var width : CGFloat = 0
         public fileprivate(set) var elements = [NXToolView.Element]()
-        open var didSelectElement : NX.Completion<NXToolView, Int>? = nil //没次点击都会调用
-        open var didReselectElement : NX.Completion<NXToolView, Int>? = nil //已经选中的再次点击
+        open var didSelect : NX.Completion<NXToolView, Int>? = nil //没次点击都会调用
+        open var didReselect : NX.Completion<NXToolView, Int>? = nil //已经选中的再次点击
         
         public let separator = NX.Separator { (_, __sender) in
             __sender.isHidden = false
@@ -179,22 +179,20 @@ extension NXToolView {
         }
     }
     
-    open class Element : NXItem {
-        open var accessKey : String = ""
+    open class Element : NX.Rect {
+        open var key : String = ""
         
         open var title = NX.Selectable<String>(completion: { (_, __sender) in
             __sender.selected = ""
             __sender.unselected = ""
         })
         
-        open var color = NX.SelectableObjectValue<UIColor>(completion: { (_, __sender) in
+        open var color = NX.Selectable<UIColor>(completion: { (_, __sender) in
             __sender.selected = NX.mainColor
             __sender.unselected = NX.darkGrayColor
         })
         
-        open var image = NX.SelectableAnyValue<UIImage>(completion:  { (_, __sender) in
-            __sender.selected = nil
-            __sender.unselected = nil
+        open var image = NX.Selectable<UIImage>(completion:  { (_, __sender) in
         })
         
         open var space : CGFloat = 0.0
@@ -247,20 +245,14 @@ extension NXToolView {
             }
             var __raw : (size:CGSize, height:CGFloat) = (CGSize(width: 28.0, height: 28.0), 14.0)
             if element.isSelected {
-                if let __image = element.image.selected {
-                    __raw.size.width = __image.size.width
-                    __raw.size.height = __image.size.height
-                }
+                __raw.size = element.image.selected.size
             }
             else {
-                if let __image = element.image.unselected {
-                    __raw.size.width = __image.size.width
-                    __raw.size.height = __image.size.height
-                }
+                __raw.size = element.image.unselected.size
             }
             
             let space : CGFloat = __raw.size.height + element.space + __raw.height
-            assetView.frame = CGRect(x: (element.ctxs.width-__raw.size.width)/2.0, y: (element.ctxs.height - space)/2.0, width: __raw.size.width, height: __raw.size.height)
+            assetView.frame = CGRect(x: (element.width-__raw.size.width)/2.0, y: (element.height - space)/2.0, width: __raw.size.width, height: __raw.size.height)
             titleView.frame = CGRect(x: 0, y: assetView.frame.maxY + element.space, width: self.w, height: __raw.height)
             
             

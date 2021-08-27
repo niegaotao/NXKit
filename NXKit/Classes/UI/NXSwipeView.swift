@@ -243,13 +243,13 @@ extension NXSwipeView {
         open var index = 0
         
         //字体
-        open var font  = NX.SelectableObjectValue<UIFont> { (_, __sender) in
+        open var font  = NX.Selectable<UIFont> { (_, __sender) in
             __sender.selected = NX.font(15, true)
             __sender.unselected = NX.font(15)
         }
         
         //颜色
-        open var color = NX.SelectableObjectValue<UIColor>{ (_, __sender) in
+        open var color = NX.Selectable<UIColor>{ (_, __sender) in
             __sender.selected = NX.darkBlackColor
             __sender.unselected = NX.darkGrayColor
         }
@@ -283,12 +283,12 @@ extension NXSwipeView {
 
         open var title =  NX.Selectable<String>(completion: nil)
         
-        open var font  = NX.SelectableObjectValue<UIFont> { (_, __sender) in
+        open var font  = NX.Selectable<UIFont> { (_, __sender) in
             __sender.selected = NX.font(15, true)
             __sender.unselected = NX.font(15)
         }
         
-        open var color = NX.SelectableObjectValue<UIColor>{ (_, __sender) in
+        open var color = NX.Selectable<UIColor>{ (_, __sender) in
             __sender.selected = NX.darkBlackColor
             __sender.unselected = NX.darkGrayColor
         }

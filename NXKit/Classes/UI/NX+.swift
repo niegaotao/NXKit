@@ -37,7 +37,7 @@ extension NX {
         
         public init(completion:NX.Completion<String, NX.Appearance>?){
             super.init()
-            completion?("", self)
+            completion?("init", self)
         }
     }
 
@@ -61,7 +61,7 @@ extension NX {
         
         public init(completion:NX.Completion<String, NX.Attribute>?){
             super.init()
-            completion?("", self)
+            completion?("init", self)
         }
         
         open class func contentHorizontalAlignment(_ textAlignment: NSTextAlignment) -> UIControl.ContentHorizontalAlignment {
@@ -94,7 +94,7 @@ extension NX {
         
         public init(completion:NX.Completion<String, NX.Layer>?){
             super.init()
-            completion?("", self)
+            completion?("init", self)
         }
     }
     
@@ -112,22 +112,21 @@ extension NX {
             super.init()
             self.isHidden = true
             self.backgroundColor = NX.separatorColor
-            completion?("", self)
+            completion?("init", self)
         }
     }
-    
-    
-    
-    open class Widget<T:UIView> : NX.View  {
-        open var view = T()
+}
+
+extension NX {
+    open class Widget<View:UIView, Value:NXInitialValue>  {
+        open var view = View()
+        open var value = Value.initialValue
         
-        public override init(){
-            super.init()
+        public init(){
         }
         
-        public init(completion:NX.Completion<String, NX.Widget<T>>?){
-            super.init()
-            completion?("", self)
+        public init(completion:NX.Completion<String, NX.Widget<View, Value>>?){
+            completion?("init", self)
         }
     }
 }
@@ -290,52 +289,11 @@ extension NX {
         }
     }
     
-    open class Specified<Value:Any> {
-        open var value : Value? = nil
-        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Specified<Value>>?) -> ())? = nil
-        
-        public init(completion: NX.Completion<String, NX.Specified<Value>>?) {
-            completion?("", self)
-        }
-        
-        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Specified<Value>>? = nil){
-            self.completion?(action, value, completion)
-        }
-    }
-    
     open class Selectable<T:NXInitialValue> {
         open var selected = T.initialValue
         open var unselected = T.initialValue
                     
         public init(completion: NX.Completion<String, NX.Selectable<T>>?){
-            completion?("", self)
-        }
-        
-        open func update(_ selected:T, unselected:T) {
-            self.selected = selected
-            self.unselected = unselected
-        }
-    }
-    
-    open class SelectableAnyValue<T:Any> {
-        open var selected : T? = nil
-        open var unselected : T? = nil
-        
-        public init(completion:NX.Completion<String, NX.SelectableAnyValue<T>>?){
-            completion?("", self)
-        }
-        
-        open func update(_ selected:T?, unselected:T?) {
-            self.selected = selected
-            self.unselected = unselected
-        }
-    }
-    
-    open class SelectableObjectValue<T:NSObject> {
-        open var selected = T()
-        open var unselected = T()
-                    
-        public init(completion:NX.Completion<String, NX.SelectableObjectValue<T>>?){
             completion?("", self)
         }
         
@@ -521,6 +479,48 @@ extension CMTimeRange : NXInitialValue {
 extension Data : NXInitialValue {
     public static var initialValue: Data {
         return Data()
+    }
+}
+
+extension UIColor : NXInitialValue {
+    public static var initialValue: Self {
+        return UIColor.clear as! Self
+    }
+}
+
+extension UIFont : NXInitialValue {
+    public static var initialValue: Self {
+        return UIFont.systemFont(ofSize: 15) as! Self
+    }
+}
+
+extension UIImage : NXInitialValue {
+    public static var initialValue: Self {
+        return UIImage() as! Self
+    }
+}
+
+extension NX.Appearance : NXInitialValue {
+    public static var initialValue: Self {
+        return NX.Appearance() as! Self
+    }
+}
+
+extension NX.Attribute : NXInitialValue {
+    public static var initialValue: Self {
+        return NX.Attribute() as! Self
+    }
+}
+
+extension NX.Layer : NXInitialValue {
+    public static var initialValue: Self {
+        return NX.Layer() as! Self
+    }
+}
+
+extension NX.Separator : NXInitialValue {
+    public static var initialValue: Self {
+        return NX.Separator() as! Self
     }
 }
 

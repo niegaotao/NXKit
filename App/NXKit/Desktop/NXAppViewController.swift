@@ -20,6 +20,7 @@ class NXAppViewController: NXCollectionViewController {
         self.setupSubviews()
         self.updateSubviews("", nil)
         
+        
         NXTester.center().debug()
     }
     
@@ -353,7 +354,7 @@ class NXSubtoolViewController : NXToolViewController {
         var tabs = [[String:Any]]()
         tabs.append(["name":"相册","selected":"rrxc_app_album_selected.png","unselected":"rrxc_app_album_unselected.png","vc":NXViewController()])
         tabs.append(["name":"工具","selected":"rrxc_app_toolbox_selected.png","unselected":"rrxc_app_toolbox_unselected.png","vc":NXViewController()])
-        tabs.append(["name":"消息","selected":"rrxc_app_team_selected.png","unselected":"rrxc_app_team_unselected.png","vc":NXViewController()])
+        tabs.append(["name":"消息","selected":"rrxc_app_message_selected.png","unselected":"rrxc_app_message_unselected.png","vc":NXViewController()])
         tabs.append(["name":"我的","selected":"rrxc_app_owner_selected.png","unselected":"rrxc_app_owner_unselected.png","vc":NXViewController()])
         
         self.elements.removeAll()
@@ -364,8 +365,12 @@ class NXSubtoolViewController : NXToolViewController {
             element.title.unselected = tab["name"] as? String ?? ""
             element.color.selected = NX.color(0x5C5B60)
             element.color.unselected = NX.color(0x5C5B60)
-            element.image.selected = UIImage(named: tab["selected"] as? String ?? "")
-            element.image.unselected = UIImage(named: tab["unselected"] as? String ?? "")
+            if let image = UIImage(named: tab["selected"] as? String ?? "") {
+                element.image.selected = image
+            }
+            if let image = UIImage(named: tab["unselected"] as? String ?? "") {
+                element.image.unselected = image
+            }
             if index == 0 {
                 element.attachment.isValue = false
                 element.attachment.value = 1
@@ -391,14 +396,6 @@ class NXSubtoolViewController : NXToolViewController {
         
         self.toolView.wrapped.separator.isHidden = true
         self.toolView.wrapped.layer.isHidden = false
-        
-        
-        self.toolView.wrapped.center.isHidden = false
-        self.toolView.wrapped.center.frame = CGRect(x: (NXDevice.width-52)/2.0, y: 8, width: 52, height: 36)
-        self.toolView.wrapped.center.image = UIImage(named: "rrxc_+.png")
-        self.toolView.centerView.setupEvents([.touchUpInside]) { (e, v) in
-            
-        }
     }
     
     override func didSelectViewController(at idx: Int, animated: Bool) {
@@ -411,7 +408,7 @@ class NXSubtoolViewController : NXToolViewController {
     }
     
     //连续双击
-    override open func didReselectElement(at index:Int){
+    override open func didReselect(at index:Int){
         NX.log { return "__index=\(index)"}
         if let tvc = self.selectedViewController as? NXTableViewController {
             guard let tv = tvc.tableView, tv.scrollsToTop else {

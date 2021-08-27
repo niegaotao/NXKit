@@ -44,11 +44,11 @@ open class NXToolViewController: NXContainerController {
         self.toolView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.toolView.controller = self
         self.toolView.backgroundColor = NX.backgroundColor
-        self.toolView.wrapped.didSelectElement = {[weak self] (toolView, index) in
-            self?.didSelectElement(at: index)
+        self.toolView.wrapped.didSelect = {[weak self] (toolView, index) in
+            self?.didSelect(at: index)
         }
-        self.toolView.wrapped.didReselectElement = {[weak self] (toolView, index) in
-            self?.didReselectElement(at: index)
+        self.toolView.wrapped.didReselect = {[weak self] (toolView, index) in
+            self?.didReselect(at: index)
         }
         
         self.index = min(max(0, self.index), subviewControllers.count)
@@ -119,12 +119,12 @@ open class NXToolViewController: NXContainerController {
     }
     
     //每次点击
-    open func didSelectElement(at index:Int){
+    open func didSelect(at index:Int){
         
     }
     
     //连续双击
-    open func didReselectElement(at index:Int){
+    open func didReselect(at index:Int){
         
     }
 }
