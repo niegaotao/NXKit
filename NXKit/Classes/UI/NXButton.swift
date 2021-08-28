@@ -18,10 +18,7 @@ open class NXButton: UIButton {
     
     //给button赋值，这样在点击button可以直接使用
     open var value: [String: Any]?
-    
-    //是否需要扩大热键范围
-    open var allowsClickRange: Bool = true
-    
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupSubviews()
@@ -40,26 +37,6 @@ open class NXButton: UIButton {
     //
     open func updateSubviews(_ action: String, _ value:Any?){
     
-    }
-    
-    ///构造函数
-    public convenience init(_ frame: CGRect, image: UIImage?, backgroundImage: UIImage?, title: String?, data: [String: Any]?) {
-        self.init(frame: frame)
-        self.setImage(image, for: .normal)
-        
-        self.setTitle(title, for: .normal)
-        
-        self.setBackgroundImage(backgroundImage, for: .normal)
-        
-        self.value = data
-    }
-    
-    public convenience init(_ frame: CGRect, image: UIImage?, backgroundImage: UIImage?, title: String?, titleColor: UIColor, titleFont: UIFont, data: [String: Any]?) {
-        self.init(frame, image: image, backgroundImage: backgroundImage, title: title, data: data)
-        
-        self.setTitleColor(titleColor, for: .normal)
-        
-        self.titleLabel?.font = titleFont
     }
     
     //根据状态设置背景，icon/title/titleColor
@@ -100,32 +77,5 @@ open class NXButton: UIButton {
         }
     }
 }
-
-
-
-/*
- 扩大button的点击热键范围
- 
- 若原热区小于36x36，则放大热区，否则保持原大小不变
- */
-extension NXButton {
-    override open func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        if allowsClickRange == true {
-            var widthDelta: CGFloat = 0
-            var heightDelta: CGFloat = 0
-            widthDelta = max(36.0-self.bounds.size.width, 0) / 2
-            heightDelta = max(36.0-self.bounds.size.height, 0) / 2
-            let area = self.bounds.insetBy(dx: -widthDelta, dy: -heightDelta)
-            return area.contains(point)
-        }
-        return super.point(inside: point, with: event)
-    }
-}
-
-
-
-
-
-
 
 

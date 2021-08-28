@@ -11,6 +11,7 @@ open class NXAction: NXItem {
     
     public let appearance = NX.Appearance{(_, __sender) in
         __sender.isHighlighted = true
+        __sender.backgroundColor = .clear
     }
     
     public let asset = NX.Attribute(completion:{(_, __sender) in

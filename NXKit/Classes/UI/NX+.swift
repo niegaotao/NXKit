@@ -134,9 +134,7 @@ extension NX {
 extension NX.View {
     
     open class func update(_ metadata:NX.Appearance, _ view:UIView){
-        if metadata.isHighlighted == false {
-            view.backgroundColor = metadata.backgroundColor
-        }
+        view.backgroundColor = metadata.backgroundColor
         if let __layer = metadata.layer {
             view.layer.cornerRadius = __layer.cornerRadius
             view.layer.borderWidth = __layer.borderWidth

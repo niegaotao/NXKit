@@ -8,7 +8,7 @@
 import UIKit
 
 
-open class NXTableUnspecifiedViewCell<T:UIView>: NXTableViewCell {
+open class NXTableSubviewCell<T:UIView>: NXTableViewCell {
     public let applicationView = T(frame: CGRect.zero)
     
     open override func setupSubviews(){
@@ -41,19 +41,12 @@ open class NXTableUnspecifiedViewCell<T:UIView>: NXTableViewCell {
     }
     
     open override func updateSubviews(_ action:String, _ value: Any?){
-        self.applicationView.frame = self.contentView.bounds
+        self.applicationView.frame = self.contentView.bounds.offsetBy(dx: 100, dy: 0)
         if let __applicationView = self.applicationView as? NXApplicationView {
             __applicationView.updateSubviews(action, value)
             
-            if let __wrapped = value as? NXAction {
-                self.backgroundView?.backgroundColor = __wrapped.appearance.backgroundColor
-                
-                if __wrapped.appearance.isHighlighted {
-                    self.selectedBackgroundView?.backgroundColor = __wrapped.appearance.selectedBackgroundColor
-                }
-                else{
-                    self.selectedBackgroundView?.backgroundColor = UIColor.clear
-                }
+            if let __wrapped = value as? NXAction, __wrapped.appearance.isHighlighted {
+                self.selectedBackgroundView?.backgroundColor = __wrapped.appearance.selectedBackgroundColor
             }
             else{
                 self.selectedBackgroundView?.backgroundColor = UIColor.clear
@@ -68,7 +61,7 @@ open class NXTableUnspecifiedViewCell<T:UIView>: NXTableViewCell {
     }
 }
 
-open class NXCollectionUnspecifiedViewCell<T:UIView>: NXCollectionViewCell {
+open class NXCollectionSubviewCell<T:UIView>: NXCollectionViewCell {
     public let applicationView = T(frame: CGRect.zero)
     
     open override func setupSubviews(){
@@ -105,15 +98,8 @@ open class NXCollectionUnspecifiedViewCell<T:UIView>: NXCollectionViewCell {
         if let __applicationView = self.applicationView as? NXApplicationView {
             __applicationView.updateSubviews(action, value)
             
-            if let __wrapped = value as? NXAction {
-                self.backgroundView?.backgroundColor = __wrapped.appearance.backgroundColor
-                
-                if __wrapped.appearance.isHighlighted {
-                    self.selectedBackgroundView?.backgroundColor = __wrapped.appearance.selectedBackgroundColor
-                }
-                else{
-                    self.selectedBackgroundView?.backgroundColor = UIColor.clear
-                }
+            if let __wrapped = value as? NXAction, __wrapped.appearance.isHighlighted {
+                self.selectedBackgroundView?.backgroundColor = __wrapped.appearance.selectedBackgroundColor
             }
             else{
                 self.selectedBackgroundView?.backgroundColor = UIColor.clear
@@ -128,8 +114,8 @@ open class NXCollectionUnspecifiedViewCell<T:UIView>: NXCollectionViewCell {
     }
 }
 
-open class NXApplicationViewCell : NXTableUnspecifiedViewCell<NXApplicationView> {}
+open class NXApplicationViewCell : NXTableSubviewCell<NXApplicationView> {}
 
-open class NXActionViewCell : NXCollectionUnspecifiedViewCell<NXApplicationView> {}
+open class NXActionViewCell : NXCollectionSubviewCell<NXApplicationView> {}
 
 
