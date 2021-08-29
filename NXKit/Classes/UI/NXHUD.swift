@@ -8,10 +8,6 @@
 import UIKit
 
 open class NXHUD {
-
-}
-
-extension NXHUD {
     
     open class Wrapped {
         open var insets = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 20)
@@ -156,7 +152,7 @@ extension NXHUD {
 
 extension NXHUD {
     
-    open class ProgressView : NXHUD.WrappedView {
+    open class LoadingView : NXHUD.WrappedView {
         public let wrapped = NXHUD.Wrapped { (_, __sender) in
             __sender.ats = .center
             __sender.backgroundColor = UIColor.black.withAlphaComponent(0.8)
@@ -261,12 +257,12 @@ extension NXHUD {
     }
     
     @discardableResult
-    open class func makeProgress(message: String, ats: NX.Ats, superview:UIView) -> NXHUD.ProgressView? {
-        if let _ = objc_getAssociatedObject(superview, &NXHUD.Wrapped.wrappedViewKey) as? NXHUD.ProgressView  {
+    open class func makeLoading(message: String, ats: NX.Ats, superview:UIView) -> NXHUD.LoadingView? {
+        if let _ = objc_getAssociatedObject(superview, &NXHUD.Wrapped.wrappedViewKey) as? NXHUD.LoadingView  {
             return nil
         }
 
-        let wrapperView = NXHUD.ProgressView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        let wrapperView = NXHUD.LoadingView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         superview.addSubview(wrapperView)
         objc_setAssociatedObject(superview, &NXHUD.Wrapped.wrappedViewKey, wrapperView, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         wrapperView.wrapped.ats = ats
@@ -287,8 +283,8 @@ extension NXHUD {
     }
     
     @discardableResult
-    open class func hideProgress(superview:UIView) -> Bool{
-        guard let wrapperView = objc_getAssociatedObject(superview, &NXHUD.Wrapped.wrappedViewKey) as? NXHUD.ProgressView else {
+    open class func hideLoading(superview:UIView) -> Bool{
+        guard let wrapperView = objc_getAssociatedObject(superview, &NXHUD.Wrapped.wrappedViewKey) as? NXHUD.LoadingView else {
             return false
         }
         UIView.animate(withDuration: wrapperView.wrapped.inoutDuration,
@@ -308,18 +304,18 @@ extension NXHUD {
 extension UIView {
     
     @discardableResult
-    open func ex_makeToast(message: String, ats: NX.Ats = .maxY, duration: TimeInterval = 2.0) -> NXHUD.ToastView? {
+    open func makeToast(message: String, ats: NX.Ats = .maxY, duration: TimeInterval = 2.0) -> NXHUD.ToastView? {
         return NXHUD.makeToast(message: message, ats: ats, duration: duration, superview: self)
     }
 
     @discardableResult
-    open func ex_makeProgress(message: String = "", ats: NX.Ats = .center) -> NXHUD.ProgressView? {
-        return NXHUD.makeProgress(message: message, ats: ats, superview: self)
+    open func makeLoading(message: String = "", ats: NX.Ats = .center) -> NXHUD.LoadingView? {
+        return NXHUD.makeLoading(message: message, ats: ats, superview: self)
     }
 
     @discardableResult
-    open func ex_hideProgress() -> Bool{
-        return NXHUD.hideProgress(superview: self)
+    open func hideLoading() -> Bool{
+        return NXHUD.hideLoading(superview: self)
     }
 }
 

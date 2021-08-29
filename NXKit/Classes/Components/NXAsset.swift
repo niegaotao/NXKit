@@ -744,7 +744,7 @@ extension NXAsset {
         }
         
         DispatchQueue.main.async {
-            NX.showAnimation("")
+            NX.showLoading("")
         }
         
         DispatchQueue.global().async {
@@ -780,7 +780,7 @@ extension NXAsset {
             }
             
             group.notify(queue: DispatchQueue.main, execute: {
-                NX.hideAnimation(superview: UIApplication.shared.keyWindow)
+                NX.hideLoading(superview: UIApplication.shared.keyWindow)
                 completion?(true, outputAssets)
             })
         }
@@ -873,10 +873,10 @@ open class NXImagePickerController : UIImagePickerController, UIImagePickerContr
         }
         
         if let __image = image {
-            NX.showAnimation("正在保存", self.view)
+            NX.showLoading("正在保存", self.view)
             NXAsset.saveImage(image: __image) {[weak self] (state, asset) in
                 guard let self = self else {return}
-                NX.hideAnimation(superview: self.view)
+                NX.hideLoading(superview: self.view)
                 
                 if let __asset = asset {
                     let leyAsset = NXAsset(asset: __asset)

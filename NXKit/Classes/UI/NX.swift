@@ -467,10 +467,10 @@ extension NX {
         static public var showToast:((_ message:String, _ ats:NX.Ats , _ superview:UIView?) -> ())?
         
         //处理animation
-        static public var showAnimation:((_ message:String, _ superview:UIView?) -> ())?
+        static public var showLoading:((_ message:String, _ superview:UIView?) -> ())?
         
         //处理toast
-        static public var hideAnimation:((_ superview:UIView?) -> ())?
+        static public var hideLoading:((_ superview:UIView?) -> ())?
     }
 }
 
@@ -554,19 +554,19 @@ extension NX {
         return NX.Imp.tableView?(tableView, value, indexPath)
     }
     
-    //处理图片浏览
+    //toast
     class public func showToast(message:String, _ ats:NX.Ats = .center , _ superview:UIView? = UIApplication.shared.keyWindow){
         NX.Imp.showToast?(message, ats, superview)
     }
     
-    //处理animation
-    class public func showAnimation(_ message:String, _ superview:UIView? = UIApplication.shared.keyWindow){
-        NX.Imp.showAnimation?(message, superview)
+    //处理loading
+    class public func showLoading(_ message:String, _ superview:UIView? = UIApplication.shared.keyWindow){
+        NX.Imp.showLoading?(message, superview)
     }
     
-    //处理toast
-    class public func hideAnimation(superview:UIView? = UIApplication.shared.keyWindow){
-        NX.Imp.hideAnimation?(superview)
+    //处理loading
+    class public func hideLoading(superview:UIView? = UIApplication.shared.keyWindow){
+        NX.Imp.hideLoading?(superview)
     }
 }
 

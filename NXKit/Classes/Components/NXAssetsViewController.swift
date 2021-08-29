@@ -535,11 +535,11 @@ extension NXAssetsViewController : UIImagePickerControllerDelegate, UINavigation
         }
         
         if let __output = image {
-            NX.showAnimation("正在保存", self.view)
+            NX.showLoading("正在保存", self.view)
             NXAsset.saveImage(image: __output, completion: {[weak self] (state, asset) in
                 guard let self = self else {return}
                 
-                NX.hideAnimation(superview: self.view)
+                NX.hideLoading(superview: self.view)
                 
                 if let __asset = asset {
                     let leyAsset = NXAsset(asset: __asset)

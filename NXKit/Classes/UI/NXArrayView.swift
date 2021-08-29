@@ -11,8 +11,8 @@ open class NXArrayView<S:UIView>: NXView {
     open var contentViews = [S]()
     
     //子类手动调用
-    open func setupSubviews(_ numberOfSubviews:Int) {
-        var __numberOfSubviews = numberOfSubviews - self.contentViews.count;
+    open func setupSubviews(_ capacity:Int) {
+        var __numberOfSubviews = capacity - self.contentViews.count;
         while __numberOfSubviews >= 1 {
             let contentView = S(frame: CGRect.zero)
             self.contentViews.append(contentView)
