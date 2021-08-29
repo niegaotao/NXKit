@@ -91,14 +91,8 @@
     return retValue;
 }
 
-+ (NSArray *)metaClass:(Class)cls forward:(BOOL)forward{
-    NSMutableArray *retValue = [NSMutableArray arrayWithCapacity:2];
-    [retValue addObject:objc_getMetaClass(NSStringFromClass(cls).UTF8String)];
-    Class superclass = [cls superclass];
-    if(superclass && forward){
-        [retValue addObjectsFromArray:[NXApi metaClass:superclass forward:forward]];
-    }
-    return retValue;
++ (NSString *)metaClass:(Class)cls forward:(BOOL)forward{
+    return objc_getMetaClass(NSStringFromClass(cls).UTF8String);
 }
 
 + (NSArray *)protocolList:(Class)cls forward:(BOOL)forward{
@@ -107,18 +101,18 @@
     }
     NSMutableArray *retValue = [NSMutableArray arrayWithCapacity:2];
 //    unsigned int count;
-//    Protocol *rss = class_copyProtocolList(cls, &count);
+//     Protocol *rss = class_copyProtocolList(cls, &count);
 //    for (unsigned int i = 0; i < count; i++) {
 //        Protocol rs = rss[i];
 //        NSString *name = NSStringFromSelector(protocol_getName(rs));
 //        [retValue addObject:name];
 //    }
 //    free(rss);
-//
-//    Class superclass = [cls superclass];
-//    if(superclass && forward){
-//        [retValue addObjectsFromArray:[NXApi methodList:superclass forward:forward]];
-//    }
+
+    Class superclass = [cls superclass];
+    if(superclass && forward){
+        [retValue addObjectsFromArray:[NXApi methodList:superclass forward:forward]];
+    }
     
     return retValue;
 }
@@ -138,10 +132,8 @@
         NSMutableDictionary *dicSubvalue = [NSMutableDictionary dictionaryWithCapacity:5];
         dicSubvalue[@"varList"] = [NXApi varList:cls forward:false];
         dicSubvalue[@"methodList"] = [NXApi methodList:cls forward:false];
-        //dicSubvalue[@"protocolList"] = [NXApi protocolList:cls forward:false];
         dicSubvalue[@"propertyList"] = [NXApi propertyList:cls forward:false];
-        dicSubvalue[@"metaClass"] = [NXApi metaClass:cls forward:false];
-        //dicSubvalue[@"size"] = @([NXApi sizeOf:cls]);
+        dicSubvalue[@"isa"] = @{@"name":[NXApi metaClass:cls forward:false],@"methodList":[NXApi methodList:object_getClass(cls) forward:false]};
         [dicValue setObject:dicSubvalue forKey:[NSString stringWithCString:class_getName(cls) encoding:NSUTF8StringEncoding]];
         cls = class_getSuperclass(cls);
     }

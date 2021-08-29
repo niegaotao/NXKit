@@ -54,12 +54,17 @@
     //NXTester.center().testArrayCopy();
     //NXTester.center().signal();
     //NXTester.center().testClass();
-//    [[[NXKVC alloc] init] KVC];
-    [[[NXKVO alloc] init] KVO];
+    //[[[NXKVC alloc] init] KVC];
+    //[[[NXKVO alloc] init] KVO];
     //NXMRC.center().testZombie();
     //NXTester.center().dispatchQueue();
     //NXTester.center().testBuffer()
+    
+//    NSDictionary *value = [NXApi descriptionClass:NXTeacher.class];
+//    NSLog(@"%@", value);
+    [[NXPerson alloc] test];
 }
+
 
 //+ (void)testPtr{
 //    UIView *testView = [UIView alloc];

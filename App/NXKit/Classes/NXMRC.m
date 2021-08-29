@@ -42,17 +42,17 @@
 #if __has_feature(objc_arc)
     
 #else
-    NXCollegeStudent *worker = [[NXCollegeStudent alloc] init];
-    worker.name = @"Worker";
-    [worker run];
-    
-    NSLog(@"");
-    
-    NXCollegeStudent *__worker = ((NXCollegeStudent *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("NXCollegeStudent"), sel_registerName("alloc"));
-    __worker = ((NXCollegeStudent *(*)(id, SEL))(void *)objc_msgSend)((id)__worker, sel_registerName("init"));
-    ((void (*)(id, SEL))(void *)objc_msgSend)((id)__worker, sel_registerName("run"));
-    
-    NSLog(@"");
+//    NXCollegeStudent *worker = [[NXCollegeStudent alloc] init];
+//    worker.name = @"Worker";
+//    [worker run];
+//    
+//    NSLog(@"");
+//    
+//    NXCollegeStudent *__worker = ((NXCollegeStudent *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("NXCollegeStudent"), sel_registerName("alloc"));
+//    __worker = ((NXCollegeStudent *(*)(id, SEL))(void *)objc_msgSend)((id)__worker, sel_registerName("init"));
+//    ((void (*)(id, SEL))(void *)objc_msgSend)((id)__worker, sel_registerName("run"));
+//    
+//    NSLog(@"");
 
     
     //((void (*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("NXCollegeStudent"), sel_registerName("run"));

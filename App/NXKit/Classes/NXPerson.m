@@ -9,6 +9,15 @@
 #import "NXPerson.h"
 #import "NXApi.h"
 
+@implementation NSObject(NXKit)
+- (void)test {
+    NSLog(@"-NSObject(NXKit)/test");
+}
+
+//+ (void)test {
+//    NSLog(@"+NSObject(NXKit)/test");
+//}
+@end
 
 
 @implementation NXPerson
@@ -16,13 +25,8 @@
     NSLog(@"NXPerson/run/bofore");
     NSLog(@"NXPerson/run/after");
 }
-
-- (void)debug{
-    NSLog(@"NXPerson/debug/name=%@",self.name);
-}
-
-+ (void)classDebug {
-    NSLog(@"NXPerson/classDebug/");
++ (void)classRun {
+    NSLog(@"NXPerson/classRun/");
 }
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {
@@ -38,10 +42,12 @@
 /*====================================================*/
 @implementation NXTeacher
 
-- (void)__em{
-    NSLog(@"NXTeacher/run/before");
-    [self __em];
-    NSLog(@"NXTeacher/run/after");
++ (void)setDesc:(NSString *)desc {
+    
+}
+
++ (NSString *)desc {
+    return @"";
 }
 
 - (void)work{
@@ -64,32 +70,12 @@
 
 /*====================================================*/
 @implementation NXStudent
-
-- (void)__em{
-    NSLog(@"NXStudent/run/before");
-    [self __em];
-    NSLog(@"NXStudent/run/after");
-}
-
 - (void)work{
     NSLog(@"NXStudent/debug");
 }
 
 + (void)classWork{
     NSLog(@"NXStudent/debug");
-}
-@end
-
-
-@implementation NXStudent (Category)
-+ (void)load {
-    [NXApi swizzleClass:[NXStudent class] original:@selector(run) swizzle:@selector(__em__)];
-}
-
-- (void)__em__{
-    NSLog(@"NXStudent/-/run/before");
-    [self __em__];
-    NSLog(@"NXStudent/-/run/after");
 }
 @end
 

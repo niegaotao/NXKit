@@ -11,23 +11,27 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-
+@interface NSObject(NXKit)
++ (void)test;
+- (void)test;
+@end
 
 
 /*====================================================*/
 @interface NXPerson : NSObject {
-    NSString *_uuid;
+    NSString *_id;
 }
 @property (nonatomic, copy) NSString *name;
 - (void)run;
-- (void)debug;
-+ (void)classDebug;
++ (void)classRun;
 @end
 
 /*====================================================*/
 @interface NXTeacher : NXPerson {
-    NSString *_union;
+    NSString *_uuid;
 }
+@property (class, nonatomic, copy) NSString *desc;
+@property (nonatomic, copy) NSString *nickname;
 - (void)work;
 + (void)classWork;
 @end
@@ -40,9 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *college;
 - (void)work;
 + (void)classWork;
-@end
-
-@interface NXStudent (Category)
 @end
 
 

@@ -11,31 +11,31 @@ open class NXAction: NXItem {
     
     public let appearance = NX.Appearance{(_, __sender) in
         __sender.isHighlighted = true
-        __sender.backgroundColor = .clear
+        __sender.backgroundColor = UIColor.clear
     }
     
     public let asset = NX.Attribute(completion:{(_, __sender) in
         __sender.color = NX.darkGrayColor
-        __sender.backgroundColor = .clear
+        __sender.backgroundColor = UIColor.clear
     })
     
     public let title = NX.Attribute(completion: {(_, __sender) in
         __sender.font = NX.font(16)
-        __sender.textAlignment = .left
+        __sender.textAlignment = NSTextAlignment.left
         __sender.backgroundColor = UIColor.clear
     })
     
     public let subtitle = NX.Attribute(completion: {(_, __sender) in
         __sender.font = NX.font(13)
         __sender.color = NX.darkGrayColor
-        __sender.textAlignment = .left
+        __sender.textAlignment = NSTextAlignment.left
         __sender.backgroundColor = UIColor.clear
     })
     
     public let access = NX.Attribute(completion: {(_, __sender) in
         __sender.font = NX.font(13)
         __sender.color = NX.darkGrayColor
-        __sender.textAlignment = .right
+        __sender.textAlignment = NSTextAlignment.right
         __sender.backgroundColor = UIColor.clear
     })
     
