@@ -14,6 +14,7 @@
 #import "NXApi.h"
 #import "NXKVC.h"
 #import "NXKVO.h"
+#import "NXMsgSend.h"
 
 //@interface NSKVONotifying_NXPerson : NXPerson
 //
@@ -62,7 +63,9 @@
     
 //    NSDictionary *value = [NXApi descriptionClass:NXTeacher.class];
 //    NSLog(@"%@", value);
-    [[NXPerson alloc] test];
+//    [[NXPerson alloc] test];
+    
+    [[[NXMsgSend alloc] init] test];
 }
 
 

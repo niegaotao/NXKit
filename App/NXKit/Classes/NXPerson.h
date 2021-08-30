@@ -22,15 +22,14 @@ NS_ASSUME_NONNULL_BEGIN
     NSString *_id;
 }
 @property (nonatomic, copy) NSString *name;
-- (void)run;
-+ (void)classRun;
+- (void)sleep;
++ (void)classSleep;
 @end
 
 /*====================================================*/
 @interface NXTeacher : NXPerson {
     NSString *_uuid;
 }
-@property (class, nonatomic, copy) NSString *desc;
 @property (nonatomic, copy) NSString *nickname;
 - (void)work;
 + (void)classWork;

@@ -14,19 +14,19 @@
     NSLog(@"-NSObject(NXKit)/test");
 }
 
-//+ (void)test {
-//    NSLog(@"+NSObject(NXKit)/test");
-//}
++ (void)test {
+    NSLog(@"+NSObject(NXKit)/test");
+}
 @end
 
 
 @implementation NXPerson
-- (void)run{
-    NSLog(@"NXPerson/run/bofore");
-    NSLog(@"NXPerson/run/after");
+- (void)sleep{
+    NSLog(@"NXPerson/sleep");
 }
-+ (void)classRun {
-    NSLog(@"NXPerson/classRun/");
+
++ (void)classSleep {
+    NSLog(@"NXPerson/classSleep");
 }
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {
@@ -41,13 +41,9 @@
 
 /*====================================================*/
 @implementation NXTeacher
-
-+ (void)setDesc:(NSString *)desc {
-    
-}
-
-+ (NSString *)desc {
-    return @"";
+- (void)sleep {
+    [super sleep];
+    NSLog(@"NXTeacher/sleep");
 }
 
 - (void)work{

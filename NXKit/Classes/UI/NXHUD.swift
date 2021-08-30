@@ -56,23 +56,18 @@ extension NXHUD {
             __sender.insets = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 20)
             __sender.size = CGSize(width: 120.0, height: 42.0)
         }
-        open var descriptionView = UILabel(frame: CGRect.zero)
+        open var messageView = UILabel(frame: CGRect.zero)
         
         open override func setupSubviews() {
             super.setupSubviews()
 
             self.layer.masksToBounds = false
 
-            self.descriptionView.textAlignment = NSTextAlignment.center
-            self.descriptionView.lineBreakMode = .byTruncatingTail;
-            self.descriptionView.backgroundColor = UIColor.clear
-            self.descriptionView.clipsToBounds = true
-            self.addSubview(self.descriptionView)
-        }
-        
-        open func update(description:String) {
-            self.wrapped.text = description
-            self.updateSubviews("", nil)
+            self.messageView.textAlignment = NSTextAlignment.center
+            self.messageView.lineBreakMode = .byTruncatingTail;
+            self.messageView.backgroundColor = UIColor.clear
+            self.messageView.clipsToBounds = true
+            self.addSubview(self.messageView)
         }
         
         open override func updateSubviews(_ action: String, _ value: Any?) {
@@ -108,11 +103,11 @@ extension NXHUD {
             }
             self.frame = __frame
             
-            self.descriptionView.textColor = self.wrapped.textColor
-            self.descriptionView.font = self.wrapped.font
-            self.descriptionView.numberOfLines = self.wrapped.numberOfLines
-            self.descriptionView.attributedText = NXString.attributedString(self.wrapped.text, self.wrapped.font, self.wrapped.textColor, 2)
-            self.descriptionView.frame = CGRect(x: self.wrapped.insets.left, y: self.wrapped.insets.top, width: __size.width , height: __size.height)
+            self.messageView.textColor = self.wrapped.textColor
+            self.messageView.font = self.wrapped.font
+            self.messageView.numberOfLines = self.wrapped.numberOfLines
+            self.messageView.attributedText = NXString.attributedString(self.wrapped.text, self.wrapped.font, self.wrapped.textColor, 2)
+            self.messageView.frame = CGRect(x: self.wrapped.insets.left, y: self.wrapped.insets.top, width: __size.width , height: __size.height)
         }
     }
     
@@ -125,7 +120,8 @@ extension NXHUD {
             
             wrapperView.wrapped.ats = ats
             wrapperView.wrapped.duration = duration
-            wrapperView.update(description: message)
+            wrapperView.wrapped.text = message
+            wrapperView.updateSubviews("", nil)
                         
             UIView.animate(withDuration: wrapperView.wrapped.inoutDuration,
                            delay: 0,
@@ -162,7 +158,7 @@ extension NXHUD {
         }
         
         open var animationView = NX.UI.AnimationClass.init(frame:CGRect(x: 0, y: 0, width: 44, height: 44))
-        open var descriptionView = UILabel(frame: CGRect.zero)
+        open var messageView = UILabel(frame: CGRect.zero)
         
         open override func setupSubviews() {
             super.setupSubviews()
@@ -172,16 +168,11 @@ extension NXHUD {
             self.animationView.frame = CGRect(x: (self.bounds.size.width - 44)/2, y: (self.bounds.size.height - 44)/2, width: 44, height: 44)
             self.addSubview(self.animationView)
           
-            self.descriptionView.textAlignment = .center
-            self.descriptionView.lineBreakMode = .byTruncatingTail
-            self.descriptionView.backgroundColor = UIColor.clear
-            self.descriptionView.clipsToBounds = true
-            self.addSubview(self.descriptionView)
-        }
-        
-        open func update(description:String) {
-            self.wrapped.text = description
-            self.updateSubviews("", nil)
+            self.messageView.textAlignment = .center
+            self.messageView.lineBreakMode = .byTruncatingTail
+            self.messageView.backgroundColor = UIColor.clear
+            self.messageView.clipsToBounds = true
+            self.addSubview(self.messageView)
         }
         
         open override func updateSubviews(_ action: String, _ value: Any?) {
@@ -221,13 +212,13 @@ extension NXHUD {
                 
                 self.animationView.frame = CGRect(x: (__frame.size.width-44)/2, y: self.wrapped.insets.top, width: 44, height: 44)
                
-                self.descriptionView.isHidden = false
-                self.descriptionView.textColor = self.wrapped.textColor
-                self.descriptionView.font = self.wrapped.font
-                self.descriptionView.numberOfLines = self.wrapped.numberOfLines
-                self.descriptionView.attributedText = NXString.attributedString(self.wrapped.text, self.wrapped.font, self.wrapped.textColor, 2)
-                self.descriptionView.textAlignment = .center
-                self.descriptionView.frame = CGRect(x: self.wrapped.insets.left, y: self.wrapped.insets.top+44+10, width: __size.width, height: __size.height)
+                self.messageView.isHidden = false
+                self.messageView.textColor = self.wrapped.textColor
+                self.messageView.font = self.wrapped.font
+                self.messageView.numberOfLines = self.wrapped.numberOfLines
+                self.messageView.attributedText = NXString.attributedString(self.wrapped.text, self.wrapped.font, self.wrapped.textColor, 2)
+                self.messageView.textAlignment = .center
+                self.messageView.frame = CGRect(x: self.wrapped.insets.left, y: self.wrapped.insets.top+44+10, width: __size.width, height: __size.height)
             }
             else {
                 //不需要展示loading的文字
@@ -250,8 +241,8 @@ extension NXHUD {
                 
                 self.animationView.frame = CGRect(x: (__frame.size.width-44)/2, y: (__frame.size.height-44)/2, width: 44, height: 44)
                 
-                self.descriptionView.isHidden = true
-                self.descriptionView.text = ""
+                self.messageView.isHidden = true
+                self.messageView.text = ""
             }
         }
     }
@@ -269,7 +260,8 @@ extension NXHUD {
         
         wrapperView.animationView.frame = CGRect(x: (wrapperView.bounds.size.width - 44)/2, y: (wrapperView.bounds.size.height - 44)/2, width: 44, height: 44)
         wrapperView.animationView.startAnimating()
-        wrapperView.update(description: message)
+        wrapperView.wrapped.text = message
+        wrapperView.updateSubviews("", nil)
         wrapperView.alpha = 0.0
 
         UIView.animate(withDuration: wrapperView.wrapped.inoutDuration,

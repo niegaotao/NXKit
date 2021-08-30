@@ -91,8 +91,6 @@
     
     NSLog(@"取消观察之后:%@", [NXApi descriptionClass:object_getClass(bookclass)]);
     //NSLog(@"取消观察之后:%@", [NXApi descriptionClass:NSClassFromString(@"NSKVONotifying_NXBookclass")]);
-
-    NSCache *a = nil;
 #endif
 }
 

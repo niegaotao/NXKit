@@ -17,6 +17,7 @@
 		C93A574F2689E7BA00787D4B /* NXMRC.m in Sources */ = {isa = PBXBuildFile; fileRef = C93A574E2689E7BA00787D4B /* NXMRC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C93AA2A8268C443A00DE0EA4 /* NXApi.m in Sources */ = {isa = PBXBuildFile; fileRef = C93AA2A7268C443A00DE0EA4 /* NXApi.m */; };
 		C93AA2AB268C46A300DE0EA4 /* NXPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = C93AA2AA268C46A300DE0EA4 /* NXPerson.m */; };
+		C952957826DB8A2F00127231 /* NXMsgSend.m in Sources */ = {isa = PBXBuildFile; fileRef = C952957726DB8A2F00127231 /* NXMsgSend.m */; };
 		C9D7810326BCE0B400625E54 /* NXKVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7810226BCE0B400625E54 /* NXKVC.m */; };
 		C9D7810626BCE7D300625E54 /* NSObject+.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7810426BCE7D200625E54 /* NSObject+.m */; };
 		C9D7810926BCE8D800625E54 /* NXKVO.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D7810826BCE8D800625E54 /* NXKVO.m */; };
@@ -45,6 +46,8 @@
 		C93AA2A7268C443A00DE0EA4 /* NXApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXApi.m; sourceTree = "<group>"; };
 		C93AA2A9268C46A300DE0EA4 /* NXPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXPerson.h; sourceTree = "<group>"; };
 		C93AA2AA268C46A300DE0EA4 /* NXPerson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXPerson.m; sourceTree = "<group>"; };
+		C952957626DB8A2F00127231 /* NXMsgSend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXMsgSend.h; sourceTree = "<group>"; };
+		C952957726DB8A2F00127231 /* NXMsgSend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXMsgSend.m; sourceTree = "<group>"; };
 		C979FFC026D0886E00D82C39 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		C979FFC126D0886F00D82C39 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		C9D7810126BCE0B400625E54 /* NXKVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXKVC.h; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 				C9D7810226BCE0B400625E54 /* NXKVC.m */,
 				C9D7810726BCE8D800625E54 /* NXKVO.h */,
 				C9D7810826BCE8D800625E54 /* NXKVO.m */,
+				C952957626DB8A2F00127231 /* NXMsgSend.h */,
+				C952957726DB8A2F00127231 /* NXMsgSend.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 				C93A574F2689E7BA00787D4B /* NXMRC.m in Sources */,
 				C920C53626831B9A00258187 /* NXTester.m in Sources */,
 				C93AA2AB268C46A300DE0EA4 /* NXPerson.m in Sources */,
+				C952957826DB8A2F00127231 /* NXMsgSend.m in Sources */,
 				C9F562F126807A9300C864E4 /* NXAppViewController.swift in Sources */,
 				C9D7810626BCE7D300625E54 /* NSObject+.m in Sources */,
 				C93AA2A8268C443A00DE0EA4 /* NXApi.m in Sources */,
@@ -356,7 +362,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -412,7 +418,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -438,7 +444,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				DEVELOPMENT_TEAM = UP4RM747M4;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				INFOPLIST_FILE = NXKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -462,7 +470,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				DEVELOPMENT_TEAM = UP4RM747M4;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				INFOPLIST_FILE = NXKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
