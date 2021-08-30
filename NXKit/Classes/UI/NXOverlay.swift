@@ -245,6 +245,6 @@ open class NXOverlay: NXBackgroundView<UIControl, UIView> {
     }
     
     deinit {
-        NX.log { return ""}
+        NX.print(NSStringFromClass(self.classForCoder))
     }
 }

@@ -14,7 +14,7 @@ open class NXObserver  {
         open var observations = [NXObserver.Observation]();
         
         deinit {
-            NX.log { return "NXObserver.Array"}
+            NX.print(NSStringFromClass(self.classForCoder))
         }
     }
     
@@ -29,7 +29,7 @@ open class NXObserver  {
         }
         
         deinit {
-            NX.log { return "NXObserver.Observation"}
+            NX.print(NSStringFromClass(self.classForCoder))
         }
     }
     

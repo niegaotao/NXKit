@@ -41,7 +41,7 @@ open class NXHUD {
     
     open class WrappedView : NXView {
         deinit {
-            NX.log{""}
+            NX.print(NSStringFromClass(self.classForCoder))
         }
     }
 }

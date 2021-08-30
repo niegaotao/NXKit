@@ -68,6 +68,6 @@ open class NXKVOObserver : NSObject {
     }
     
     deinit {
-        NX.log { return "NXKVOObserver"}
+        NX.print(NSStringFromClass(self.classForCoder))
     }
 }

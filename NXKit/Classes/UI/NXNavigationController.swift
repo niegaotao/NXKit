@@ -384,7 +384,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     }
     
     deinit {
-        NX.log { return String(describing: self)}
+        NX.print(NSStringFromClass(self.classForCoder))
     }
 }
 

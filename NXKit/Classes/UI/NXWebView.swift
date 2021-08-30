@@ -105,7 +105,7 @@ open class NXWebView: WKWebView {
     }
     
     deinit {
-        NX.log { return "NXWebView"}
+        NX.print(NSStringFromClass(self.classForCoder))
         for name in NX.Association.names {
             self.configuration.userContentController.removeScriptMessageHandler(forName: name)
         }
@@ -316,7 +316,7 @@ extension NXWebView {
         }
         
         deinit {
-            NX.log { return "NXWebView.Wrapped"}
+            NX.print(NSStringFromClass(self.classForCoder))
         }
     }
 }
