@@ -155,6 +155,8 @@ extension NXHUD {
             __sender.textColor = UIColor.white
             __sender.insets = UIEdgeInsets(top: 16, left: 20, bottom: 16, right: 20)
             __sender.size = CGSize(width: 140.0, height: 92.0)
+            __sender.cornerRadius = 9.0
+            __sender.shadowRadius = 9.0
         }
         
         open var animationView = NX.UI.AnimationClass.init(frame:CGRect(x: 0, y: 0, width: 44, height: 44))
@@ -165,7 +167,8 @@ extension NXHUD {
             
             self.layer.masksToBounds = false
 
-            self.animationView.frame = CGRect(x: (self.bounds.size.width - 44)/2, y: (self.bounds.size.height - 44)/2, width: 44, height: 44)
+            
+            self.animationView.frame = CGRect(x: (self.bounds.size.width - 50)/2, y: (self.bounds.size.height - 50)/2, width: 50, height: 50)
             self.addSubview(self.animationView)
           
             self.messageView.textAlignment = .center
@@ -185,6 +188,8 @@ extension NXHUD {
             self.layer.shadowOpacity = self.wrapped.shadowOpacity
             self.layer.shadowOffset = self.wrapped.shadowOffset
             
+            
+            
             if self.wrapped.text.count > 0 {
                 var __size = String.size(of: self.wrapped.text, size: CGSize(width: NXOverlay.frame.width-self.wrapped.insets.left-self.wrapped.insets.right, height: 200), font: self.wrapped.font) { (style) in
                     style.lineSpacing = 2.0
@@ -192,7 +197,7 @@ extension NXHUD {
                 __size.width = max(self.wrapped.size.width - self.wrapped.insets.left - self.wrapped.insets.right, __size.width + 1)
                 __size.height = max(20, __size.height + 1)
                
-                var __frame = CGRect(x: 0, y: 0, width: __size.width+self.wrapped.insets.left+self.wrapped.insets.right, height: self.wrapped.insets.top+44+10+__size.height+self.wrapped.insets.bottom)
+                var __frame = CGRect(x: 0, y: 0, width: __size.width+self.wrapped.insets.left+self.wrapped.insets.right, height: self.wrapped.insets.top+self.animationView.frame.size.height+10+__size.height+self.wrapped.insets.bottom)
                 var __super = CGSize(width:NXDevice.width, height:NXDevice.height)
                 if let __superview = self.superview {
                     __super = __superview.frame.size
@@ -210,19 +215,19 @@ extension NXHUD {
                 self.frame = __frame
                 
                 
-                self.animationView.frame = CGRect(x: (__frame.size.width-44)/2, y: self.wrapped.insets.top, width: 44, height: 44)
-               
+                self.animationView.frame = CGRect(origin: CGPoint(x: (__frame.size.width-self.animationView.frame.size.width)/2, y: self.wrapped.insets.top), size: self.animationView.frame.size)
+
                 self.messageView.isHidden = false
                 self.messageView.textColor = self.wrapped.textColor
                 self.messageView.font = self.wrapped.font
                 self.messageView.numberOfLines = self.wrapped.numberOfLines
                 self.messageView.attributedText = NXString.attributedString(self.wrapped.text, self.wrapped.font, self.wrapped.textColor, 2)
                 self.messageView.textAlignment = .center
-                self.messageView.frame = CGRect(x: self.wrapped.insets.left, y: self.wrapped.insets.top+44+10, width: __size.width, height: __size.height)
+                self.messageView.frame = CGRect(x: self.wrapped.insets.left, y: self.wrapped.insets.top+self.animationView.frame.size.height+10, width: __size.width, height: __size.height)
             }
             else {
                 //不需要展示loading的文字
-                var __frame = CGRect(x: 0, y: 0, width: self.wrapped.size.width, height: self.wrapped.size.width)
+                var __frame = CGRect(x: 0, y: 0, width: self.wrapped.insets.left + self.animationView.frame.size.width + self.wrapped.insets.right, height: self.wrapped.insets.top + self.animationView.frame.size.height + self.wrapped.insets.bottom)
                 var __super = CGSize(width:NXDevice.width, height:NXDevice.height)
                 if let __superview = self.superview {
                     __super = __superview.frame.size
@@ -239,7 +244,7 @@ extension NXHUD {
                 }
                 self.frame = __frame
                 
-                self.animationView.frame = CGRect(x: (__frame.size.width-44)/2, y: (__frame.size.height-44)/2, width: 44, height: 44)
+                self.animationView.frame = CGRect(origin: CGPoint(x: (__frame.size.width-self.animationView.frame.size.width)/2, y: self.wrapped.insets.top), size: self.animationView.frame.size)
                 
                 self.messageView.isHidden = true
                 self.messageView.text = ""
@@ -258,7 +263,7 @@ extension NXHUD {
         objc_setAssociatedObject(superview, &NXHUD.Wrapped.wrappedViewKey, wrapperView, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         wrapperView.wrapped.ats = ats
         
-        wrapperView.animationView.frame = CGRect(x: (wrapperView.bounds.size.width - 44)/2, y: (wrapperView.bounds.size.height - 44)/2, width: 44, height: 44)
+        wrapperView.animationView.frame = CGRect(x: (wrapperView.bounds.size.width - 50)/2, y: (wrapperView.bounds.size.height - 50)/2, width: 50, height: 50)
         wrapperView.animationView.startAnimating()
         wrapperView.wrapped.text = message
         wrapperView.updateSubviews("", nil)

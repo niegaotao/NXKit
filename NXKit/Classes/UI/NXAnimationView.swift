@@ -58,7 +58,7 @@ open class NXAnimationView: NXImageView {
 
 open class NXAnimationWrappedView: NXAutoresizeView<NXAnimationView> {
     //转圈的视图
-    open var size = CGSize(width: 50, height: 50)
+    open var animation = CGSize(width: 50, height: 50)
     
     required public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -89,6 +89,6 @@ open class NXAnimationWrappedView: NXAutoresizeView<NXAnimationView> {
     
     //布局
     open override func layoutSubviews() {
-        self.contentView.frame = CGRect(x: (self.w-50)/2, y: (self.h-50)/2, width: 50, height: 50)
+        self.contentView.frame = CGRect(x: (self.w-self.animation.width)/2, y: (self.h-self.animation.height)/2, width: self.animation.width, height: self.animation.height)
     }
 }

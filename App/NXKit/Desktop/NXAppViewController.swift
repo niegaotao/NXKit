@@ -59,6 +59,12 @@ class NXAppViewController: NXCollectionViewController {
                                     ["access":"NXPopupView3","title":"NXPopupView3"]
                             ]])
         
+        self.values.append(["access":"access","title":"提示",
+                            "body":[["access":"toast","title":"toast"],
+                                    ["access":"loading-image","title":"loading-image"],
+                                    ["access":"loading-image-text","title":"loading-image-text"]
+                            ]])
+        
         self.values.append(["access":"access","title":"选图",
                             "body":[["access":"NXAsset_UIImage1-1","title":"NXAsset_UIImage1-1"],
                                     ["access":"NXAsset_UIVideo1-1","title":"NXAsset_UIVideo1-1"],
@@ -177,6 +183,21 @@ class NXAppViewController: NXCollectionViewController {
             }
             else {
                 NXActionView.alert(title: "温馨提示", subtitle: "我们生活真的很幸福，珍惜现在报效祖国是我们肩负的使命", actions: actions, setup:nil,completion: nil)
+            }
+        }
+        else if action == "toast" {
+            self.view.makeToast(message: "进行下一步之前请点击同意")
+        }
+        else if action == "loading-image" {
+            self.view.makeLoading(message: "", ats: .center)
+            DispatchQueue.main.asyncAfter(delay: 3) {
+                self.view.hideLoading()
+            }
+        }
+        else if action == "loading-image-text" {
+            self.view.makeLoading(message: "进行下一步之前请点击同意", ats: .center)
+            DispatchQueue.main.asyncAfter(delay: 3) {
+                self.view.hideLoading()
             }
         }
         else if ["NXAsset_UIImage1-1","NXAsset_UIVideo1-1",
@@ -344,6 +365,7 @@ class NXAppViewController: NXCollectionViewController {
                 }
             }
         }
+        
     }
 }
 
