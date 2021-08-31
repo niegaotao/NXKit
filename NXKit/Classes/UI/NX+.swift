@@ -243,59 +243,72 @@ extension NX.View {
 
 extension NX {
     
-    open class Wrapped<Index: Any, Value:Any> where Index : NXInitialValue, Value : NXInitialValue {
+    open class Disposeable<Value:Any>{
+        open var value : Value? = nil
+        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Disposeable<Value>>?) -> ())? = nil
+        
+        public init(completion: NX.Completion<String, NX.Disposeable<Value>>?) {
+            completion?("", self)
+        }
+        
+        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Disposeable<Value>>? = nil){
+            self.completion?(action, value, completion)
+        }
+    }
+    
+    open class Wrappable<Index: NXInitialValue, Value: NXInitialValue> {
         open var index = Index.initialValue
         open var initialValue = Value.initialValue
         open var value = Value.initialValue
-        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrapped<Index, Value>>?) -> ())? = nil
+        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrappable<Index, Value>>?) -> ())? = nil
         
-        public init(completion: NX.Completion<String, NX.Wrapped<Index, Value>>?) {
+        public init(completion: NX.Completion<String, NX.Wrappable<Index, Value>>?) {
             completion?("", self)
         }
         
-        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrapped<Index, Value>>? = nil){
+        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrappable<Index, Value>>? = nil){
             self.completion?(action, value, completion)
         }
     }
     
-    open class Completed<Value:Any> where Value : NXInitialValue {
+    open class Completable<Value: NXInitialValue> {
         open var isCompleted = false
         open var value = Value.initialValue
         
-        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Completed<Value>>?) -> ())? = nil
+        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Completable<Value>>?) -> ())? = nil
         
-        public init(completion: NX.Completion<String, NX.Completed<Value>>?) {
+        public init(completion: NX.Completion<String, NX.Completable<Value>>?) {
             completion?("", self)
         }
         
-        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Completed<Value>>? = nil){
+        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Completable<Value>>? = nil){
             self.completion?(action, value, completion)
         }
     }
     
-    open class Compared<Value:Any> where Value : NXInitialValue {
+    open class Comparable<Value: NXInitialValue> {
         open var minValue = Value.initialValue
         open var maxValue = Value.initialValue
-        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Compared<Value>>?) -> ())? = nil
+        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Comparable<Value>>?) -> ())? = nil
         
-        public init(completion: NX.Completion<String, NX.Compared<Value>>?) {
+        public init(completion: NX.Completion<String, NX.Comparable<Value>>?) {
             completion?("", self)
         }
         
-        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Compared<Value>>? = nil){
+        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Comparable<Value>>? = nil){
             self.completion?(action, value, completion)
         }
     }
     
-    open class Selectable<T:NXInitialValue> {
-        open var selected = T.initialValue
-        open var unselected = T.initialValue
+    open class Selectable<Value: NXInitialValue> {
+        open var selected = Value.initialValue
+        open var unselected = Value.initialValue
                     
-        public init(completion: NX.Completion<String, NX.Selectable<T>>?){
+        public init(completion: NX.Completion<String, NX.Selectable<Value>>?){
             completion?("", self)
         }
         
-        open func update(_ selected:T, unselected:T) {
+        open func update(_ selected:Value, unselected:Value) {
             self.selected = selected
             self.unselected = unselected
         }
