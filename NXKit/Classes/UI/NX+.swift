@@ -245,14 +245,10 @@ extension NX {
     
     open class Disposeable<Value:Any>{
         open var value : Value? = nil
-        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Disposeable<Value>>?) -> ())? = nil
+        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Disposeable<Value>>?) -> ())? = nil
         
         public init(completion: NX.Completion<String, NX.Disposeable<Value>>?) {
             completion?("", self)
-        }
-        
-        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Disposeable<Value>>? = nil){
-            self.completion?(action, value, completion)
         }
     }
     
@@ -260,14 +256,10 @@ extension NX {
         open var index = Index.initialValue
         open var initialValue = Value.initialValue
         open var value = Value.initialValue
-        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrappable<Index, Value>>?) -> ())? = nil
+        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrappable<Index, Value>>?) -> ())? = nil
         
         public init(completion: NX.Completion<String, NX.Wrappable<Index, Value>>?) {
             completion?("", self)
-        }
-        
-        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrappable<Index, Value>>? = nil){
-            self.completion?(action, value, completion)
         }
     }
     
@@ -275,28 +267,20 @@ extension NX {
         open var isCompleted = false
         open var value = Value.initialValue
         
-        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Completable<Value>>?) -> ())? = nil
+        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Completable<Value>>?) -> ())? = nil
         
         public init(completion: NX.Completion<String, NX.Completable<Value>>?) {
             completion?("", self)
-        }
-        
-        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Completable<Value>>? = nil){
-            self.completion?(action, value, completion)
         }
     }
     
     open class Comparable<Value: NXInitialValue> {
         open var minValue = Value.initialValue
         open var maxValue = Value.initialValue
-        open var completion : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Comparable<Value>>?) -> ())? = nil
+        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Comparable<Value>>?) -> ())? = nil
         
         public init(completion: NX.Completion<String, NX.Comparable<Value>>?) {
             completion?("", self)
-        }
-        
-        open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Comparable<Value>>? = nil){
-            self.completion?(action, value, completion)
         }
     }
     

@@ -94,7 +94,7 @@ extension NX {
 }
 
 extension NX {
-    open class func scale(size:CGSize, to:CGSize, mode:UIView.ContentMode) -> CGRect {
+    open class func resize(size:CGSize, to:CGSize, mode:UIView.ContentMode) -> CGRect {
         var __frame = CGRect.zero
         if size.width <= 0 || size.height <= 0 || to.width <= 0 || to.height <= 0 {
             return __frame
