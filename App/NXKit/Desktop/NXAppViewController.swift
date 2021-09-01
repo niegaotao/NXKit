@@ -20,7 +20,6 @@ class NXAppViewController: NXCollectionViewController {
         self.setupSubviews()
         self.updateSubviews("", nil)
         
-        
         NXTester.center().debug()
     }
     

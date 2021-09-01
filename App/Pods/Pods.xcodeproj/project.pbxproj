@@ -49,7 +49,7 @@
 		66C6FE30518FDB8879271F926ABA30F8 /* NXBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40913BB90C0096A73A407D2DA1AD1137 /* NXBackgroundView.swift */; };
 		69C69FDAE81B90BFB88C07905CB79B5E /* NXAnylayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D44DB09A715B0BE0BC361B19523481 /* NXAnylayerView.swift */; };
 		6D5D2D842E5349424EB61270C9C86906 /* NXItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7860A802C733F0A9ECDBE8ADFA8E92E7 /* NXItem.swift */; };
-		71496988671AFD4203412F0D2E9B7DFF /* UserDefaults+NXKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE99B8D7196C0B6795E43492AAD2BC47 /* UserDefaults+NXKit.swift */; };
+		71496988671AFD4203412F0D2E9B7DFF /* NXStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE99B8D7196C0B6795E43492AAD2BC47 /* NXStorage.swift */; };
 		76AFD53CCBF81D7EE305E9E83C140CF0 /* NXWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1718C07B9D9DDE4D183232703EC197 /* NXWebView.swift */; };
 		79666AAD5B4218245F70EF10DF649EF6 /* NXAutoresizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DE6030B3BC5217EA74DD75684E6AA8 /* NXAutoresizeView.swift */; };
 		7B9FA8D1468D588E20D6BA6E6799BBF4 /* String+NXKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0330F57435781B6A3674E1DC2CEEFAC7 /* String+NXKit.swift */; };
@@ -231,7 +231,7 @@
 		E9706D110AD6CACAAAD75C2AA997F5F9 /* NXWebViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXWebViewController.swift; sourceTree = "<group>"; };
 		EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		ECA9172CB6C0DE55336B5C76FB778E25 /* navi-more@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi-more@2x.png"; path = "NXKit/Assets/navi-more@2x.png"; sourceTree = "<group>"; };
-		EE99B8D7196C0B6795E43492AAD2BC47 /* UserDefaults+NXKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UserDefaults+NXKit.swift"; sourceTree = "<group>"; };
+		EE99B8D7196C0B6795E43492AAD2BC47 /* NXStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXStorage.swift; sourceTree = "<group>"; };
 		EF7E2C72A408E7CACDE525568915FBDD /* NXCollectionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXCollectionViewCell.swift; sourceTree = "<group>"; };
 		F008F08F6FCD1AEB73403410894ABF49 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F7845292C2514272969C5CF6F8B32D2E /* uiapp-camera@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "uiapp-camera@3x.png"; path = "NXKit/Assets/uiapp-camera@3x.png"; sourceTree = "<group>"; };
@@ -387,6 +387,7 @@
 				CE7E8D6C33AF9C5EE2D308B8ADA3F373 /* NXRuntime.swift */,
 				E89909DABCCCD7ABC67EBF12E39B32D1 /* NXSerialization.swift */,
 				45FE8BEDDE8907771C39A38C2791406A /* NXShadowView.swift */,
+				EE99B8D7196C0B6795E43492AAD2BC47 /* NXStorage.swift */,
 				0FEDDE4612C71B613620542D12190B5C /* NXString.swift */,
 				927EADFC3AAAED6BBD004B4A93BD169A /* NXSuspendView.swift */,
 				4747076435FB13E39D4A5047628AFF8A /* NXSwipeView.swift */,
@@ -413,7 +414,6 @@
 				7347828CB4709F85BED7DDB38FB709F5 /* UIImage+NXKit.swift */,
 				DD6BE5F04F248817032D22F00D546C8E /* UILabel+NXKit.swift */,
 				BCEE035376A1D9BE918AAF124DD5FF70 /* UIView+NXKit.swift */,
-				EE99B8D7196C0B6795E43492AAD2BC47 /* UserDefaults+NXKit.swift */,
 			);
 			name = UI;
 			path = NXKit/Classes/UI;
@@ -719,7 +719,7 @@
 				C6BF93FED1F6776623C6C9EE164FDB87 /* UIImage+NXKit.swift in Sources */,
 				A65CDAA6C186D9F8AF224548ECA8D418 /* UILabel+NXKit.swift in Sources */,
 				93A28EBECBB9CF85530CC81883B4BDEA /* UIView+NXKit.swift in Sources */,
-				71496988671AFD4203412F0D2E9B7DFF /* UserDefaults+NXKit.swift in Sources */,
+				71496988671AFD4203412F0D2E9B7DFF /* NXStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

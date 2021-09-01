@@ -275,8 +275,8 @@ extension NX {
     }
     
     open class Comparable<Value: NXInitialValue> {
-        open var minValue = Value.initialValue
-        open var maxValue = Value.initialValue
+        open var lhsValue = Value.initialValue
+        open var rhsValue = Value.initialValue
         open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Comparable<Value>>?) -> ())? = nil
         
         public init(completion: NX.Completion<String, NX.Comparable<Value>>?) {
@@ -492,6 +492,18 @@ extension UIFont : NXInitialValue {
 extension UIImage : NXInitialValue {
     public static var initialValue: Self {
         return UIImage() as! Self
+    }
+}
+
+extension Date : NXInitialValue {
+    public static var initialValue: Date {
+        return Date()
+    }
+}
+
+extension NSNumber : NXInitialValue {
+    public static var initialValue: Self {
+        return NSNumber(value: 0) as! Self
     }
 }
 
