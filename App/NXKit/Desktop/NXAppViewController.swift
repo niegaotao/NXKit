@@ -185,17 +185,17 @@ class NXAppViewController: NXCollectionViewController {
             }
         }
         else if action == "toast" {
-            self.view.makeToast(message: "进行下一步之前请点击同意")
+            self.view.makeToast(message: "好的")
         }
         else if action == "loading-image" {
             self.view.makeLoading(message: "", ats: .center)
-            DispatchQueue.main.asyncAfter(delay: 3) {
+            DispatchQueue.main.asyncAfter(delay: 4) {
                 self.view.hideLoading()
             }
         }
         else if action == "loading-image-text" {
-            self.view.makeLoading(message: "进行下一步之前请点击同意", ats: .center)
-            DispatchQueue.main.asyncAfter(delay: 3) {
+            self.view.makeLoading(message: "进行下一步之前请先同意服务协议。请确认是否同意？", ats: .center)
+            DispatchQueue.main.asyncAfter(delay: 4) {
                 self.view.hideLoading()
             }
         }

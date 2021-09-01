@@ -242,7 +242,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                     if assets.count == 1 && self.wrapped.imageClips.count >= 1, let image = assets.first?.image  {
                         let vc = NXAssetClipImageViewController()
                         vc.image = image
-                        vc.clips.index = 0
+                        vc.clips.state = 0
                         vc.clips.value = self.wrapped.imageClips
                         vc.ctxs.completion = { [weak self] (_, outputUIImage) in
                             guard let self = self else {

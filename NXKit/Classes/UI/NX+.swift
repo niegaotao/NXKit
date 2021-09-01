@@ -252,24 +252,13 @@ extension NX {
         }
     }
     
-    open class Wrappable<Index: NXInitialValue, Value: NXInitialValue> {
-        open var index = Index.initialValue
-        open var initialValue = Value.initialValue
+    open class Wrappable<State: NXInitialValue, InitialValue:NXInitialValue, Value: NXInitialValue> {
+        open var state = State.initialValue
+        open var initialValue = InitialValue.initialValue
         open var value = Value.initialValue
-        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrappable<Index, Value>>?) -> ())? = nil
+        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrappable<State, InitialValue, Value>>?) -> ())? = nil
         
-        public init(completion: NX.Completion<String, NX.Wrappable<Index, Value>>?) {
-            completion?("", self)
-        }
-    }
-    
-    open class Completable<Value: NXInitialValue> {
-        open var isCompleted = false
-        open var value = Value.initialValue
-        
-        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Completable<Value>>?) -> ())? = nil
-        
-        public init(completion: NX.Completion<String, NX.Completable<Value>>?) {
+        public init(completion: NX.Completion<String, NX.Wrappable<State, InitialValue, Value>>?) {
             completion?("", self)
         }
     }
