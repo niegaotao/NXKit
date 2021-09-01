@@ -20,13 +20,15 @@ open class NXStorage {
         }
     }
     
-    open func value<T:Any>(forKey key:String) -> T? {
-        if let __value = self.rootValue[key] as? T {
+    @discardableResult
+    open func value(forKey key:String) -> Any? {
+        if let __value = self.rootValue[key] {
             return __value
         }
         return nil
     }
     
+    @discardableResult
     open func set(_ value:Any?, forKey key:String) -> Bool {
         guard key.count > 0 else {
             return false
@@ -42,6 +44,7 @@ open class NXStorage {
         return true
     }
     
+    @discardableResult
     open func removeValue(forKey key: String) -> Bool {
         guard key.count > 0 else {
             return false
