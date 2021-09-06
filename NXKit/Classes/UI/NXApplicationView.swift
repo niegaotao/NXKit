@@ -11,7 +11,7 @@ open class NXApplicationView: NXView {
     public let assetView = UIImageView(frame: CGRect.zero)
     public let titleView = UILabel(frame: CGRect.zero)
     public let subtitleView = UILabel(frame: CGRect.zero)
-    public let accessView = UILabel(frame: CGRect.zero)
+    public let valueView = UILabel(frame: CGRect.zero)
     public let arrowView = UIImageView(frame:CGRect.zero)
     public let separator = CALayer()
 
@@ -33,11 +33,11 @@ open class NXApplicationView: NXView {
         subtitleView.layer.masksToBounds = true
         self.addSubview(subtitleView)
         
-        accessView.font = NX.font(14)
-        accessView.textAlignment = .right
-        accessView.textColor = NX.darkGrayColor
-        accessView.layer.masksToBounds = true
-        self.addSubview(accessView)
+        valueView.font = NX.font(14)
+        valueView.textAlignment = .right
+        valueView.textColor = NX.darkGrayColor
+        valueView.layer.masksToBounds = true
+        self.addSubview(valueView)
         
         arrowView.contentMode = .scaleAspectFill
         arrowView.layer.masksToBounds = true
@@ -57,7 +57,7 @@ open class NXApplicationView: NXView {
         NX.View.update(__wrapped.asset, self.assetView)
         NX.View.update(__wrapped.title, self.titleView)
         NX.View.update(__wrapped.subtitle, self.subtitleView)
-        NX.View.update(__wrapped.access, self.accessView)
+        NX.View.update(__wrapped.value, self.valueView)
         NX.View.update(__wrapped.arrow, self.arrowView)
         
         

@@ -32,7 +32,7 @@ open class NXAction: NXItem {
         __sender.backgroundColor = UIColor.clear
     })
     
-    public let access = NX.Attribute(completion: {(_, __sender) in
+    public let value = NX.Attribute(completion: {(_, __sender) in
         __sender.font = NX.font(13)
         __sender.color = NX.darkGrayColor
         __sender.textAlignment = NSTextAlignment.right

@@ -164,7 +164,7 @@ class NXAppViewController: NXCollectionViewController {
                     }
                     __action.title.isHidden = false
                     __action.subtitle.isHidden = true
-                    __action.access.isHidden = true
+                    __action.value.isHidden = true
                     __action.arrow.isHidden = true
                 })
             }
@@ -473,6 +473,34 @@ class NXSubswipeViewController: NXSwipeViewController {
                 self.naviView.isHidden = true
                 self.contentView.frame = self.view.bounds
             }
+            
+            let backgroundView = NXCView<UIView>(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+            backgroundView.backgroundColor = UIColor.red
+            backgroundView.setupEvents([.tap]) { _, _ in
+                NX.print("backgroundView")
+            }
+            
+            backgroundView.contentView.frame = CGRect(x: 50, y: 50, width: 100, height: 100)
+            backgroundView.contentView.backgroundColor = UIColor.green
+            backgroundView.contentView.setupEvents([.tap]) { _, _ in
+                NX.print("contentView")
+            }
+            
+            let ltView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+            ltView.backgroundColor = UIColor.yellow
+            ltView.setupEvents([.tap]) { _, _ in
+                NX.print("ltView")
+            }
+            backgroundView.contentView.addSubview(ltView)
+            
+            let rbView = UIButton(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
+            rbView.backgroundColor = UIColor.yellow
+            rbView.setupEvents([.touchUpInside]) { _, _ in
+                NX.print("rbView")
+            }
+            backgroundView.contentView.addSubview(rbView)
+            
+            self.contentView.addSubview(backgroundView)
         }
         
         override func viewWillAppear(_ animated: Bool) {

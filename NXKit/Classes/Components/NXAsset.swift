@@ -1062,7 +1062,7 @@ public class NXAlbum : NXAction {
         self.subtitle.textAlignment = .left
         self.subtitle.isHidden = false
         
-        self.access.isHidden = true
+        self.value.isHidden = true
         
         self.arrow.isHidden = false
         self.arrow.frame = CGRect(x: self.ctxs.width - 16 - 6, y: (self.ctxs.height - 12)/2.0, width: 6, height: 12)
