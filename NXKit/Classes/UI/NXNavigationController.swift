@@ -100,8 +100,8 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     }
     
     ///当push完成后回触发completion
-    open func pushViewController(_ viewController: NXViewController, animated: Bool, completion:(() -> ())?){
-        viewController.ctxs.callbackViewAppeared = completion
+    open func pushViewController(_ viewController: NXViewController, animated: Bool, completion:NX.Completion<String, NXViewController>?){
+        viewController.ctxs.didAppear = completion
         self.pushViewController(viewController, animated: animated)
     }
     

@@ -7,12 +7,17 @@
 
 import UIKit
 
-open class NXWrappedViewController<WrappedView: UIView>: NXViewController {
-
-    open var wrappedView : WrappedView? = nil
+open class NXWrappedViewController<C:NXViewController>: NXViewController {
+    public let viewController = C()
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.naviView.isHidden = true
+        self.contentView.isHidden = true
+        
+        self.viewController.ctxs.superviewController = self
+        self.addChild(viewController)
+        self.view.addSubview(viewController.view)
     }
 }

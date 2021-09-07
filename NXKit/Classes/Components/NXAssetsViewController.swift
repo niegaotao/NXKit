@@ -133,8 +133,8 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         self.dispose("subcomponents", nil)
     }
     
-    open override func updateSubviews(_ action:String, _ value: [String:Any]?){
-        guard let album = value?["album"] as? NXAlbum else {
+    open override func updateSubviews(_ action:String, _ value: Any?){
+        guard let value = value as? [String:Any], let album = value["album"] as? NXAlbum else {
             return
         }
         

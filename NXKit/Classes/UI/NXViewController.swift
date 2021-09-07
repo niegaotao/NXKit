@@ -73,6 +73,9 @@ open class NXViewController: UIViewController  {
     override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.ctxs.willAppear?("", self)
+        self.ctxs.willAppear = nil
+        
         //更新状态栏样式
         self.updateNavigationBar()
     }
@@ -80,19 +83,22 @@ open class NXViewController: UIViewController  {
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //在这里回调告知新的视图控制器已经加载完毕，用于在某些特殊场景移除上一个页面
-        if let callbackViewAppeared = self.ctxs.callbackViewAppeared {
-            callbackViewAppeared()
-            self.ctxs.callbackViewAppeared = nil
-        }
+        self.ctxs.didAppear?("", self)
+        self.ctxs.didAppear = nil
     }
     
     override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        self.ctxs.willDisappear?("", self)
+        self.ctxs.willDisappear = nil
     }
     
     override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
+        self.ctxs.didDisappear?("", self)
+        self.ctxs.didDisappear = nil
     }
     
     //开始动画
@@ -120,7 +126,7 @@ open class NXViewController: UIViewController  {
     }
     
     //更新视图：父类不会自动调用
-    open func updateSubviews(_ action: String, _ value: [String:Any]?){
+    open func updateSubviews(_ action: String, _ value: Any?){
         
     }
     
@@ -179,13 +185,16 @@ open class NXViewController: UIViewController  {
     
     //是否支持通过重力感应自动转屏幕
     open func shouldAutorotate() -> Bool {
-        return false
+        return self.ctxs.shouldAutorotate
     }
     
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         var currentValue = self.ctxs.statusBarStyle
         if let viewController =  self as? NXToolViewController, let selectedViewController = viewController.selectedViewController {
             currentValue = selectedViewController.ctxs.statusBarStyle
+        }
+        else if let viewController =  self as? NXWrappedViewController {
+            currentValue = viewController.viewController.ctxs.statusBarStyle
         }
         else if let viewController = self.ctxs.subviewControllers.last, viewController.ctxs.statusBarStyle != .none {
             currentValue = viewController.ctxs.statusBarStyle
@@ -218,6 +227,9 @@ open class NXViewController: UIViewController  {
 
         if let viewController =  self as? NXToolViewController, let selectedViewController = viewController.selectedViewController {
             currentValue = selectedViewController.ctxs.statusBarStyle
+        }
+        else if let viewController = self as? NXWrappedViewController {
+            currentValue = viewController.viewController.ctxs.statusBarStyle
         }
         else if let viewController = self.ctxs.subviewControllers.last, viewController.ctxs.statusBarStyle != .none {
             currentValue = viewController.ctxs.statusBarStyle
@@ -257,16 +269,21 @@ extension NXViewController {
         open var y: Int = 0
         open var z: Int = 0
         
+        open var willAppear : NX.Completion<String, NXViewController>? = nil
+        open var didAppear: NX.Completion<String, NXViewController>? = nil
+        open var willDisappear: NX.Completion<String, NXViewController>? = nil
+        open var didDisappear: NX.Completion<String, NXViewController>? = nil
+        
+        
         ///状态栏样式
+        open var shouldAutorotate = false
         open var statusBarStyle = NX.Bar.dark
         open var statusBarHidden = false
         open var orientationMask = UIInterfaceOrientationMask.portrait
         
         ///空页面加载动画
         open var animationViewClass : NXAnimationWrappedView.Type? = NX.UI.AnimationClass
-        
-        ///页面加载完毕触发(触发后会强制置为nil)
-        open var callbackViewAppeared: (() -> ())?
+       
         ///是否允许手势返回：某些页面会设置不允许手势返回，采用block是因为可以在当前页面接收到右滑手势返回事件
         open var panRecognizer : ((String, UIPanGestureRecognizer) -> (Bool)) = {_, _ in return true}
         

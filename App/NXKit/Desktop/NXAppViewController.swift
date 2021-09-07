@@ -30,7 +30,7 @@ class NXAppViewController: NXCollectionViewController {
         self.collectionView?.register(NXActionViewCell.self, forCellWithReuseIdentifier: "NXActionViewCell")
     }
     
-    override func updateSubviews(_ action: String, _ entities: [String : Any]?) {
+    override func updateSubviews(_ action: String, _ value: Any?) {
         
         NX.print("------\(self.ctxs.index)");
         

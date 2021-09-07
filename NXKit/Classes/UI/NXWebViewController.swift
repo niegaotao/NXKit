@@ -104,8 +104,8 @@ open class NXWebViewController: NXViewController {
         self.contentView.addSubview(self.progressView)
     }
     
-    open override func updateSubviews(_ action: String, _ value: [String : Any]?) {
-        guard let _url = value?["url"] as? String else {
+    open override func updateSubviews(_ action: String, _ value: Any?) {
+        guard let value = value as? [String:Any], let _url = value["url"] as? String else {
             return
         }
         if let __url = URL(string: _url) {

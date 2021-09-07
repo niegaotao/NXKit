@@ -203,13 +203,13 @@ extension NXHUD {
             }
         }
         let wrappedView = NXHUD.WrappedView(frame: CGRect(x: 0, y: 0, width: 100, height: 36))
+        superview.addSubview(wrappedView)
         wrappedView.wrapped.key = key
         wrappedView.wrapped.image = image
         wrappedView.wrapped.message = message
         wrappedView.wrapped.ats = ats
         wrappedView.wrapped.duration = duration
         wrappedView.updateSubviews("", nil)
-        superview.addSubview(wrappedView)
         
         if key == NXHUD.Key.toast.rawValue {
             wrappedView.alpha = 0.0
