@@ -141,7 +141,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                 if fromViewController.ctxs.subviewControllers.count > 0 {
                     return false
                 }
-                return fromViewController.ctxs.allowsTransitionBack()
+                return fromViewController.ctxs.panRecognizer("", panRecognizer)
             }
             
             //支持返回

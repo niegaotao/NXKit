@@ -268,7 +268,7 @@ extension NXViewController {
         ///页面加载完毕触发(触发后会强制置为nil)
         open var callbackViewAppeared: (() -> ())?
         ///是否允许手势返回：某些页面会设置不允许手势返回，采用block是因为可以在当前页面接收到右滑手势返回事件
-        open var allowsTransitionBack : (() -> (Bool)) = {return true}
+        open var panRecognizer : ((String, UIPanGestureRecognizer) -> (Bool)) = {_, _ in return true}
         
         ///进行的什么操作
         open var operation = NXViewController.Operation.push
