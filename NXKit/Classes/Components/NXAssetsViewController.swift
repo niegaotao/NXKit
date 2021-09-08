@@ -45,14 +45,14 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
          */
         NX.authorization(NX.Authorize.album, DispatchQueue.main, true) {[weak self] (state) in
             if state == .authorized, let self = self {
-                self.contentView.addSubview(self.animationView!)
-                self.animationView?.startAnimating()
+                self.contentView.addSubview(self.animationView)
+                self.animationView.startAnimating()
                 DispatchQueue(label: "serialQueue", attributes: .init(rawValue: 0)).async {
                     NXAsset.outputAlbums(self.wrapped, completion: { [weak self] (albums) in
                         self?.wrapped.albums.append(contentsOf: albums)
                         
                         DispatchQueue.main.async {[weak self] in
-                            self?.animationView?.stopAnimating()
+                            self?.animationView.stopAnimating()
                             
                             if let count = self?.wrapped.albums.count, count > 0  {
                                 self?.setupSubviews()

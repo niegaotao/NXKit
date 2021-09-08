@@ -46,7 +46,7 @@ open class NXHUD {
     
     open class WrappedView : NXView {
         open var stateView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        open var animationView = NX.UI.AnimationClass.init(frame:CGRect(x: 0, y: 0, width: 50, height: 50))
+        open var animationView = NX.UI.HUDAnimationClass.init(frame:CGRect(x: 0, y: 0, width: 50, height: 50))
         open var messageView = UILabel(frame: CGRect.zero)
         
         public let wrapped = NXHUD.Wrapped { (_, __sender) in

@@ -44,9 +44,8 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
 
         tableView?.tableWrapper = self.tableWrapper
         self.tableWrapper.tableView = tableView
-        if let __animationsView = self.animationView {
-            self.contentView.bringSubviewToFront(__animationsView)
-        }
+        
+        self.contentView.bringSubviewToFront(self.animationView)
     }
     
     

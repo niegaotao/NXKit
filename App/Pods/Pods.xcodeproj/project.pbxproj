@@ -85,6 +85,7 @@
 		C54EDCEE64EF2E25FBCCF381EE08C2EC /* NXSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4747076435FB13E39D4A5047628AFF8A /* NXSwipeView.swift */; };
 		C6BF93FED1F6776623C6C9EE164FDB87 /* UIImage+NXKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7347828CB4709F85BED7DDB38FB709F5 /* UIImage+NXKit.swift */; };
 		C952957526DB1A6600127231 /* NXArrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C952957426DB1A6600127231 /* NXArrayView.swift */; };
+		C9B3635326E8888200B95DF3 /* NXEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B3635226E8888200B95DF3 /* NXEquatable.swift */; };
 		CDD4B6FFB1B88448D04A5CB7AA693AAB /* NXCollectionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7086200941315A477B5431FBE39293 /* NXCollectionWrapper.swift */; };
 		CF8BEB3179258E8DFC518C16D8E83376 /* uiapp-animation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F1EA293223A0E0592CDCC14986FAA2 /* uiapp-animation@2x.png */; };
 		D300A72C146917C5BBDB0C67ED2CC7C5 /* NXSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785C718D19168F96308F491FCB67E889 /* NXSwitch.swift */; };
@@ -214,6 +215,7 @@
 		BCEE035376A1D9BE918AAF124DD5FF70 /* UIView+NXKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIView+NXKit.swift"; sourceTree = "<group>"; };
 		C50552AFE474259DF8A377116BC58375 /* NXControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXControl.swift; sourceTree = "<group>"; };
 		C952957426DB1A6600127231 /* NXArrayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NXArrayView.swift; sourceTree = "<group>"; };
+		C9B3635226E8888200B95DF3 /* NXEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NXEquatable.swift; sourceTree = "<group>"; };
 		CDC63356E7E320C2BAF669413B03E28A /* NXViewAssociation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXViewAssociation.swift; sourceTree = "<group>"; };
 		CE7E8D6C33AF9C5EE2D308B8ADA3F373 /* NXRuntime.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXRuntime.swift; sourceTree = "<group>"; };
 		D245E0514AAC1A2B9A6D5EA2F383E90F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -372,6 +374,7 @@
 				193222A8983341E41080A64CEB163B80 /* NXFS.swift */,
 				3214A8CD7A9DEA3CC808F68DF8B7BC87 /* NXHUD.swift */,
 				6A6FA55ADD842707A3FD03DD151A8BDA /* NXImageView.swift */,
+				C9B3635226E8888200B95DF3 /* NXEquatable.swift */,
 				7860A802C733F0A9ECDBE8ADFA8E92E7 /* NXItem.swift */,
 				E43D66E37CE1862394366FE462E794D9 /* NXKVOObserver.swift */,
 				5A37FF5DAA120623EBE08FEB95BC00AA /* NXLabel.swift */,
@@ -718,6 +721,7 @@
 				5C34EF2441FB6A9E2280BFB39C63E53F /* UIButton+NXKit.swift in Sources */,
 				C6BF93FED1F6776623C6C9EE164FDB87 /* UIImage+NXKit.swift in Sources */,
 				A65CDAA6C186D9F8AF224548ECA8D418 /* UILabel+NXKit.swift in Sources */,
+				C9B3635326E8888200B95DF3 /* NXEquatable.swift in Sources */,
 				93A28EBECBB9CF85530CC81883B4BDEA /* UIView+NXKit.swift in Sources */,
 				71496988671AFD4203412F0D2E9B7DFF /* NXStorage.swift in Sources */,
 			);

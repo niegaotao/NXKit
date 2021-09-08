@@ -39,9 +39,7 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
             collectionView?.contentInsetAdjustmentBehavior = .never
         }
         
-        if let __animationsView = self.animationView {
-            self.contentView.bringSubviewToFront(__animationsView)
-        }
+        self.contentView.bringSubviewToFront(self.animationView)
     }
     
     ///代理方法数据源方法

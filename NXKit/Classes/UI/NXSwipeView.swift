@@ -41,18 +41,18 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
         self.wrapped.index = NX.get(int:dicValue["index"] as? Int, 0)
         
         self.wrapped.removeAll()
-        if let elements = dicValue["elements"] as? [String] {
+        if let elements = dicValue["items"] as? [String] {
             for (_, title) in elements.enumerated() {
                 let item = NXSwipeView.Element()
                 item.title.selected = title
                 item.title.unselected = title
-                self.wrapped.elements.append(item)
+                self.wrapped.items.append(item)
             }
         }
-        else if let elements = dicValue["elements"] as? [NXSwipeView.Element] {
+        else if let elements = dicValue["items"] as? [NXSwipeView.Element] {
             self.wrapped.append(contentsOf: elements)
         }
-        for (_, item) in self.wrapped.elements.enumerated() {
+        for (_, item) in self.wrapped.items.enumerated() {
             if item.ctxs.cls == nil || item.ctxs.reuse.count <= 0 {
                 item.ctxs.update(NXSwipeView.Cell.self, "NXSwipeViewCell")
             }
@@ -69,15 +69,15 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
         }
         
         if self.wrapped.isEqually {
-            let maximumOfComponents = max(min(self.wrapped.maximumOfComponents, CGFloat(self.wrapped.elements.count)),1.0)
+            let maximumOfComponents = max(min(self.wrapped.maximumOfComponents, CGFloat(self.wrapped.items.count)),1.0)
             let widthOfComponents = (self.w - wrapped.insets.left - wrapped.insets.right)/CGFloat(maximumOfComponents)
-            for (_, item) in self.wrapped.elements.enumerated() {
+            for (_, item) in self.wrapped.items.enumerated() {
                 item.size.selected = CGSize(width: widthOfComponents, height: self.h)
                 item.size.unselected = CGSize(width: widthOfComponents, height: self.h)
             }
         }
         else {
-            for (_, item) in self.wrapped.elements.enumerated() {
+            for (_, item) in self.wrapped.items.enumerated() {
                 item.size.selected = CGSize(width: item.width.selected + self.wrapped.spaceOfComponents, height: self.h)
                 item.size.unselected = CGSize(width: item.width.unselected + self.wrapped.spaceOfComponents, height: self.h)
             }
@@ -167,7 +167,7 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
             
             __frame.origin.x = self.wrapped.insets.left + (item.size.selected.width - __frame.size.width)/2.0
             
-            for (__idx, loop) in self.wrapped.elements.enumerated() {
+            for (__idx, loop) in self.wrapped.items.enumerated() {
                 if __idx < index {
                     __frame.origin.x = __frame.origin.x + loop.size.unselected.width
                 }

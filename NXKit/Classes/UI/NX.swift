@@ -232,9 +232,9 @@ extension NX {
             return NX.UI.setupBarValue
         }
         
-        
-        //空页面加载动画类型
-        static public var AnimationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self
+        static public var AnimationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self //空页面加载动画类型
+        static public var HUDAnimationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self//loading
+
         static public var PagingClass : NXInitialValue.Type = Int.self
         
         static public var isSeparatorHidden = false
@@ -283,7 +283,7 @@ extension NX {
                 return lightColor
             }
         }
-        return lightColor;
+        return lightColor
     }
     
     //view背景色

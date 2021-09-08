@@ -20,7 +20,7 @@ open class NXViewController: UIViewController  {
     open var contentView = UIView(frame: CGRect(x: 0, y: NXDevice.topOffset, width: NXDevice.width, height: NXDevice.height-NXDevice.topOffset))
     
     ///页面无内容时的加载动画
-    open var animationView : NXAnimationWrappedView? = nil
+    open var animationView = NX.UI.AnimationClass.init(frame: CGRect.zero)
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -55,10 +55,8 @@ open class NXViewController: UIViewController  {
         self.view.addSubview(self.contentView)
         
         
-        if let __animationView = self.ctxs.animationViewClass?.init(frame: self.contentView.bounds) {
-            self.animationView = __animationView
-            self.contentView.addSubview(__animationView)
-        }
+        self.animationView.frame = self.contentView.bounds
+        self.contentView.addSubview(self.animationView)
         
         
         self.naviView.frame = CGRect(x: 0, y: 0, width: self.view.w, height: NXDevice.topOffset)
@@ -103,18 +101,15 @@ open class NXViewController: UIViewController  {
     
     //开始动画
     open func startAnimating(){
-        guard let __animationView = self.animationView else {
-            return
-        }
         if self.ctxs.isEmpty {
-            __animationView.superview?.bringSubviewToFront(__animationView)
-            __animationView.startAnimating()
+            self.animationView.superview?.bringSubviewToFront(self.animationView)
+            self.animationView.startAnimating()
         }
     }
     
     //结束动画
     open func stopAnimating(_ isCompleted:Bool = true){
-        self.animationView?.stopAnimating(isCompleted)
+        self.animationView.stopAnimating(isCompleted)
         if self.ctxs.isEmpty {
             self.ctxs.isEmpty = false
         }
@@ -282,7 +277,7 @@ extension NXViewController {
         open var orientationMask = UIInterfaceOrientationMask.portrait
         
         ///空页面加载动画
-        open var animationViewClass : NXAnimationWrappedView.Type? = NX.UI.AnimationClass
+        open var animationViewClass = NX.UI.AnimationClass
        
         ///是否允许手势返回：某些页面会设置不允许手势返回，采用block是因为可以在当前页面接收到右滑手势返回事件
         open var panRecognizer : ((String, UIPanGestureRecognizer) -> (Bool)) = {_, _ in return true}

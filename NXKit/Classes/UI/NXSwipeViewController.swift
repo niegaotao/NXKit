@@ -85,7 +85,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
             element.ctxs.size = CGSize(width: NXDevice.width, height: NXDevice.height-NXDevice.topOffset)
             element.ctxs.update(NXSwipeViewController.Cell.self, "NXSwipeViewControllerCell" + String(idx+1))
             element.owner = vc
-            self.wrapped.elements.append(element)
+            self.wrapped.items.append(element)
             
             if index == idx {
                 self.selectedViewController = vc
@@ -95,7 +95,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
             self.addChild(vc)
         }
         
-        self.swipeView.updateSubviews("update", ["index":index,"elements":elements])
+        self.swipeView.updateSubviews("update", ["index":index,"items":elements])
         
         if index >= 1 {
             self.collectionView?.setContentOffset(CGPoint(x: self.view.w * CGFloat(index), y: 0), animated: false)
