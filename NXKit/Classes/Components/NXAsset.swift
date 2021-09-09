@@ -416,12 +416,12 @@ extension NXAsset {
         NX.authorization(NX.Authorize.album, DispatchQueue.main, true) { state in
             guard state == NX.AuthorizeState.authorized else {return}
 
-            let vc = NXWrappedViewController<NXWrappedNavigationController<NXAssetsViewController>>()
-            vc.modalPresentationStyle = .fullScreen
-            vc.viewController.viewController.wrapped.completion = completion
-            album?(true, vc.viewController.viewController)
-            if vc.viewController.viewController.wrapped.isOpenable {
-                NXAsset.Wrapped.open(vc.viewController.viewController.wrapped, vc: vc)
+            let __wrapped = NXWrappedViewController<NXWrappedNavigationController<NXAssetsViewController>>()
+            __wrapped.modalPresentationStyle = .fullScreen
+            __wrapped.viewController.viewController.wrapped.completion = completion
+            album?(true, __wrapped.viewController.viewController)
+            if __wrapped.viewController.viewController.wrapped.isOpenable {
+                NXAsset.Wrapped.open(__wrapped.viewController.viewController.wrapped, vc: __wrapped)
             }
         }
     }
@@ -503,13 +503,17 @@ extension NXAsset {
         NX.authorization(NX.Authorize.camera, DispatchQueue.main, true) {(state) in
             guard state == NX.AuthorizeState.authorized else {return}
             
-            let vc = NXImagePickerController()
-            vc.wrapped.completion = completion
-            vc.sourceType = .camera
-            vc.delegate = vc
-            vc.modalPresentationStyle = .fullScreen
-            camera?(true, vc)
-            vc.wrapped.naviController?.currentViewController?.present(vc, animated: true, completion: nil)
+            let __wrapped = NXWrappedViewController<NXImagePickerController>()
+            __wrapped.view.backgroundColor = .black
+            __wrapped.naviView.isHidden = true
+            __wrapped.viewController.view.backgroundColor = .black
+            __wrapped.viewController.setNavigationBarHidden(true, animated: false)
+            __wrapped.viewController.wrapped.completion = completion
+            __wrapped.viewController.sourceType = .camera
+            __wrapped.viewController.delegate = __wrapped.viewController
+            __wrapped.viewController.modalPresentationStyle = .fullScreen
+            camera?(true, __wrapped.viewController)
+            __wrapped.viewController.wrapped.naviController?.pushViewController(__wrapped, animated: true)
         }
     }
     
@@ -863,9 +867,6 @@ open class NXImagePickerController : UIImagePickerController, UIImagePickerContr
     public let wrapped = NXAsset.Wrapped()
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        //系统相册选图
-        picker.dismiss(animated: false, completion: nil)
-
         //拍照
         var image : UIImage? = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         if let __image = image, let fixed = UIImage.fixedOrientation(image: __image) {
@@ -887,21 +888,25 @@ open class NXImagePickerController : UIImagePickerController, UIImagePickerContr
                     ctxs.assets.append(leyAsset)
                     ctxs.images.append(__image)
                     self.wrapped.completion?(true, ctxs)
+                    
+                    self.wrapped.naviController?.popViewController(animated: true)
                 }
                 else {
                     let ctxs = NXAsset.Output()
                     self.wrapped.completion?(false, ctxs)
+                    self.wrapped.naviController?.popViewController(animated: true)
                 }
             }
         }
         else {
             let ctxs = NXAsset.Output()
             self.wrapped.completion?(false, ctxs)
+            self.wrapped.naviController?.popViewController(animated: true)
         }
     }
     
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
+        self.wrapped.naviController?.popViewController(animated: true)
     }
 }
 
