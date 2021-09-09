@@ -400,7 +400,7 @@ extension NXNavigationController {
     }
 }
 
-open class NXMixedNavigationController<C:UIViewController>: NXNavigationController {
+open class NXWrappedNavigationController<C:UIViewController>: NXNavigationController {
     public let viewController = C()
     
     open override func setup() {

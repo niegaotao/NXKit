@@ -411,21 +411,22 @@ extension NXAsset {
 
 
 extension NXAsset {
-    @discardableResult
     open class func open(album: NX.Completion<Bool, NXAssetsViewController>?,
-                         completion: NX.Completion<Bool, NXAsset.Output>?) -> NXMixedViewController<NXMixedNavigationController<NXAssetsViewController>> {
-        let vc = NXMixedViewController<NXMixedNavigationController<NXAssetsViewController>>()
-        vc.modalPresentationStyle = .fullScreen
-        vc.viewController.viewController.wrapped.completion = completion
-        album?(true, vc.viewController.viewController)
-        if vc.viewController.viewController.wrapped.isOpenable {
-            NXAsset.Wrapped.open(vc.viewController.viewController.wrapped, vc: vc)
+                         completion: NX.Completion<Bool, NXAsset.Output>?) {
+        NX.authorization(NX.Authorize.album, DispatchQueue.main, true) { state in
+            guard state == NX.AuthorizeState.authorized else {return}
+
+            let vc = NXWrappedViewController<NXWrappedNavigationController<NXAssetsViewController>>()
+            vc.modalPresentationStyle = .fullScreen
+            vc.viewController.viewController.wrapped.completion = completion
+            album?(true, vc.viewController.viewController)
+            if vc.viewController.viewController.wrapped.isOpenable {
+                NXAsset.Wrapped.open(vc.viewController.viewController.wrapped, vc: vc)
+            }
         }
-        return vc
     }
     
-    @discardableResult
-    open class func openAlbum(minOfAssets:Int,
+    open class func album(minOfAssets:Int,
                               maxOfAssets:Int,
                               image : (minOfAssets:Int, maxOfAssets:Int, isIndex:Bool),
                               video : (minOfAssets:Int, maxOfAssets:Int, isIndex:Bool),
@@ -452,9 +453,9 @@ extension NXAsset {
                               isOpenable:Bool,
                               isCloseable:Bool,
                               isAnimated:Bool,
-                              completion:NX.Completion<Bool, NXAsset.Output>?) -> NXMixedViewController<NXMixedNavigationController<NXAssetsViewController>> {
+                              completion:NX.Completion<Bool, NXAsset.Output>?) {
         
-        return NXAsset.open(album: {(state:Bool, vc:NXAssetsViewController) in
+        NXAsset.open(album: {(state:Bool, vc:NXAssetsViewController) in
             //基础配置
             vc.wrapped.output.minOfAssets = minOfAssets
             vc.wrapped.output.maxOfAssets = maxOfAssets
@@ -494,23 +495,22 @@ extension NXAsset {
             vc.wrapped.isOpenable = isOpenable
             vc.wrapped.isCloseable = isCloseable
             vc.wrapped.isAnimated = isAnimated
-        },completion: completion)
+        }, completion: completion)
     }
     
-    @discardableResult
     open class func open(camera:NX.Completion<Bool, NXImagePickerController>?,
-                         completion:NX.Completion<Bool, NXAsset.Output>?) -> NXImagePickerController {
-        
-        let vc = NXImagePickerController()
-        vc.wrapped.completion = completion
-        vc.delegate = vc
-        vc.modalPresentationStyle = .fullScreen
-        camera?(true, vc)
-        NX.authorization(NX.Authorize.camera, DispatchQueue.main, true) {[weak vc] (state) in
-            guard let __vc = vc, state == NX.AuthorizeState.authorized else {return}
-            __vc.wrapped.naviController?.currentViewController?.present(__vc, animated: true, completion: nil)
+                         completion:NX.Completion<Bool, NXAsset.Output>?) {
+        NX.authorization(NX.Authorize.camera, DispatchQueue.main, true) {(state) in
+            guard state == NX.AuthorizeState.authorized else {return}
+            
+            let vc = NXImagePickerController()
+            vc.wrapped.completion = completion
+            vc.sourceType = .camera
+            vc.delegate = vc
+            vc.modalPresentationStyle = .fullScreen
+            camera?(true, vc)
+            vc.wrapped.naviController?.currentViewController?.present(vc, animated: true, completion: nil)
         }
-        return vc
     }
     
     

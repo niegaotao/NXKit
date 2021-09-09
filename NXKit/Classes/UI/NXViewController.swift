@@ -188,9 +188,6 @@ open class NXViewController: UIViewController  {
         if let viewController =  self as? NXToolViewController, let selectedViewController = viewController.selectedViewController {
             currentValue = selectedViewController.ctxs.statusBarStyle
         }
-        else if let viewController =  self as? NXWrappedViewController {
-            currentValue = viewController.viewController.ctxs.statusBarStyle
-        }
         else if let viewController = self.ctxs.subviewControllers.last, viewController.ctxs.statusBarStyle != .none {
             currentValue = viewController.ctxs.statusBarStyle
         }
@@ -222,9 +219,6 @@ open class NXViewController: UIViewController  {
 
         if let viewController =  self as? NXToolViewController, let selectedViewController = viewController.selectedViewController {
             currentValue = selectedViewController.ctxs.statusBarStyle
-        }
-        else if let viewController = self as? NXWrappedViewController {
-            currentValue = viewController.viewController.ctxs.statusBarStyle
         }
         else if let viewController = self.ctxs.subviewControllers.last, viewController.ctxs.statusBarStyle != .none {
             currentValue = viewController.ctxs.statusBarStyle
@@ -326,7 +320,7 @@ extension NXViewController {
 }
 
 
-open class NXMixedViewController<C:UIViewController>: NXViewController {
+open class NXWrappedViewController<C:UIViewController>: NXViewController {
     public let viewController = C()
     
     open override func viewDidLoad() {
@@ -335,6 +329,9 @@ open class NXMixedViewController<C:UIViewController>: NXViewController {
         self.naviView.isHidden = true
         self.contentView.isHidden = true
         
+        if let vc = self.viewController as? NXViewController {
+            vc.ctxs.superviewController = self
+        }
         self.addChild(viewController)
         self.view.addSubview(viewController.view)
     }

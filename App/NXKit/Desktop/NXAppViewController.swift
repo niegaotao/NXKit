@@ -73,6 +73,10 @@ class NXAppViewController: NXCollectionViewController {
                                     ["access":"NXAsset_UIImage1-18/UIVideo1-18","title":"NXAsset_UIImage1-18/UIVideo1-18"],
                             ]])
         
+        self.values.append(["access":"access","title":"相机",
+                            "body":[["access":"NXAsset_Camera1-1","title":"NXAsset_Camera1-1"]
+                            ]])
+        
         for (_, value) in values.enumerated() {
             
             if let access = value["access"] as? String, access == "access" {
@@ -208,7 +212,7 @@ class NXAppViewController: NXCollectionViewController {
             }
             
             if action == "NXAsset_UIImage1-1" {
-                NXAsset.openAlbum(minOfAssets: 1,
+                NXAsset.album(minOfAssets: 1,
                                              maxOfAssets: 1,
                                              image: (minOfAssets:1, maxOfAssets:1, isIndex:true),
                                              video: (minOfAssets:0, maxOfAssets:0, isIndex:false),
@@ -234,7 +238,7 @@ class NXAppViewController: NXCollectionViewController {
                 }
             }
             else if action == "NXAsset_UIVideo1-1" {
-                NXAsset.openAlbum(minOfAssets: 1,
+                NXAsset.album(minOfAssets: 1,
                                              maxOfAssets: 1,
                                              image: (minOfAssets:0, maxOfAssets:0, isIndex:true),
                                              video: (minOfAssets:1, maxOfAssets:1, isIndex:false),
@@ -260,7 +264,7 @@ class NXAppViewController: NXCollectionViewController {
                 }
             }
             else if action == "NXAsset_UIImage1-9" {
-                NXAsset.openAlbum(minOfAssets: 1,
+                NXAsset.album(minOfAssets: 1,
                                              maxOfAssets: 9,
                                              image: (minOfAssets:1, maxOfAssets:9, isIndex:true),
                                              video: (minOfAssets:0, maxOfAssets:0, isIndex:false),
@@ -286,7 +290,7 @@ class NXAppViewController: NXCollectionViewController {
                 }
             }
             else if action == "NXAsset_UIVideo1-9" {
-                NXAsset.openAlbum(minOfAssets: 1,
+                NXAsset.album(minOfAssets: 1,
                                              maxOfAssets: 9,
                                              image: (minOfAssets:0, maxOfAssets:0, isIndex:true),
                                              video: (minOfAssets:1, maxOfAssets:9, isIndex:false),
@@ -312,7 +316,7 @@ class NXAppViewController: NXCollectionViewController {
                 }
             }
             else if action == "NXAsset_UIImage1-18+UIVideo1-18" {
-                NXAsset.openAlbum(minOfAssets: 1,
+                NXAsset.album(minOfAssets: 1,
                                              maxOfAssets: 36,
                                              image: (minOfAssets:1, maxOfAssets:18, isIndex:true),
                                              video: (minOfAssets:1, maxOfAssets:18, isIndex:false),
@@ -338,7 +342,7 @@ class NXAppViewController: NXCollectionViewController {
                 }
             }
             else if action == "NXAsset_UIImage1-18/UIVideo1-18" {
-                NXAsset.openAlbum(minOfAssets: 1,
+                NXAsset.album(minOfAssets: 1,
                                              maxOfAssets: 18,
                                              image: (minOfAssets:1, maxOfAssets:18, isIndex:true),
                                              video: (minOfAssets:1, maxOfAssets:18, isIndex:false),
@@ -364,7 +368,13 @@ class NXAppViewController: NXCollectionViewController {
                 }
             }
         }
-        
+        else if action == "NXAsset_Camera1-1" {
+            NXAsset.open(camera: { _, vc in
+                vc.wrapped.naviController = self.navigationController as? NXNavigationController
+            }, completion: { _, _ in
+                
+            })
+        }
     }
 }
 
