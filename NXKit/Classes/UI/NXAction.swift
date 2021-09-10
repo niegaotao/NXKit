@@ -44,8 +44,21 @@ open class NXAction: NXItem {
         __sender.backgroundColor = .clear
     }
     
+    public override init() {
+        super.init()
+    }
+    
+    public override init(value: [String : Any]?) {
+        super.init(value: value)
+    }
+    
+    public override init(completion:NX.Completion<String, NXAction>?) {
+        super.init(completion: nil)
+        completion?("init", self)
+    }
+    
     public convenience init(title:String, value: [String: Any]?, completion:NX.Completion<String, NXAction>?) {
-        self.init()
+        self.init(completion:nil)
         self.ctxs.value = value
         self.ctxs.update(NXActionViewCell.self, "NXActionViewCell")
         self.ctxs.size = CGSize(width: NXDevice.width, height: NX.Association.size.height)
@@ -53,6 +66,6 @@ open class NXAction: NXItem {
         self.title.value = title
         self.title.frame = CGRect(x: 16, y: 0, width: NXDevice.width-32, height: self.ctxs.height)
         self.title.textAlignment = .center
-        completion?("", self)
+        completion?("init", self)
     }
 }

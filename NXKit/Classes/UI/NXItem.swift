@@ -43,6 +43,11 @@ open class NXItem : NXAny {
         super.init()
     }
     
+    public init(value:[String:Any]?) {
+        super.init()
+        self.ctxs.value = value
+    }
+    
     public init(completion:NX.Completion<String, NXItem>?) {
         super.init()
         completion?("init", self)

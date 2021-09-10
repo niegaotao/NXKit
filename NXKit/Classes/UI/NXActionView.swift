@@ -9,8 +9,6 @@
 import UIKit
 
 extension NXActionView {
-    
-    
     @discardableResult
     class public func alert(title: String, subtitle:String, actions:[String], completion:NX.Completion<String, Int>?) -> NXActionView {
         let __actions = actions.map { (title) -> NXAction in
