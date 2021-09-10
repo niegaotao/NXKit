@@ -413,7 +413,7 @@ extension NXAsset {
 extension NXAsset {
     open class func open(album: NX.Completion<Bool, NXAssetsViewController>?,
                          completion: NX.Completion<Bool, NXAsset.Output>?) {
-        NX.authorization(NX.Authorize.album, DispatchQueue.main, true) { state in
+        NX.authorization(NX.Authorize.album, DispatchQueue.main, true, { state in
             guard state == NX.AuthorizeState.authorized else {return}
 
             let __wrapped = NXWrappedViewController<NXWrappedNavigationController<NXAssetsViewController>>()
@@ -423,7 +423,7 @@ extension NXAsset {
             if __wrapped.viewController.viewController.wrapped.isOpenable {
                 NXAsset.Wrapped.open(__wrapped.viewController.viewController.wrapped, vc: __wrapped)
             }
-        }
+        })
     }
     
     open class func album(minOfAssets:Int,
@@ -500,7 +500,7 @@ extension NXAsset {
     
     open class func open(camera:NX.Completion<Bool, NXImagePickerController>?,
                          completion:NX.Completion<Bool, NXAsset.Output>?) {
-        NX.authorization(NX.Authorize.camera, DispatchQueue.main, true) {(state) in
+        NX.authorization(NX.Authorize.camera, DispatchQueue.main, true, {(state) in
             guard state == NX.AuthorizeState.authorized else {return}
             
             let __wrapped = NXWrappedViewController<NXImagePickerController>()
@@ -514,7 +514,7 @@ extension NXAsset {
             __wrapped.viewController.modalPresentationStyle = .fullScreen
             camera?(true, __wrapped.viewController)
             __wrapped.viewController.wrapped.naviController?.pushViewController(__wrapped, animated: true)
-        }
+        })
     }
     
     

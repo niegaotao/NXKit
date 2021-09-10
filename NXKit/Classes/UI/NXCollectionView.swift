@@ -9,8 +9,7 @@
 import UIKit
 
 open class NXCollectionView: UICollectionView, UIGestureRecognizerDelegate {
-    
-    open weak var collectionWrapper : NXCollectionWrapper?
+    open weak var value : NXCollectionWrapper?
     
     open var wrapped : NXCollectionWrapper.Wrapped? {
         if let __wrapper = self.collectionViewLayout as? NXCollectionWrapper.Wrapped {

@@ -35,24 +35,17 @@ extension NXItem {
 }
 
 //单元格基类
-open class NXItem : NXEquatable {
+open class NXItem : NXAny {
     
     public let ctxs = NXItem.Association()
     
     public override init() {
         super.init()
-        self.setup()
     }
     
-    public init(value: [String: Any]?) {
+    public init(completion:NX.Completion<String, NXItem>?) {
         super.init()
-        self.ctxs.value = value
-        self.setup()
-    }
-    
-    //子类按需重在该方法
-    open func setup(){
-        
+        completion?("init", self)
     }
 }
 
@@ -193,7 +186,8 @@ extension NXSection {
 }
 
 //三维模型的基类：通用于 UITableView 数据模型和 UICollectionView 数据模型
-open class NXCollection : NSObject {
+open class NXCollection<T:UIScrollView> : NSObject {
+    open weak var wrappedView : T? = nil
     open var sections = [NXSection]()
     
     //通过下标访问一个分组对象

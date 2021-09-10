@@ -23,7 +23,7 @@ open class NX {
 
 //内容横向纵向边缘缩进
 extension NX {
-    open class Rect {
+    open class Rect : NXAny {
         open var x = CGFloat.zero
         open var y = CGFloat.zero
         open var width = CGFloat.zero
@@ -61,9 +61,12 @@ extension NX {
             }
         }
         
-        public init(){}
+        public override init(){
+            super.init()
+        }
         
         public init(completion: NX.Completion<String, NX.Rect>?){
+            super.init()
             completion?("init", self)
         }
     }
@@ -334,27 +337,15 @@ extension NX {
         guard NX.isLoggable, let value = get?() else {
             return
         }
-        let format = "YYYY-MM-dd HH:mm:ss SSS"
-        let time = getCurrentTime(format)
+        let time = NX.descriptionOf(date: Date(), format: "YYYY-MM-dd HH:mm:ss SSS")
         Swift.print("\((file as NSString).lastPathComponent)[\(line)],\(method):--💚💚\(time)--\n\(value)\n")
     }
     
-    public class func error(_ file:String = #file, _ method: String = #function, _ line: Int = #line, _ get:(()->(Any?))?){
-        guard NX.isLoggable, let value = get?() else {
-            return
-        }
-        let format = "YYYY-MM-dd HH:mm:ss SSS"
-        let time = getCurrentTime(format)
-        Swift.print("\((file as NSString).lastPathComponent)[\(line)],\(method):--💔💔\(time)--\n\(value)\n")
-    }
-    
-    public class func warn(_ file:String = #file, _ method: String = #function, _ line: Int = #line, _ get:(()->(Any?))?){
-        guard NX.isLoggable, let value = get?() else {
-            return
-        }
-        let format = "YYYY-MM-dd HH:mm:ss SSS"
-        let time = getCurrentTime(format)
-        Swift.print("\((file as NSString).lastPathComponent)[\(line)],\(method):--💛💛\(time)--\n\(value)\n")
+    //yyyy-MM-dd HH:mm
+    class public func descriptionOf(date:Date, format:String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: date)
     }
 }
 

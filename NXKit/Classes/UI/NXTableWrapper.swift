@@ -8,11 +8,21 @@
 
 import UIKit
 
-open class NXTableWrapper : NXCollection {
+open class NXTableWrapper : NXCollection<NXTableView> {
+    //视图
+    public let placeholderView = NXPlaceholderView()
+    open func addPlaceholderView(_ frame: CGRect){
+        let e = NXPlaceholderView.Element()
+        e.placeholderView = self.placeholderView
+        e.ctxs.update(NXPlaceholderView.TableViewCell.self, "NXPlaceholderViewCell")
+        e.ctxs.frame = frame
+        self.addElementToLastSection(e)
+        self.wrappedView?.register(NXPlaceholderView.TableViewCell.self, forCellReuseIdentifier: "NXPlaceholderViewCell")
+    }
+    
     //表视图样式
     open var tableViewStyle = NX.Association.tableViewStyle
-    //视图
-    open weak var tableView : NXTableView?
+    
     //是否展示第一个section的头部
     open var showsFirstSectionHeader = false
     //是否显示最后一个section的尾部
@@ -42,7 +52,7 @@ open class NXTableWrapper : NXCollection {
             }
             
             //2.根据FD中的自适应返回单元格的高度
-            if let height = NX.heightForRow(self.tableView, element, indexPath), height > 0 {
+            if let height = NX.heightForRow(self.wrappedView, element, indexPath), height > 0 {
                 return height
             }
         }
@@ -61,14 +71,6 @@ open class NXTableWrapper : NXCollection {
         return 0.0
     }
     
-    public let placeholderView = NXPlaceholderView()
-    open func addPlaceholderView(_ frame: CGRect){
-        let e = NXPlaceholderView.Element()
-        e.placeholderView = self.placeholderView
-        e.ctxs.update(NXPlaceholderView.TableViewCell.self, "NXPlaceholderViewCell")
-        e.ctxs.frame = frame
-        self.addElementToLastSection(e)
-        self.tableView?.register(NXPlaceholderView.TableViewCell.self, forCellReuseIdentifier: "NXPlaceholderViewCell")
-    }
+    
 }
 

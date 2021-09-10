@@ -53,15 +53,35 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
         self.setupSubviews()
     }
     
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.ctxs.willAppear?("", self)
+        self.ctxs.willAppear = nil
+    }
+    
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //在这里回调告知新的视图控制器已经加载完毕，用于在某些特殊场景移除上一个页面
-        if let callbackViewAppeared = self.ctxs.callbackViewAppeared {
-            callbackViewAppeared()
-            self.ctxs.callbackViewAppeared = nil
-        }
+        self.ctxs.didAppear?("", self)
+        self.ctxs.didAppear = nil
     }
+    
+    
+    open override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.ctxs.willDisappear?("", self)
+        self.ctxs.willDisappear = nil
+    }
+    
+    override open func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.ctxs.didDisappear?("", self)
+        self.ctxs.didDisappear = nil
+    }
+    
     
     open func setupSubviews(){
         self.setNavigationBarHidden(true, animated: false)
@@ -392,8 +412,12 @@ extension NXNavigationController {
     open class Associated {
         weak var owner : NXNavigationController? = nil
         public let semaphore = DispatchSemaphore(value: 1)
-        open var callbackViewAppeared: (() -> ())?
         open var duration : TimeInterval = 0.3
+        
+        open var willAppear : NX.Completion<String, NXNavigationController>? = nil
+        open var didAppear: NX.Completion<String, NXNavigationController>? = nil
+        open var willDisappear: NX.Completion<String, NXNavigationController>? = nil
+        open var didDisappear: NX.Completion<String, NXNavigationController>? = nil
         
         ///初始化方法
         public init(){}

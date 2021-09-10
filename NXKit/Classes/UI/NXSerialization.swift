@@ -7,11 +7,10 @@
 //
 
 open class NXSerialization {
+    public static let `Any` = "Any"
+    public static let Dictionary = "Dictionary"
+    public static let Array = "Array"
     
-    public enum Category : String {
-        case Dictionary = "Dictionary"
-        case Array = "Array"
-    }
     
     //=========================================
     //data -> toJSONObject

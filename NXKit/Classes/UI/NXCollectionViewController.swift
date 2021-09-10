@@ -33,8 +33,8 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
         self.collectionView?.wrapped?.minimumInteritemSpacing = 0.0
         self.collectionView?.wrapped?.sectionInset = UIEdgeInsets.zero
         self.contentView.addSubview(self.collectionView!)
-        self.collectionView?.collectionWrapper = self.collectionWrapper
-        self.collectionWrapper.collectionView = self.collectionView
+        self.collectionView?.value = self.collectionWrapper
+        self.collectionWrapper.wrappedView = self.collectionView
         if #available(iOS 11.0, *) {
             collectionView?.contentInsetAdjustmentBehavior = .never
         }

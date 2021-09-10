@@ -22,8 +22,7 @@ public struct NXTableDescriptor {
 
 open class NXTableView: UITableView {
     open var backdropView : UIImageView? = nil
-    weak open var tableWrapper : NXTableWrapper?
-
+    weak open var value : NXTableWrapper?
     
     public override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -82,12 +81,12 @@ open class NXTableView: UITableView {
     //是否显示默认图
     open func updateSubviews(_ action:String, _ value:Any?) {
         if let __value = value as? NXTableDescriptor {
-            self.tableWrapper?.placeholderView.wrapped.isHidden = !__value.placeholder
-            self.tableWrapper?.calcAt = __value.calc
+            self.value?.placeholderView.wrapped.isHidden = !__value.placeholder
+            self.value?.calcAt = __value.calc
         }
         else {
-            self.tableWrapper?.placeholderView.wrapped.isHidden = false
-            self.tableWrapper?.calcAt = true
+            self.value?.placeholderView.wrapped.isHidden = false
+            self.value?.calcAt = true
         }
         
         self.reloadData()
@@ -96,7 +95,7 @@ open class NXTableView: UITableView {
     //加载的时候看是否需要显示默认图
     override open func reloadData() {
         
-        if let __tableWrapper = self.tableWrapper {
+        if let __tableWrapper = self.value {
             if __tableWrapper.sections.isEmpty {
                 
                 if __tableWrapper.placeholderView.wrapped.isHidden == false {

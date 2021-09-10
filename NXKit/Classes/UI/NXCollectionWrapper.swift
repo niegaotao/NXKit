@@ -8,9 +8,7 @@
 
 import UIKit
 
-open class NXCollectionWrapper : NXCollection {
-    open weak var collectionView : NXCollectionView?//视图
-    
+open class NXCollectionWrapper : NXCollection<NXCollectionView> {
     public let placeholderView = NXPlaceholderView()
     public func addPlaceholderView(_ frame: CGRect){
         let e = NXPlaceholderView.Element()
@@ -19,7 +17,7 @@ open class NXCollectionWrapper : NXCollection {
         e.ctxs.frame = frame
         self.addElementToLastSection(e)
         
-        self.collectionView?.register(NXPlaceholderView.CollectionViewCell.self, forCellWithReuseIdentifier: "NXPlaceholderViewCell")
+        self.wrappedView?.register(NXPlaceholderView.CollectionViewCell.self, forCellWithReuseIdentifier: "NXPlaceholderViewCell")
     }
 }
 

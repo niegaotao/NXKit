@@ -42,8 +42,8 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         }
         self.contentView.addSubview(self.tableView!)
 
-        tableView?.tableWrapper = self.tableWrapper
-        self.tableWrapper.tableView = tableView
+        tableView?.value = self.tableWrapper
+        self.tableWrapper.wrappedView = tableView
         
         self.contentView.bringSubviewToFront(self.animationView)
     }
