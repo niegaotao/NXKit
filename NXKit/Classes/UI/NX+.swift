@@ -252,23 +252,14 @@ extension NX {
         }
     }
     
-    open class Wrappable<State: NXInitialValue, InitialValue:NXInitialValue, Value: NXInitialValue> {
-        open var state = State.initialValue
-        open var initialValue = InitialValue.initialValue
+    open class Wrappable<IS: NXInitialValue, OldValue:NXInitialValue, Value: NXInitialValue> {
+        open var `is` = IS.initialValue
+        open var oldValue = OldValue.initialValue
         open var value = Value.initialValue
-        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrappable<State, InitialValue, Value>>?) -> ())? = nil
         
-        public init(completion: NX.Completion<String, NX.Wrappable<State, InitialValue, Value>>?) {
-            completion?("", self)
-        }
-    }
-    
-    open class Comparable<Value: NXInitialValue> {
-        open var lhsValue = Value.initialValue
-        open var rhsValue = Value.initialValue
-        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Comparable<Value>>?) -> ())? = nil
+        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrappable<IS, OldValue, Value>>?) -> ())? = nil
         
-        public init(completion: NX.Completion<String, NX.Comparable<Value>>?) {
+        public init(completion: NX.Completion<String, NX.Wrappable<IS, OldValue, Value>>?) {
             completion?("", self)
         }
     }
@@ -279,11 +270,6 @@ extension NX {
                     
         public init(completion: NX.Completion<String, NX.Selectable<Value>>?){
             completion?("", self)
-        }
-        
-        open func update(_ selected:Value, unselected:Value) {
-            self.selected = selected
-            self.unselected = unselected
         }
     }
 }

@@ -13,7 +13,7 @@ open class NXAssetClipImageViewController: NXViewController {
     open var image : UIImage? = nil
     
     open var clips = NX.Wrappable<Int, [NXAsset.Clip], [NXAsset.Clip]> { (_, __sender) in
-        __sender.state = -1
+        __sender.is = -1
         __sender.value = []
     }
     public let backgroundView = NXCView<UIImageView>(frame: CGRect(x: 10, y: 10, width: NXDevice.width-20, height: NXDevice.height-NXDevice.topOffset-NXDevice.bottomOffset-20))
@@ -50,8 +50,8 @@ open class NXAssetClipImageViewController: NXViewController {
         
         if let image = self.image, image.size.width > 0 && image.size.height > 0, self.clips.value.count >= 1 {
             
-            if self.clips.state < 0 || self.clips.state >= self.clips.value.count {
-                self.clips.state = 0
+            if self.clips.is < 0 || self.clips.is >= self.clips.value.count {
+                self.clips.is = 0
             }
             
             var __background = CGRect(x: 10, y: 10, width: NXDevice.width-20, height: NXDevice.height-NXDevice.topOffset-NXDevice.bottomOffset-20)
@@ -77,7 +77,7 @@ open class NXAssetClipImageViewController: NXViewController {
                     componentView.setupEvents([.tap]) {[weak self] (_, sender) in
                         self?.dispose("footer", sender, nil)
                     }
-                    if index == self.clips.state {
+                    if index == self.clips.is {
                         componentView.backgroundColor = UIColor.white
                         componentView.textColor = NX.color(0x181818)
                     }
@@ -119,10 +119,10 @@ open class NXAssetClipImageViewController: NXViewController {
             self.clipboardView.wrapped.size.width = __frame.size.width
             self.clipboardView.wrapped.size.height = __frame.size.height
             
-            self.clipboardView.wrapped.clip.isResizable = self.clips.value[self.clips.state].isResizable
-            self.clipboardView.wrapped.clip.width = self.clips.value[self.clips.state].width
-            self.clipboardView.wrapped.clip.height = self.clips.value[self.clips.state].height
-            self.clipboardView.wrapped.clip.isHidden = self.clips.value[self.clips.state].isHidden
+            self.clipboardView.wrapped.clip.isResizable = self.clips.value[self.clips.is].isResizable
+            self.clipboardView.wrapped.clip.width = self.clips.value[self.clips.is].width
+            self.clipboardView.wrapped.clip.height = self.clips.value[self.clips.is].height
+            self.clipboardView.wrapped.clip.isHidden = self.clips.value[self.clips.is].isHidden
             
             self.clipboardView.updateSubviews("", nil)
             
@@ -160,14 +160,14 @@ open class NXAssetClipImageViewController: NXViewController {
             self.ctxs.completion?("", uiImage)
         }
         else if action == "footer" {
-            guard let sender = value as? UILabel, sender.tag != self.clips.state else {
+            guard let sender = value as? UILabel, sender.tag != self.clips.is else {
                 return
             }
-            self.clips.state = sender.tag
+            self.clips.is = sender.tag
             
             for (index, componentView) in self.componentViews.enumerated() {
                 
-                if index == self.clips.state {
+                if index == self.clips.is {
                     componentView.backgroundColor = UIColor.white
                     componentView.textColor = NX.color(0x181818)
                 }
@@ -177,10 +177,10 @@ open class NXAssetClipImageViewController: NXViewController {
                 }
             }
             
-            self.clipboardView.wrapped.clip.isResizable = self.clips.value[self.clips.state].isResizable
-            self.clipboardView.wrapped.clip.width = self.clips.value[self.clips.state].width
-            self.clipboardView.wrapped.clip.height = self.clips.value[self.clips.state].height
-            self.clipboardView.wrapped.clip.isHidden = self.clips.value[self.clips.state].isHidden
+            self.clipboardView.wrapped.clip.isResizable = self.clips.value[self.clips.is].isResizable
+            self.clipboardView.wrapped.clip.width = self.clips.value[self.clips.is].width
+            self.clipboardView.wrapped.clip.height = self.clips.value[self.clips.is].height
+            self.clipboardView.wrapped.clip.isHidden = self.clips.value[self.clips.is].isHidden
             
             self.clipboardView.updateSubviews("", nil)
             

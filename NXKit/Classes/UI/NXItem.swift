@@ -35,9 +35,10 @@ extension NXItem {
 }
 
 //单元格基类
+
 open class NXItem : NXAny {
     
-    public let ctxs = NXItem.Association()
+    open var ctxs = NXItem.Association()
     
     public override init() {
         super.init()

@@ -69,6 +69,10 @@ open class NXApplicationView: NXView {
         else if __separator.ats.contains(.minY) || __separator.ats.contains(.minX) {
             __isHidden = __wrapped.ctxs.at.first
         }
+        else {
+            __isHidden = true
+        }
+        
         if __isHidden {
             self.separator.isHidden = true
         }

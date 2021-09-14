@@ -31,7 +31,7 @@ open class NXClipboardView: NXView {
         open var ats = NX.Ats.unspefified
         //框选区域的frame
         public let frame = NX.Wrappable<Bool, CGRect, CGRect> { (_, __sender) in
-            __sender.initialValue = CGRect.zero;__sender.value = CGRect.zero;}
+            __sender.oldValue = CGRect.zero;__sender.value = CGRect.zero;}
     }
 
     open class WrappedView : NXView {
@@ -131,7 +131,7 @@ open class NXClipboardView: NXView {
     public let wrappedView = NXClipboardView.WrappedView(frame:CGRect.zero)
     public let panRecognizer = UIPanGestureRecognizer()
     public let point = NX.Wrappable<UIGestureRecognizer.State, CGPoint, CGPoint>{ (_, __sender) in
-        __sender.state = UIGestureRecognizer.State.possible;__sender.initialValue = CGPoint.zero;__sender.value = CGPoint.zero;}
+        __sender.is = UIGestureRecognizer.State.possible;__sender.oldValue = CGPoint.zero;__sender.value = CGPoint.zero;}
     public let pinchRecognizer = UIPinchGestureRecognizer()
     
     open override func setupSubviews() {
@@ -204,8 +204,8 @@ open class NXClipboardView: NXView {
                 pfsValue.height = self.wrapped.size.height
                 pfsValue.width = pfsValue.height * (self.wrapped.clip.width / self.wrapped.clip.height)
             }
-            self.wrapped.frame.initialValue = CGRect(x:(self.wrapped.size.width - pfsValue.width)/2.0, y:(self.wrapped.size.height - pfsValue.height)/2.0, width:pfsValue.width, height:pfsValue.height)
-            self.wrapped.frame.value = self.wrapped.frame.initialValue
+            self.wrapped.frame.oldValue = CGRect(x:(self.wrapped.size.width - pfsValue.width)/2.0, y:(self.wrapped.size.height - pfsValue.height)/2.0, width:pfsValue.width, height:pfsValue.height)
+            self.wrapped.frame.value = self.wrapped.frame.oldValue
             self.wrappedView.frame = self.wrapped.frame.value
             
             self.panRecognizer.isEnabled = true
@@ -214,8 +214,8 @@ open class NXClipboardView: NXView {
         else {
             self.wrappedView.isHidden = true
             
-            self.wrapped.frame.initialValue = CGRect.zero
-            self.wrapped.frame.value = self.wrapped.frame.initialValue
+            self.wrapped.frame.oldValue = CGRect.zero
+            self.wrapped.frame.value = self.wrapped.frame.oldValue
             self.wrappedView.frame = self.wrapped.frame.value
 
             self.panRecognizer.isEnabled = true
@@ -229,27 +229,27 @@ open class NXClipboardView: NXView {
     
     @objc func panRecognizerAction(_ panRecognizer:UIPanGestureRecognizer) {
         let __translation = panRecognizer.translation(in: self)
-        self.point.state = panRecognizer.state
+        self.point.is = panRecognizer.state
         self.point.value = panRecognizer.location(in: self)
         panRecognizer.setTranslation(CGPoint.zero, in: self)
         
-        if self.point.state == .began {
-            self.point.initialValue = self.point.value
+        if self.point.is == .began {
+            self.point.oldValue = self.point.value
         }
         
         if self.wrapped.clip.isHidden == false {
-            if self.point.state == .began {
+            if self.point.is == .began {
                 
-                if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.minXView.frame, to: self).contains(self.point.initialValue) {
+                if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.minXView.frame, to: self).contains(self.point.oldValue) {
                     self.wrapped.ats = .minX
                 }
-                else if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.maxXView.frame, to: self).contains(self.point.initialValue) {
+                else if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.maxXView.frame, to: self).contains(self.point.oldValue) {
                     self.wrapped.ats = .maxX
                 }
-                else if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.minYView.frame, to: self).contains(self.point.initialValue) {
+                else if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.minYView.frame, to: self).contains(self.point.oldValue) {
                     self.wrapped.ats = .minY
                 }
-                else if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.maxYView.frame, to: self).contains(self.point.initialValue) {
+                else if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.maxYView.frame, to: self).contains(self.point.oldValue) {
                     self.wrapped.ats = .maxY
                 }
                 else {
@@ -257,7 +257,7 @@ open class NXClipboardView: NXView {
                 }
             }
             
-            if self.point.state == .began || self.point.state == .changed {
+            if self.point.is == .began || self.point.is == .changed {
                 if self.wrapped.ats == .center {
                     self.wrappedView.center = CGPoint(x: self.wrappedView.center.x + __translation.x, y: self.wrappedView.center.y + __translation.y)
                     self.wrapped.frame.value = self.wrappedView.frame
@@ -339,22 +339,22 @@ open class NXClipboardView: NXView {
         }
         else {
             var __frame = CGRect.zero
-            if self.point.initialValue.x <= self.point.value.x {
-                __frame.origin.x = self.point.initialValue.x
-                __frame.size.width = self.point.value.x - self.point.initialValue.x
+            if self.point.oldValue.x <= self.point.value.x {
+                __frame.origin.x = self.point.oldValue.x
+                __frame.size.width = self.point.value.x - self.point.oldValue.x
             }
             else {
                 __frame.origin.x = self.point.value.x
-                __frame.size.width = self.point.initialValue.x - self.point.value.x
+                __frame.size.width = self.point.oldValue.x - self.point.value.x
             }
             
-            if self.point.initialValue.y <= self.point.value.y {
-                __frame.origin.y = self.point.initialValue.y
-                __frame.size.height = self.point.value.y - self.point.initialValue.y
+            if self.point.oldValue.y <= self.point.value.y {
+                __frame.origin.y = self.point.oldValue.y
+                __frame.size.height = self.point.value.y - self.point.oldValue.y
             }
             else {
                 __frame.origin.y = self.point.value.y
-                __frame.size.height = self.point.initialValue.y - self.point.value.y
+                __frame.size.height = self.point.oldValue.y - self.point.value.y
             }
             
             if __frame.minX < 0 {
@@ -373,7 +373,7 @@ open class NXClipboardView: NXView {
                 __frame.size.height = self.wrapped.size.height - __frame.origin.y
             }
             
-            if self.point.state == .began || self.point.state == .changed {
+            if self.point.is == .began || self.point.is == .changed {
                 self.wrapped.frame.value = __frame
                 self.wrappedView.frame = self.wrapped.frame.value
                 self.wrappedView.isHidden = false

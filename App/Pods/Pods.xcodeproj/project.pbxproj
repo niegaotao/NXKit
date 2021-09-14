@@ -13,7 +13,6 @@
 		0817422D51475D96B925A2474457AD8E /* NXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2A97199B9CDA44FBED0A69CC1118A3 /* NXView.swift */; };
 		0A13ED4B00C236F13434FEA0DE1A779E /* NXViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F62C925999C91277F8E4F4D5DB74370 /* NXViewControllerView.swift */; };
 		0CBB7AF17BCB39D2FB3FCA3D47922C96 /* NXApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B7CEA3FDD9278D347A559B69F4C2C2 /* NXApplicationView.swift */; };
-		0D50DE10EBF7E0822C991290365EA0B7 /* NXClipboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E626A8FA8D3F905692AEE5AA2282AB5 /* NXClipboardView.swift */; };
 		0DB7D33E124AD4BB6F342C74112C78A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */; };
 		0EFEA2B6F65EF83E90480DFA4A4F0F42 /* navi-dropdown-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3C43F1E043260E4B1B93FC6488B569C /* navi-dropdown-arrow@3x.png */; };
 		10325509289132D100700F6DABAC6EF6 /* NXTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0225D57CCF5B6390D12FAD5057F0A7 /* NXTableViewController.swift */; };
@@ -38,7 +37,6 @@
 		554CBF4F7A2ABB45C0844E349EC2E08A /* NXContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00851177A1BAD713BD3B32502CF97151 /* NXContainerController.swift */; };
 		55833A448D22613E5EAC97B66F5EC6FA /* NXCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E63A94059EB896CF0BCF0FE0E58B044 /* NXCollectionReusableView.swift */; };
 		5779A9E4F8C039BE75E98491ADA3E517 /* NXAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6176D93C802E28FFC4AFFC3F5D1BBB0C /* NXAction.swift */; };
-		58ED005929DC36B36FFD73872C6B4411 /* NXAssetClipImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AE026A370BC9D477BBCDEC2386A82 /* NXAssetClipImageViewController.swift */; };
 		5BB8CAEC1037E9C3491C464B3FD13F01 /* NXRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB43DAC4BE6F86442001F9730F9E9F1A /* NXRouter.swift */; };
 		5C34EF2441FB6A9E2280BFB39C63E53F /* UIButton+NXKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33971D5CEBF42DB7A5C68818919BA286 /* UIButton+NXKit.swift */; };
 		60052A4604A160672C8E4B604FFE5EFB /* CAAnimation+NXKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED4A529C925A57630BAA2F798B450E /* CAAnimation+NXKit.swift */; };
@@ -56,7 +54,6 @@
 		816C25673820FB56E82E080415284FB0 /* NXViewAssociation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC63356E7E320C2BAF669413B03E28A /* NXViewAssociation.swift */; };
 		832290AFB321F473CE3DBB0F679F6457 /* NXTransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDD7633B106FC66AE0714219EC1FA4B /* NXTransitionView.swift */; };
 		87F42C21B6CCAC3F54C23F363BBFB4CB /* navi-back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90607673F305DFD62F455BA8A92B0CA6 /* navi-back@2x.png */; };
-		883C250FE3C47D08434841FEF2F52DF7 /* NXAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE0783934F68455C108A2A98D723ED1 /* NXAsset.swift */; };
 		8C559B81C8656A5D933D39786E989836 /* NXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F43E4A48668988B0045FDFDDEAD212B /* NXViewController.swift */; };
 		918A33509E0B43B9165A3904DAF7DB74 /* NXRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7E8D6C33AF9C5EE2D308B8ADA3F373 /* NXRuntime.swift */; };
 		9207B016B9B8EA5C7C1564A80ECA5583 /* NXObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB6C9009252F4120B6C0AFECA2D1B2D /* NXObserver.swift */; };
@@ -70,7 +67,6 @@
 		A5F197AA04AC2A52C1B37250D240015F /* NXCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE9ABC383BE800757DA8495383023F4 /* NXCollectionView.swift */; };
 		A65CDAA6C186D9F8AF224548ECA8D418 /* UILabel+NXKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6BE5F04F248817032D22F00D546C8E /* UILabel+NXKit.swift */; };
 		A75565A6F5C58A1A436C45C9C6AA289D /* NX+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E1B968C4D849221540F61677FC4B /* NX+.swift */; };
-		A8F95E6FAA6B790A3F50A76181C2353A /* NXAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F40589E04F6F13B6C251C7300A5E49 /* NXAssetsViewController.swift */; };
 		A992A1510939BCE3B9A3EF2F2B5DB17E /* NX.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD09638BB5ED857F4C14CF41B621E8BC /* NX.swift */; };
 		A9C5324575EAEDEF2FE34B271907723C /* NXToolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2909E4B09E29C06663AF37CF4AAA5AFC /* NXToolViewController.swift */; };
 		AA51B4E59D5999E19A6746124E44F2F8 /* navi-close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CB1CB5C1443E9EDB2E69EF8AAF9938 /* navi-close@3x.png */; };
@@ -83,6 +79,10 @@
 		C54EDCEE64EF2E25FBCCF381EE08C2EC /* NXSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4747076435FB13E39D4A5047628AFF8A /* NXSwipeView.swift */; };
 		C6BF93FED1F6776623C6C9EE164FDB87 /* UIImage+NXKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7347828CB4709F85BED7DDB38FB709F5 /* UIImage+NXKit.swift */; };
 		C952957526DB1A6600127231 /* NXArrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C952957426DB1A6600127231 /* NXArrayView.swift */; };
+		C9593F2F26F0D72100699FC0 /* NXAssetClipImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9593F2B26F0D72100699FC0 /* NXAssetClipImageViewController.swift */; };
+		C9593F3026F0D72100699FC0 /* NXClipboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9593F2C26F0D72100699FC0 /* NXClipboardView.swift */; };
+		C9593F3126F0D72100699FC0 /* NXAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9593F2D26F0D72100699FC0 /* NXAssetsViewController.swift */; };
+		C9593F3226F0D72100699FC0 /* NXAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9593F2E26F0D72100699FC0 /* NXAsset.swift */; };
 		C9B3635326E8888200B95DF3 /* NXAny.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B3635226E8888200B95DF3 /* NXAny.swift */; };
 		CDD4B6FFB1B88448D04A5CB7AA693AAB /* NXCollectionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7086200941315A477B5431FBE39293 /* NXCollectionWrapper.swift */; };
 		CF8BEB3179258E8DFC518C16D8E83376 /* uiapp-animation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F1EA293223A0E0592CDCC14986FAA2 /* uiapp-animation@2x.png */; };
@@ -130,7 +130,6 @@
 		0876171BBF3853EE7EAFA9AA005C6BFC /* NXCView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXCView.swift; sourceTree = "<group>"; };
 		0BDD7633B106FC66AE0714219EC1FA4B /* NXTransitionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXTransitionView.swift; sourceTree = "<group>"; };
 		0D2A97199B9CDA44FBED0A69CC1118A3 /* NXView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXView.swift; sourceTree = "<group>"; };
-		0E5AE026A370BC9D477BBCDEC2386A82 /* NXAssetClipImageViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXAssetClipImageViewController.swift; sourceTree = "<group>"; };
 		0FEDDE4612C71B613620542D12190B5C /* NXString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXString.swift; sourceTree = "<group>"; };
 		11027D287148AFEA534F1A6129A506E1 /* uiapp-arrow@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "uiapp-arrow@3x.png"; path = "NXKit/Assets/uiapp-arrow@3x.png"; sourceTree = "<group>"; };
 		193222A8983341E41080A64CEB163B80 /* NXFS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXFS.swift; sourceTree = "<group>"; };
@@ -148,7 +147,6 @@
 		38D44DB09A715B0BE0BC361B19523481 /* NXAnylayerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXAnylayerView.swift; sourceTree = "<group>"; };
 		38FE5D596805F04C0A86A9FB54476DC8 /* NXActionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXActionView.swift; sourceTree = "<group>"; };
 		3D1718C07B9D9DDE4D183232703EC197 /* NXWebView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXWebView.swift; sourceTree = "<group>"; };
-		3FE0783934F68455C108A2A98D723ED1 /* NXAsset.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXAsset.swift; sourceTree = "<group>"; };
 		40913BB90C0096A73A407D2DA1AD1137 /* NXBackgroundView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXBackgroundView.swift; sourceTree = "<group>"; };
 		42BB65E121FA174610EFBAF9A9B0205B /* DispatchQueue+NXKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+NXKit.swift"; sourceTree = "<group>"; };
 		45FE8BEDDE8907771C39A38C2791406A /* NXShadowView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXShadowView.swift; sourceTree = "<group>"; };
@@ -199,7 +197,6 @@
 		9B930C764EC59DBDA28F8F3F3995B396 /* NXSwipeViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXSwipeViewController.swift; sourceTree = "<group>"; };
 		9D03820BB486F83A7D7BDE79532B7560 /* NXLRView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXLRView.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9E626A8FA8D3F905692AEE5AA2282AB5 /* NXClipboardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXClipboardView.swift; sourceTree = "<group>"; };
 		9F47D67C967A47EEBC5471C0CE507F93 /* NXAnimationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXAnimationView.swift; sourceTree = "<group>"; };
 		AD09638BB5ED857F4C14CF41B621E8BC /* NX.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NX.swift; sourceTree = "<group>"; };
 		B3C43F1E043260E4B1B93FC6488B569C /* navi-dropdown-arrow@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "navi-dropdown-arrow@3x.png"; path = "NXKit/Assets/navi-dropdown-arrow@3x.png"; sourceTree = "<group>"; };
@@ -211,6 +208,10 @@
 		BCEE035376A1D9BE918AAF124DD5FF70 /* UIView+NXKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIView+NXKit.swift"; sourceTree = "<group>"; };
 		C50552AFE474259DF8A377116BC58375 /* NXControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXControl.swift; sourceTree = "<group>"; };
 		C952957426DB1A6600127231 /* NXArrayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NXArrayView.swift; sourceTree = "<group>"; };
+		C9593F2B26F0D72100699FC0 /* NXAssetClipImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXAssetClipImageViewController.swift; sourceTree = "<group>"; };
+		C9593F2C26F0D72100699FC0 /* NXClipboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXClipboardView.swift; sourceTree = "<group>"; };
+		C9593F2D26F0D72100699FC0 /* NXAssetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXAssetsViewController.swift; sourceTree = "<group>"; };
+		C9593F2E26F0D72100699FC0 /* NXAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NXAsset.swift; sourceTree = "<group>"; };
 		C9B3635226E8888200B95DF3 /* NXAny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NXAny.swift; sourceTree = "<group>"; };
 		CDC63356E7E320C2BAF669413B03E28A /* NXViewAssociation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXViewAssociation.swift; sourceTree = "<group>"; };
 		CE7E8D6C33AF9C5EE2D308B8ADA3F373 /* NXRuntime.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXRuntime.swift; sourceTree = "<group>"; };
@@ -220,7 +221,6 @@
 		DB47C4C4C0E3C1E44C01CB44702BC67A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DD6BE5F04F248817032D22F00D546C8E /* UILabel+NXKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UILabel+NXKit.swift"; sourceTree = "<group>"; };
 		DD96D57E2000C23BB4E520229ED8641D /* NXKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NXKit-dummy.m"; sourceTree = "<group>"; };
-		E1F40589E04F6F13B6C251C7300A5E49 /* NXAssetsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXAssetsViewController.swift; sourceTree = "<group>"; };
 		E43D66E37CE1862394366FE462E794D9 /* NXKVOObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXKVOObserver.swift; sourceTree = "<group>"; };
 		E554FF1ED369AE73A5790D4ADD1EBD88 /* NXLCRView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NXLCRView.swift; sourceTree = "<group>"; };
 		E63DF99DCD4379F20D3F2B193AA61FC9 /* NXKit-NXKit */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "NXKit-NXKit"; path = NXKit.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -419,10 +419,10 @@
 		C5A1D36768E2FC0FE5E212870111D074 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				3FE0783934F68455C108A2A98D723ED1 /* NXAsset.swift */,
-				0E5AE026A370BC9D477BBCDEC2386A82 /* NXAssetClipImageViewController.swift */,
-				E1F40589E04F6F13B6C251C7300A5E49 /* NXAssetsViewController.swift */,
-				9E626A8FA8D3F905692AEE5AA2282AB5 /* NXClipboardView.swift */,
+				C9593F2B26F0D72100699FC0 /* NXAssetClipImageViewController.swift */,
+				C9593F2C26F0D72100699FC0 /* NXClipboardView.swift */,
+				C9593F2D26F0D72100699FC0 /* NXAssetsViewController.swift */,
+				C9593F2E26F0D72100699FC0 /* NXAsset.swift */,
 			);
 			name = Components;
 			path = NXKit/Classes/Components;
@@ -655,14 +655,11 @@
 				69C69FDAE81B90BFB88C07905CB79B5E /* NXAnylayerView.swift in Sources */,
 				0CBB7AF17BCB39D2FB3FCA3D47922C96 /* NXApplicationView.swift in Sources */,
 				066FF13F3530F8DBB5C32DD4BCFD0CAF /* NXApplicationViewCell.swift in Sources */,
-				883C250FE3C47D08434841FEF2F52DF7 /* NXAsset.swift in Sources */,
-				58ED005929DC36B36FFD73872C6B4411 /* NXAssetClipImageViewController.swift in Sources */,
-				A8F95E6FAA6B790A3F50A76181C2353A /* NXAssetsViewController.swift in Sources */,
 				79666AAD5B4218245F70EF10DF649EF6 /* NXAutoresizeView.swift in Sources */,
 				66C6FE30518FDB8879271F926ABA30F8 /* NXBackgroundView.swift in Sources */,
 				D50CD7632A2611646BEDA53167431FA9 /* NXButton.swift in Sources */,
-				0D50DE10EBF7E0822C991290365EA0B7 /* NXClipboardView.swift in Sources */,
 				55833A448D22613E5EAC97B66F5EC6FA /* NXCollectionReusableView.swift in Sources */,
+				C9593F3026F0D72100699FC0 /* NXClipboardView.swift in Sources */,
 				A5F197AA04AC2A52C1B37250D240015F /* NXCollectionView.swift in Sources */,
 				AB0F44E48664B1A9FBA3C69958552A62 /* NXCollectionViewCell.swift in Sources */,
 				3D37C4DA13B5A0B36BC95CF44D3FF183 /* NXCollectionViewController.swift in Sources */,
@@ -682,6 +679,7 @@
 				3088019B3DC81D46E89A0D558EC8325F /* NXLRView.swift in Sources */,
 				C4BC8E1E6E2622EACAB6156C3E552BF3 /* NXNavigationController.swift in Sources */,
 				2E5AB424FB2AC0EA45F9AFCF85077072 /* NXNaviView.swift in Sources */,
+				C9593F2F26F0D72100699FC0 /* NXAssetClipImageViewController.swift in Sources */,
 				9207B016B9B8EA5C7C1564A80ECA5583 /* NXObserver.swift in Sources */,
 				30F7286E16B55DD3A03AAA1BBF9FA733 /* NXOverlay.swift in Sources */,
 				BE7C53A62A03FB47B5966B102A82E034 /* NXPlaceholderView.swift in Sources */,
@@ -692,6 +690,7 @@
 				7EC714FBDAE2394F692DB923699AE43B /* NXString.swift in Sources */,
 				0319674ED12B005FF51E04035AE291F4 /* NXSuspendView.swift in Sources */,
 				C54EDCEE64EF2E25FBCCF381EE08C2EC /* NXSwipeView.swift in Sources */,
+				C9593F3226F0D72100699FC0 /* NXAsset.swift in Sources */,
 				2F1D676BD9FE5E92A49990896F4D577E /* NXSwipeViewController.swift in Sources */,
 				D300A72C146917C5BBDB0C67ED2CC7C5 /* NXSwitch.swift in Sources */,
 				9F508E959A82CF92ABEA7E19EA87CA5C /* NXTableReusableView.swift in Sources */,
@@ -716,6 +715,7 @@
 				C9B3635326E8888200B95DF3 /* NXAny.swift in Sources */,
 				93A28EBECBB9CF85530CC81883B4BDEA /* UIView+NXKit.swift in Sources */,
 				71496988671AFD4203412F0D2E9B7DFF /* NXStorage.swift in Sources */,
+				C9593F3126F0D72100699FC0 /* NXAssetsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -75,47 +75,48 @@ open class NXHUD {
         
         open override func updateSubviews(_ action: String, _ value: Any?) {
             
-            let state = NX.Comparable<CGRect> { _, __sender in
-                __sender.lhsValue.size = CGSize(width: 0, height: 0)
-                __sender.rhsValue.size = CGSize(width: 0, height: 0)
+            let state = NX.Wrappable<Int,CGRect, CGRect> { _, __sender in
+                __sender.oldValue.size = CGSize(width: 0, height: 0)
+                __sender.value.size = CGSize(width: 0, height: 0)
             }
 
             if let image = self.wrapped.image, image.size.width > 0 {
-                state.lhsValue.size.width = 50
-                state.lhsValue.size.height = 50
+                state.oldValue.size.width = 50
+                state.oldValue.size.height = 50
             }
+            
             if self.wrapped.message.count > 0 {
                 let __size = String.size(of: self.wrapped.message, size: CGSize(width: NXOverlay.frame.width-self.wrapped.insets.left-self.wrapped.insets.right-1, height: 200), font: self.wrapped.font) { (style) in
                     style.lineSpacing = 2.0
                 }
-                state.rhsValue.size.width = __size.width + 1
-                state.rhsValue.size.height = __size.height + 1
+                state.value.size.width = __size.width + 1
+                state.value.size.height = __size.height + 1
             }
             
             var __frame = CGRect.zero
-            if state.lhsValue.size.height > 0 && state.rhsValue.size.height > 0 {
-                __frame.size.width = self.wrapped.insets.left + max(state.lhsValue.size.width, state.rhsValue.size.width) + self.wrapped.insets.right
-                __frame.size.height = self.wrapped.insets.top + state.lhsValue.size.height + 10.0 + state.rhsValue.size.height + self.wrapped.insets.bottom
+            if state.oldValue.size.height > 0 && state.value.size.height > 0 {
+                __frame.size.width = self.wrapped.insets.left + max(state.oldValue.size.width, state.value.size.width) + self.wrapped.insets.right
+                __frame.size.height = self.wrapped.insets.top + state.oldValue.size.height + 10.0 + state.value.size.height + self.wrapped.insets.bottom
 
-                state.lhsValue.origin.x = (__frame.size.width - state.lhsValue.size.width)/2.0
-                state.lhsValue.origin.y = self.wrapped.insets.top
+                state.oldValue.origin.x = (__frame.size.width - state.oldValue.size.width)/2.0
+                state.oldValue.origin.y = self.wrapped.insets.top
                 
-                state.rhsValue.origin.x = (__frame.size.width - state.rhsValue.size.width)/2.0
-                state.rhsValue.origin.y = self.wrapped.insets.top + state.lhsValue.size.height + 10.0
+                state.value.origin.x = (__frame.size.width - state.value.size.width)/2.0
+                state.value.origin.y = self.wrapped.insets.top + state.oldValue.size.height + 10.0
             }
-            else if state.lhsValue.size.height > 0 {
-                __frame.size.width = self.wrapped.insets.left + state.lhsValue.size.width + self.wrapped.insets.right
-                __frame.size.height = self.wrapped.insets.top + state.lhsValue.size.height + self.wrapped.insets.bottom
+            else if state.oldValue.size.height > 0 {
+                __frame.size.width = self.wrapped.insets.left + state.oldValue.size.width + self.wrapped.insets.right
+                __frame.size.height = self.wrapped.insets.top + state.oldValue.size.height + self.wrapped.insets.bottom
 
-                state.lhsValue.origin.x = (__frame.size.width - state.lhsValue.size.width)/2.0
-                state.lhsValue.origin.y = self.wrapped.insets.top
+                state.oldValue.origin.x = (__frame.size.width - state.oldValue.size.width)/2.0
+                state.oldValue.origin.y = self.wrapped.insets.top
             }
-            else if state.rhsValue.size.height > 0 {
-                __frame.size.width = self.wrapped.insets.left + state.rhsValue.size.width + self.wrapped.insets.right
-                __frame.size.height = self.wrapped.insets.top + state.rhsValue.size.height + self.wrapped.insets.bottom
+            else if state.value.size.height > 0 {
+                __frame.size.width = self.wrapped.insets.left + state.value.size.width + self.wrapped.insets.right
+                __frame.size.height = self.wrapped.insets.top + state.value.size.height + self.wrapped.insets.bottom
                 
-                state.rhsValue.origin.x = (__frame.size.width - state.rhsValue.size.width)/2.0
-                state.rhsValue.origin.y = self.wrapped.insets.top
+                state.value.origin.x = (__frame.size.width - state.value.size.width)/2.0
+                state.value.origin.y = self.wrapped.insets.top
             }
             __frame.size.width = ceil(__frame.size.width)
             __frame.size.height = ceil(__frame.size.height)
@@ -149,7 +150,7 @@ open class NXHUD {
                 if self.wrapped.key == NXHUD.Key.toast.rawValue {
                     self.stateView.isHidden = false
                     self.stateView.image = image
-                    self.stateView.frame = state.lhsValue
+                    self.stateView.frame = state.oldValue
                     
                     self.animationView.isHidden = true
                     self.animationView.stopAnimating()
@@ -157,7 +158,7 @@ open class NXHUD {
                 else if self.wrapped.key == NXHUD.Key.loading.rawValue {
                     self.stateView.isHidden = true
                     
-                    self.animationView.frame = state.lhsValue
+                    self.animationView.frame = state.oldValue
                     self.animationView.isHidden = false
                     self.animationView.contentView.image = image
                     self.animationView.startAnimating()
@@ -177,7 +178,7 @@ open class NXHUD {
                 self.messageView.numberOfLines = self.wrapped.numberOfLines
                 self.messageView.attributedText = NXString.attributedString(self.wrapped.message, self.wrapped.font, self.wrapped.textColor, 2)
                 self.messageView.textAlignment = .center
-                self.messageView.frame = state.rhsValue
+                self.messageView.frame = state.value
             }
             else {
                 self.messageView.isHidden = true
