@@ -9,9 +9,10 @@
 import UIKit
 
 open class NXCollectionReusableView: UICollectionReusableView {
-    open var arrowView : UIImageView = UIImageView(frame: CGRect.zero)
-    open var separator : CALayer = CALayer()
+    open var arrowView = UIImageView(frame: CGRect.zero)
+    open var separator = CALayer()
     open var value : Any? = nil
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.setup()

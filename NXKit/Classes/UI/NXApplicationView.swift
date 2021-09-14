@@ -62,26 +62,33 @@ open class NXApplicationView: NXView {
         
         
         let __separator = __wrapped.appearance.separator
-        if __separator.ats.isEmpty {
+        var __frame = CGRect.zero
+        var __isHidden = false
+        if __separator.ats.contains(.minY) || __separator.ats.contains(.maxY) {
+            __frame = CGRect(x: __separator.insets.left, y: 0, width: __wrapped.ctxs.width-__separator.insets.left-__separator.insets.right, height: NXDevice.pixel)
+            if __wrapped.appearance.separator.ats.contains(.maxY) {
+                __frame.origin.y = __wrapped.ctxs.height-NXDevice.pixel
+            }
+        }
+        else if __separator.ats.contains(.minX) || __separator.ats.contains(.maxX){
+            __frame = CGRect(x: 0, y: __separator.insets.top, width: NXDevice.pixel, height: __wrapped.ctxs.height-__separator.insets.top-__separator.insets.bottom)
+            if __separator.ats.contains(.maxX) {
+                __frame.origin.x = __wrapped.ctxs.width-NXDevice.pixel
+            }
+        }
+        
+        if __separator.ats.contains(.maxY) || __separator.ats.contains(.maxX) {
+            __isHidden = __wrapped.ctxs.at.last
+        }
+        else if __separator.ats.contains(.minY) || __separator.ats.contains(.minX) {
+            __isHidden = __wrapped.ctxs.at.first
+        }
+        if __isHidden {
             self.separator.isHidden = true
         }
-        else{
+        else {
             self.separator.isHidden = false
-            var __frame = CGRect.zero
-            if __separator.ats.contains(.minY) || __separator.ats.contains(.maxY) {
-                __frame = CGRect(x: __separator.insets.left, y: 0, width: __wrapped.ctxs.width-__separator.insets.left-__separator.insets.right, height: NXDevice.pixel)
-                if __wrapped.appearance.separator.ats.contains(.maxY) {
-                    __frame.origin.y = __wrapped.ctxs.height-NXDevice.pixel
-                }
-            }
-            else {
-                __frame = CGRect(x: 0, y: __separator.insets.top, width: NXDevice.pixel, height: __wrapped.ctxs.height-__separator.insets.top-__separator.insets.bottom)
-                if __separator.ats.contains(.maxX) {
-                    __frame.origin.x = __wrapped.ctxs.width-NXDevice.pixel
-                }
-            }
             self.separator.frame = __frame
-
             self.separator.backgroundColor = __separator.backgroundColor.cgColor
         }
     }

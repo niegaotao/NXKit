@@ -41,7 +41,7 @@ open class NXTableSubviewCell<T:UIView>: NXTableViewCell {
     }
     
     open override func updateSubviews(_ action:String, _ value: Any?){
-        self.applicationView.frame = self.contentView.bounds.offsetBy(dx: 100, dy: 0)
+        self.applicationView.frame = self.contentView.bounds
         if let __applicationView = self.applicationView as? NXApplicationView {
             __applicationView.updateSubviews(action, value)
             
