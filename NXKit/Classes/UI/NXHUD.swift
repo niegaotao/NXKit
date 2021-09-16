@@ -277,7 +277,7 @@ extension UIView {
 
     @discardableResult
     open func makeLoading(message: String = "", ats: NX.Ats = .center) -> NXHUD.WrappedView? {
-        return NXHUD.showSubview(key: NXHUD.Key.loading.rawValue, image: NX.image(named:"uiapp-animation.png"), message: message, ats: ats, duration: 0, superview: self)
+        return NXHUD.showSubview(key: NXHUD.Key.loading.rawValue, image: NX.image(named:"icon-animation.png"), message: message, ats: ats, duration: 0, superview: self)
     }
 
     @discardableResult

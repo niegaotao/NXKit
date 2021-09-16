@@ -112,7 +112,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         
         self.footerView.centerView.frame = CGRect(x: (footerView.w-50)/2, y: 5, width: 50, height: 50)
         self.footerView.centerView.isHidden = self.wrapped.footer.center
-        self.footerView.centerView.setImage(NX.image(named: "uiapp-camera.png"), for: .normal)
+        self.footerView.centerView.setImage(NX.image(named: "icon-camera.png"), for: .normal)
         self.footerView.centerView.setupEvents([.touchUpInside], action: {[weak self] (e, v) in
             self?.dispose("footer.center", nil)
         })
