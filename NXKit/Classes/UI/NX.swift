@@ -472,22 +472,12 @@ extension NX {
 // 图片
 extension NX {
     //加载获取bundle中图片
-    public class func image(named name:String, _ scale:Int = Int(UIScreen.main.scale)) -> UIImage? {
+    public class func image(named name:String) -> UIImage? {
         guard name.count > 0 else {return nil}
-
-        var __name = name
         if NX.Association.path.count > 0 {
-            if __name.contains("@2x.") || __name.contains("@3x.")  {
-                
-            }
-            else {
-                if scale == 2 || scale == 3 {
-                    __name = __name.replacingOccurrences(of: ".png", with: "@\(scale)x.png")
-                }
-            }
-            __name = NX.Association.path + __name
+            return UIImage(named: name, in: Bundle(path: NX.Association.path), compatibleWith: nil)
         }
-        return UIImage(named: __name)
+        return UIImage(named: name)
     }
     
     //处理图片浏览

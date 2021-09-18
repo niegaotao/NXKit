@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  EXViewController.swift
 //  NXKit
 //
 //  Created by niegaotao on 09/18/2021.
@@ -9,17 +9,18 @@
 import UIKit
 import NXKit
 
-class ViewController: NXViewController {
+class EXViewController: NXViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: NXDevice.width, height: 100))
         button.backgroundColor = .red
         button.setupEvents([.touchUpInside]) { _, _ in
-            let vc = ViewController()
+            let vc = EXViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
         self.contentView.addSubview(button)
