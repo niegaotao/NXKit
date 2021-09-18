@@ -434,7 +434,7 @@ extension NX {
     
     public class Imp {
         //处理图片浏览
-        static public var showAssets:((_ type:String, _ assets:[Any]) -> ())?
+        static public var previewAssets:((_ type:String, _ assets:[Any]) -> ())?
         
         //设置url
         static public var image : ((_ targetView: UIView?, _ url:String, _ state:UIControl.State) -> ())?
@@ -462,6 +462,9 @@ extension NX {
         
         //处理toast
         static public var hideLoading:((_ superview:UIView?) -> ())?
+        
+        //处理网络请求
+        static public var request:((_ action:String, _ request:NXRequest, _ completion:NX.Completion<String, NXRequest>?) -> ())?
     }
 }
 
@@ -488,8 +491,8 @@ extension NX {
     }
     
     //处理图片浏览
-    class public func showAssets(type:String, assets:[Any]){
-        NX.Imp.showAssets?(type, assets)
+    class public func previewAssets(type:String, assets:[Any]){
+        NX.Imp.previewAssets?(type, assets)
     }
     
     //设置图像
@@ -559,7 +562,13 @@ extension NX {
     class public func hideLoading(superview:UIView? = UIApplication.shared.keyWindow){
         NX.Imp.hideLoading?(superview)
     }
+    
+    //request
+    class public func request(_ action:String, _ request:NXRequest, _ completion:NX.Completion<String, NXRequest>?) {
+        NX.Imp.request?(action, request, completion)
+    }
 }
+
 
 extension NX {
     open class func get(dictionary:[String:Any]?, _ nonnullValue:[String:Any] = [:]) -> [String:Any] {

@@ -195,7 +195,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                 
                 NXAsset.outputAssets(self.wrapped) {[weak self] (assets, outputs) in
                     self?.wrapped.output.isOutputting = false
-                    NX.showAssets(type: "UIImage", assets: outputs)
+                    NX.previewAssets(type: "UIImage", assets: outputs)
                 }
             }
             else{

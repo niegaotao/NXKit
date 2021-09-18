@@ -1,0 +1,20 @@
+PODS:
+  - NXKit (0.9.2):
+    - NXKit/Components (= 0.9.2)
+    - NXKit/UI (= 0.9.2)
+  - NXKit/Components (0.9.2)
+  - NXKit/UI (0.9.2)
+
+DEPENDENCIES:
+  - NXKit (from `../`)
+
+EXTERNAL SOURCES:
+  NXKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  NXKit: 0c8e54a9457ad833f3e5b3cd33170af01c0b1649
+
+PODFILE CHECKSUM: 7a3be36e3d918c7d9f1a6ed0bd882e1eb1229920
+
+COCOAPODS: 1.11.0.beta.2
