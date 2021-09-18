@@ -62,12 +62,12 @@ extension UIImage {
  
  */
 extension UIImage {
-    open class func resize(image: UIImage?, size:CGSize, by:NXAsset.Resize.RawValue) -> UIImage? {
+    open class func resize(image: UIImage?, size:CGSize, by:String) -> UIImage? {
         guard let _image = image else {
             return nil
         }
         var __size = CGSize(width: _image.size.width*_image.scale, height: _image.size.height*_image.scale)
-        __size = NXAsset.resize(by: by, __size, size, true)
+        __size = NXResize.resize(by: by, __size, size, true)
         UIGraphicsBeginImageContext(__size)
         _image.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: __size))
         let resultImage = UIGraphicsGetImageFromCurrentImageContext()

@@ -15,10 +15,11 @@ Pod::Spec.new do |s|
         'NXKit' => ['NXKit/Assets/*.png']
     }
     s.frameworks = ['UIKit', 'Foundation']
-    s.subspec 'UI' do |ui|
-        ui.source_files = 'NXKit/Classes/UI/*'
+    s.subspec 'UI' do |ss|
+            ss.source_files = 'NXKit/Classes/UI/*'
     end
-    s.subspec 'Components' do |components|
-        components.source_files = 'NXKit/Classes/Components/*'
+    s.subspec 'Components' do |ss|
+            ss.source_files = 'NXKit/Classes/Components/*'
+            ss.dependency 'NXKit/UI'
     end
 end

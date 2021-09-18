@@ -15,18 +15,19 @@ class ViewController: NXViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        DispatchQueue.main.asyncAfter(delay: 0.5) {
-            if self.navigationController!.viewControllers.count < 2 {
-                let vc = ViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+        
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        button.backgroundColor = .red
+        button.setupEvents([.touchUpInside]) { _, _ in
+            let vc = ViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
+        self.contentView.addSubview(button)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 }
 

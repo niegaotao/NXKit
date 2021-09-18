@@ -11,7 +11,7 @@ import Photos
 open class NXAsset: NSObject {
     open var value = [String:Any]()
     
-    open var type = NXAsset.Typed.unknown.rawValue//类型
+    open var type = NXAsset.Subtype.unknown.rawValue//类型
     open var size : CGSize = CGSize.zero //宽度高度
     open var url : String = ""
     open var file : String = ""
@@ -142,35 +142,28 @@ extension NXAsset {
         public init(){}
     }
     
-    public enum Typed : String {
+    public enum Subtype : String {
         case image = "image"
         case video = "video"
         case audio = "audio"
         case unknown = "unknown"
     }
     
-    public class func type(_ mediaType:PHAssetMediaType?) -> NXAsset.Typed.RawValue {
+    public class func type(_ mediaType:PHAssetMediaType?) -> NXAsset.Subtype.RawValue {
         guard let __mediaType = mediaType else {
-            return NXAsset.Typed.unknown.rawValue
+            return NXAsset.Subtype.unknown.rawValue
         }
         if __mediaType == .image {
-            return NXAsset.Typed.image.rawValue
+            return NXAsset.Subtype.image.rawValue
         }
         else if __mediaType == .video {
-            return NXAsset.Typed.video.rawValue
+            return NXAsset.Subtype.video.rawValue
         }
         else if __mediaType == .audio {
-            return NXAsset.Typed.audio.rawValue
+            return NXAsset.Subtype.audio.rawValue
         }
-        return NXAsset.Typed.unknown.rawValue
+        return NXAsset.Subtype.unknown.rawValue
     }
-    
-    public enum Resize : String {
-        case side = "side" //图片变长/目标边长：所谓缩放系数
-        case area = "area" //开平方（图片宽高相乘/目标宽高相乘）：作为缩放系数
-        case none = "none" //不缩放
-    }
-    
 }
 
 extension NXAsset {
@@ -268,7 +261,7 @@ extension NXAsset {
 
         //导出封面图相关
         open var outputResize = CGSize(width: 1920, height: 1920)//导出尺寸
-        open var outputResizeBy = NXAsset.Resize.side.rawValue//导出size计算方法
+        open var outputResizeBy = NXResize.side//导出size计算方法
         open var outputUIImage = true //是否需要导出UIImage
         
         //图片相关
@@ -356,57 +349,7 @@ extension NXAsset {
 
 
 extension NXAsset {
-    open class func resize(by:NXAsset.Resize.RawValue, _ targetSize:CGSize, _ fixedSize:CGSize, _ floorAllowed:Bool) -> CGSize {
-        var retValue = targetSize
-        if targetSize.width == 0 || targetSize.height == 0 || fixedSize.width == 0 || fixedSize.height == 0 {
-            return retValue
-        }
-        if by == NXAsset.Resize.area.rawValue {
-            let ratioValue = CGFloat(sqrtf(Float((retValue.width * retValue.height)/(fixedSize.width * fixedSize.height))))
-            if ratioValue > 1 {
-                retValue.width = retValue.width / ratioValue
-                retValue.height = retValue.height / ratioValue
-                
-                if floorAllowed {
-                    retValue.width = floor(retValue.width)
-                    retValue.height = floor(retValue.height)
-                }
-            }
-        }
-        else if by == NXAsset.Resize.side.rawValue {
-            let ratioMaxValue = max(targetSize.width, targetSize.height)/max(fixedSize.width, fixedSize.height)
-            let ratioMinValue = min(targetSize.width, targetSize.height)/min(fixedSize.width, fixedSize.height)
-            let ratioValue = max(ratioMaxValue, ratioMinValue)
-            if ratioValue > 1 {
-                retValue.width = retValue.width / ratioValue
-                retValue.height = retValue.height / ratioValue
-                
-                if floorAllowed {
-                    retValue.width = floor(retValue.width)
-                    retValue.height = floor(retValue.height)
-                }
-            }
-        }
-        else if by == NXAsset.Resize.none.rawValue {
-            
-        }
-        
-        return retValue
-    }
     
-    open class func resize(_ image:UIImage, _ size:CGSize) -> UIImage? {
-        if size.width <= 0 || size.height == 0 {
-            return nil
-        }
-        if image.size.width * image.scale > size.width || image.size.height * image.scale > size.height {
-            UIGraphicsBeginImageContext(size)
-            image.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-            let outputImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return outputImage
-        }
-        return nil
-    }
 }
 
 
@@ -437,7 +380,7 @@ extension NXAsset {
                               selectedIdentifiers:[String],
                               usedIdentifiers:[String],
                               outputResize:CGSize,
-                              outputResizeBy:NXAsset.Resize.RawValue,
+                              outputResizeBy:String,
                               outputUIImage:Bool,
 
                               imageClips:[NXAsset.Clip],
@@ -761,7 +704,7 @@ extension NXAsset {
                 
                 if let __phasset = __outputAsset.asset {
                     let request = NXAsset.Request()
-                    request.size = NXAsset.resize(by: wrapped.outputResizeBy, CGSize(width: __phasset.pixelWidth, height: __phasset.pixelHeight), wrapped.outputResize, true)
+                    request.size = NXResize.resize(by: wrapped.outputResizeBy, CGSize(width: __phasset.pixelWidth, height: __phasset.pixelHeight), wrapped.outputResize, true)
                     request.iCloud = NXAsset.Wrapped.iCloud
                     __outputAsset.startRequest(request, { (isCompleted, image) in
                         if let __image = image as? UIImage {
@@ -814,7 +757,7 @@ extension NXAsset {
                 }
                 
                 if let __data = data, let image = UIImage(data: __data) {
-                    let outputImage = NXAsset.resize(image, size) ?? image
+                    let outputImage = NXResize.resize(image, size) ?? image
                     completion?(true, outputImage)
                 }
                 else {

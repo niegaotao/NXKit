@@ -35,7 +35,12 @@
     },
     {
       "name": "Components",
-      "source_files": "NXKit/Classes/Components/*"
+      "source_files": "NXKit/Classes/Components/*",
+      "dependencies": {
+        "NXKit/UI": [
+
+        ]
+      }
     }
   ],
   "swift_version": "5.0"
