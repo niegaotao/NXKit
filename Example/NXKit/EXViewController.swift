@@ -24,6 +24,10 @@ class EXViewController: NXViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
         self.contentView.addSubview(button)
+        
+        let imageView = UIImageView(frame: CGRect(x: 5, y: 5, width: 40, height: 40))
+        imageView.image = NX.image(named: "navi-back.png")
+        self.contentView.addSubview(imageView)
     }
 
     override func didReceiveMemoryWarning() {

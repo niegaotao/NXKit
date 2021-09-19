@@ -17,8 +17,8 @@ extension String {
     /*
      md5
      */
-    public var md5: String {
-        let cStr = self.cString(using: .utf8)
+    public static func md5(_ value:String) -> String {
+        let cStr = value.cString(using: .utf8)
         let buff = UnsafeMutablePointer<UInt8>.allocate(capacity: 16)
         
         CC_MD5(cStr!,(CC_LONG)(strlen(cStr!)), buff)
@@ -34,20 +34,77 @@ extension String {
     
     
     //base64加密
-    public var base64Encode: String? {
-        if let data = self.data(using: String.Encoding.utf8) {
+    public static func base64Encode(_ value:String) -> String {
+        if let data = value.data(using: String.Encoding.utf8) {
             return data.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
         }
-        return nil
+        return ""
     }
     
     
     //base64解密
-    public var base64Decode: String? {
-        if let data = Data(base64Encoded: self, options: NSData.Base64DecodingOptions(rawValue: 0)) {
-            return String(data: data, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue))
+    public static func base64Decode(_ value:String) -> String {
+        if let data = Data(base64Encoded: value, options: NSData.Base64DecodingOptions(rawValue: 0)) {
+            return String(data: data, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue)) ?? ""
         }
-        return nil
+        return ""
+    }
+    
+    
+    //encodeURIComponent
+    public static func encodeURIComponent(_ uri:String) -> String? {
+        /*!*'();:@&=+$,/?%#[]{}   增加了对"和\ --> !*'();:@&=+$,/?%#[]{}\"\\ */
+        let allowedCharacters = CharacterSet(charactersIn: NX.Association.characters).inverted
+        let retValue = uri.addingPercentEncoding(withAllowedCharacters: allowedCharacters)
+        return retValue ?? ""
+    }
+    
+    //decodeURIComponent
+    public static func decodeURIComponent(_ uri:String) -> String {
+        let retValue = uri.removingPercentEncoding
+        return retValue ?? ""
+    }
+    
+    
+    //https://www.haomeili.net/Code/UnicodeDetail?TotalCount=20971&quwei=4E00-9FFF&PageIndex=1
+    //字符个数（一个英文字母计为1个字符，一个中文汉字计为2个字符）
+    public static func countOfBytes(_ value: String?) -> Int {
+        guard let __value = value else {
+            return 0
+        }
+        var __countOfBytes : Int = 0
+        for (_, subvalue) in __value.enumerated() {
+            // 4E00 -> 9FA5/9FFF
+            if subvalue >= "\u{4E00}" && subvalue <= "\u{9FFF}" {
+                __countOfBytes = __countOfBytes + 2
+            }
+            else {
+                __countOfBytes = __countOfBytes + 1
+            }
+        }
+        return __countOfBytes
+    }
+    
+    public static func substringOfBytes(_ value: String, countOfBytes:Int) -> String {
+        
+        var __countOfBytes : Int = 0
+        for (index, subvalue) in value.enumerated() {
+            // 4E00 -> 9FA5/9FFF
+            if subvalue >= "\u{4E00}" && subvalue <= "\u{9FFF}" {
+                __countOfBytes = __countOfBytes + 2
+            }
+            else {
+                __countOfBytes = __countOfBytes + 1
+            }
+            
+            if __countOfBytes == countOfBytes {
+                return (value as NSString).substring(to: index+1)
+            }
+            else if __countOfBytes > countOfBytes {
+                return (value as NSString).substring(to: index)
+            }
+        }
+        return value
     }
 }
 

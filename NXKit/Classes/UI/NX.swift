@@ -496,9 +496,7 @@ extension NX {
             return NX.Imp.encodeURIComponent?(uri)
         }
         /*!*'();:@&=+$,/?%#[]{}   增加了对"和\ --> !*'();:@&=+$,/?%#[]{}\"\\ */
-        let allowedCharacters = CharacterSet(charactersIn: NX.Association.characters).inverted
-        let retValue = uri.addingPercentEncoding(withAllowedCharacters: allowedCharacters)
-        return retValue ?? ""
+        return String.encodeURIComponent(uri)
     }
     
     //decodeURIComponent
@@ -506,8 +504,7 @@ extension NX {
         if NX.Imp.decodeURIComponent != nil {
             return NX.Imp.decodeURIComponent?(uri) ?? uri
         }
-        let retValue = uri.removingPercentEncoding
-        return retValue ?? ""
+        return String.decodeURIComponent(uri)
     }
 
     //openURL
