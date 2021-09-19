@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
+		607FACD61AFB9204008FA782 /* EXAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* EXAppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* EXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* EXViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -16,10 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5BEE75677317CA880F07381F /* Pods-NXKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NXKit_Tests.release.xcconfig"; path = "Target Support Files/Pods-NXKit_Tests/Pods-NXKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* NXKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NXKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		607FACD51AFB9204008FA782 /* EXAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXAppDelegate.swift; sourceTree = "<group>"; };
 		607FACD71AFB9204008FA782 /* EXViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -29,8 +28,7 @@
 		864313D935B3361166070CAC /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		866B0C35E26E65D86E9E5FD8 /* Pods-NXKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NXKit_Example.release.xcconfig"; path = "Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		8C051E22B406A1F24D7F2ACE /* Pods_NXKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NXKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8CB6BA1F31E4F8593CD13FE6 /* NXKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NXKit.podspec; path = ../NXKit.podspec; sourceTree = "<group>"; };
-		A156E6BE7EDAE240359F0417 /* Pods-NXKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NXKit_Tests.debug.xcconfig"; path = "Target Support Files/Pods-NXKit_Tests/Pods-NXKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		8CB6BA1F31E4F8593CD13FE6 /* NXKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NXKit.podspec; path = ../NXKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		DF7BD977515B790E949094EE /* Pods-NXKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NXKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		EE5BAF05F07B37A044139B20 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,7 +68,7 @@
 		607FACD21AFB9204008FA782 /* Example for NXKit */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				607FACD51AFB9204008FA782 /* EXAppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* EXViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -121,8 +119,6 @@
 			children = (
 				DF7BD977515B790E949094EE /* Pods-NXKit_Example.debug.xcconfig */,
 				866B0C35E26E65D86E9E5FD8 /* Pods-NXKit_Example.release.xcconfig */,
-				A156E6BE7EDAE240359F0417 /* Pods-NXKit_Tests.debug.xcconfig */,
-				5BEE75677317CA880F07381F /* Pods-NXKit_Tests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -255,7 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* EXViewController.swift in Sources */,
-				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				607FACD61AFB9204008FA782 /* EXAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

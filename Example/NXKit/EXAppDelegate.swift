@@ -1,5 +1,5 @@
 //
-//  AppDelegate.swift
+//  EXAppDelegate.swift
 //  NXKit
 //
 //  Created by niegaotao on 09/18/2021.
@@ -10,7 +10,7 @@ import UIKit
 import NXKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class EXAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 

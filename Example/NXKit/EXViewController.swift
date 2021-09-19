@@ -17,7 +17,7 @@ class EXViewController: NXViewController {
         
         
         
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: NXDevice.width, height: 100))
+        let button = UIButton(frame: CGRect(x: 5, y: 5, width: NXDevice.width-10, height: 100))
         button.backgroundColor = .red
         button.setupEvents([.touchUpInside]) { _, _ in
             let vc = EXViewController()

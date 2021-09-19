@@ -4,10 +4,4 @@ platform :ios, '9.0'
 
 target 'NXKit_Example' do
   pod 'NXKit', :path => '../'
-
-  target 'NXKit_Tests' do
-    inherit! :search_paths
-
-    
-  end
 end
