@@ -14,7 +14,7 @@ open class LEYTextView: UITextView {
     
     override open var text: String! {
         didSet {
-            textDidChangeNotification()
+            textDidChange()
         }
     }
     
@@ -31,7 +31,7 @@ open class LEYTextView: UITextView {
     
     override open var attributedText: NSAttributedString! {
         didSet {
-            textDidChangeNotification()
+            textDidChange()
         }
     }
     
@@ -40,9 +40,6 @@ open class LEYTextView: UITextView {
             self.layoutSubviews()
         }
     }
-    
-    open var textDidChangeCallback : (() -> ())?
-    open var accessoryCallback : (() -> ())?
     
     open var maximumOfBytes: Int = 0 //小于等于0表示无限制，大于0表示有显示
     public let accessoryView = NXKeyboardAccessoryView(frame: CGRect(x: 0, y: 0, width: NXDevice.width, height: 44))
@@ -66,7 +63,7 @@ open class LEYTextView: UITextView {
         self.textContainer.lineFragmentPadding = 0.01
         self.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(textDidChangeNotification),
+                                               selector: #selector(textDidChange),
                                                name: UITextView.textDidChangeNotification,
                                                object: nil)
     }
@@ -103,7 +100,6 @@ open class LEYTextView: UITextView {
         
         self.accessoryView.actionView.setupEvents([.touchUpInside], action: {[weak self] _, bar in
             self?.endEditing(true)
-            self?.accessoryCallback?()
         })
 
         self.inputAccessoryView = accessoryView
@@ -122,7 +118,7 @@ open class LEYTextView: UITextView {
         self.layoutSubviews()
     }
     
-    @objc private func textDidChangeNotification() {
+    @objc private func textDidChange() {
         placeholderView.isHidden = !text.isEmpty
         
         //只有对长度有限制才需要处理
@@ -151,8 +147,6 @@ open class LEYTextView: UITextView {
         else {
             self.accessoryView.bytesView.isHidden = true
         }
-        
-        textDidChangeCallback?()
     }
     
     open override func layoutSubviews() {
