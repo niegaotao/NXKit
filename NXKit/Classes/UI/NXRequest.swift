@@ -26,4 +26,9 @@ open class NXRequest: NXAny {
     open var completion : NX.Completion<String, NXRequest>? = nil
     
     open var retry : Int = 0
+    open var isDisposeable = true
+    
+    public override init(){
+        super.init()
+    }
 }
