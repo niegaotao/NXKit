@@ -7,11 +7,11 @@
 
 import UIKit
 
-
 open class NXRequest: NXAny {
     open var method = "post"
     
     open var service = ""
+    
     open var path = ""
     open var url = ""
     open var headers = [String:String]()

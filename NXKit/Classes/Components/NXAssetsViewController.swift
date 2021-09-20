@@ -535,7 +535,7 @@ extension NXAssetsViewController : UIImagePickerControllerDelegate, UINavigation
         }
         
         if let __output = image {
-            NX.showLoading("正在保存", self.view)
+            NX.showLoading("正在保存", .center, self.view)
             NXAsset.saveImage(image: __output, completion: {[weak self] (state, asset) in
                 guard let self = self else {return}
                 

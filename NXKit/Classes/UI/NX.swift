@@ -458,13 +458,13 @@ extension NX {
         static public var showToast:((_ message:String, _ ats:NX.Ats , _ superview:UIView?) -> ())?
         
         //处理animation
-        static public var showLoading:((_ message:String, _ superview:UIView?) -> ())?
+        static public var showLoading:((_ message:String, _ ats:NX.Ats, _ superview:UIView?) -> ())?
         
         //处理toast
         static public var hideLoading:((_ superview:UIView?) -> ())?
         
         //处理网络请求
-        static public var request:((_ action:String, _ request:NXRequest, _ completion:NX.Completion<String, NXRequest>?) -> ())?
+        static public var request:((_ request:NXRequest, _ completion:NX.Completion<String, NXRequest>?) -> ())?
     }
 }
 
@@ -536,23 +536,38 @@ extension NX {
     }
     
     //toast
-    class public func showToast(message:String, _ ats:NX.Ats = .center , _ superview:UIView? = UIApplication.shared.keyWindow){
-        NX.Imp.showToast?(message, ats, superview)
+    class public func showToast(message:String, _ ats:NX.Ats = .center, _ superview:UIView? = UIApplication.shared.keyWindow){
+        if let handler = NX.Imp.showToast {
+            handler(message, ats, superview)
+        }
+        else {
+            (superview ?? UIApplication.shared.keyWindow)?.makeToast(message: message, ats: ats)
+        }
     }
     
     //处理loading
-    class public func showLoading(_ message:String, _ superview:UIView? = UIApplication.shared.keyWindow){
-        NX.Imp.showLoading?(message, superview)
+    class public func showLoading(_ message:String, _ ats:NX.Ats = .center, _ superview:UIView? = UIApplication.shared.keyWindow){
+        if let handler = NX.Imp.showLoading {
+            handler(message, ats, superview)
+        }
+        else {
+            (superview ?? UIApplication.shared.keyWindow)?.makeLoading(message: message, ats: ats)
+        }
     }
     
     //处理loading
     class public func hideLoading(superview:UIView? = UIApplication.shared.keyWindow){
-        NX.Imp.hideLoading?(superview)
+        if let handler = NX.Imp.hideLoading {
+            handler(superview)
+        }
+        else {
+            (superview ?? UIApplication.shared.keyWindow)?.hideLoading()
+        }
     }
     
     //request
-    class public func request(_ action:String, _ request:NXRequest, _ completion:NX.Completion<String, NXRequest>?) {
-        NX.Imp.request?(action, request, completion)
+    class public func request(_ request:NXRequest, _ completion:NX.Completion<String, NXRequest>?) {
+        NX.Imp.request?(request, completion)
     }
 }
 

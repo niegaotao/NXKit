@@ -169,8 +169,6 @@ extension NXNaviView {
         ///ui
         public var image: UIImage?
         public var title : String?
-        ///返回按钮或者更多按钮
-        public fileprivate(set) var action : String = ""
         
         
         ///记录owner
@@ -216,7 +214,6 @@ extension NXNaviView {
         
         open class  func back(image: UIImage?, title: String?) -> NXNaviView.Bar {
             let element = NXNaviView.Bar(frame: CGRect.zero)
-            element.wrapped.action = "lhs"
             element.contentHorizontalAlignment = .left
             element.updateSubviews(image, title)
             return element
@@ -236,7 +233,6 @@ extension NXNaviView {
         
         open class func forward(image: UIImage?, title: String?) -> NXNaviView.Bar {
             let element = NXNaviView.Bar(frame: CGRect.zero)
-            element.wrapped.action = "rhs"
             element.contentHorizontalAlignment = .right
             element.updateSubviews(image, title)
             return element
@@ -271,20 +267,11 @@ extension NXNaviView {
         }
         
         open func updateSubviews(_ image: UIImage?, _ title:String?){
-            if wrapped.action == "lhs" {
-                self.wrapped.image = image
-                self.wrapped.title = title
-                
-                self.setImage(image, for: .normal)
-                self.setTitle(title, for: .normal)
-            }
-            else if wrapped.action == "rhs" {
-                self.wrapped.image = image
-                self.wrapped.title = title
-                
-                self.setImage(image, for: .normal)
-                self.setTitle(title, for: .normal)
-            }
+            self.wrapped.image = image
+            self.wrapped.title = title
+            
+            self.setImage(image, for: .normal)
+            self.setTitle(title, for: .normal)
         }
     }
 }
