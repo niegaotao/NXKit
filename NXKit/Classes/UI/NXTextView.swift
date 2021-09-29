@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class LEYTextView: UITextView {
+open class NXTextView: UITextView {
     public let placeholderView = UILabel()
     
     

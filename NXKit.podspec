@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'NXKit'
-    s.version          = '0.9.7.2'
+    s.version          = '0.9.7.3'
     s.summary          = 'NXKit is a Swift UI framework for iOS.'
     s.description      = <<-DESC
         NXKit is a Swift UI framework for iOS.
@@ -14,9 +14,11 @@ Pod::Spec.new do |s|
     s.resource_bundles = {
         'NXKit' => ['NXKit/Assets/*']
     }
+
     s.frameworks = ['UIKit', 'Foundation']
     s.subspec 'UI' do |ss|
             ss.source_files = 'NXKit/Classes/UI/*'
+            
     end
     s.subspec 'Components' do |ss|
             ss.source_files = 'NXKit/Classes/Components/*'

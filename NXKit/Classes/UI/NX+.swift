@@ -264,6 +264,18 @@ extension NX {
         }
     }
     
+    open class Comparable<Minimum: NXInitialValue, Maximum:NXInitialValue, Value: NXInitialValue> {
+        open var minValue = Minimum.initialValue
+        open var maxValue = Maximum.initialValue
+        open var value = Value.initialValue
+        
+        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Comparable<Minimum, Maximum, Value>>?) -> ())? = nil
+        
+        public init(completion: NX.Completion<String, NX.Comparable<Minimum, Maximum, Value>>?) {
+            completion?("", self)
+        }
+    }
+    
     open class Selectable<Value: NXInitialValue> {
         open var selected = Value.initialValue
         open var unselected = Value.initialValue
