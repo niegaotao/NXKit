@@ -65,26 +65,6 @@ extension UIView {
     }
 }
 
-//是否显示动画，只要是用来关闭layer的隐式动画
-extension UIView {
-    
-    /// 执行的操作是否需要动画
-    ///
-    /// - Parameters:
-    ///   - animation: true：显示动画，false关闭动画
-    ///   - action: 执行的操作
-    ///   - completion: 完成后的回调
-    class func animations(_ animation: Bool, action: (()->()), completion: @escaping (()->())) {
-        CATransaction.begin()
-        CATransaction.setDisableActions(!animation)
-        CATransaction.setCompletionBlock({
-            completion()
-        })
-        action()
-        CATransaction.commit()
-    }
-}
-
 
 /*
  UIView 的layer设置
@@ -112,7 +92,7 @@ extension UIView {
     }
     
     //设置圆角
-    public func addCorner(rect:CGRect, corners:UIRectCorner, radii:CGSize) {
+    public func setupCorner(rect:CGRect, corners:UIRectCorner, radii:CGSize) {
         let maskPath = UIBezierPath.init(roundedRect: rect, byRoundingCorners: corners, cornerRadii: radii)
         if let maskLayer = self.layer.mask as? CAShapeLayer {
             maskLayer.frame = self.bounds
@@ -128,28 +108,34 @@ extension UIView {
     }
     
     //设置边框+圆角
-    public func setupBorder(color: UIColor?, width: CGFloat?, radius: CGFloat = 6.0){
-        if(color != nil && width != nil) {
-            self.layer.borderColor = color!.cgColor
-            self.layer.borderWidth = width!
-        }
+    public func setupBorder(color: UIColor, width: CGFloat, radius: CGFloat){
+        self.layer.borderColor = color.cgColor
+        self.layer.borderWidth = width
         self.layer.cornerRadius = radius
         self.layer.masksToBounds = true
     }
     
-    //添加上下/左右的边缘分割线
-    public func addBorder(color: UIColor?, ats: NX.Ats, insets: UIEdgeInsets = UIEdgeInsets.zero){
-        self.setupSeparator(color: color, ats: ats, insets: insets)
+    //设置阴影效果
+    public func setupShadow(color: UIColor, offset: CGSize, radius: CGFloat){
+        //设置阴影
+        self.layer.shadowColor = color.cgColor;
+        self.layer.shadowOffset = offset
+        self.layer.shadowRadius = radius
+        self.layer.shadowOpacity = 0.15
+        //设置圆角
+        self.layer.cornerRadius = self.layer.shadowRadius
+        self.layer.masksToBounds = false
     }
     
-    public func setupSeparator(color:UIColor?, ats: NX.Ats, insets: UIEdgeInsets = UIEdgeInsets.zero){
-        let color = color ?? NX.separatorColor
-        
+    //添加上下/左右的边缘分割线
+    public func setupSeparator(color:UIColor, ats: NX.Ats, insets: UIEdgeInsets = UIEdgeInsets.zero, width:CGFloat = NXDevice.pixel){
+        let __color = color
+        let __width = width
         
         if ats.contains(.minY) && ats.contains(.minX) && ats.contains(.maxY) && ats.contains(.maxX) {
             ///四周都添加分割线
             self.association?.separator?.isHidden = true
-            self.setupBorder(color: color, width: NXDevice.pixel, radius: 0)
+            self.setupBorder(color: __color, width: __width, radius: 0)
         }
         else if ats.isEmpty {
             ///无分割线
@@ -170,33 +156,21 @@ extension UIView {
             separator?.backgroundColor = color.cgColor;
 
             if ats.contains(.minY) {
-                separator?.frame = CGRect(x: insets.left, y: 0, width: self.w-insets.left-insets.right, height: NXDevice.pixel)
+                separator?.frame = CGRect(x: insets.left, y: 0, width: self.w-insets.left-insets.right, height: width)
             }
             else if ats.contains(.minX) {
-                separator?.frame = CGRect(x: 0, y: insets.top, width: NXDevice.pixel, height: self.h-insets.top-insets.bottom)
+                separator?.frame = CGRect(x: 0, y: insets.top, width: __width, height: self.h-insets.top-insets.bottom)
             }
             else if ats.contains(.maxY) {
-                separator?.frame = CGRect(x: insets.left, y: self.h-NXDevice.pixel, width: self.w-insets.left-insets.right, height: NXDevice.pixel)
+                separator?.frame = CGRect(x: insets.left, y: self.h-__width, width: self.w-insets.left-insets.right, height: __width)
             }
             else if ats.contains(.maxX) {
-                separator?.frame = CGRect(x: self.w-NXDevice.pixel, y: 0, width: NXDevice.pixel, height: self.h-insets.top-insets.bottom)
+                separator?.frame = CGRect(x: self.w-__width, y: 0, width: __width, height: self.h-insets.top-insets.bottom)
             }
         }
     }
     
-    //设置阴影效果
-    public func setShadow(color: UIColor?, offset: CGSize, radius: CGFloat = 6.0){
-        let color = color ?? NX.shadowColor
-        
-        //设置阴影
-        self.layer.shadowColor = color.cgColor;
-        self.layer.shadowOffset = offset
-        self.layer.shadowRadius = radius
-        self.layer.shadowOpacity = 0.15
-        //设置圆角
-        self.layer.cornerRadius = self.layer.shadowRadius
-        self.layer.masksToBounds = false
-    }
+    
 }
 
 
@@ -219,9 +193,6 @@ extension UIView {
         return nil
     }
 }
-
-
-
 
 
 //添加虚线边框
@@ -306,8 +277,4 @@ extension UIView {
             self.layer.addSublayer(shapeLayer)
         }
     }
-}
-
-public enum NXViewShakeDirection {
-    case horizontal, vertical
 }

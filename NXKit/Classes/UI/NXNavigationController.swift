@@ -114,7 +114,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     override open func pushViewController(_ viewController: UIViewController, animated: Bool) {
         if let viewController = viewController as? NXViewController {
             viewController.ctxs.operation = .push
-            viewController.ctxs.oriention = .right
+            viewController.ctxs.orientation = .right
         }
         super.pushViewController(viewController, animated: animated)
     }
@@ -196,7 +196,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
         to.view.addSubview(viewController.ctxs.transitionView!)
         viewController.ctxs.transitionView?.addSubview(viewController.view)
         
-        if viewController.ctxs.oriention == .left {
+        if viewController.ctxs.orientation == .left {
             viewController.view.x = -to.view.w
             UIView.animate(withDuration: animated ? self.ctxs.duration : 0.0,
                            delay: 0.0,
@@ -208,7 +208,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                 self.ctxs.semaphore.signal()
             })
         }
-        else if viewController.ctxs.oriention == .right {
+        else if viewController.ctxs.orientation == .right {
             viewController.view.x = to.view.w
             UIView.animate(withDuration: animated ? self.ctxs.duration:0.0,
                            delay: 0.0,
@@ -220,7 +220,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                 self.ctxs.semaphore.signal()
             })
         }
-        else if viewController.ctxs.oriention == .top {
+        else if viewController.ctxs.orientation == .top {
             viewController.view.y = -to.view.h
             UIView.animate(withDuration: animated ? self.ctxs.duration:0.0,
                            delay: 0.0,
@@ -232,7 +232,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                 self.ctxs.semaphore.signal()
             })
         }
-        else if viewController.ctxs.oriention == .bottom {
+        else if viewController.ctxs.orientation == .bottom {
             viewController.view.y = to.view.h
             UIView.animate(withDuration: animated ? self.ctxs.duration:0.0,
                            delay: 0.0,
@@ -259,7 +259,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
         guard let parentViewController = viewController.ctxs.superviewController else {return}
         guard let index = parentViewController.ctxs.subviewControllers.lastIndex(of: viewController) else { return }
         self.ctxs.semaphore.wait()
-        if viewController.ctxs.oriention == .left {
+        if viewController.ctxs.orientation == .left {
             self.view.isUserInteractionEnabled = false
             UIView.animate(withDuration: animated ? self.ctxs.duration:0.0,
                            delay: 0.0,
@@ -280,7 +280,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                 self.ctxs.semaphore.signal()
             })
         }
-        else if viewController.ctxs.oriention == .right {
+        else if viewController.ctxs.orientation == .right {
             self.view.isUserInteractionEnabled = false
             UIView.animate(withDuration: animated ? self.ctxs.duration:0.0,
                            delay: 0.0,
@@ -301,7 +301,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                 self.ctxs.semaphore.signal()
             })
         }
-        else if viewController.ctxs.oriention == .top {
+        else if viewController.ctxs.orientation == .top {
             self.view.isUserInteractionEnabled = false
             UIView.animate(withDuration: animated ? self.ctxs.duration:0.0,
                            delay: 0.0,
@@ -322,7 +322,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                 self.ctxs.semaphore.signal()
             })
         }
-        else if viewController.ctxs.oriention == .bottom {
+        else if viewController.ctxs.orientation == .bottom {
             self.view.isUserInteractionEnabled = false
             UIView.animate(withDuration: animated ? self.ctxs.duration:0.0,
                            delay: 0.0,

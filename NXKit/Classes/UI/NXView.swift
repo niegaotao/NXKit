@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class NXView: UIView{
+open class NXView: UIView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

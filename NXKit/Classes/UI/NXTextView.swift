@@ -9,8 +9,8 @@
 import UIKit
 
 open class NXTextView: UITextView {
-    public let placeholderView = UILabel()
-    
+    public let placeholderView = UILabel(frame: CGRect.zero)
+    open var notification : NX.Completion<NSNotification.Name, NXTextView>? = nil
     
     override open var text: String! {
         didSet {
@@ -20,12 +20,7 @@ open class NXTextView: UITextView {
     
     override open  var font: UIFont? {
         didSet {
-            if let __font = self.font {
-                let __size = String.size(of: "应用", size: CGSize(width: 200, height: 200), font: __font)
-                var __frame = self.placeholderView.frame
-                __frame.size.height = ceil(__size.height)
-                self.placeholderView.frame = __frame
-            }
+            self.setNeedsLayout()
         }
     }
     
@@ -68,7 +63,7 @@ open class NXTextView: UITextView {
                                                object: nil)
     }
     
-    //
+    
     public convenience init(frame: CGRect, textContainer: NSTextContainer?, maximumOfBytes: Int) {
         self.init(frame: frame, textContainer: textContainer)
         self.update(placeholder:nil, placeholderColor:nil, maximumOfBytes:maximumOfBytes)
@@ -85,7 +80,7 @@ open class NXTextView: UITextView {
         self.maximumOfBytes = maximumOfBytes
         
         self.commitInputAccessoryView()
-
+        self.setNeedsLayout()
     }
     
     private func commitInputAccessoryView() {
@@ -106,19 +101,17 @@ open class NXTextView: UITextView {
     }
     
     private func updateSubviews() {
-        placeholderView.font = NX.font(16)
         placeholderView.textColor = NX.lightGrayColor
-        placeholderView.textAlignment = self.textAlignment
-        placeholderView.text = ""
-        placeholderView.numberOfLines = 0
+       
         placeholderView.backgroundColor = UIColor.clear
         placeholderView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(placeholderView)
         
-        self.layoutSubviews()
+        self.setNeedsLayout()
     }
     
     @objc private func textDidChange() {
+        self.notification?(UITextView.textDidChangeNotification, self)
         placeholderView.isHidden = !text.isEmpty
         
         //只有对长度有限制才需要处理
@@ -152,10 +145,20 @@ open class NXTextView: UITextView {
     open override func layoutSubviews() {
         super.layoutSubviews()
         
+        let __font = self.font ?? NX.font(16)
+
         var __frame = self.placeholderView.frame
         __frame.origin.x = self.textContainerInset.left + self.textContainer.lineFragmentPadding
         __frame.origin.y = self.textContainerInset.top
         __frame.size.width = self.frame.size.width - self.textContainerInset.left - self.textContainerInset.right - self.textContainer.lineFragmentPadding * 2.0
+        let __size = String.size(of: self.placeholderView.text, size: CGSize(width: __frame.size.width, height: 100), font: __font) { __style in
+            __style.lineSpacing = 2.0
+        }
+        __frame.size.height = __size.height
+        
+        self.placeholderView.textAlignment = self.textAlignment
+        self.placeholderView.numberOfLines = 0
+        self.placeholderView.font = __font
         self.placeholderView.frame = __frame
     }
     

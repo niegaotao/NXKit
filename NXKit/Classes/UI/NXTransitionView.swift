@@ -43,7 +43,7 @@ open class NXTransitionView: NXView {
         super.addSubview(view)
         
         if let viewController = view.next as? NXViewController, viewController == owner {
-            if owner.ctxs.oriention == .bottom || owner.ctxs.oriention == .top {
+            if owner.ctxs.orientation == .bottom || owner.ctxs.orientation == .top {
                 panRecognizer.isEnabled = false
             }
             else{
@@ -61,18 +61,18 @@ open class NXTransitionView: NXView {
         else if panRecognizer.state == .changed {
             var affineValue = point.x - self.p.x
             
-            if owner.ctxs.oriention == .right {
+            if owner.ctxs.orientation == .right {
                 if affineValue < 0 { affineValue = 0}
                 if affineValue > NXDevice.width { affineValue = NXDevice.width}
             }
-            else if owner.ctxs.oriention == .left {
+            else if owner.ctxs.orientation == .left {
                 if affineValue > 0 { affineValue = 0}
                 if affineValue < -NXDevice.width { affineValue = -NXDevice.width}
             }
             owner.view.x = affineValue
         }
         else {
-            if owner.ctxs.oriention == .right {
+            if owner.ctxs.orientation == .right {
                 if owner.view.x < NXDevice.width/3.0 {
                     UIView.animate(withDuration: 0.2) {
                         self.owner.view.x = 0.0

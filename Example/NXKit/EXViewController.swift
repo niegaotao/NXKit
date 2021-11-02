@@ -15,7 +15,7 @@ class EXViewController: NXViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        
+        self.naviView.title = "NXViewController"
         
         let button = UIButton(frame: CGRect(x: 5, y: 5, width: NXDevice.width-10, height: 100))
         button.backgroundColor = .red
@@ -24,7 +24,7 @@ class EXViewController: NXViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
         self.contentView.addSubview(button)
-        
+                
     }
 
     override func didReceiveMemoryWarning() {

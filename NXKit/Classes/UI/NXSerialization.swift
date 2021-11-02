@@ -146,28 +146,4 @@ open class NXSerialization {
         guard let path = path else {return []}
         return NXSerialization.data(toArray: NXSerialization.file(toData: path))
     }
-    
-    //生成路由URL
-    public class func createRouter(scheme:String, path:String, operation:String, data:[String:Any]) -> String {
-        let __operation = NX.encodeURIComponent(operation) ?? operation
-        if data.count > 0 {
-            let encode = NXSerialization.JSONObject(toString:data, encode:true)
-            return "\(scheme)://\(path)?operation=\(__operation)&data=\(encode)"
-        }
-        return "\(scheme)://\(path)?operation=\(__operation)"
-    }
-    
-    public class func createRouter(scheme:String, path:String, query:[String:String], encode:Bool) -> String {
-        var __querys = [String]()
-        for (queryKey, queryKalue) in query {
-            let __queryKey = encode ? NX.get(string:NX.encodeURIComponent(queryKey), ""): queryKey
-            let __queryValue = encode ? NX.get(string:NX.encodeURIComponent(queryKalue), ""): queryKalue
-            __querys.append("\(__queryKey)=\(__queryValue)")
-        }
-        var __actionURL = "\(scheme)://\(path)"
-        if __querys.count > 0 {
-            __actionURL = __actionURL + "?" + __querys.joined(separator: "&")
-        }
-        return __actionURL
-    }
 }

@@ -1,5 +1,5 @@
 //
-//  NXAssetClipImageViewController.swift
+//  NXAssetClipViewController.swift
 //  NXKit
 //
 //  Created by niegaotao on 2020/11/1.
@@ -9,7 +9,7 @@
 import UIKit
 
 
-open class NXAssetClipImageViewController: NXViewController {
+open class NXAssetClipViewController: NXViewController {
     open var image : UIImage? = nil
     
     open var clips = NX.Wrappable<Int, [NXAsset.Clip], [NXAsset.Clip]> { (_, __sender) in
@@ -45,7 +45,7 @@ open class NXAssetClipImageViewController: NXViewController {
         self.footerView.frame = CGRect(x: 0, y: self.contentView.h-self.footerView.h, width: self.footerView.w, height: self.footerView.h)
         self.footerView.backgroundColor = NX.color(0x181818)
         self.footerView.contentView.backgroundColor = NX.color(0x181818)
-        self.footerView.setupSeparator(color: nil, ats: [])
+        self.footerView.setupSeparator(color: NX.separatorColor, ats: [])
         self.contentView.addSubview(self.footerView)
         
         if let image = self.image, image.size.width > 0 && image.size.height > 0, self.clips.value.count >= 1 {
@@ -119,10 +119,15 @@ open class NXAssetClipImageViewController: NXViewController {
             self.clipboardView.wrapped.size.width = __frame.size.width
             self.clipboardView.wrapped.size.height = __frame.size.height
             
-            self.clipboardView.wrapped.clip.isResizable = self.clips.value[self.clips.is].isResizable
-            self.clipboardView.wrapped.clip.width = self.clips.value[self.clips.is].width
-            self.clipboardView.wrapped.clip.height = self.clips.value[self.clips.is].height
-            self.clipboardView.wrapped.clip.isHidden = self.clips.value[self.clips.is].isHidden
+            let clip = self.clips.value[self.clips.is]
+            self.clipboardView.wrapped.clip.isResizable = clip.isResizable
+            self.clipboardView.wrapped.clip.width = clip.width
+            self.clipboardView.wrapped.clip.height = clip.height
+            if self.clipboardView.wrapped.clip.width <= 0 || self.clipboardView.wrapped.clip.height <= 0  {
+                self.clipboardView.wrapped.clip.width = __size.width
+                self.clipboardView.wrapped.clip.height = __size.height
+            }
+            self.clipboardView.wrapped.clip.isHidden = clip.isHidden
             
             self.clipboardView.updateSubviews("", nil)
             

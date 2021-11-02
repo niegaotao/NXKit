@@ -149,8 +149,6 @@ extension NXFS {
 }
 
 extension NXFS {
-    public static let file = NX.namespace
-
     //setValue:写入数据
     open class func setValue(_ value: Any, forKey: String, directory: NXFS.Directory, filename: String) {
         

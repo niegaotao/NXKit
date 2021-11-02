@@ -17,7 +17,16 @@ class EXAppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        if #available(iOS 13.0, *) {
+            let rect = self.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
+            NX.print("-------\(rect)")
+        } else {
+            // Fallback on earlier versions
+        }
         self.window?.rootViewController = NXNavigationController(rootViewController: EXViewController())
         self.window?.makeKeyAndVisible()
         return true

@@ -166,6 +166,13 @@ extension String {
         }
         return __text.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: options, context: nil).size
     }
+    
+    static public func size(of attributedText: NSAttributedString?, size: CGSize) -> CGSize {
+        guard let __text = attributedText else {
+            return CGSize.zero
+        }
+        return __text.boundingRect(with: size, options: .usesLineFragmentOrigin, context: nil).size
+    }
 }
 
 

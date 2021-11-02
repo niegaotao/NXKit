@@ -15,7 +15,7 @@ open class NXKeyboardAccessoryView: NXView {
     open override func setupSubviews() {
         
         self.backgroundColor = NX.viewBackgroundColor
-        self.addBorder(color: NX.separatorColor, ats: .minY, insets: UIEdgeInsets.zero)
+        self.setupSeparator(color: NX.separatorColor, ats: .minY, insets: UIEdgeInsets.zero)
         
         actionView.frame = CGRect(x: self.w - 55, y: 0, width: 50, height: self.h)
         actionView.setTitle("确定", for: .normal)

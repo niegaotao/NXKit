@@ -12,4 +12,6 @@ open class NXAny: Equatable {
     public static func == (lhs: NXAny, rhs: NXAny) -> Bool {
         return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
     }
+    
+    public init(){}
 }

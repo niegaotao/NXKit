@@ -9,8 +9,8 @@ import UIKit
 
 open class NXClipboardView: NXView {
     open class Line {
-        open var width : CGFloat = 10.0
-        open var insets : CGFloat =  8.0
+        open var width : CGFloat = 20.0
+        open var insets : CGFloat = 18.0
         
         public init(){}
         
@@ -164,29 +164,29 @@ open class NXClipboardView: NXView {
         self.wrappedView.maxYView.h = self.wrapped.line.width
         self.wrappedView.maxYView.insets = UIEdgeInsets(top: self.wrapped.line.insets, left: 0, bottom: 0, right: 0)
         
-        self.wrappedView.minYLHSView.w = self.wrapped.line.width * 2.0
+        self.wrappedView.minYLHSView.w = self.wrapped.line.width * 1.25
         self.wrappedView.minYLHSView.h = self.wrapped.line.width * 0.5
         
-        self.wrappedView.minYRHSView.w = self.wrapped.line.width * 2.0
+        self.wrappedView.minYRHSView.w = self.wrapped.line.width * 1.25
         self.wrappedView.minYRHSView.h = self.wrapped.line.width * 0.5
 
-        self.wrappedView.maxYLHSView.w = self.wrapped.line.width * 2.0
+        self.wrappedView.maxYLHSView.w = self.wrapped.line.width * 1.25
         self.wrappedView.maxYLHSView.h = self.wrapped.line.width * 0.5
         
-        self.wrappedView.maxYRHSView.w = self.wrapped.line.width * 2.0
+        self.wrappedView.maxYRHSView.w = self.wrapped.line.width * 1.25
         self.wrappedView.maxYRHSView.h = self.wrapped.line.width * 0.5
         
         self.wrappedView.minXTHSView.w = self.wrapped.line.width * 0.5
-        self.wrappedView.minXTHSView.h = self.wrapped.line.width * 2.0
+        self.wrappedView.minXTHSView.h = self.wrapped.line.width * 1.25
         
         self.wrappedView.minXBHSView.w = self.wrapped.line.width * 0.5
-        self.wrappedView.minXBHSView.h = self.wrapped.line.width * 2.0
+        self.wrappedView.minXBHSView.h = self.wrapped.line.width * 1.25
         
         self.wrappedView.maxXTHSView.w = self.wrapped.line.width * 0.5
-        self.wrappedView.maxXTHSView.h = self.wrapped.line.width * 2.0
+        self.wrappedView.maxXTHSView.h = self.wrapped.line.width * 1.25
         
         self.wrappedView.maxXBHSView.w = self.wrapped.line.width * 0.5
-        self.wrappedView.maxXBHSView.h = self.wrapped.line.width * 2.0
+        self.wrappedView.maxXBHSView.h = self.wrapped.line.width * 1.25
         
         if self.wrapped.clip.isHidden == false {
             self.wrappedView.isHidden = false

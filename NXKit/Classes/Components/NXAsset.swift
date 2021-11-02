@@ -8,20 +8,18 @@
 import UIKit
 import Photos
 
-open class NXAsset: NSObject {
+open class NXAsset: NXAny {
     open var value = [String:Any]()
     
-    open var type = NXAsset.Subtype.unknown.rawValue//类型
+    open var mediaType = PHAssetMediaType.unknown//类型
     open var size : CGSize = CGSize.zero //宽度高度
     open var url : String = ""
     open var file : String = ""
     
     open var asset : PHAsset? = nil
-
-    open var mediaType: PHAssetMediaType = .unknown
     open var duration: TimeInterval = 0 //时长
     
-    open var name : String = "" //文件名
+    open var filename : String = "" //文件名
     open var isBlocked : Bool = false //是否在历史记录中
     open var isSelectable: Bool = false //是否可选择
     open var isMaskedable : Bool = false //是否添加覆盖层
@@ -43,10 +41,10 @@ open class NXAsset: NSObject {
             
             self.size = CGSize(width: __asset.pixelWidth, height: __asset.pixelHeight)
             self.duration = __asset.duration
+            self.filename = NX.get(string: __asset.value(forKey: "filename") as? String, "")
             
-            self.name = NX.get(string: __asset.value(forKey: "filename") as? String, "")
             if __asset.mediaType == .video {
-                let __filename = self.name.lowercased()
+                let __filename = self.filename.lowercased()
                 if fileExtensions.count > 0 {
                     self.isSelectable = fileExtensions.contains { (suffixe) -> Bool in
                         return __filename.hasSuffix(suffixe)
@@ -69,6 +67,12 @@ open class NXAsset: NSObject {
 }
 
 extension NXAsset {
+    
+    open class Request {
+        open var size = CGSize.zero
+        open var iCloud = false
+        public init(){}
+    }
     
     open func startRequest(_ request:NXAsset.Request, _ completion:@escaping NX.Completion<Bool, Any?>){
         if self.completion == nil {
@@ -136,39 +140,8 @@ extension NXAsset {
 }
 
 extension NXAsset {
-    open class Request {
-        open var size = CGSize.zero
-        open var iCloud = false
-        public init(){}
-    }
-    
-    public enum Subtype : String {
-        case image = "image"
-        case video = "video"
-        case audio = "audio"
-        case unknown = "unknown"
-    }
-    
-    public class func type(_ mediaType:PHAssetMediaType?) -> NXAsset.Subtype.RawValue {
-        guard let __mediaType = mediaType else {
-            return NXAsset.Subtype.unknown.rawValue
-        }
-        if __mediaType == .image {
-            return NXAsset.Subtype.image.rawValue
-        }
-        else if __mediaType == .video {
-            return NXAsset.Subtype.video.rawValue
-        }
-        else if __mediaType == .audio {
-            return NXAsset.Subtype.audio.rawValue
-        }
-        return NXAsset.Subtype.unknown.rawValue
-    }
-}
-
-extension NXAsset {
     //选择的记录
-    open class Value : NSObject {
+    open class Record : NSObject {
         open var isIndex = true
         open var minOfAssets : Int = 0
         open var maxOfAssets : Int = 0
@@ -179,7 +152,6 @@ extension NXAsset {
     public enum State {
         case succeed
         case error
-        case denied
     }
     
     //回调部分的结构
@@ -188,8 +160,8 @@ extension NXAsset {
         open var maxOfAssets : Int = 0
         open var assets = [NXAsset]()
         
-        open var image = NXAsset.Value()
-        open var video = NXAsset.Value()
+        open var image = NXAsset.Record()
+        open var video = NXAsset.Record()
         open var isMixable = false
         
         open var isAutoclosed = true
@@ -243,7 +215,7 @@ extension NXAsset {
         //创建相册信号量
         public static var semaphore = DispatchSemaphore(value: 1)
         //是否优先请求全高清图像
-        public static var iCloud = false
+        public static var iCloud = true
         //支持展示的媒体类型
         open var mediaType = PHAssetMediaType.unknown
         //本次已经选择的资源
@@ -256,8 +228,6 @@ extension NXAsset {
         open var output = NXAsset.Output()
         //本次已经选择的资源
         open var selectedIdentifiers = [String]()
-        //已经选择过的
-        open var usedIdentifiers = [String]()
 
         //导出封面图相关
         open var outputResize = CGSize(width: 1920, height: 1920)//导出尺寸
@@ -265,7 +235,7 @@ extension NXAsset {
         open var outputUIImage = true //是否需要导出UIImage
         
         //图片相关
-        open var imageClips = [NXAsset.Clip]()//具体的宽高比例
+        open var clips = [NXAsset.Clip]()//具体的宽高比例
         
         //导出视频相关
         open var videoClipsAllowed = false//是否支持裁剪
@@ -277,9 +247,9 @@ extension NXAsset {
         //最初的打开方式
         open var operation = NXViewController.Operation.present
         //是否打开页面
-        open var isOpenable = true
+        open var openAllowed = true
         //是否关闭页面
-        open var isCloseable = true
+        open var closeAllowed = true
         //是否需要动画
         open var isAnimated = true
         
@@ -312,7 +282,7 @@ extension NXAsset {
         
         //处理数据
         public class func dispose(_ wrapped:NXAsset.Wrapped, assets:[NXAsset]){
-            if wrapped.isCloseable {
+            if wrapped.closeAllowed {
                 NXAsset.Wrapped.close(wrapped)
             }
             
@@ -349,11 +319,6 @@ extension NXAsset {
 
 
 extension NXAsset {
-    
-}
-
-
-extension NXAsset {
     open class func open(album: NX.Completion<Bool, NXAssetsViewController>?,
                          completion: NX.Completion<Bool, NXAsset.Output>?) {
         NX.authorization(NX.Authorize.album, DispatchQueue.main, true, { state in
@@ -363,7 +328,7 @@ extension NXAsset {
             __wrapped.modalPresentationStyle = .fullScreen
             __wrapped.viewController.viewController.wrapped.completion = completion
             album?(true, __wrapped.viewController.viewController)
-            if __wrapped.viewController.viewController.wrapped.isOpenable {
+            if __wrapped.viewController.viewController.wrapped.openAllowed {
                 NXAsset.Wrapped.open(__wrapped.viewController.viewController.wrapped, vc: __wrapped)
             }
         })
@@ -378,12 +343,11 @@ extension NXAsset {
                               
                               mediaType:PHAssetMediaType,
                               selectedIdentifiers:[String],
-                              usedIdentifiers:[String],
                               outputResize:CGSize,
                               outputResizeBy:String,
                               outputUIImage:Bool,
 
-                              imageClips:[NXAsset.Clip],
+                              clips:[NXAsset.Clip],
                               
                               videoClipsAllowed:Bool,
                               videoClipsDuration:TimeInterval,
@@ -393,8 +357,8 @@ extension NXAsset {
                               
                               operation:NXViewController.Operation,
                               naviController:NXNavigationController,
-                              isOpenable:Bool,
-                              isCloseable:Bool,
+                              openAllowed:Bool,
+                              closeAllowed:Bool,
                               isAnimated:Bool,
                               completion:NX.Completion<Bool, NXAsset.Output>?) {
         
@@ -413,7 +377,6 @@ extension NXAsset {
             vc.wrapped.output.isAutoclosed = isAutoclosed
 
             vc.wrapped.mediaType = mediaType
-            vc.wrapped.usedIdentifiers = usedIdentifiers
             vc.wrapped.selectedIdentifiers = selectedIdentifiers
             
             //导出封面图相关
@@ -422,7 +385,7 @@ extension NXAsset {
             vc.wrapped.outputUIImage = outputUIImage
 
             //图片
-            vc.wrapped.imageClips = imageClips
+            vc.wrapped.clips = clips
             
             //视频
             vc.wrapped.videoClipsAllowed = videoClipsAllowed
@@ -435,8 +398,8 @@ extension NXAsset {
             //导航相关
             vc.wrapped.naviController = naviController
             vc.wrapped.operation = operation
-            vc.wrapped.isOpenable = isOpenable
-            vc.wrapped.isCloseable = isCloseable
+            vc.wrapped.openAllowed = openAllowed
+            vc.wrapped.closeAllowed = closeAllowed
             vc.wrapped.isAnimated = isAnimated
         }, completion: completion)
     }
@@ -548,7 +511,7 @@ extension NXAsset {
         NX.authorization(.album, queue, false) { (status) in
             guard status == .authorized else {
                 queue.async {
-                    completion?(.denied, [])
+                    completion?(.error, [])
                 }
                 return
             }
@@ -854,7 +817,7 @@ open class NXImagePickerController : UIImagePickerController, UIImagePickerContr
 }
 
 
-open class NXAssetViewCell: NXCollectionViewCell{
+open class NXAssetViewCell: NXCollectionViewCell {
     public let assetView = UIImageView(frame: CGRect.zero) //显示图片或者视频的封面
     public let durationView = UILabel(frame: CGRect.zero) //显示视频时长
     public let indexView = UILabel(frame: CGRect.zero) //显示选中和非选中的按钮
@@ -873,11 +836,11 @@ open class NXAssetViewCell: NXCollectionViewCell{
         durationView.isHidden = true
         contentView.addSubview(durationView)
         
-        indexView.layer.cornerRadius = 10
+        indexView.layer.cornerRadius = 11.5
         indexView.layer.masksToBounds = true
         indexView.textColor = UIColor.white
-        indexView.alpha = 0.85
-        indexView.font = NX.font(12, true)
+        indexView.font = NX.font(13, true)
+        indexView.layer.borderWidth = 1.5
         indexView.textAlignment = .center
         indexView.isUserInteractionEnabled = false
         contentView.addSubview(indexView)
@@ -929,11 +892,13 @@ open class NXAssetViewCell: NXCollectionViewCell{
             indexView.isHidden = false
             if asset.index.isEmpty {
                 indexView.text = ""
-                indexView.backgroundColor = UIColor.white
+                indexView.backgroundColor = UIColor.clear
+                indexView.layer.borderColor = UIColor.white.cgColor
             }
             else {
                 indexView.text = asset.index
                 indexView.backgroundColor = NX.mainColor
+                indexView.layer.borderColor = NX.mainColor.cgColor
             }
             maskedView.isHidden = true
         }
@@ -944,19 +909,15 @@ open class NXAssetViewCell: NXCollectionViewCell{
         
         assetView.frame = contentView.bounds
         durationView.frame = CGRect(x: 4, y: contentView.h-22, width: contentView.w-8, height: 22)
-        indexView.frame = CGRect(x: contentView.w-20-5, y: 5, width: 20, height: 20)
+        indexView.frame = CGRect(x: contentView.w-23-5, y: 5, width: 23, height: 23)
         maskedView.frame = contentView.bounds
     }
 }
 
-public class NXAlbum : NXAction {
-    var assets = [NXAsset]() //保存自己之前生成的model
-    var finalAssets = [NXAsset]() //过滤之后的数据源
-    
-    var isBlockable = false //是否支持做过滤处理
-    var isBlocked = true//默认是过滤过滤的
+open class NXAlbum : NXAction {
+    public var assets = [NXAsset]() //保存自己之前生成的model
         
-    convenience init(title: String, fetchResults: [PHFetchResult<AnyObject>], wrapped:NXAsset.Wrapped) {
+    convenience public init(title: String, fetchResults: [PHFetchResult<AnyObject>], wrapped:NXAsset.Wrapped) {
         self.init(title: title, value: nil, completion:nil)
         self.ctxs.update(NXActionViewCell.self, "NXActionViewCell")
                 
@@ -967,18 +928,14 @@ public class NXAlbum : NXAction {
                     
                     let phasset = __fetchResult[index]
                     let __asset = NXAsset(asset: phasset, fileExtensions:wrapped.videoFileExtensions)
-                    __asset.isBlocked = wrapped.usedIdentifiers.contains(phasset.localIdentifier)
                     self.assets.append(__asset)
-                    if !__asset.isBlocked {
-                        self.finalAssets.append(__asset)
-                    }
                 }
             }
         }
         
         
         //获取封面
-        if let asset = self.assets.first?.asset {
+        if let asset = self.assets.last?.asset {
             var __size = CGSize.zero
             __size.width = round((NXDevice.width-12*2-2*3)/4.0 * NXDevice.scale)
             __size.height = __size.width
@@ -990,9 +947,7 @@ public class NXAlbum : NXAction {
                                                     self?.asset.image = image
             }
         }
-        
-        self.isBlockable = (self.assets.count != self.finalAssets.count)
-        
+                
         self.ctxs.size = CGSize(width: NXDevice.width, height: 80)
         self.asset.frame = CGRect(x: 16, y: 1, width: 78, height: 78)
         self.asset.cornerRadius = 0.0

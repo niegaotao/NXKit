@@ -14,13 +14,10 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     public let wrapped = NXAsset.Wrapped()
     //导航栏中间切换相册
     public let centerView = NXButton(frame: CGRect(x: 75.0, y: NXDevice.insets.top, width: NXDevice.width-75.0*2, height: NXDevice.topOffset-NXDevice.insets.top))
-    //顶部悬停过滤的
-    public let filterView = NXSuspendView<UIButton>(frame: CGRect(x: 0, y: 0, width: NXDevice.width, height: 40))
     //展示图片
     public let collectionView = NXCollectionView(frame: CGRect.zero)
     //展示底部切换的按钮
     public let footerView = NXFooterView(frame: CGRect(x: 0, y: -(60+NXDevice.bottomOffset), width: NXDevice.width, height: 60+NXDevice.bottomOffset))
-    
     
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -86,17 +83,6 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
             collectionView.contentInsetAdjustmentBehavior = .never
         }
         
-        self.filterView.contentView.frame = CGRect(x: 0, y: 0, width: NXDevice.width, height: 40)
-        self.filterView.contentView.titleLabel?.font = NX.font(13, false)
-        self.filterView.contentView.contentHorizontalAlignment = .center
-        self.filterView.setupSeparator(color: NX.separatorColor, ats: .maxY)
-        self.filterView.contentView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
-            self?.dispose("filter", nil)
-        }
-        self.filterView.backgroundColor = NX.backgroundColor
-        self.contentView.addSubview(self.filterView)
-        self.filterView.updateSubviews("", false)
-        
         self.footerView.frame = CGRect(x: 0, y: self.contentView.h-60-NXDevice.bottomOffset, width: self.contentView.w, height: 60+NXDevice.bottomOffset)
         self.footerView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.footerView.backgroundColor = NX.backgroundColor
@@ -141,39 +127,14 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         self.centerView.setTitle(album.title.value, for: .normal)
         self.centerView.updateAlignment(.horizontalReverse, 2)
                 
-        if album.isBlockable {
-            if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.sectionInset.top = 40
-            }
-
-            var prefix = "\(album.assets.count-album.finalAssets.count)张图已经发布过，已为您智能隐藏 "
-            var subfix = "全部显示"
-            if !album.isBlocked {
-                prefix = "\(album.assets.count-album.finalAssets.count)张图已经发布过，已为您全部显示 "
-                subfix = "智能隐藏"
-            }
-            let attris = NSMutableAttributedString(string: prefix+subfix)
-            attris.setAttributes([NSAttributedString.Key.font:NX.font(13, false)], range: NSRange(location: 0, length: prefix.count+subfix.count))
-            attris.setAttributes([NSAttributedString.Key.foregroundColor:NX.darkGrayColor], range: NSRange(location: 0, length: prefix.count))
-            attris.setAttributes([NSAttributedString.Key.foregroundColor:NX.mainColor], range: NSRange(location: prefix.count, length: subfix.count))
-            self.filterView.contentView.setAttributedTitle(attris, for: .normal)
-            
-            
-            DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {[weak self] in
-                self?.filterView.updateSubviews("animation", true)
-            }
-        }
-        else{
-            self.filterView.updateSubviews("", false)
-            if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.sectionInset.top = 12
-            }
+        if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.sectionInset.top = 12
         }
     }
     
     open override func dispose(_ action: String, _ value: Any?, _ completion: NX.Completion<String, Any?>? = nil) {
         if action == "navi.center" {
-            NXActionView.action(actions: self.wrapped.albums, header: (.header(false, true, true, false), "请选择相册"), footer: (.whitespace, ""), setup: nil) { (_, index) in
+            NXActionView.action(actions: self.wrapped.albums, header: (.header(false, false, true, true), "请选择相册"), footer: (.whitespace, ""), initialize: nil) { (_, index) in
                 guard index != self.ctxs.x else {
                     return;
                 }
@@ -239,11 +200,11 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                     }
                     self.wrapped.output.isOutputting = false
                     
-                    if assets.count == 1 && self.wrapped.imageClips.count >= 1, let image = assets.first?.image  {
-                        let vc = NXAssetClipImageViewController()
+                    if assets.count == 1 && self.wrapped.clips.count >= 1, let image = assets.first?.image  {
+                        let vc = NXAssetClipViewController()
                         vc.image = image
                         vc.clips.is = 0
-                        vc.clips.value = self.wrapped.imageClips
+                        vc.clips.value = self.wrapped.clips
                         vc.ctxs.completion = { [weak self] (_, outputUIImage) in
                             guard let self = self else {
                                 return
@@ -262,15 +223,6 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
             }
             else {
                 NXAsset.Wrapped.dispose(self.wrapped, assets: self.wrapped.output.assets)
-            }
-        }
-        else if action == "filter" {
-            if self.ctxs.x < self.wrapped.albums.count {
-                let album = self.wrapped.albums[self.ctxs.x]
-                if album.isBlockable {
-                    album.isBlocked = !album.isBlocked
-                    self.showAlbumAssets(at: self.ctxs.x)
-                }
             }
         }
         else if action == "subcomponents" {
@@ -300,28 +252,12 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     }
     
     public func showAlbumAssets(at index: Int){
-        self.filterView.updateSubviews("", false)
         guard index >= 0 && index < self.wrapped.albums.count else {return;}
         
         let album = self.wrapped.albums[index]
         self.wrapped.assets.removeAll()
         
-        if album.isBlockable {
-            if album.isBlocked {
-                if album.assets.count > 0 {
-                    self.wrapped.assets.append(contentsOf: album.finalAssets)
-                }
-            }
-            else{
-                if album.assets.count > 0 {
-                    self.wrapped.assets.append(contentsOf: album.assets)
-                }
-            }
-        }
-        else{
-            self.wrapped.assets.append(contentsOf: album.assets)
-        }
-        
+        self.wrapped.assets.append(contentsOf: album.assets)
         
         self.updateSubviews("", ["album":album])
         self.collectionView.reloadData()
@@ -480,46 +416,6 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         }
         cell.updateSubviews("update", asset)
         return cell
-    }
-    
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == self.collectionView {
-            if self.wrapped.albums[self.ctxs.x].isBlockable {
-                self.filterView.updateSubviews("animation", false)
-            }
-        }
-    }
-    
-    public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        if scrollView == self.collectionView {
-            if self.wrapped.albums[self.ctxs.x].isBlockable {
-                self.filterView.updateSubviews("animation", true)
-            }
-        }
-    }
-    
-    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if scrollView == self.collectionView {
-            if self.wrapped.albums[self.ctxs.x].isBlockable {
-                self.filterView.updateSubviews("animation", true)
-            }
-        }
-    }
-    
-    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if scrollView == self.collectionView {
-            if self.wrapped.albums[self.ctxs.x].isBlockable {
-                self.filterView.updateSubviews("animation", true)
-            }
-        }
-    }
-    
-    public func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        if scrollView == self.collectionView {
-            if self.wrapped.albums[self.ctxs.x].isBlockable {
-                self.filterView.updateSubviews("animation", true)
-            }
-        }
     }
 }
 

@@ -279,7 +279,7 @@ extension NXViewController {
         ///进行的什么操作
         open var operation = NXViewController.Operation.push
         ///从哪个方向载入
-        open var oriention = NXViewController.Orientation.right
+        open var orientation = NXViewController.Orientation.right
         ///转场动画过程中需要的容器视图
         open var transitionView: NXTransitionView?
         ///两级页面之间传递信息
