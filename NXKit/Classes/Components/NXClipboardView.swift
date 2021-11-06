@@ -24,7 +24,7 @@ open class NXClipboardView: NXView {
         //整个可以展示区域的宽高
         open var size = CGSize(width: CGFloat.zero, height: CGFloat.zero)
         //约束宽高
-        open var clip = NXAsset.Clip(isResizable: false, width: 1.0, height: 1.0, isHidden: false)
+        open var clip = NXAsset.Clip(name: "1:1", isResizable: false, width: 1.0, height: 1.0, isHidden: false)
         //线条相关属性
         open var line = NXClipboardView.Line()
         //边
@@ -127,7 +127,7 @@ open class NXClipboardView: NXView {
     }
     
 
-    public let wrapped = NXClipboardView.Wrapped()
+    public let ctxs = NXClipboardView.Wrapped()
     public let wrappedView = NXClipboardView.WrappedView(frame:CGRect.zero)
     public let panRecognizer = UIPanGestureRecognizer()
     public let point = NX.Wrappable<UIGestureRecognizer.State, CGPoint, CGPoint>{ (_, __sender) in
@@ -147,66 +147,67 @@ open class NXClipboardView: NXView {
     
     open override func updateSubviews(_ action: String, _ value: Any?) {
         
-        if self.wrapped.clip.width <= 0 || self.wrapped.clip.height <= 0 {
-            self.wrapped.clip.width = 1.0
-            self.wrapped.clip.height = 1.0
+        if self.ctxs.clip.width <= 0 || self.ctxs.clip.height <= 0 {
+            self.ctxs.clip.name = "1:1"
+            self.ctxs.clip.width = 1.0
+            self.ctxs.clip.height = 1.0
         }
         
-        self.wrappedView.minXView.w = self.wrapped.line.width
-        self.wrappedView.minXView.insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: self.wrapped.line.insets)
+        self.wrappedView.minXView.w = self.ctxs.line.width
+        self.wrappedView.minXView.insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: self.ctxs.line.insets)
         
-        self.wrappedView.maxXView.w = self.wrapped.line.width
-        self.wrappedView.maxXView.insets = UIEdgeInsets(top: 0, left: self.wrapped.line.insets, bottom: 0, right: 0)
+        self.wrappedView.maxXView.w = self.ctxs.line.width
+        self.wrappedView.maxXView.insets = UIEdgeInsets(top: 0, left: self.ctxs.line.insets, bottom: 0, right: 0)
         
-        self.wrappedView.minYView.h = self.wrapped.line.width
-        self.wrappedView.minYView.insets = UIEdgeInsets(top: 0, left: 0, bottom: self.wrapped.line.insets, right: 0)
+        self.wrappedView.minYView.h = self.ctxs.line.width
+        self.wrappedView.minYView.insets = UIEdgeInsets(top: 0, left: 0, bottom: self.ctxs.line.insets, right: 0)
         
-        self.wrappedView.maxYView.h = self.wrapped.line.width
-        self.wrappedView.maxYView.insets = UIEdgeInsets(top: self.wrapped.line.insets, left: 0, bottom: 0, right: 0)
+        self.wrappedView.maxYView.h = self.ctxs.line.width
+        self.wrappedView.maxYView.insets = UIEdgeInsets(top: self.ctxs.line.insets, left: 0, bottom: 0, right: 0)
         
-        self.wrappedView.minYLHSView.w = self.wrapped.line.width * 1.25
-        self.wrappedView.minYLHSView.h = self.wrapped.line.width * 0.5
+        self.wrappedView.minYLHSView.w = self.ctxs.line.width * 1.25
+        self.wrappedView.minYLHSView.h = self.ctxs.line.width * 0.5
         
-        self.wrappedView.minYRHSView.w = self.wrapped.line.width * 1.25
-        self.wrappedView.minYRHSView.h = self.wrapped.line.width * 0.5
+        self.wrappedView.minYRHSView.w = self.ctxs.line.width * 1.25
+        self.wrappedView.minYRHSView.h = self.ctxs.line.width * 0.5
 
-        self.wrappedView.maxYLHSView.w = self.wrapped.line.width * 1.25
-        self.wrappedView.maxYLHSView.h = self.wrapped.line.width * 0.5
+        self.wrappedView.maxYLHSView.w = self.ctxs.line.width * 1.25
+        self.wrappedView.maxYLHSView.h = self.ctxs.line.width * 0.5
         
-        self.wrappedView.maxYRHSView.w = self.wrapped.line.width * 1.25
-        self.wrappedView.maxYRHSView.h = self.wrapped.line.width * 0.5
+        self.wrappedView.maxYRHSView.w = self.ctxs.line.width * 1.25
+        self.wrappedView.maxYRHSView.h = self.ctxs.line.width * 0.5
         
-        self.wrappedView.minXTHSView.w = self.wrapped.line.width * 0.5
-        self.wrappedView.minXTHSView.h = self.wrapped.line.width * 1.25
+        self.wrappedView.minXTHSView.w = self.ctxs.line.width * 0.5
+        self.wrappedView.minXTHSView.h = self.ctxs.line.width * 1.25
         
-        self.wrappedView.minXBHSView.w = self.wrapped.line.width * 0.5
-        self.wrappedView.minXBHSView.h = self.wrapped.line.width * 1.25
+        self.wrappedView.minXBHSView.w = self.ctxs.line.width * 0.5
+        self.wrappedView.minXBHSView.h = self.ctxs.line.width * 1.25
         
-        self.wrappedView.maxXTHSView.w = self.wrapped.line.width * 0.5
-        self.wrappedView.maxXTHSView.h = self.wrapped.line.width * 1.25
+        self.wrappedView.maxXTHSView.w = self.ctxs.line.width * 0.5
+        self.wrappedView.maxXTHSView.h = self.ctxs.line.width * 1.25
         
-        self.wrappedView.maxXBHSView.w = self.wrapped.line.width * 0.5
-        self.wrappedView.maxXBHSView.h = self.wrapped.line.width * 1.25
+        self.wrappedView.maxXBHSView.w = self.ctxs.line.width * 0.5
+        self.wrappedView.maxXBHSView.h = self.ctxs.line.width * 1.25
         
-        if self.wrapped.clip.isHidden == false {
+        if self.ctxs.clip.isHidden == false {
             self.wrappedView.isHidden = false
             
             let pfsValue = NX.Rect(completion:nil)
-            pfsValue.x = self.wrapped.clip.width / self.wrapped.size.width
-            pfsValue.y = self.wrapped.clip.height / self.wrapped.size.height
+            pfsValue.x = self.ctxs.clip.width / self.ctxs.size.width
+            pfsValue.y = self.ctxs.clip.height / self.ctxs.size.height
             if pfsValue.x >= pfsValue.y {
                 //宽度撑满
-                pfsValue.width = self.wrapped.size.width
-                pfsValue.height = pfsValue.width * (self.wrapped.clip.height / self.wrapped.clip.width)
+                pfsValue.width = self.ctxs.size.width
+                pfsValue.height = pfsValue.width * (self.ctxs.clip.height / self.ctxs.clip.width)
             }
             else {
                 //高度撑满
-                pfsValue.height = self.wrapped.size.height
-                pfsValue.width = pfsValue.height * (self.wrapped.clip.width / self.wrapped.clip.height)
+                pfsValue.height = self.ctxs.size.height
+                pfsValue.width = pfsValue.height * (self.ctxs.clip.width / self.ctxs.clip.height)
             }
-            self.wrapped.frame.oldValue = CGRect(x:(self.wrapped.size.width - pfsValue.width)/2.0, y:(self.wrapped.size.height - pfsValue.height)/2.0, width:pfsValue.width, height:pfsValue.height)
-            self.wrapped.frame.value = self.wrapped.frame.oldValue
-            self.wrappedView.frame = self.wrapped.frame.value
+            self.ctxs.frame.oldValue = CGRect(x:(self.ctxs.size.width - pfsValue.width)/2.0, y:(self.ctxs.size.height - pfsValue.height)/2.0, width:pfsValue.width, height:pfsValue.height)
+            self.ctxs.frame.value = self.ctxs.frame.oldValue
+            self.wrappedView.frame = self.ctxs.frame.value
             
             self.panRecognizer.isEnabled = true
             self.pinchRecognizer.isEnabled = true
@@ -214,9 +215,9 @@ open class NXClipboardView: NXView {
         else {
             self.wrappedView.isHidden = true
             
-            self.wrapped.frame.oldValue = CGRect.zero
-            self.wrapped.frame.value = self.wrapped.frame.oldValue
-            self.wrappedView.frame = self.wrapped.frame.value
+            self.ctxs.frame.oldValue = CGRect.zero
+            self.ctxs.frame.value = self.ctxs.frame.oldValue
+            self.wrappedView.frame = self.ctxs.frame.value
 
             self.panRecognizer.isEnabled = true
             self.pinchRecognizer.isEnabled = false
@@ -237,101 +238,101 @@ open class NXClipboardView: NXView {
             self.point.oldValue = self.point.value
         }
         
-        if self.wrapped.clip.isHidden == false {
+        if self.ctxs.clip.isHidden == false {
             if self.point.is == .began {
                 
-                if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.minXView.frame, to: self).contains(self.point.oldValue) {
-                    self.wrapped.ats = .minX
+                if self.ctxs.clip.isResizable && self.wrappedView.convert(self.wrappedView.minXView.frame, to: self).contains(self.point.oldValue) {
+                    self.ctxs.ats = .minX
                 }
-                else if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.maxXView.frame, to: self).contains(self.point.oldValue) {
-                    self.wrapped.ats = .maxX
+                else if self.ctxs.clip.isResizable && self.wrappedView.convert(self.wrappedView.maxXView.frame, to: self).contains(self.point.oldValue) {
+                    self.ctxs.ats = .maxX
                 }
-                else if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.minYView.frame, to: self).contains(self.point.oldValue) {
-                    self.wrapped.ats = .minY
+                else if self.ctxs.clip.isResizable && self.wrappedView.convert(self.wrappedView.minYView.frame, to: self).contains(self.point.oldValue) {
+                    self.ctxs.ats = .minY
                 }
-                else if self.wrapped.clip.isResizable && self.wrappedView.convert(self.wrappedView.maxYView.frame, to: self).contains(self.point.oldValue) {
-                    self.wrapped.ats = .maxY
+                else if self.ctxs.clip.isResizable && self.wrappedView.convert(self.wrappedView.maxYView.frame, to: self).contains(self.point.oldValue) {
+                    self.ctxs.ats = .maxY
                 }
                 else {
-                    self.wrapped.ats = .center
+                    self.ctxs.ats = .center
                 }
             }
             
             if self.point.is == .began || self.point.is == .changed {
-                if self.wrapped.ats == .center {
+                if self.ctxs.ats == .center {
                     self.wrappedView.center = CGPoint(x: self.wrappedView.center.x + __translation.x, y: self.wrappedView.center.y + __translation.y)
-                    self.wrapped.frame.value = self.wrappedView.frame
+                    self.ctxs.frame.value = self.wrappedView.frame
                 }
-                else if self.wrapped.ats == .minX {
+                else if self.ctxs.ats == .minX {
                     var __frame = self.wrappedView.frame
                     __frame.origin.x = __frame.origin.x + __translation.x
                     __frame.size.width = __frame.size.width - __translation.x
-                    if __frame.size.width >= self.wrapped.line.width * 2.0
-                        && __frame.size.width <= self.wrapped.size.width {
-                        self.wrapped.frame.value = __frame
+                    if __frame.size.width >= self.ctxs.line.width * 2.0
+                        && __frame.size.width <= self.ctxs.size.width {
+                        self.ctxs.frame.value = __frame
                         self.wrappedView.frame = __frame
                     }
                 }
-                else if self.wrapped.ats == .maxX {
+                else if self.ctxs.ats == .maxX {
                     var __frame = self.wrappedView.frame
                     __frame.size.width = __frame.size.width + __translation.x
-                    if __frame.size.width >= self.wrapped.line.width * 2.0
-                        && __frame.size.width <= self.wrapped.size.width {
-                        self.wrapped.frame.value = __frame
+                    if __frame.size.width >= self.ctxs.line.width * 2.0
+                        && __frame.size.width <= self.ctxs.size.width {
+                        self.ctxs.frame.value = __frame
                         self.wrappedView.frame = __frame
                     }
                 }
-                else if self.wrapped.ats == .minY {
+                else if self.ctxs.ats == .minY {
                     var __frame = self.wrappedView.frame
                     __frame.origin.y = __frame.origin.y + __translation.y
                     __frame.size.height = __frame.size.height - __translation.y
-                    if __frame.size.height >= self.wrapped.line.width * 2.0
-                        && __frame.size.height <= self.wrapped.size.height {
-                        self.wrapped.frame.value = __frame
+                    if __frame.size.height >= self.ctxs.line.width * 2.0
+                        && __frame.size.height <= self.ctxs.size.height {
+                        self.ctxs.frame.value = __frame
                         self.wrappedView.frame = __frame
                     }
                 }
-                else if self.wrapped.ats == .maxY {
+                else if self.ctxs.ats == .maxY {
                     var __frame = self.wrappedView.frame
                     __frame.size.height = __frame.size.height + __translation.y
-                    if __frame.size.height >= self.wrapped.line.width * 2.0
-                        && __frame.size.height <= self.wrapped.size.height {
-                        self.wrapped.frame.value = __frame
+                    if __frame.size.height >= self.ctxs.line.width * 2.0
+                        && __frame.size.height <= self.ctxs.size.height {
+                        self.ctxs.frame.value = __frame
                         self.wrappedView.frame = __frame
                     }
                 }
             }
             else {
                 var __frame = self.wrappedView.frame
-                if __frame.width > self.wrapped.size.width {
-                    __frame.size.width = self.wrapped.size.width
-                    if self.wrapped.clip.isResizable == false {
-                        __frame.size.height = __frame.size.width * (self.wrapped.clip.height / self.wrapped.clip.width)
+                if __frame.width > self.ctxs.size.width {
+                    __frame.size.width = self.ctxs.size.width
+                    if self.ctxs.clip.isResizable == false {
+                        __frame.size.height = __frame.size.width * (self.ctxs.clip.height / self.ctxs.clip.width)
                     }
                 }
                 
-                if __frame.height > self.wrapped.size.height {
-                    __frame.size.height = self.wrapped.size.height
-                    if self.wrapped.clip.isResizable == false {
-                        __frame.size.width = __frame.size.height * (self.wrapped.clip.width / self.wrapped.clip.height)
+                if __frame.height > self.ctxs.size.height {
+                    __frame.size.height = self.ctxs.size.height
+                    if self.ctxs.clip.isResizable == false {
+                        __frame.size.width = __frame.size.height * (self.ctxs.clip.width / self.ctxs.clip.height)
                     }
                 }
                 if __frame.minX < 0 {
                     __frame.origin.x = 0
                 }
                 
-                if __frame.maxX > self.wrapped.size.width {
-                    __frame.origin.x = self.wrapped.size.width - __frame.width
+                if __frame.maxX > self.ctxs.size.width {
+                    __frame.origin.x = self.ctxs.size.width - __frame.width
                 }
                 
                 if __frame.minY < 0 {
                     __frame.origin.y = 0
                 }
                 
-                if __frame.maxY > self.wrapped.size.height {
-                    __frame.origin.y =  self.wrapped.size.height - __frame.height
+                if __frame.maxY > self.ctxs.size.height {
+                    __frame.origin.y =  self.ctxs.size.height - __frame.height
                 }
-                self.wrapped.frame.value = __frame
+                self.ctxs.frame.value = __frame
                 UIView.animate(withDuration: 0.15) {
                     self.wrappedView.frame = __frame
                 }
@@ -361,52 +362,52 @@ open class NXClipboardView: NXView {
                 __frame.origin.x = 0
             }
             
-            if __frame.maxX > self.wrapped.size.width {
-                __frame.size.width = self.wrapped.size.width - __frame.origin.x
+            if __frame.maxX > self.ctxs.size.width {
+                __frame.size.width = self.ctxs.size.width - __frame.origin.x
             }
             
             if __frame.minY < 0 {
                 __frame.origin.y = 0
             }
             
-            if __frame.maxY > self.wrapped.size.height {
-                __frame.size.height = self.wrapped.size.height - __frame.origin.y
+            if __frame.maxY > self.ctxs.size.height {
+                __frame.size.height = self.ctxs.size.height - __frame.origin.y
             }
             
             if self.point.is == .began || self.point.is == .changed {
-                self.wrapped.frame.value = __frame
-                self.wrappedView.frame = self.wrapped.frame.value
+                self.ctxs.frame.value = __frame
+                self.wrappedView.frame = self.ctxs.frame.value
                 self.wrappedView.isHidden = false
             }
             else {
-                if self.wrapped.clip.isResizable == false {
+                if self.ctxs.clip.isResizable == false {
                     //不动左上角,缩小比例
-                    let rateValue = CGPoint(x: __frame.size.width/self.wrapped.clip.width, y: __frame.size.height/self.wrapped.clip.height)
+                    let rateValue = CGPoint(x: __frame.size.width/self.ctxs.clip.width, y: __frame.size.height/self.ctxs.clip.height)
                     if rateValue.x >= rateValue.y {
                         //宽度过大，收缩宽度
-                        __frame.size.width = __frame.size.height * (self.wrapped.clip.width / self.wrapped.clip.height)
+                        __frame.size.width = __frame.size.height * (self.ctxs.clip.width / self.ctxs.clip.height)
                     }
                     else {
-                        __frame.size.height = __frame.size.width * (self.wrapped.clip.height / self.wrapped.clip.width)
+                        __frame.size.height = __frame.size.width * (self.ctxs.clip.height / self.ctxs.clip.width)
                     }
                 }
                 
                 //一次手势时间结束了
-                if __frame.size.width >=  self.wrapped.line.width * 2.0 && __frame.size.height >= self.wrapped.line.width * 2.0 {
-                    self.wrapped.clip.isHidden = false
+                if __frame.size.width >=  self.ctxs.line.width * 2.0 && __frame.size.height >= self.ctxs.line.width * 2.0 {
+                    self.ctxs.clip.isHidden = false
                     
-                    self.wrapped.frame.value = __frame
-                    self.wrappedView.frame = self.wrapped.frame.value
+                    self.ctxs.frame.value = __frame
+                    self.wrappedView.frame = self.ctxs.frame.value
                     self.wrappedView.isHidden = false
                     
                     self.panRecognizer.isEnabled = true
                     self.pinchRecognizer.isEnabled = true
                 }
                 else {
-                    self.wrapped.clip.isHidden = true
+                    self.ctxs.clip.isHidden = true
                     
-                    self.wrapped.frame.value = CGRect.zero
-                    self.wrappedView.frame = self.wrapped.frame.value
+                    self.ctxs.frame.value = CGRect.zero
+                    self.wrappedView.frame = self.ctxs.frame.value
                     self.wrappedView.isHidden = true
                     
                     self.panRecognizer.isEnabled = true
@@ -433,28 +434,28 @@ open class NXClipboardView: NXView {
             __frame.size.width = self.wrappedView.w * __ctxs.scale
             __frame.size.height = self.wrappedView.h * __ctxs.scale
             
-            if __frame.size.width >= self.wrapped.line.width * 2.0
-                && __frame.size.height >= self.wrapped.line.width * 2.0
-                && __frame.size.width <= self.wrapped.size.width
-                && __frame.size.height <= self.wrapped.size.height {
-                self.wrapped.frame.value = __frame
+            if __frame.size.width >= self.ctxs.line.width * 2.0
+                && __frame.size.height >= self.ctxs.line.width * 2.0
+                && __frame.size.width <= self.ctxs.size.width
+                && __frame.size.height <= self.ctxs.size.height {
+                self.ctxs.frame.value = __frame
                 self.wrappedView.frame = __frame
             }
         }
         else {
             var __frame = self.wrappedView.frame
 
-            if __frame.width > self.wrapped.size.width {
-                __frame.size.width = self.wrapped.size.width
-                if self.wrapped.clip.isResizable == false {
-                    __frame.size.height = __frame.size.width * (self.wrapped.clip.height / self.wrapped.clip.width)
+            if __frame.width > self.ctxs.size.width {
+                __frame.size.width = self.ctxs.size.width
+                if self.ctxs.clip.isResizable == false {
+                    __frame.size.height = __frame.size.width * (self.ctxs.clip.height / self.ctxs.clip.width)
                 }
             }
             
-            if __frame.height > self.wrapped.size.height {
-                __frame.size.height = self.wrapped.size.height
-                if self.wrapped.clip.isResizable == false {
-                    __frame.size.width = __frame.size.height * (self.wrapped.clip.width / self.wrapped.clip.height)
+            if __frame.height > self.ctxs.size.height {
+                __frame.size.height = self.ctxs.size.height
+                if self.ctxs.clip.isResizable == false {
+                    __frame.size.width = __frame.size.height * (self.ctxs.clip.width / self.ctxs.clip.height)
                 }
             }
             
@@ -462,19 +463,19 @@ open class NXClipboardView: NXView {
                 __frame.origin.x = 0
             }
             
-            if __frame.maxX > self.wrapped.size.width {
-                __frame.origin.x = self.wrapped.size.width - __frame.width
+            if __frame.maxX > self.ctxs.size.width {
+                __frame.origin.x = self.ctxs.size.width - __frame.width
             }
             
             if __frame.minY < 0 {
                 __frame.origin.y = 0
             }
             
-            if __frame.maxY > self.wrapped.size.height {
-                __frame.origin.y = self.wrapped.size.height - __frame.height
+            if __frame.maxY > self.ctxs.size.height {
+                __frame.origin.y = self.ctxs.size.height - __frame.height
             }
             
-            self.wrapped.frame.value = __frame
+            self.ctxs.frame.value = __frame
             UIView.animate(withDuration: 0.15) {
                 self.wrappedView.frame = __frame
             }

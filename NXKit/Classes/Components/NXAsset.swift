@@ -193,6 +193,7 @@ extension NXAsset {
     }
     
     open class Clip : NSObject {
+        open var name = "1:1"
         open var isResizable = false
         open var width : CGFloat = 1.0
         open var height : CGFloat = 1.0
@@ -202,8 +203,9 @@ extension NXAsset {
             super.init()
         }
         
-        convenience public init(isResizable:Bool, width:CGFloat, height:CGFloat, isHidden:Bool) {
+        convenience public init(name:String, isResizable:Bool, width:CGFloat, height:CGFloat, isHidden:Bool) {
             self.init()
+            self.name = name
             self.isResizable = isResizable
             self.width = width
             self.height = height
