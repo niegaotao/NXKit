@@ -113,7 +113,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     /// 重写父类push方法
     override open func pushViewController(_ viewController: UIViewController, animated: Bool) {
         if let viewController = viewController as? NXViewController {
-            viewController.ctxs.operation = .push
+            viewController.ctxs.navigation = .push
             viewController.ctxs.orientation = .right
         }
         super.pushViewController(viewController, animated: animated)
@@ -127,7 +127,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     
     override open func present(_ viewController: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         if let viewController = viewController as? NXViewController {
-            viewController.ctxs.operation = .present
+            viewController.ctxs.navigation = .present
         }
         super.present(viewController, animated: flag, completion: completion)
     }
@@ -183,7 +183,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
         guard let to = self.topViewController as? NXViewController else {return}
         
         ctxs.semaphore.wait()
-        viewController.ctxs.operation = .overlay
+        viewController.ctxs.navigation = .overlay
         
         to.ctxs.subviewControllers.append(viewController)
         viewController.ctxs.superviewController = to

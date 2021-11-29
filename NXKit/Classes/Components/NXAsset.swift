@@ -247,7 +247,7 @@ extension NXAsset {
         //最后的回调
         open var completion : NX.Completion<Bool, NXAsset.Output>? = nil
         //最初的打开方式
-        open var operation = NXViewController.Operation.present
+        open var navigation = NXViewController.Navigation.present
         //是否打开页面
         open var openAllowed = true
         //是否关闭页面
@@ -266,16 +266,16 @@ extension NXAsset {
         //打开相册
         public class func open(_ wrapped:NXAsset.Wrapped, vc:NXViewController) {
             if let navi = wrapped.naviController {
-                if wrapped.operation == .present, let visible = navi.currentViewController {
+                if wrapped.navigation == .present, let visible = navi.currentViewController {
                     wrapped.viewController = visible
                     visible.present(vc, animated: wrapped.isAnimated, completion: nil)
                 }
-                else if wrapped.operation == .overlay, let _ = navi.topViewController as? NXViewController {
+                else if wrapped.navigation == .overlay, let _ = navi.topViewController as? NXViewController {
                     wrapped.viewController = vc
                     navi.showSubviewController(vc, animated: wrapped.isAnimated)
                 }
                 else if let top = navi.topViewController {
-                    wrapped.operation = .push
+                    wrapped.navigation = .push
                     wrapped.viewController = top
                     navi.pushViewController(vc, animated: wrapped.isAnimated)
                 }
@@ -301,15 +301,15 @@ extension NXAsset {
         //关闭相册
         public class func close(_ wrapped:NXAsset.Wrapped) {
             if let navi = wrapped.naviController {
-                if wrapped.operation == .present {
+                if wrapped.navigation == .present {
                     wrapped.viewController?.dismiss(animated: wrapped.isAnimated, completion: nil)
                 }
-                else if wrapped.operation == .overlay {
+                else if wrapped.navigation == .overlay {
                     if let vc = wrapped.viewController as? NXViewController {
                         navi.removeSubviewController(vc, animated: wrapped.isAnimated)
                     }
                 }
-                else if wrapped.operation == .push {
+                else if wrapped.navigation == .push {
                     if let vc = wrapped.viewController {
                         navi.popToViewController(vc, animated: wrapped.isAnimated)
                     }
@@ -357,7 +357,7 @@ extension NXAsset {
                               
                               footer:(lhs:Bool, center:Bool, rhs:Bool),
                               
-                              operation:NXViewController.Operation,
+                              navigation:NXViewController.Navigation,
                               naviController:NXNavigationController,
                               openAllowed:Bool,
                               closeAllowed:Bool,
@@ -399,7 +399,7 @@ extension NXAsset {
             
             //导航相关
             vc.wrapped.naviController = naviController
-            vc.wrapped.operation = operation
+            vc.wrapped.navigation = navigation
             vc.wrapped.openAllowed = openAllowed
             vc.wrapped.closeAllowed = closeAllowed
             vc.wrapped.isAnimated = isAnimated

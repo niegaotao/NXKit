@@ -148,15 +148,15 @@ open class NXViewController: UIViewController  {
     
     ///关闭当前控制器
     open func close(){
-        if self.ctxs.operation == .push {
+        if self.ctxs.navigation == .push {
             if let count = self.navigationController?.viewControllers.count, count > 1 {
                 self.navigationController?.popViewController(animated: true)
             }
         }
-        else if self.ctxs.operation == .present {
+        else if self.ctxs.navigation == .present {
             self.dismiss(animated: true, completion: nil)
         }
-        else if self.ctxs.operation == .overlay {
+        else if self.ctxs.navigation == .overlay {
             if let naviController = self.ctxs.superviewController?.navigationController as? NXNavigationController {
                 naviController.removeSubviewController(self, animated: true)
             }
@@ -232,7 +232,7 @@ open class NXViewController: UIViewController  {
     
     override open func present(_ viewController: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         if let viewController = viewController as? NXViewController {
-            viewController.ctxs.operation = .present
+            viewController.ctxs.navigation = .present
         }
         super.present(viewController, animated: flag, completion: completion)
     }
@@ -277,7 +277,7 @@ extension NXViewController {
         open var panRecognizer : ((String, UIPanGestureRecognizer) -> (Bool)) = {_, _ in return true}
         
         ///进行的什么操作
-        open var operation = NXViewController.Operation.push
+        open var navigation = NXViewController.Navigation.push
         ///从哪个方向载入
         open var orientation = NXViewController.Orientation.right
         ///转场动画过程中需要的容器视图
@@ -299,7 +299,7 @@ extension NXViewController {
         public init(){}
     }
     
-    public enum Operation  {
+    public enum Navigation : Int {
         case push       //打开页面通过push方式打开的
         case present    //打开页面通过present方式打开的
         case overlay    //打开页面通过overlay方式打开的
