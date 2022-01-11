@@ -2,8 +2,8 @@
 //  NXCollectionView.swift
 //  NXKit
 //
-//  Created by 聂高涛 on 2020/5/23.
-//  Copyright © 2018年 无码科技. All rights reserved.
+//  Created by niegaotao on 2020/5/23.
+//  Copyright © 2020年 TIMESCAPE. All rights reserved.
 //
 
 import UIKit

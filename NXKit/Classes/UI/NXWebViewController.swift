@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/5/30.
-//  Copyright © 2018年 无码科技. All rights reserved.
+//  Copyright © 2020年 TIMESCAPE. All rights reserved.
 //
 
 import UIKit
@@ -177,7 +177,6 @@ open class NXWebViewController: NXViewController {
                 self.backbarView.updateSubviews("", true)
                 self.naviView.titleView.x = 15.0 + 44.0 + 1.0
                 self.naviView.titleView.w = self.naviView.w - self.naviView.titleView.x * 2.0
-                NX.print("t.f=\(self.naviView.titleView.frame)")
             }
         }
     }

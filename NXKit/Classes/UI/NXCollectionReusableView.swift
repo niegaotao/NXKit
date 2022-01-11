@@ -2,7 +2,7 @@
 //  NXCollectionReusableView.swift
 //  NXKit
 //
-//  Created by niegaotao on 2019/3/9.
+//  Created by niegaotao on 2020/3/9.
 //  Copyright © 2019 niegaotao. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  NXString.swift
 //  NXKit
 //
-//  Created by niegaotao on 2021/1/12.
+//  Created by niegaotao on 2020/1/12.
 //
 
 import UIKit
