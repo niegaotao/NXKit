@@ -2,13 +2,8 @@
 //  NXViewControllerView.swift
 //  NXKit
 //
-<<<<<<< HEAD
-//  Created by niegaotao on 2021/9/1.
-//  Copyright © 2021 无码科技. All rights reserved.
-=======
 //  Created by niegaotao on 2020/9/1.
 //  Copyright © 2020 TIMESCAPE. All rights reserved.
->>>>>>> 54b3e71c2be9f4a23c8c9b48586689a860947b51
 //
 
 import UIKit
