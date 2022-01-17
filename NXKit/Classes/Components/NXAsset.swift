@@ -2,7 +2,7 @@
 //  NXAsset.swift
 //  NXKit
 //
-//  Created by niegaotao on 2020/5/17.
+//  Created by niegaotao on 2021/5/17.
 //
 
 import UIKit

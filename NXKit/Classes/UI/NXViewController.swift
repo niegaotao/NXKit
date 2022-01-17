@@ -2,7 +2,7 @@
 //  NXViewController.swift
 //  NXKit
 //
-//  Created by niegaotao on 2020/5/8.
+//  Created by niegaotao on 2021/5/8.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 
@@ -169,12 +169,12 @@ open class NXViewController: UIViewController  {
     }
     
     //开始网络请求：处理加载框的开启/关闭,网络异常,参数异常等情况
-    open func request(_ action:String, _ value:Any?, _ completion: NX.Completion<String, Any?>? = nil){
+    open func request(_ operation:String, _ value:Any?, _ completion: NX.Completion<String, Any?>? = nil){
     
     }
     
     //页面内的相关逻辑操作
-    open func dispose(_ action:String, _ value:Any?, _ completion:NX.Completion<String, Any?>? = nil){
+    open func dispose(_ operation:String, _ value:Any?, _ completion:NX.Completion<String, Any?>? = nil){
         
     }
     

@@ -2,7 +2,7 @@
 //  NXLCRView.swift
 //  NXKit
 //
-//  Created by niegaotao on 2020/3/8.
+//  Created by niegaotao on 2021/3/8.
 //
 
 import UIKit

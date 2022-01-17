@@ -2,7 +2,7 @@
 //  NXTableViewCell.swift
 //  NXKit
 //
-//  Created by niegaotao on 2020/6/15.
+//  Created by niegaotao on 2021/6/15.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 
@@ -25,7 +25,7 @@ open class NXTableViewCell: UITableViewCell {
         self.setupSubviews()
     }
     
-    @objc open func setup(){
+    open func setup(){
         arrowView.frame = CGRect(x: contentView.w-NX.insets.right-6, y: (contentView.h-12)/2, width: 6, height: 12)
         arrowView.image = NX.image(named:"icon-arrow.png")
         arrowView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin]
@@ -45,17 +45,13 @@ open class NXTableViewCell: UITableViewCell {
     }
     
     /// 子类直接重写该方法进行UI视图的初始化和布局
-    @objc open func setupSubviews(){
+    open func setupSubviews(){
         
     }
     
     
     /// 子类重写该方法进行数据绑定操作
-    @objc open func updateSubviews(_ action:String, _ value: Any?){
+    open func updateSubviews(_ action:String, _ value: Any?){
         
     }
-    
-    
-    @objc open func willDisplay(_ item: Any?) {}
-    @objc open func didEndDisplay(_ item: Any?) {}
 }

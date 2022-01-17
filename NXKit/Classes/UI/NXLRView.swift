@@ -2,7 +2,7 @@
 //  NXLRView.swift
 //  NXKit
 //
-//  Created by niegaotao on 2020/5/16.
+//  Created by niegaotao on 2021/5/16.
 //
 
 import UIKit

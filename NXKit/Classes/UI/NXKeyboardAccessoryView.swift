@@ -2,8 +2,8 @@
 //  NXKeyboardAccessoryView.swift
 //  NXKit
 //
-//  Created by niegaotao on 2019/9/19.
-//  Copyright © 2019 无码科技. All rights reserved.
+//  Created by niegaotao on 2021/9/19.
+//  Copyright © 2021 无码科技. All rights reserved.
 //
 
 import UIKit

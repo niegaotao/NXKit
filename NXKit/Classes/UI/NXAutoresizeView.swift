@@ -2,7 +2,7 @@
 //  NXAutoresizeView.swift
 //  NXKit
 //
-//  Created by niegaotao on 2020/3/11.
+//  Created by niegaotao on 2021/3/11.
 //
 
 import UIKit

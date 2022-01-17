@@ -2,7 +2,7 @@
 //  String+NXFoundation.swift
 //  NXKit
 //
-//  Created by niegaotao on 2020/5/29.
+//  Created by niegaotao on 2021/5/29.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 

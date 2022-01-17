@@ -2,7 +2,7 @@
 //  NXActionView.swift
 //  NXKit
 //
-//  Created by niegaotao on 2020/5/31.
+//  Created by niegaotao on 2021/5/31.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 
@@ -238,16 +238,6 @@ extension NXActionView {
         case unknown = "unknown"
     }
     
-    open class Wrapped: NX.Rect {
-        open var key = NXActionView.Key.action.rawValue
-        open var header = NXActionView.Metadata()
-        open var center = NXActionView.Metadata()
-        open var footer = NXActionView.Metadata()
-        open var devide = CGFloat(6.0) //底部分开的高度，默认是6pt(只有在底部高度>0的时候有效)
-        open var max = NXDevice.height * 0.80
-        open var isAnimation = true
-    }
-    
     open class Metadata : NX.View {
         public let title = NX.Attribute { (_, __sender) in
             __sender.textAlignment = .center
@@ -288,7 +278,7 @@ extension NXActionView {
         open var actions = [NXAction]()
         open var insets = UIEdgeInsets.zero
         
-        open class func center(_ wrapped:NXActionView.Wrapped) -> CGSize {
+        open class func center(_ wrapped:NXActionViewAttributes) -> CGSize {
             let  metadata = wrapped.center
             var contentSize = CGSize(width: metadata.frame.width, height: 0)
             if let __customView = metadata.customView {
@@ -375,8 +365,18 @@ extension NXActionView {
     public typealias Attachment = (enumeration:NXActionView.Enumeration, title:String)
 }
 
+open class NXActionViewAttributes: NXOverlayAttributes {
+    open var key = NXActionView.Key.action.rawValue
+    open var header = NXActionView.Metadata()
+    open var center = NXActionView.Metadata()
+    open var footer = NXActionView.Metadata()
+    open var devide = CGFloat(6.0) //底部分开的高度，默认是6pt(只有在底部高度>0的时候有效)
+    open var max = NXDevice.height * 0.80
+    open var isAnimation = true
+}
+
 open class NXActionView: NXOverlay {
-    public let ctxs = NXActionView.Wrapped()
+    public let ctxs = NXActionViewAttributes()
     public let headerView = NXActionView.HeaderView(frame:CGRect.zero)
     public let centerView = NXActionView.CenterView(frame:CGRect.zero)
     public let footerView = NXActionView.FooterView(frame:CGRect.zero)
@@ -549,7 +549,7 @@ extension NXActionView {
         }
         
         open override func updateSubviews(_ action:String, _ value: Any?){
-            guard let wrapped = value as? NXActionView.Wrapped else {
+            guard let wrapped = value as? NXActionViewAttributes else {
                 return
             }
             let metadata = wrapped.header
@@ -580,7 +580,7 @@ extension NXActionView {
 
 extension NXActionView {
     open class CenterView : NXCView<NXCollectionView>, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-        private(set) var wrapped = NXActionView.Wrapped()
+        private(set) var wrapped = NXActionViewAttributes()
         open var completion : NX.Completion<NXAction, Int>? = nil
         
         open override func setupSubviews() {
@@ -597,7 +597,7 @@ extension NXActionView {
         }
         
         open override func updateSubviews(_ action:String, _ value: Any?){
-            guard let __wrapped = value as? NXActionView.Wrapped else {
+            guard let __wrapped = value as? NXActionViewAttributes else {
                 return
             }
             self.wrapped = __wrapped
@@ -677,7 +677,7 @@ extension NXActionView {
 extension NXActionView {
     open class FooterView : NXFooterView {
         open override func updateSubviews(_ action:String, _ value: Any?){
-            guard let wrapped = value as? NXActionView.Wrapped else {
+            guard let wrapped = value as? NXActionViewAttributes else {
                 return
             }
             let metadata = wrapped.footer

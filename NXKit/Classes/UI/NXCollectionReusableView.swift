@@ -2,8 +2,8 @@
 //  NXCollectionReusableView.swift
 //  NXKit
 //
-//  Created by niegaotao on 2019/3/9.
-//  Copyright © 2019 niegaotao. All rights reserved.
+//  Created by niegaotao on 2021/3/9.
+//  Copyright © 2021 niegaotao. All rights reserved.
 //
 
 import UIKit

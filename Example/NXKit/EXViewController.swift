@@ -13,7 +13,6 @@ class EXViewController: NXViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         self.naviView.title = "NXViewController"
         
@@ -25,11 +24,6 @@ class EXViewController: NXViewController {
         }
         self.contentView.addSubview(button)
                 
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 

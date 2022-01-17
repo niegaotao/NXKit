@@ -2,7 +2,7 @@
 //  NXLabel.swift
 //  NXKit
 //
-//  Created by niegaotao on 2020/8/28.
+//  Created by niegaotao on 2021/8/28.
 //  Copyright © 2018年 无码科技. All rights reserved.
 //
 

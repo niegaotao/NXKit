@@ -2,7 +2,7 @@
 //  NXObserver.swift
 //  NXKit
 //
-//  Created by niegaotao on 2020/7/12.
+//  Created by niegaotao on 2021/7/12.
 //
 
 import UIKit

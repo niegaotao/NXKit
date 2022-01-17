@@ -2,8 +2,8 @@
 //  NX.swift
 //  NXKit
 //
-//  Created by niegaotao on 2019/1/23.
-//  Copyright © 2019年 无码科技. All rights reserved.
+//  Created by niegaotao on 2021/1/23.
+//  Copyright © 2021年 无码科技. All rights reserved.
 //
 
 import UIKit
