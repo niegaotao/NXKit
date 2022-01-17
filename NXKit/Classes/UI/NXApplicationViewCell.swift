@@ -2,7 +2,7 @@
 //  NXApplicationViewCell.swift
 //  NXKit
 //
-//  Created by niegaotao on 2021/8/17.
+//  Created by niegaotao on 2020/8/17.
 //
 
 import UIKit
