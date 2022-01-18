@@ -8,8 +8,8 @@
 import UIKit
 
 open class NXKVOObserver : NSObject {
-    weak open var observer : NSObject? = nil
-    open var observations = [NXKVOObserver.Observation]()
+    public fileprivate(set) weak var observer : NSObject? = nil
+    public fileprivate(set) var observations = [NXKVOObserver.Observation]()
     
     open class Observation : NSObject {
         weak open var object : NSObject? = nil
