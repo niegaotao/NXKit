@@ -128,7 +128,7 @@ extension UIView {
     }
     
     //添加上下/左右的边缘分割线
-    public func setupSeparator(color:UIColor, ats: NX.Ats, insets: UIEdgeInsets = UIEdgeInsets.zero, width:CGFloat = NXDevice.pixel){
+    public func setupSeparator(color:UIColor, ats: NX.Ats, insets: UIEdgeInsets = UIEdgeInsets.zero, width:CGFloat = NXUI.pixel){
         let __color = color
         let __width = width
         

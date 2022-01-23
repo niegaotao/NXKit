@@ -10,7 +10,7 @@ import UIKit
 
 open class NXTextField: UITextField {
     open var maximumOfBytes: Int = 0
-    public let accessoryView = NXKeyboardAccessoryView(frame: CGRect(x: 0, y: 0, width: NXDevice.width, height: 44))
+    public let accessoryView = NXKeyboardAccessoryView(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: 44))
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

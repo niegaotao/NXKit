@@ -121,7 +121,7 @@ open class NXHUD {
             __frame.size.width = ceil(__frame.size.width)
             __frame.size.height = ceil(__frame.size.height)
 
-            var __super = CGSize(width: NXDevice.width, height: NXDevice.height)
+            var __super = CGSize(width: NXUI.width, height: NXUI.height)
             if let __superview = self.superview {
                 __super = __superview.frame.size
             }

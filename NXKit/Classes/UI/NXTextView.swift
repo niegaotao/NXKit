@@ -37,7 +37,7 @@ open class NXTextView: UITextView {
     }
     
     open var maximumOfBytes: Int = 0 //小于等于0表示无限制，大于0表示有显示
-    public let accessoryView = NXKeyboardAccessoryView(frame: CGRect(x: 0, y: 0, width: NXDevice.width, height: 44))
+    public let accessoryView = NXKeyboardAccessoryView(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: 44))
     
     override public init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)

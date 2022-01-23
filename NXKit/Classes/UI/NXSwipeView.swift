@@ -64,8 +64,8 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
             item.color.selected = self.wrapped.color.selected
             item.color.unselected = self.wrapped.color.unselected
             
-            item.width.selected = item.title.selected.stringSize(font: item.font.selected, size: CGSize(width: NXDevice.width, height: 44)).width + 2.0
-            item.width.unselected = item.title.unselected.stringSize(font: item.font.unselected, size: CGSize(width: NXDevice.width, height: 44)).width + 2.0
+            item.width.selected = item.title.selected.stringSize(font: item.font.selected, size: CGSize(width: NXUI.width, height: 44)).width + 2.0
+            item.width.unselected = item.title.unselected.stringSize(font: item.font.unselected, size: CGSize(width: NXUI.width, height: 44)).width + 2.0
         }
         
         if self.wrapped.isEqually {
@@ -102,8 +102,8 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
         }
         item.title.selected = title
         item.title.unselected = title
-        item.width.selected = item.title.selected.stringSize(font: item.font.selected, size: CGSize(width: NXDevice.width, height: 44)).width + 2.0
-        item.width.unselected = item.title.unselected.stringSize(font: item.font.unselected, size: CGSize(width: NXDevice.width, height: 44)).width + 2.0
+        item.width.selected = item.title.selected.stringSize(font: item.font.selected, size: CGSize(width: NXUI.width, height: 44)).width + 2.0
+        item.width.unselected = item.title.unselected.stringSize(font: item.font.unselected, size: CGSize(width: NXUI.width, height: 44)).width + 2.0
         
         if self.wrapped.isEqually {
             let maximumOfComponents = max(min(self.wrapped.maximumOfComponents, CGFloat(self.wrapped.count)),1.0)

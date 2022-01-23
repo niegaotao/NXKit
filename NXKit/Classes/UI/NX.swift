@@ -294,6 +294,10 @@ extension NX {
     //contentView背景色
     static public var contentViewBackgroundColor = NX.color(247, 247, 247)
     //tableView背景色
+    static public var naviViewBackgroundColor = NX.color(255, 255, 255)
+    //tableView背景色
+    static public var naviViewForegroundColor = NX.color(51, 51, 51)
+    //tableView背景色
     static public var tableViewBackgroundColor = NX.color(247, 247, 247)
     //collectionView背景色
     static public var collectionViewBackgroundColor = NX.color(247, 247, 247)
@@ -397,8 +401,8 @@ extension NX {
     }
     
     public class Association {
-        //默认使用的bundle图片的path
-        static public var path = Bundle(for: NX.self).bundlePath + "/NXKit.bundle/"
+        //Framework所在的路径
+        static public var root = Bundle(for: NX.self).bundlePath
         
         //进行urlcomponent编码的字符
         static public var characters = "!*'();:@&=+$,/?%#[]{}\"\\"
@@ -429,7 +433,7 @@ extension NX {
         static public var separatorStyle = UITableViewCell.SeparatorStyle.singleLine
         
         //alert/action的单元格最大宽度、高度
-        static public var size = CGSize(width: NXDevice.width*0.8, height: 48.0)
+        static public var size = CGSize(width: NXUI.width*0.8, height: 48.0)
     }
     
     public class Imp {
@@ -474,8 +478,8 @@ extension NX {
     //加载获取bundle中图片
     public class func image(named name:String) -> UIImage? {
         guard name.count > 0 else {return nil}
-        if NX.Association.path.count > 0 {
-            return UIImage(named: name, in: Bundle(path: NX.Association.path), compatibleWith: nil)
+        if NX.Association.root.count > 0 {
+            return UIImage(named: "\(NX.Association.root)/NXKit.bundle/NX.bundle/\(name)")
         }
         return UIImage(named: name)
     }
@@ -486,7 +490,7 @@ extension NX {
     }
     
     //设置图像
-    open class func image(_ targetView:UIView?, _ url:String, _ state:UIControl.State = UIControl.State.normal){
+    class public func image(_ targetView:UIView?, _ url:String, _ state:UIControl.State = UIControl.State.normal){
         NX.Imp.image?(targetView, url, state)
     }
 
@@ -519,7 +523,7 @@ extension NX {
     }
     
     //获取授权/请求授权入口
-    open class func authorization(_ type: NX.Authorize, _ queue:DispatchQueue, _ isAlertable: Bool, _ completion:((NX.AuthorizeState) -> ())?){
+    class public func authorization(_ type: NX.Authorize, _ queue:DispatchQueue, _ isAlertable: Bool, _ completion:((NX.AuthorizeState) -> ())?){
         NX.Imp.authorization?(type, queue, isAlertable, completion)
     }
 
@@ -573,49 +577,49 @@ extension NX {
 
 
 extension NX {
-    open class func get(dictionary:[String:Any]?, _ nonnullValue:[String:Any] = [:]) -> [String:Any] {
+    class public func get(dictionary:[String:Any]?, _ nonnullValue:[String:Any] = [:]) -> [String:Any] {
         if let __value = dictionary, __value.count > 0 {
             return __value
         }
         return nonnullValue
     }
     
-    open class func get(array:[Any]?, _ nonnullValue:[Any] = []) -> [Any] {
+    class public func get(array:[Any]?, _ nonnullValue:[Any] = []) -> [Any] {
         if let __value = array, __value.count > 0 {
             return __value
         }
         return nonnullValue
     }
     
-    open class func get(string:String?, _ nonnullValue:String = "") -> String {
+    class public func get(string:String?, _ nonnullValue:String = "") -> String {
         if let __value = string, __value.count > 0 {
             return __value
         }
         return nonnullValue
     }
     
-    open class func get(int:Int?, _ nonnullValue:Int = 0) -> Int {
+    class public func get(int:Int?, _ nonnullValue:Int = 0) -> Int {
         if let __value = int {
             return __value
         }
         return nonnullValue
     }
     
-    open class func get(float:CGFloat?, _ nonnullValue:CGFloat = 0.0) -> CGFloat {
+    class public func get(float:CGFloat?, _ nonnullValue:CGFloat = 0.0) -> CGFloat {
         if let __value = float {
             return __value
         }
         return nonnullValue
     }
     
-    open class func get(bool:Bool?, _ nonnullValue:Bool = false) -> Bool {
+    class public func get(bool:Bool?, _ nonnullValue:Bool = false) -> Bool {
         if let __value = bool {
             return __value
         }
         return nonnullValue
     }
     
-    open class func get<T:Equatable>(value:T?, _ nonnullValue:T) -> T {
+    class public func get<T:Equatable>(value:T?, _ nonnullValue:T) -> T {
         if let __value = value {
             return __value
         }

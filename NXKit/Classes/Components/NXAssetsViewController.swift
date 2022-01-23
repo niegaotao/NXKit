@@ -13,11 +13,11 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     //配置信息
     public let wrapped = NXAsset.Wrapped()
     //导航栏中间切换相册
-    public let centerView = NXButton(frame: CGRect(x: 75.0, y: NXDevice.insets.top, width: NXDevice.width-75.0*2, height: NXDevice.topOffset-NXDevice.insets.top))
+    public let centerView = NXButton(frame: CGRect(x: 75.0, y: NXUI.insets.top, width: NXUI.width-75.0*2, height: NXUI.topOffset-NXUI.insets.top))
     //展示图片
     public let collectionView = NXCollectionView(frame: CGRect.zero)
     //展示底部切换的按钮
-    public let footerView = NXFooterView(frame: CGRect(x: 0, y: -(60+NXDevice.bottomOffset), width: NXDevice.width, height: 60+NXDevice.bottomOffset))
+    public let footerView = NXFooterView(frame: CGRect(x: 0, y: -(60+NXUI.bottomOffset), width: NXUI.width, height: 60+NXUI.bottomOffset))
     
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -66,12 +66,12 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     }
     
     open override func setupSubviews(){
-        self.collectionView.frame = CGRect(x: 0, y:0 , width: self.contentView.w, height: self.contentView.h-60-NXDevice.bottomOffset)
+        self.collectionView.frame = CGRect(x: 0, y:0 , width: self.contentView.w, height: self.contentView.h-60-NXUI.bottomOffset)
         self.collectionView.wrapped?.minimumLineSpacing = 2
         self.collectionView.wrapped?.minimumInteritemSpacing = 1
         self.collectionView.wrapped?.sectionInset = UIEdgeInsets(top: 40, left: 12, bottom: 10, right: 12)
         self.collectionView.wrapped?.scrollDirection = .vertical
-        self.collectionView.wrapped?.itemSize = CGSize(width: (NXDevice.width-12*2-2*3)/4, height: (NXDevice.width-12*2-2*3)/4)
+        self.collectionView.wrapped?.itemSize = CGSize(width: (NXUI.width-12*2-2*3)/4, height: (NXUI.width-12*2-2*3)/4)
         self.collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.collectionView.backgroundColor = NX.backgroundColor
         self.collectionView.delegate = self
@@ -83,7 +83,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
             collectionView.contentInsetAdjustmentBehavior = .never
         }
         
-        self.footerView.frame = CGRect(x: 0, y: self.contentView.h-60-NXDevice.bottomOffset, width: self.contentView.w, height: 60+NXDevice.bottomOffset)
+        self.footerView.frame = CGRect(x: 0, y: self.contentView.h-60-NXUI.bottomOffset, width: self.contentView.w, height: 60+NXUI.bottomOffset)
         self.footerView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.footerView.backgroundColor = NX.backgroundColor
         self.footerView.lhsView.frame = CGRect(x: 15, y: 12, width: 144, height: 36)
@@ -103,7 +103,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
             self?.dispose("footer.center", nil)
         })
         
-        self.footerView.rhsView.frame = CGRect(x: NXDevice.width-15-88, y: 12, width: 88, height: 36)
+        self.footerView.rhsView.frame = CGRect(x: NXUI.width-15-88, y: 12, width: 88, height: 36)
         self.footerView.rhsView.layer.cornerRadius = 18
         self.footerView.rhsView.layer.masksToBounds = true
         self.footerView.rhsView.setTitleColor(UIColor.white, for: .normal)
@@ -242,7 +242,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
             var __size = String.size(of: __description, size: CGSize(width: 200, height: 36), font: NX.font(15))
             __size.width = __size.width + 24
             __size.height = 36
-            self.footerView.rhsView.frame = CGRect(x: NXDevice.width-15-__size.width, y: 12, width: __size.width, height: __size.height)
+            self.footerView.rhsView.frame = CGRect(x: NXUI.width-15-__size.width, y: 12, width: __size.width, height: __size.height)
             self.footerView.rhsView.setTitle(__description, for: .normal)
         }
     }

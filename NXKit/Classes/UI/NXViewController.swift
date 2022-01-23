@@ -14,10 +14,10 @@ open class NXViewController: UIViewController  {
     public let ctxs = NXViewController.Association<Int>()
     
     ///导航栏
-    open var naviView = NXNaviView(frame: CGRect(x: 0, y: 0, width: NXDevice.width, height: NXDevice.topOffset))
+    open var naviView = NXNaviView(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: NXUI.topOffset))
     
     ///内容视图，不会被导航栏覆盖
-    open var contentView = UIView(frame: CGRect(x: 0, y: NXDevice.topOffset, width: NXDevice.width, height: NXDevice.height-NXDevice.topOffset))
+    open var contentView = UIView(frame: CGRect(x: 0, y: NXUI.topOffset, width: NXUI.width, height: NXUI.height-NXUI.topOffset))
     
     ///页面无内容时的加载动画
     open var animationView = NX.UI.AnimationClass.init(frame: CGRect.zero)
@@ -49,7 +49,7 @@ open class NXViewController: UIViewController  {
         
         self.view.backgroundColor = NX.viewBackgroundColor
         
-        self.contentView.frame = CGRect(x: 0, y: NXDevice.topOffset, width: self.view.w, height: self.view.h-NXDevice.topOffset)
+        self.contentView.frame = CGRect(x: 0, y: NXUI.topOffset, width: self.view.w, height: self.view.h-NXUI.topOffset)
         self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.contentView.backgroundColor = NX.contentViewBackgroundColor
         self.view.addSubview(self.contentView)
@@ -59,7 +59,7 @@ open class NXViewController: UIViewController  {
         self.contentView.addSubview(self.animationView)
         
         
-        self.naviView.frame = CGRect(x: 0, y: 0, width: self.view.w, height: NXDevice.topOffset)
+        self.naviView.frame = CGRect(x: 0, y: 0, width: self.view.w, height: NXUI.topOffset)
         self.naviView.autoresizingMask = [.flexibleWidth]
         self.naviView.controller = self
         self.naviView.separator.isHidden = self.ctxs.separator.isHidden

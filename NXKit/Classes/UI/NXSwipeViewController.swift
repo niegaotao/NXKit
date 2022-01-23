@@ -11,7 +11,7 @@ import UIKit
 open class NXSwipeViewController: NXContainerController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     open var wrapped = NXSection<NXItem>()
     open var collectionView : NXCollectionView? = nil
-    open var swipeView = NXSwipeView(frame: CGRect(x: 0, y: NXDevice.topOffset, width: NXDevice.width, height: 44))
+    open var swipeView = NXSwipeView(frame: CGRect(x: 0, y: NXUI.topOffset, width: NXUI.width, height: 44))
     
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
         }
         self.view.addSubview(swipeView)
         
-        self.contentView.frame = CGRect(x: 0, y: NXDevice.topOffset+44, width: NXDevice.width, height: self.view.h-(NXDevice.topOffset+44))
+        self.contentView.frame = CGRect(x: 0, y: NXUI.topOffset+44, width: NXUI.width, height: self.view.h-(NXUI.topOffset+44))
         
         collectionView = NXCollectionView(frame: self.contentView.bounds)
         collectionView?.wrapped?.scrollDirection = .horizontal
@@ -82,7 +82,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
             vc.ctxs.superviewController = self
             
             let element = NXSwipeViewController.Element()
-            element.ctxs.size = CGSize(width: NXDevice.width, height: NXDevice.height-NXDevice.topOffset)
+            element.ctxs.size = CGSize(width: NXUI.width, height: NXUI.height-NXUI.topOffset)
             element.ctxs.update(NXSwipeViewController.Cell.self, "NXSwipeViewControllerCell" + String(idx+1))
             element.owner = vc
             self.wrapped.items.append(element)
@@ -143,7 +143,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
     
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let p = scrollView.contentOffset
-        let index = Int((p.x + CGFloat(NXDevice.width) * 0.5) / CGFloat(NXDevice.width))
+        let index = Int((p.x + CGFloat(NXUI.width) * 0.5) / CGFloat(NXUI.width))
         if index != self.swipeView.wrapped.index && index >= 0 && index < subviewControllers.count {
             self.swipeView.didSelectItem(at: index)
             self.selectedViewController = self.subviewControllers[index]

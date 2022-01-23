@@ -16,9 +16,9 @@ open class NXAssetClipViewController: NXViewController {
         __sender.is = -1
         __sender.value = []
     }
-    public let backgroundView = NXCView<UIImageView>(frame: CGRect(x: 10, y: 10, width: NXDevice.width-20, height: NXDevice.height-NXDevice.topOffset-NXDevice.bottomOffset-20))
+    public let backgroundView = NXCView<UIImageView>(frame: CGRect(x: 10, y: 10, width: NXUI.width-20, height: NXUI.height-NXUI.topOffset-NXUI.bottomOffset-20))
     public let clipboardView = NXClipboardView(frame: CGRect.zero)
-    public let footerView = NXCView<UIScrollView>(frame: CGRect(x: 0, y: 0, width: NXDevice.width, height: 80+NXDevice.bottomOffset))
+    public let footerView = NXCView<UIScrollView>(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: 80+NXUI.bottomOffset))
     public var componentViews = [UILabel]()
     
     open override func viewDidLoad() {
@@ -54,15 +54,15 @@ open class NXAssetClipViewController: NXViewController {
                 self.clips.is = 0
             }
             
-            var __background = CGRect(x: 10, y: 10, width: NXDevice.width-20, height: NXDevice.height-NXDevice.topOffset-NXDevice.bottomOffset-20)
+            var __background = CGRect(x: 10, y: 10, width: NXUI.width-20, height: NXUI.height-NXUI.topOffset-NXUI.bottomOffset-20)
             if self.clips.value.count >= 2 {
                 //有多项可选
-                __background = CGRect(x: 10, y: 10, width: NXDevice.width-20, height: NXDevice.height-NXDevice.topOffset-NXDevice.bottomOffset-20-80)
+                __background = CGRect(x: 10, y: 10, width: NXUI.width-20, height: NXUI.height-NXUI.topOffset-NXUI.bottomOffset-20-80)
                 
                 var offset = CGRect(x: 15, y: 8, width: 52, height: 60)
                 var ctx = CGRect(x: 15, y: 0, width: CGFloat(self.clips.value.count) * offset.size.width + CGFloat(self.clips.value.count - 1)*10.0, height: offset.size.height)
-                if (NXDevice.width - ctx.size.width) / 2.0 > ctx.origin.x {
-                    ctx.origin.x = (NXDevice.width - ctx.size.width) / 2.0
+                if (NXUI.width - ctx.size.width) / 2.0 > ctx.origin.x {
+                    ctx.origin.x = (NXUI.width - ctx.size.width) / 2.0
                 }
                 offset.origin.x = ctx.origin.x
                 
@@ -97,7 +97,7 @@ open class NXAssetClipViewController: NXViewController {
                 }
                 offset.origin.x = offset.origin.x + ctx.origin.x
                 self.footerView.isHidden = false
-                self.footerView.contentView.frame = CGRect(x: 0, y: 0, width: NXDevice.width, height: 80)
+                self.footerView.contentView.frame = CGRect(x: 0, y: 0, width: NXUI.width, height: 80)
                 self.footerView.contentView.contentSize = CGSize(width: max(self.footerView.contentView.frame.size.width, offset.origin.x), height: 80)
             }
             else {

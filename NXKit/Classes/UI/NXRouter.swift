@@ -36,7 +36,7 @@ extension NXRouter {
 }
 
 open class NXRouter {
-    public private(set) var uris = [NXRouter.URI]()                //存储的paths
+    public private(set) var uris = [NXRouter.URI]()                //存储的uris
     public private(set) var schemes = [String]()                    //支持的schemes
     public private(set) var isRepeatable = false                    //是否支持重复的path
     open var exception : ((_ url:String) -> ())?                    //对未注册的或异常的一个回调

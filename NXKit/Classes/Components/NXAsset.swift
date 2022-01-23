@@ -861,8 +861,8 @@ open class NXAssetViewCell: NXCollectionViewCell {
         }
         else{
             var size = self.contentView.frame.size
-            size.width = round(size.width * NXDevice.scale)
-            size.height =  round(size.height * NXDevice.scale)
+            size.width = round(size.width * NXUI.scale)
+            size.height =  round(size.height * NXUI.scale)
             PHCachingImageManager.default().requestImage(for: phasset,
                                                          targetSize: size,
                                                          contentMode: .aspectFill,
@@ -939,7 +939,7 @@ open class NXAlbum : NXAction {
         //获取封面
         if let asset = self.assets.last?.asset {
             var __size = CGSize.zero
-            __size.width = round((NXDevice.width-12*2-2*3)/4.0 * NXDevice.scale)
+            __size.width = round((NXUI.width-12*2-2*3)/4.0 * NXUI.scale)
             __size.height = __size.width
             PHImageManager.default().requestImage(for: asset,
                                                   targetSize: __size,
@@ -950,18 +950,18 @@ open class NXAlbum : NXAction {
             }
         }
                 
-        self.ctxs.size = CGSize(width: NXDevice.width, height: 80)
+        self.ctxs.size = CGSize(width: NXUI.width, height: 80)
         self.asset.frame = CGRect(x: 16, y: 1, width: 78, height: 78)
         self.asset.cornerRadius = 0.0
         self.asset.isHidden = false
         
-        self.title.frame = CGRect(x: 106, y: 19, width: NXDevice.width-136, height: 22)
+        self.title.frame = CGRect(x: 106, y: 19, width: NXUI.width-136, height: 22)
         self.title.value = title
         self.title.textAlignment = .left
         self.title.font = NX.font(16, true)
         self.title.isHidden = false
         
-        self.subtitle.frame = CGRect(x: 106, y: 43, width: NXDevice.width-136, height: 18)
+        self.subtitle.frame = CGRect(x: 106, y: 43, width: NXUI.width-136, height: 18)
         self.subtitle.value = "\(self.assets.count)张"
         self.subtitle.font = NX.font(14, false)
         self.subtitle.textAlignment = .left

@@ -52,10 +52,10 @@ open class NXTableView: UITableView {
             self.sectionHeaderHeight = 10
             self.sectionFooterHeight = 0
         }
-        self.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: NXDevice.width, height: 0.01))
+        self.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: 0.01))
         self.tableHeaderView?.backgroundColor = UIColor.clear
         
-        self.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: NXDevice.width, height: 0.01))
+        self.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: 0.01))
         self.tableFooterView?.backgroundColor = UIColor.clear
     }
     
@@ -100,7 +100,7 @@ open class NXTableView: UITableView {
                 
                 if __tableWrapper.placeholderView.wrapped.isHidden == false {
 
-                    var size  = CGSize(width: NXDevice.width, height: 0)
+                    var size  = CGSize(width: NXUI.width, height: 0)
                     if __tableWrapper.placeholderView.wrapped.frame.width > 0 && __tableWrapper.placeholderView.wrapped.frame.height > 0 {
                         size.height = __tableWrapper.placeholderView.wrapped.frame.height
                     }

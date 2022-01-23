@@ -63,17 +63,17 @@ open class NXTransitionView: NXView {
             
             if owner.ctxs.orientation == .right {
                 if affineValue < 0 { affineValue = 0}
-                if affineValue > NXDevice.width { affineValue = NXDevice.width}
+                if affineValue > NXUI.width { affineValue = NXUI.width}
             }
             else if owner.ctxs.orientation == .left {
                 if affineValue > 0 { affineValue = 0}
-                if affineValue < -NXDevice.width { affineValue = -NXDevice.width}
+                if affineValue < -NXUI.width { affineValue = -NXUI.width}
             }
             owner.view.x = affineValue
         }
         else {
             if owner.ctxs.orientation == .right {
-                if owner.view.x < NXDevice.width/3.0 {
+                if owner.view.x < NXUI.width/3.0 {
                     UIView.animate(withDuration: 0.2) {
                         self.owner.view.x = 0.0
                         self.backgroundColor = NX.maxAlphaOfColor
@@ -83,7 +83,7 @@ open class NXTransitionView: NXView {
                     if let naviController = self.owner.ctxs.superviewController?.navigationController as? NXNavigationController {
                         naviController.removeSubviewController(owner, animated: true)
                         UIView.animate(withDuration: naviController.ctxs.duration*0.6) {
-                            self.owner.view.x = NXDevice.width
+                            self.owner.view.x = NXUI.width
                             self.backgroundColor = NX.minAlphaOfColor
                         }
                     }
@@ -91,7 +91,7 @@ open class NXTransitionView: NXView {
                 }
             }
             else {
-                if owner.view.x > -NXDevice.width/3.0 {
+                if owner.view.x > -NXUI.width/3.0 {
                     UIView.animate(withDuration: 0.2) {
                         self.owner.view.x = 0.0
                         self.backgroundColor = NX.maxAlphaOfColor
@@ -101,7 +101,7 @@ open class NXTransitionView: NXView {
                     if let naviController = self.owner.ctxs.superviewController?.navigationController as? NXNavigationController {
                         naviController.removeSubviewController(owner, animated: true)
                         UIView.animate(withDuration: naviController.ctxs.duration*0.6) {
-                            self.owner.view.x = -NXDevice.width
+                            self.owner.view.x = -NXUI.width
                             self.backgroundColor = NX.minAlphaOfColor
                         }
                     }

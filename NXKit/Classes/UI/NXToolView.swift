@@ -69,11 +69,11 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
             }
             
             for (index, element) in self.wrapped.elements.enumerated() {
-                element.size = CGSize(width: self.wrapped.width, height: NXDevice.toolViewOffset)
+                element.size = CGSize(width: self.wrapped.width, height: NXUI.toolViewOffset)
                 element.elementView.isHidden = false
-                element.elementView.frame = CGRect(x: self.wrapped.width * CGFloat(index), y: 0, width: self.wrapped.width, height: NXDevice.toolViewOffset)
+                element.elementView.frame = CGRect(x: self.wrapped.width * CGFloat(index), y: 0, width: self.wrapped.width, height: NXUI.toolViewOffset)
                 if index >= self.wrapped.elements.count/2 && self.wrapped.center.isHidden == false {
-                    element.elementView.frame = CGRect(x: self.wrapped.width * CGFloat(index+1), y: 0, width: self.wrapped.width, height: NXDevice.toolViewOffset)
+                    element.elementView.frame = CGRect(x: self.wrapped.width * CGFloat(index+1), y: 0, width: self.wrapped.width, height: NXUI.toolViewOffset)
                 }
                 element.elementView.tag = index
                 element.elementView.setupEvents([UIControl.Event.tap]) {[weak self] (e, v) in
@@ -216,7 +216,7 @@ extension NXToolView {
             isValue:Bool,
             isResetable:Bool) = (0, UIColor.red, UIColor.white, UIColor.red, 0, 11, UIEdgeInsets(top: 1.5, left: 1.5, bottom: 1.5, right: 1.5), true, false)
         
-        open var elementView = NXToolView.ElementView(frame: CGRect(x: 0, y: 0, width: NXDevice.width/4.0, height: NXDevice.toolViewOffset))
+        open var elementView = NXToolView.ElementView(frame: CGRect(x: 0, y: 0, width: NXUI.width/4.0, height: NXUI.toolViewOffset))
     }
     
     open class ElementView : NXView {

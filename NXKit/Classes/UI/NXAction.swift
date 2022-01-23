@@ -61,10 +61,10 @@ open class NXAction: NXItem {
         self.init(completion:nil)
         self.ctxs.value = value
         self.ctxs.update(NXActionViewCell.self, "NXActionViewCell")
-        self.ctxs.size = CGSize(width: NXDevice.width, height: NX.Association.size.height)
+        self.ctxs.size = CGSize(width: NXUI.width, height: NX.Association.size.height)
         
         self.title.value = title
-        self.title.frame = CGRect(x: 16, y: 0, width: NXDevice.width-32, height: self.ctxs.height)
+        self.title.frame = CGRect(x: 16, y: 0, width: NXUI.width-32, height: self.ctxs.height)
         self.title.textAlignment = .center
         completion?("init", self)
     }

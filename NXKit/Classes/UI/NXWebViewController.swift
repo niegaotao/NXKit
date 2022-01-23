@@ -17,7 +17,7 @@ open class NXBackbarWrappedView: NXLCRView<NXButton, UIView, NXButton> {
         self.lhsView.setImage(NX.image(named:"navi-back.png"), for: .normal)
         self.lhsView.contentHorizontalAlignment = .left
         
-        self.centerView.frame = CGRect(x: 32, y: 14, width: NXDevice.pixel, height: 16)
+        self.centerView.frame = CGRect(x: 32, y: 14, width: NXUI.pixel, height: 16)
         self.centerView.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         
         self.rhsView.frame = CGRect(x: 33, y: 0, width: 32, height: 44)

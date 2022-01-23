@@ -22,8 +22,8 @@ extension NXOverlay {
     }
     
     public static let frame = NX.Rect { (_, __sender) in
-        __sender.width = max(min(350.0, NXDevice.width * 0.8), 300.0)
-        __sender.x = (NXDevice.width - __sender.width)/2.0
+        __sender.width = max(min(350.0, NXUI.width * 0.8), 300.0)
+        __sender.x = (NXUI.width - __sender.width)/2.0
     }
     
     public static let inset = NX.Rect { (_, __sender) in
