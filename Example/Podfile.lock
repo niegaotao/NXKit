@@ -1,10 +1,10 @@
 PODS:
-  - NXKit (0.9.8):
-    - NXKit/Components (= 0.9.8)
-    - NXKit/UI (= 0.9.8)
-  - NXKit/Components (0.9.8):
-    - NXKit/UI
-  - NXKit/UI (0.9.8)
+  - NXKit (0.9.9):
+    - NXKit/Extensions (= 0.9.9)
+    - NXKit/Foundation (= 0.9.9)
+  - NXKit/Extensions (0.9.9):
+    - NXKit/Foundation
+  - NXKit/Foundation (0.9.9)
 
 DEPENDENCIES:
   - NXKit (from `../`)
@@ -14,7 +14,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  NXKit: bad8eacc69ff557f8a6a2dca4529ab84e042db08
+  NXKit: 728d4e632de8595a9ef2e65515fe85b174924142
 
 PODFILE CHECKSUM: 6b5831c7898e1d8270bec7e09c3c935af90ead31
 
