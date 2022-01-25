@@ -18,13 +18,10 @@ extension NXRouter {
     
     //*这里采用类对象的方式保存注册信息*/
     open class URI : NSObject {
-        open var url = ""           //url
+        open var url = ""       //url
         open var scheme = ""        //scheme
-        open var host = ""          //host
-        open var port = ""          //port
         open var path = ""          //path
-        open var query = ""         //query
-        open var fragment = ""      //fragment
+        open var query : [String: String]? = nil                   //URL对应解析的参数，输出
         open var completion: NX.Completion<Bool, NXRouter.Wrapped?>? = nil//注册后的回调action
     }
     
@@ -36,7 +33,7 @@ extension NXRouter {
 }
 
 open class NXRouter {
-    public private(set) var uris = [NXRouter.URI]()                //存储的uris
+    public private(set) var routes = [NXRouter.URI]()                //存储的uris
     public private(set) var schemes = [String]()                    //支持的schemes
     public private(set) var isRepeatable = false                    //是否支持重复的path
     open var exception : ((_ url:String) -> ())?                    //对未注册的或异常的一个回调
@@ -49,7 +46,7 @@ open class NXRouter {
     /*新增URL*/
     @discardableResult
     public func add(_ url: String, completion:@escaping NX.Completion<Bool, NXRouter.Wrapped?>) -> NXRouter.URI? {
-        let record = self.compatibleURI(url: url)
+        let record = self.componentsOf(url: url)
         return self.add(record: record, completion: completion)
     }
     
@@ -74,7 +71,7 @@ open class NXRouter {
     /*新增URL*/
     @discardableResult
     public func add(scheme:String, path: String, completion:@escaping NX.Completion<Bool, NXRouter.Wrapped?>) -> NXRouter.URI? {
-        let record = self.compatibleURI(url: scheme + "://" + path)
+        let record = self.componentsOf(url: scheme + "://" + path)
         return self.add(record: record, completion: completion)
     }
     
@@ -88,8 +85,8 @@ open class NXRouter {
         
         if isRepeatable == false {
             if let uri = record.uri {
-                if let index = self.uris.firstIndex(of: uri){
-                    self.uris.remove(at: index)
+                if let index = self.routes.firstIndex(of: uri){
+                    self.routes.remove(at: index)
                 }
             }
         }
@@ -100,7 +97,7 @@ open class NXRouter {
         uri.scheme = record.scheme
         uri.path = record.path
         uri.completion = completion
-        uris.append(uri)
+        routes.append(uri)
         
         return uri
     }
@@ -110,7 +107,7 @@ open class NXRouter {
     /*删除*/
     @discardableResult
     public func remove(_ url: String, uri: NXRouter.URI? = nil) -> Bool {
-        let __components = self.compatibleURI(url: url)
+        let __components = self.componentsOf(url: url)
         if __components.isValid == false {
             return false
         }
@@ -118,7 +115,7 @@ open class NXRouter {
         var isRemoved : Bool = false
         
         if let __target = uri {
-            self.uris.removeAll { (__uri) -> Bool in
+            self.routes.removeAll { (__uri) -> Bool in
                 if __target == __uri {
                     isRemoved = true
                     return true
@@ -127,7 +124,7 @@ open class NXRouter {
             }
         }
         else {
-            self.uris.removeAll { (__uri) -> Bool in
+            self.routes.removeAll { (__uri) -> Bool in
                 if __uri.scheme == __components.scheme && __uri.path == __components.path {
                     isRemoved = true
                     return true
@@ -140,12 +137,12 @@ open class NXRouter {
     
     //打开链接
     public func open(_ url: String, info: [String: Any]?, completion: NX.Completion<Bool, [String: Any]>?) {
-        let compatible = self.compatibleURI(url: url)
+        let compatible = self.componentsOf(url: url)
         if compatible.isValid, let uri = compatible.uri {
             let rawValue = NXRouter.Wrapped()
             rawValue.url = url
             rawValue.info = info
-            rawValue.query = NXRouter.query(url: url)
+            rawValue.query = compatible.query
             rawValue.completion = completion
             uri.completion?(true, rawValue)
         }
@@ -155,7 +152,7 @@ open class NXRouter {
     }
     
     /*检测url的有效性,匹配URL*/
-    public func compatibleURI(url: String) -> NXRouter.Record {
+    public func componentsOf(url: String) -> NXRouter.Record {
         let record = NXRouter.Record()
         if let encodeURL = url.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed) {
             if let __url = URL(string: encodeURL), let __scheme = __url.scheme , self.schemes.contains(__scheme){
@@ -163,31 +160,13 @@ open class NXRouter {
                 record.url = encodeURL
                 record.scheme = __scheme
                 record.path = (__url.host ?? "") + __url.path
+                record.query = NXRouter.query(url: encodeURL)
             }
         }
         
-        for uri in self.uris {
-            
-            var compare : (scheme:Bool, path:Bool) = (true, true)
-            if uri.scheme.count > 0 {
-                compare.scheme = uri.scheme == record.scheme
-            }
-            else {
-                compare.scheme = true
-            }
-            
-            if uri.path.count > 0 {
-                compare.path = uri.path == record.path
-            }
-            else {
-                compare.path = true
-            }
-            
-            if compare.scheme && compare.path {
-                record.uri = uri
-                return record
-            }
-        }
+        record.uri = self.routes.first(where: { uri in
+            return (record.scheme.count > 0 ? record.scheme == uri.scheme : true) && (record.path.count > 0 ? record.path == uri.path : true);
+        })
         
         return record
     }
