@@ -20,7 +20,7 @@ open class NXViewController: UIViewController  {
     open var contentView = UIView(frame: CGRect(x: 0, y: NXUI.topOffset, width: NXUI.width, height: NXUI.height-NXUI.topOffset))
     
     ///页面无内容时的加载动画
-    open var animationView = NX.UI.AnimationClass.init(frame: CGRect.zero)
+    open var animationView = NX.AnimationClass.init(frame: CGRect.zero)
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -128,7 +128,7 @@ open class NXViewController: UIViewController  {
     //更新导航栏：父类会自动调用
     open func updateNavigationBar() {
         if NX.isViewControllerBasedStatusBarAppearance == false {
-            NX.UI.update(self.ctxs.statusBarStyle)
+            NX.setupBarValue = self.ctxs.statusBarStyle
         }
         else if let superviewController = self.ctxs.superviewController {
             if let viewController = superviewController as? NXToolViewController, viewController.selectedViewController == self {
@@ -266,12 +266,12 @@ extension NXViewController {
         
         ///状态栏样式
         open var shouldAutorotate = false
-        open var statusBarStyle = NX.Bar.dark
+        open var statusBarStyle = NX.statusBarStyle
         open var statusBarHidden = false
         open var orientationMask = UIInterfaceOrientationMask.portrait
         
         ///空页面加载动画
-        open var animationViewClass = NX.UI.AnimationClass
+        open var animationViewClass = NX.AnimationClass
        
         ///是否允许手势返回：某些页面会设置不允许手势返回，采用block是因为可以在当前页面接收到右滑手势返回事件
         open var panRecognizer : ((String, UIPanGestureRecognizer) -> (Bool)) = {_, _ in return true}
@@ -287,7 +287,7 @@ extension NXViewController {
         ///导航栏顶部的分割线
         public let separator = NX.Separator { (_, __sender) in
             __sender.insets = UIEdgeInsets.zero;
-            __sender.isHidden = NX.UI.isSeparatorHidden;
+            __sender.isHidden = NX.isSeparatorHidden;
             __sender.backgroundColor = NX.separatorColor;
         }
         ///覆盖的视图控制器
