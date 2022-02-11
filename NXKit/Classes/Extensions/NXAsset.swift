@@ -234,7 +234,7 @@ extension NXAsset {
         //最后的回调
         open var completion : NX.Completion<Bool, NXAsset.Output>? = nil
         //最初的打开方式
-        open var navigation = NXViewController.Navigation.present
+        open var navigation = NX.Navigation.present
         //是否打开页面
         open var openAllowed = true
         //是否关闭页面
@@ -339,7 +339,7 @@ extension NXAsset {
                           
                           footer:(lhs:Bool, center:Bool, rhs:Bool),
                           
-                          navigation:NXViewController.Navigation,
+                          navigation:NX.Navigation,
                           naviController:NXNavigationController,
                           openAllowed:Bool,
                           closeAllowed:Bool,

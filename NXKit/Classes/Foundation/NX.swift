@@ -77,7 +77,7 @@ extension NX {
     static public var insets = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
     
     public struct Ats : OptionSet {
-        public let rawValue : Int
+        public private(set) var rawValue : Int = 0
         public init(rawValue:Int) {
             self.rawValue = rawValue
         }
@@ -183,20 +183,18 @@ extension NX {
     static public var minAlphaOfColor = UIColor.black.withAlphaComponent(0.01)
     // 转场后容器视图的Alpha值
     static public var maxAlphaOfColor = UIColor.black.withAlphaComponent(0.30)
-    //初始化的状态栏样式
-    static public var statusBarStyle = NX.Bar.dark
     
     //用户设定的暗黑模式类型
-    static private(set) var __setupColorValue = NX.Color.light
-    static public var setupColorValue : NX.Color {
+    static private(set) var __userInterfaceStyle = NX.Color.light
+    static public var userInterfaceStyle : NX.Color {
         set{
-            __setupColorValue = newValue
+            __userInterfaceStyle = newValue
         }
         get{
-            if __setupColorValue == NX.Color.light {
+            if __userInterfaceStyle == NX.Color.light {
                 return NX.Color.light
             }
-            else if __setupColorValue == NX.Color.dark {
+            else if __userInterfaceStyle == NX.Color.dark {
                 if #available(iOS 13.0, *) {
                     return NX.Color.dark
                 }
@@ -213,34 +211,35 @@ extension NX {
         }
     }
     
-    static private(set) var __setupBarValue = NX.Bar.none
-    static public var setupBarValue : NX.Bar {
+    //初始化的状态栏样式
+    static private(set) var __statusBarStyle = NX.Bar.dark
+    static public var statusBarStyle : NX.Bar {
         set{
             if NX.isViewControllerBasedStatusBarAppearance {
                 if newValue !=  .none {
-                    __setupBarValue = newValue
+                    __statusBarStyle = newValue
                 }
             }
             else {
                 if newValue == NX.Bar.hidden {
-                    __setupBarValue = newValue
+                    __statusBarStyle = newValue
                     UIApplication.shared.isStatusBarHidden = true
                 }
                 else if newValue == NX.Bar.unspecified {
-                    __setupBarValue = newValue
+                    __statusBarStyle = newValue
                     UIApplication.shared.isStatusBarHidden = false
                     UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.default, animated: true)
                 }
                 else if newValue == NX.Bar.light {
-                    __setupBarValue = newValue
+                    __statusBarStyle = newValue
                     UIApplication.shared.isStatusBarHidden = false
                     UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
                 }
                 else if newValue == NX.Bar.dark {
-                    __setupBarValue = newValue
+                    __statusBarStyle = newValue
                     UIApplication.shared.isStatusBarHidden = false
                     if #available(iOS 13.0, *) {
-                        if setupColorValue == NX.Color.dark {
+                        if userInterfaceStyle == NX.Color.dark {
                             UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
                         }
                         else {
@@ -254,7 +253,7 @@ extension NX {
             }
         }
         get{
-            return __setupBarValue
+            return __statusBarStyle
         }
         
     }
@@ -274,11 +273,28 @@ extension NX {
         case light = "light"
         case dark = "dark"
     }
+    
+    public enum Navigation : Int {
+        case push       //打开页面通过push方式打开的
+        case present    //打开页面通过present方式打开的
+        case overlay    //打开页面通过overlay方式打开的
+    }
+    
+    public enum Orientation : Int {
+        case top        //从顶部进入
+        case left       //从左侧进入
+        case bottom     //从底部进入
+        case right      //从右侧进入
+    }
+    
+    public enum Reload : Int {
+        case initialized //初始状态
+        case update      //下拉刷新
+        case more        //上拉加载更多
+    }
         
     static public var AnimationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self //空页面加载动画类型
     static public var HUDAnimationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self//loading
-
-    static public var PagingClass : NXInitialValue.Type = Int.self
     
     static public var isSeparatorHidden = false
 }
@@ -300,7 +316,7 @@ extension NX {
     public class func color(_ lightColor:UIColor, _ darkColor:UIColor? = nil) -> UIColor {
         if #available(iOS 13.0, *) {
             return UIColor.init { (__collection) -> UIColor in
-                if let __darkColor = darkColor, NX.setupColorValue == NX.Color.dark {
+                if let __darkColor = darkColor, NX.userInterfaceStyle == NX.Color.dark {
                     return __darkColor
                 }
                 return lightColor

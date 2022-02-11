@@ -128,7 +128,7 @@ open class NXViewController: UIViewController  {
     //更新导航栏：父类会自动调用
     open func updateNavigationBar() {
         if NX.isViewControllerBasedStatusBarAppearance == false {
-            NX.setupBarValue = self.ctxs.statusBarStyle
+            NX.statusBarStyle = self.ctxs.statusBarStyle
         }
         else if let superviewController = self.ctxs.superviewController {
             if let viewController = superviewController as? NXToolViewController, viewController.selectedViewController == self {
@@ -248,7 +248,7 @@ extension NXViewController {
     open class Association<Index:NXInitialValue> {
         open var index = Index.initialValue ///用于记录当前正在请求或者展示的页面index，多用于分页加载
         open var next = Index.initialValue  ///用于记录下一页next，多用于分页加载
-        open var reload = NXViewController.Reload.initialized///当前刷新状态
+        open var reload = NX.Reload.initialized///当前刷新状态
         
         open var isWrapped : Bool = false ///是否被其他UIViewController包装了，某些情况被包装的需要隐藏掉导航栏
         open var isEmpty : Bool = true ///页面是否为空，如有缓存数据则可置为false。false不用展示加载动画
@@ -266,7 +266,7 @@ extension NXViewController {
         
         ///状态栏样式
         open var shouldAutorotate = false
-        open var statusBarStyle = NX.statusBarStyle
+        open var statusBarStyle = NX.Bar.dark
         open var statusBarHidden = false
         open var orientationMask = UIInterfaceOrientationMask.portrait
         
@@ -277,9 +277,9 @@ extension NXViewController {
         open var panRecognizer : ((String, UIPanGestureRecognizer) -> (Bool)) = {_, _ in return true}
         
         ///进行的什么操作
-        open var navigation = NXViewController.Navigation.push
+        open var navigation = NX.Navigation.push
         ///从哪个方向载入
-        open var orientation = NXViewController.Orientation.right
+        open var orientation = NX.Orientation.right
         ///转场动画过程中需要的容器视图
         open var transitionView: NXTransitionView?
         ///两级页面之间传递信息
@@ -297,25 +297,6 @@ extension NXViewController {
         
         ///初始化方法
         public init(){}
-    }
-    
-    public enum Navigation : Int {
-        case push       //打开页面通过push方式打开的
-        case present    //打开页面通过present方式打开的
-        case overlay    //打开页面通过overlay方式打开的
-    }
-    
-    public enum Orientation : Int {
-        case top        //从顶部进入
-        case left       //从左侧进入
-        case bottom     //从底部进入
-        case right      //从右侧进入
-    }
-    
-    public enum Reload : Int {
-        case initialized //初始状态
-        case update      //下拉刷新
-        case more        //上拉加载更多
     }
 }
 
