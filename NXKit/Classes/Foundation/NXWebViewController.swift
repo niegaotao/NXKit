@@ -67,7 +67,7 @@ open class NXWebViewController: NXViewController {
     }
     
     open override func setupSubviews() {
-        self.webView.attachedViewController = self
+        self.webView.webViewController = self
         self.webView.frame = self.contentView.bounds
         self.webView.backgroundColor = UIColor.white
         self.webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -75,12 +75,12 @@ open class NXWebViewController: NXViewController {
         self.observer.add(object:self.webView, key: "title", options: [.new, .old], context: nil, completion: nil)
         self.observer.add(object:self.webView, key: "estimatedProgress", options: [.new, .old], context: nil, completion: nil)
         
-        self.webView.callbackWithNavigation = {[weak self](navigation, action, isCompleted, error) -> () in
+        self.webView.ctxs.callbackWithNavigation = {[weak self](navigation, action, isCompleted, error) -> () in
             if action == "result" {
                 self?.callbackWithCompletion(isCompleted, error)
             }
         }
-        self.webView.callbackWithValue = {[weak self] (value:[String:Any])  in
+        self.webView.ctxs.callbackWithValue = {[weak self] (value:[String:Any])  in
             self?.callbackWithValue(value)
         }
         self.contentView.addSubview(self.webView)

@@ -11,13 +11,13 @@ import UIKit
 
 open class NXToolView: NXBackgroundView<UIImageView, UIView> {
     open weak var controller : NXToolViewController?
-    public let wrapped = NXToolView.Wrapped()
+    public let ctxs = NXToolView.Wrapped()
     public let centerView = NXToolView.Bar(frame: CGRect(x: 0, y: 0, width: 56, height: 47))
         
     override open func setupSubviews() {
         super.setupSubviews()
         
-        self.contentView.setupSeparator(color: self.wrapped.separator.backgroundColor, ats: .minY, insets: .zero)
+        self.contentView.setupSeparator(color: self.ctxs.separator.backgroundColor, ats: .minY, insets: .zero)
         self.contentView.addSubview(centerView)
     }
     
@@ -29,23 +29,23 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
             guard let __elements = dicValue["elements"] as? [NXToolView.Element], __elements.count > 0 else {
                 return
             }
-            self.wrapped.elements.forEach { (element) in
+            self.ctxs.elements.forEach { (element) in
                 element.elementView.removeFromSuperview()
             }
-            self.wrapped.elements = __elements
-            self.wrapped.index = dicValue["index"] as? Int ?? 0
+            self.ctxs.elements = __elements
+            self.ctxs.index = dicValue["index"] as? Int ?? 0
             
-            if self.wrapped.center.isHidden == false {
+            if self.ctxs.center.isHidden == false {
                 //如果想要显示中间的加大按钮，必须满足常规按钮的个数是偶数个
-                self.wrapped.center.isHidden = (self.wrapped.elements.count % 2 != 0)
+                self.ctxs.center.isHidden = (self.ctxs.elements.count % 2 != 0)
             }
             
-            if self.wrapped.layer.isHidden == false {
+            if self.ctxs.layer.isHidden == false {
                 //设置阴影
-                self.layer.shadowColor = self.wrapped.layer.shadowColor.cgColor;
-                self.layer.shadowOffset = self.wrapped.layer.shadowOffset
-                self.layer.shadowRadius = self.wrapped.layer.shadowRadius
-                self.layer.shadowOpacity = Float(self.wrapped.layer.shadowOpacity)
+                self.layer.shadowColor = self.ctxs.layer.shadowColor.cgColor;
+                self.layer.shadowOffset = self.ctxs.layer.shadowOffset
+                self.layer.shadowRadius = self.ctxs.layer.shadowRadius
+                self.layer.shadowOpacity = Float(self.ctxs.layer.shadowOpacity)
                 self.layer.cornerRadius = self.layer.shadowRadius
                 self.layer.masksToBounds = false
             }
@@ -54,33 +54,33 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
                 self.layer.masksToBounds = true
             }
             
-            self.contentView.association?.separator?.isHidden = self.wrapped.separator.isHidden
-            self.contentView.association?.separator?.backgroundColor = self.wrapped.separator.backgroundColor.cgColor
+            self.contentView.association?.separator?.isHidden = self.ctxs.separator.isHidden
+            self.contentView.association?.separator?.backgroundColor = self.ctxs.separator.backgroundColor.cgColor
             
-            self.centerView.centerView.image = self.wrapped.center.image
-            self.centerView.isHidden = self.wrapped.center.isHidden
-            self.centerView.frame = self.wrapped.center.frame
+            self.centerView.centerView.image = self.ctxs.center.image
+            self.centerView.isHidden = self.ctxs.center.isHidden
+            self.centerView.frame = self.ctxs.center.frame
             
-            if self.wrapped.center.isHidden == false {
-                self.wrapped.width = self.w/CGFloat(self.wrapped.elements.count+1)
+            if self.ctxs.center.isHidden == false {
+                self.ctxs.width = self.w/CGFloat(self.ctxs.elements.count+1)
             }
             else {
-                self.wrapped.width = self.w/CGFloat(self.wrapped.elements.count)
+                self.ctxs.width = self.w/CGFloat(self.ctxs.elements.count)
             }
             
-            for (index, element) in self.wrapped.elements.enumerated() {
-                element.size = CGSize(width: self.wrapped.width, height: NXUI.toolViewOffset)
+            for (index, element) in self.ctxs.elements.enumerated() {
+                element.size = CGSize(width: self.ctxs.width, height: NXUI.toolViewOffset)
                 element.elementView.isHidden = false
-                element.elementView.frame = CGRect(x: self.wrapped.width * CGFloat(index), y: 0, width: self.wrapped.width, height: NXUI.toolViewOffset)
-                if index >= self.wrapped.elements.count/2 && self.wrapped.center.isHidden == false {
-                    element.elementView.frame = CGRect(x: self.wrapped.width * CGFloat(index+1), y: 0, width: self.wrapped.width, height: NXUI.toolViewOffset)
+                element.elementView.frame = CGRect(x: self.ctxs.width * CGFloat(index), y: 0, width: self.ctxs.width, height: NXUI.toolViewOffset)
+                if index >= self.ctxs.elements.count/2 && self.ctxs.center.isHidden == false {
+                    element.elementView.frame = CGRect(x: self.ctxs.width * CGFloat(index+1), y: 0, width: self.ctxs.width, height: NXUI.toolViewOffset)
                 }
                 element.elementView.tag = index
                 element.elementView.setupEvents([UIControl.Event.tap]) {[weak self] (e, v) in
                     
                     guard let __toolView = self,
                         let __elementView = v as? NXToolView.ElementView,
-                        let __ctxs = self?.wrapped,
+                        let __ctxs = self?.ctxs,
                         __elementView.tag >= 0 && __elementView.tag < __ctxs.elements.count else {
                         return
                     }
@@ -91,13 +91,13 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
                         self?.controller?.didSelectViewController(at: __elementView.tag, animated: false)
                         
                         //选中的回调
-                        self?.wrapped.didSelect?(__toolView, __elementView.tag)
+                        self?.ctxs.didSelect?(__toolView, __elementView.tag)
                     }
                     else{
                         //选中的回调
-                        self?.wrapped.didSelect?(__toolView, __elementView.tag)
+                        self?.ctxs.didSelect?(__toolView, __elementView.tag)
                         //处理连续的双击
-                        self?.wrapped.didReselect?(__toolView, __elementView.tag)
+                        self?.ctxs.didReselect?(__toolView, __elementView.tag)
                     }
                 }
                 self.contentView.addSubview(element.elementView)
@@ -108,23 +108,23 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
                 return
             }
             let index = dicValue["index"] as? Int ?? 0
-            self.wrapped.index = max(min(index, self.wrapped.elements.count), 0)
+            self.ctxs.index = max(min(index, self.ctxs.elements.count), 0)
         }
         
-        for (index, element) in self.wrapped.elements.enumerated() {
+        for (index, element) in self.ctxs.elements.enumerated() {
             element.elementView.isHidden = false
-            element.isSelected = index == self.wrapped.index
+            element.isSelected = index == self.ctxs.index
             element.elementView.updateSubviews("", element)
         }
     }
     
     open func didSelect(at idx: Int){
-        let newValue = max(min(idx, self.wrapped.elements.count), 0)
-        guard self.wrapped.index != newValue else {return}
+        let newValue = max(min(idx, self.ctxs.elements.count), 0)
+        guard self.ctxs.index != newValue else {return}
         
-        let element = self.wrapped.elements[newValue]
+        let element = self.ctxs.elements[newValue]
         if element.isSelectable {
-            self.wrapped.index = newValue
+            self.ctxs.index = newValue
             
             if element.attachment.isResetable {
                 element.attachment.value = 0

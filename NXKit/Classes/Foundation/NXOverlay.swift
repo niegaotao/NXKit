@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension NXOverlay {
+open class NXOverlay : NXBackgroundView<UIControl, UIView> {
     public enum Animation : String {
         case none = "none"
         
@@ -54,11 +54,7 @@ extension NXOverlay {
 
 open class NXOverlayAttributes : NX.Rect {
     open var backgroundColor = UIColor.black.withAlphaComponent(0.4)
-}
 
-open class NXOverlay: NXBackgroundView<UIControl, UIView> {
-    //上下文
-    public let `is` = NXOverlayAttributes()
     
     //关闭的回调, background,lhs,rhs,close,footer
     open var closeCompletion : NX.Completion<String, Any?>? = nil
@@ -68,6 +64,15 @@ open class NXOverlay: NXBackgroundView<UIControl, UIView> {
     
     //弹框打开/关闭的动画
     open var animation = NXOverlay.Animation.center.rawValue
+    
+    required public override init() {
+        super.init()
+    }
+}
+
+open class NXOverlayView<Attributes:NXOverlayAttributes>: NXOverlay {
+    //上下文
+    public let ctxs = Attributes()
     
     //创建基础的容器试图
     override open func setupSubviews() {
@@ -98,7 +103,7 @@ open class NXOverlay: NXBackgroundView<UIControl, UIView> {
             self.contentView.alpha = fromValue.alpha
             
             UIView.animate(withDuration: 0.27, delay: 0, options: [.curveEaseInOut], animations: {
-                self.backgroundView.backgroundColor = self.is.backgroundColor
+                self.backgroundView.backgroundColor = self.ctxs.backgroundColor
                 self.contentView.transform = toValue.transform
                 self.contentView.alpha = toValue.alpha
             }, completion: {(v) in
@@ -116,7 +121,7 @@ open class NXOverlay: NXBackgroundView<UIControl, UIView> {
             self.contentView.frame = fromValue.frame
             
             UIView.animate(withDuration: 0.27, delay: 0, options: [.curveEaseInOut], animations: {
-                self.backgroundView.backgroundColor = self.is.backgroundColor
+                self.backgroundView.backgroundColor = self.ctxs.backgroundColor
                 self.contentView.alpha = toValue.alpha
                 self.contentView.frame = toValue.frame
             }, completion: { (finished) in
@@ -134,7 +139,7 @@ open class NXOverlay: NXBackgroundView<UIControl, UIView> {
             self.contentView.frame = fromValue.frame
             
             UIView.animate(withDuration: 0.27, delay: 0, options: [.curveEaseInOut], animations: {
-                self.backgroundView.backgroundColor = self.is.backgroundColor
+                self.backgroundView.backgroundColor = self.ctxs.backgroundColor
                 self.contentView.alpha = toValue.alpha
                 self.contentView.frame = toValue.frame
             }, completion: { (finished) in
@@ -152,7 +157,7 @@ open class NXOverlay: NXBackgroundView<UIControl, UIView> {
             self.contentView.frame = fromValue.frame
 
             UIView.animate(withDuration: 0.27, delay: 0, options: [.curveEaseInOut], animations: {
-                self.backgroundView.backgroundColor = self.is.backgroundColor
+                self.backgroundView.backgroundColor = self.ctxs.backgroundColor
                 self.contentView.alpha = toValue.aplha
                 self.contentView.frame = toValue.frame
             }, completion: {(completed) in
@@ -170,7 +175,7 @@ open class NXOverlay: NXBackgroundView<UIControl, UIView> {
             self.contentView.frame = fromValue.frame
 
             UIView.animate(withDuration: 0.27, delay: 0, options: [.curveEaseInOut], animations: {
-                self.backgroundView.backgroundColor = self.is.backgroundColor
+                self.backgroundView.backgroundColor = self.ctxs.backgroundColor
                 self.contentView.alpha = toValue.aplha
                 self.contentView.frame = toValue.frame
             }, completion: {(completed) in
@@ -178,7 +183,7 @@ open class NXOverlay: NXBackgroundView<UIControl, UIView> {
             })
         }
         else if animation == NXOverlay.Animation.none.rawValue {
-            self.backgroundView.backgroundColor = self.is.backgroundColor
+            self.backgroundView.backgroundColor = self.ctxs.backgroundColor
             completion?(true)
         }
     }

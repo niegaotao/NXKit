@@ -9,15 +9,15 @@
 import UIKit
 
 open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    open var wrapped = NXSwipeView.Wrapped()
+    open var ctxs = NXSwipeView.Wrapped()
     open var completion : ((_ swipeView: NXSwipeView, _ index: Int, _ animated: Bool) -> ())?
     
     override open func setupSubviews() {
         super.setupSubviews()
         
-        self.wrapped.insets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+        self.ctxs.insets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         
-        contentView.wrapped?.scrollDirection = .horizontal
+        contentView.ctxs?.scrollDirection = .horizontal
         contentView.frame = self.bounds
         contentView.backgroundColor = NX.backgroundColor
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -31,65 +31,65 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
             contentView.contentInsetAdjustmentBehavior = .never
         }
         self.setupSeparator(color: NX.separatorColor, ats: .maxY, insets: UIEdgeInsets.zero)
-        self.wrapped.slider.sliderView.layer.masksToBounds = true
-        self.contentView.addSubview(self.wrapped.slider.sliderView)
+        self.ctxs.slider.sliderView.layer.masksToBounds = true
+        self.contentView.addSubview(self.ctxs.slider.sliderView)
     }
     open override func updateSubviews(_ action: String, _ value: Any?) {
         guard let dicValue = value as? [String:Any] else {
             return
         }
-        self.wrapped.index = NX.get(int:dicValue["index"] as? Int, 0)
+        self.ctxs.index = NX.get(int:dicValue["index"] as? Int, 0)
         
-        self.wrapped.removeAll()
+        self.ctxs.removeAll()
         if let elements = dicValue["items"] as? [String] {
             for (_, title) in elements.enumerated() {
                 let item = NXSwipeView.Element()
                 item.title.selected = title
                 item.title.unselected = title
-                self.wrapped.items.append(item)
+                self.ctxs.items.append(item)
             }
         }
         else if let elements = dicValue["items"] as? [NXSwipeView.Element] {
-            self.wrapped.append(contentsOf: elements)
+            self.ctxs.append(contentsOf: elements)
         }
-        for (_, item) in self.wrapped.items.enumerated() {
+        for (_, item) in self.ctxs.items.enumerated() {
             if item.ctxs.cls == nil || item.ctxs.reuse.count <= 0 {
                 item.ctxs.update(NXSwipeView.Cell.self, "NXSwipeViewCell")
             }
             self.contentView.register(item.ctxs.cls, forCellWithReuseIdentifier: item.ctxs.reuse)
             
-            item.font.selected = self.wrapped.font.selected
-            item.font.unselected = self.wrapped.font.unselected
+            item.font.selected = self.ctxs.font.selected
+            item.font.unselected = self.ctxs.font.unselected
             
-            item.color.selected = self.wrapped.color.selected
-            item.color.unselected = self.wrapped.color.unselected
+            item.color.selected = self.ctxs.color.selected
+            item.color.unselected = self.ctxs.color.unselected
             
             item.width.selected = item.title.selected.stringSize(font: item.font.selected, size: CGSize(width: NXUI.width, height: 44)).width + 2.0
             item.width.unselected = item.title.unselected.stringSize(font: item.font.unselected, size: CGSize(width: NXUI.width, height: 44)).width + 2.0
         }
         
-        if self.wrapped.isEqually {
-            let maximumOfComponents = max(min(self.wrapped.maximumOfComponents, CGFloat(self.wrapped.items.count)),1.0)
-            let widthOfComponents = (self.w - wrapped.insets.left - wrapped.insets.right)/CGFloat(maximumOfComponents)
-            for (_, item) in self.wrapped.items.enumerated() {
+        if self.ctxs.isEqually {
+            let maximumOfComponents = max(min(self.ctxs.maximumOfComponents, CGFloat(self.ctxs.items.count)),1.0)
+            let widthOfComponents = (self.w - ctxs.insets.left - ctxs.insets.right)/CGFloat(maximumOfComponents)
+            for (_, item) in self.ctxs.items.enumerated() {
                 item.size.selected = CGSize(width: widthOfComponents, height: self.h)
                 item.size.unselected = CGSize(width: widthOfComponents, height: self.h)
             }
         }
         else {
-            for (_, item) in self.wrapped.items.enumerated() {
-                item.size.selected = CGSize(width: item.width.selected + self.wrapped.spaceOfComponents, height: self.h)
-                item.size.unselected = CGSize(width: item.width.unselected + self.wrapped.spaceOfComponents, height: self.h)
+            for (_, item) in self.ctxs.items.enumerated() {
+                item.size.selected = CGSize(width: item.width.selected + self.ctxs.spaceOfComponents, height: self.h)
+                item.size.unselected = CGSize(width: item.width.unselected + self.ctxs.spaceOfComponents, height: self.h)
             }
         }
         
         self.contentView.reloadData()
-        self.resizeSlider(at: self.wrapped.index, animated: false)
+        self.resizeSlider(at: self.ctxs.index, animated: false)
         
         //矫正位置
         DispatchQueue.main.asyncAfter(delay:0.01) {
             if self.contentView.contentSize.width > self.contentView.w {
-                let indexPath = IndexPath(row: self.wrapped.index, section: 0)
+                let indexPath = IndexPath(row: self.ctxs.index, section: 0)
                 self.contentView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             }
         }
@@ -97,7 +97,7 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
     
     //更新title，index为第几个：从0开始
     open func update(title:String, at index: Int) {
-        guard let item = self.wrapped[index] else {
+        guard let item = self.ctxs[index] else {
             return
         }
         item.title.selected = title
@@ -105,9 +105,9 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
         item.width.selected = item.title.selected.stringSize(font: item.font.selected, size: CGSize(width: NXUI.width, height: 44)).width + 2.0
         item.width.unselected = item.title.unselected.stringSize(font: item.font.unselected, size: CGSize(width: NXUI.width, height: 44)).width + 2.0
         
-        if self.wrapped.isEqually {
-            let maximumOfComponents = max(min(self.wrapped.maximumOfComponents, CGFloat(self.wrapped.count)),1.0)
-            let widthOfComponents = (self.w - wrapped.insets.left - wrapped.insets.right)/CGFloat(maximumOfComponents)
+        if self.ctxs.isEqually {
+            let maximumOfComponents = max(min(self.ctxs.maximumOfComponents, CGFloat(self.ctxs.count)),1.0)
+            let widthOfComponents = (self.w - ctxs.insets.left - ctxs.insets.right)/CGFloat(maximumOfComponents)
             
             item.size.selected = CGSize(width: widthOfComponents, height: self.h)
             item.size.unselected = CGSize(width: widthOfComponents, height: self.h)
@@ -118,56 +118,56 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
         }
         
         self.contentView.reloadData()
-        self.resizeSlider(at: self.wrapped.index, animated: false)
+        self.resizeSlider(at: self.ctxs.index, animated: false)
     }
     
     //在Controller中：手动滚动后 scrollViewDidEndScroll(_) 中调用NXSwipeView.didSelectItem(_)切换滑块
     //在Swipeview中：手动点击后 collectionView(_ didSelectItemAt:)中调用NXSwipeView.didSelectItem(_)切换滑块,并通知Controller
     
     open func didSelectItem(at index: Int){
-        self.wrapped.index = index
+        self.ctxs.index = index
         
         self.contentView.reloadData()
         self.resizeSlider(at: index, animated: true)
 
         //矫正位置
         if contentView.contentSize.width > contentView.w {
-            let indexPath = IndexPath(row: self.wrapped.index, section: 0)
+            let indexPath = IndexPath(row: self.ctxs.index, section: 0)
             self.contentView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
     }
     
     
     open func resizeSlider(at index:Int, animated:Bool){
-        self.wrapped.slider.sliderView.isHidden = self.wrapped.slider.isHidden
-        self.wrapped.slider.sliderView.layer.cornerRadius = self.wrapped.slider.radius
-        self.wrapped.slider.sliderView.backgroundColor = self.wrapped.slider.backgroundColor
+        self.ctxs.slider.sliderView.isHidden = self.ctxs.slider.isHidden
+        self.ctxs.slider.sliderView.layer.cornerRadius = self.ctxs.slider.radius
+        self.ctxs.slider.sliderView.backgroundColor = self.ctxs.slider.backgroundColor
         
         var __frame = CGRect.zero
-        if let item = self.wrapped[index] {
+        if let item = self.ctxs[index] {
             /*
              由于两个item的之间文字的间距是16pt,所以在计算item宽度的时候实在文字宽度的基础上加上了16
              所以这里需要将选中item.size.width减去16就是文字的宽度，也是滑块的宽度，origin.x也要减去一半
              */
-            if self.wrapped.slider.width > 0 {
-                __frame.size.width = self.wrapped.slider.width
+            if self.ctxs.slider.width > 0 {
+                __frame.size.width = self.ctxs.slider.width
             }
             else {
                 __frame.size.width = item.width.selected
             }
-            __frame.size.width = __frame.size.width - self.wrapped.slider.insets.left - self.wrapped.slider.insets.right
+            __frame.size.width = __frame.size.width - self.ctxs.slider.insets.left - self.ctxs.slider.insets.right
             
-            if self.wrapped.slider.height > 0 {
-                __frame.size.height = self.wrapped.slider.height
+            if self.ctxs.slider.height > 0 {
+                __frame.size.height = self.ctxs.slider.height
             }
             else {
                 __frame.size.height = 3
             }
-            __frame.origin.y = self.h - self.wrapped.slider.insets.bottom - __frame.size.height
+            __frame.origin.y = self.h - self.ctxs.slider.insets.bottom - __frame.size.height
             
-            __frame.origin.x = self.wrapped.insets.left + (item.size.selected.width - __frame.size.width)/2.0
+            __frame.origin.x = self.ctxs.insets.left + (item.size.selected.width - __frame.size.width)/2.0
             
-            for (__idx, loop) in self.wrapped.items.enumerated() {
+            for (__idx, loop) in self.ctxs.items.enumerated() {
                 if __idx < index {
                     __frame.origin.x = __frame.origin.x + loop.size.unselected.width
                 }
@@ -176,12 +176,12 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
         
         if animated {
             UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseInOut], animations: {
-                self.wrapped.slider.sliderView.frame = __frame
+                self.ctxs.slider.sliderView.frame = __frame
             }, completion:{ (finish) in
             })
         }
         else{
-            self.wrapped.slider.sliderView.frame = __frame
+            self.ctxs.slider.sliderView.frame = __frame
         }
     }
     
@@ -191,12 +191,12 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
     }
     
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.wrapped.count
+        return self.ctxs.count
     }
     
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let rs = self.wrapped.dequeue(collectionView, indexPath), let element = rs.element as? NXSwipeView.Element {
-            element.isSelected = (self.wrapped.index == indexPath.item)
+        if let rs = self.ctxs.dequeue(collectionView, indexPath), let element = rs.element as? NXSwipeView.Element {
+            element.isSelected = (self.ctxs.index == indexPath.item)
             rs.cell.updateSubviews("", element)
             return rs.cell
         }
@@ -204,7 +204,7 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
     }
     
     open  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if self.wrapped.index !=  indexPath.item {
+        if self.ctxs.index !=  indexPath.item {
             self.didSelectItem(at: indexPath.item)
             
             if let completion = self.completion {
@@ -214,20 +214,20 @@ open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UIC
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
-        return self.wrapped.insets
+        return self.ctxs.insets
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat{
-        return self.wrapped.lineSpacing
+        return self.ctxs.lineSpacing
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat{
-        return self.wrapped.interitemSpacing
+        return self.ctxs.interitemSpacing
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if let item = self.wrapped[indexPath.item] {
-            if self.wrapped.index == indexPath.item {
+        if let item = self.ctxs[indexPath.item] {
+            if self.ctxs.index == indexPath.item {
                 return item.size.selected
             }
             return item.size.unselected

@@ -336,7 +336,7 @@ extension NX {
         Swift.print("\((file as NSString).lastPathComponent)[\(line)],\(method):\n\(value)\n")
     }
     
-    public class func log(_ file:String = #file, _ method: String = #function, _ line: Int = #line, _ get:(()->(Any?))?){
+    public class func log(_ get:(() -> Any?)?, _ file:String = #file, _ method: String = #function, _ line: Int = #line){
         guard NX.isLoggable, let value = get?() else {
             return
         }

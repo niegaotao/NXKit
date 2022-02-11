@@ -54,9 +54,9 @@ extension NXActionView {
         
         /*
          空白：20
-         title:20,20,actionView.wrapped.header.frame.width - 40, 30
+         title:20,20,actionView.ctxs.header.frame.width - 40, 30
          空白10
-         center:20,60,actionView.wrapped.header.frame.width - 40, __height
+         center:20,60,actionView.ctxs.header.frame.width - 40, __height
          空白20
          */
         let actionView = NXActionView(frame: UIScreen.main.bounds)
@@ -95,8 +95,8 @@ extension NXActionView {
         setup?("setup", actionView)
                 
         actionView.updateSubviews(NXActionView.Key.alert.rawValue, nil)
-        actionView.completion = completion
-        actionView.open(animation: actionView.animation, completion: nil)
+        actionView.ctxs.completion = completion
+        actionView.open(animation: actionView.ctxs.animation, completion: nil)
         return actionView
     }
     
@@ -224,8 +224,8 @@ extension NXActionView {
         initialize?("initialize", actionView)
         
         actionView.updateSubviews(NXActionView.Key.action.rawValue, nil)
-        actionView.completion = completion
-        actionView.open(animation: actionView.animation, completion: nil)
+        actionView.ctxs.completion = completion
+        actionView.open(animation: actionView.ctxs.animation, completion: nil)
         return actionView
     }
 }
@@ -375,8 +375,7 @@ open class NXActionViewAttributes: NXOverlayAttributes {
     open var isAnimation = true
 }
 
-open class NXActionView: NXOverlay {
-    public let ctxs = NXActionViewAttributes()
+open class NXActionView: NXOverlayView<NXActionViewAttributes> {
     public let headerView = NXActionView.HeaderView(frame:CGRect.zero)
     public let centerView = NXActionView.CenterView(frame:CGRect.zero)
     public let footerView = NXActionView.FooterView(frame:CGRect.zero)
@@ -387,8 +386,8 @@ open class NXActionView: NXOverlay {
         //0.背景
         self.backgroundView.setupEvents([.touchUpInside], action: { [weak self] (event, sender) in
             guard let __weakself = self else { return }
-            __weakself.close(animation: __weakself.animation, completion: { (isCompleted) in
-                __weakself.closeCompletion?("background", nil)
+            __weakself.close(animation: __weakself.ctxs.animation, completion: { (isCompleted) in
+                __weakself.ctxs.closeCompletion?("background", nil)
             })
         })
                 
@@ -396,14 +395,14 @@ open class NXActionView: NXOverlay {
         self.headerView.isHidden = true
         self.headerView.lhsView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
             guard let __weakself = self else { return }
-            __weakself.close(animation: __weakself.animation, completion: {(_ isCompleted) in
-                __weakself.closeCompletion?("header.lhs", nil)
+            __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
+                __weakself.ctxs.closeCompletion?("header.lhs", nil)
             })
         }
         self.headerView.rhsView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
             guard let __weakself = self else { return }
-            __weakself.close(animation: __weakself.animation, completion: {(_ isCompleted) in
-                __weakself.closeCompletion?("header.rhs", nil)
+            __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
+                __weakself.ctxs.closeCompletion?("header.rhs", nil)
             })
         }
         self.contentView.addSubview(self.headerView)
@@ -413,12 +412,12 @@ open class NXActionView: NXOverlay {
         self.centerView.completion = {[weak self] (_ action:NXAction, _ index: Int) in
             guard let __weakself = self else { return }
             if action.appearance.isCloseable {
-                __weakself.close(animation: __weakself.animation, completion: { (isCompleted) in
-                    __weakself.completion?("", index)
+                __weakself.close(animation: __weakself.ctxs.animation, completion: { (isCompleted) in
+                    __weakself.ctxs.completion?("", index)
                 })
             }
             else {
-                __weakself.completion?("", index)
+                __weakself.ctxs.completion?("", index)
             }
         }
         self.contentView.addSubview(self.centerView)
@@ -427,20 +426,20 @@ open class NXActionView: NXOverlay {
         self.footerView.isHidden = true
         self.footerView.lhsView.setupEvents([.touchUpInside]) { [weak self] (e, v) in
             guard let __weakself = self else { return }
-            __weakself.close(animation: __weakself.animation, completion: {(_ isCompleted) in
-                __weakself.closeCompletion?("footer.lhs", nil)
+            __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
+                __weakself.ctxs.closeCompletion?("footer.lhs", nil)
             })
         }
         self.footerView.centerView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
             guard let __weakself = self else { return }
-            __weakself.close(animation: __weakself.animation, completion: {(_ isCompleted) in
-                __weakself.closeCompletion?("footer.center", nil)
+            __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
+                __weakself.ctxs.closeCompletion?("footer.center", nil)
             })
         }
         self.footerView.rhsView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
             guard let __weakself = self else { return }
-            __weakself.close(animation: __weakself.animation, completion: {(_ isCompleted) in
-                __weakself.closeCompletion?("footer.rhs", nil)
+            __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
+                __weakself.ctxs.closeCompletion?("footer.rhs", nil)
             })
         }
         self.contentView.addSubview(self.footerView)
@@ -450,7 +449,7 @@ open class NXActionView: NXOverlay {
         self.ctxs.key = action
         
         if self.ctxs.key.contains("center") {
-            self.animation = NXOverlay.Animation.center.rawValue
+            self.ctxs.animation = NXOverlay.Animation.center.rawValue
             
             self.ctxs.size = CGSize(width: NXUI.width * 0.8, height: 0.0)
             self.contentView.layer.cornerRadius = 8
@@ -459,7 +458,7 @@ open class NXActionView: NXOverlay {
             self.backgroundView.isUserInteractionEnabled = false
         }
         else if self.ctxs.key.contains("footer"){
-            self.animation = NXOverlay.Animation.footer.rawValue
+            self.ctxs.animation = NXOverlay.Animation.footer.rawValue
             
             if self.ctxs.devide > 0 {
                 self.contentView.backgroundColor = NX.contentViewBackgroundColor
@@ -580,17 +579,17 @@ extension NXActionView {
 
 extension NXActionView {
     open class CenterView : NXCView<NXCollectionView>, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-        private(set) var wrapped = NXActionViewAttributes()
+        private(set) var ctxs = NXActionViewAttributes()
         open var completion : NX.Completion<NXAction, Int>? = nil
         
         open override func setupSubviews() {
             super.setupSubviews()
             
             self.contentView.frame = self.bounds
-            self.contentView.wrapped?.minimumLineSpacing = 0.0
-            self.contentView.wrapped?.minimumInteritemSpacing = 0.0
-            self.contentView.wrapped?.scrollDirection = .vertical
-            self.contentView.wrapped?.sectionInset = UIEdgeInsets.zero
+            self.contentView.ctxs?.minimumLineSpacing = 0.0
+            self.contentView.ctxs?.minimumInteritemSpacing = 0.0
+            self.contentView.ctxs?.scrollDirection = .vertical
+            self.contentView.ctxs?.sectionInset = UIEdgeInsets.zero
             self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             self.contentView.backgroundColor = NX.backgroundColor
             self.contentView.delaysContentTouches = false
@@ -600,7 +599,7 @@ extension NXActionView {
             guard let __wrapped = value as? NXActionViewAttributes else {
                 return
             }
-            self.wrapped = __wrapped
+            self.ctxs = __wrapped
             let metadata = __wrapped.center
             
             metadata.actions.forEach { (option) in
@@ -625,23 +624,23 @@ extension NXActionView {
         }
         
         public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return self.wrapped.center.actions.count
+            return self.ctxs.center.actions.count
         }
         
         public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-            let action = self.wrapped.center.actions[indexPath.item]
+            let action = self.ctxs.center.actions[indexPath.item]
             return action.ctxs.size
         }
         
         public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let action = self.wrapped.center.actions[indexPath.item]
+            let action = self.ctxs.center.actions[indexPath.item]
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: action.ctxs.reuse, for: indexPath) as! NXActionViewCell
             cell.updateSubviews("update", action)
             return cell
         }
         
         public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-            if self.wrapped.isAnimation == true {
+            if self.ctxs.isAnimation == true {
                 var rotation = CATransform3DMakeTranslation(0, -2, 0.0)
                 rotation.m43 = 1.0 / -600.0
                 cell.layer.shadowColor = UIColor.black.cgColor
@@ -658,7 +657,7 @@ extension NXActionView {
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
-                    self.wrapped.isAnimation = false
+                    self.ctxs.isAnimation = false
                 }
             }
         }
@@ -666,7 +665,7 @@ extension NXActionView {
         public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             collectionView.deselectItem(at: indexPath, animated: true)
             
-            let action = self.wrapped.center.actions[indexPath.item]
+            let action = self.ctxs.center.actions[indexPath.item]
             if action.appearance.isEnabled == true {
                 self.completion?(action, indexPath.item)
             }

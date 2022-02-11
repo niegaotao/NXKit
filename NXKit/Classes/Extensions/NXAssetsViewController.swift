@@ -67,11 +67,11 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     
     open override func setupSubviews(){
         self.collectionView.frame = CGRect(x: 0, y:0 , width: self.contentView.w, height: self.contentView.h-60-NXUI.bottomOffset)
-        self.collectionView.wrapped?.minimumLineSpacing = 2
-        self.collectionView.wrapped?.minimumInteritemSpacing = 1
-        self.collectionView.wrapped?.sectionInset = UIEdgeInsets(top: 40, left: 12, bottom: 10, right: 12)
-        self.collectionView.wrapped?.scrollDirection = .vertical
-        self.collectionView.wrapped?.itemSize = CGSize(width: (NXUI.width-12*2-2*3)/4, height: (NXUI.width-12*2-2*3)/4)
+        self.collectionView.ctxs?.minimumLineSpacing = 2
+        self.collectionView.ctxs?.minimumInteritemSpacing = 1
+        self.collectionView.ctxs?.sectionInset = UIEdgeInsets(top: 40, left: 12, bottom: 10, right: 12)
+        self.collectionView.ctxs?.scrollDirection = .vertical
+        self.collectionView.ctxs?.itemSize = CGSize(width: (NXUI.width-12*2-2*3)/4, height: (NXUI.width-12*2-2*3)/4)
         self.collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.collectionView.backgroundColor = NX.backgroundColor
         self.collectionView.delegate = self

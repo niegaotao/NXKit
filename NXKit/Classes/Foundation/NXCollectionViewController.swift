@@ -28,10 +28,10 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
         self.collectionView?.alwaysBounceVertical = true
-        self.collectionView?.wrapped?.scrollDirection = .vertical
-        self.collectionView?.wrapped?.minimumLineSpacing =  0.0
-        self.collectionView?.wrapped?.minimumInteritemSpacing = 0.0
-        self.collectionView?.wrapped?.sectionInset = UIEdgeInsets.zero
+        self.collectionView?.ctxs?.scrollDirection = .vertical
+        self.collectionView?.ctxs?.minimumLineSpacing =  0.0
+        self.collectionView?.ctxs?.minimumInteritemSpacing = 0.0
+        self.collectionView?.ctxs?.sectionInset = UIEdgeInsets.zero
         self.contentView.addSubview(self.collectionView!)
         self.collectionView?.value = self.collectionWrapper
         self.collectionWrapper.wrappedView = self.collectionView

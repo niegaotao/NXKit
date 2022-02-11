@@ -189,7 +189,7 @@ extension NXNaviView {
     
     open class Bar: UIButton {
         open var dicValue : [String: Any]?
-        public let wrapped = NXNaviView.Wrapped()
+        public let ctxs = NXNaviView.Wrapped()
         
         public override init(frame: CGRect) {
             super.init(frame: frame)
@@ -250,23 +250,23 @@ extension NXNaviView {
         
         open func addTarget(_ target: Any?, action: Selector?, completion:((_ owner:NXNaviView.Bar) -> ())?) {
             if let __completion = completion {
-                self.wrapped.update(self, completion: __completion)
+                self.ctxs.update(self, completion: __completion)
             }
             else {
-                if self.wrapped.target != nil && self.wrapped.selector != nil {
-                    self.removeTarget(self.wrapped.target, action: self.wrapped.selector, for: UIControl.Event.touchUpInside)
+                if self.ctxs.target != nil && self.ctxs.selector != nil {
+                    self.removeTarget(self.ctxs.target, action: self.ctxs.selector, for: UIControl.Event.touchUpInside)
                 }
                 if let __action = action {
                     super.addTarget(target, action: __action, for: UIControl.Event.touchUpInside)
                 }
-                self.wrapped.target = target as? NSObject
-                self.wrapped.selector = action
+                self.ctxs.target = target as? NSObject
+                self.ctxs.selector = action
             }
         }
         
         open func updateSubviews(_ image: UIImage?, _ title:String?){
-            self.wrapped.image = image
-            self.wrapped.title = title
+            self.ctxs.image = image
+            self.ctxs.title = title
             
             self.setImage(image, for: .normal)
             self.setTitle(title, for: .normal)

@@ -44,10 +44,10 @@ open class NXToolViewController: NXContainerController {
         self.toolView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.toolView.controller = self
         self.toolView.backgroundColor = NX.backgroundColor
-        self.toolView.wrapped.didSelect = {[weak self] (toolView, index) in
+        self.toolView.ctxs.didSelect = {[weak self] (toolView, index) in
             self?.didSelect(at: index)
         }
-        self.toolView.wrapped.didReselect = {[weak self] (toolView, index) in
+        self.toolView.ctxs.didReselect = {[weak self] (toolView, index) in
             self?.didReselect(at: index)
         }
         
@@ -83,10 +83,10 @@ open class NXToolViewController: NXContainerController {
     
     //选中
     open func didSelectViewController(at idx: Int, animated : Bool){
-        let newValue = max(min(idx, self.toolView.wrapped.elements.count), 0)
+        let newValue = max(min(idx, self.toolView.ctxs.elements.count), 0)
         guard self.index != newValue else {return}
         
-        let element = self.toolView.wrapped.elements[newValue]
+        let element = self.toolView.ctxs.elements[newValue]
         if element.isSelectable {
             let fromViewController = subviewControllers[self.index]
             let toViewController = subviewControllers[newValue]

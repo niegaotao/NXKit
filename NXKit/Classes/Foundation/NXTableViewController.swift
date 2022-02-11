@@ -25,7 +25,7 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         
         //默认情况下不开启：通常在接口数据返回后把该标识为true
-        self.tableWrapper.placeholderView.wrapped.isHidden = true
+        self.tableWrapper.placeholderView.ctxs.isHidden = true
 
         //tableView
         self.tableView = NXTableView(frame: self.contentView.bounds, style: tableWrapper.tableViewStyle)

@@ -49,7 +49,7 @@ open class NXHUD {
         open var animationView = NX.HUDAnimationClass.init(frame:CGRect(x: 0, y: 0, width: 50, height: 50))
         open var messageView = UILabel(frame: CGRect.zero)
         
-        public let wrapped = NXHUD.Wrapped { (_, __sender) in
+        public let ctxs = NXHUD.Wrapped { (_, __sender) in
             __sender.ats = .center
             __sender.textColor = UIColor.white
             __sender.insets = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 20)
@@ -80,13 +80,13 @@ open class NXHUD {
                 __sender.value.size = CGSize(width: 0, height: 0)
             }
 
-            if let image = self.wrapped.image, image.size.width > 0 {
+            if let image = self.ctxs.image, image.size.width > 0 {
                 state.oldValue.size.width = 50
                 state.oldValue.size.height = 50
             }
             
-            if self.wrapped.message.count > 0 {
-                let __size = String.size(of: self.wrapped.message, size: CGSize(width: NXOverlay.frame.width-self.wrapped.insets.left-self.wrapped.insets.right-1, height: 200), font: self.wrapped.font) { (style) in
+            if self.ctxs.message.count > 0 {
+                let __size = String.size(of: self.ctxs.message, size: CGSize(width: NXOverlay.frame.width-self.ctxs.insets.left-self.ctxs.insets.right-1, height: 200), font: self.ctxs.font) { (style) in
                     style.lineSpacing = 2.0
                 }
                 state.value.size.width = __size.width + 1
@@ -95,28 +95,28 @@ open class NXHUD {
             
             var __frame = CGRect.zero
             if state.oldValue.size.height > 0 && state.value.size.height > 0 {
-                __frame.size.width = self.wrapped.insets.left + max(state.oldValue.size.width, state.value.size.width) + self.wrapped.insets.right
-                __frame.size.height = self.wrapped.insets.top + state.oldValue.size.height + 10.0 + state.value.size.height + self.wrapped.insets.bottom
+                __frame.size.width = self.ctxs.insets.left + max(state.oldValue.size.width, state.value.size.width) + self.ctxs.insets.right
+                __frame.size.height = self.ctxs.insets.top + state.oldValue.size.height + 10.0 + state.value.size.height + self.ctxs.insets.bottom
 
                 state.oldValue.origin.x = (__frame.size.width - state.oldValue.size.width)/2.0
-                state.oldValue.origin.y = self.wrapped.insets.top
+                state.oldValue.origin.y = self.ctxs.insets.top
                 
                 state.value.origin.x = (__frame.size.width - state.value.size.width)/2.0
-                state.value.origin.y = self.wrapped.insets.top + state.oldValue.size.height + 10.0
+                state.value.origin.y = self.ctxs.insets.top + state.oldValue.size.height + 10.0
             }
             else if state.oldValue.size.height > 0 {
-                __frame.size.width = self.wrapped.insets.left + state.oldValue.size.width + self.wrapped.insets.right
-                __frame.size.height = self.wrapped.insets.top + state.oldValue.size.height + self.wrapped.insets.bottom
+                __frame.size.width = self.ctxs.insets.left + state.oldValue.size.width + self.ctxs.insets.right
+                __frame.size.height = self.ctxs.insets.top + state.oldValue.size.height + self.ctxs.insets.bottom
 
                 state.oldValue.origin.x = (__frame.size.width - state.oldValue.size.width)/2.0
-                state.oldValue.origin.y = self.wrapped.insets.top
+                state.oldValue.origin.y = self.ctxs.insets.top
             }
             else if state.value.size.height > 0 {
-                __frame.size.width = self.wrapped.insets.left + state.value.size.width + self.wrapped.insets.right
-                __frame.size.height = self.wrapped.insets.top + state.value.size.height + self.wrapped.insets.bottom
+                __frame.size.width = self.ctxs.insets.left + state.value.size.width + self.ctxs.insets.right
+                __frame.size.height = self.ctxs.insets.top + state.value.size.height + self.ctxs.insets.bottom
                 
                 state.value.origin.x = (__frame.size.width - state.value.size.width)/2.0
-                state.value.origin.y = self.wrapped.insets.top
+                state.value.origin.y = self.ctxs.insets.top
             }
             __frame.size.width = ceil(__frame.size.width)
             __frame.size.height = ceil(__frame.size.height)
@@ -126,28 +126,28 @@ open class NXHUD {
                 __super = __superview.frame.size
             }
             __frame.origin.x = (__super.width -  __frame.size.width)/2.0
-            if wrapped.ats == .minY {
+            if ctxs.ats == .minY {
                 __frame.origin.y = __super.height * 0.20 - __frame.size.height/2.0
             }
-            else if wrapped.ats == .center {
+            else if ctxs.ats == .center {
                 __frame.origin.y = __super.height * 0.5 - __frame.size.height/2.0
             }
-            else if wrapped.ats == .maxY {
+            else if ctxs.ats == .maxY {
                 __frame.origin.y = __super.height * 0.78 - __frame.size.height/2.0
             }
             self.frame = __frame
             
             
-            self.alpha = self.wrapped.alpha
-            self.backgroundColor = self.wrapped.backgroundColor
-            self.layer.shadowColor = self.wrapped.shadowColor
-            self.layer.shadowOpacity = self.wrapped.shadowOpacity
-            self.layer.shadowOffset = self.wrapped.shadowOffset
+            self.alpha = self.ctxs.alpha
+            self.backgroundColor = self.ctxs.backgroundColor
+            self.layer.shadowColor = self.ctxs.shadowColor
+            self.layer.shadowOpacity = self.ctxs.shadowOpacity
+            self.layer.shadowOffset = self.ctxs.shadowOffset
             self.layer.cornerRadius = 6.0 + min(round(max(__frame.size.height - 40, 0)/25.0), 4)
             self.layer.shadowRadius = 6.0 + min(round(max(__frame.size.height - 40, 0)/25.0), 4)
             
-            if let image = self.wrapped.image {
-                if self.wrapped.key == NXHUD.Key.toast.rawValue {
+            if let image = self.ctxs.image {
+                if self.ctxs.key == NXHUD.Key.toast.rawValue {
                     self.stateView.isHidden = false
                     self.stateView.image = image
                     self.stateView.frame = state.oldValue
@@ -155,7 +155,7 @@ open class NXHUD {
                     self.animationView.isHidden = true
                     self.animationView.stopAnimating()
                 }
-                else if self.wrapped.key == NXHUD.Key.loading.rawValue {
+                else if self.ctxs.key == NXHUD.Key.loading.rawValue {
                     self.stateView.isHidden = true
                     
                     self.animationView.frame = state.oldValue
@@ -171,12 +171,12 @@ open class NXHUD {
                 self.animationView.stopAnimating()
             }
             
-            if self.wrapped.message.count > 0 {
+            if self.ctxs.message.count > 0 {
                 self.messageView.isHidden = false
-                self.messageView.textColor = self.wrapped.textColor
-                self.messageView.font = self.wrapped.font
-                self.messageView.numberOfLines = self.wrapped.numberOfLines
-                self.messageView.attributedText = NXString.attributedString(self.wrapped.message, self.wrapped.font, self.wrapped.textColor, 2)
+                self.messageView.textColor = self.ctxs.textColor
+                self.messageView.font = self.ctxs.font
+                self.messageView.numberOfLines = self.ctxs.numberOfLines
+                self.messageView.attributedText = NXString.attributedString(self.ctxs.message, self.ctxs.font, self.ctxs.textColor, 2)
                 self.messageView.textAlignment = .center
                 self.messageView.frame = state.value
             }
@@ -205,20 +205,20 @@ extension NXHUD {
         }
         let wrappedView = NXHUD.WrappedView(frame: CGRect(x: 0, y: 0, width: 100, height: 36))
         superview.addSubview(wrappedView)
-        wrappedView.wrapped.key = key
-        wrappedView.wrapped.image = image
-        wrappedView.wrapped.message = message
-        wrappedView.wrapped.ats = ats
-        wrappedView.wrapped.duration = duration
+        wrappedView.ctxs.key = key
+        wrappedView.ctxs.image = image
+        wrappedView.ctxs.message = message
+        wrappedView.ctxs.ats = ats
+        wrappedView.ctxs.duration = duration
         wrappedView.updateSubviews("", nil)
         
         if key == NXHUD.Key.toast.rawValue {
             wrappedView.alpha = 0.0
-            UIView.animate(withDuration: wrappedView.wrapped.inoutDuration,
+            UIView.animate(withDuration: wrappedView.ctxs.inoutDuration,
                            delay: 0,
                            options: [.curveEaseInOut, .allowUserInteraction],
                            animations: {
-                            wrappedView.alpha = wrappedView.wrapped.alpha
+                            wrappedView.alpha = wrappedView.ctxs.alpha
                            },
                            completion: { (isCompleted) in
                             NXHUD.closeSubview(subview: wrappedView, superview: nil)
@@ -227,11 +227,11 @@ extension NXHUD {
         else if key == NXHUD.Key.loading.rawValue {
             objc_setAssociatedObject(superview, &NXHUD.Wrapped.wrappedViewKey, wrappedView, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             wrappedView.alpha = 0.0
-            UIView.animate(withDuration: wrappedView.wrapped.inoutDuration,
+            UIView.animate(withDuration: wrappedView.ctxs.inoutDuration,
                            delay: 0.0,
                            options: [.curveEaseOut, .allowUserInteraction],
                            animations: {
-                            wrappedView.alpha = wrappedView.wrapped.alpha
+                            wrappedView.alpha = wrappedView.ctxs.alpha
             },
                            completion: nil)
         }
@@ -241,8 +241,8 @@ extension NXHUD {
     @discardableResult
     open class func closeSubview(subview:NXHUD.WrappedView?,  superview:UIView?) -> Bool{
         if let wrappedView = subview {
-            UIView.animate(withDuration: wrappedView.wrapped.inoutDuration,
-                           delay: wrappedView.wrapped.duration,
+            UIView.animate(withDuration: wrappedView.ctxs.inoutDuration,
+                           delay: wrappedView.ctxs.duration,
                            options: [.curveEaseInOut,.allowUserInteraction],
                            animations: {
                             wrappedView.alpha = 0.0},
@@ -252,7 +252,7 @@ extension NXHUD {
             return true
         }
         else if let superview = superview, let wrapperView = objc_getAssociatedObject(superview, &NXHUD.Wrapped.wrappedViewKey) as? NXHUD.WrappedView {
-            UIView.animate(withDuration: wrapperView.wrapped.inoutDuration,
+            UIView.animate(withDuration: wrapperView.ctxs.inoutDuration,
                            delay: 0.0,
                            options: UIView.AnimationOptions.curveEaseOut,
                            animations: {
