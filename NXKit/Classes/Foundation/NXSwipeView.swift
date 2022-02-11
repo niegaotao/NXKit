@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class NXSwipeView: NXCView<NXCollectionView>, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     open var ctxs = NXSwipeView.Wrapped()
     open var completion : ((_ swipeView: NXSwipeView, _ index: Int, _ animated: Bool) -> ())?
     

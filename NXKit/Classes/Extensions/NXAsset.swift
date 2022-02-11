@@ -32,7 +32,7 @@ open class NXAsset: NXAny {
         super.init()
     }
     
-    convenience public init(asset: PHAsset?, fileExtensions:[String] = []) {
+    convenience public init(asset: PHAsset?, extensions:[String] = []) {
         self.init()
         
         if let __asset = asset {
@@ -45,9 +45,9 @@ open class NXAsset: NXAny {
             
             if __asset.mediaType == .video {
                 let __filename = self.filename.lowercased()
-                if fileExtensions.count > 0 {
-                    self.isSelectable = fileExtensions.contains { (suffixe) -> Bool in
-                        return __filename.hasSuffix(suffixe)
+                if extensions.count > 0 {
+                    self.isSelectable = extensions.contains { (suffix) -> Bool in
+                        return __filename.hasSuffix(suffix)
                     }
                 }
                 else {
@@ -141,33 +141,17 @@ extension NXAsset {
 
 extension NXAsset {
     //选择的记录
-    open class Record : NSObject {
-        open var isIndex = true
+    open class Value<Value:NXInitialValue> : NXAny {
+        open var isIndex = Value.initialValue
         open var minOfAssets : Int = 0
         open var maxOfAssets : Int = 0
         open var assets = [NXAsset]()
-    }
-    
-    //操作结果
-    public enum State {
-        case succeed
-        case error
     }
     
     //回调部分的结构
-    open class Output : NSObject {
-        open var minOfAssets : Int = 0
-        open var maxOfAssets : Int = 0
-        open var assets = [NXAsset]()
-        
-        open var image = NXAsset.Record()
-        open var video = NXAsset.Record()
-        open var isMixable = false
-        
-        open var isAutoclosed = true
-        open var images = [UIImage]()
-        open var value : Any? = nil //用在特殊场景的导出数据：例如拍摄导出的是rrxcasset
-        open var isOutputting  = false //是否正在导出image
+    open class Output : Value<Bool> {
+        open var image = NXAsset.Value<Bool>()
+        open var video = NXAsset.Value<Bool>()
         
         open func add(_ value:NXAsset) {
             if value.mediaType == .image {
@@ -192,7 +176,7 @@ extension NXAsset {
         }
     }
     
-    open class Clip : NSObject {
+    open class Clip : NXAny {
         open var name = "1:1"
         open var isResizable = false
         open var width : CGFloat = 1.0
@@ -213,7 +197,7 @@ extension NXAsset {
         }
     }
     
-    open class Wrapped : NSObject {
+    open class Wrapped : NXAny {
         //创建相册信号量
         public static var semaphore = DispatchSemaphore(value: 1)
         //是否优先请求全高清图像
@@ -235,6 +219,9 @@ extension NXAsset {
         open var outputResize = CGSize(width: 1920, height: 1920)//导出尺寸
         open var outputResizeBy = NXResize.side//导出size计算方法
         open var outputUIImage = true //是否需要导出UIImage
+        open var isAutoclosed = true
+        open var isOutputting  = false //是否正在导出image
+        open var isMixable = false
         
         //图片相关
         open var clips = [NXAsset.Clip]()//具体的宽高比例
@@ -290,11 +277,6 @@ extension NXAsset {
             
             let output = NXAsset.Output()
             output.assets = assets
-            for asset in assets {
-                if let image = asset.image {
-                    output.images.append(image)
-                }
-            }
             wrapped.completion?(true, output)
         }
         
@@ -337,46 +319,46 @@ extension NXAsset {
     }
     
     open class func album(minOfAssets:Int,
-                              maxOfAssets:Int,
-                              image : (minOfAssets:Int, maxOfAssets:Int, isIndex:Bool),
-                              video : (minOfAssets:Int, maxOfAssets:Int, isIndex:Bool),
-                              isMixable:Bool,
-                              isAutoclosed:Bool,
-                              
-                              mediaType:PHAssetMediaType,
-                              selectedIdentifiers:[String],
-                              outputResize:CGSize,
-                              outputResizeBy:String,
-                              outputUIImage:Bool,
+                          maxOfAssets:Int,
+                          image : (minOfAssets:Int, maxOfAssets:Int, isIndex:Bool),
+                          video : (minOfAssets:Int, maxOfAssets:Int, isIndex:Bool),
+                          isMixable:Bool,
+                          isAutoclosed:Bool,
+                          
+                          mediaType:PHAssetMediaType,
+                          selectedIdentifiers:[String],
+                          outputResize:CGSize,
+                          outputResizeBy:String,
+                          outputUIImage:Bool,
 
-                              clips:[NXAsset.Clip],
-                              
-                              videoClipsAllowed:Bool,
-                              videoClipsDuration:TimeInterval,
-                              videoFileExtensions:[String],
-                              
-                              footer:(lhs:Bool, center:Bool, rhs:Bool),
-                              
-                              navigation:NXViewController.Navigation,
-                              naviController:NXNavigationController,
-                              openAllowed:Bool,
-                              closeAllowed:Bool,
-                              isAnimated:Bool,
-                              completion:NX.Completion<Bool, NXAsset.Output>?) {
+                          clips:[NXAsset.Clip],
+                          
+                          videoClipsAllowed:Bool,
+                          videoClipsDuration:TimeInterval,
+                          videoFileExtensions:[String],
+                          
+                          footer:(lhs:Bool, center:Bool, rhs:Bool),
+                          
+                          navigation:NXViewController.Navigation,
+                          naviController:NXNavigationController,
+                          openAllowed:Bool,
+                          closeAllowed:Bool,
+                          isAnimated:Bool,
+                          completion:NX.Completion<Bool, NXAsset.Output>?) {
         
         NXAsset.open(album: {(state:Bool, vc:NXAssetsViewController) in
             //基础配置
             vc.wrapped.output.minOfAssets = minOfAssets
             vc.wrapped.output.maxOfAssets = maxOfAssets
-            
             vc.wrapped.output.image.minOfAssets = image.minOfAssets
             vc.wrapped.output.image.maxOfAssets = image.maxOfAssets
             vc.wrapped.output.image.isIndex = image.isIndex
             vc.wrapped.output.video.minOfAssets = video.minOfAssets
             vc.wrapped.output.video.maxOfAssets = video.maxOfAssets
             vc.wrapped.output.video.isIndex = video.isIndex
-            vc.wrapped.output.isMixable = isMixable
-            vc.wrapped.output.isAutoclosed = isAutoclosed
+            
+            vc.wrapped.isMixable = isMixable
+            vc.wrapped.isAutoclosed = isAutoclosed
 
             vc.wrapped.mediaType = mediaType
             vc.wrapped.selectedIdentifiers = selectedIdentifiers
@@ -426,7 +408,7 @@ extension NXAsset {
     }
     
     
-    //这个地方存在同时创建多个云阅交科的情况:采用信号量的方案来解决
+    //这个地方存在同时创建多个同名相册的情况:采用信号量的方案来解决
     open class func fetchAlbum(name: String, queue:DispatchQueue, isCreated:Bool, completion:@escaping ((_ album:PHAssetCollection?) -> ())){
         if name.count == 0 {
             //指定的相册名称为空，则保存到相机胶卷
@@ -494,26 +476,26 @@ extension NXAsset {
     }
     
     //5.保存图片到相册
-    open class func saveImage(image: UIImage, name: String = NX.name, queue:DispatchQueue = DispatchQueue.main, completion: ((_ state: NXAsset.State, _ asset:PHAsset?) -> ())?) {
+    open class func saveImage(image: UIImage, name: String = NX.name, queue:DispatchQueue = DispatchQueue.main, completion: ((_ isCompleted: Bool, _ asset:PHAsset?) -> ())?) {
         NXAsset.save(assets: [image], name: name, queue:queue, completion:{ (state, assets) in
             completion?(state, assets.first)
         })
     }
     
     //保存视频到相册
-    open class func saveVideo(fileURL:URL, name: String = NX.name, queue:DispatchQueue = DispatchQueue.main, completion: ((_ state: NXAsset.State, _ asset:PHAsset?) -> ())?){
+    open class func saveVideo(fileURL:URL, name: String = NX.name, queue:DispatchQueue = DispatchQueue.main, completion: ((_ isCompleted: Bool, _ asset:PHAsset?) -> ())?){
         NXAsset.save(assets: [fileURL], name: name, queue:queue, completion:{ (state, assets) in
             completion?(state, assets.first)
         })
     }
     
     //保存视频/图片到系统相册
-    open class func save(assets:[Any], name: String, queue:DispatchQueue, completion: ((_ state: NXAsset.State, _ assets:[PHAsset]) -> ())?) {
+    open class func save(assets:[Any], name: String, queue:DispatchQueue, completion: ((_ isCompleted: Bool, _ assets:[PHAsset]) -> ())?) {
         //相册授权
         NX.authorization(.album, queue, false) { (status) in
             guard status == .authorized else {
                 queue.async {
-                    completion?(.error, [])
+                    completion?(false, [])
                 }
                 return
             }
@@ -523,7 +505,7 @@ extension NXAsset {
                 
                 guard let album = album else {
                     queue.async {
-                        completion?(.error, [])
+                        completion?(false, [])
                     }
                     return
                 }
@@ -566,7 +548,7 @@ extension NXAsset {
                         __assets.append(__fetchResult[index])
                     }
                     queue.async {
-                       completion?(.succeed, __assets)
+                       completion?(true, __assets)
                     }
                 })
             })
@@ -649,7 +631,7 @@ extension NXAsset {
     
     public class  func outputAssets(_ wrapped: NXAsset.Wrapped, completion:NX.Completion<Bool, [NXAsset]>?){
         let outputAssets = wrapped.output.assets.map { (__leyAsset) -> NXAsset in
-            let __outputAsset = NXAsset(asset: __leyAsset.asset, fileExtensions:wrapped.videoFileExtensions)
+            let __outputAsset = NXAsset(asset: __leyAsset.asset, extensions:wrapped.videoFileExtensions)
             __outputAsset.thumbnail = __leyAsset.thumbnail
             __outputAsset.image = __leyAsset.image
             return __outputAsset
@@ -794,7 +776,6 @@ open class NXImagePickerController : UIImagePickerController, UIImagePickerContr
                     
                     let ctxs = NXAsset.Output()
                     ctxs.assets.append(leyAsset)
-                    ctxs.images.append(__image)
                     self.wrapped.completion?(true, ctxs)
                     
                     self.wrapped.naviController?.popViewController(animated: true)
@@ -922,19 +903,17 @@ open class NXAlbum : NXAction {
     convenience public init(title: String, fetchResults: [PHFetchResult<AnyObject>], wrapped:NXAsset.Wrapped) {
         self.init(title: title, value: nil, completion:nil)
         self.ctxs.update(NXActionViewCell.self, "NXActionViewCell")
-                
+        
         //生成NXAsset对象
         for fetchResult in fetchResults {
             if let __fetchResult = fetchResult as? PHFetchResult<PHAsset> {
                 for index in 0 ..< __fetchResult.count {
-                    
                     let phasset = __fetchResult[index]
-                    let __asset = NXAsset(asset: phasset, fileExtensions:wrapped.videoFileExtensions)
+                    let __asset = NXAsset(asset: phasset, extensions:wrapped.videoFileExtensions)
                     self.assets.append(__asset)
                 }
             }
         }
-        
         
         //获取封面
         if let asset = self.assets.last?.asset {

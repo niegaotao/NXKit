@@ -10,14 +10,14 @@ import UIKit
 
 extension NXItem {
     //记录单元格类型和重用ID的对象
-    open class Association : NX.Rect {
+    open class Wrapped : NX.Rect {
         open var value : [String: Any]? = nil
         
         open var cls : AnyClass?        //单元格/视图类型, e.g. NXTableViewCell.self
         open var reuse : String = ""    //单元格重用ID
         open var tag: Int = 0           //根据不同tag来做不同单元格的区分
         
-        open var completion : NX.Completion<String, Any?>? = nil  //点击等回调
+        open var completion: NX.Completion<String, Any?>? = nil  //点击等回调
         
         open var backgroundColor: UIColor? = nil //头部尾部的背景色
         open var at : (first:Bool, last:Bool) = (false, false) //是否是第一个，是否是最后一个
@@ -35,10 +35,9 @@ extension NXItem {
 }
 
 //单元格基类
-
 open class NXItem : NXAny {
     
-    open var ctxs = NXItem.Association()
+    open var ctxs = NXItem.Wrapped()
     
     public override init() {
         super.init()
@@ -192,7 +191,7 @@ extension NXSection {
 }
 
 //三维模型的基类：通用于 UITableView 数据模型和 UICollectionView 数据模型
-open class NXCollection<T:UIScrollView> : NSObject {
+open class NXCollection<T:UIScrollView> : NXAny {
     open weak var wrappedView : T? = nil
     open var sections = [NXSection]()
     

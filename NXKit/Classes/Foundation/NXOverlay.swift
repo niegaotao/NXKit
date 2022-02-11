@@ -55,7 +55,6 @@ extension NXOverlay {
 open class NXOverlayAttributes : NX.Rect {
     open var backgroundColor = UIColor.black.withAlphaComponent(0.4)
 
-    
     //关闭的回调, background,lhs,rhs,close,footer
     open var closeCompletion : NX.Completion<String, Any?>? = nil
     

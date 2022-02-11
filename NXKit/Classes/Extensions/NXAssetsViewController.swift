@@ -149,13 +149,13 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                     return;
                 }
                 
-                if wrapped.output.isOutputting {
+                if wrapped.isOutputting {
                     return;
                 }
-                wrapped.output.isOutputting = true
+                wrapped.isOutputting = true
                 
                 NXAsset.outputAssets(self.wrapped) {[weak self] (assets, outputs) in
-                    self?.wrapped.output.isOutputting = false
+                    self?.wrapped.isOutputting = false
                     NX.previewAssets(type: "UIImage", assets: outputs)
                 }
             }
@@ -189,16 +189,16 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
             }
             
             if wrapped.outputUIImage {
-                if wrapped.output.isOutputting {
+                if wrapped.isOutputting {
                     return;
                 }
-                wrapped.output.isOutputting = true
+                wrapped.isOutputting = true
                 
                 NXAsset.outputAssets(self.wrapped, completion:{[weak self] (_, assets:[NXAsset]) in
                     guard let self = self else {
                         return
                     }
-                    self.wrapped.output.isOutputting = false
+                    self.wrapped.isOutputting = false
                     
                     if assets.count == 1 && self.wrapped.clips.count >= 1, let image = assets.first?.image  {
                         let vc = NXAssetClipViewController()
@@ -228,7 +228,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
         else if action == "subcomponents" {
             self.footerView.lhsView.setTitle("预览(\(self.wrapped.output.assets.count))", for: .normal)
             var __description = "完成(0/\(self.wrapped.output.maxOfAssets))"
-            if self.wrapped.output.isMixable {
+            if self.wrapped.isMixable {
                 __description = "完成(\(self.wrapped.output.assets.count)/\(self.wrapped.output.maxOfAssets))"
             }
             else {
@@ -288,7 +288,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                 return
             }
             
-            if __wrapped.output.isMixable {
+            if __wrapped.isMixable {
                 if __wrapped.output.assets.count >= __wrapped.output.maxOfAssets {
                     NX.showToast(message: "最多只能选择\(__wrapped.output.maxOfAssets)张图片和视频哦", .center, self.contentView)
                     return
@@ -312,7 +312,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                 self.collectionView.reloadData()
                 
                 //当只选择一张的时候，选择之后直接进行接下来的操作
-                if __wrapped.output.image.maxOfAssets == 1 && __wrapped.output.image.assets.count == 1 && __wrapped.output.isMixable == false && __wrapped.output.isAutoclosed {
+                if __wrapped.output.image.maxOfAssets == 1 && __wrapped.output.image.assets.count == 1 && __wrapped.isMixable == false && __wrapped.isAutoclosed {
                     self.dispose("footer.rhs", nil)
                 }
                 self.dispose("subcomponents", nil)
@@ -327,7 +327,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                 return
             }
             
-            if __wrapped.output.isMixable {
+            if __wrapped.isMixable {
                 if __wrapped.output.assets.count >= __wrapped.output.maxOfAssets {
                     NX.showToast(message: "最多只能选择\(__wrapped.output.maxOfAssets)张图片和视频哦", .center, self.contentView)
                     return
@@ -357,7 +357,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                 __wrapped.output.add(asset)
                 self.collectionView.reloadData()
 
-                if __wrapped.output.video.maxOfAssets == 1 && __wrapped.output.video.assets.count == 1 && __wrapped.output.isMixable == false && __wrapped.output.isAutoclosed {
+                if __wrapped.output.video.maxOfAssets == 1 && __wrapped.output.video.assets.count == 1 && __wrapped.isMixable == false && __wrapped.isAutoclosed {
                     self.dispose("footer.rhs", nil)
                 }
                 self.dispose("subcomponents", nil)
@@ -396,7 +396,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                 if asset.isMaskedable == false {
                     asset.isMaskedable = self.wrapped.output.assets.count >= self.wrapped.output.maxOfAssets
                 }
-                if asset.isMaskedable == false && self.wrapped.output.isMixable == false {
+                if asset.isMaskedable == false && self.wrapped.isMixable == false {
                     asset.isMaskedable = self.wrapped.output.video.assets.count > 0
                 }
             }
@@ -405,7 +405,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                 if asset.isMaskedable == false {
                     asset.isMaskedable = self.wrapped.output.assets.count >= self.wrapped.output.maxOfAssets
                 }
-                if asset.isMaskedable == false && self.wrapped.output.isMixable == false {
+                if asset.isMaskedable == false && self.wrapped.isMixable == false {
                     asset.isMaskedable = self.wrapped.output.image.assets.count > 0
                 }
             }

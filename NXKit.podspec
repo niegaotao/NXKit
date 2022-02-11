@@ -11,13 +11,16 @@ Pod::Spec.new do |s|
     s.source           = { :git => 'git@github.com:niegaotao/NXKit.git', :tag => s.version.to_s }
     s.platform         = :ios, '9.0'
     s.swift_version    = '5.0'
-    s.resource_bundles = {
-        'NXKit' => ['NXKit/Assets/*']
-    }
+#    s.resource_bundles = {
+#        'NXKit' => ['NXKit/Assets/*']
+#    }
 
     s.frameworks = ['UIKit', 'Foundation']
     s.subspec 'Foundation' do |ss|
             ss.source_files = 'NXKit/Classes/Foundation/*'
+            ss.resource_bundles = {
+                'NXKit' => ['NXKit/Assets/*']
+            }
     end
     s.subspec 'Extensions' do |ss|
             ss.source_files = 'NXKit/Classes/Extensions/*'
