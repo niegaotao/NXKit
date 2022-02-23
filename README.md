@@ -5,21 +5,10 @@
 [![License](https://img.shields.io/cocoapods/l/NXKit.svg?style=flat)](https://cocoapods.org/pods/NXKit)
 [![Platform](https://img.shields.io/cocoapods/p/NXKit.svg?style=flat)](https://cocoapods.org/pods/NXKit)
 
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
-
-## Installation
-
-NXKit is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-##一、功能介绍
+## 一、功能介绍
 根据功能分为基础部分、扩展部分共两个部分：
-###1、基础部分
-#####1.1.基础结构
+### 1、基础部分
+##### 1.1.基础结构
 - `NX`：全局变量和全局方法，多用于配置主题风格等
 - `NX+`：封装跟`UIView`、`UILabel`、`UIImageView`、`CALayer`对等的模型。
 - `NXAny`：遵守`Equatable`协议的类类型的基类
@@ -28,7 +17,7 @@ it, simply add the following line to your Podfile:
 - `NXTableWrapper`：封装`UITableView`数据
 - `NXCollectionWrapper`：封装`UICollectionView`数据
 - `NXAction`：：封装通用表单单元格的数据模型
-#####1.2.基础UI
+##### 1.2.基础UI
 - `NXView`
 - `NXCView<C:UIView>`：包含`C`类型的`contentView`内容视图属性
 - `NXLRView<L:UIView, R:UIView>`：包含`L`类型的`lhsView`、`R`类型的`rhsView`属性
@@ -51,7 +40,7 @@ it, simply add the following line to your Podfile:
 - `NXCollectionSubviewCell<T:UIView>`
 - `NXApplicationViewCell`
 - `NXActionViewCell`
-#####1.3.控制器
+##### 1.3.控制器
 - `NXViewController`
 - `NXTableViewController`：`NXTableView`视图控制器
 - `NXCollectionViewController`：`NXCollectionView`视图控制器
@@ -60,18 +49,18 @@ it, simply add the following line to your Podfile:
 - `NXContainerController`：容器控制器
 - `NXToolViewController`：仿系统`UITabBarController`
 -` NXSwipeViewController`：仿系统`UIPageViewController`
-#####1.4.弹框
+##### 1.4.弹框
 - `NXOverlay`
 - `NXActionView`：仿系统`UIAlertController`
 - `NXHUD`：弱提示
-#####1.5.扩展
+##### 1.5.扩展
 - `DispatchQueue+NXKit`
 - `String+NXKit`
 - `UIButton+NXKit`
 - `UIImage+NXKit`
 - `UILabel+NXKit`
 - `UIView+NXKit`
-#####1.6.服务
+##### 1.6.服务
 - `NXObserver`：应用内通知
 - `NXKVOObserver`：`KVO`封装
 - `NXStorage`：基于`UserDefaults`存储的封装
@@ -81,14 +70,14 @@ it, simply add the following line to your Podfile:
 #####1.7.资源文件
 - `NXKit.bundle`
 
-###2、扩展部分
-#####2.1.相册选图功能封装
+### 2、扩展部分
+##### 2.1.相册选图功能封装
 - `NXAsset`
 - `NXAssetsViewController`
 - `NXClipboardView`
 - `NXAssetClipViewController`
 
-##2.如何使用
+## 2.如何使用
 代码全部开源，[点击查看代码](git@github.com:niegaotao/NXKit.git)。
 ```
 //仅使用Foundation部分功能：
@@ -99,10 +88,9 @@ pod 'NXKit'
 ```
 你也可以下载代码后修改作为本地`pod`去使用。
 
-## Author
-
+## 3.Author
 niegaotao, niegaotao@163.com
 
-## License
+## 4.License
 
 NXKit is available under the MIT license. See the LICENSE file for more info.
