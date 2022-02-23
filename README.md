@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/NXKit.svg?style=flat)](https://cocoapods.org/pods/NXKit)
 [![Platform](https://img.shields.io/cocoapods/p/NXKit.svg?style=flat)](https://cocoapods.org/pods/NXKit)
 
-## 一、功能介绍
+## 1、功能介绍
 根据功能分为基础部分、扩展部分共两个部分：
 ### 1、基础部分
 ##### 1.1.基础结构
@@ -67,7 +67,7 @@
 - `NXFS`：本地文件的读写
 - `NXRouter`：路由管理器
 - `NXRequest`：基于网络请求的封装
-#####1.7.资源文件
+##### 1.7.资源文件
 - `NXKit.bundle`
 
 ### 2、扩展部分
@@ -77,7 +77,7 @@
 - `NXClipboardView`
 - `NXAssetClipViewController`
 
-## 2.如何使用
+## 2、如何使用
 代码全部开源，[点击查看代码](git@github.com:niegaotao/NXKit.git)。
 ```
 //仅使用Foundation部分功能：
@@ -88,9 +88,8 @@ pod 'NXKit'
 ```
 你也可以下载代码后修改作为本地`pod`去使用。
 
-## 3.Author
+## 3、Author
 niegaotao, niegaotao@163.com
 
-## 4.License
-
+## 4、License
 NXKit is available under the MIT license. See the LICENSE file for more info.
