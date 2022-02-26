@@ -23,7 +23,7 @@ class EXViewController: NXViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
         self.contentView.addSubview(button)
-                
+                        
     }
 }
 
