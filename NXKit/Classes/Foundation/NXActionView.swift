@@ -109,12 +109,12 @@ extension NXActionView {
                 __action.subtitle.isHidden = true
             })
         }
-        return NXActionView.action(actions: __actions, header:(.none, ""), footer: (.footer(true, false, true), "取消"), initialize: nil, completion: completion)
+        return NXActionView.action(actions: __actions, header:.none, footer: .footer(true, false, true,"取消"), initialize: nil, completion: completion)
     }
     
     @discardableResult
     class public func action(actions: [NXAction], completion:NX.Completion<String, Int>?) -> NXActionView {
-        return NXActionView.action(actions: actions, header:(.none, ""), footer: (.footer(true, false, true), "取消"), initialize:nil, completion: completion)
+        return NXActionView.action(actions: actions, header:.none, footer: .footer(true, false, true,"取消"), initialize:nil, completion: completion)
     }
     
     @discardableResult
@@ -123,7 +123,7 @@ extension NXActionView {
         let actionView = NXActionView(frame: UIScreen.main.bounds)
         //header
         
-        if case .header(let lhs, let center, let rhs, let title) = header.enumeration {
+        if case .header(let lhs, let center, let rhs, let title, let value) = header {
             actionView.ctxs.header.isHidden = false
             actionView.ctxs.header.frame.size = CGSize(width: NXUI.width, height: 60)
             actionView.ctxs.header.separator.ats = NX.Ats.maxY
@@ -135,7 +135,7 @@ extension NXActionView {
             
             actionView.ctxs.header.center.isHidden = center
             if actionView.ctxs.header.center.isHidden == false {
-                actionView.ctxs.header.center.value = header.title
+                actionView.ctxs.header.center.value = value
             }
             
             actionView.ctxs.header.rhs.isHidden = rhs
@@ -145,9 +145,9 @@ extension NXActionView {
 
             actionView.ctxs.header.title.isHidden = title
         }
-        else if case .whitespace = header.enumeration {
+        else if case .whitespace(let height) = header {
             actionView.ctxs.header.isHidden = false
-            actionView.ctxs.header.frame.size = CGSize(width: NXUI.width, height: 32)
+            actionView.ctxs.header.frame.size = CGSize(width: NXUI.width, height: height)
             actionView.ctxs.header.separator.ats = NX.Ats.maxY
             
             actionView.ctxs.header.title.isHidden = true
@@ -155,7 +155,7 @@ extension NXActionView {
             actionView.ctxs.header.center.isHidden = true
             actionView.ctxs.header.rhs.isHidden = true
         }
-        else if case .custom(let customView) = header.enumeration {
+        else if case .custom(let customView) = header {
             actionView.ctxs.header.isHidden = false
             actionView.ctxs.header.frame.size = CGSize(width: NXUI.width, height: customView.frame.size.height)
             actionView.ctxs.header.separator.ats = NX.Ats.maxY
@@ -166,7 +166,7 @@ extension NXActionView {
             actionView.ctxs.header.rhs.isHidden = true
             actionView.ctxs.header.customView = customView
         }
-        else if case .none = header.enumeration {
+        else if case .none = header {
             actionView.ctxs.header.isHidden = true
             actionView.ctxs.header.frame.size = CGSize(width: NXUI.width, height: 0)
             actionView.ctxs.header.separator.ats = []
@@ -183,8 +183,7 @@ extension NXActionView {
         //footer
         actionView.ctxs.footer.isHidden = false
         actionView.ctxs.footer.separator.ats = []
-        actionView.ctxs.footer.center.value = footer.title.count > 0 ? footer.title : "取消"
-        if case .footer(let lhs, let center, let rhs) = footer.enumeration {
+        if case .footer(let lhs, let center, let rhs, let value) = footer {
             actionView.ctxs.footer.frame.size = CGSize(width: NXUI.width, height: 60+NXUI.bottomOffset)
             actionView.ctxs.footer.title.isHidden = true
             actionView.ctxs.footer.lhs.isHidden = lhs
@@ -192,10 +191,11 @@ extension NXActionView {
             actionView.ctxs.footer.center.frame = CGRect(x: 0, y: 0, width: NXUI.width, height: 60)
             actionView.ctxs.footer.center.font = NX.font(17)
             actionView.ctxs.footer.center.color = NX.mainColor
+            actionView.ctxs.footer.center.value = value.count > 0 ? value : "取消"
             actionView.ctxs.footer.rhs.isHidden = rhs
         }
-        else if case .whitespace = footer.enumeration {
-            actionView.ctxs.footer.frame.size = CGSize(width: NXUI.width, height: 32.0+NXUI.bottomOffset)
+        else if case .whitespace(let height) = footer {
+            actionView.ctxs.footer.frame.size = CGSize(width: NXUI.width, height: height+NXUI.bottomOffset)
             actionView.ctxs.footer.title.isHidden = true
             actionView.ctxs.footer.lhs.isHidden = true
             actionView.ctxs.footer.center.isHidden = true
@@ -203,7 +203,7 @@ extension NXActionView {
             
             actionView.ctxs.devide = 0.0
         }
-        else if case .custom(let customView) = footer.enumeration {
+        else if case .custom(let customView) = footer {
             actionView.ctxs.footer.frame.size = CGSize(width: NXUI.width, height: customView.frame.size.height+NXUI.bottomOffset)
             actionView.ctxs.footer.title.isHidden = true
             actionView.ctxs.footer.lhs.isHidden = true
@@ -211,7 +211,7 @@ extension NXActionView {
             actionView.ctxs.footer.rhs.isHidden = true
             actionView.ctxs.footer.customView = customView
         }
-        else if case .none = footer.enumeration {
+        else if case .none = footer {
             actionView.ctxs.footer.frame.size = CGSize(width: NXUI.width, height: NXUI.bottomOffset)
             actionView.ctxs.footer.title.isHidden = true
             actionView.ctxs.footer.lhs.isHidden = true
@@ -355,14 +355,13 @@ extension NXActionView {
         }
     }
     
-    public enum Enumeration {
-        case header(_ lhs:Bool, _ center:Bool, _ rhs:Bool, _ title:Bool)
-        case footer(_ lhs:Bool, _ center:Bool, _ rhs:Bool)
-        case whitespace                                //视图存在，但是没有任何需要展示的信息
+    public enum Attachment {
+        case header(_ lhs:Bool, _ center:Bool, _ rhs:Bool, _ title:Bool, _ value:String)
+        case footer(_ lhs:Bool, _ center:Bool, _ rhs:Bool, _ value:String)
+        case whitespace(_ height:CGFloat)            //视图存在，但是没有任何需要展示的信息
         case custom(_ customView:UIView)             //定制
         case none                                   //无底部
     }
-    public typealias Attachment = (enumeration:NXActionView.Enumeration, title:String)
 }
 
 open class NXActionViewAttributes: NXOverlayAttributes {
@@ -371,7 +370,7 @@ open class NXActionViewAttributes: NXOverlayAttributes {
     open var center = NXActionView.Metadata()
     open var footer = NXActionView.Metadata()
     open var devide = CGFloat(6.0) //底部分开的高度，默认是6pt(只有在底部高度>0的时候有效)
-    open var max = NXUI.height * 0.80
+    open var max = NXUI.height * 0.75
     open var isAnimation = true
 }
 

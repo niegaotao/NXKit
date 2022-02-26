@@ -134,7 +134,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
     
     open override func dispose(_ action: String, _ value: Any?, _ completion: NX.Completion<String, Any?>? = nil) {
         if action == "navi.center" {
-            NXActionView.action(actions: self.wrapped.albums, header: (.header(false, false, true, true), "请选择相册"), footer: (.whitespace, ""), initialize: nil) { (_, index) in
+            NXActionView.action(actions: self.wrapped.albums, header: .header(false, false, true, true, "请选择相册"), footer: .whitespace(32), initialize: nil) { (_, index) in
                 guard index != self.ctxs.x else {
                     return;
                 }
@@ -156,7 +156,7 @@ open class NXAssetsViewController: NXViewController,UICollectionViewDelegate, UI
                 
                 NXAsset.outputAssets(self.wrapped) {[weak self] (assets, outputs) in
                     self?.wrapped.isOutputting = false
-                    NX.previewAssets(type: "UIImage", assets: outputs)
+                    NX.previewAssets(type: "NXAsset", assets: outputs)
                 }
             }
             else{

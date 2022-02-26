@@ -445,7 +445,7 @@ extension NX {
         static public var scripts = [WKUserScript]()
         
         static public var tableViewStyle = UITableView.Style.grouped
-        static public var separatorStyle = UITableViewCell.SeparatorStyle.singleLine
+        static public var separatorStyle = UITableViewCell.SeparatorStyle.none
         
         //alert/action的单元格最大宽度、高度
         static public var size = CGSize(width: NXUI.width*0.8, height: 48.0)
