@@ -42,7 +42,6 @@ class EXViewController: NXTableViewController {
         
         self.naviView.title = "NXViewController"
         
-<<<<<<< HEAD
         self.setupSubviews()
         self.updateSubviews("", nil)
     }
