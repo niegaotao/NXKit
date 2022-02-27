@@ -46,6 +46,9 @@ open class NXRouter {
     /*新增URL*/
     @discardableResult
     public func add(_ url: String, completion:@escaping NX.Completion<Bool, NXRouter.Wrapped?>) -> NXRouter.URI? {
+        guard let url = URL(string: url) else {
+            return nil
+        }
         let record = self.componentsOf(url: url)
         return self.add(record: record, completion: completion)
     }
@@ -71,7 +74,10 @@ open class NXRouter {
     /*新增URL*/
     @discardableResult
     public func add(scheme:String, path: String, completion:@escaping NX.Completion<Bool, NXRouter.Wrapped?>) -> NXRouter.URI? {
-        let record = self.componentsOf(url: scheme + "://" + path)
+        guard let url = URL(string: scheme + "://" + path) else {
+            return nil
+        }
+        let record = self.componentsOf(url: url)
         return self.add(record: record, completion: completion)
     }
     
@@ -107,6 +113,9 @@ open class NXRouter {
     /*删除*/
     @discardableResult
     public func remove(_ url: String, uri: NXRouter.URI? = nil) -> Bool {
+        guard let url = URL(string: url) else {
+            return false
+        }
         let __components = self.componentsOf(url: url)
         if __components.isValid == false {
             return false
@@ -137,31 +146,33 @@ open class NXRouter {
     
     //打开链接
     public func open(_ url: String, info: [String: Any]?, completion: NX.Completion<Bool, [String: Any]>?) {
+        guard let url = URL(string: url) else {
+            self.exception?(url)
+            return
+        }
         let compatible = self.componentsOf(url: url)
         if compatible.isValid, let uri = compatible.uri {
             let rawValue = NXRouter.Wrapped()
-            rawValue.url = url
+            rawValue.url = url.absoluteString
             rawValue.info = info
             rawValue.query = compatible.query
             rawValue.completion = completion
             uri.completion?(true, rawValue)
         }
         else {
-            self.exception?(url)
+            self.exception?(url.absoluteString)
         }
     }
     
     /*检测url的有效性,匹配URL*/
-    public func componentsOf(url: String) -> NXRouter.Record {
+    public func componentsOf(url: URL) -> NXRouter.Record {
         let record = NXRouter.Record()
-        if let encodeURL = url.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed) {
-            if let __url = URL(string: encodeURL), let __scheme = __url.scheme , self.schemes.contains(__scheme){
-                record.isValid = true
-                record.url = encodeURL
-                record.scheme = __scheme
-                record.path = (__url.host ?? "") + __url.path
-                record.query = NXRouter.query(url: encodeURL)
-            }
+        if let __scheme = url.scheme , self.schemes.contains(__scheme){
+            record.isValid = true
+            record.url = url.absoluteString
+            record.scheme = __scheme
+            record.path = (url.host ?? "") + url.path
+            record.query = NXRouter.query(url: url)
         }
         
         record.uri = self.routes.first(where: { uri in
@@ -173,8 +184,8 @@ open class NXRouter {
     
     
     /*解析URL自带的参数规则*/
-    class public func query(url: String) -> [String: String]? {
-        if let __url = URL(string: url), let query = __url.query, query.count > 0 {
+    class public func query(url: URL) -> [String: String]? {
+        if let query = url.query, query.count > 0 {
             var dicValue = [String: String]()
             
             let components = query.components(separatedBy: "&")

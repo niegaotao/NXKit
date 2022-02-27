@@ -39,7 +39,7 @@ open class NXWebViewController: NXViewController {
     
     open var HTTPMethed : String = "GET"
     
-    open var cachePolicy = URLRequest.CachePolicy.useProtocolCachePolicy
+    open var cachePolicy = URLRequest.CachePolicy.reloadIgnoringLocalCacheData
     open var timeoutInterval: TimeInterval = 60.0
 
     open var webView = NXWebView(frame: CGRect.zero)
