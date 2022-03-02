@@ -841,11 +841,8 @@ open class NXAssetViewCell: NXCollectionViewCell {
             self.assetView.image = __thumbnail
         }
         else{
-            var size = self.contentView.frame.size
-            size.width = round(size.width * NXUI.scale)
-            size.height =  round(size.height * NXUI.scale)
             PHCachingImageManager.default().requestImage(for: phasset,
-                                                         targetSize: size,
+                                                            targetSize: CGSize(width: NXUI.width, height: NXUI.width),
                                                          contentMode: .aspectFill,
                                                          options: nil) {[weak self](image, info) in
                                                             asset.thumbnail = image
@@ -917,11 +914,8 @@ open class NXAlbum : NXAction {
         
         //获取封面
         if let asset = self.assets.last?.asset {
-            var __size = CGSize.zero
-            __size.width = round((NXUI.width-12*2-2*3)/4.0 * NXUI.scale)
-            __size.height = __size.width
             PHImageManager.default().requestImage(for: asset,
-                                                  targetSize: __size,
+                                                     targetSize: CGSize(width: NXUI.width, height: NXUI.width),
                                                   contentMode: .aspectFill,
                                                   options: nil) {[weak self]
                                                     (image, info) in
