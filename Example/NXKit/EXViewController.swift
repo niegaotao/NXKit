@@ -25,6 +25,16 @@ class EXViewController: NXTableViewController {
         
         if true {
             var arrSubvalues = [[String:Any]]()
+            arrSubvalues.append(["title":"相册选图:image<=9","operation":"NXAsset-image-9"])
+            arrSubvalues.append(["title":"相册选图:video<=1","operation":"NXAsset-video-1"])
+            arrSubvalues.append(["title":"相册选图:混合<=12","operation":"NXAsset-12-1"])
+            arrSubvalues.append(["title":"相册选图:混合<=12,video<=3","operation":"NXAsset-12-2"])
+
+            self.arrValues.append(arrSubvalues)
+        }
+        
+        if true {
+            var arrSubvalues = [[String:Any]]()
             arrSubvalues.append(["title":"NXActionView-alert(1个选项)","operation":"NXActionView-alert-1"])
             arrSubvalues.append(["title":"NXActionView-alert(2个选项)","operation":"NXActionView-alert-2"])
             arrSubvalues.append(["title":"NXActionView-alert(>=3个选项)","operation":"NXActionView-alert-3"])
@@ -102,6 +112,18 @@ class EXViewController: NXTableViewController {
                     let vc = NXCollectionViewController()
                     vc.title = operation
                     self.navigationController?.pushViewController(vc, animated: true)
+                }
+                else if operation == "NXAsset-image-9" {
+                    NXAsset.album(minOfAssets: 1, maxOfAssets: 9, image: (1,9, true), video: (0,0, false), isMixable: false, isAutoclosed: true, mediaType: .image, selectedIdentifiers: [], outputResize: CGSize(width: 1920, height: 1920), outputResizeBy: "area", outputUIImage: true, clips: [], videoClipsAllowed: false, videoClipsDuration: 0, videoFileExtensions: [], footer: (false, true, false), navigation:.push , naviController: self.navigationController as! NXNavigationController, openAllowed: true, closeAllowed: true, isAnimated: true, completion: nil)
+                }
+                else if operation == "NXAsset-video-1" {
+                    NXAsset.album(minOfAssets: 1, maxOfAssets: 1, image: (0,0, true), video: (1,1, false), isMixable: false, isAutoclosed: true, mediaType: .video, selectedIdentifiers: [], outputResize: CGSize(width: 1920, height: 1920), outputResizeBy: "area", outputUIImage: true, clips: [], videoClipsAllowed: false, videoClipsDuration: 1000, videoFileExtensions: [".mp4",".mov"], footer: (false, true, false), navigation:.push , naviController: self.navigationController as! NXNavigationController, openAllowed: true, closeAllowed: true, isAnimated: true, completion: nil)
+                }
+                else if operation == "NXAsset-12-1" {
+                    NXAsset.album(minOfAssets: 1, maxOfAssets: 12, image: (1,12, true), video: (1,12, false), isMixable: true, isAutoclosed: true, mediaType: .unknown, selectedIdentifiers: [], outputResize: CGSize(width: 1920, height: 1920), outputResizeBy: "area", outputUIImage: true, clips: [], videoClipsAllowed: false, videoClipsDuration: 1000, videoFileExtensions: [".mp4",".mov"], footer: (false, true, false), navigation:.push , naviController: self.navigationController as! NXNavigationController, openAllowed: true, closeAllowed: true, isAnimated: true, completion: nil)
+                }
+                else if operation == "NXAsset-12-2" {
+                    NXAsset.album(minOfAssets: 1, maxOfAssets: 12, image: (1,12, true), video: (1,3, false), isMixable: true, isAutoclosed: true, mediaType: .unknown, selectedIdentifiers: [], outputResize: CGSize(width: 1920, height: 1920), outputResizeBy: "area", outputUIImage: true, clips: [], videoClipsAllowed: false, videoClipsDuration: 1000, videoFileExtensions: [".mp4",".mov"], footer: (false, true, false), navigation:.push , naviController: self.navigationController as! NXNavigationController, openAllowed: true, closeAllowed: true, isAnimated: true, completion: nil)
                 }
                 else if operation == "NXActionView-alert-1" {
                     NXActionView.alert(title: "温馨提示", subtitle: "确认删除该记录吗？删除后不可恢复哦", actions: ["我再想想"], completion: nil)

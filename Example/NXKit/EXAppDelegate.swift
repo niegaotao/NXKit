@@ -15,7 +15,12 @@ class EXAppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {                
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        //授权
+        NX.Imp.authorization = { (type, queue, isAlertable ,completion) in
+            EXAuthorizeManager.authorization(type, queue, completion, isAlertable)
+        }
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         if #available(iOS 13.0, *) {
