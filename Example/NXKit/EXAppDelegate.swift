@@ -19,14 +19,21 @@ class EXAppDelegate: UIResponder, UIApplicationDelegate {
         
         //授权
         NX.Imp.authorization = { (type, queue, isAlertable ,completion) in
-            EXAuthorizeManager.authorization(type, queue, completion, isAlertable)
+            EXApp.authorization(type, queue, completion, isAlertable)
+        }
+        
+        NX.Imp.previewAssets = {(type, assets:[Any]) in
+            if let __assets = assets as? [NXAsset] {
+                EXApp.center.preview(__assets, 0)
+            }
         }
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         if #available(iOS 13.0, *) {
             self.window?.overrideUserInterfaceStyle = .light
         }
-        self.window?.rootViewController = NXNavigationController(rootViewController: EXViewController())
+        EXApp.naviController.pushViewController(EXViewController(), animated: false)
+        self.window?.rootViewController = EXApp.naviController
         self.window?.makeKeyAndVisible()
         return true
     }

@@ -25,11 +25,14 @@ class EXViewController: NXTableViewController {
         
         if true {
             var arrSubvalues = [[String:Any]]()
+            arrSubvalues.append(["title":"相册选图:image<=1","operation":"NXAsset-image-1"])
             arrSubvalues.append(["title":"相册选图:image<=9","operation":"NXAsset-image-9"])
             arrSubvalues.append(["title":"相册选图:video<=1","operation":"NXAsset-video-1"])
-            arrSubvalues.append(["title":"相册选图:混合<=12","operation":"NXAsset-12-1"])
-            arrSubvalues.append(["title":"相册选图:混合<=12,video<=3","operation":"NXAsset-12-2"])
-
+            arrSubvalues.append(["title":"相册选图:video<=9","operation":"NXAsset-video-9"])
+            arrSubvalues.append(["title":"相册选图:混合<=12,image<12&&video<=12","operation":"NXAsset-12-1"])
+            arrSubvalues.append(["title":"相册选图:混合<=12,image<6&&video<=6","operation":"NXAsset-12-2"])
+            arrSubvalues.append(["title":"打开相机:拍图","operation":"camera-image"])
+            arrSubvalues.append(["title":"打开相机:拍视频","operation":"camera-video"])
             self.arrValues.append(arrSubvalues)
         }
         
@@ -113,17 +116,125 @@ class EXViewController: NXTableViewController {
                     vc.title = operation
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
+                else if operation == "NXAsset-image-1" {
+                    NXAsset.album(open:{ action, value in
+                        value.wrapped.minOfAssets = 1
+                        value.wrapped.maxOfAssets = 1
+                        value.wrapped.image.minOfAssets = 1
+                        value.wrapped.image.maxOfAssets = 1
+                        value.wrapped.video.minOfAssets = 0
+                        value.wrapped.video.maxOfAssets = 0
+                        value.wrapped.isMixable = false
+                        value.wrapped.mediaType = .image
+                        value.wrapped.subviews = (true, false, false)
+                        value.wrapped.clips = [NXAsset.Clip(name: "1:1", isResizable: false, width: 1, height: 1, isHidden: false)]
+                        value.wrapped.numberOfColumns = 4
+                        self.present(value, animated: true, completion: nil)
+                    }, completion: { action, value in
+                        NX.print("count:\(value.assets.count)")
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                }
                 else if operation == "NXAsset-image-9" {
-                    NXAsset.album(minOfAssets: 1, maxOfAssets: 9, image: (1,9, true), video: (0,0, false), isMixable: false, isAutoclosed: true, mediaType: .image, selectedIdentifiers: [], outputResize: CGSize(width: 1920, height: 1920), outputResizeBy: "area", outputUIImage: true, clips: [], videoClipsAllowed: false, videoClipsDuration: 0, videoFileExtensions: [], footer: (false, true, false), navigation:.push , naviController: self.navigationController as! NXNavigationController, openAllowed: true, closeAllowed: true, isAnimated: true, completion: nil)
+                    NXAsset.album(open:{ action, value in
+                        value.wrapped.minOfAssets = 1
+                        value.wrapped.maxOfAssets = 9
+                        value.wrapped.image.minOfAssets = 1
+                        value.wrapped.image.maxOfAssets = 9
+                        value.wrapped.video.minOfAssets = 0
+                        value.wrapped.video.maxOfAssets = 0
+                        value.wrapped.isMixable = false
+                        value.wrapped.mediaType = .image
+                        //self.navigationController?.pushViewController(value, animated: true)
+                        value.wrapped.subviews = (true, false, false)
+                        self.present(value, animated: true, completion: nil)
+                    }, completion: { action, value in
+                        NX.print("count:\(value.assets.count)")
+                        self.dismiss(animated: true, completion: nil)
+                        //self.navigationController?.popViewController(animated: true)
+                    })
                 }
                 else if operation == "NXAsset-video-1" {
-                    NXAsset.album(minOfAssets: 1, maxOfAssets: 1, image: (0,0, true), video: (1,1, false), isMixable: false, isAutoclosed: true, mediaType: .video, selectedIdentifiers: [], outputResize: CGSize(width: 1920, height: 1920), outputResizeBy: "area", outputUIImage: true, clips: [], videoClipsAllowed: false, videoClipsDuration: 1000, videoFileExtensions: [".mp4",".mov"], footer: (false, true, false), navigation:.push , naviController: self.navigationController as! NXNavigationController, openAllowed: true, closeAllowed: true, isAnimated: true, completion: nil)
+                    NXAsset.album(open:{ action, value in
+                        value.wrapped.minOfAssets = 1
+                        value.wrapped.maxOfAssets = 1
+                        value.wrapped.image.minOfAssets = 0
+                        value.wrapped.image.maxOfAssets = 0
+                        value.wrapped.video.minOfAssets = 1
+                        value.wrapped.video.maxOfAssets = 1
+                        value.wrapped.isMixable = false
+                        value.wrapped.mediaType = .video
+                        value.wrapped.clips = [NXAsset.Clip(name: "1:1", isResizable: false, width: 1, height: 1, isHidden: false)]
+                        self.present(value, animated: true, completion: nil)
+                    }, completion: { action, value in
+                        NX.print("count:\(value.assets.count)")
+                        self.dismiss(animated: true, completion: nil)
+
+                    })
+                }
+                else if operation == "NXAsset-video-9" {
+                    NXAsset.album(open:{ action, value in
+                        value.wrapped.minOfAssets = 1
+                        value.wrapped.maxOfAssets = 9
+                        value.wrapped.image.minOfAssets = 0
+                        value.wrapped.image.maxOfAssets = 0
+                        value.wrapped.video.minOfAssets = 1
+                        value.wrapped.video.maxOfAssets = 9
+                        value.wrapped.isMixable = false
+                        value.wrapped.mediaType = .video
+                        self.navigationController?.pushViewController(value, animated: true)
+                    }, completion: { action, value in
+                        NX.print("count:\(value.assets.count)")
+                        self.navigationController?.popViewController(animated: true)
+                    })
                 }
                 else if operation == "NXAsset-12-1" {
-                    NXAsset.album(minOfAssets: 1, maxOfAssets: 12, image: (1,12, true), video: (1,12, false), isMixable: true, isAutoclosed: true, mediaType: .unknown, selectedIdentifiers: [], outputResize: CGSize(width: 1920, height: 1920), outputResizeBy: "area", outputUIImage: true, clips: [], videoClipsAllowed: false, videoClipsDuration: 1000, videoFileExtensions: [".mp4",".mov"], footer: (false, true, false), navigation:.push , naviController: self.navigationController as! NXNavigationController, openAllowed: true, closeAllowed: true, isAnimated: true, completion: nil)
+                    NXAsset.album(open:{ action, value in
+                        value.wrapped.minOfAssets = 1
+                        value.wrapped.maxOfAssets = 12
+                        value.wrapped.image.minOfAssets = 1
+                        value.wrapped.image.maxOfAssets = 12
+                        value.wrapped.video.minOfAssets = 1
+                        value.wrapped.video.maxOfAssets = 12
+                        value.wrapped.isMixable = true
+                        value.wrapped.mediaType = .unknown
+                        self.navigationController?.pushViewController(value, animated: true)
+                    }, completion: { action, value in
+                        NX.print("count:\(value.assets.count)")
+                        self.navigationController?.popViewController(animated: true)
+                    })
                 }
                 else if operation == "NXAsset-12-2" {
-                    NXAsset.album(minOfAssets: 1, maxOfAssets: 12, image: (1,12, true), video: (1,3, false), isMixable: true, isAutoclosed: true, mediaType: .unknown, selectedIdentifiers: [], outputResize: CGSize(width: 1920, height: 1920), outputResizeBy: "area", outputUIImage: true, clips: [], videoClipsAllowed: false, videoClipsDuration: 1000, videoFileExtensions: [".mp4",".mov"], footer: (false, true, false), navigation:.push , naviController: self.navigationController as! NXNavigationController, openAllowed: true, closeAllowed: true, isAnimated: true, completion: nil)
+                    NXAsset.album(open:{ action, value in
+                        value.wrapped.minOfAssets = 1
+                        value.wrapped.maxOfAssets = 12
+                        value.wrapped.image.minOfAssets = 1
+                        value.wrapped.image.maxOfAssets = 6
+                        value.wrapped.video.minOfAssets = 1
+                        value.wrapped.video.maxOfAssets = 6
+                        value.wrapped.isMixable = true
+                        value.wrapped.mediaType = .unknown
+                        self.navigationController?.pushViewController(value, animated: true)
+                    }, completion: { action, value in
+                        NX.print("count:\(value.assets.count)")
+                        self.navigationController?.popViewController(animated: true)
+                    })
+                }
+                else if operation == "camera-image"{
+                    NXAsset.camera(open: { action, value in
+                        self.navigationController?.pushViewController(value, animated: true)
+                    }, completion: { action, value in
+                        NX.print("count:\(value.assets.count)")
+                        self.navigationController?.popViewController(animated: true)
+                    })
+                }
+                else if operation == "camera-video"{
+                    NXAsset.camera(open: { action, value in
+                        self.navigationController?.pushViewController(value, animated: true)
+                    }, completion: { action, value in
+                        NX.print("count:\(value.assets.count)")
+                        self.navigationController?.popViewController(animated: true)
+                    })
                 }
                 else if operation == "NXActionView-alert-1" {
                     NXActionView.alert(title: "温馨提示", subtitle: "确认删除该记录吗？删除后不可恢复哦", actions: ["我再想想"], completion: nil)

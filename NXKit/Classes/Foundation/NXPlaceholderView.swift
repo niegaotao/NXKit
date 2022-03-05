@@ -57,7 +57,6 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
     
     open override func updateSubviews(_ action: String, _ value: Any?) {
         if self.ctxs.isHidden == false {
-            
             if let __customizableView = customizableView {
                 __customizableView.isHidden = false
                 __customizableView.frame = CGRect(x: (self.bounds.width-__customizableView.w)/2, y: (self.bounds.height - __customizableView.h)/2, width: __customizableView.w, height: __customizableView.h)
@@ -77,6 +76,11 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
             self.customizableView?.isHidden = true
             self.contentView.isHidden = true
         }
+    }
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        self.contentView.center = self.center
     }
 }
 
