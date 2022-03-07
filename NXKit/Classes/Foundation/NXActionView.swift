@@ -110,16 +110,16 @@ extension NXActionView {
                 __action.subtitle.isHidden = true
             })
         }
-        return NXActionView.action(actions: __actions, header:.none, footer: .footer(true, false, true,"取消"), initialize: nil, completion: completion)
+        return NXActionView.action(actions: __actions, header:.none, footer: .footer(true, false, true,"取消"), completion: completion)
     }
     
     @discardableResult
     class public func action(actions: [NXAction], completion:NX.Completion<String, Int>?) -> NXActionView {
-        return NXActionView.action(actions: actions, header:.none, footer: .footer(true, false, true,"取消"), initialize:nil, completion: completion)
+        return NXActionView.action(actions: actions, header:.none, footer: .footer(true, false, true,"取消"), completion: completion)
     }
     
     @discardableResult
-    class public func action(actions: [NXAction], header:NXActionView.Attachment, footer: NXActionView.Attachment, initialize:NX.Completion<String, NXActionView>?, completion:NX.Completion<String, Int>?) -> NXActionView {
+    class public func action(actions: [NXAction], header:NXActionView.Attachment, footer: NXActionView.Attachment, completion:NX.Completion<String, Int>?) -> NXActionView {
         
         let actionView = NXActionView(frame: UIScreen.main.bounds)
         //header
@@ -224,9 +224,7 @@ extension NXActionView {
             
             actionView.ctxs.devide = 0.0
         }
-        
-        initialize?("initialize", actionView)
-        
+                
         actionView.updateSubviews(NXActionView.Key.action.rawValue, nil)
         actionView.ctxs.completion = completion
         actionView.open(animation: actionView.ctxs.animation, completion: nil)

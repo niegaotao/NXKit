@@ -50,6 +50,17 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return outoutImage
     }
+    
+    open class func image(backgroundColor:UIColor, foregroundColor:UIColor, size:CGSize) -> UIImage? {
+        let background = UIImage.image(color: backgroundColor, size: size)
+        let foreground = UIImage.image(color: foregroundColor.withAlphaComponent(0.5), size: size)
+        UIGraphicsBeginImageContext(size)
+        background?.draw(in: CGRect(origin: CGPoint.zero, size: size))
+        foreground?.draw(in: CGRect(origin: CGPoint.zero, size: size))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
 }
 
 
