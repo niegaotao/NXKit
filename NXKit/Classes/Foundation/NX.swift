@@ -483,7 +483,7 @@ extension NX {
         static public var hideLoading:((_ superview:UIView?) -> ())?
         
         //处理网络请求
-        static public var request:((_ request:NXRequestProtocol, _ completion:NX.Completion<String, NXRequestProtocol>?) -> ())?
+        static public var request:((_ request:NXRequest, _ completion:NX.Completion<String, NXRequest>?) -> ())?
     }
 }
 
@@ -585,7 +585,7 @@ extension NX {
     }
     
     //request
-    class public func request(_ request:NXRequestProtocol, _ completion:NX.Completion<String, NXRequestProtocol>?) {
+    class public func request(_ request:NXRequest, _ completion:NX.Completion<String, NXRequest>?) {
         NX.Imp.request?(request, completion)
     }
 }
