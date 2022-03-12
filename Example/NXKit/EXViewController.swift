@@ -25,12 +25,17 @@ class EXViewController: NXTableViewController {
         
         if true {
             var arrSubvalues = [[String:Any]]()
-            arrSubvalues.append(["title":"相册选图:image<=1","operation":"NXAsset-image-1"])
-            arrSubvalues.append(["title":"相册选图:image<=9","operation":"NXAsset-image-9"])
-            arrSubvalues.append(["title":"相册选图:video<=1","operation":"NXAsset-video-1"])
-            arrSubvalues.append(["title":"相册选图:video<=9","operation":"NXAsset-video-9"])
-            arrSubvalues.append(["title":"相册选图:混合<=12,image<12&&video<=12","operation":"NXAsset-12-1"])
-            arrSubvalues.append(["title":"相册选图:混合<=12,image<6&&video<=6","operation":"NXAsset-12-2"])
+            arrSubvalues.append(["title":"相册选图:image<=1,push","operation":"NXAsset-image-1"])
+            arrSubvalues.append(["title":"相册选图:image<=9,present","operation":"NXAsset-image-9"])
+            arrSubvalues.append(["title":"相册选图:video<=1,overlay","operation":"NXAsset-video-1"])
+            arrSubvalues.append(["title":"相册选图:video<=9,push","operation":"NXAsset-video-9"])
+            arrSubvalues.append(["title":"相册选图:混合<=12,image<12&&video<=12,present","operation":"NXAsset-12-1"])
+            arrSubvalues.append(["title":"相册选图:混合<=12,image<6&&video<=6,overlay","operation":"NXAsset-12-2"])
+            self.arrValues.append(arrSubvalues)
+        }
+        
+        if true {
+            var arrSubvalues = [[String:Any]]()
             arrSubvalues.append(["title":"打开相机:拍图","operation":"camera-image"])
             arrSubvalues.append(["title":"打开相机:拍视频","operation":"camera-video"])
             self.arrValues.append(arrSubvalues)
@@ -127,12 +132,12 @@ class EXViewController: NXTableViewController {
                         value.wrapped.isMixable = false
                         value.wrapped.mediaType = .image
                         value.wrapped.subviews = (true, false, false)
-                        value.wrapped.clips = [NXAsset.Clip(name: "1:1", isResizable: false, width: 1, height: 1, isHidden: false)]
+                        value.wrapped.clips = [NXClip(name: "1:1", isResizable: false, width: 1, height: 1, isHidden: false)]
                         value.wrapped.numberOfColumns = 4
-                        self.present(value, animated: true, completion: nil)
+                        self.navigationController?.pushViewController(value, animated: true)
                     }, completion: { action, value in
                         NX.print("count:\(value.assets.count)")
-                        self.dismiss(animated: true, completion: nil)
+                        self.navigationController?.popViewController(animated: true)
                     })
                 }
                 else if operation == "NXAsset-image-9" {
@@ -164,11 +169,12 @@ class EXViewController: NXTableViewController {
                         value.wrapped.video.maxOfAssets = 1
                         value.wrapped.isMixable = false
                         value.wrapped.mediaType = .video
-                        value.wrapped.clips = [NXAsset.Clip(name: "1:1", isResizable: false, width: 1, height: 1, isHidden: false)]
-                        self.present(value, animated: true, completion: nil)
+                        value.wrapped.clips = [NXClip(name: "1:1", isResizable: false, width: 1, height: 1, isHidden: false)]
+                        value.ctxs.orientation = .bottom
+                        (self.navigationController as? NXNavigationController)?.openViewController(value, animated: true)
                     }, completion: { action, value in
                         NX.print("count:\(value.assets.count)")
-                        self.dismiss(animated: true, completion: nil)
+                        (self.navigationController as? NXNavigationController)?.closeViewController(value.contentViewController!, animated: true)
 
                     })
                 }
@@ -198,10 +204,10 @@ class EXViewController: NXTableViewController {
                         value.wrapped.video.maxOfAssets = 12
                         value.wrapped.isMixable = true
                         value.wrapped.mediaType = .unknown
-                        self.navigationController?.pushViewController(value, animated: true)
+                        self.present(value, animated: true, completion: nil)
                     }, completion: { action, value in
                         NX.print("count:\(value.assets.count)")
-                        self.navigationController?.popViewController(animated: true)
+                        self.dismiss(animated: true, completion: nil)
                     })
                 }
                 else if operation == "NXAsset-12-2" {
@@ -214,10 +220,11 @@ class EXViewController: NXTableViewController {
                         value.wrapped.video.maxOfAssets = 6
                         value.wrapped.isMixable = true
                         value.wrapped.mediaType = .unknown
-                        self.navigationController?.pushViewController(value, animated: true)
+                        value.ctxs.orientation = .bottom
+                        (self.navigationController as? NXNavigationController)?.openViewController(value, animated: true)
                     }, completion: { action, value in
                         NX.print("count:\(value.assets.count)")
-                        self.navigationController?.popViewController(animated: true)
+                        (self.navigationController as? NXNavigationController)?.closeViewController(value.contentViewController!, animated: true)
                     })
                 }
                 else if operation == "camera-image"{
@@ -230,10 +237,10 @@ class EXViewController: NXTableViewController {
                 }
                 else if operation == "camera-video"{
                     NXAsset.camera(open: { action, value in
-                        self.navigationController?.pushViewController(value, animated: true)
+                        self.present(value, animated: true, completion: nil)
                     }, completion: { action, value in
                         NX.print("count:\(value.assets.count)")
-                        self.navigationController?.popViewController(animated: true)
+                        self.dismiss(animated: true, completion: nil)
                     })
                 }
                 else if operation == "NXActionView-alert-1" {
@@ -246,7 +253,7 @@ class EXViewController: NXTableViewController {
                     NXActionView.alert(title: "温馨提示", subtitle: "确认删除该记录吗？删除后不可恢复哦", actions: ["删除","我再想想","稍后再说","好的"], completion: nil)
                 }
                 else if operation == "NXActionView-action" {
-                    NXActionView.action(actions: [NXAction(title: "北京", value: nil, completion: nil),NXAction(title: "上海", value: nil, completion: nil)], header: .none, footer: .none, initialize: nil, completion: nil)
+                    NXActionView.action(actions: [NXAction(title: "北京", value: nil, completion: nil), NXAction(title: "上海", value: nil, completion: nil)], header: .none, footer: .none, completion: nil)
                 }
                 else if operation == "NXActionView-action-footer" {
                     var actions = [NXAction]()
@@ -257,7 +264,7 @@ class EXViewController: NXTableViewController {
                     actions.append(NXAction(title: "成都", value: nil, completion: nil))
                     actions.append(NXAction(title: "重庆", value: nil, completion: nil))
                     actions.append(NXAction(title: "武汉", value: nil, completion: nil))
-                    NXActionView.action(actions: actions, header: .none, footer: .footer(true, false, true, "取消"), initialize: nil, completion: nil)
+                    NXActionView.action(actions: actions, header: .none, footer: .footer(true, false, true, "取消"), completion: nil)
                 }
                 else if operation == "NXActionView-action--header-footer" {
                     var actions = [NXAction]()
@@ -273,7 +280,7 @@ class EXViewController: NXTableViewController {
                     actions.append(NXAction(title: "长沙", value: nil, completion: nil))
                     actions.append(NXAction(title: "郑州", value: nil, completion: nil))
                     actions.append(NXAction(title: "合肥", value: nil, completion: nil))
-                    NXActionView.action(actions: actions, header: .header(true, false, true, true, "请选择城市"), footer: .footer(true, false, true, "取消"), initialize: nil, completion: nil)
+                    NXActionView.action(actions: actions, header: .header(true, false, true, true, "请选择城市"), footer: .footer(true, false, true, "取消"), completion: nil)
                 }
             }
         }

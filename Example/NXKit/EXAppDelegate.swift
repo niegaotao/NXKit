@@ -35,6 +35,7 @@ class EXAppDelegate: UIResponder, UIApplicationDelegate {
         EXApp.naviController.pushViewController(EXViewController(), animated: false)
         self.window?.rootViewController = EXApp.naviController
         self.window?.makeKeyAndVisible()
+        
         return true
     }
 

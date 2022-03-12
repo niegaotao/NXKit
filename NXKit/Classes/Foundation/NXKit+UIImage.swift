@@ -78,7 +78,7 @@ extension UIImage {
             return nil
         }
         var __size = CGSize(width: _image.size.width*_image.scale, height: _image.size.height*_image.scale)
-        __size = NXResize.resize(by: by, __size, size, true)
+        __size = NXClip.resize(by: by, __size, size, true)
         UIGraphicsBeginImageContext(__size)
         _image.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: __size))
         let resultImage = UIGraphicsGetImageFromCurrentImageContext()

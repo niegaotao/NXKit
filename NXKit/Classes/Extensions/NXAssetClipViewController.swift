@@ -12,7 +12,7 @@ import UIKit
 open class NXAssetClipViewController: NXViewController {
     open var image : UIImage? = nil
     
-    open var clips = NX.Wrappable<Int, [NXAsset.Clip], [NXAsset.Clip]> { (_, __sender) in
+    open var clips = NX.Wrappable<Int, [NXClip], [NXClip]> { (_, __sender) in
         __sender.is = -1
         __sender.value = []
     }

@@ -474,13 +474,13 @@ extension NX {
         static public var tableView : ((_ tableView: UITableView?, _ value:NXItem, _ indexPath:IndexPath) -> CGFloat)?
         
         //处理toast
-        static public var showToast:((_ message:String, _ ats:NX.Ats , _ superview:UIView?) -> ())?
+        static public var showToast:((_ message:String, _ ats:NX.Ats , _ superview:UIView?) -> NXHUD.WrappedView?)?
         
         //处理animation
-        static public var showLoading:((_ message:String, _ ats:NX.Ats, _ superview:UIView?) -> ())?
+        static public var showLoading:((_ message:String, _ ats:NX.Ats, _ superview:UIView?) -> NXHUD.WrappedView?)?
         
-        //处理toast
-        static public var hideLoading:((_ superview:UIView?) -> ())?
+        //处理animation
+        static public var hideLoading:((_ animationView:NXHUD.WrappedView?, _ superview:UIView?) -> ())?
         
         //处理网络请求
         static public var request:((_ request:NXRequest, _ completion:NX.Completion<String, NXRequest>?) -> ())?
@@ -555,29 +555,29 @@ extension NX {
     }
     
     //toast
-    class public func showToast(message:String, _ ats:NX.Ats = .center, _ superview:UIView? = UIApplication.shared.keyWindow){
+    class public func showToast(message:String, _ ats:NX.Ats = .center, _ superview:UIView? = UIApplication.shared.keyWindow) -> NXHUD.WrappedView? {
         if let handler = NX.Imp.showToast {
-            handler(message, ats, superview)
+            return handler(message, ats, superview)
         }
         else {
-            (superview ?? UIApplication.shared.keyWindow)?.makeToast(message: message, ats: ats)
+            return (superview ?? UIApplication.shared.keyWindow)?.makeToast(message: message, ats: ats)
         }
     }
     
     //处理loading
-    class public func showLoading(_ message:String, _ ats:NX.Ats = .center, _ superview:UIView? = UIApplication.shared.keyWindow){
+    class public func showLoading(_ message:String, _ ats:NX.Ats = .center, _ superview:UIView? = UIApplication.shared.keyWindow) -> NXHUD.WrappedView?{
         if let handler = NX.Imp.showLoading {
-            handler(message, ats, superview)
+            return handler(message, ats, superview)
         }
         else {
-            (superview ?? UIApplication.shared.keyWindow)?.makeLoading(message: message, ats: ats)
+            return (superview ?? UIApplication.shared.keyWindow)?.makeLoading(message: message, ats: ats)
         }
     }
     
     //处理loading
-    class public func hideLoading(superview:UIView? = UIApplication.shared.keyWindow){
+    class public func hideLoading(_ animationView:NXHUD.WrappedView? = nil, superview:UIView? = UIApplication.shared.keyWindow){
         if let handler = NX.Imp.hideLoading {
-            handler(superview)
+            handler(animationView, superview)
         }
         else {
             (superview ?? UIApplication.shared.keyWindow)?.hideLoading()

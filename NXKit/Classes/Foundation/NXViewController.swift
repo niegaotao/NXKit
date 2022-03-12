@@ -94,7 +94,7 @@ open class NXViewController: UIViewController  {
     
     override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
+
         self.ctxs.didDisappear?("", self)
         self.ctxs.didDisappear = nil
     }
@@ -158,7 +158,7 @@ open class NXViewController: UIViewController  {
         }
         else if self.ctxs.navigation == .overlay {
             if let naviController = self.ctxs.superviewController?.navigationController as? NXNavigationController {
-                naviController.removeSubviewController(self, animated: true)
+                naviController.closeViewController(self, animated: true)
             }
         }
     }

@@ -24,7 +24,7 @@ open class NXClipboardView: NXView {
         //整个可以展示区域的宽高
         open var size = CGSize(width: CGFloat.zero, height: CGFloat.zero)
         //约束宽高
-        open var clip = NXAsset.Clip(name: "1:1", isResizable: false, width: 1.0, height: 1.0, isHidden: false)
+        open var clip = NXClip(name: "1:1", isResizable: false, width: 1.0, height: 1.0, isHidden: false)
         //线条相关属性
         open var line = NXClipboardView.Line()
         //边

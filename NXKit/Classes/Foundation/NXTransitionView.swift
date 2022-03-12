@@ -81,7 +81,7 @@ open class NXTransitionView: NXView {
                 }
                 else {
                     if let naviController = self.owner.ctxs.superviewController?.navigationController as? NXNavigationController {
-                        naviController.removeSubviewController(owner, animated: true)
+                        naviController.closeViewController(owner, animated: true)
                         UIView.animate(withDuration: naviController.ctxs.duration*0.6) {
                             self.owner.view.x = NXUI.width
                             self.backgroundColor = NX.minAlphaOfColor
@@ -99,7 +99,7 @@ open class NXTransitionView: NXView {
                 }
                 else {
                     if let naviController = self.owner.ctxs.superviewController?.navigationController as? NXNavigationController {
-                        naviController.removeSubviewController(owner, animated: true)
+                        naviController.closeViewController(owner, animated: true)
                         UIView.animate(withDuration: naviController.ctxs.duration*0.6) {
                             self.owner.view.x = -NXUI.width
                             self.backgroundColor = NX.minAlphaOfColor

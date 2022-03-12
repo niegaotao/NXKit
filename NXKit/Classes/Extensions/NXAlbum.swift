@@ -12,29 +12,32 @@ import Photos
 open class NXAlbum : NXAction {
     public var assets = [NXAsset]() //保存自己之前生成的model
         
-    convenience public init(title: String, fetchResults: [PHFetchResult<AnyObject>], wrapped:NXAsset.Wrapped) {
+    convenience public init(title: String, fetchResult: PHFetchResult<AnyObject>?, wrapped:NXAsset.Wrapped) {
         self.init(title: title, value: nil, completion:nil)
         self.ctxs.update(NXActionViewCell.self, "NXActionViewCell")
         
         //生成NXAsset对象
-        for fetchResult in fetchResults {
-            if let __fetchResult = fetchResult as? PHFetchResult<PHAsset> {
-                for index in 0 ..< __fetchResult.count {
-                    let phasset = __fetchResult[index]
-                    let __asset = NXAsset(asset: phasset, suffixes:wrapped.video.suffixes)
-                    self.assets.append(__asset)
-                }
+        if let __fetchResult = fetchResult as? PHFetchResult<PHAsset> {
+            for index in 0 ..< __fetchResult.count {
+                let phasset = __fetchResult[index]
+                let __asset = NXAsset(asset: phasset, suffixes:wrapped.video.suffixes)
+                self.assets.append(__asset)
             }
         }
         
         //获取封面
-        if let asset = self.assets.last?.asset {
-            PHImageManager.default().requestImage(for: asset,
-                                                     targetSize: CGSize(width: NXUI.width, height: NXUI.width),
-                                                  contentMode: .aspectFill,
-                                                  options: nil) {[weak self]
-                                                    (image, info) in
-                                                    self?.asset.image = image
+        if let __asset = self.assets.last, let phasset = __asset.asset {
+            if let __thumbnail = __asset.thumbnail {
+                self.asset.image = __thumbnail
+            }
+            else{
+                PHCachingImageManager.default().requestImage(for: phasset,
+                                                                targetSize: NXAsset.Wrapped.size,
+                                                             contentMode: .aspectFill,
+                                                             options: nil) {[weak self](image, info) in
+                    __asset.thumbnail = image
+                    self?.asset.image = image
+                }
             }
         }
                 

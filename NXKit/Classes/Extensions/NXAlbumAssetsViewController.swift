@@ -65,7 +65,7 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
                 self.contentView.addSubview(self.animationView)
                 self.animationView.startAnimating()
                 DispatchQueue(label: "serialQueue", attributes: .init(rawValue: 0)).async {
-                    NXAsset.outputAlbums(self.wrapped, completion: { [weak self] (albums) in
+                    NXAsset.outputAlbums(self.wrapped, completion: { [weak self] (_, albums) in
                         self?.wrapped.albums = albums
                         
                         DispatchQueue.main.async {[weak self] in

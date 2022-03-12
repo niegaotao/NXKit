@@ -178,7 +178,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     /// - Parameters:
     ///   - viewController: 要弹出的视图控制器
     ///   - animated: 是否需要动画，动画方向默认从右侧进入
-    open func showSubviewController(_ viewController: NXViewController, animated: Bool){
+    open func openViewController(_ viewController: NXViewController, animated: Bool){
         //添加到的父视图控制器:必须栈顶的视图控制器
         guard let to = self.topViewController as? NXViewController else {return}
         
@@ -255,7 +255,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     /// - Parameters:
     ///   - viewController: 要移除的视图控制器
     ///   - animated: 是否需要动画
-    open func removeSubviewController(_ viewController: NXViewController, animated: Bool){
+    open func closeViewController(_ viewController: NXViewController, animated: Bool){
         guard let parentViewController = viewController.ctxs.superviewController else {return}
         guard let index = parentViewController.ctxs.subviewControllers.lastIndex(of: viewController) else { return }
         self.ctxs.semaphore.wait()

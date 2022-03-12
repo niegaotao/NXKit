@@ -281,8 +281,8 @@ extension UIView {
     }
 
     @discardableResult
-    open func hideLoading() -> Bool{
-        return NXHUD.closeSubview(subview:nil, superview: self)
+    open func hideLoading(animationView:NXHUD.WrappedView? = nil) -> Bool{
+        return NXHUD.closeSubview(subview:animationView, superview: self)
     }
 }
 

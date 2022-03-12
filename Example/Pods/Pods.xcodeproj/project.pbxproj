@@ -76,7 +76,7 @@
 		79080A4BC32E7B0B9B360DB338D0F345 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A58EDF9003AE3AA9879270D7E52764 /* CGRect.swift */; };
 		7B29FC02B53215ACBB445637D2881487 /* NXKVOObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E353A7214E16447CE56E09540963F4 /* NXKVOObserver.swift */; };
 		80819E70F8664856BB2C83D13E08523C /* NXLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17909809B5ECD7CAC46246FAAE1A550C /* NXLabel.swift */; };
-		89CE81833283AB09A506CAD233BFC27A /* NXResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3550D537DDCDE6728DAA43ABD1C49B /* NXResize.swift */; };
+		89CE81833283AB09A506CAD233BFC27A /* NXClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3550D537DDCDE6728DAA43ABD1C49B /* NXClip.swift */; };
 		8D8A1D2CBB8305C11C341714963C11DB /* NXObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93E42DF01BC4097C4A8078F9C82D430 /* NXObserver.swift */; };
 		8EF046AE2C7FDE6E015FBFCA23205D80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */; };
 		8F080B67BE669ED20FA499F35FE2CE40 /* NXTableReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3FCF2A1E92A87A7B7A9EAA630A42C3 /* NXTableReusableView.swift */; };
@@ -177,7 +177,7 @@
 		17909809B5ECD7CAC46246FAAE1A550C /* NXLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXLabel.swift; path = NXKit/Classes/Foundation/NXLabel.swift; sourceTree = "<group>"; };
 		18208026CD6978D23B92764EBA9CF3FA /* ItemControllerDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ItemControllerDelegate.swift; path = ImageViewer/Source/ItemControllerDelegate.swift; sourceTree = "<group>"; };
 		1C3E5C833EC544E5A111F2DFD475FD3B /* NXCollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXCollectionView.swift; path = NXKit/Classes/Foundation/NXCollectionView.swift; sourceTree = "<group>"; };
-		1D5C6A8144B46736945B2658CE837A71 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		1D5C6A8144B46736945B2658CE837A71 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		1E00A4B8221CD300383C8F821FBE1CED /* UIView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIView.swift; path = ImageViewer/Source/Extensions/UIView.swift; sourceTree = "<group>"; };
 		1E650482BBB970B9C3E4D1C3DCBAB26B /* NXView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXView.swift; path = NXKit/Classes/Foundation/NXView.swift; sourceTree = "<group>"; };
 		2060EB18B97BB7A27ACFE4C9512E7006 /* NXKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "NXKit-Info.plist"; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 		3927266784ECE276D3C7D273B4ABF7F1 /* NXApplicationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXApplicationView.swift; path = NXKit/Classes/Foundation/NXApplicationView.swift; sourceTree = "<group>"; };
 		3AD39005E6E96CC039E4452F0336164D /* NXNavigationController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXNavigationController.swift; path = NXKit/Classes/Foundation/NXNavigationController.swift; sourceTree = "<group>"; };
 		3B289EB58D7B419D8DCF304D2999CCD9 /* NXKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NXKit-prefix.pch"; sourceTree = "<group>"; };
-		3B2A1F21921992B015E84C2D1B165E18 /* NXKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = NXKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		3B2A1F21921992B015E84C2D1B165E18 /* NXKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = NXKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		3D71255D3004DA60959C1EBE4D80CAA6 /* NXLCRView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXLCRView.swift; path = NXKit/Classes/Foundation/NXLCRView.swift; sourceTree = "<group>"; };
 		3F367138DC047EB1CBF8BA009FFA07DB /* NXCameraCaptureController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXCameraCaptureController.swift; path = NXKit/Classes/Extensions/NXCameraCaptureController.swift; sourceTree = "<group>"; };
 		3FC0FE7FC70EF95CFF5BEE52C052218D /* ImageViewer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ImageViewer-prefix.pch"; sourceTree = "<group>"; };
@@ -224,7 +224,7 @@
 		53B1D16393DF320F4A44E0989AF3D6C5 /* UIColor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = ImageViewer/Source/Extensions/UIColor.swift; sourceTree = "<group>"; };
 		54302B2434A86492921BB48A23C3B564 /* NXAlbum.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXAlbum.swift; path = NXKit/Classes/Extensions/NXAlbum.swift; sourceTree = "<group>"; };
 		5440B40E69CE90ACF6D459D400FE6ED7 /* Pods-NXKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NXKit_Example.release.xcconfig"; sourceTree = "<group>"; };
-		560DF0A6E407235A9DC8553F0E70ADEB /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		560DF0A6E407235A9DC8553F0E70ADEB /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5D18A3CC976C360FD59633E819F085FB /* NXKeyboardAccessoryView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXKeyboardAccessoryView.swift; path = NXKit/Classes/Foundation/NXKeyboardAccessoryView.swift; sourceTree = "<group>"; };
 		5E963136C2B5922492186E3DB4CB917A /* NXStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXStorage.swift; path = NXKit/Classes/Foundation/NXStorage.swift; sourceTree = "<group>"; };
 		5F69386CF41B131FB792226AAC642EE0 /* NXKit */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = NXKit; path = NXKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -263,7 +263,7 @@
 		98945AAC4B7427A3E6B5EE4D0868D3A7 /* NXTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXTextField.swift; path = NXKit/Classes/Foundation/NXTextField.swift; sourceTree = "<group>"; };
 		9C4EA7C007D8ACED336291B4D3D3B472 /* ItemBaseController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ItemBaseController.swift; path = ImageViewer/Source/ItemBaseController.swift; sourceTree = "<group>"; };
 		9D10136AC8C50181D3DE68D4C49B8C22 /* NXNaviView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXNaviView.swift; path = NXKit/Classes/Foundation/NXNaviView.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A014064C758188BD1523941C2A0BD522 /* NXToolView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXToolView.swift; path = NXKit/Classes/Foundation/NXToolView.swift; sourceTree = "<group>"; };
 		A02B159968FA83C3E6084E739CA6E0EC /* NXTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXTableView.swift; path = NXKit/Classes/Foundation/NXTableView.swift; sourceTree = "<group>"; };
 		A35AF2471EF9E8B6D130A5B9BA60B584 /* NXRuntime.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXRuntime.swift; path = NXKit/Classes/Foundation/NXRuntime.swift; sourceTree = "<group>"; };
@@ -271,7 +271,7 @@
 		A4A58EDF9003AE3AA9879270D7E52764 /* CGRect.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CGRect.swift; path = ImageViewer/Source/Extensions/CGRect.swift; sourceTree = "<group>"; };
 		A638CE43D53C7B6759AEA1CF127489DD /* NX+.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NX+.swift"; path = "NXKit/Classes/Foundation/NX+.swift"; sourceTree = "<group>"; };
 		AA7E5E1C5CC2D61B45B1E536AE161446 /* ThumbnailCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThumbnailCell.swift; path = "ImageViewer/Source/Thumbnails Controller/ThumbnailCell.swift"; sourceTree = "<group>"; };
-		AB3550D537DDCDE6728DAA43ABD1C49B /* NXResize.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXResize.swift; path = NXKit/Classes/Foundation/NXResize.swift; sourceTree = "<group>"; };
+		AB3550D537DDCDE6728DAA43ABD1C49B /* NXClip.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXClip.swift; path = NXKit/Classes/Foundation/NXClip.swift; sourceTree = "<group>"; };
 		ABA7C2DD85A648F6005356FADF08B555 /* GalleryConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GalleryConfiguration.swift; path = ImageViewer/Source/GalleryConfiguration.swift; sourceTree = "<group>"; };
 		AC5140ECA81F76835F5C645FB4AE7BE0 /* LayoutEnums.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutEnums.swift; path = ImageViewer/Source/LayoutEnums.swift; sourceTree = "<group>"; };
 		B551D9C475AE3C4D1D56C414F18D61D3 /* UIScreen.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIScreen.swift; path = ImageViewer/Source/Extensions/UIScreen.swift; sourceTree = "<group>"; };
@@ -478,7 +478,6 @@
 				B7688D67EBFE97B8BBC64EA57DB3564D /* VideoViewController.swift */,
 				130DEA2AE3BFD60BD1CBB4E2F8105D0E /* Support Files */,
 			);
-			name = ImageViewer;
 			path = ImageViewer;
 			sourceTree = "<group>";
 		};
@@ -515,6 +514,7 @@
 				75042A0829F95213D6DE1A75B5856915 /* NXAutoresizeView.swift */,
 				2A22FB50FEC56C487D6DB915CBF46510 /* NXBackgroundView.swift */,
 				2E0A9232214F13E93775089CA0CD0F45 /* NXButton.swift */,
+				AB3550D537DDCDE6728DAA43ABD1C49B /* NXClip.swift */,
 				833FD6D550B3C2749FAE52CD85C58BC2 /* NXCollectionReusableView.swift */,
 				1C3E5C833EC544E5A111F2DFD475FD3B /* NXCollectionView.swift */,
 				2F184167EC707CAEE382CB7DA389005A /* NXCollectionViewCell.swift */,
@@ -545,7 +545,6 @@
 				04209304166211D57E6CEFD8203A174B /* NXOverlay.swift */,
 				9213B8990DDA2EA923AC99DF07FCE510 /* NXPlaceholderView.swift */,
 				67BEDEA4E2262FC86CC8C8B59F687741 /* NXRequest.swift */,
-				AB3550D537DDCDE6728DAA43ABD1C49B /* NXResize.swift */,
 				8CF8D9C99AA3F403912553DCFF368607 /* NXRouter.swift */,
 				A35AF2471EF9E8B6D130A5B9BA60B584 /* NXRuntime.swift */,
 				EFE3246D9EE3508CFA7A4D13E03F84C2 /* NXSerialization.swift */,
@@ -916,7 +915,7 @@
 				B7FFF6B805308996D161F9F6420A6838 /* NXOverlay.swift in Sources */,
 				54B997F7DF9AB583E236CBD501777F56 /* NXPlaceholderView.swift in Sources */,
 				452DDB362FDAC9D2A3540386A038F0B1 /* NXRequest.swift in Sources */,
-				89CE81833283AB09A506CAD233BFC27A /* NXResize.swift in Sources */,
+				89CE81833283AB09A506CAD233BFC27A /* NXClip.swift in Sources */,
 				AFEBAFC8901A9BF65763255564A56998 /* NXRouter.swift in Sources */,
 				B2183F4D196FA73658416B6492DF792E /* NXRuntime.swift in Sources */,
 				2C3CBE959EBE5342435D19B9E29F27A1 /* NXSerialization.swift in Sources */,
@@ -1217,8 +1216,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};

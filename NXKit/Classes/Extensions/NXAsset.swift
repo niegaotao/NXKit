@@ -44,14 +44,14 @@ open class NXAsset: NXAny {
             self.filename = NX.get(string: __asset.value(forKey: "filename") as? String, "")
             
             if __asset.mediaType == .video {
-                let __filename = self.filename.lowercased()
                 if suffixes.count > 0 {
+                    let __filename = self.filename.lowercased()
                     self.isSelectable = suffixes.contains { (suffix) -> Bool in
                         return __filename.hasSuffix(suffix)
                     }
                 }
                 else {
-                    self.isSelectable = __filename.hasSuffix(".mp4")
+                    self.isSelectable = true
                 }
             }
             else if __asset.mediaType == .image {
@@ -118,7 +118,7 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
         }
         else{
             PHCachingImageManager.default().requestImage(for: phasset,
-                                                            targetSize: CGSize(width: NXUI.width, height: NXUI.width),
+                                                            targetSize: NXAsset.Wrapped.size,
                                                          contentMode: .aspectFill,
                                                          options: nil) {[weak self](image, info) in
                                                             asset.thumbnail = image
@@ -171,80 +171,6 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
     }
 }
 
-
-extension NXAsset {
-    
-    open class Request {
-        open var size = CGSize.zero
-        open var iCloud = false
-        public init(){}
-    }
-    
-    open func startRequest(_ request:NXAsset.Request, _ completion:@escaping NX.Completion<Bool, Any?>){
-        if self.completion == nil {
-            self.value.removeAll()
-        }
-        self.completion = completion
-        
-        guard let __asset =  self.asset else {
-            self.completion?(false, nil)
-            return
-        }
-        
-        NXAsset.requestImageData(__asset, request.iCloud, request.size, nil) {[weak self] (isDegraded, image) in
-            
-            //如果返回的是有效的图片，则先保存好图片
-            if let __image = image, __image.size.width > 0 && __image.size.height > 0 {
-                var images = self?.value["images"] as? [UIImage] ?? []
-                images.append(__image)
-                self?.value["images"] = images
-            }
-            
-            if request.iCloud {
-                //这次请求的就是iCloud上的大图
-                self?.stopRequest()
-            }
-            else {
-                //返回的是本地的大图或者缩略图
-                let isRequesting = NX.get(bool: self?.value["isRequesting"] as? Bool, false)
-                if isRequesting {
-                    return
-                }
-                
-                let __size = image?.size ?? CGSize.zero
-                let __scale = image?.scale ?? 1.0
-                
-                if isDegraded || __size.width * __size.height * __scale * __scale <= (request.size.width - 10) * (request.size.height - 10) {
-                    self?.value["isRequesting"] = true
-                    
-                    NXAsset.requestImageData(__asset, true, request.size, nil) {[weak self] (__isDegraded, __image) in
-                        
-                        if let ____image = __image, ____image.size.width > 0 && ____image.size.height > 0 {
-                            var images = self?.value["images"] as? [UIImage] ?? []
-                            images.append(____image)
-                            self?.value["images"] = images
-                        }
-                        
-                        self?.stopRequest()
-                    }
-                }
-                else {
-                    self?.stopRequest()
-                }
-            }
-        }
-    }
-
-    open func stopRequest(){
-        let image = (self.value["images"] as? [UIImage])?.last
-        if let __completion = self.completion {
-            __completion(true, image)
-            self.completion = nil
-        }
-        self.value.removeAll()
-    }
-}
-
 extension NXAsset {
     //选择的记录
     open class Preset : NXAny {
@@ -292,41 +218,20 @@ extension NXAsset {
         
         //图片相关，导出封面图相关
         open var isMixable = false
-        open var clips = [NXAsset.Clip]()//具体的宽高比例
+        open var clips = [NXClip]()//具体的宽高比例
         open var duration : TimeInterval = 0.0//最大视频时长，0表示无限制
         open var resize = CGSize(width: 1920, height: 1920)//导出尺寸
-        open var resizeBy = NXResize.side//导出size计算方法
+        open var resizeBy = NXClip.side//导出size计算方法
         open var isOutputable = true //是否需要导出UIImage
         open var isOutputting  = false //是否正在导出UIImage
-    }
-    
-    open class Clip : NXAny {
-        open var name = "1:1"
-        open var isResizable = false
-        open var width : CGFloat = 1.0
-        open var height : CGFloat = 1.0
-        open var isHidden = false
-        
-        public override init() {
-            super.init()
-        }
-        
-        convenience public init(name:String, isResizable:Bool, width:CGFloat, height:CGFloat, isHidden:Bool) {
-            self.init()
-            self.name = name
-            self.isResizable = isResizable
-            self.width = width
-            self.height = height
-            self.isHidden = isHidden
-        }
     }
     
     open class Wrapped : Output {
         //创建相册信号量
         public static var semaphore = DispatchSemaphore(value: 1)
-        //是否优先请求全高清图像
-        public static var iCloud = true
-        //容器视图
+        //缩略图尺寸
+        public static var size = CGSize(width: Int(NXUI.width/4.0 * CGFloat(UIScreen.main.scale)), height: Int(NXUI.width/4.0 * CGFloat(UIScreen.main.scale)))
+
         //支持展示的媒体类型
         open var mediaType = PHAssetMediaType.unknown
         //本次已经选择的资源
@@ -385,6 +290,7 @@ extension NXAsset {
 
 
 extension NXAsset {
+    //打开相册
     open class func album(open: NX.Completion<Bool, NXAlbumViewController>?,
                           completion: NX.Completion<Bool, NXAsset.Output>?) {
         NX.authorization(NX.Authorize.album, DispatchQueue.main, true, { state in
@@ -414,6 +320,7 @@ extension NXAsset {
         })
     }
     
+    //打开相机
     open class func camera(open:NX.Completion<Bool, NXCameraViewController>?,
                          completion:NX.Completion<Bool, NXAsset.Output>?) {
         NX.authorization(NX.Authorize.camera, DispatchQueue.main, true, {(state) in
@@ -434,10 +341,12 @@ extension NXAsset {
             open?(true, __wrapped)
         })
     }
-    
-    
+}
+
+
+extension NXAsset {
     //这个地方存在同时创建多个同名相册的情况:采用信号量的方案来解决
-    open class func fetchAlbum(name: String, queue:DispatchQueue, isCreated:Bool, completion:@escaping ((_ album:PHAssetCollection?) -> ())){
+    open class func fetchCollection(name: String, queue:DispatchQueue, autocreate:Bool, completion:@escaping ((_ album:PHAssetCollection?) -> ())){
         if name.count == 0 {
             //指定的相册名称为空，则保存到相机胶卷
             let albums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
@@ -469,7 +378,7 @@ extension NXAsset {
             }
             else{
                 //不存在的话
-                if isCreated {
+                if autocreate {
                     //不存在的话则创建该相册
                     PHPhotoLibrary.shared().performChanges({
                         PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: name)
@@ -503,7 +412,7 @@ extension NXAsset {
         }
     }
     
-    //5.保存图片到相册
+    //保存图片到相册
     open class func saveImage(image: UIImage, name: String = NX.name, queue:DispatchQueue = DispatchQueue.main, completion: ((_ isCompleted: Bool, _ asset:PHAsset?) -> ())?) {
         NXAsset.save(assets: [image], name: name, queue:queue, completion:{ (state, assets) in
             completion?(state, assets.first)
@@ -529,7 +438,7 @@ extension NXAsset {
             }
             
             //获取目标相册
-            NXAsset.fetchAlbum(name:name, queue:queue, isCreated:true, completion: { (album) in
+            NXAsset.fetchCollection(name:name, queue:queue, autocreate:true, completion: { (album) in
                 
                 guard let album = album else {
                     queue.async {
@@ -587,41 +496,33 @@ extension NXAsset {
 
 extension NXAsset {
     //获取所有的相册列表
-    public class func outputAlbums(_ wrapped: NXAsset.Wrapped, completion: ((_ outputAlbums:[NXAlbum]) -> ())?) {
+    public class func outputAlbums(_ wrapped: NXAsset.Wrapped, completion: NX.Completion<Bool, [NXAlbum]>?) {
         
         var accessAlbums = [NXAlbum]()
         
         let options = PHFetchOptions()
-        //resultsOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate",ascending: true)]
+        //options.sortDescriptors = [NSSortDescriptor(key: "creationDate",ascending: true)]
         if wrapped.mediaType != .unknown {
             //当外部传入了具体类型(.image, .auduo, .video)的时候做过滤操作
             options.predicate = NSPredicate(format: "mediaType = %d", wrapped.mediaType.rawValue)
         }
         
-        //用户自己创建的相册
+        //用户自己创建的相册：美颜相机，QQ空间、百度网盘、Alciade、微博、重要文件、抖音、QQ、今日头条、拼图大师、NXKit-Example、简书
         let __albums = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
-        //系统创建的相册
+        //系统创建的相册：最近项目、个人收藏、视频、自拍、实况照片、人像、长曝光、全景照片、延时摄影、慢动作、连拍快照、截屏、动图、RAW、已隐藏、无法上传
         let __smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
         
-        var contains = [PHAssetCollection]()
         if let fetchResults = [__albums, __smartAlbums] as? [PHFetchResult<AnyObject>] {
             for fetchResult in fetchResults {
-                
                 for index in 0 ..< fetchResult.count {
                     
                     //有可能是PHCollectionList的对象，过滤掉
                     guard let collection  = fetchResult[index] as? PHAssetCollection else {continue}
-                    
-                    //最近删除：过滤掉
-                    if collection.localizedTitle == "Deleted" || collection.localizedTitle == "最近删除" {continue}
-                    //已经导入：过滤掉
-                    if contains.contains(collection) {continue}
-                    
+                               
                     //无照片相册,过滤掉
                     if let fetchResult = (PHAsset.fetchAssets(in: collection, options: options) as? PHFetchResult<AnyObject>), fetchResult.count > 0 {
                         
-                        contains.append(collection)
-                        let album = NXAlbum(title: collection.localizedTitle ?? "", fetchResults: [fetchResult], wrapped:wrapped)
+                        let album = NXAlbum(title: collection.localizedTitle ?? "相册", fetchResult: fetchResult, wrapped:wrapped)
                         if album.assets.count > 0 {
                             accessAlbums.append(album)
                         }
@@ -654,7 +555,7 @@ extension NXAsset {
             }
         }
         
-        completion?(accessAlbums)
+        completion?(true, accessAlbums)
     }
     
     public class  func outputAssets(_ assets:[NXAsset], _ wrapped: NXAsset.Wrapped, completion:NX.Completion<Bool, [NXAsset]>?){
@@ -665,24 +566,36 @@ extension NXAsset {
             return outputAsset
         }
         
+        var animationView : NXHUD.WrappedView? = nil
         DispatchQueue.main.async {
-            NX.showLoading("")
+            animationView = NX.showLoading("正在加载图片...")
         }
         
         DispatchQueue.global().async {
             let group = DispatchGroup()
-            let semaphore = DispatchSemaphore(value: 3)
+            let semaphore = DispatchSemaphore(value: 1)
             
             for __outputAsset in outputAssets {
                 group.enter()
                 semaphore.wait()
                 
                 if let __phasset = __outputAsset.asset {
-                    let request = NXAsset.Request()
-                    request.size = NXResize.resize(by: wrapped.resizeBy, CGSize(width: __phasset.pixelWidth, height: __phasset.pixelHeight), wrapped.resize, true)
-                    request.iCloud = NXAsset.Wrapped.iCloud
-                    __outputAsset.startRequest(request, { (isCompleted, image) in
-                        if let __image = image as? UIImage {
+                    let size = NXClip.resize(by: wrapped.resizeBy, CGSize(width: __phasset.pixelWidth, height: __phasset.pixelHeight), wrapped.resize, true)
+                    NXAsset.requestImage(__phasset,
+                                           true,
+                                           size,
+                                           progress:{value, _ in
+                        if value >= 1 {
+                            animationView?.ctxs.message = "正在加载图片..."
+                            animationView?.updateSubviews("", nil)
+                        }
+                        else {
+                            animationView?.ctxs.message = "正在从iCloud加载图片,\(Int(value*100))%..."
+                            animationView?.updateSubviews("", nil)
+                        }
+                    },
+                                           completion:{ action, value in
+                        if let __image = value {
                             __outputAsset.image = __image
                         }
                         else if let thumbnail = __outputAsset.thumbnail {
@@ -702,74 +615,117 @@ extension NXAsset {
             }
             
             group.notify(queue: DispatchQueue.main, execute: {
-                NX.hideLoading(superview: UIApplication.shared.keyWindow)
+                NX.hideLoading(animationView)
                 completion?(true, outputAssets)
             })
         }
     }
     
+    //PHImageFileOrientationKey:0, int
+    //PHImageResultIsDegradedKey:0, bool
+    //PHImageResultRequestIDKey:48,int
+    //PHImageFileUTIKey:public.png, string
+    
     
     @discardableResult
-    open class func requestImageData(_ asset: PHAsset, _ isNetworkAccessAllowed:Bool, _ size:CGSize,  _ options:PHImageRequestOptions?, _ completion:NX.Completion<Bool, UIImage?>?) -> PHImageRequestID {
-        if isNetworkAccessAllowed {
-            var __options : PHImageRequestOptions? = options
-            if __options == nil {
-                __options = PHImageRequestOptions()
-                __options?.isNetworkAccessAllowed = true
-                if let filename = asset.value(forKey: "filename") as? String, filename.contains("GIF") {
-                    __options?.version = .original
-                }
-                __options?.deliveryMode = .highQualityFormat
-                __options?.progressHandler = {(progress, error, stop, info) in
-                    NX.log{return "inCloud progressValue=\(progress)"}
+    open class func requestImage(_ asset: PHAsset, _ isNetworkAccessAllowed:Bool, _ size:CGSize, progress:NX.Completion<Double, Any?>?, completion:NX.Completion<Bool, UIImage?>?) -> PHImageRequestID {
+        var isReturnedOrRequestingiCloud = false
+        let unaccess = PHImageRequestOptions()
+        unaccess.resizeMode = .fast
+        unaccess.isNetworkAccessAllowed = false
+        return PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: unaccess) {(result, info) in
+            
+            if NX.isLoggable, var info = info {
+                info["image"] = result
+                NX.log{return info}
+            }
+            let dicValue = info as? [String:Any] ?? [:]
+            let isInCloud = NX.get(bool: dicValue["PHImageResultIsInCloudKey"] as? Bool, false)
+            let isDegraded = NX.get(bool: dicValue["PHImageResultIsDegradedKey"] as? Bool, false)
+            let isCancelled = NX.get(bool: dicValue["PHImageCancelledKey"] as? Bool, false)
+            if isCancelled {return}
+            
+            if isDegraded {
+                if isInCloud && isNetworkAccessAllowed {
+                    //只要已回调过或者已开启iCloud下载，这里的iCloud下载流程终止
+                    if isReturnedOrRequestingiCloud == true { return }
+                    isReturnedOrRequestingiCloud = true
+                    
+                    NXAsset.requestImageData(asset, progress: progress) { action, value in
+                        if let __data = value, let image = UIImage(data: __data) {
+                            let outputImage = NXClip.resize(image, size) ?? image
+                            completion?(true, outputImage)
+                        }
+                        else {
+                            completion?(true, nil)
+                        }
+                    }
                 }
             }
-            
-            return PHImageManager.default().requestImageData(for: asset, options: __options) { (data, dataUTI, orientation, info) in
-                if NX.isLoggable, var info = info {
-                    info.removeValue(forKey: "PHImageFileDataKey")
-                    NX.log{return info}
-                }
+            else {
+                if isReturnedOrRequestingiCloud == true { return }//只要已回调过或者已开启iCloud下载，这里的回调流程终止
+                isReturnedOrRequestingiCloud = true
                 
-                if let __data = data, let image = UIImage(data: __data) {
-                    let outputImage = NXResize.resize(image, size) ?? image
-                    completion?(true, outputImage)
-                }
-                else {
-                    completion?(true, nil)
-                }
-            }
-        }
-        else {
-            var __options : PHImageRequestOptions? = options
-            if __options == nil {
-                __options = PHImageRequestOptions()
-                __options?.resizeMode = .fast
-                __options?.isNetworkAccessAllowed = false
-            }
-            __options?.isNetworkAccessAllowed = false
-            
-            return PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: __options) {(result, info) in
-                if NX.isLoggable, let info = info {
-                    NX.log{return info}
-                }
-                let dicValue = info as? [String:Any] ?? [:]
-                //let isInCloud = NX.get(bool: dicValue["PHImageResultIsInCloudKey"] as? Bool, false)
-                let isDegraded = NX.get(bool: dicValue["PHImageResultIsDegradedKey"] as? Bool, false)
-                completion?(isDegraded, result)
+                completion?(true, result)
             }
         }
     }
     
     @discardableResult
-    open class func requestAVAsset(_ asset: PHAsset, _ options:PHVideoRequestOptions?, _ completion:NX.Completion<Bool, AVAsset?>?) -> PHImageRequestID {
-        var __options : PHVideoRequestOptions? = options
-        if __options == nil {
-            __options = PHVideoRequestOptions()
-            __options?.deliveryMode = .automatic
-            __options?.isNetworkAccessAllowed = true
-            __options?.progressHandler = { (progress, error, stop, info) in
-                NX.log{return "inCloud progressValue=\(progress)"}
+    open class func requestImageData(_ asset: PHAsset, progress:NX.Completion<Double, Any?>?, completion:NX.Completion<Bool, Data?>?) -> PHImageRequestID {
+        let access = PHImageRequestOptions()
+        if let filename = asset.value(forKey: "filename") as? String, filename.contains("GIF") {
+            access.version = .original
+        }
+        access.deliveryMode = .highQualityFormat
+        access.progressHandler = {(value, error, stop, info) in
+            DispatchQueue.main.async {
+                progress?(value, nil)
+            }
+        }
+        access.resizeMode = .fast
+        access.isNetworkAccessAllowed = true
+        if #available(iOS 13, *) {
+            return PHImageManager.default().requestImageDataAndOrientation(for: asset, options: access) { data, dataUTI, orientation, info in
+                
+                var dicValue = info as? [String:Any] ?? [:]
+                let isCancelled = NX.get(bool: dicValue["PHImageCancelledKey"] as? Bool, false)
+                if NX.isLoggable {
+                    dicValue.removeValue(forKey: "PHImageFileDataKey")
+                    NX.log{return dicValue}
+                }
+                
+                if isCancelled == false {
+                    completion?(data != nil, data)
+                }
+            }
+        }
+        else {
+            return PHImageManager.default().requestImageData(for: asset, options: access) { (data, dataUTI, orientation, info) in
+                var dicValue = info as? [String:Any] ?? [:]
+                let isCancelled = NX.get(bool: dicValue["PHImageCancelledKey"] as? Bool, false)
+
+                if NX.isLoggable {
+                    dicValue.removeValue(forKey: "PHImageFileDataKey")
+                    NX.log{return dicValue}
+                }
+                
+                if isCancelled == false {
+                    completion?(data != nil, data)
+                }
+            }
+        }
+    }
+    
+    
+    @discardableResult
+    open class func requestAVAsset(_ asset: PHAsset, progress:NX.Completion<Double, Any?>?, completion:NX.Completion<Bool, AVAsset?>?) -> PHImageRequestID {
+        let __options = PHVideoRequestOptions()
+        __options.deliveryMode = .automatic
+        __options.isNetworkAccessAllowed = true
+        __options.progressHandler = { (value, error, stop, info) in
+            DispatchQueue.main.async {
+                progress?(value, nil)
             }
         }
         return PHImageManager.default().requestAVAsset(forVideo: asset, options: __options) { (avasset, mix, info) in

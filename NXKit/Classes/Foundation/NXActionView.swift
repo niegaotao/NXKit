@@ -372,7 +372,7 @@ open class NXActionViewAttributes: NXOverlayAttributes {
     open var center = NXActionView.Metadata()
     open var footer = NXActionView.Metadata()
     open var devide = CGFloat(6.0) //底部分开的高度，默认是6pt(只有在底部高度>0的时候有效)
-    open var max = NXUI.height * 0.75
+    open var max = NXUI.height * 0.70
     open var isAnimation = true
 }
 
