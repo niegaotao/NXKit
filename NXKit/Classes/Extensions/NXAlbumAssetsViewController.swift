@@ -123,11 +123,14 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
         
         self.collectionView.isHidden = false
         self.collectionView.frame = CGRect(x: 0, y:0 , width: self.contentView.w, height: self.contentView.h - 50 - NXUI.bottomOffset)
-        self.collectionView.ctxs?.minimumLineSpacing = 2
-        self.collectionView.ctxs?.minimumInteritemSpacing = 1
-        self.collectionView.ctxs?.sectionInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        self.collectionView.ctxs?.scrollDirection = .vertical
-        self.collectionView.ctxs?.itemSize = CGSize(width: itemSize, height: itemSize)
+        if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.minimumLineSpacing = 2
+            layout.minimumInteritemSpacing = 1
+            layout.sectionInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+            layout.scrollDirection = .vertical
+            layout.itemSize = CGSize(width: itemSize, height: itemSize)
+        }
+        
         self.collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.collectionView.backgroundColor = NX.backgroundColor
         self.collectionView.delegate = self
@@ -211,7 +214,7 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
             wrapped.isOutputting = true
             NXAsset.outputAssets(assets, self.wrapped, completion:{[weak self] (_, outputs) in
                 self?.wrapped.isOutputting = false
-                NX.previewAssets(type: "NXAsset", assets: outputs)
+                NX.previewAssets(type: "NXAsset", assets: outputs, index: 0)
             })
         }
         else if action == "outputAssets" {

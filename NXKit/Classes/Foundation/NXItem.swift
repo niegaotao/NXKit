@@ -54,18 +54,24 @@ open class NXItem : NXAny {
     }
 }
 
+public protocol NXCollectionViewAttributesProtocol {
+    var attributes : UICollectionViewLayoutAttributes {set get}
+}
+
 //分组基类
 open class NXSection<Value: NXItem> : NXItem {
+    open var header : NXItem? = nil             //头部的色块
     open var items = [Value]()                  //分组下所有的单元格对象
-    open var header = NXItem()                  //头部的分割线
     open var footer: NXItem? = nil              //尾部应该用不到，默认为nil
     
-    //+便利构造函数
-    public convenience init(cls: AnyClass, reuse:String, height: CGFloat) {
-        self.init()
-        self.header.ctxs.update(cls, reuse)
-        self.header.ctxs.height = height
+    public func updateHeader(cls: AnyClass, reuse:String, height: CGFloat){
+        if self.header == nil {
+            self.header = NXItem()
+        }
+        self.header?.ctxs.update(cls, reuse)
+        self.header?.ctxs.height = height
     }
+    
     
     //+便利构造函数
     public convenience init(lineSpacing:CGFloat, interitemSpacing:CGFloat, insets:UIEdgeInsets) {
@@ -191,7 +197,7 @@ extension NXSection {
 }
 
 //三维模型的基类：通用于 UITableView 数据模型和 UICollectionView 数据模型
-open class NXCollection<T:UIScrollView> : NXAny {
+open class NXCollection<T:UIView> : NXAny {
     open weak var wrappedView : T? = nil
     open var sections = [NXSection]()
     
@@ -279,13 +285,13 @@ open class NXCollection<T:UIScrollView> : NXAny {
     }
 }
 
+public enum NXCollectionDequeue : String{
+    case header = "header"
+    case cell = "cell"
+    case footer = "footer"
+}
+
 extension NXCollection {
-    public enum Dequeue : String{
-        case header = "header"
-        case cell = "cell"
-        case footer = "footer"
-    }
-    
     //UITableView 获取element/cell
     public func dequeue(_ tableView: UITableView?, _ indexPath : IndexPath) -> (element: NXItem, cell:NXTableViewCell)? {
         guard let __tableView = tableView, indexPath.section >= 0 && indexPath.section < self.sections.count else {
@@ -296,12 +302,12 @@ extension NXCollection {
     }
     
     //UITableView header footer
-    public func dequeue(_ tableView:UITableView?, _ index:Int, _ type:NXCollection.Dequeue.RawValue) -> (element:NXItem, reusableView:NXTableReusableView)?{
+    public func dequeue(_ tableView:UITableView?, _ index:Int, _ type:NXCollectionDequeue.RawValue) -> (element:NXItem, reusableView:NXTableReusableView)?{
         guard let __tableView = tableView, index >= 0 && index < self.sections.count else {
             return nil
         }
-        if type == NXCollection.Dequeue.header.rawValue {
-            let header = self.sections[index].header
+        if type == NXCollectionDequeue.header.rawValue {
+            guard let header = self.sections[index].header else {return nil}
             guard header.ctxs.cls != nil && header.ctxs.reuse.count > 0 else {
                 return nil
             }
@@ -309,10 +315,8 @@ extension NXCollection {
                 return (header, reusableView)
             }
         }
-        else if type == NXCollection.Dequeue.footer.rawValue {
-            guard let footer = self.sections[index].footer else {
-                return nil
-            }
+        else if type == NXCollectionDequeue.footer.rawValue {
+            guard let footer = self.sections[index].footer else { return nil}
             guard footer.ctxs.cls != nil && footer.ctxs.reuse.count > 0 else {
                 return nil
             }
@@ -334,12 +338,12 @@ extension NXCollection {
     }
     
     //UICollectionView 获取header footer
-    public func dequeue(_ collectionView: UICollectionView?, _ indexPath:IndexPath, _ type:NXCollection.Dequeue.RawValue) -> (elelment:NXItem, reusableView:NXCollectionReusableView)? {
+    public func dequeue(_ collectionView: UICollectionView?, _ indexPath:IndexPath, _ type:NXCollectionDequeue.RawValue) -> (elelment:NXItem, reusableView:NXCollectionReusableView)? {
         guard let __collectionView = collectionView, indexPath.section >= 0 && indexPath.section < self.sections.count else {
             return nil
         }
-        if type == NXCollection.Dequeue.header.rawValue {
-            let element = self.sections[indexPath.section].header
+        if type == NXCollectionDequeue.header.rawValue {
+            guard let element = self.sections[indexPath.section].header else {return nil}
             guard element.ctxs.cls != nil && element.ctxs.reuse.count > 0 else {
                 return nil
             }
@@ -347,7 +351,7 @@ extension NXCollection {
                 return (element, reusableView)
             }
         }
-        else if type == NXCollection.Dequeue.footer.rawValue {
+        else if type == NXCollectionDequeue.footer.rawValue {
             guard let element = self.sections[indexPath.section].footer else {
                 return nil
             }
@@ -415,7 +419,8 @@ extension NXCollection {
     //新增一个分组,并将新增的分组返回//_ cls: AnyClass = NXTableReusableView.self, _ reuse:String = "NXTableReusableView", _ h:CGFloat = 10.0
     @discardableResult
     open func addSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection<NXItem> {
-        let section = NXSection(cls:cls, reuse:reuse, height: height)
+        let section = NXSection()
+        section.updateHeader(cls:cls, reuse:reuse, height: height)
         self.append(section)
         return section
     }

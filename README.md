@@ -7,16 +7,19 @@
 
 ##一、功能介绍
 根据功能分为基础部分、扩展部分共两个部分：
+
 ###1、基础部分
+
 #####1.1.基础结构
 - `NX`：全局变量和全局方法，多用于配置主题风格等
 - `NX+`：封装跟`UIView`、`UILabel`、`UIImageView`、`CALayer`对等的模型。
 - `NXAny`：遵守`Equatable`协议的类类型的基类
 - `NXUI`：设备、屏幕等信息
 - `NXItem`：渲染`UITableView`、`UICollectionView`的单元格的模型基类。
-- `NXTableWrapper`：封装`UITableView`数据
-- `NXCollectionWrapper`：封装`UICollectionView`数据
+- `NXTableViewData`：封装`UITableView`数据
+- `NXCollectionViewData`：封装`UICollectionView`数据
 - `NXAction`：：封装通用表单单元格的数据模型
+
 #####1.2.基础UI
 - `NXView`：`setupSubviews`、`updateSubviews`方法用于初始化视图和刷新视图
 - `NXCView<C:UIView>`：包含`C`类型的`contentView`内容视图属性
@@ -40,6 +43,7 @@
 - `NXCollectionSubviewCell<T:UIView>`
 - `NXApplicationViewCell`
 - `NXActionViewCell`
+
 #####1.3.控制器
 - `NXViewController`：视图控制器基本，包含导航栏、内容视图、加载动画等功能
 - `NXTableViewController`：`NXTableView`视图控制器
@@ -49,10 +53,12 @@
 - `NXContainerController`：容器控制器
 - `NXToolViewController`：仿系统`UITabBarController`
 - `NXSwipeViewController`：仿系统`UIPageViewController`
+
 #####1.4.弹框
 - `NXOverlay`
 - `NXActionView`：仿系统`UIAlertController`
 - `NXHUD`：弱提示
+
 #####1.5.扩展
 - `DispatchQueue+NXKit`
 - `String+NXKit`
@@ -60,6 +66,7 @@
 - `UIImage+NXKit`
 - `UILabel+NXKit`
 - `UIView+NXKit`
+
 #####1.6.服务
 - `NXObserver`：应用内通知
 - `NXKVOObserver`：`KVO`封装
@@ -67,6 +74,7 @@
 - `NXFS`：本地文件的读写
 - `NXRouter`：路由管理器
 - `NXRequest`：基于网络请求的封装
+
 #####1.7.资源文件
 - `NXKit.bundle`：包含图片资源和json文件
 

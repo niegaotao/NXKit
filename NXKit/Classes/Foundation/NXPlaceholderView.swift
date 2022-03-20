@@ -10,7 +10,7 @@ import UIKit
 
 
 open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>> {
-    public let ctxs = NXPlaceholderView.Wrapped()
+    public let ctxs = NXPlaceholderWrapped()
     
     open var assetView : UIImageView { return self.contentView.lhsView }
     open var descriptionView : UILabel { return self.contentView.centerView }
@@ -84,52 +84,54 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
     }
 }
 
-extension NXPlaceholderView {
-    open class Wrapped : NSObject {
-        open var isHidden = true
-        open var completion : NX.Completion<String, Any?>? = nil
-        open var frame = NX.Placeholder.frame
-    }
+open class NXPlaceholderWrapped : NSObject {
+    open var isHidden = true
+    open var completion : NX.Completion<String, Any?>? = nil
+    open var frame = NX.Placeholder.frame
     
     open class Element : NXItem {
         open var placeholderView: NXPlaceholderView?
     }
-    
-    
-    open class TableViewCell : NXTableViewCell {
-        override open func setupSubviews() {
-            super.setupSubviews()
-            selectionStyle = .none
-            accessoryType = .none
-            self.arrowView.isHidden = true
-        }
-        
-        override open func updateSubviews(_ action:String, _ value: Any?) {
-            guard let item = value as? NXPlaceholderView.Element, let placeholderView = item.placeholderView  else {
-                return;
-            }
-            placeholderView.frame = CGRect(x: 0, y: 0, width: item.ctxs.width, height: item.ctxs.height)
-            placeholderView.updateSubviews(action, value)
-            self.backgroundView?.backgroundColor = placeholderView.backgroundColor
-            self.contentView.addSubview(placeholderView)
-        }
+}
+
+open class NXPlaceholderElement : NXItem {
+    open var placeholderView: NXPlaceholderView?
+}
+
+
+open class NXTablePlaceholderViewCell : NXTableViewCell {
+    override open func setupSubviews() {
+        super.setupSubviews()
+        selectionStyle = .none
+        accessoryType = .none
+        self.arrowView.isHidden = true
     }
     
-    open class CollectionViewCell : NXCollectionViewCell {
-        override open func setupSubviews() {
-            super.setupSubviews()
+    override open func updateSubviews(_ action:String, _ value: Any?) {
+        guard let item = value as? NXPlaceholderElement, let placeholderView = item.placeholderView  else {
+            return;
+        }
+        placeholderView.frame = CGRect(x: 0, y: 0, width: item.ctxs.width, height: item.ctxs.height)
+        placeholderView.updateSubviews(action, value)
+        self.backgroundView?.backgroundColor = placeholderView.backgroundColor
+        self.contentView.addSubview(placeholderView)
+    }
+}
+
+open class NXCollectionPlaceholderViewCell : NXCollectionViewCell {
+    override open func setupSubviews() {
+        super.setupSubviews()
+    }
+    
+    override open func updateSubviews(_ action:String, _ value: Any?) {
+        guard let item = value as? NXPlaceholderElement, let placeholderView = item.placeholderView  else {
+            return;
         }
         
-        override open func updateSubviews(_ action:String, _ value: Any?) {
-            guard let item = value as? NXPlaceholderView.Element, let placeholderView = item.placeholderView  else {
-                return;
-            }
-            
-            placeholderView.frame = CGRect(x: 0, y: 0, width: item.ctxs.width, height: item.ctxs.height)
-            placeholderView.updateSubviews(action, value)
-            self.backgroundView?.backgroundColor = placeholderView.backgroundColor
-            self.contentView.addSubview(placeholderView)
-        }
+        placeholderView.frame = CGRect(x: 0, y: 0, width: item.ctxs.width, height: item.ctxs.height)
+        placeholderView.updateSubviews(action, value)
+        self.backgroundView?.backgroundColor = placeholderView.backgroundColor
+        self.contentView.addSubview(placeholderView)
     }
 }
 

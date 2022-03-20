@@ -11,7 +11,7 @@ import UIKit
 open class NXCollectionViewController: NXViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     public var collectionView : NXCollectionView? = nil
-    public let collectionWrapper = NXCollectionWrapper()
+    public let wrappedData = NXCollectionViewData()
     
     override open func setup() {
         super.setup()
@@ -28,13 +28,9 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
         self.collectionView?.alwaysBounceVertical = true
-        self.collectionView?.ctxs?.scrollDirection = .vertical
-        self.collectionView?.ctxs?.minimumLineSpacing =  0.0
-        self.collectionView?.ctxs?.minimumInteritemSpacing = 0.0
-        self.collectionView?.ctxs?.sectionInset = UIEdgeInsets.zero
         self.contentView.addSubview(self.collectionView!)
-        self.collectionView?.value = self.collectionWrapper
-        self.collectionWrapper.wrappedView = self.collectionView
+        self.collectionView?.wrappedData = self.wrappedData
+        self.wrappedData.wrappedView = self.collectionView
         if #available(iOS 11.0, *) {
             collectionView?.contentInsetAdjustmentBehavior = .never
         }
@@ -44,15 +40,32 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
     
     ///代理方法数据源方法
     open func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return self.collectionWrapper.count
+        return self.wrappedData.count
     }
     
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.collectionWrapper[section]?.count ?? 0
+        return self.wrappedData[section]?.count ?? 0
+    }
+    
+    open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            if let rs = self.wrappedData.dequeue(collectionView, indexPath, NXCollectionDequeue.header.rawValue) {
+                rs.reusableView.updateSubviews("update", rs.elelment)
+                return rs.reusableView
+            }
+            //
+        }
+        else if kind == UICollectionView.elementKindSectionFooter {
+            if let rs = self.wrappedData.dequeue(collectionView, indexPath, NXCollectionDequeue.footer.rawValue) {
+                rs.reusableView.updateSubviews("update", rs.elelment)
+                return rs.reusableView
+            }
+        }
+        return UICollectionReusableView()
     }
     
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let rs = self.collectionWrapper.dequeue(collectionView, indexPath) {
+        if let rs = self.wrappedData.dequeue(collectionView, indexPath) {
             rs.cell.updateSubviews("update", rs.element)
             return rs.cell
         }
@@ -60,19 +73,27 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
-        return self.collectionWrapper[section]?.insets ?? UIEdgeInsets.zero
+        return self.wrappedData[section]?.insets ?? UIEdgeInsets.zero
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat{
-        return self.collectionWrapper[section]?.lineSpacing ?? 0.0
+        return self.wrappedData[section]?.lineSpacing ?? 0.0
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat{
-        return self.collectionWrapper[section]?.interitemSpacing ?? 0.0
+        return self.wrappedData[section]?.interitemSpacing ?? 0.0
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return self.collectionWrapper[indexPath]?.ctxs.size ?? CGSize(width: 1, height: 1)
+        return self.wrappedData[indexPath]?.ctxs.size ?? CGSize(width: 1, height: 1)
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return self.wrappedData[section]?.header?.ctxs.size ?? CGSize.zero
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return self.wrappedData[section]?.footer?.ctxs.size ?? CGSize.zero
     }
     
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

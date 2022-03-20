@@ -453,7 +453,7 @@ extension NX {
     
     public class Imp {
         //处理图片浏览
-        static public var previewAssets:((_ type:String, _ assets:[Any]) -> ())?
+        static public var previewAssets:((_ type:String, _ assets:[Any], _ index:Int) -> ())?
         
         //设置url
         static public var image : ((_ targetView: UIView?, _ url:String, _ state:UIControl.State) -> ())?
@@ -500,8 +500,8 @@ extension NX {
     }
     
     //处理图片浏览
-    class public func previewAssets(type:String, assets:[Any]){
-        NX.Imp.previewAssets?(type, assets)
+    class public func previewAssets(type:String, assets:[Any], index:Int){
+        NX.Imp.previewAssets?(type, assets, index)
     }
     
     //设置图像
@@ -555,6 +555,7 @@ extension NX {
     }
     
     //toast
+    @discardableResult
     class public func showToast(message:String, _ ats:NX.Ats = .center, _ superview:UIView? = UIApplication.shared.keyWindow) -> NXHUD.WrappedView? {
         if let handler = NX.Imp.showToast {
             return handler(message, ats, superview)
@@ -565,6 +566,7 @@ extension NX {
     }
     
     //处理loading
+    @discardableResult
     class public func showLoading(_ message:String, _ ats:NX.Ats = .center, _ superview:UIView? = UIApplication.shared.keyWindow) -> NXHUD.WrappedView?{
         if let handler = NX.Imp.showLoading {
             return handler(message, ats, superview)

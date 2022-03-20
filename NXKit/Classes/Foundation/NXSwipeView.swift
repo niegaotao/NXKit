@@ -17,7 +17,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         
         self.ctxs.insets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         
-        contentView.ctxs?.scrollDirection = .horizontal
+        (contentView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
         contentView.frame = self.bounds
         contentView.backgroundColor = NX.backgroundColor
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

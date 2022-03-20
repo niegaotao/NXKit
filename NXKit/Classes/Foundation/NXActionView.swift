@@ -587,10 +587,12 @@ extension NXActionView {
             super.setupSubviews()
             
             self.contentView.frame = self.bounds
-            self.contentView.ctxs?.minimumLineSpacing = 0.0
-            self.contentView.ctxs?.minimumInteritemSpacing = 0.0
-            self.contentView.ctxs?.scrollDirection = .vertical
-            self.contentView.ctxs?.sectionInset = UIEdgeInsets.zero
+            if let layout = self.contentView.collectionViewLayout as? UICollectionViewFlowLayout {
+                layout.minimumLineSpacing = 0.0
+                layout.minimumInteritemSpacing = 0.0
+                layout.scrollDirection = .vertical
+                layout.sectionInset = UIEdgeInsets.zero
+            }
             self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             self.contentView.backgroundColor = NX.backgroundColor
             self.contentView.delaysContentTouches = false

@@ -1,5 +1,5 @@
 //
-//  NXCollectionWrapper.swift
+//  NXCollectionViewData.swift
 //  NXKit
 //
 //  Created by niegaotao on 2020/10/7.
@@ -8,15 +8,17 @@
 
 import UIKit
 
-open class NXCollectionWrapper : NXCollection<NXCollectionView> {
+open class NXCollectionViewData : NXCollection<UICollectionView> {
     public let placeholderView = NXPlaceholderView()
     public func addPlaceholderView(_ frame: CGRect){
-        let e = NXPlaceholderView.Element()
+        let e = NXPlaceholderElement()
         e.placeholderView = self.placeholderView
-        e.ctxs.update(NXPlaceholderView.CollectionViewCell.self, "NXPlaceholderViewCell")
+        e.ctxs.update(NXCollectionPlaceholderViewCell.self, "NXPlaceholderViewCell")
         e.ctxs.frame = frame
         self.addElementToLastSection(e)
         
-        self.wrappedView?.register(NXPlaceholderView.CollectionViewCell.self, forCellWithReuseIdentifier: "NXPlaceholderViewCell")
+        self.wrappedView?.register(NXCollectionPlaceholderViewCell.self, forCellWithReuseIdentifier: "NXPlaceholderViewCell")
     }
 }
+
+

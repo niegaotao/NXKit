@@ -13,7 +13,7 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
     //表视图
     open var tableView: NXTableView? = nil
     //数据源管理对象
-    public let tableWrapper = NXTableWrapper()
+    public let wrappedData = NXTableViewData()
     
     override open func setup() {
         super.setup()
@@ -25,10 +25,10 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         
         //默认情况下不开启：通常在接口数据返回后把该标识为true
-        self.tableWrapper.placeholderView.ctxs.isHidden = true
+        self.wrappedData.placeholderView.ctxs.isHidden = true
 
         //tableView
-        self.tableView = NXTableView(frame: self.contentView.bounds, style: tableWrapper.tableViewStyle)
+        self.tableView = NXTableView(frame: self.contentView.bounds, style: wrappedData.tableViewStyle)
         self.tableView?.frame = self.contentView.bounds
         self.tableView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.tableView?.backgroundColor = NX.tableViewBackgroundColor
@@ -42,8 +42,8 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         }
         self.contentView.addSubview(self.tableView!)
 
-        tableView?.value = self.tableWrapper
-        self.tableWrapper.wrappedView = tableView
+        tableView?.wrappedData = self.wrappedData
+        self.wrappedData.wrappedView = tableView
         
         self.contentView.bringSubviewToFront(self.animationView)
     }
@@ -51,12 +51,12 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
     
     //分组个数
     open func numberOfSections(in tableView: UITableView) -> Int {
-        return self.tableWrapper.count
+        return self.wrappedData.count
     }
     
     //各组单元格个数
     open func tableView(_ tableView: UITableView, numberOfRowsInSection index: Int) -> Int {
-        if let section = self.tableWrapper[index] {
+        if let section = self.wrappedData[index] {
             return section.count
         }
         return 0
@@ -64,23 +64,23 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
     
     //分组的头部：高度和视图
     open func tableView(_ tableView: UITableView, heightForHeaderInSection index: Int) -> CGFloat {
-        if index == 0 && self.tableWrapper.showsFirstSectionHeader == false {
+        if index == 0 && self.wrappedData.showsFirstSectionHeader == false {
             return 0.0
         }
-        return self.tableWrapper.heightForHeader(at: index)
+        return self.wrappedData.heightForHeader(at: index)
     }
     
     open func tableView(_ tableView: UITableView, viewForHeaderInSection index: Int) -> UIView? {
-        if index == 0 && self.tableWrapper.showsFirstSectionHeader == false {
+        if index == 0 && self.wrappedData.showsFirstSectionHeader == false {
             return nil
         }
         
-        if let rs = self.tableWrapper.dequeue(tableView, index, NXCollection.Dequeue.header.rawValue) {
+        if let rs = self.wrappedData.dequeue(tableView, index, NXCollectionDequeue.header.rawValue) {
             rs.reusableView.updateSubviews("update", rs.element)
             return rs.reusableView
         }
         else {
-            if let header = self.tableWrapper[index]?.header {
+            if let header = self.wrappedData[index]?.header {
                 if let cls = header.ctxs.cls as? NXTableReusableView.Type {
                     let reusableView = cls.init(reuseIdentifier:header.ctxs.reuse)
                     reusableView.updateSubviews("update", header)
@@ -96,11 +96,11 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
     
     //中间的单元格：高度和视图
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.tableWrapper.heightForRow(at: indexPath)
+        return self.wrappedData.heightForRow(at: indexPath)
     }
     
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let rs = self.tableWrapper.dequeue(self.tableView, indexPath) {
+        if let rs = self.wrappedData.dequeue(self.tableView, indexPath) {
             rs.cell.updateSubviews("update", rs.element)
             return rs.cell
         }
@@ -110,23 +110,23 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
     
     //分组的尾部：高度和视图
     open func tableView(_ tableView: UITableView, heightForFooterInSection index: Int) -> CGFloat {
-        if index == self.tableWrapper.count-1 && self.tableWrapper.showsLastSectionFooter == false {
+        if index == self.wrappedData.count-1 && self.wrappedData.showsLastSectionFooter == false {
             return 0.0
         }
-        return self.tableWrapper.heightForFooter(at: index)
+        return self.wrappedData.heightForFooter(at: index)
     }
     
     open func tableView(_ tableView: UITableView, viewForFooterInSection index: Int) -> UIView? {
-        if index == self.tableWrapper.count-1 && self.tableWrapper.showsLastSectionFooter == false {
+        if index == self.wrappedData.count-1 && self.wrappedData.showsLastSectionFooter == false {
             return nil
         }
         
-        if let rs = self.tableWrapper.dequeue(tableView, index, NXCollection.Dequeue.footer.rawValue) {
+        if let rs = self.wrappedData.dequeue(tableView, index, NXCollectionDequeue.footer.rawValue) {
             rs.reusableView.updateSubviews("update", rs.element)
             return rs.reusableView
         }
         else {
-            if let footer = self.tableWrapper[index]?.footer {
+            if let footer = self.wrappedData[index]?.footer {
                 if let cls = footer.ctxs.cls as? NXTableReusableView.Type {
                     let reusableView = cls.init(reuseIdentifier:footer.ctxs.reuse)
                     reusableView.updateSubviews("update", footer)

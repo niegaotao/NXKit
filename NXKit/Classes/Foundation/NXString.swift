@@ -65,7 +65,7 @@ extension NXString {
             
             let subattributedText = NSMutableAttributedString(string: string.text, attributes: mapValue)
             if string.query.count > 0 {
-                subattributedText.addAttribute(NSAttributedString.Key.link, value: "yyjk://query?query="+NXSerialization.JSONObject(toString: string.query, encode: true), range: NSMakeRange(0, (string.text as NSString).length))
+                subattributedText.addAttribute(NSAttributedString.Key.link, value: "app://query?query="+NXSerialization.JSONObject(toString: string.query, encode: true), range: NSMakeRange(0, (string.text as NSString).length))
             }
             attributedText.append(subattributedText)
         }

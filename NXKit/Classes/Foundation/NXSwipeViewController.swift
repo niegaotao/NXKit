@@ -25,10 +25,12 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
         self.contentView.frame = CGRect(x: 0, y: NXUI.topOffset+44, width: NXUI.width, height: self.view.h-(NXUI.topOffset+44))
         
         collectionView = NXCollectionView(frame: self.contentView.bounds)
-        collectionView?.ctxs?.scrollDirection = .horizontal
-        collectionView?.ctxs?.sectionInset = UIEdgeInsets.zero
-        collectionView?.ctxs?.minimumLineSpacing = 0.0
-        collectionView?.ctxs?.minimumInteritemSpacing = 0.0
+        if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+            layout.sectionInset = UIEdgeInsets.zero
+            layout.minimumLineSpacing = 0.0
+            layout.minimumInteritemSpacing = 0.0
+        }
         collectionView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView?.backgroundColor = NX.collectionViewBackgroundColor
         collectionView?.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)

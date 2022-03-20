@@ -1,5 +1,5 @@
 //
-//  NXTableWrapper.swift
+//  NXTableViewData.swift
 //  NXKit
 //
 //  Created by niegaotao on 2020/10/7.
@@ -8,16 +8,16 @@
 
 import UIKit
 
-open class NXTableWrapper : NXCollection<NXTableView> {
+open class NXTableViewData : NXCollection<UITableView> {
     //视图
     public let placeholderView = NXPlaceholderView()
     open func addPlaceholderView(_ frame: CGRect){
-        let e = NXPlaceholderView.Element()
+        let e = NXPlaceholderElement()
         e.placeholderView = self.placeholderView
-        e.ctxs.update(NXPlaceholderView.TableViewCell.self, "NXPlaceholderViewCell")
+        e.ctxs.update(NXTablePlaceholderViewCell.self, "NXTablePlaceholderViewCell")
         e.ctxs.frame = frame
         self.addElementToLastSection(e)
-        self.wrappedView?.register(NXPlaceholderView.TableViewCell.self, forCellReuseIdentifier: "NXPlaceholderViewCell")
+        self.wrappedView?.register(NXTablePlaceholderViewCell.self, forCellReuseIdentifier: "NXTablePlaceholderViewCell")
     }
     
     //表视图样式
