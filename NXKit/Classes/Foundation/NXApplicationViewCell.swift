@@ -15,7 +15,7 @@ open class NXTableSubviewCell<T:UIView>: NXTableViewCell {
         
         self.selectedBackgroundView = UIView(frame: self.bounds)
         self.selectedBackgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.selectedBackgroundView?.backgroundColor = NX.selectedBackgroundColor
+        self.selectedBackgroundView?.backgroundColor = NXUI.selectedBackgroundColor
         
         if let __applicationView = self.applicationView as? NXApplicationView {
             __applicationView.assetView.backgroundColor = UIColor.white
@@ -23,12 +23,12 @@ open class NXTableSubviewCell<T:UIView>: NXTableViewCell {
             __applicationView.assetView.layer.masksToBounds = true
             __applicationView.assetView.contentMode = .scaleAspectFill
             __applicationView.titleView.textAlignment = .center
-            __applicationView.titleView.textColor = NX.darkBlackColor
-            __applicationView.titleView.font = NX.font(16)
+            __applicationView.titleView.textColor = NXUI.darkBlackColor
+            __applicationView.titleView.font = NXUI.font(16)
             __applicationView.titleView.numberOfLines = 0
             __applicationView.subtitleView.textAlignment = .center
-            __applicationView.subtitleView.textColor = NX.darkGrayColor
-            __applicationView.subtitleView.font = NX.font(13)
+            __applicationView.subtitleView.textColor = NXUI.darkGrayColor
+            __applicationView.subtitleView.font = NXUI.font(13)
             __applicationView.subtitleView.numberOfLines = 0
             __applicationView.subtitleView.isHidden = true
         }
@@ -36,7 +36,7 @@ open class NXTableSubviewCell<T:UIView>: NXTableViewCell {
         
         self.contentView.bringSubviewToFront(self.arrowView)
         
-        separator.backgroundColor = NX.separatorColor.cgColor
+        separator.backgroundColor = NXUI.separatorColor.cgColor
         separator.isHidden = true
     }
     
@@ -68,7 +68,7 @@ open class NXCollectionSubviewCell<T:UIView>: NXCollectionViewCell {
         
         self.selectedBackgroundView = UIView(frame: self.bounds)
         self.selectedBackgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.selectedBackgroundView?.backgroundColor = NX.selectedBackgroundColor
+        self.selectedBackgroundView?.backgroundColor = NXUI.selectedBackgroundColor
         
         if let __applicationView = self.applicationView as? NXApplicationView {
             __applicationView.assetView.backgroundColor = UIColor.white
@@ -76,12 +76,12 @@ open class NXCollectionSubviewCell<T:UIView>: NXCollectionViewCell {
             __applicationView.assetView.layer.masksToBounds = true
             __applicationView.assetView.contentMode = .scaleAspectFill
             __applicationView.titleView.textAlignment = .center
-            __applicationView.titleView.textColor = NX.darkBlackColor
-            __applicationView.titleView.font = NX.font(16)
+            __applicationView.titleView.textColor = NXUI.darkBlackColor
+            __applicationView.titleView.font = NXUI.font(16)
             __applicationView.titleView.numberOfLines = 0
             __applicationView.subtitleView.textAlignment = .center
-            __applicationView.subtitleView.textColor = NX.darkGrayColor
-            __applicationView.subtitleView.font = NX.font(13)
+            __applicationView.subtitleView.textColor = NXUI.darkGrayColor
+            __applicationView.subtitleView.font = NXUI.font(13)
             __applicationView.subtitleView.numberOfLines = 0
             __applicationView.subtitleView.isHidden = true
         }
@@ -89,7 +89,7 @@ open class NXCollectionSubviewCell<T:UIView>: NXCollectionViewCell {
         
         self.contentView.bringSubviewToFront(self.arrowView)
         
-        self.separator.backgroundColor = NX.separatorColor.cgColor
+        self.separator.backgroundColor = NXUI.separatorColor.cgColor
         self.separator.isHidden = true
     }
     

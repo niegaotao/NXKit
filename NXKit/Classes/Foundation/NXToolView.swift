@@ -145,12 +145,12 @@ extension NXToolView {
         
         public let separator = NX.Separator { (_, __sender) in
             __sender.isHidden = false
-            __sender.backgroundColor = NX.separatorColor
+            __sender.backgroundColor = NXUI.separatorColor
         }
         
         public let layer = NX.Layer { (_, __sender) in
             __sender.isHidden = true
-            __sender.shadowColor = NX.shadowColor
+            __sender.shadowColor = NXUI.shadowColor
             __sender.shadowOffset = CGSize(width: 0, height: -2)
             __sender.shadowRadius = 2.0
             __sender.shadowOpacity = 0.15
@@ -188,8 +188,8 @@ extension NXToolView {
         })
         
         open var color = NX.Selectable<UIColor>(completion: { (_, __sender) in
-            __sender.selected = NX.mainColor
-            __sender.unselected = NX.darkGrayColor
+            __sender.selected = NXUI.mainColor
+            __sender.unselected = NXUI.darkGrayColor
         })
         
         open var image = NX.Selectable<UIImage>(completion:  { (_, __sender) in
@@ -228,7 +228,7 @@ extension NXToolView {
             super.setupSubviews()
             self.addSubview(assetView)
             
-            titleView.font = NX.font(11)
+            titleView.font = NXUI.font(11)
             titleView.textAlignment = .center
             self.addSubview(titleView)
             
@@ -276,7 +276,7 @@ extension NXToolView {
                         attachmentValue = "99+"
                     }
                     //6.87, 13.13
-                    var __size = attachmentValue.stringSize(font: NX.font(element.attachment.size), size: CGSize(width: 100, height: 100))
+                    var __size = attachmentValue.stringSize(font: NXUI.font(element.attachment.size), size: CGSize(width: 100, height: 100))
                     __size.width = max(element.attachment.insets.left, 0) + __size.width + max(element.attachment.insets.right, 0)
                     __size.height = max(element.attachment.insets.top, 0) + __size.height + max(element.attachment.insets.bottom, 0)
                     if __size.width < __size.height {
@@ -288,7 +288,7 @@ extension NXToolView {
                     markupView.backgroundColor = element.attachment.backgroundColor
                     markupView.text = attachmentValue
                     markupView.textColor = element.attachment.color
-                    markupView.font = NX.font(element.attachment.size)
+                    markupView.font = NXUI.font(element.attachment.size)
                     markupView.frame = CGRect(x: assetView.frame.maxX-__size.width/2.0, y: assetView.frame.minY, width: __size.width, height: __size.height)
                 }
                 else {

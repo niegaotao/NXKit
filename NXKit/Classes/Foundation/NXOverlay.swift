@@ -69,7 +69,7 @@ open class NXOverlayAttributes : NX.Rect {
     }
 }
 
-open class NXOverlayView<Attributes:NXOverlayAttributes>: NXOverlay {
+open class NXSuboverlay<Attributes:NXOverlayAttributes>: NXOverlay {
     //上下文
     public let ctxs = Attributes()
     

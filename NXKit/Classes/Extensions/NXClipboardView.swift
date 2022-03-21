@@ -51,56 +51,56 @@ open class NXClipboardView: NXView {
         public let maxYView = NXAutoresizeView<UIView>(frame: CGRect.zero)
         
         open override func setupSubviews() {
-            self.minXTHSView.backgroundColor = NX.mainColor
+            self.minXTHSView.backgroundColor = NXUI.mainColor
             self.minXTHSView.isUserInteractionEnabled = false
             self.addSubview(self.minXTHSView)
             
-            self.minXBHSView.backgroundColor = NX.mainColor
+            self.minXBHSView.backgroundColor = NXUI.mainColor
             self.minXBHSView.isUserInteractionEnabled = false
             self.addSubview(self.minXBHSView)
             
-            self.maxXTHSView.backgroundColor = NX.mainColor
+            self.maxXTHSView.backgroundColor = NXUI.mainColor
             self.maxXTHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxXTHSView)
             
-            self.maxXBHSView.backgroundColor = NX.mainColor
+            self.maxXBHSView.backgroundColor = NXUI.mainColor
             self.maxXBHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxXBHSView)
             
-            self.minYLHSView.backgroundColor = NX.mainColor
+            self.minYLHSView.backgroundColor = NXUI.mainColor
             self.minYLHSView.isUserInteractionEnabled = false
             self.addSubview(self.minYLHSView)
             
-            self.minYRHSView.backgroundColor = NX.mainColor
+            self.minYRHSView.backgroundColor = NXUI.mainColor
             self.minYRHSView.isUserInteractionEnabled = false
             self.addSubview(self.minYRHSView)
             
-            self.maxYLHSView.backgroundColor = NX.mainColor
+            self.maxYLHSView.backgroundColor = NXUI.mainColor
             self.maxYLHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxYLHSView)
             
-            self.maxYRHSView.backgroundColor = NX.mainColor
+            self.maxYRHSView.backgroundColor = NXUI.mainColor
             self.maxYRHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxYRHSView)
             
             self.minXView.autoresizesSubviews = true
             self.minXView.backgroundColor = UIColor.clear
-            self.minXView.contentView.backgroundColor = NX.mainColor
+            self.minXView.contentView.backgroundColor = NXUI.mainColor
             self.addSubview(self.minXView)
             
             self.maxXView.autoresizesSubviews = true
             self.maxXView.backgroundColor = UIColor.clear
-            self.maxXView.contentView.backgroundColor = NX.mainColor
+            self.maxXView.contentView.backgroundColor = NXUI.mainColor
             self.addSubview(self.maxXView)
             
             self.minYView.autoresizesSubviews = true
             self.minYView.backgroundColor = UIColor.clear
-            self.minYView.contentView.backgroundColor = NX.mainColor
+            self.minYView.contentView.backgroundColor = NXUI.mainColor
             self.addSubview(self.minYView)
             
             self.maxYView.autoresizesSubviews = true
             self.maxYView.backgroundColor = UIColor.clear
-            self.maxYView.contentView.backgroundColor = NX.mainColor
+            self.maxYView.contentView.backgroundColor = NXUI.mainColor
             self.addSubview(self.maxYView)
         }
         

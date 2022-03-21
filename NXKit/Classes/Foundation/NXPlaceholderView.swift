@@ -30,7 +30,7 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
         }
         else if NX.Placeholder.m.value.count > 0 {
             if NX.Placeholder.t.value.hasPrefix("http") {
-                NX.image(self.contentView.lhsView, NX.Placeholder.m.value)
+                NXUI.image(self.contentView.lhsView, NX.Placeholder.m.value)
             }
             else {
                 self.contentView.lhsView.image = UIImage(named: NX.Placeholder.m.value)

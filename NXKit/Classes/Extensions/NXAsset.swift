@@ -83,7 +83,7 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
         
         durationView.textAlignment = .right
         durationView.textColor = UIColor.white
-        durationView.font = NX.font(12, false)
+        durationView.font = NXUI.font(12, false)
         durationView.isHidden = true
         contentView.addSubview(durationView)
         
@@ -97,7 +97,7 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
         indexView.layer.cornerRadius = 11.5
         indexView.layer.masksToBounds = true
         indexView.textColor = UIColor.white
-        indexView.font = NX.font(13, true)
+        indexView.font = NXUI.font(13, true)
         indexView.layer.borderWidth = 1.5
         indexView.textAlignment = .center
         indexView.isUserInteractionEnabled = false
@@ -153,8 +153,8 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
             }
             else {
                 indexView.text = asset.index
-                indexView.backgroundColor = NX.mainColor
-                indexView.layer.borderColor = NX.mainColor.cgColor
+                indexView.backgroundColor = NXUI.mainColor
+                indexView.layer.borderColor = NXUI.mainColor.cgColor
             }
             maskedView.isHidden = true
         }
@@ -568,7 +568,7 @@ extension NXAsset {
         
         var animationView : NXHUD.WrappedView? = nil
         DispatchQueue.main.async {
-            animationView = NX.showLoading("正在加载图片...")
+            animationView = NXUI.showLoading("正在加载图片...")
         }
         
         DispatchQueue.global().async {
@@ -615,7 +615,7 @@ extension NXAsset {
             }
             
             group.notify(queue: DispatchQueue.main, execute: {
-                NX.hideLoading(animationView)
+                NXUI.hideLoading(animationView)
                 completion?(true, outputAssets)
             })
         }

@@ -12,14 +12,14 @@ extension NX {
     
     open class View : NX.Rect {
         open var isHidden = false
-        open var backgroundColor = NX.backgroundColor
+        open var backgroundColor = NXUI.backgroundColor
         public override init() {
             super.init()
         }
     }
     
     open class Appearance : NX.View {
-        open var selectedBackgroundColor = NX.selectedBackgroundColor
+        open var selectedBackgroundColor = NXUI.selectedBackgroundColor
         open var isHighlighted = false
         open var isEnabled = true
         open var isCloseable = true
@@ -42,13 +42,13 @@ extension NX {
     }
 
     open class Attribute : NX.View {
-        open var color  = NX.darkBlackColor
+        open var color = NXUI.darkBlackColor
         open var textAlignment = NSTextAlignment.center
         open var numberOfLines: Int = 1
         open var lineSpacing : CGFloat = 2.5
         open var isAttributed : Bool = false
         open var value = ""
-        open var font = NX.font(15)
+        open var font = NXUI.font(15)
         
         open var image : UIImage? = nil
         
@@ -81,12 +81,12 @@ extension NX {
         open var cornerRadius : CGFloat = 0.0
         
         open var borderWidth : CGFloat = 0.0
-        open var borderColor = NX.separatorColor
+        open var borderColor = NXUI.separatorColor
         
         open var shadowOpacity : CGFloat = 0.0
         open var shadowRadius : CGFloat = 0.0
         open var shadowOffset = CGSize.zero
-        open var shadowColor = NX.shadowColor
+        open var shadowColor = NXUI.shadowColor
         
         public override init(){
             super.init()
@@ -105,13 +105,13 @@ extension NX {
         public override init(){
             super.init()
             self.isHidden = true
-            self.backgroundColor = NX.separatorColor
+            self.backgroundColor = NXUI.separatorColor
         }
         
         public init(completion:NX.Completion<String, NX.Separator>?){
             super.init()
             self.isHidden = true
-            self.backgroundColor = NX.separatorColor
+            self.backgroundColor = NXUI.separatorColor
             completion?("init", self)
         }
     }
@@ -207,7 +207,7 @@ extension NX.View {
             }
             else if metadata.value.count > 0 {
                 if NX.Placeholder.t.value.hasPrefix("http") {
-                    NX.image(view, metadata.value)
+                    NXUI.image(view, metadata.value)
                 }
                 else {
                     view.image = UIImage(named: metadata.value)

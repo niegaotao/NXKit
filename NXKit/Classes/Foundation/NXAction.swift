@@ -15,26 +15,26 @@ open class NXAction: NXItem {
     }
     
     public let asset = NX.Attribute(completion:{(_, __sender) in
-        __sender.color = NX.darkGrayColor
+        __sender.color = NXUI.darkGrayColor
         __sender.backgroundColor = UIColor.clear
     })
     
     public let title = NX.Attribute(completion: {(_, __sender) in
-        __sender.font = NX.font(16)
+        __sender.font = NXUI.font(16)
         __sender.textAlignment = NSTextAlignment.left
         __sender.backgroundColor = UIColor.clear
     })
     
     public let subtitle = NX.Attribute(completion: {(_, __sender) in
-        __sender.font = NX.font(13)
-        __sender.color = NX.darkGrayColor
+        __sender.font = NXUI.font(13)
+        __sender.color = NXUI.darkGrayColor
         __sender.textAlignment = NSTextAlignment.left
         __sender.backgroundColor = UIColor.clear
     })
     
     public let value = NX.Attribute(completion: {(_, __sender) in
-        __sender.font = NX.font(13)
-        __sender.color = NX.darkGrayColor
+        __sender.font = NXUI.font(13)
+        __sender.color = NXUI.darkGrayColor
         __sender.textAlignment = NSTextAlignment.right
         __sender.backgroundColor = UIColor.clear
     })

@@ -117,7 +117,7 @@ extension UILabel {
     }
 
     
-    public func addBottomColorView(color: UIColor = NX.mainColor.withAlphaComponent(0.85), height: CGFloat = 7) {
+    public func addBottomColorView(color: UIColor = NXUI.mainColor.withAlphaComponent(0.85), height: CGFloat = 7) {
         guard let str = self.text else {
             return
         }

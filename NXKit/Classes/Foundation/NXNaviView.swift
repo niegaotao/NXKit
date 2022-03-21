@@ -11,7 +11,7 @@ import UIKit
 open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
     open weak var controller : NXViewController?
     
-    open var backBar = NXNaviView.Bar.back(image:NX.image(named:"navi-back.png"), title: nil) //默认
+    open var backBar = NXNaviView.Bar.back(image:NXUI.image(named:"navi-back.png"), title: nil) //默认
     open var backView : UIView? {
         willSet{
             backView?.removeFromSuperview()
@@ -63,7 +63,7 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
         self.backgroundView.frame = self.bounds
         self.backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.backgroundView.backgroundColor = UIColor.clear
-        self.backgroundView.image = UIImage.image(color: NX.naviViewBackgroundColor)
+        self.backgroundView.image = UIImage.image(color: NXUI.naviViewBackgroundColor)
         
         //整个导航栏的子控件
         self.contentView.frame = self.bounds
@@ -72,8 +72,8 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
         
         self.titleView.frame = CGRect(x: 75.0, y: NXUI.insets.top, width: self.contentView.w-75.0*2, height: self.contentView.h-NXUI.insets.top)
         self.titleView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.titleView.textColor = NX.naviViewForegroundColor
-        self.titleView.font = NX.font(17, true)
+        self.titleView.textColor = NXUI.naviViewForegroundColor
+        self.titleView.font = NXUI.font(17, true)
         self.titleView.textAlignment = .center
         self.contentView.addSubview(self.titleView)
         
@@ -87,7 +87,7 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
         self.contentView.addSubview(self.backBar)
         
         self.separator.frame = CGRect(x: 0, y: self.contentView.h-NXUI.pixel, width: self.contentView.w, height: NXUI.pixel)
-        self.separator.backgroundColor = NX.separatorColor.cgColor
+        self.separator.backgroundColor = NXUI.separatorColor.cgColor
         self.separator.isHidden = true
         self.contentView.layer.addSublayer(self.separator)
     }
@@ -205,9 +205,9 @@ extension NXNaviView {
         
         open func setupSubviews(){
             self.frame.size = CGSize(width:70.0, height:44.0)
-            self.setTitleColor(NX.darkBlackColor, for: .normal)
-            self.setTitleColor(NX.darkGrayColor, for: .highlighted)
-            self.titleLabel?.font = NX.font(17)
+            self.setTitleColor(NXUI.darkBlackColor, for: .normal)
+            self.setTitleColor(NXUI.darkGrayColor, for: .highlighted)
+            self.titleLabel?.font = NXUI.font(17)
         }
         
         open class  func back(image: UIImage?, title: String?) -> NXNaviView.Bar {

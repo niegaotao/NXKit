@@ -96,184 +96,8 @@ extension NX {
     }
 }
 
-extension NX {
-    open class func resize(size:CGSize, to:CGSize, mode:UIView.ContentMode) -> CGRect {
-        var __frame = CGRect.zero
-        if size.width <= 0 || size.height <= 0 || to.width <= 0 || to.height <= 0 {
-            return __frame
-        }
-        let p = CGPoint(x: size.width/to.width, y: size.height/to.height)
-        if mode == .scaleAspectFit {
-            //等比缩放，长边撑满，短边留白
-            if p.x >= p.y {
-                __frame.origin.x = 0
-                __frame.size.width = to.width
-                __frame.size.height = __frame.size.width * (size.height / size.width)
-                __frame.origin.y = (to.height - __frame.size.height)/2.0
-            }
-            else {
-                __frame.origin.y = 0
-                __frame.size.height = to.height
-                __frame.size.width = __frame.size.height * (size.width / size.height)
-                __frame.origin.x = (to.width - __frame.size.width)/2.0
-            }
-        }
-        else if mode == .scaleAspectFill {
-            //等比缩放，短边撑满，长边溢出
-            if p.x >= p.y {
-                __frame.origin.y = 0
-                __frame.size.height = to.height
-                __frame.size.width = __frame.size.height * (size.width / size.height)
-                __frame.origin.x = (to.width - __frame.size.width)/2.0
-            }
-            else {
-                __frame.origin.x = 0
-                __frame.size.width = to.width
-                __frame.size.height = __frame.size.width * (size.height / size.width)
-                __frame.origin.y = (to.height - __frame.size.height)/2.0
-            }
-        }
-        else {
-            __frame.origin.x = 0
-            __frame.origin.y = 0
-            __frame.size.width = to.width
-            __frame.size.height = to.height
-        }
-        
-        return __frame
-    }
-}
-
-
 
 extension NX {
-    //view背景色
-    static public var viewBackgroundColor = NX.color(247, 247, 247)
-    //contentView背景色
-    static public var contentViewBackgroundColor = NX.color(247, 247, 247)
-    //tableView背景色
-    static public var naviViewBackgroundColor = NX.color(255, 255, 255)
-    //tableView背景色
-    static public var naviViewForegroundColor = NX.color(51, 51, 51)
-    //tableView背景色
-    static public var tableViewBackgroundColor = NX.color(247, 247, 247)
-    //collectionView背景色
-    static public var collectionViewBackgroundColor = NX.color(247, 247, 247)
-    //overlay背景色
-    static public var overlayBackgroundColor = NX.color(255, 225, 225)
-    //背景色
-    static public var backgroundColor = NX.color(255, 255, 255)
-    //选中背景色
-    static public var selectedBackgroundColor = NX.color(218.0, 218.0, 218.0, 0.3)
-    //分割线颜色
-    static public var separatorColor = NX.color(235, 235, 240)
-    //阴影颜色
-    static public var shadowColor = NX.color(56, 79, 134)
-    // 主色
-    static public var mainColor = NX.color(51, 120, 246)
-    // 深黑
-    static public var darkBlackColor = NX.color(51, 51, 51)
-    // 浅黑
-    static public var lightBlackColor = NX.color(102, 102, 102)
-    // 深灰
-    static public var darkGrayColor = NX.color(153, 153, 153)
-    // 浅灰
-    static public var lightGrayColor = NX.color(192, 192, 192)
-    // 转场前容器视图的Alpha值
-    static public var minAlphaOfColor = UIColor.black.withAlphaComponent(0.01)
-    // 转场后容器视图的Alpha值
-    static public var maxAlphaOfColor = UIColor.black.withAlphaComponent(0.30)
-    
-    //用户设定的暗黑模式类型
-    static private(set) var __userInterfaceStyle = NX.Color.light
-    static public var userInterfaceStyle : NX.Color {
-        set{
-            __userInterfaceStyle = newValue
-        }
-        get{
-            if __userInterfaceStyle == NX.Color.light {
-                return NX.Color.light
-            }
-            else if __userInterfaceStyle == NX.Color.dark {
-                if #available(iOS 13.0, *) {
-                    return NX.Color.dark
-                }
-                return NX.Color.light
-            }
-            else {
-                if #available(iOS 13.0, *) {
-                    if UITraitCollection.current.userInterfaceStyle == .dark {
-                        return NX.Color.dark
-                    }
-                }
-                return NX.Color.light
-            }
-        }
-    }
-    
-    //初始化的状态栏样式
-    static private(set) var __statusBarStyle = NX.Bar.dark
-    static public var statusBarStyle : NX.Bar {
-        set{
-            if NX.isViewControllerBasedStatusBarAppearance {
-                if newValue !=  .none {
-                    __statusBarStyle = newValue
-                }
-            }
-            else {
-                if newValue == NX.Bar.hidden {
-                    __statusBarStyle = newValue
-                    UIApplication.shared.isStatusBarHidden = true
-                }
-                else if newValue == NX.Bar.unspecified {
-                    __statusBarStyle = newValue
-                    UIApplication.shared.isStatusBarHidden = false
-                    UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.default, animated: true)
-                }
-                else if newValue == NX.Bar.light {
-                    __statusBarStyle = newValue
-                    UIApplication.shared.isStatusBarHidden = false
-                    UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
-                }
-                else if newValue == NX.Bar.dark {
-                    __statusBarStyle = newValue
-                    UIApplication.shared.isStatusBarHidden = false
-                    if #available(iOS 13.0, *) {
-                        if userInterfaceStyle == NX.Color.dark {
-                            UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
-                        }
-                        else {
-                            UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.darkContent, animated: true)
-                        }
-                    }
-                    else{
-                        UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.default, animated: true)
-                    }
-                }
-            }
-        }
-        get{
-            return __statusBarStyle
-        }
-        
-    }
-    
-    //暗黑模式的类型
-    public enum Color : String {
-        case unspecified = "unspecified"
-        case light = "light"
-        case dark = "dark"
-    }
-    
-    //状态栏的样式
-    public enum Bar : String {
-        case none = "none"
-        case hidden = "hidden"
-        case unspecified = "unspecified"
-        case light = "light"
-        case dark = "dark"
-    }
-    
     public enum Navigation : Int {
         case push       //打开页面通过push方式打开的
         case present    //打开页面通过present方式打开的
@@ -292,55 +116,10 @@ extension NX {
         case update      //下拉刷新
         case more        //上拉加载更多
     }
-        
-    static public var AnimationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self //空页面加载动画类型
-    static public var HUDAnimationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self//loading
-    
-    static public var isSeparatorHidden = false
 }
 
 
-// 颜色和字体
-extension NX {
-    //颜色:rgb+alpha, rgb:[0,255],a:[0,1]
-    public class func color(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat, _ a:CGFloat = 1.0) -> UIColor {
-        return UIColor(red: (r)/255.0, green: (g)/255.0, blue: (b)/255.0, alpha: a)
-    }
-    
-    //颜色：hex+alpha
-    public class func color(_ hex:Int, _ a: CGFloat = 1.0) -> UIColor {
-        return NX.color(((CGFloat)((hex & 0xFF0000) >> 16)), ((CGFloat)((hex & 0xFF00) >> 8)), ((CGFloat)(hex & 0xFF)), a)
-    }
-    
-    //创建浅色/暗黑模式的颜色
-    public class func color(_ lightColor:UIColor, _ darkColor:UIColor? = nil) -> UIColor {
-        if #available(iOS 13.0, *) {
-            return UIColor.init { (__collection) -> UIColor in
-                if let __darkColor = darkColor, NX.userInterfaceStyle == NX.Color.dark {
-                    return __darkColor
-                }
-                return lightColor
-            }
-        }
-        return lightColor
-    }
-    
-    //字体:
-    public class func font(_ size: CGFloat, _ blod:Bool = false) -> UIFont {
-        if blod {
-            return UIFont.boldSystemFont(ofSize: size)
-        }
-        return UIFont.systemFont(ofSize: size)
-    }
-    
-    //自定义字体:
-    public class func font(_ name:String, _ size: CGFloat, _ blod:Bool = false) -> UIFont {
-        if let font =  UIFont(name: name, size: size) {
-            return font
-        }
-        return NX.font(size, blod)
-    }
-}
+
 
 extension NX {
     public static var isLoggable : Bool = true
@@ -383,8 +162,8 @@ extension NX {
             __sender.value = "暂无数据～"
             __sender.textAlignment = .center
             __sender.numberOfLines = 0
-            __sender.font = NX.font(16)
-            __sender.color = NX.darkGrayColor
+            __sender.font = NXUI.font(16)
+            __sender.color = NXUI.darkGrayColor
         }
     }
     
@@ -490,24 +269,7 @@ extension NX {
 
 // 图片
 extension NX {
-    //加载获取bundle中图片
-    public class func image(named name:String) -> UIImage? {
-        guard name.count > 0 else {return nil}
-        if NX.Association.root.count > 0 {
-            return UIImage(named: "\(NX.Association.root)/NXKit.bundle/NX.bundle/\(name)")
-        }
-        return UIImage(named: name)
-    }
     
-    //处理图片浏览
-    class public func previewAssets(type:String, assets:[Any], index:Int){
-        NX.Imp.previewAssets?(type, assets, index)
-    }
-    
-    //设置图像
-    class public func image(_ targetView:UIView?, _ url:String, _ state:UIControl.State = UIControl.State.normal){
-        NX.Imp.image?(targetView, url, state)
-    }
 
     //encodeURIComponent
     class public func encodeURIComponent(_ uri:String) -> String? {
@@ -552,43 +314,6 @@ extension NX {
     //这里处理单元格高度的通过autoLayout计算的一种回调
     class public func heightForRow(_ tableView:UITableView?, _ value:NXItem, _ indexPath:IndexPath) -> CGFloat? {
         return NX.Imp.tableView?(tableView, value, indexPath)
-    }
-    
-    //toast
-    @discardableResult
-    class public func showToast(message:String, _ ats:NX.Ats = .center, _ superview:UIView? = UIApplication.shared.keyWindow) -> NXHUD.WrappedView? {
-        if let handler = NX.Imp.showToast {
-            return handler(message, ats, superview)
-        }
-        else {
-            return (superview ?? UIApplication.shared.keyWindow)?.makeToast(message: message, ats: ats)
-        }
-    }
-    
-    //处理loading
-    @discardableResult
-    class public func showLoading(_ message:String, _ ats:NX.Ats = .center, _ superview:UIView? = UIApplication.shared.keyWindow) -> NXHUD.WrappedView?{
-        if let handler = NX.Imp.showLoading {
-            return handler(message, ats, superview)
-        }
-        else {
-            return (superview ?? UIApplication.shared.keyWindow)?.makeLoading(message: message, ats: ats)
-        }
-    }
-    
-    //处理loading
-    class public func hideLoading(_ animationView:NXHUD.WrappedView? = nil, superview:UIView? = UIApplication.shared.keyWindow){
-        if let handler = NX.Imp.hideLoading {
-            handler(animationView, superview)
-        }
-        else {
-            (superview ?? UIApplication.shared.keyWindow)?.hideLoading()
-        }
-    }
-    
-    //request
-    class public func request(_ request:NXRequest, _ completion:NX.Completion<String, NXRequest>?) {
-        NX.Imp.request?(request, completion)
     }
 }
 

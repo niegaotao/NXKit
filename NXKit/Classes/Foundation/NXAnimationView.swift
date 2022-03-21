@@ -18,7 +18,7 @@ open class NXAnimationView: NXImageView {
         self.isHidden = true
         self.contentMode = .scaleAspectFill
         self.backgroundColor = UIColor.clear
-        self.image = NX.image(named:"icon-animation.png")
+        self.image = NXUI.image(named:"icon-animation.png")
     }
     
     //开始动画

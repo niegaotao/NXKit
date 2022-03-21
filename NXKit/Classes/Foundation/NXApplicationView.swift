@@ -21,21 +21,21 @@ open class NXApplicationView: NXView {
         assetView.layer.masksToBounds = true
         self.addSubview(assetView)
         
-        titleView.font = NX.font(16)
+        titleView.font = NXUI.font(16)
         titleView.textAlignment = .left
-        titleView.textColor = NX.darkBlackColor
+        titleView.textColor = NXUI.darkBlackColor
         titleView.layer.masksToBounds = true
         self.addSubview(titleView)
         
-        subtitleView.font = NX.font(14)
+        subtitleView.font = NXUI.font(14)
         subtitleView.textAlignment = .left
-        subtitleView.textColor = NX.darkGrayColor
+        subtitleView.textColor = NXUI.darkGrayColor
         subtitleView.layer.masksToBounds = true
         self.addSubview(subtitleView)
         
-        valueView.font = NX.font(14)
+        valueView.font = NXUI.font(14)
         valueView.textAlignment = .right
-        valueView.textColor = NX.darkGrayColor
+        valueView.textColor = NXUI.darkGrayColor
         valueView.layer.masksToBounds = true
         self.addSubview(valueView)
         
@@ -43,7 +43,7 @@ open class NXApplicationView: NXView {
         arrowView.layer.masksToBounds = true
         self.addSubview(arrowView)
         
-        separator.backgroundColor = NX.separatorColor.cgColor
+        separator.backgroundColor = NXUI.separatorColor.cgColor
         separator.isHidden = true
         self.layer.addSublayer(separator)
     }

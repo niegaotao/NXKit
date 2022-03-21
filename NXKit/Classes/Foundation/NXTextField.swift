@@ -68,10 +68,10 @@ open class NXTextField: UITextField {
                     self.accessoryView.bytesView.text = "\(Int(ceil(Double(byteLength/2))))/\(Int(ceil(Double(maximumOfBytes/2))))"
                     
                     if byteLength == maximumOfBytes {
-                        self.accessoryView.bytesView.textColor = NX.color(0xFF3B74, 1)
+                        self.accessoryView.bytesView.textColor = NXUI.color(0xFF3B74, 1)
                     }
                     else {
-                        self.accessoryView.bytesView.textColor = NX.color(0x92929B, 1)
+                        self.accessoryView.bytesView.textColor = NXUI.color(0x92929B, 1)
                     }
                 }
             }

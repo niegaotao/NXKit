@@ -49,12 +49,12 @@ open class NXAlbum : NXAction {
         self.title.frame = CGRect(x: 106, y: 19, width: NXUI.width-136, height: 22)
         self.title.value = title
         self.title.textAlignment = .left
-        self.title.font = NX.font(16, true)
+        self.title.font = NXUI.font(16, true)
         self.title.isHidden = false
         
         self.subtitle.frame = CGRect(x: 106, y: 43, width: NXUI.width-136, height: 18)
         self.subtitle.value = "\(self.assets.count)张"
-        self.subtitle.font = NX.font(14, false)
+        self.subtitle.font = NXUI.font(14, false)
         self.subtitle.textAlignment = .left
         self.subtitle.isHidden = false
         
@@ -62,7 +62,7 @@ open class NXAlbum : NXAction {
         
         self.arrow.isHidden = false
         self.arrow.frame = CGRect(x: self.ctxs.width - 16 - 6, y: (self.ctxs.height - 12)/2.0, width: 6, height: 12)
-        self.arrow.image = NX.image(named:"icon-arrow.png")
+        self.arrow.image = NXUI.image(named:"icon-arrow.png")
         
         self.appearance.separator.insets = UIEdgeInsets(top: 0, left: 106, bottom: 0, right: 0)
         self.appearance.separator.ats = .maxY

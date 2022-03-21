@@ -20,7 +20,7 @@ open class NXViewController: UIViewController  {
     open var contentView = UIView(frame: CGRect(x: 0, y: NXUI.topOffset, width: NXUI.width, height: NXUI.height-NXUI.topOffset))
     
     ///页面无内容时的加载动画
-    open var animationView = NX.AnimationClass.init(frame: CGRect.zero)
+    open var animationView = NXUI.AnimationClass.init(frame: CGRect.zero)
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -47,11 +47,11 @@ open class NXViewController: UIViewController  {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = NX.viewBackgroundColor
+        self.view.backgroundColor = NXUI.viewBackgroundColor
         
         self.contentView.frame = CGRect(x: 0, y: NXUI.topOffset, width: self.view.w, height: self.view.h-NXUI.topOffset)
         self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.contentView.backgroundColor = NX.contentViewBackgroundColor
+        self.contentView.backgroundColor = NXUI.contentViewBackgroundColor
         self.view.addSubview(self.contentView)
         
         
@@ -128,7 +128,7 @@ open class NXViewController: UIViewController  {
     //更新导航栏：父类会自动调用
     open func updateNavigationBar() {
         if NX.isViewControllerBasedStatusBarAppearance == false {
-            NX.statusBarStyle = self.ctxs.statusBarStyle
+            NXUI.statusBarStyle = self.ctxs.statusBarStyle
         }
         else if let superviewController = self.ctxs.superviewController {
             if let viewController = superviewController as? NXToolViewController, viewController.selectedViewController == self {
@@ -192,13 +192,13 @@ open class NXViewController: UIViewController  {
             currentValue = viewController.ctxs.statusBarStyle
         }
         
-        if currentValue == NX.Bar.unspecified {
+        if currentValue == NXUI.Bar.unspecified {
             return UIStatusBarStyle.default
         }
-        else if currentValue == NX.Bar.light {
+        else if currentValue == NXUI.Bar.light {
             return UIStatusBarStyle.lightContent
         }
-        else if currentValue == NX.Bar.dark {
+        else if currentValue == NXUI.Bar.dark {
             if #available(iOS 13.0, *) {
                 if UITraitCollection.current.userInterfaceStyle == .dark {
                     return UIStatusBarStyle.lightContent
@@ -223,7 +223,7 @@ open class NXViewController: UIViewController  {
         else if let viewController = self.ctxs.subviewControllers.last, viewController.ctxs.statusBarStyle != .none {
             currentValue = viewController.ctxs.statusBarStyle
         }
-        return currentValue == NX.Bar.hidden
+        return currentValue == NXUI.Bar.hidden
     }
     
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -266,12 +266,12 @@ extension NXViewController {
         
         ///状态栏样式
         open var shouldAutorotate = false
-        open var statusBarStyle = NX.Bar.dark
+        open var statusBarStyle = NXUI.Bar.dark
         open var statusBarHidden = false
         open var orientationMask = UIInterfaceOrientationMask.portrait
         
         ///空页面加载动画
-        open var animationViewClass = NX.AnimationClass
+        open var animationViewClass = NXUI.AnimationClass
        
         ///是否允许手势返回：某些页面会设置不允许手势返回，采用block是因为可以在当前页面接收到右滑手势返回事件
         open var panRecognizer : ((String, UIPanGestureRecognizer) -> (Bool)) = {_, _ in return true}
@@ -287,8 +287,8 @@ extension NXViewController {
         ///导航栏顶部的分割线
         public let separator = NX.Separator { (_, __sender) in
             __sender.insets = UIEdgeInsets.zero;
-            __sender.isHidden = NX.isSeparatorHidden;
-            __sender.backgroundColor = NX.separatorColor;
+            __sender.isHidden = NXUI.isSeparatorHidden;
+            __sender.backgroundColor = NXUI.separatorColor;
         }
         ///覆盖的视图控制器
         public var subviewControllers = [NXViewController]()

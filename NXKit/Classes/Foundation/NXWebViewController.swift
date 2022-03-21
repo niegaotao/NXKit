@@ -14,14 +14,14 @@ open class NXBackbarWrappedView: NXLCRView<NXButton, UIView, NXButton> {
     override open func setupSubviews() {
         super.setupSubviews()
         self.lhsView.frame = CGRect(x: 0, y: 0, width: 32, height: 44)
-        self.lhsView.setImage(NX.image(named:"navi-back.png"), for: .normal)
+        self.lhsView.setImage(NXUI.image(named:"navi-back.png"), for: .normal)
         self.lhsView.contentHorizontalAlignment = .left
         
         self.centerView.frame = CGRect(x: 32, y: 14, width: NXUI.pixel, height: 16)
         self.centerView.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         
         self.rhsView.frame = CGRect(x: 33, y: 0, width: 32, height: 44)
-        self.rhsView.setImage(NX.image(named:"navi-close.png"), for: .normal)
+        self.rhsView.setImage(NXUI.image(named:"navi-close.png"), for: .normal)
         self.rhsView.contentHorizontalAlignment = .right
     }
     
@@ -98,7 +98,7 @@ open class NXWebViewController: NXViewController {
         
         self.progressView.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.size.width, height: self.progressView.frame.size.height)
         self.progressView.autoresizingMask = [.flexibleWidth]
-        self.progressView.progressTintColor = NX.mainColor
+        self.progressView.progressTintColor = NXUI.mainColor
         self.progressView.trackTintColor = UIColor.clear
         self.progressView.alpha = 0.0
         self.contentView.addSubview(self.progressView)
