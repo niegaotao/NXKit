@@ -8,8 +8,9 @@
 
 import Foundation
 
-open class NXUI {
-    //屏幕信息
+
+//屏幕
+extension NXUI {
     static public let width = UIScreen.main.bounds.size.width
     static public let height = UIScreen.main.bounds.size.height
     static public let size = CGSize(width: NXUI.width, height: NXUI.height)
@@ -52,41 +53,11 @@ open class NXUI {
     }
     
     static public var toolViewOffset : CGFloat = 49.0
-    
-    //设备model与产品的映射表
-    static public var devices : [String:String] = {
-        if let value = NXSerialization.file(toDictionary: NX.Association.root + "/NXKit.bundle/NX.bundle/device.json") as? [String:String] {
-            return value
-        }
-        return [:]
-    }()
-    
-    public struct Frame {
-        public var width = CGFloat.zero
-        public var height = CGFloat.zero
-        public var scale = CGFloat.zero
-        public var inches = [CGFloat]()
-    }
-    
-    public static var is320x480x1 = NXUI.Frame(width: 320, height: 480, scale: 1, inches: [3.5]) ///[iPhone,iPhone3GS]
-    public static var is320x480x2 = NXUI.Frame(width: 320, height: 480, scale: 2, inches: [3.5]) ///[iPhone4,iPhone4S]
-    public static var is320x568x2 = NXUI.Frame(width: 320, height: 568, scale: 2, inches: [4.0]) ///[iPhone5,iPhone5c,iPhone5S,iPhoneSE1]
-        
-    public static var is375x667x2 = NXUI.Frame(width: 375, height: 667, scale: 2, inches: [4.7]) ///[iPhone6,iPhone6s,iPhone7,iPhone8,iPhoneSE2]
-    public static var is375x812x3 = NXUI.Frame(width: 375, height: 812, scale: 3, inches: [5.4,5.8]) ///[iPhone12mini,iPhone13mini],[iPhoneX,iPhoneXs,iPhone11Pro]
-    
-    public static var is390x844x3 = NXUI.Frame(width: 390, height: 844, scale: 3, inches: [6.1]) ///[iPhone12,iPhone12Pro,iPhone13,iPhone13Pro]
-    
-    public static var is414x736x3 = NXUI.Frame(width: 414, height: 736, scale: 3, inches: [5.5]) ///[iPhone6Plus,iPhone6sPlus,iPhone7Plus,iPhone8Plus]
-    public static var is414x896x2 = NXUI.Frame(width: 414, height: 896, scale: 2, inches: [6.1]) ///[iPhoneXr,iPhone11]
-    public static var is414x896x3 = NXUI.Frame(width: 414, height: 896, scale: 3, inches: [6.5]) ///[iPhoneXs max,iPhone11ProMax]
-    
-    public static var is428x926x3 = NXUI.Frame(width: 428, height: 926, scale: 3, inches: [6.7]) ///[iPhone12ProMax,iPhone13ProMax]
 }
 
 
-// 颜色和字体
-extension NXUI {
+// 颜色
+open class NXUI {
     //view背景色
     static public var viewBackgroundColor = NXUI.color(247, 247, 247)
     //contentView背景色
@@ -123,8 +94,88 @@ extension NXUI {
     static public var minAlphaOfColor = UIColor.black.withAlphaComponent(0.01)
     // 转场后容器视图的Alpha值
     static public var maxAlphaOfColor = UIColor.black.withAlphaComponent(0.30)
+
     
-    //用户设定的暗黑模式类型
+    //颜色:rgb+alpha, rgb:[0,255],a:[0,1]
+    public class func color(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat, _ a:CGFloat = 1.0) -> UIColor {
+        return UIColor(red: (r)/255.0, green: (g)/255.0, blue: (b)/255.0, alpha: a)
+    }
+    
+    //颜色：hex+alpha
+    public class func color(_ hex:Int, _ a: CGFloat = 1.0) -> UIColor {
+        return NXUI.color(((CGFloat)((hex & 0xFF0000) >> 16)), ((CGFloat)((hex & 0xFF00) >> 8)), ((CGFloat)(hex & 0xFF)), a)
+    }
+    
+    //创建浅色/暗黑模式的颜色
+    public class func color(_ lightColor:UIColor, _ darkColor:UIColor? = nil) -> UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.init { (__collection) -> UIColor in
+                if let __darkColor = darkColor, NXUI.userInterfaceStyle == NXUI.Color.dark {
+                    return __darkColor
+                }
+                return lightColor
+            }
+        }
+        return lightColor
+    }
+}
+
+
+//字体
+extension NXUI {
+    //字体
+    public class func font(_ size: CGFloat, _ blod:Bool = false) -> UIFont {
+        if blod {
+            return UIFont.boldSystemFont(ofSize: size)
+        }
+        return UIFont.systemFont(ofSize: size)
+    }
+    
+    //自定义字体
+    public class func font(_ name:String, _ size: CGFloat, _ blod:Bool = false) -> UIFont {
+        if let font =  UIFont(name: name, size: size) {
+            return font
+        }
+        return NXUI.font(size, blod)
+    }
+}
+
+// 设备-其他
+extension NXUI {
+    //设备model与产品的映射表
+    static public var devices : [String:String] = {
+        if let value = NXSerialization.file(toDictionary: NX.Association.root + "/NXKit.bundle/NX.bundle/device.json") as? [String:String] {
+            return value
+        }
+        return [:]
+    }()
+    
+    public struct Frame {
+        public var width = CGFloat.zero
+        public var height = CGFloat.zero
+        public var scale = CGFloat.zero
+        public var inches = [CGFloat]()
+    }
+    
+    public static var is320x480x1 = NXUI.Frame(width: 320, height: 480, scale: 1, inches: [3.5]) ///[iPhone,iPhone3GS]
+    public static var is320x480x2 = NXUI.Frame(width: 320, height: 480, scale: 2, inches: [3.5]) ///[iPhone4,iPhone4S]
+    public static var is320x568x2 = NXUI.Frame(width: 320, height: 568, scale: 2, inches: [4.0]) ///[iPhone5,iPhone5c,iPhone5S,iPhoneSE1]
+        
+    public static var is375x667x2 = NXUI.Frame(width: 375, height: 667, scale: 2, inches: [4.7]) ///[iPhone6,iPhone6s,iPhone7,iPhone8,iPhoneSE2]
+    public static var is375x812x3 = NXUI.Frame(width: 375, height: 812, scale: 3, inches: [5.4,5.8]) ///[iPhone12mini,iPhone13mini],[iPhoneX,iPhoneXs,iPhone11Pro]
+    
+    public static var is390x844x3 = NXUI.Frame(width: 390, height: 844, scale: 3, inches: [6.1]) ///[iPhone12,iPhone12Pro,iPhone13,iPhone13Pro]
+    
+    public static var is414x736x3 = NXUI.Frame(width: 414, height: 736, scale: 3, inches: [5.5]) ///[iPhone6Plus,iPhone6sPlus,iPhone7Plus,iPhone8Plus]
+    public static var is414x896x2 = NXUI.Frame(width: 414, height: 896, scale: 2, inches: [6.1]) ///[iPhoneXr,iPhone11]
+    public static var is414x896x3 = NXUI.Frame(width: 414, height: 896, scale: 3, inches: [6.5]) ///[iPhoneXs max,iPhone11ProMax]
+    
+    public static var is428x926x3 = NXUI.Frame(width: 428, height: 926, scale: 3, inches: [6.7]) ///[iPhone12ProMax,iPhone13ProMax]
+}
+
+
+//用户设定的暗黑模式类型
+extension NXUI {
     static private(set) var __userInterfaceStyle = NXUI.Color.light
     static public var userInterfaceStyle : NXUI.Color {
         set{
@@ -155,41 +206,8 @@ extension NXUI {
     static private(set) var __statusBarStyle = NXUI.Bar.dark
     static public var statusBarStyle : NXUI.Bar {
         set{
-            if NX.isViewControllerBasedStatusBarAppearance {
-                if newValue !=  .none {
-                    __statusBarStyle = newValue
-                }
-            }
-            else {
-                if newValue == NXUI.Bar.hidden {
-                    __statusBarStyle = newValue
-                    UIApplication.shared.isStatusBarHidden = true
-                }
-                else if newValue == NXUI.Bar.unspecified {
-                    __statusBarStyle = newValue
-                    UIApplication.shared.isStatusBarHidden = false
-                    UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.default, animated: true)
-                }
-                else if newValue == NXUI.Bar.light {
-                    __statusBarStyle = newValue
-                    UIApplication.shared.isStatusBarHidden = false
-                    UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
-                }
-                else if newValue == NXUI.Bar.dark {
-                    __statusBarStyle = newValue
-                    UIApplication.shared.isStatusBarHidden = false
-                    if #available(iOS 13.0, *) {
-                        if userInterfaceStyle == NXUI.Color.dark {
-                            UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
-                        }
-                        else {
-                            UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.darkContent, animated: true)
-                        }
-                    }
-                    else{
-                        UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.default, animated: true)
-                    }
-                }
+            if newValue !=  .none {
+                __statusBarStyle = newValue
             }
         }
         get{
@@ -217,8 +235,11 @@ extension NXUI {
 }
 
 
-// 
+//全局UI
 extension NXUI {
+    static public var tableViewStyle = UITableView.Style.grouped
+    static public var separatorStyle = UITableViewCell.SeparatorStyle.none
+    
     static public var AnimationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self //空页面加载动画类型
     static public var HUDAnimationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self//loading
 
@@ -226,49 +247,8 @@ extension NXUI {
 }
 
 
-// 颜色和字体
-extension NXUI {
-    
-    //颜色:rgb+alpha, rgb:[0,255],a:[0,1]
-    public class func color(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat, _ a:CGFloat = 1.0) -> UIColor {
-        return UIColor(red: (r)/255.0, green: (g)/255.0, blue: (b)/255.0, alpha: a)
-    }
-    
-    //颜色：hex+alpha
-    public class func color(_ hex:Int, _ a: CGFloat = 1.0) -> UIColor {
-        return NXUI.color(((CGFloat)((hex & 0xFF0000) >> 16)), ((CGFloat)((hex & 0xFF00) >> 8)), ((CGFloat)(hex & 0xFF)), a)
-    }
-    
-    //创建浅色/暗黑模式的颜色
-    public class func color(_ lightColor:UIColor, _ darkColor:UIColor? = nil) -> UIColor {
-        if #available(iOS 13.0, *) {
-            return UIColor.init { (__collection) -> UIColor in
-                if let __darkColor = darkColor, NXUI.userInterfaceStyle == NXUI.Color.dark {
-                    return __darkColor
-                }
-                return lightColor
-            }
-        }
-        return lightColor
-    }
-    
-    //字体:
-    public class func font(_ size: CGFloat, _ blod:Bool = false) -> UIFont {
-        if blod {
-            return UIFont.boldSystemFont(ofSize: size)
-        }
-        return UIFont.systemFont(ofSize: size)
-    }
-    
-    //自定义字体:
-    public class func font(_ name:String, _ size: CGFloat, _ blod:Bool = false) -> UIFont {
-        if let font =  UIFont(name: name, size: size) {
-            return font
-        }
-        return NXUI.font(size, blod)
-    }
-}
 
+//获取框架中的资源文件
 extension NXUI {
     //加载获取bundle中图片
     public class func image(named name:String) -> UIImage? {
@@ -290,8 +270,8 @@ extension NXUI {
     }
 }
 
+//提示与加载动画
 extension NXUI {
-    
     //toast
     @discardableResult
     class public func showToast(message:String, _ ats:NX.Ats = .center, _ superview:UIView? = UIApplication.shared.keyWindow) -> NXHUD.WrappedView? {
@@ -326,6 +306,7 @@ extension NXUI {
 }
 
 
+//重定尺寸
 extension NXUI {
     open class func resize(size:CGSize, to:CGSize, mode:UIView.ContentMode) -> CGRect {
         var __frame = CGRect.zero

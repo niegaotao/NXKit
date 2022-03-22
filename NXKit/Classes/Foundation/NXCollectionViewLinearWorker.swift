@@ -10,10 +10,11 @@ import UIKit
 open class NXCollectionViewLinearWorker : UICollectionViewLayout {
     
     open class Column: NXAny {
-        open var index = 0 //处在第几个列
-        open var count = 0 //已经加入的对象的个数
-        open var offset : CGFloat = 0 //偏移
-        init(index:Int, count:Int, offset:CGFloat){
+        open var index = Int.zero //处在第几个列
+        open var count = Int.zero //已经加入的对象的个数
+        open var offset = CGPoint.zero //偏移
+        open var width = CGFloat.zero
+        init(index:Int, count:Int, offset:CGPoint){
             super.init()
             self.index = index
             self.count = count
@@ -36,7 +37,7 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
         self.direction = direction
         
         while(self.columns.count < self.numberOfColumns) {
-            self.columns.append(Column(index: self.columns.count, count: 0, offset: 0.0))
+            self.columns.append(Column(index: self.columns.count, count: 0, offset: CGPoint.zero))
         }
     }
     
@@ -44,20 +45,21 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
         super.init(coder: coder)
         
         while(self.columns.count < self.numberOfColumns) {
-            self.columns.append(Column(index: self.columns.count, count: 0, offset: 0.0))
+            self.columns.append(Column(index: self.columns.count, count: 0, offset: CGPoint.zero))
         }
     }
     
     open func clear() {
         self.added = 0
         self.columns.forEach { e in
-            e.offset = 0
+            e.offset.y = 0
             e.count = 0
         }
     }
     
     open func updateAttributes(_ attributes: UICollectionViewLayoutAttributes, type:String, size:CGSize, section: NXSection<NXItem>, sections:[NXSection<NXItem>]) {
         var __frame = CGRect.zero
+        __frame.size = size
         
         if self.direction == .vertical {
             let index = sections.firstIndex(of: section) ?? -1
@@ -71,7 +73,7 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
                 //2.找出插入到哪一列
                 var target = self.columns[0]
                 for e in self.columns {
-                    if e.offset < target.offset {
+                    if e.offset.y < target.offset.y {
                         target = e
                     }
                 }
@@ -80,18 +82,18 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
                 __frame.origin.x = self.insets.left +  section.insets.left + (__frame.width + section.interitemSpacing) * CGFloat(target.index)
                 if target.count == 0 && section.header == nil{
                     if index == 0 {
-                        target.offset = target.offset + self.insets.top + section.insets.top
+                        target.offset.y = target.offset.y + self.insets.top + section.insets.top
                     }
                     else {
-                        target.offset = target.offset + section.insets.top
+                        target.offset.y = target.offset.y + section.insets.top
                     }
-                    __frame.origin.y = target.offset
+                    __frame.origin.y = target.offset.y
                 }
                 else {
-                    target.offset = target.offset + section.lineSpacing
-                    __frame.origin.y = target.offset
+                    target.offset.y = target.offset.y + section.lineSpacing
+                    __frame.origin.y = target.offset.y
                 }
-                target.offset = target.offset + __frame.size.height
+                target.offset.y = target.offset.y + __frame.size.height
                 target.count = target.count + 1
                 
                 if index >= 0 {
@@ -112,7 +114,7 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
                 //2.找出插入到哪一列
                 var target = self.columns[0]
                 for e in self.columns {
-                    if e.offset > target.offset {
+                    if e.offset.y > target.offset.y {
                         target = e
                     }
                 }
@@ -121,17 +123,17 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
                 __frame.origin.x = self.insets.left +  section.insets.left
                 
                 if index == 0 {
-                    target.offset = self.insets.top + section.insets.top
+                    target.offset.y = self.insets.top + section.insets.top
                 }
                 else {
-                    target.offset = section.insets.top
+                    target.offset.y = section.insets.top
                 }
-                __frame.origin.y = target.offset
-                target.offset = target.offset + __frame.size.height
+                __frame.origin.y = target.offset.y
+                target.offset.y = target.offset.y + __frame.size.height
                 
                 //更新其他列的偏移
                 for e in self.columns {
-                    e.offset = target.offset
+                    e.offset.y = target.offset.y
                 }
                 if index >= 0 {
                     attributes.indexPath = IndexPath(index: index)
@@ -150,17 +152,17 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
                 //2.找出插入到哪一列
                 var target = self.columns[0]
                 for e in self.columns {
-                    if e.offset > target.offset {
+                    if e.offset.y > target.offset.y {
                         target = e
                     }
                 }
                 
                 //3.插入数据
                 __frame.origin.x = self.insets.left +  section.insets.left
-                __frame.origin.y = target.offset
-                target.offset = target.offset + __frame.size.height
+                __frame.origin.y = target.offset.y
+                target.offset.y = target.offset.y + __frame.size.height
                 if index == sections.count-1 {
-                    target.offset = target.offset + section.insets.bottom
+                    target.offset.y = target.offset.y + section.insets.bottom
                 }
                 
                 //更新其他列的偏移
@@ -186,7 +188,7 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
             //2.找出插入到哪一列
             var target = self.columns[0]
             for e in self.columns {
-                if e.offset < target.offset {
+                if e.offset.x < target.offset.x {
                     target = e
                 }
             }
@@ -194,14 +196,14 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
             //3.插入数据
             __frame.origin.y = self.insets.top +  section.insets.top + (__frame.height + section.interitemSpacing) * CGFloat(target.index)
             if target.count == 0 {
-                target.offset = self.insets.left + section.insets.left
-                __frame.origin.x = target.offset
+                target.offset.x = self.insets.left + section.insets.left
+                __frame.origin.x = target.offset.x
             }
             else {
-                target.offset = target.offset + section.lineSpacing
-                __frame.origin.x = target.offset
+                target.offset.x = target.offset.x + section.lineSpacing
+                __frame.origin.x = target.offset.x
             }
-            target.offset = target.offset + __frame.size.width
+            target.offset.x = target.offset.x + __frame.size.width
             target.count = target.count + 1
             
             attributes.indexPath = IndexPath(row: self.added, section: 0)
@@ -215,7 +217,7 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
     open override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         var attribute : UICollectionViewLayoutAttributes? = nil
 
-        if let wrappedData = (self.collectionView as? NXCollectionView)?.wrappedData, let section = wrappedData[indexPath.section] {
+        if let data = (self.collectionView as? NXCollectionView)?.data, let section = data[indexPath.section] {
             if elementKind == UICollectionView.elementKindSectionHeader {
                 attribute = (section.header as? NXCollectionViewAttributesProtocol)?.attributes
             }
@@ -228,8 +230,8 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
     }
     
     open override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        if let wrappedData = (self.collectionView as? NXCollectionView)?.wrappedData {
-            return (wrappedData[indexPath] as? NXCollectionViewAttributesProtocol)?.attributes
+        if let data = (self.collectionView as? NXCollectionView)?.data {
+            return (data[indexPath] as? NXCollectionViewAttributesProtocol)?.attributes
         }
         return nil
     }
@@ -237,9 +239,9 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
     
     open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var attributes = [UICollectionViewLayoutAttributes]()
-        if let wrappedData = (self.collectionView as? NXCollectionView)?.wrappedData {
+        if let data = (self.collectionView as? NXCollectionView)?.data {
             
-            for section in wrappedData.sections {
+            for section in data.sections {
                 
                 
                 
@@ -277,24 +279,24 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
         var size = self.size
         var target = self.columns[0]
         for e in self.columns {
-            if e.offset > target.offset {
+            if e.offset.y > target.offset.y {
                 target = e
             }
         }
-        if let section = (self.collectionView as? NXCollectionView)?.wrappedData?.sections.last {
+        if let section = (self.collectionView as? NXCollectionView)?.data?.sections.last {
             if self.direction == .vertical {
-                size.height = max(size.height, target.offset + section.insets.bottom + self.insets.bottom)
+                size.height = max(size.height, target.offset.y + section.insets.bottom + self.insets.bottom)
             }
             else {
-                size.width = max(size.width, target.offset + section.insets.bottom + self.insets.right)
+                size.width = max(size.width, target.offset.y + section.insets.bottom + self.insets.right)
             }
         }
         else {
             if self.direction == .vertical {
-                size.height = max(size.height, target.offset + self.insets.bottom)
+                size.height = max(size.height, target.offset.x + self.insets.bottom)
             }
             else {
-                size.width = max(size.width, target.offset + self.insets.right)
+                size.width = max(size.width, target.offset.x + self.insets.right)
             }
         }
         

@@ -15,9 +15,7 @@ open class NX {
     static public let namespace = NX.infoDictionary["CFBundleExecutable"] as? String ?? ""
     static public let name = NX.infoDictionary["CFBundleDisplayName"] as? String ?? ""
     static public let version = NX.infoDictionary["CFBundleShortVersionString"] as? String ?? ""
-    static public let build = NX.infoDictionary["CFBundleVersion"] as? String ?? ""
-    static public let isViewControllerBasedStatusBarAppearance = NX.get(bool: NX.infoDictionary["UIViewControllerBasedStatusBarAppearance"] as? Bool, true)
-    
+    static public let build = NX.infoDictionary["CFBundleVersion"] as? String ?? ""    
     public typealias Completion<Action, Value> = (_ action:Action, _ value:Value)  -> ()
 }
 
@@ -149,24 +147,6 @@ extension NX {
 
 
 extension NX {
-    //占位图
-    public class Placeholder {
-        static public var frame = CGRect(x: 0, y: 0, width: 320, height: 256)
-        
-        static public var m = NX.Attribute { (_, __sender) in
-            __sender.frame = CGRect(x: 0, y: 0, width: 320, height: 170)
-        }
-        
-        static public var t = NX.Attribute { (_, __sender) in
-            __sender.frame = CGRect(x: 0, y: 175, width: 320, height: 55)
-            __sender.value = "暂无数据～"
-            __sender.textAlignment = .center
-            __sender.numberOfLines = 0
-            __sender.font = NXUI.font(16)
-            __sender.color = NXUI.darkGrayColor
-        }
-    }
-    
     //授权类型
     public enum Authorize {
         case album          //系统相册
@@ -222,9 +202,6 @@ extension NX {
         
         //js注入脚本
         static public var scripts = [WKUserScript]()
-        
-        static public var tableViewStyle = UITableView.Style.grouped
-        static public var separatorStyle = UITableViewCell.SeparatorStyle.none
         
         //alert/action的单元格最大宽度、高度
         static public var size = CGSize(width: NXUI.width*0.8, height: 48.0)

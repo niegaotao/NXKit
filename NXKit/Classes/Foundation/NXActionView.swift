@@ -382,7 +382,7 @@ open class NXActionView: NXSuboverlay<NXActionViewAttributes> {
         self.backgroundView.setupEvents([.touchUpInside], action: { [weak self] (event, sender) in
             guard let __weakself = self else { return }
             __weakself.close(animation: __weakself.ctxs.animation, completion: { (isCompleted) in
-                __weakself.ctxs.closeCompletion?("background", nil)
+                __weakself.ctxs.close?("background", nil)
             })
         })
         
@@ -409,13 +409,13 @@ open class NXActionView: NXSuboverlay<NXActionViewAttributes> {
         self.headerView.lhsView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
             guard let __weakself = self else { return }
             __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
-                __weakself.ctxs.closeCompletion?("header.lhs", nil)
+                __weakself.ctxs.close?("header.lhs", nil)
             })
         }
         self.headerView.rhsView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
             guard let __weakself = self else { return }
             __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
-                __weakself.ctxs.closeCompletion?("header.rhs", nil)
+                __weakself.ctxs.close?("header.rhs", nil)
             })
         }
         self.contentView.addSubview(self.headerView)
@@ -425,19 +425,19 @@ open class NXActionView: NXSuboverlay<NXActionViewAttributes> {
         self.footerView.lhsView.setupEvents([.touchUpInside]) { [weak self] (e, v) in
             guard let __weakself = self else { return }
             __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
-                __weakself.ctxs.closeCompletion?("footer.lhs", nil)
+                __weakself.ctxs.close?("footer.lhs", nil)
             })
         }
         self.footerView.centerView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
             guard let __weakself = self else { return }
             __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
-                __weakself.ctxs.closeCompletion?("footer.center", nil)
+                __weakself.ctxs.close?("footer.center", nil)
             })
         }
         self.footerView.rhsView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
             guard let __weakself = self else { return }
             __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
-                __weakself.ctxs.closeCompletion?("footer.rhs", nil)
+                __weakself.ctxs.close?("footer.rhs", nil)
             })
         }
         self.contentView.addSubview(self.footerView)

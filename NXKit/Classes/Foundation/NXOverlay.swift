@@ -56,7 +56,7 @@ open class NXOverlayAttributes : NX.Rect {
     open var backgroundColor = UIColor.black.withAlphaComponent(0.4)
 
     //关闭的回调, background,lhs,rhs,close,footer
-    open var closeCompletion : NX.Completion<String, Any?>? = nil
+    open var close : NX.Completion<String, Any?>? = nil
     
     //点击选项或者左右按钮消失的回调
     open var completion : NX.Completion<String, Int>? = nil

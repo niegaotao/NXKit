@@ -38,6 +38,9 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
     }
     
     open var forwardBar: NXNaviView.Bar? {
+        willSet {
+            forwardBar?.removeFromSuperview()
+        }
         didSet {
             self.updateSubviews("", nil)
         }
@@ -162,7 +165,7 @@ extension NXNaviView {
         public init(){}
         
         ///记录点击事件的变量
-        weak var target : NSObject?
+        public weak var target : NSObject?
         public var selector : Selector?
         ///ui
         public var image: UIImage?

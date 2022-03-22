@@ -206,7 +206,7 @@ extension NX.View {
                 view.image = image
             }
             else if metadata.value.count > 0 {
-                if NX.Placeholder.t.value.hasPrefix("http") {
+                if metadata.value.hasPrefix("http") {
                     NXUI.image(view, metadata.value)
                 }
                 else {

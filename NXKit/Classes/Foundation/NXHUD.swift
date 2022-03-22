@@ -193,7 +193,7 @@ open class NXHUD {
 
 extension NXHUD {
     @discardableResult
-    open class func showSubview(key:String, image:UIImage?, message:String, ats:NX.Ats, duration:TimeInterval, superview:UIView) -> NXHUD.WrappedView? {
+    open class func openWrappedView(key:String, image:UIImage?, message:String, ats:NX.Ats, duration:TimeInterval, superview:UIView) -> NXHUD.WrappedView? {
         if image == nil && message.count <= 0 {
             return nil
         }
@@ -221,7 +221,7 @@ extension NXHUD {
                             wrappedView.alpha = wrappedView.ctxs.alpha
                            },
                            completion: { (isCompleted) in
-                            NXHUD.closeSubview(subview: wrappedView, superview: nil)
+                            NXHUD.closeWrappedView(subview: wrappedView, superview: nil)
                            })
         }
         else if key == NXHUD.Key.loading.rawValue {
@@ -239,7 +239,7 @@ extension NXHUD {
     }
     
     @discardableResult
-    open class func closeSubview(subview:NXHUD.WrappedView?,  superview:UIView?) -> Bool{
+    open class func closeWrappedView(subview:NXHUD.WrappedView?,  superview:UIView?) -> Bool{
         if let wrappedView = subview {
             UIView.animate(withDuration: wrappedView.ctxs.inoutDuration,
                            delay: wrappedView.ctxs.duration,
@@ -272,17 +272,17 @@ extension UIView {
     
     @discardableResult
     open func makeToast(message: String, ats: NX.Ats = .maxY, duration: TimeInterval = 2.0) -> NXHUD.WrappedView? {
-        return NXHUD.showSubview(key: NXHUD.Key.toast.rawValue, image: nil, message: message, ats: ats, duration: duration, superview: self)
+        return NXHUD.openWrappedView(key: NXHUD.Key.toast.rawValue, image: nil, message: message, ats: ats, duration: duration, superview: self)
     }
 
     @discardableResult
     open func makeLoading(message: String = "", ats: NX.Ats = .center) -> NXHUD.WrappedView? {
-        return NXHUD.showSubview(key: NXHUD.Key.loading.rawValue, image: NXUI.image(named:"icon-animation.png"), message: message, ats: ats, duration: 0, superview: self)
+        return NXHUD.openWrappedView(key: NXHUD.Key.loading.rawValue, image: NXUI.image(named:"icon-animation.png"), message: message, ats: ats, duration: 0, superview: self)
     }
 
     @discardableResult
     open func hideLoading(animationView:NXHUD.WrappedView? = nil) -> Bool{
-        return NXHUD.closeSubview(subview:animationView, superview: self)
+        return NXHUD.closeWrappedView(subview:animationView, superview: self)
     }
 }
 

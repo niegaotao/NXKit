@@ -9,7 +9,7 @@
 import UIKit
 
 open class NXCollectionView: UICollectionView, UIGestureRecognizerDelegate {
-    open weak var wrappedData : NXCollectionViewData?
+    open weak var data : NXCollection<NXCollectionView>?
     
     open var isMultirecognizersSupported = true; //是否支持多手势识别
     

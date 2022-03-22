@@ -127,10 +127,7 @@ open class NXViewController: UIViewController  {
     
     //更新导航栏：父类会自动调用
     open func updateNavigationBar() {
-        if NX.isViewControllerBasedStatusBarAppearance == false {
-            NXUI.statusBarStyle = self.ctxs.statusBarStyle
-        }
-        else if let superviewController = self.ctxs.superviewController {
+        if let superviewController = self.ctxs.superviewController {
             if let viewController = superviewController as? NXToolViewController, viewController.selectedViewController == self {
                 superviewController.updateNavigationBar()
             }
@@ -185,7 +182,7 @@ open class NXViewController: UIViewController  {
     
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         var currentValue = self.ctxs.statusBarStyle
-        if let viewController =  self as? NXToolViewController, let selectedViewController = viewController.selectedViewController {
+        if let viewController = self as? NXToolViewController, let selectedViewController = viewController.selectedViewController {
             currentValue = selectedViewController.ctxs.statusBarStyle
         }
         else if let viewController = self.ctxs.subviewControllers.last, viewController.ctxs.statusBarStyle != .none {
