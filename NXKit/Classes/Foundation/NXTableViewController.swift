@@ -10,6 +10,9 @@ import UIKit
 
 
 open class NXTableViewController: NXViewController, UITableViewDelegate, UITableViewDataSource {
+    //表视图样式
+    open var tableViewStyle = NXUI.tableViewStyle
+    
     //表视图
     open var tableView: NXTableView? = nil
     //数据源管理对象
@@ -28,7 +31,7 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         self.data.placeholderView.ctxs.isHidden = true
 
         //tableView
-        self.tableView = NXTableView(frame: self.contentView.bounds, style: data.tableViewStyle)
+        self.tableView = NXTableView(frame: self.contentView.bounds, style: self.tableViewStyle)
         self.tableView?.frame = self.contentView.bounds
         self.tableView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.tableView?.backgroundColor = NXUI.tableViewBackgroundColor

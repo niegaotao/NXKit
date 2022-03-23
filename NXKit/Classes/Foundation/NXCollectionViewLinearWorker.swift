@@ -57,7 +57,7 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
         }
     }
     
-    open func updateAttributes(_ attributes: UICollectionViewLayoutAttributes, type:String, size:CGSize, section: NXSection<NXItem>, sections:[NXSection<NXItem>]) {
+    open func updateAttributes(_ attributes: UICollectionViewLayoutAttributes, type:String, size:CGSize, section: NXSection, sections:[NXSection]) {
         var __frame = CGRect.zero
         __frame.size = size
         

@@ -213,7 +213,7 @@ extension NXToolView {
             borderWidth:CGFloat,
             size:CGFloat,
             insets:UIEdgeInsets,
-            isValue:Bool,
+            isNumeric:Bool,
             isResetable:Bool) = (0, UIColor.red, UIColor.white, UIColor.red, 0, 11, UIEdgeInsets(top: 1.5, left: 1.5, bottom: 1.5, right: 1.5), true, false)
         
         open var elementView = NXToolView.ElementView(frame: CGRect(x: 0, y: 0, width: NXUI.width/4.0, height: NXUI.toolViewOffset))
@@ -269,7 +269,7 @@ extension NXToolView {
             
             if element.attachment.value > 0 {
                 markupView.isHidden = false
-                if element.attachment.isValue {
+                if element.attachment.isNumeric {
                     
                     var attachmentValue = "\(element.attachment.value)"
                     if element.attachment.value > 99 {

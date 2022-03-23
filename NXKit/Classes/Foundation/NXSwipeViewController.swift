@@ -9,7 +9,7 @@
 import UIKit
 
 open class NXSwipeViewController: NXContainerController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    open var wrapped = NXSection<NXItem>()
+    open var wrapped = NXSection()
     open var collectionView : NXCollectionView? = nil
     open var swipeView = NXSwipeView(frame: CGRect(x: 0, y: NXUI.topOffset, width: NXUI.width, height: 44))
     

@@ -59,10 +59,10 @@ public protocol NXCollectionViewAttributesProtocol {
 }
 
 //分组基类
-open class NXSection<Value: NXItem> : NXItem {
-    open var header : NXItem? = nil             //头部的色块
-    open var items = [Value]()                  //分组下所有的单元格对象
-    open var footer: NXItem? = nil              //尾部应该用不到，默认为nil
+open class NXSection : NXItem {
+    open var header : NXItem? = nil             //头部的块，默认为nil
+    open var items = [NXItem]()                  //分组下所有的单元格对象
+    open var footer: NXItem? = nil              //尾部的块，默认为nil
     
     public func updateHeader(cls: AnyClass, reuse:String, height: CGFloat){
         if self.header == nil {
@@ -82,7 +82,7 @@ open class NXSection<Value: NXItem> : NXItem {
     }
     
     //通过下标访问时加一层判断，防止越界crash
-    open subscript(index: Int) -> Value? {
+    open subscript(index: Int) -> NXItem? {
         if index >= 0 && index < items.count {
             return self.items[index]
         }
@@ -90,14 +90,14 @@ open class NXSection<Value: NXItem> : NXItem {
     }
     
     //添加一个元素
-    open func append(_ newValue: Value?){
+    open func append(_ newValue: NXItem?){
         if let value = newValue {
             items.append(value)
         }
     }
 
     //批量添加元素
-    open func append(contentsOf contents: [Value]?){
+    open func append(contentsOf contents: [NXItem]?){
         if let contents = contents, contents.count > 0 {
             items.append(contentsOf:contents)
         }
@@ -106,7 +106,7 @@ open class NXSection<Value: NXItem> : NXItem {
     //插入某个元素到指定索引位置
     //如果index=elements.count，则操作同append(_:)
     @discardableResult
-    open func insert(_ value: Value?, at index:Int) -> Bool {
+    open func insert(_ value: NXItem?, at index:Int) -> Bool {
         if let value = value, index >= 0 && index <= items.count {
             items.insert(value, at: index)
             return true
@@ -116,7 +116,7 @@ open class NXSection<Value: NXItem> : NXItem {
     
     //移除一个元素，找到第一个就会移除,返回值true表示元素存在并且成功移除
     @discardableResult
-    open func remove(_ value: Value?) -> Bool {
+    open func remove(_ value: NXItem?) -> Bool {
         if let value = value, let index = items.firstIndex(of: value) {
             return self.remove(at: index)
         }
@@ -140,7 +140,7 @@ open class NXSection<Value: NXItem> : NXItem {
     
     //替换某个元素
     @discardableResult
-    open func replace(_ value: Value?, at index: Int) -> Bool {
+    open func replace(_ value: NXItem?, at index: Int) -> Bool {
         if let value = value, index >= 0 && index < items.count {
             self.items.replaceSubrange(index...index, with: [value])
             return true
@@ -202,9 +202,6 @@ open class NXCollection<T:UIView> : NXAny {
     open var sections = [NXSection]()
     
     public let placeholderView = NXPlaceholderView()
-
-    //表视图样式
-    open var tableViewStyle = NXUI.tableViewStyle
     
     //是否展示第一个section的头部
     open var showsFirstSectionHeader = false
@@ -214,7 +211,7 @@ open class NXCollection<T:UIView> : NXAny {
     open var calcAt = false
     
     //通过下标访问一个分组对象
-    open subscript(index: Int) -> NXSection<NXItem>? {
+    open subscript(index: Int) -> NXSection? {
         if index >= 0 && index < sections.count {
             return self.sections[index]
         }
@@ -233,14 +230,14 @@ open class NXCollection<T:UIView> : NXAny {
     }
     
     //添加一个分组
-    open func append(_ newValue: NXSection<NXItem>?){
+    open func append(_ newValue: NXSection?){
         if let value = newValue {
             sections.append(value)
         }
     }
     
     //批量添加分组
-    open func append(contentsOf contents: [NXSection<NXItem>]?){
+    open func append(contentsOf contents: [NXSection]?){
         if let contents = contents, contents.count > 0 {
             sections.append(contentsOf:contents)
         }
@@ -249,7 +246,7 @@ open class NXCollection<T:UIView> : NXAny {
     //插入某个分组到指定索引位置
     //如果index=sections.count，则操作同append(_:)
     @discardableResult
-    open func insert(_ value: NXSection<NXItem>?, at index:Int) -> Bool {
+    open func insert(_ value: NXSection?, at index:Int) -> Bool {
         if let value = value, index >= 0 && index <= sections.count {
             sections.insert(value, at: index)
             return true
@@ -259,7 +256,7 @@ open class NXCollection<T:UIView> : NXAny {
     
     //移除一个分组，找到第一个就会移除,返回值true表示分组存在并且成功移除
     @discardableResult
-    open func remove(_ value: NXSection<NXItem>?) -> Bool {
+    open func remove(_ value: NXSection?) -> Bool {
         if let value = value, let index = sections.firstIndex(of: value) {
             return self.remove(at: index)
         }
@@ -283,7 +280,7 @@ open class NXCollection<T:UIView> : NXAny {
     
     //替换某个分组
     @discardableResult
-    open func replace(_ element: NXSection<NXItem>?, at index: Int) -> Bool {
+    open func replace(_ element: NXSection?, at index: Int) -> Bool {
         if let element = element, index >= 0 && index < sections.count {
             self.sections.replaceSubrange(index...index, with: [element])
             return true
@@ -427,40 +424,6 @@ extension NXCollection {
             }
         }
     }
-    
-    //新增一个分组,并将新增的分组返回//_ cls: AnyClass = NXTableReusableView.self, _ reuse:String = "NXTableReusableView", _ h:CGFloat = 10.0
-    @discardableResult
-    open func addSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection<NXItem> {
-        let section = NXSection()
-        section.updateHeader(cls:cls, reuse:reuse, height: height)
-        self.append(section)
-        return section
-    }
-    
-    //返回最后一个分组，没有则新增并返回最后一个分组
-    @discardableResult
-    open func getLastSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection<NXItem> {
-        if let section = self.sections.last {
-            return section
-        }
-        return addSection(cls:cls, reuse:reuse, height: height)
-    }
-    
-    //添加一个单元格到最后一个分组上，如果没有分组则创建
-    @discardableResult
-    open func addElementToLastSection(_ item: NXItem?) -> NXSection<NXItem> {
-        let section = self.getLastSection(cls: NXTableReusableView.self, reuse: "NXTableReusableView", height: 10)
-        section.append(item)
-        return section
-    }
-    
-    //批量添加单元格到最后一个分组上
-    @discardableResult
-    open func addElementsToLastSection(_ items: [NXItem]?) -> NXSection<NXItem> {
-        let section = self.getLastSection(cls: NXTableReusableView.self, reuse: "NXTableReusableView", height: 10)
-        section.append(contentsOf: items)
-        return section
-    }
 }
 
 extension NXCollection where T == NXTableView {
@@ -469,7 +432,7 @@ extension NXCollection where T == NXTableView {
         e.placeholderView = self.placeholderView
         e.ctxs.update(NXTablePlaceholderViewCell.self, "NXTablePlaceholderViewCell")
         e.ctxs.frame = frame
-        self.addElementToLastSection(e)
+        self.addElementsToLastSection([e])
         self.wrappedView?.register(NXTablePlaceholderViewCell.self, forCellReuseIdentifier: "NXTablePlaceholderViewCell")
         return e
     }
@@ -514,6 +477,32 @@ extension NXCollection where T == NXTableView {
         }
         return 0.0
     }
+    
+    //新增一个分组,并将新增的分组返回//_ cls: AnyClass = NXTableReusableView.self, _ reuse:String = "NXTableReusableView", _ h:CGFloat = 10.0
+    @discardableResult
+    open func addSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
+        let section = NXSection()
+        section.updateHeader(cls:cls, reuse:reuse, height: height)
+        self.append(section)
+        return section
+    }
+    
+    //返回最后一个分组，没有则新增并返回最后一个分组
+    @discardableResult
+    open func getLastSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
+        if let section = self.sections.last {
+            return section
+        }
+        return addSection(cls:cls, reuse:reuse, height: height)
+    }
+    
+    //批量添加单元格到最后一个分组上
+    @discardableResult
+    open func addElementsToLastSection(_ items: [NXItem]?) -> NXSection {
+        let section = self.getLastSection(cls: NXTableReusableView.self, reuse: "NXTableReusableView", height: 10)
+        section.append(contentsOf: items)
+        return section
+    }
 }
 
 
@@ -523,9 +512,35 @@ extension NXCollection where T == NXCollectionView {
         e.placeholderView = self.placeholderView
         e.ctxs.update(NXCollectionPlaceholderViewCell.self, "NXPlaceholderViewCell")
         e.ctxs.frame = frame
-        self.addElementToLastSection(e)
+        self.addElementsToLastSection([e])
         
         self.wrappedView?.register(NXCollectionPlaceholderViewCell.self, forCellWithReuseIdentifier: "NXPlaceholderViewCell")
         return e
+    }
+    
+    //新增一个分组,并将新增的分组返回//_ cls: AnyClass = NXTableReusableView.self, _ reuse:String = "NXTableReusableView", _ h:CGFloat = 0.0
+    @discardableResult
+    open func addSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
+        let section = NXSection()
+        section.updateHeader(cls:cls, reuse:reuse, height: height)
+        self.append(section)
+        return section
+    }
+    
+    //返回最后一个分组，没有则新增并返回最后一个分组
+    @discardableResult
+    open func getLastSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
+        if let section = self.sections.last {
+            return section
+        }
+        return addSection(cls:cls, reuse:reuse, height: height)
+    }
+    
+    //批量添加单元格到最后一个分组上
+    @discardableResult
+    open func addElementsToLastSection(_ items: [NXItem]?) -> NXSection {
+        let section = self.getLastSection(cls: NXCollectionReusableView.self, reuse: "NXCollectionReusableView", height: 0)
+        section.append(contentsOf: items)
+        return section
     }
 }

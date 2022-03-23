@@ -53,6 +53,9 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
             self.ctxs.append(contentsOf: elements)
         }
         for (_, item) in self.ctxs.items.enumerated() {
+            guard let item = item as? NXSwipeView.Element else {
+                continue
+            }
             if item.ctxs.cls == nil || item.ctxs.reuse.count <= 0 {
                 item.ctxs.update(NXSwipeView.Cell.self, "NXSwipeViewCell")
             }
@@ -72,12 +75,18 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
             let maximumOfComponents = max(min(self.ctxs.maximumOfComponents, CGFloat(self.ctxs.items.count)),1.0)
             let widthOfComponents = (self.w - ctxs.insets.left - ctxs.insets.right)/CGFloat(maximumOfComponents)
             for (_, item) in self.ctxs.items.enumerated() {
+                guard let item = item as? NXSwipeView.Element else {
+                    continue
+                }
                 item.size.selected = CGSize(width: widthOfComponents, height: self.h)
                 item.size.unselected = CGSize(width: widthOfComponents, height: self.h)
             }
         }
         else {
             for (_, item) in self.ctxs.items.enumerated() {
+                guard let item = item as? NXSwipeView.Element else {
+                    continue
+                }
                 item.size.selected = CGSize(width: item.width.selected + self.ctxs.spaceOfComponents, height: self.h)
                 item.size.unselected = CGSize(width: item.width.unselected + self.ctxs.spaceOfComponents, height: self.h)
             }
@@ -97,7 +106,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
     
     //更新title，index为第几个：从0开始
     open func update(title:String, at index: Int) {
-        guard let item = self.ctxs[index] else {
+        guard let item = self.ctxs[index] as? NXSwipeView.Element else {
             return
         }
         item.title.selected = title
@@ -144,7 +153,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         self.ctxs.slider.sliderView.backgroundColor = self.ctxs.slider.backgroundColor
         
         var __frame = CGRect.zero
-        if let item = self.ctxs[index] {
+        if let item = self.ctxs[index] as? NXSwipeView.Element {
             /*
              由于两个item的之间文字的间距是16pt,所以在计算item宽度的时候实在文字宽度的基础上加上了16
              所以这里需要将选中item.size.width减去16就是文字的宽度，也是滑块的宽度，origin.x也要减去一半
@@ -168,6 +177,9 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
             __frame.origin.x = self.ctxs.insets.left + (item.size.selected.width - __frame.size.width)/2.0
             
             for (__idx, loop) in self.ctxs.items.enumerated() {
+                guard let loop = loop as? NXSwipeView.Element else {
+                    continue
+                }
                 if __idx < index {
                     __frame.origin.x = __frame.origin.x + loop.size.unselected.width
                 }
@@ -226,7 +238,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if let item = self.ctxs[indexPath.item] {
+        if let item = self.ctxs[indexPath.item] as? NXSwipeView.Element {
             if self.ctxs.index == indexPath.item {
                 return item.size.selected
             }
@@ -238,7 +250,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
 
 
 extension NXSwipeView {
-    open class Wrapped : NXSection<NXSwipeView.Element> {
+    open class Wrapped : NXSection{
         //当前选中的索引
         open var index = 0
         
