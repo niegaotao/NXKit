@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/5/24.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -243,7 +243,7 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
                     if assets.count == 1 && self.wrapped.clips.count >= 1, let image = assets.first?.image  {
                         let vc = NXAssetClipViewController()
                         vc.image = image
-                        vc.clips.is = 0
+                        vc.clips.key = 0
                         vc.clips.value = self.wrapped.clips
                         vc.ctxs.completion = { [weak self] (_, outputUIImage) in
                             guard let self = self else {

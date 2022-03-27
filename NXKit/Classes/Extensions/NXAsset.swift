@@ -3,6 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2021/5/17.
+//  Copyright (c) 2021 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -28,7 +29,7 @@ open class NXAsset: NXAny {
     open var index : String = ""
     
     
-    public override init() {
+    public required init() {
         super.init()
     }
     
@@ -210,7 +211,7 @@ extension NXAsset {
             }
         }
         
-        public override init() {
+        public required init() {
             super.init()
             self.image.suffixes = []
             self.video.suffixes = [".mp4", ".mov"]
@@ -257,6 +258,10 @@ extension NXAsset {
             output.assets = assets
             output.contentViewController = self.contentViewController
             self.completion?(true, output)
+        }
+        
+        public required init() {
+            super.init()
         }
     }
     

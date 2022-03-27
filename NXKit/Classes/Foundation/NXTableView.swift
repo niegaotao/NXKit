@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/6/20.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -96,7 +96,7 @@ open class NXTableView: UITableView {
     override open func reloadData() {
         
         if let __tableWrapper = self.data {
-            if __tableWrapper.sections.isEmpty {
+            if __tableWrapper.elements.isEmpty {
                 
                 if __tableWrapper.placeholderView.ctxs.isHidden == false {
 
@@ -114,13 +114,13 @@ open class NXTableView: UITableView {
             }
             
             if __tableWrapper.calcAt {
-                __tableWrapper.sections.forEach { (__section) in
-                    __section.items.forEach { (__element) in
+                __tableWrapper.elements.forEach { (__section) in
+                    __section.elements.forEach { (__element) in
                         __element.ctxs.at.first = false
                         __element.ctxs.at.last = false
                     }
-                    __section.items.first?.ctxs.at.first = true
-                    __section.items.last?.ctxs.at.last = true
+                    __section.elements.first?.ctxs.at.first = true
+                    __section.elements.last?.ctxs.at.last = true
                 }
             }
         }

@@ -69,12 +69,12 @@ class EXViewController: NXTableViewController {
     }
     
     override func updateSubviews(_ action: String, _ value: Any?) {
-        self.tableWrapper.removeAll()
+        self.data.removeAll()
         
         for arrSubvalues in self.arrValues {
-            let section = self.tableWrapper.addSection(cls: NXTableReusableView.self, reuse: "NXTableReusableView", height: 10)
+            let section = self.data.addSection(cls: NXTableReusableView.self, reuse: "NXTableReusableView", height: 10)
             for dicValue in arrSubvalues {
-                let item = NXAction(value: dicValue)
+                let item = NXAction(value: dicValue, completion: nil)
                 item.ctxs.update(NXApplicationViewCell.self, "NXApplicationViewCell");
                 item.ctxs.size = CGSize(width: NXUI.width, height: 56)
                 
@@ -90,7 +90,7 @@ class EXViewController: NXTableViewController {
                 
                 item.arrow.isHidden = false
                 item.arrow.frame = CGRect(x: NXUI.width-15-6, y: (item.ctxs.height - 12)/2.0, width: 6, height: 12)
-                item.arrow.image = NX.image(named: "icon-arrow.png")
+                item.arrow.image = NXUI.image(named: "icon-arrow.png")
 
                 item.appearance.separator.ats = .maxY
                 item.appearance.separator.insets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
@@ -104,7 +104,7 @@ class EXViewController: NXTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if let item = self.tableWrapper[indexPath] as? NXAction {
+        if let item = self.data[indexPath] as? NXAction {
             if let operation = item.ctxs.value?["operation"] as? String, operation.count > 0 {
                 if operation == "NXViewController" {
                     let vc = NXViewController()
@@ -150,13 +150,11 @@ class EXViewController: NXTableViewController {
                         value.wrapped.video.maxOfAssets = 0
                         value.wrapped.isMixable = false
                         value.wrapped.mediaType = .image
-                        //self.navigationController?.pushViewController(value, animated: true)
                         value.wrapped.subviews = (true, false, false)
                         self.present(value, animated: true, completion: nil)
                     }, completion: { action, value in
                         NX.print("count:\(value.assets.count)")
                         self.dismiss(animated: true, completion: nil)
-                        //self.navigationController?.popViewController(animated: true)
                     })
                 }
                 else if operation == "NXAsset-video-1" {

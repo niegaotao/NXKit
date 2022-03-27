@@ -3,6 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/9/18.
+//  Copyright (c) 2020 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -31,7 +32,7 @@ open class NXRequest: NXAny {
         return self.code == 200 || self.code == 0
     }
     
-    public override init(){
+    public required init(){
         super.init()
     }
 }

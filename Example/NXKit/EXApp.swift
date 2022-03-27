@@ -118,7 +118,7 @@ class EXApp {
             headerView.centerView.frame = CGRect(x: headerView.w/3.0, y: 0, width: headerView.w/3.0, height: headerView.h)
             headerView.centerView.textAlignment = .center
             headerView.centerView.textColor = UIColor.white
-            headerView.centerView.font = NX.font(17)
+            headerView.centerView.font = NXUI.font(17)
             headerView.centerView.text = "\(__index+1) / \(self.assets.count)"
             __viewController.headerView = headerView
         }

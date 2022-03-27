@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/3/9.
-//  Copyright © 2019 niegaotao. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -19,7 +19,13 @@ open class NXCollectionReusableView: UICollectionReusableView {
         self.setupSubviews()
     }
     
-    @objc open func setup(){
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setup()
+        self.setupSubviews()
+    }
+    
+    open func setup(){
         arrowView.frame = CGRect(x: self.w-NX.insets.right-6, y: (self.h-12)/2, width: 6, height: 12)
         arrowView.image = NXUI.image(named:"icon-arrow.png")
         arrowView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin]
@@ -32,18 +38,11 @@ open class NXCollectionReusableView: UICollectionReusableView {
         self.layer.addSublayer(separator)
     }
     
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.setup()
-        self.setupSubviews()
-    }
-    
-    //MARK: 子类重写该方法初始化视图
-    @objc open func setupSubviews(){
+    open func setupSubviews(){
         
     }
     
-    @objc open func updateSubviews(_ action:String, _ value: Any?){
+    open func updateSubviews(_ action:String, _ value: Any?){
         
     }
 }

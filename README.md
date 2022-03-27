@@ -11,13 +11,11 @@
 ###1、基础部分
 
 #####1.1.基础结构
-- `NX`：全局变量和全局方法，多用于配置主题风格等
-- `NX+`：封装跟`UIView`、`UILabel`、`UIImageView`、`CALayer`对等的模型。
+- `NX`：全局变量和方法，封装跟`UIView`、`UILabel`、`UIImageView`、`CALayer`对等的模型。
 - `NXAny`：遵守`Equatable`协议的类类型的基类
-- `NXUI`：设备、屏幕等信息
+- `NXUI`：设备、屏幕、颜色、字号等信息
 - `NXItem`：渲染`UITableView`、`UICollectionView`的单元格的模型基类。
-- `NXTableViewData`：封装`UITableView`数据
-- `NXCollectionViewData`：封装`UICollectionView`数据
+- `NXCollection`：封装`UITableView`数据，封装`UICollectionView`数据
 - `NXAction`：：封装通用表单单元格的数据模型
 
 #####1.2.基础UI
@@ -79,14 +77,19 @@
 - `NXKit.bundle`：包含图片资源和json文件
 
 ###2、扩展部分
+
 #####2.1.相册选图功能封装
 - `NXAsset`
-- `NXAssetsViewController`
+- `NXAlbum`
+- `NXAlbumViewController`
+- `NXAlbumAssetsViewController`
+- `NXCameraViewController`
+- `NXCameraCaptureController`
 - `NXClipboardView`
 - `NXAssetClipViewController`
 
 ##二、如何使用
-代码全部开源，[点击查看代码](git@github.com:niegaotao/NXKit.git)。
+代码全部开源，[点击查看代码](https://github.com/niegaotao/NXKit.git)。
 ```
 //仅使用Foundation部分功能：
 pod 'NXKit/Foundation'
@@ -98,5 +101,5 @@ pod 'NXKit'
 使用案例，可以下载查看`Example`.
 
 ##三、其他
-- Author：niegaotao, niegaotao@163.com
+- Author：niegaotao, 247268158@qq.com
 - License ：NXKit is available under the MIT license. See the LICENSE file for more info.

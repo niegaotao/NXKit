@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/7/7.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -76,7 +76,7 @@ open class NXTransitionView: NXView {
                 if owner.view.x < NXUI.width/3.0 {
                     UIView.animate(withDuration: 0.2) {
                         self.owner.view.x = 0.0
-                        self.backgroundColor = NXUI.maxAlphaOfColor
+                        self.backgroundColor = NXUI.maxAlphaOfBackgroundColor
                     }
                 }
                 else {
@@ -84,7 +84,7 @@ open class NXTransitionView: NXView {
                         naviController.closeViewController(owner, animated: true)
                         UIView.animate(withDuration: naviController.ctxs.duration*0.6) {
                             self.owner.view.x = NXUI.width
-                            self.backgroundColor = NXUI.minAlphaOfColor
+                            self.backgroundColor = NXUI.minAlphaOfBackgroundColor
                         }
                     }
                     
@@ -94,7 +94,7 @@ open class NXTransitionView: NXView {
                 if owner.view.x > -NXUI.width/3.0 {
                     UIView.animate(withDuration: 0.2) {
                         self.owner.view.x = 0.0
-                        self.backgroundColor = NXUI.maxAlphaOfColor
+                        self.backgroundColor = NXUI.maxAlphaOfBackgroundColor
                     }
                 }
                 else {
@@ -102,7 +102,7 @@ open class NXTransitionView: NXView {
                         naviController.closeViewController(owner, animated: true)
                         UIView.animate(withDuration: naviController.ctxs.duration*0.6) {
                             self.owner.view.x = -NXUI.width
-                            self.backgroundColor = NXUI.minAlphaOfColor
+                            self.backgroundColor = NXUI.minAlphaOfBackgroundColor
                         }
                     }
                 }

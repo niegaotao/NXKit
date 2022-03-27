@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/11/9.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -64,7 +64,7 @@ open class NXOverlayAttributes : NX.Rect {
     //弹框打开/关闭的动画
     open var animation = NXOverlay.Animation.center.rawValue
     
-    required public override init() {
+    required public init() {
         super.init()
     }
 }

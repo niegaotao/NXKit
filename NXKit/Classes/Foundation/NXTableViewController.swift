@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/8/22.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -78,7 +78,7 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
             return nil
         }
         
-        if let rs = self.data.dequeue(tableView, index, NXCollectionDequeue.header.rawValue) {
+        if let rs = self.data.dequeue(tableView, index, NXItem.View.header.rawValue) {
             rs.reusableView.updateSubviews("update", rs.element)
             return rs.reusableView
         }
@@ -124,7 +124,7 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
             return nil
         }
         
-        if let rs = self.data.dequeue(tableView, index, NXCollectionDequeue.footer.rawValue) {
+        if let rs = self.data.dequeue(tableView, index, NXItem.View.footer.rawValue) {
             rs.reusableView.updateSubviews("update", rs.element)
             return rs.reusableView
         }

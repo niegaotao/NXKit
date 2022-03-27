@@ -3,13 +3,39 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/5/23.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
 
 open class NXCollectionView: UICollectionView, UIGestureRecognizerDelegate {
     open weak var data : NXCollection<NXCollectionView>?
+    
+    //方案1.UICollectionViewFlowLayout中设置对应的sectionInset.top的值
+    //方案2.NXCollectionViewLayouter中可以实现对改view的布局
+    open var headerView : UIView? {
+        willSet {
+            headerView?.removeFromSuperview()
+        }
+        didSet {
+            if let __headerView = self.headerView {
+                self.addSubview(__headerView)
+            }
+            self.reloadData()
+        }
+    }
+    
+    open var footerView : UIView? {
+        willSet {
+            footerView?.removeFromSuperview()
+        }
+        didSet {
+            if let __footerView = self.footerView {
+                self.addSubview(__footerView)
+            }
+            self.reloadData()
+        }
+    }
     
     open var isMultirecognizersSupported = true; //是否支持多手势识别
     

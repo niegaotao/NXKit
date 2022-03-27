@@ -3,11 +3,13 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/1/23.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
 import WebKit
+import AVFoundation
+
 
 //应用程序信息
 open class NX {
@@ -59,7 +61,7 @@ extension NX {
             }
         }
         
-        public override init(){
+        public required init(){
             super.init()
         }
         
@@ -85,12 +87,14 @@ extension NX {
         public static var minX = NX.Ats(rawValue: 1)        //2^0
         public static var centerX = NX.Ats(rawValue: 2)     //2^1
         public static var maxX = NX.Ats(rawValue: 4)        //2^2
-        
+        public static var Xs = NX.Ats(rawValue: 7)          //2^0+2^1+2^2
+
         public static var minY =  NX.Ats(rawValue: 16)      //2^4
         public static var centerY =  NX.Ats(rawValue: 32)   //2^5
         public static var maxY = NX.Ats(rawValue: 64)       //2^6
-        
-        public static var center = NX.Ats(rawValue: 256)    //2^8
+        public static var Ys = NX.Ats(rawValue: 112)        //2^4+2^5+2^6
+
+        public static var center = NX.Ats(rawValue: 34)    //2^1+2^5
     }
 }
 
@@ -121,7 +125,7 @@ extension NX {
 
 extension NX {
     public static var isLoggable : Bool = true
-    
+    private static let formatter = DateFormatter()
     public class func print(_ items:Any?, _ file:String = #file, _ method: String = #function, _ line: Int = #line) {
         guard NX.isLoggable, let value = items else {
             return
@@ -139,7 +143,6 @@ extension NX {
     
     //yyyy-MM-dd HH:mm
     class public func descriptionOf(date:Date, format:String) -> String {
-        let formatter = DateFormatter()
         formatter.dateFormat = format
         return formatter.string(from: date)
     }
@@ -246,8 +249,6 @@ extension NX {
 
 // 图片
 extension NX {
-    
-
     //encodeURIComponent
     class public func encodeURIComponent(_ uri:String) -> String? {
         if NX.Imp.encodeURIComponent != nil {
@@ -345,3 +346,519 @@ extension NX {
         return nonnullValue
     }
 }
+
+
+extension NX {
+    open class View : NX.Rect {
+        open var isHidden = false
+        open var backgroundColor = NXUI.backgroundColor
+        public required init() {
+            super.init()
+        }
+    }
+    
+    open class Appearance : NX.View {
+        open var selectedBackgroundColor = NXUI.selectedBackgroundColor
+        open var isHighlighted = false
+        open var isEnabled = true
+        open var isCloseable = true
+        
+        open var value : Any? = nil
+        
+        public let separator = NX.Separator{(_,_) in}
+        
+        open var cornerRadius : CGFloat = 0
+        open var layer : NX.Layer? = nil
+
+        public required init(){
+            super.init()
+        }
+        
+        public init(completion:NX.Completion<String, NX.Appearance>?){
+            super.init()
+            completion?("init", self)
+        }
+    }
+
+    open class Attribute : NX.View {
+        open var color = NXUI.darkBlackColor
+        open var textAlignment = NSTextAlignment.center
+        open var numberOfLines: Int = 1
+        open var lineSpacing : CGFloat = 2.5
+        open var isAttributed : Bool = false
+        open var value = ""
+        open var font = NXUI.font(15)
+        
+        open var image : UIImage? = nil
+        
+        open var cornerRadius : CGFloat = 0
+        open var layer : NX.Layer? = nil
+        
+        public required init(){
+            super.init()
+        }
+        
+        public init(completion:NX.Completion<String, NX.Attribute>?){
+            super.init()
+            completion?("init", self)
+        }
+        
+        open class func contentHorizontalAlignment(_ textAlignment: NSTextAlignment) -> UIControl.ContentHorizontalAlignment {
+            if textAlignment == .left {
+                return UIControl.ContentHorizontalAlignment.left
+            }
+            else if textAlignment == .right {
+                return UIControl.ContentHorizontalAlignment.right
+            }
+            return UIControl.ContentHorizontalAlignment.center
+        }
+    }
+    
+    open class Layer : NX.View {
+        open var opacity : CGFloat = 0.0
+        open var masksToBounds : Bool = false
+        open var cornerRadius : CGFloat = 0.0
+        
+        open var borderWidth : CGFloat = 0.0
+        open var borderColor = NXUI.separatorColor
+        
+        open var shadowOpacity : CGFloat = 0.0
+        open var shadowRadius : CGFloat = 0.0
+        open var shadowOffset = CGSize.zero
+        open var shadowColor = NXUI.shadowColor
+        
+        public required init(){
+            super.init()
+        }
+        
+        public init(completion:NX.Completion<String, NX.Layer>?){
+            super.init()
+            completion?("init", self)
+        }
+    }
+    
+    open class Separator : NX.View {
+        open var insets = UIEdgeInsets.zero
+        open var ats : NX.Ats = []
+        
+        public required init(){
+            super.init()
+            self.isHidden = true
+            self.backgroundColor = NXUI.separatorColor
+        }
+        
+        public init(completion:NX.Completion<String, NX.Separator>?){
+            super.init()
+            self.isHidden = true
+            self.backgroundColor = NXUI.separatorColor
+            completion?("init", self)
+        }
+    }
+}
+
+extension NX {
+    open class Widget<View:UIView, Value:NXInitialValue>  {
+        open var view = View()
+        open var value = Value.initialValue
+        
+        public init(){
+        }
+        
+        public init(completion:NX.Completion<String, NX.Widget<View, Value>>?){
+            completion?("init", self)
+        }
+    }
+}
+
+extension NX.View {
+    
+    open class func update(_ metadata:NX.Appearance, _ view:UIView){
+        view.backgroundColor = metadata.backgroundColor
+        if let __layer = metadata.layer {
+            view.layer.cornerRadius = __layer.cornerRadius
+            view.layer.borderWidth = __layer.borderWidth
+            view.layer.borderColor = __layer.borderColor.cgColor
+        }
+        else {
+            view.layer.cornerRadius = metadata.cornerRadius
+        }
+    }
+
+    open class func update(_ metadata:NX.Attribute, _ view:UIView){
+        if metadata.isHidden {
+            view.isHidden = true
+            return
+        }
+        if let view = view as? UILabel {
+            view.isHidden = false
+            view.frame = metadata.frame
+            view.backgroundColor = metadata.backgroundColor
+            view.numberOfLines = metadata.numberOfLines
+            if metadata.isAttributed {
+                let paragraph = NSMutableParagraphStyle()
+                paragraph.lineSpacing = metadata.lineSpacing
+                let attributedText = NSAttributedString(string: metadata.value,
+                                                        attributes: [NSAttributedString.Key.font:metadata.font,
+                                                                     NSAttributedString.Key.foregroundColor:metadata.color,
+                                                                     NSAttributedString.Key.paragraphStyle:paragraph])
+                view.attributedText = attributedText
+            }
+            else {
+                view.text = metadata.value
+                view.textColor = metadata.color
+                view.font = metadata.font
+            }
+            view.textAlignment = metadata.textAlignment
+            
+            if let __layer = metadata.layer {
+                view.layer.cornerRadius = __layer.cornerRadius
+                view.layer.borderWidth = __layer.borderWidth
+                view.layer.borderColor = __layer.borderColor.cgColor
+            }
+            else {
+                view.layer.cornerRadius = metadata.cornerRadius
+            }
+        }
+        else if let view = view as? UIButton {
+            view.isHidden = false
+            view.frame = metadata.frame
+            view.backgroundColor = metadata.backgroundColor
+            view.setImage(metadata.image, for: .normal)
+            view.setTitle(metadata.value, for: .normal)
+            view.setTitleColor(metadata.color, for: .normal)
+            view.titleLabel?.font = metadata.font
+            if let __layer = metadata.layer {
+                view.layer.cornerRadius = __layer.cornerRadius
+                view.layer.borderWidth = __layer.borderWidth
+                view.layer.borderColor = __layer.borderColor.cgColor
+            }
+            else {
+                view.layer.cornerRadius = metadata.cornerRadius
+            }
+            view.contentHorizontalAlignment = NX.Attribute.contentHorizontalAlignment(metadata.textAlignment)
+        }
+        else if let view = view as? UIImageView {
+            view.isHidden = false
+            view.frame = metadata.frame
+            view.backgroundColor = metadata.backgroundColor
+            if let image = metadata.image {
+                view.image = image
+            }
+            else if metadata.value.count > 0 {
+                if metadata.value.hasPrefix("http") {
+                    NXUI.image(view, metadata.value)
+                }
+                else {
+                    view.image = UIImage(named: metadata.value)
+                }
+            }
+            else {
+                view.image = nil
+            }
+            if let __layer = metadata.layer {
+                view.layer.cornerRadius = __layer.cornerRadius
+                view.layer.borderWidth = __layer.borderWidth
+                view.layer.borderColor = __layer.borderColor.cgColor
+            }
+            else {
+                view.layer.cornerRadius = metadata.cornerRadius
+            }
+        }
+        else {
+            view.isHidden = false
+            view.frame = metadata.frame
+            view.backgroundColor = metadata.backgroundColor
+            if let __layer = metadata.layer {
+                view.layer.cornerRadius = __layer.cornerRadius
+                view.layer.borderWidth = __layer.borderWidth
+                view.layer.borderColor = __layer.borderColor.cgColor
+            }
+            else {
+                view.layer.cornerRadius = metadata.cornerRadius
+            }
+        }
+    }
+}
+
+extension NX {
+    
+    open class Disposeable<Value:Any>{
+        open var value : Value? = nil
+        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Disposeable<Value>>?) -> ())? = nil
+        
+        public init(completion: NX.Completion<String, NX.Disposeable<Value>>?) {
+            completion?("", self)
+        }
+    }
+    
+    open class Wrappable<Key: NXInitialValue, OldValue:NXInitialValue, Value: NXInitialValue> {
+        open var key = Key.initialValue
+        open var oldValue = OldValue.initialValue
+        open var value = Value.initialValue
+        
+        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrappable<Key, OldValue, Value>>?) -> ())? = nil
+        
+        public init(completion: NX.Completion<String, NX.Wrappable<Key, OldValue, Value>>?) {
+            completion?("", self)
+        }
+    }
+    
+    open class Comparable<Minimum: NXInitialValue, Maximum:NXInitialValue, Value: NXInitialValue> {
+        open var minValue = Minimum.initialValue
+        open var maxValue = Maximum.initialValue
+        open var value = Value.initialValue
+        
+        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Comparable<Minimum, Maximum, Value>>?) -> ())? = nil
+        
+        public init(completion: NX.Completion<String, NX.Comparable<Minimum, Maximum, Value>>?) {
+            completion?("", self)
+        }
+    }
+    
+    open class Selectable<Value: NXInitialValue> {
+        open var selected = Value.initialValue
+        open var unselected = Value.initialValue
+                    
+        public init(completion: NX.Completion<String, NX.Selectable<Value>>?){
+            completion?("", self)
+        }
+    }
+}
+
+
+
+public protocol NXInitialValue {
+    static var initialValue : Self { get }
+}
+
+extension Dictionary : NXInitialValue {
+    public static var initialValue: Dictionary<Key, Value> {
+        return Dictionary<Key, Value>()
+    }
+}
+
+extension Array : NXInitialValue {
+    public static var initialValue: Array<Element> {
+        return Array<Element>()
+    }
+}
+
+extension Set : NXInitialValue {
+    public static var initialValue: Set<Element> {
+        return Set<Element>()
+    }
+}
+
+extension String : NXInitialValue {
+    public static var initialValue: String {
+        return ""
+    }
+}
+
+extension Bool : NXInitialValue {
+    public static var initialValue: Bool {
+        return false
+    }
+}
+
+extension CGPoint : NXInitialValue {
+    public static var initialValue : CGPoint {
+        return CGPoint.zero
+    }
+}
+
+extension CGSize : NXInitialValue {
+    public static var initialValue: CGSize {
+        return CGSize.zero
+    }
+}
+
+extension CGRect : NXInitialValue {
+    public static var initialValue: CGRect {
+        return CGRect.zero
+    }
+}
+
+extension CGVector : NXInitialValue {
+    public static var initialValue: CGVector {
+        return CGVector.zero
+    }
+}
+
+extension UIOffset : NXInitialValue {
+    public static var initialValue: UIOffset {
+        return UIOffset.zero
+    }
+}
+
+extension UIEdgeInsets : NXInitialValue {
+    public static var initialValue: UIEdgeInsets {
+        return UIEdgeInsets.zero
+    }
+}
+
+extension CGAffineTransform : NXInitialValue {
+    public static var initialValue: CGAffineTransform {
+        return CGAffineTransform.identity
+    }
+}
+
+extension CGFloat : NXInitialValue {
+    public static var initialValue: CGFloat {
+        return CGFloat.zero
+    }
+}
+
+extension Int : NXInitialValue {
+    public static var initialValue: Int {
+        return 0
+    }
+}
+
+extension Int8 : NXInitialValue {
+    public static var initialValue: Int8 {
+        return 0
+    }
+}
+
+extension Int16 : NXInitialValue {
+    public static var initialValue: Int16 {
+        return 0
+    }
+}
+
+extension Int32 : NXInitialValue {
+    public static var initialValue: Int32 {
+        return 0
+    }
+}
+
+extension Int64 : NXInitialValue {
+    public static var initialValue: Int64 {
+        return 0
+    }
+}
+
+extension Float : NXInitialValue {
+    public static var initialValue: Float {
+        return Float.zero
+    }
+}
+
+@available(iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS, unavailable)
+@available(macCatalyst, unavailable)
+extension Float16 : NXInitialValue {
+    public static var initialValue: Float16 {
+        return Float16.zero
+    }
+}
+
+extension Double : NXInitialValue {
+    public static var initialValue: Double {
+        return Double.zero
+    }
+}
+
+extension NSTextAlignment : NXInitialValue {
+    public static var initialValue: NSTextAlignment {
+        return NSTextAlignment.center
+    }
+}
+
+extension UIControl.ContentVerticalAlignment : NXInitialValue {
+    public static var initialValue: UIControl.ContentVerticalAlignment {
+        return UIControl.ContentVerticalAlignment.center
+    }
+}
+
+extension UIControl.ContentHorizontalAlignment : NXInitialValue {
+    public static var initialValue: UIControl.ContentHorizontalAlignment {
+        return UIControl.ContentHorizontalAlignment.center
+    }
+}
+
+extension UIGestureRecognizer.State : NXInitialValue {
+    public static var initialValue: UIGestureRecognizer.State {
+        return UIGestureRecognizer.State.possible
+    }
+}
+
+extension CMTime : NXInitialValue {
+    public static var initialValue: CMTime {
+        return CMTime.zero
+    }
+}
+
+extension CMTimeRange : NXInitialValue {
+    public static var initialValue: CMTimeRange {
+        return CMTimeRange(start: CMTime.initialValue, end: CMTime.initialValue)
+    }
+}
+
+
+extension Data : NXInitialValue {
+    public static var initialValue: Data {
+        return Data()
+    }
+}
+
+extension UIColor : NXInitialValue {
+    public static var initialValue: Self {
+        return UIColor.clear as! Self
+    }
+}
+
+extension UIFont : NXInitialValue {
+    public static var initialValue: Self {
+        return UIFont.systemFont(ofSize: 15) as! Self
+    }
+}
+
+extension UIImage : NXInitialValue {
+    public static var initialValue: Self {
+        return UIImage() as! Self
+    }
+}
+
+extension Date : NXInitialValue {
+    public static var initialValue: Date {
+        return Date()
+    }
+}
+
+extension NSNumber : NXInitialValue {
+    public static var initialValue: Self {
+        return NSNumber(value: 0) as! Self
+    }
+}
+
+extension NX.Appearance : NXInitialValue {
+    public static var initialValue: Self {
+        return NX.Appearance() as! Self
+    }
+}
+
+extension NX.Attribute : NXInitialValue {
+    public static var initialValue: Self {
+        return NX.Attribute() as! Self
+    }
+}
+
+extension NX.Layer : NXInitialValue {
+    public static var initialValue: Self {
+        return NX.Layer() as! Self
+    }
+}
+
+extension NX.Separator : NXInitialValue {
+    public static var initialValue: Self {
+        return NX.Separator() as! Self
+    }
+}
+
+
+
+
+
+

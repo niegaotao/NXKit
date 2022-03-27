@@ -2,7 +2,8 @@
 //  NXApi.swift
 //  NXKit
 //
-//  Created by 聂高涛 on 2021/8/15.
+//  Created by niegaotao on 2021/8/15.
+//  Copyright (c) 2021 niegaotao. All rights reserved.
 //
 
 import UIKit

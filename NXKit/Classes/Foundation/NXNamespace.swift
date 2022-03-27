@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/1/23.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 public struct NXNamespace<RawValue> {

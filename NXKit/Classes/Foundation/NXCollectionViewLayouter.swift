@@ -1,24 +1,29 @@
 //
-//  NXCollectionViewLinearWorker.swift
+//  NXCollectionViewLayouter.swift
 //  NXKit
 //
-//  Created by 聂高涛 on 2022/3/18.
+//  Created by niegaotao on 2022/3/18.
+//  Copyright (c) 2022 niegaotao. All rights reserved.
 //
 
 import UIKit
 
-open class NXCollectionViewLinearWorker : UICollectionViewLayout {
+open class NXCollectionViewLayouter : UICollectionViewLayout {
     
     open class Column: NXAny {
         open var index = Int.zero //处在第几个列
         open var count = Int.zero //已经加入的对象的个数
         open var offset = CGPoint.zero //偏移
-        open var width = CGFloat.zero
+        open var width = CGFloat.zero//宽度
         init(index:Int, count:Int, offset:CGPoint){
             super.init()
             self.index = index
             self.count = count
             self.offset = offset
+        }
+        
+        public required init() {
+            super.init()
         }
     }
     
@@ -57,6 +62,31 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
         }
     }
     
+    open func sizeAttributes(type:String, section: NXSection) -> CGSize {
+        var __size = CGSize.zero
+        if self.direction == .vertical {
+            if type == NXItem.View.cell.rawValue {
+                let whitespace = self.insets.left + section.insets.left + section.interitemSpacing * CGFloat(self.numberOfColumns - 1) +  section.insets.right + self.insets.right
+                __size.width = (self.size.width - whitespace)/CGFloat(self.numberOfColumns)
+            }
+            else {
+                let whitespace = self.insets.left + self.insets.right
+                __size.width = self.size.width - whitespace
+            }
+        }
+        else if self.direction == .horizontal {
+            if type == NXItem.View.cell.rawValue {
+                let whitespace = self.insets.top + section.insets.top + section.interitemSpacing * CGFloat(self.numberOfColumns - 1) +  section.insets.bottom + self.insets.bottom
+                __size.height = (self.size.height - whitespace)/CGFloat(self.numberOfColumns)
+            }
+            else {
+                let whitespace = self.insets.top + self.insets.bottom
+                __size.height = self.size.height - whitespace
+            }
+        }
+        return __size
+    }
+    
     open func updateAttributes(_ attributes: UICollectionViewLayoutAttributes, type:String, size:CGSize, section: NXSection, sections:[NXSection]) {
         var __frame = CGRect.zero
         __frame.size = size
@@ -64,37 +94,32 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
         if self.direction == .vertical {
             let index = sections.firstIndex(of: section) ?? -1
             
-            if type == NXCollectionDequeue.cell.rawValue {
-                //1.确定元素显示的大小
-                let whitespace = self.insets.left + section.insets.left + section.interitemSpacing * CGFloat(self.numberOfColumns - 1) +  section.insets.right + self.insets.right
-                __frame.size.width = (self.size.width - whitespace)/CGFloat(self.numberOfColumns)
-                __frame.size.height = __frame.width * (size.height / size.width)
-                
-                //2.找出插入到哪一列
-                var target = self.columns[0]
-                for e in self.columns {
-                    if e.offset.y < target.offset.y {
-                        target = e
+            if type == NXItem.View.cell.rawValue {
+                //1.找出插入到哪一列
+                var column = self.columns[0]
+                for __column in self.columns {
+                    if __column.offset.y < column.offset.y {
+                        column = __column
                     }
                 }
                 
-                //3.插入数据
-                __frame.origin.x = self.insets.left +  section.insets.left + (__frame.width + section.interitemSpacing) * CGFloat(target.index)
-                if target.count == 0 && section.header == nil{
+                //2.插入数据
+                __frame.origin.x = self.insets.left +  section.insets.left + (__frame.width + section.interitemSpacing) * CGFloat(column.index)
+                if column.count == 0 && section.header == nil{
                     if index == 0 {
-                        target.offset.y = target.offset.y + self.insets.top + section.insets.top
+                        column.offset.y = column.offset.y + self.insets.top + section.insets.top
                     }
                     else {
-                        target.offset.y = target.offset.y + section.insets.top
+                        column.offset.y = column.offset.y + section.insets.top
                     }
-                    __frame.origin.y = target.offset.y
+                    __frame.origin.y = column.offset.y
                 }
                 else {
-                    target.offset.y = target.offset.y + section.lineSpacing
-                    __frame.origin.y = target.offset.y
+                    column.offset.y = column.offset.y + section.lineSpacing
+                    __frame.origin.y = column.offset.y
                 }
-                target.offset.y = target.offset.y + __frame.size.height
-                target.count = target.count + 1
+                column.offset.y = column.offset.y + __frame.size.height
+                column.count = column.count + 1
                 
                 if index >= 0 {
                     attributes.indexPath = IndexPath(row: self.added, section: index)
@@ -105,35 +130,30 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
                 attributes.frame = __frame
                 self.added = self.added + 1
             }
-            else if type == NXCollectionDequeue.header.rawValue {
-                //1.确定元素显示的大小
-                let whitespace = self.insets.left + section.insets.left + section.insets.right + self.insets.right
-                __frame.size.width = self.size.width - whitespace
-                __frame.size.height = size.height
-                
-                //2.找出插入到哪一列
-                var target = self.columns[0]
-                for e in self.columns {
-                    if e.offset.y > target.offset.y {
-                        target = e
+            else if type == NXItem.View.header.rawValue {
+                //1.找出插入到哪一列
+                var column = self.columns[0]
+                for __column in self.columns {
+                    if __column.offset.y > column.offset.y {
+                        column = __column
                     }
                 }
                 
-                //3.插入数据
+                //2.插入数据
                 __frame.origin.x = self.insets.left +  section.insets.left
                 
                 if index == 0 {
-                    target.offset.y = self.insets.top + section.insets.top
+                    column.offset.y = self.insets.top + section.insets.top
                 }
                 else {
-                    target.offset.y = section.insets.top
+                    column.offset.y = section.insets.top
                 }
-                __frame.origin.y = target.offset.y
-                target.offset.y = target.offset.y + __frame.size.height
+                __frame.origin.y = column.offset.y
+                column.offset.y = column.offset.y + __frame.size.height
                 
-                //更新其他列的偏移
+                //3.更新其他列的偏移
                 for e in self.columns {
-                    e.offset.y = target.offset.y
+                    e.offset.y = column.offset.y
                 }
                 if index >= 0 {
                     attributes.indexPath = IndexPath(index: index)
@@ -143,31 +163,26 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
                 }
                 attributes.frame = __frame
             }
-            else if type == NXCollectionDequeue.footer.rawValue {
-                //1.确定元素显示的大小
-                let whitespace = self.insets.left + section.insets.left + section.insets.right + self.insets.right
-                __frame.size.width = self.size.width - whitespace
-                __frame.size.height = size.height
-                
-                //2.找出插入到哪一列
-                var target = self.columns[0]
-                for e in self.columns {
-                    if e.offset.y > target.offset.y {
-                        target = e
+            else if type == NXItem.View.footer.rawValue {
+                //1.找出插入到哪一列
+                var column = self.columns[0]
+                for __column in self.columns {
+                    if __column.offset.y > column.offset.y {
+                        column = __column
                     }
                 }
                 
-                //3.插入数据
+                //2.插入数据
                 __frame.origin.x = self.insets.left +  section.insets.left
-                __frame.origin.y = target.offset.y
-                target.offset.y = target.offset.y + __frame.size.height
+                __frame.origin.y = column.offset.y
+                column.offset.y = column.offset.y + __frame.size.height
                 if index == sections.count-1 {
-                    target.offset.y = target.offset.y + section.insets.bottom
+                    column.offset.y = column.offset.y + section.insets.bottom
                 }
                 
-                //更新其他列的偏移
-                for e in self.columns {
-                    e.offset = target.offset
+                //3.更新其他列的偏移
+                for __column in self.columns {
+                    __column.offset = column.offset
                 }
                 
                 if index >= 0 {
@@ -180,38 +195,31 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
             }
         }
         else {
-            //1.确定元素现实的大小
-            let whitespace = self.insets.top + section.insets.top + section.interitemSpacing * CGFloat(self.numberOfColumns - 1) +  section.insets.bottom + self.insets.bottom
-            __frame.size.height = (self.size.height - whitespace)/CGFloat(self.numberOfColumns)
-            __frame.size.width = __frame.height * (size.width / size.height)
-            
-            //2.找出插入到哪一列
-            var target = self.columns[0]
-            for e in self.columns {
-                if e.offset.x < target.offset.x {
-                    target = e
+            //1.找出插入到哪一列
+            var column = self.columns[0]
+            for __column in self.columns {
+                if __column.offset.x < column.offset.x {
+                    column = __column
                 }
             }
             
-            //3.插入数据
-            __frame.origin.y = self.insets.top +  section.insets.top + (__frame.height + section.interitemSpacing) * CGFloat(target.index)
-            if target.count == 0 {
-                target.offset.x = self.insets.left + section.insets.left
-                __frame.origin.x = target.offset.x
+            //2.插入数据
+            __frame.origin.y = self.insets.top +  section.insets.top + (__frame.height + section.interitemSpacing) * CGFloat(column.index)
+            if column.count == 0 {
+                column.offset.x = self.insets.left + section.insets.left
+                __frame.origin.x = column.offset.x
             }
             else {
-                target.offset.x = target.offset.x + section.lineSpacing
-                __frame.origin.x = target.offset.x
+                column.offset.x = column.offset.x + section.lineSpacing
+                __frame.origin.x = column.offset.x
             }
-            target.offset.x = target.offset.x + __frame.size.width
-            target.count = target.count + 1
+            column.offset.x = column.offset.x + __frame.size.width
+            column.count = column.count + 1
             
             attributes.indexPath = IndexPath(row: self.added, section: 0)
             attributes.frame = __frame
             self.added = self.added + 1
         }
-        
-        
     }
     
     open override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
@@ -241,11 +249,9 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
         var attributes = [UICollectionViewLayoutAttributes]()
         if let data = (self.collectionView as? NXCollectionView)?.data {
             
-            for section in data.sections {
+            for section in data.elements {
                 
-                
-                
-                for item in section.items {
+                for item in section.elements {
                     if let item  = item as? NXCollectionViewAttributesProtocol {
                         if rect.intersects(item.attributes.frame) {
                             attributes.append(item.attributes)
@@ -277,26 +283,26 @@ open class NXCollectionViewLinearWorker : UICollectionViewLayout {
     
     open override var collectionViewContentSize: CGSize {
         var size = self.size
-        var target = self.columns[0]
-        for e in self.columns {
-            if e.offset.y > target.offset.y {
-                target = e
+        var column = self.columns[0]
+        for __column in self.columns {
+            if __column.offset.y > column.offset.y {
+                column = __column
             }
         }
-        if let section = (self.collectionView as? NXCollectionView)?.data?.sections.last {
+        if let section = (self.collectionView as? NXCollectionView)?.data?.elements.last {
             if self.direction == .vertical {
-                size.height = max(size.height, target.offset.y + section.insets.bottom + self.insets.bottom)
+                size.height = max(size.height, column.offset.y + section.insets.bottom + self.insets.bottom)
             }
             else {
-                size.width = max(size.width, target.offset.y + section.insets.bottom + self.insets.right)
+                size.width = max(size.width, column.offset.y + section.insets.bottom + self.insets.right)
             }
         }
         else {
             if self.direction == .vertical {
-                size.height = max(size.height, target.offset.x + self.insets.bottom)
+                size.height = max(size.height, column.offset.x + self.insets.bottom)
             }
             else {
-                size.width = max(size.width, target.offset.x + self.insets.right)
+                size.width = max(size.width, column.offset.x + self.insets.right)
             }
         }
         

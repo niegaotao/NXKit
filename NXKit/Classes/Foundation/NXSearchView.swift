@@ -2,7 +2,8 @@
 //  NXSearchView.swift
 //  NXKit
 //
-//  Created by 聂高涛 on 2022/3/18.
+//  Created by niegaotao on 2022/3/18.
+//  Copyright (c) 2022 niegaotao. All rights reserved.
 //
 
 import UIKit

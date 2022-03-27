@@ -3,6 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2021/4/12.
+//  Copyright (c) 2021 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -44,22 +45,17 @@ open class NXAction: NXItem {
         __sender.backgroundColor = .clear
     }
     
-    public override init() {
+    public required init() {
         super.init()
     }
     
-    public override init(value: [String : Any]?) {
-        super.init(value: value)
-    }
-    
-    public override init(completion:NX.Completion<String, NXAction>?) {
-        super.init(completion: nil)
+    public override init(value: [String : Any]?, completion: NX.Completion<String, NXAction>?) {
+        super.init(value: value, completion: nil)
         completion?("init", self)
     }
     
     public convenience init(title:String, value: [String: Any]?, completion:NX.Completion<String, NXAction>?) {
-        self.init(completion:nil)
-        self.ctxs.value = value
+        self.init(value:value, completion:nil)
         self.ctxs.update(NXActionViewCell.self, "NXActionViewCell")
         self.ctxs.size = CGSize(width: NXUI.width, height: NX.Association.size.height)
         

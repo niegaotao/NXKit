@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/5/8.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -192,7 +192,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
         viewController.view.backgroundColor = UIColor.clear
         
         viewController.ctxs.transitionView = NXTransitionView(frame: to.view.bounds, owner:viewController)
-        viewController.ctxs.transitionView?.backgroundColor = NXUI.minAlphaOfColor
+        viewController.ctxs.transitionView?.backgroundColor = NXUI.minAlphaOfBackgroundColor
         to.view.addSubview(viewController.ctxs.transitionView!)
         viewController.ctxs.transitionView?.addSubview(viewController.view)
         
@@ -203,7 +203,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.maxAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXUI.maxAlphaOfBackgroundColor
             },completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
@@ -215,7 +215,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.maxAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXUI.maxAlphaOfBackgroundColor
             }, completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
@@ -227,7 +227,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.maxAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXUI.maxAlphaOfBackgroundColor
             }, completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
@@ -239,7 +239,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.maxAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXUI.maxAlphaOfBackgroundColor
             }, completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
@@ -266,7 +266,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = -viewController.view.w
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.minAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXUI.minAlphaOfBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -287,7 +287,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = viewController.view.w
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.minAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXUI.minAlphaOfBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -308,7 +308,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = -viewController.view.h
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.minAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXUI.minAlphaOfBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -329,7 +329,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = viewController.view.h
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.minAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXUI.minAlphaOfBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -388,7 +388,6 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
         }
         else {
             //这种情况没有模态控制器
-            
             if let vc = __returnViewController as? NXViewController {
                 if let __vc = vc.ctxs.subviewControllers.last {
                     //先查找自定义加上去的视图控制器

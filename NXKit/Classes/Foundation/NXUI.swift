@@ -3,21 +3,20 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/5/18.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import Foundation
 
+open class NXUI {}
 
 //屏幕
 extension NXUI {
     static public let width = UIScreen.main.bounds.size.width
     static public let height = UIScreen.main.bounds.size.height
     static public let size = CGSize(width: NXUI.width, height: NXUI.height)
-    static public let scale : CGFloat = UIScreen.main.scale
-    
-    static public let pixel : CGFloat = 1.0 / UIScreen.main.scale //一个像素的宽度
-    
+    static public let scale = UIScreen.main.scale
+    static public let pixel = 1.0 / UIScreen.main.scale //一个像素的宽度
     
     //操作系统信息
     static public let os : (name:String, version:String) = (UIDevice.current.systemName, UIDevice.current.systemVersion)
@@ -57,7 +56,7 @@ extension NXUI {
 
 
 // 颜色
-open class NXUI {
+extension NXUI {
     //view背景色
     static public var viewBackgroundColor = NXUI.color(247, 247, 247)
     //contentView背景色
@@ -91,9 +90,9 @@ open class NXUI {
     // 浅灰
     static public var lightGrayColor = NXUI.color(192, 192, 192)
     // 转场前容器视图的Alpha值
-    static public var minAlphaOfColor = UIColor.black.withAlphaComponent(0.01)
+    static public var minAlphaOfBackgroundColor = UIColor.black.withAlphaComponent(0.01)
     // 转场后容器视图的Alpha值
-    static public var maxAlphaOfColor = UIColor.black.withAlphaComponent(0.30)
+    static public var maxAlphaOfBackgroundColor = UIColor.black.withAlphaComponent(0.30)
 
     
     //颜色:rgb+alpha, rgb:[0,255],a:[0,1]

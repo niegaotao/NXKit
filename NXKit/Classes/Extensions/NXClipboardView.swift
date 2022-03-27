@@ -3,6 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2021/11/26.
+//  Copyright (c) 2021 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -131,7 +132,7 @@ open class NXClipboardView: NXView {
     public let wrappedView = NXClipboardView.WrappedView(frame:CGRect.zero)
     public let panRecognizer = UIPanGestureRecognizer()
     public let point = NX.Wrappable<UIGestureRecognizer.State, CGPoint, CGPoint>{ (_, __sender) in
-        __sender.is = UIGestureRecognizer.State.possible;__sender.oldValue = CGPoint.zero;__sender.value = CGPoint.zero;}
+        __sender.key = UIGestureRecognizer.State.possible;__sender.oldValue = CGPoint.zero;__sender.value = CGPoint.zero;}
     public let pinchRecognizer = UIPinchGestureRecognizer()
     
     open override func setupSubviews() {
@@ -230,16 +231,16 @@ open class NXClipboardView: NXView {
     
     @objc func panRecognizerAction(_ panRecognizer:UIPanGestureRecognizer) {
         let __translation = panRecognizer.translation(in: self)
-        self.point.is = panRecognizer.state
+        self.point.key = panRecognizer.state
         self.point.value = panRecognizer.location(in: self)
         panRecognizer.setTranslation(CGPoint.zero, in: self)
         
-        if self.point.is == .began {
+        if self.point.key == .began {
             self.point.oldValue = self.point.value
         }
         
         if self.ctxs.clip.isHidden == false {
-            if self.point.is == .began {
+            if self.point.key == .began {
                 
                 if self.ctxs.clip.isResizable && self.wrappedView.convert(self.wrappedView.minXView.frame, to: self).contains(self.point.oldValue) {
                     self.ctxs.ats = .minX
@@ -258,7 +259,7 @@ open class NXClipboardView: NXView {
                 }
             }
             
-            if self.point.is == .began || self.point.is == .changed {
+            if self.point.key == .began || self.point.key == .changed {
                 if self.ctxs.ats == .center {
                     self.wrappedView.center = CGPoint(x: self.wrappedView.center.x + __translation.x, y: self.wrappedView.center.y + __translation.y)
                     self.ctxs.frame.value = self.wrappedView.frame
@@ -374,7 +375,7 @@ open class NXClipboardView: NXView {
                 __frame.size.height = self.ctxs.size.height - __frame.origin.y
             }
             
-            if self.point.is == .began || self.point.is == .changed {
+            if self.point.key == .began || self.point.key == .changed {
                 self.ctxs.frame.value = __frame
                 self.wrappedView.frame = self.ctxs.frame.value
                 self.wrappedView.isHidden = false

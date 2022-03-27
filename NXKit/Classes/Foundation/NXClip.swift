@@ -3,6 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/9/18.
+//  Copyright (c) 2020 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +15,7 @@ open class NXClip : NXAny {
     open var height : CGFloat = 1.0
     open var isHidden = false
     
-    public override init() {
+    public required init() {
         super.init()
     }
     

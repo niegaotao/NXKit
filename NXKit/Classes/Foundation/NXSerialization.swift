@@ -3,7 +3,7 @@
 //  NXSerialization
 //
 //  Created by niegaotao on 2020/8/3.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 open class NXSerialization {

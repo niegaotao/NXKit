@@ -22,7 +22,7 @@ class EXAppDelegate: UIResponder, UIApplicationDelegate {
             EXApp.authorization(type, queue, completion, isAlertable)
         }
         
-        NX.Imp.previewAssets = {(type, assets:[Any]) in
+        NX.Imp.previewAssets = {(type, assets:[Any], index:Int) in
             if let __assets = assets as? [NXAsset] {
                 EXApp.center.preview(__assets, 0)
             }
@@ -36,7 +36,13 @@ class EXAppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = EXApp.naviController
         self.window?.makeKeyAndVisible()
         
+        //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(test), userInfo: nil, repeats: true)
+        
         return true
+    }
+    
+    @objc func test(){
+        //NX.print(EXApp.naviController.currentViewController)
     }
 
 }

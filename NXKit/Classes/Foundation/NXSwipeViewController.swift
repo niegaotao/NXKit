@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/6/13.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -87,7 +87,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
             element.ctxs.size = CGSize(width: NXUI.width, height: NXUI.height-NXUI.topOffset)
             element.ctxs.update(NXSwipeViewController.Cell.self, "NXSwipeViewControllerCell" + String(idx+1))
             element.owner = vc
-            self.wrapped.items.append(element)
+            self.wrapped.elements.append(element)
             
             if index == idx {
                 self.selectedViewController = vc

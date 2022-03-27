@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/5/8.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -11,7 +11,7 @@ import UIKit
 open class NXViewController: UIViewController  {
 
     ///ctxs.index用于记录分页加载的索引，xyz备用
-    public let ctxs = NXViewController.Association<Int>()
+    public let ctxs = NXViewController.Association()
     
     ///导航栏
     open var naviView = NXNaviView(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: NXUI.topOffset))
@@ -242,10 +242,10 @@ open class NXViewController: UIViewController  {
 
 
 extension NXViewController {
-    open class Association<Index:NXInitialValue> {
-        open var index = Index.initialValue ///用于记录当前正在请求或者展示的页面index，多用于分页加载
-        open var next = Index.initialValue  ///用于记录下一页next，多用于分页加载
-        open var reload = NX.Reload.initialized///当前刷新状态
+    open class Association {
+        open var index = 0 ///用于记录当前正在请求或者展示的页面index，多用于分页加载
+        open var next = 0  ///用于记录下一页next，多用于分页加载
+        open var state = NX.Reload.initialized///当前刷新状态
         
         open var isWrapped : Bool = false ///是否被其他UIViewController包装了，某些情况被包装的需要隐藏掉导航栏
         open var isEmpty : Bool = true ///页面是否为空，如有缓存数据则可置为false。false不用展示加载动画

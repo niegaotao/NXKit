@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/9/1.
-//  Copyright © 2020 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit

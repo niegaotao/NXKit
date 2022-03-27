@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/5/23.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -49,14 +49,14 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
     
     open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
-            if let rs = self.data.dequeue(collectionView, indexPath, NXCollectionDequeue.header.rawValue) {
+            if let rs = self.data.dequeue(collectionView, indexPath, NXItem.View.header.rawValue) {
                 rs.reusableView.updateSubviews("update", rs.elelment)
                 return rs.reusableView
             }
             //
         }
         else if kind == UICollectionView.elementKindSectionFooter {
-            if let rs = self.data.dequeue(collectionView, indexPath, NXCollectionDequeue.footer.rawValue) {
+            if let rs = self.data.dequeue(collectionView, indexPath, NXItem.View.footer.rawValue) {
                 rs.reusableView.updateSubviews("update", rs.elelment)
                 return rs.reusableView
             }

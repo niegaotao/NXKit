@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/6/13.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -46,13 +46,13 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
                 let item = NXSwipeView.Element()
                 item.title.selected = title
                 item.title.unselected = title
-                self.ctxs.items.append(item)
+                self.ctxs.elements.append(item)
             }
         }
         else if let elements = dicValue["items"] as? [NXSwipeView.Element] {
             self.ctxs.append(contentsOf: elements)
         }
-        for (_, item) in self.ctxs.items.enumerated() {
+        for (_, item) in self.ctxs.elements.enumerated() {
             guard let item = item as? NXSwipeView.Element else {
                 continue
             }
@@ -72,9 +72,9 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         }
         
         if self.ctxs.isEqually {
-            let maximumOfComponents = max(min(self.ctxs.maximumOfComponents, CGFloat(self.ctxs.items.count)),1.0)
+            let maximumOfComponents = max(min(self.ctxs.maximumOfComponents, CGFloat(self.ctxs.elements.count)),1.0)
             let widthOfComponents = (self.w - ctxs.insets.left - ctxs.insets.right)/CGFloat(maximumOfComponents)
-            for (_, item) in self.ctxs.items.enumerated() {
+            for (_, item) in self.ctxs.elements.enumerated() {
                 guard let item = item as? NXSwipeView.Element else {
                     continue
                 }
@@ -83,7 +83,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
             }
         }
         else {
-            for (_, item) in self.ctxs.items.enumerated() {
+            for (_, item) in self.ctxs.elements.enumerated() {
                 guard let item = item as? NXSwipeView.Element else {
                     continue
                 }
@@ -176,7 +176,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
             
             __frame.origin.x = self.ctxs.insets.left + (item.size.selected.width - __frame.size.width)/2.0
             
-            for (__idx, loop) in self.ctxs.items.enumerated() {
+            for (__idx, loop) in self.ctxs.elements.enumerated() {
                 guard let loop = loop as? NXSwipeView.Element else {
                     continue
                 }
@@ -250,7 +250,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
 
 
 extension NXSwipeView {
-    open class Wrapped : NXSection{
+    open class Wrapped : NXSection {
         //当前选中的索引
         open var index = 0
         
