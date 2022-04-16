@@ -65,7 +65,7 @@ class EXViewController: NXTableViewController {
     }
     
     override func setupSubviews() {
-        self.tableView?.register(NXApplicationViewCell.self, forCellReuseIdentifier: "NXApplicationViewCell")
+        self.tableView?.register(NXAbstractViewCell.self, forCellReuseIdentifier: "NXAbstractViewCell")
     }
     
     override func updateSubviews(_ action: String, _ value: Any?) {
@@ -75,7 +75,7 @@ class EXViewController: NXTableViewController {
             let section = self.data.addSection(cls: NXTableReusableView.self, reuse: "NXTableReusableView", height: 10)
             for dicValue in arrSubvalues {
                 let item = NXAction(value: dicValue, completion: nil)
-                item.ctxs.update(NXApplicationViewCell.self, "NXApplicationViewCell");
+                item.ctxs.update(NXAbstractViewCell.self, "NXAbstractViewCell");
                 item.ctxs.size = CGSize(width: NXUI.width, height: 56)
                 
                 item.asset.isHidden = true
@@ -92,8 +92,8 @@ class EXViewController: NXTableViewController {
                 item.arrow.frame = CGRect(x: NXUI.width-15-6, y: (item.ctxs.height - 12)/2.0, width: 6, height: 12)
                 item.arrow.image = NXUI.image(named: "icon-arrow.png")
 
-                item.appearance.separator.ats = .maxY
-                item.appearance.separator.insets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+                item.raw.separator.ats = .maxY
+                item.raw.separator.insets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
                 section.append(item)
             }
         }

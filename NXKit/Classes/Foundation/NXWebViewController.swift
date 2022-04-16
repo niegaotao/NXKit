@@ -14,15 +14,17 @@ open class NXBackbarWrappedView: NXLCRView<NXButton, UIView, NXButton> {
     override open func setupSubviews() {
         super.setupSubviews()
         self.lhsView.frame = CGRect(x: 0, y: 0, width: 32, height: 44)
-        self.lhsView.setImage(NXUI.image(named:"navi-back.png"), for: .normal)
+        self.lhsView.setImage(NXUI.image(named:"navi-back.png", mode: .alwaysTemplate), for: .normal)
         self.lhsView.contentHorizontalAlignment = .left
+        self.lhsView.tintColor = NXUI.barForegroundColor
         
         self.centerView.frame = CGRect(x: 32, y: 14, width: NXUI.pixel, height: 16)
-        self.centerView.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        self.centerView.backgroundColor = NXUI.barForegroundColor.withAlphaComponent(0.6)
         
         self.rhsView.frame = CGRect(x: 33, y: 0, width: 32, height: 44)
-        self.rhsView.setImage(NXUI.image(named:"navi-close.png"), for: .normal)
+        self.rhsView.setImage(NXUI.image(named:"navi-close.png", mode: .alwaysTemplate), for: .normal)
         self.rhsView.contentHorizontalAlignment = .right
+        self.rhsView.tintColor = NXUI.barForegroundColor
     }
     
     open override func updateSubviews(_ action: String, _ value: Any?) {
@@ -69,7 +71,8 @@ open class NXWebViewController: NXViewController {
     open override func setupSubviews() {
         self.webView.webViewController = self
         self.webView.frame = self.contentView.bounds
-        self.webView.backgroundColor = UIColor.white
+        self.webView.backgroundColor = NXUI.contentViewBackgroundColor
+        self.webView.isOpaque = false
         self.webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         self.observer.add(object:self.webView, key: "title", options: [.new, .old], context: nil, completion: nil)

@@ -24,7 +24,7 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
         
         self.collectionView = NXCollectionView(frame: self.contentView.bounds)
         self.collectionView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.collectionView?.backgroundColor = NXUI.collectionViewBackgroundColor
+        self.collectionView?.backgroundColor = NXUI.contentViewBackgroundColor
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
         self.collectionView?.alwaysBounceVertical = true

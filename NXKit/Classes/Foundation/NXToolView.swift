@@ -133,6 +133,25 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
             self.updateSubviews("", nil)
         }
     }
+    
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        
+        if self.ctxs.layer.isHidden == false {
+            //设置阴影
+            self.layer.shadowColor = self.ctxs.layer.shadowColor.cgColor;
+            self.layer.shadowOffset = self.ctxs.layer.shadowOffset
+            self.layer.shadowRadius = self.ctxs.layer.shadowRadius
+            self.layer.shadowOpacity = Float(self.ctxs.layer.shadowOpacity)
+            self.layer.cornerRadius = self.layer.shadowRadius
+            self.layer.masksToBounds = false
+        }
+        else {
+            self.layer.shadowColor = UIColor.clear.cgColor
+            self.layer.masksToBounds = true
+        }
+    }
 }
 
 extension NXToolView {
@@ -257,12 +276,16 @@ extension NXToolView {
             
             
             if element.isSelected {
-                assetView.image = element.image.selected
+                assetView.image = element.image.selected.withRenderingMode(.alwaysTemplate)
+                assetView.tintColor = element.color.selected
+
                 titleView.text = element.title.selected
                 titleView.textColor = element.color.selected
             }
             else {
-                assetView.image = element.image.unselected
+                assetView.image = element.image.unselected.withRenderingMode(.alwaysTemplate)
+                assetView.tintColor = element.color.unselected
+
                 titleView.text = element.title.unselected
                 titleView.textColor = element.color.unselected
             }

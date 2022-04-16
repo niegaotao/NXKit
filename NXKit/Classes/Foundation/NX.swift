@@ -527,6 +527,7 @@ extension NX.View {
             view.setTitle(metadata.value, for: .normal)
             view.setTitleColor(metadata.color, for: .normal)
             view.titleLabel?.font = metadata.font
+            view.tintColor = metadata.color
             if let __layer = metadata.layer {
                 view.layer.cornerRadius = __layer.cornerRadius
                 view.layer.borderWidth = __layer.borderWidth

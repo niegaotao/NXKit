@@ -57,47 +57,48 @@ extension NXUI {
 
 // 颜色
 extension NXUI {
-    //view背景色
-    static public var viewBackgroundColor = NXUI.color(247, 247, 247)
-    //contentView背景色
-    static public var contentViewBackgroundColor = NXUI.color(247, 247, 247)
-    //tableView背景色
-    static public var naviViewBackgroundColor = NXUI.color(255, 255, 255)
-    //tableView背景色
-    static public var naviViewForegroundColor = NXUI.color(51, 51, 51)
-    //tableView背景色
-    static public var tableViewBackgroundColor = NXUI.color(247, 247, 247)
-    //collectionView背景色
-    static public var collectionViewBackgroundColor = NXUI.color(247, 247, 247)
-    //overlay背景色
-    static public var overlayBackgroundColor = NXUI.color(255, 225, 225)
     //背景色
-    static public var backgroundColor = NXUI.color(255, 255, 255)
+    static public var backgroundColor = NXUI.color(255, 255, 255, 1)
+    //view背景色
+    static public var viewBackgroundColor = NXUI.color(247, 247, 247, 1)
+    //contentView背景色
+    static public var contentViewBackgroundColor = NXUI.color(247, 247, 247, 1)
+    
+    //naviView背景色
+    static public var barBackgroundColor = NXUI.color(255, 255, 255, 1)
+    //naviView背景色
+    static public var barForegroundColor = NXUI.color(51, 51, 51, 1)
+    
+    //overlay背景色
+    static public var overlayBackgroundColor = NXUI.color(255, 225, 225, 1)
+    
+    //未选中背景色
+    static public var unselectedBackgroundColor = NXUI.color(255.0, 255.0, 255.0, 1.0)
     //选中背景色
     static public var selectedBackgroundColor = NXUI.color(218.0, 218.0, 218.0, 0.3)
+    
     //分割线颜色
-    static public var separatorColor = NXUI.color(235, 235, 240)
+    static public var separatorColor = NXUI.color(235, 235, 240, 1)
     //阴影颜色
-    static public var shadowColor = NXUI.color(56, 79, 134)
+    static public var shadowColor = NXUI.color(56, 79, 134, 1)
     // 主色
-    static public var mainColor = NXUI.color(51, 120, 246)
+    static public var mainColor = NXUI.color(51, 120, 246, 1)
     // 深黑
-    static public var darkBlackColor = NXUI.color(51, 51, 51)
+    static public var darkBlackColor = NXUI.color(51, 51, 51, 1)
     // 浅黑
-    static public var lightBlackColor = NXUI.color(102, 102, 102)
+    static public var lightBlackColor = NXUI.color(102, 102, 102, 1)
     // 深灰
-    static public var darkGrayColor = NXUI.color(153, 153, 153)
+    static public var darkGrayColor = NXUI.color(153, 153, 153, 1)
     // 浅灰
-    static public var lightGrayColor = NXUI.color(192, 192, 192)
+    static public var lightGrayColor = NXUI.color(192, 192, 192, 1)
     // 转场前容器视图的Alpha值
-    static public var minAlphaOfBackgroundColor = UIColor.black.withAlphaComponent(0.01)
+    static public var transitionInoutBackgroundColor = NXUI.color(0, 0, 0, 0)
     // 转场后容器视图的Alpha值
-    static public var maxAlphaOfBackgroundColor = UIColor.black.withAlphaComponent(0.30)
-
+    static public var transitionBackgroundColor = NXUI.color(0, 0, 0, 0.3)
     
     //颜色:rgb+alpha, rgb:[0,255],a:[0,1]
     public class func color(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat, _ a:CGFloat = 1.0) -> UIColor {
-        return UIColor(red: (r)/255.0, green: (g)/255.0, blue: (b)/255.0, alpha: a)
+        return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a)
     }
     
     //颜色：hex+alpha
@@ -250,12 +251,12 @@ extension NXUI {
 //获取框架中的资源文件
 extension NXUI {
     //加载获取bundle中图片
-    public class func image(named name:String) -> UIImage? {
+    public class func image(named name:String, mode:UIImage.RenderingMode = .automatic) -> UIImage? {
         guard name.count > 0 else {return nil}
         if NX.Association.root.count > 0 {
-            return UIImage(named: "\(NX.Association.root)/NXKit.bundle/NX.bundle/\(name)")
+            return UIImage(named: "\(NX.Association.root)/NXKit.bundle/NX.bundle/\(name)")?.withRenderingMode(mode)
         }
-        return UIImage(named: name)
+        return UIImage(named: name)?.withRenderingMode(mode)
     }
     
     //处理图片浏览

@@ -29,7 +29,7 @@ open class NXCollectionViewCell: UICollectionViewCell {
         
         if self.backgroundView == nil {
             self.backgroundView = UIView(frame: CGRect.zero)
-            self.backgroundView?.backgroundColor = NXUI.backgroundColor
+            self.backgroundView?.backgroundColor = NXUI.unselectedBackgroundColor
             self.backgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
         
@@ -51,5 +51,10 @@ open class NXCollectionViewCell: UICollectionViewCell {
     
     open func updateSubviews(_ action:String, _ value: Any?){
         
+    }
+    
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.separator.backgroundColor = NXUI.separatorColor.cgColor
     }
 }

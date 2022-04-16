@@ -10,7 +10,7 @@ import UIKit
 
 open class NXAction: NXItem {
     
-    public let appearance = NX.Appearance{(_, __sender) in
+    public let raw = NX.Appearance{(_, __sender) in
         __sender.isHighlighted = true
         __sender.backgroundColor = UIColor.clear
     }

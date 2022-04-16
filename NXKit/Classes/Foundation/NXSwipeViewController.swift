@@ -32,7 +32,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
             layout.minimumInteritemSpacing = 0.0
         }
         collectionView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView?.backgroundColor = NXUI.collectionViewBackgroundColor
+        collectionView?.backgroundColor = NXUI.contentViewBackgroundColor
         collectionView?.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
         collectionView?.delegate = self
         collectionView?.dataSource = self

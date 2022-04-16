@@ -34,7 +34,7 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         self.tableView = NXTableView(frame: self.contentView.bounds, style: self.tableViewStyle)
         self.tableView?.frame = self.contentView.bounds
         self.tableView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.tableView?.backgroundColor = NXUI.tableViewBackgroundColor
+        self.tableView?.backgroundColor = NXUI.contentViewBackgroundColor
         self.tableView?.separatorColor = NXUI.separatorColor
         self.tableView?.delegate = self
         self.tableView?.dataSource = self

@@ -90,8 +90,9 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
     
     open override func setupSubviews(){
         self.centerView.setTitle("我的相册", for: .normal)
-        self.centerView.setImage(NXUI.image(named: "navi-dropdown-arrow.png"), for: .normal)
-        self.centerView.setTitleColor(NXUI.darkBlackColor, for: .normal)
+        self.centerView.setImage(NXUI.image(named: "navi-dropdown-arrow.png", mode: .alwaysTemplate), for: .normal)
+        self.centerView.setTitleColor(NXUI.barForegroundColor, for: .normal)
+        self.centerView.tintColor = NXUI.barForegroundColor
         self.centerView.titleLabel?.font = NXUI.font(17, true)
         self.centerView.contentHorizontalAlignment = .center
         self.centerView.setupEvents([.touchUpInside]) {[weak self] _, _ in
@@ -100,12 +101,12 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
         self.centerView.updateAlignment(.horizontalReverse, 2)
         self.naviView.centerView = self.centerView
         self.naviView.backBar.isHidden = false
-        self.naviView.backBar.updateSubviews(NXUI.image(named: "navi-close.png"), nil)
+        self.naviView.backBar.updateSubviews(NXUI.image(named: "navi-close.png", mode: .alwaysTemplate), nil)
         self.naviView.backBar.addTarget(nil, action: nil) {[weak self] _ in
             self?.wrapped.close(assets: [])
         }
         
-        self.naviView.forwardBar = NXNaviView.Bar.forward(image: NXUI.image(named: "icon-camera.png"), title: nil, completion: {[weak self] owner in
+        self.naviView.forwardBar = NXNaviView.Bar.forward(image: NXUI.image(named: "icon-camera.png", mode: .alwaysTemplate), title: nil, completion: {[weak self] owner in
             self?.observer.unregister()
             self?.dispose("openCamera", nil)
         })

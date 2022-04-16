@@ -35,7 +35,7 @@ open class NXTableViewCell: UITableViewCell {
         
         if self.backgroundView == nil {
             self.backgroundView = UIView(frame: CGRect.zero)
-            self.backgroundView?.backgroundColor = NXUI.backgroundColor
+            self.backgroundView?.backgroundColor = NXUI.unselectedBackgroundColor
             self.backgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
         
@@ -53,5 +53,10 @@ open class NXTableViewCell: UITableViewCell {
     /// 子类重写该方法进行数据绑定操作
     open func updateSubviews(_ action:String, _ value: Any?){
         
+    }
+    
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.separator.backgroundColor = NXUI.separatorColor.cgColor
     }
 }

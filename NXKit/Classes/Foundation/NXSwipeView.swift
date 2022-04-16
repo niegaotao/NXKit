@@ -19,7 +19,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         
         (contentView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
         contentView.frame = self.bounds
-        contentView.backgroundColor = NXUI.backgroundColor
+        contentView.backgroundColor = NXUI.barBackgroundColor
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         contentView.showsHorizontalScrollIndicator = false
         contentView.showsVerticalScrollIndicator = false
@@ -195,6 +195,11 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         else{
             self.ctxs.slider.sliderView.frame = __frame
         }
+    }
+    
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.setupSeparator(color: NXUI.separatorColor, ats: .maxY, insets: UIEdgeInsets.zero)
     }
     
     

@@ -53,7 +53,8 @@ extension NXOverlay {
 }
 
 open class NXOverlayAttributes : NX.Rect {
-    open var backgroundColor = UIColor.black.withAlphaComponent(0.4)
+    open var inoutBackgroundColor = NXUI.transitionInoutBackgroundColor
+    open var backgroundColor = NXUI.transitionBackgroundColor
 
     //关闭的回调, background,lhs,rhs,close,footer
     open var close : NX.Completion<String, Any?>? = nil
@@ -69,7 +70,7 @@ open class NXOverlayAttributes : NX.Rect {
     }
 }
 
-open class NXSuboverlay<Attributes:NXOverlayAttributes>: NXOverlay {
+open class NXAbstractOverlay<Attributes:NXOverlayAttributes>: NXOverlay {
     //上下文
     public let ctxs = Attributes()
     
@@ -97,7 +98,7 @@ open class NXSuboverlay<Attributes:NXOverlayAttributes>: NXOverlay {
             let fromValue : (frame:CGRect, alpha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame, 0.0, CGAffineTransform.identity.scaledBy(x: 1.08, y: 1.08))
             let toValue : (frame:CGRect, alpha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame, self.contentView.alpha, CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0))
             
-            self.backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.001)
+            self.backgroundView.backgroundColor = self.ctxs.inoutBackgroundColor
             self.contentView.transform = fromValue.transform
             self.contentView.alpha = fromValue.alpha
             
@@ -115,7 +116,7 @@ open class NXSuboverlay<Attributes:NXOverlayAttributes>: NXOverlay {
             
             let fromValue : (frame:CGRect, alpha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame.offsetBy(dx: 0, dy: self.contentView.h), self.contentView.alpha, CGAffineTransform.identity)
             
-            self.backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.001)
+            self.backgroundView.backgroundColor = self.ctxs.inoutBackgroundColor
             self.contentView.alpha = fromValue.alpha
             self.contentView.frame = fromValue.frame
             
@@ -133,7 +134,7 @@ open class NXSuboverlay<Attributes:NXOverlayAttributes>: NXOverlay {
             
             let fromValue : (frame:CGRect, alpha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame.offsetBy(dx: 0, dy: -self.contentView.h), self.contentView.alpha, CGAffineTransform.identity)
             
-            self.backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.001)
+            self.backgroundView.backgroundColor = self.ctxs.inoutBackgroundColor
             self.contentView.alpha = fromValue.alpha
             self.contentView.frame = fromValue.frame
             
@@ -151,7 +152,7 @@ open class NXSuboverlay<Attributes:NXOverlayAttributes>: NXOverlay {
             
             let fromValue : (frame:CGRect, aplha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame.offsetBy(dx: 0, dy: -toValue.frame.maxY), self.contentView.alpha, CGAffineTransform.identity)
             
-            self.backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.001)
+            self.backgroundView.backgroundColor = self.ctxs.inoutBackgroundColor
             self.contentView.alpha = fromValue.aplha
             self.contentView.frame = fromValue.frame
 
@@ -169,7 +170,7 @@ open class NXSuboverlay<Attributes:NXOverlayAttributes>: NXOverlay {
             
             let fromValue : (frame:CGRect, aplha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame.offsetBy(dx: 0, dy: toValue.frame.maxY), self.contentView.alpha, CGAffineTransform.identity)
             
-            self.backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.001)
+            self.backgroundView.backgroundColor = self.ctxs.inoutBackgroundColor
             self.contentView.alpha = fromValue.aplha
             self.contentView.frame = fromValue.frame
 
@@ -194,7 +195,7 @@ open class NXSuboverlay<Attributes:NXOverlayAttributes>: NXOverlay {
             
             UIView.animate(withDuration: 0.27, animations: {
                 self.contentView.transform = CGAffineTransform.identity.scaledBy(x: 0.96, y: 0.96)
-                self.backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.001)
+                self.backgroundView.backgroundColor = NXUI.transitionInoutBackgroundColor
                 self.contentView.alpha = 0.0
             }, completion: { (completed) in
                 self.removeFromSuperview()
@@ -206,7 +207,7 @@ open class NXSuboverlay<Attributes:NXOverlayAttributes>: NXOverlay {
             let toValue : (frame:CGRect, aplha:CGFloat) = (fromValue.frame.offsetBy(dx: 0, dy: self.contentView.h), self.contentView.alpha)
             
             UIView.animate(withDuration: 0.27, animations: {
-                self.backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.01)
+                self.backgroundView.backgroundColor = NXUI.transitionInoutBackgroundColor
                 self.contentView.frame = toValue.frame
             }, completion: { (finished) in
                 self.removeFromSuperview()
@@ -218,7 +219,7 @@ open class NXSuboverlay<Attributes:NXOverlayAttributes>: NXOverlay {
             let toValue : (frame:CGRect, aplha:CGFloat) = (fromValue.frame.offsetBy(dx: 0, dy: -self.contentView.h), self.contentView.alpha)
             
             UIView.animate(withDuration: 0.27, animations: {
-                self.backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.01)
+                self.backgroundView.backgroundColor = NXUI.transitionInoutBackgroundColor
                 self.contentView.frame = toValue.frame
             }, completion: { (finished) in
                 self.removeFromSuperview()
@@ -230,7 +231,7 @@ open class NXSuboverlay<Attributes:NXOverlayAttributes>: NXOverlay {
             let toValue : (frame:CGRect, aplha:CGFloat) = (fromValue.frame.offsetBy(dx: 0, dy: self.contentView.maxY), self.contentView.alpha)
             
             UIView.animate(withDuration: 0.27, animations: {
-                self.backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.01)
+                self.backgroundView.backgroundColor = NXUI.transitionInoutBackgroundColor
                 self.contentView.frame = toValue.frame
             }, completion: {(completed) in
                 self.removeFromSuperview()
@@ -242,7 +243,7 @@ open class NXSuboverlay<Attributes:NXOverlayAttributes>: NXOverlay {
             let toValue : (frame:CGRect, aplha:CGFloat) = (fromValue.frame.offsetBy(dx: 0, dy: -self.contentView.maxY), self.contentView.alpha)
             
             UIView.animate(withDuration: 0.27, animations: {
-                self.backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.01)
+                self.backgroundView.backgroundColor = NXUI.transitionInoutBackgroundColor
                 self.contentView.frame = toValue.frame
             }, completion: {(completed) in
                 self.removeFromSuperview()

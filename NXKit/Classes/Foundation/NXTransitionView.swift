@@ -76,7 +76,7 @@ open class NXTransitionView: NXView {
                 if owner.view.x < NXUI.width/3.0 {
                     UIView.animate(withDuration: 0.2) {
                         self.owner.view.x = 0.0
-                        self.backgroundColor = NXUI.maxAlphaOfBackgroundColor
+                        self.backgroundColor = NXUI.transitionBackgroundColor
                     }
                 }
                 else {
@@ -84,7 +84,7 @@ open class NXTransitionView: NXView {
                         naviController.closeViewController(owner, animated: true)
                         UIView.animate(withDuration: naviController.ctxs.duration*0.6) {
                             self.owner.view.x = NXUI.width
-                            self.backgroundColor = NXUI.minAlphaOfBackgroundColor
+                            self.backgroundColor = NXUI.transitionInoutBackgroundColor
                         }
                     }
                     
@@ -94,7 +94,7 @@ open class NXTransitionView: NXView {
                 if owner.view.x > -NXUI.width/3.0 {
                     UIView.animate(withDuration: 0.2) {
                         self.owner.view.x = 0.0
-                        self.backgroundColor = NXUI.maxAlphaOfBackgroundColor
+                        self.backgroundColor = NXUI.transitionBackgroundColor
                     }
                 }
                 else {
@@ -102,7 +102,7 @@ open class NXTransitionView: NXView {
                         naviController.closeViewController(owner, animated: true)
                         UIView.animate(withDuration: naviController.ctxs.duration*0.6) {
                             self.owner.view.x = -NXUI.width
-                            self.backgroundColor = NXUI.minAlphaOfBackgroundColor
+                            self.backgroundColor = NXUI.transitionInoutBackgroundColor
                         }
                     }
                 }

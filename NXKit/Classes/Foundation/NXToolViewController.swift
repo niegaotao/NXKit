@@ -43,7 +43,7 @@ open class NXToolViewController: NXContainerController {
         self.toolView.frame = CGRect(x: 0, y: self.view.h-NXUI.toolViewOffset-NXUI.bottomOffset, width: self.view.w, height: NXUI.toolViewOffset+NXUI.bottomOffset)
         self.toolView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.toolView.controller = self
-        self.toolView.backgroundColor = NXUI.backgroundColor
+        self.toolView.backgroundColor = NXUI.barBackgroundColor
         self.toolView.ctxs.didSelect = {[weak self] (toolView, index) in
             self?.didSelect(at: index)
         }

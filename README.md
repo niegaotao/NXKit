@@ -36,10 +36,10 @@
 - `NXCollectionViewCell`
 - `NXCollectionReusableView`
 - `NXAnimationView`：动画视图
-- `NXApplicationView`
-- `NXTableSubviewCell<T:UIView>`
-- `NXCollectionSubviewCell<T:UIView>`
-- `NXApplicationViewCell`
+- `NXAbstractView`
+- `NXAbstractTableViewCell<T:UIView>`
+- `NXAbstractCollectionViewCell<T:UIView>`
+- `NXAbstractViewCell`
 - `NXActionViewCell`
 
 #####1.3.控制器

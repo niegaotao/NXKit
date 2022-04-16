@@ -11,7 +11,7 @@ import UIKit
 open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
     open weak var controller : NXViewController?
     
-    open var backBar = NXNaviView.Bar.back(image:NXUI.image(named:"navi-back.png"), title: nil) //默认
+    open var backBar = NXNaviView.Bar.back(image:NXUI.image(named:"navi-back.png", mode: .alwaysTemplate), title: nil) //默认
     open var backView : UIView? {
         willSet{
             backView?.removeFromSuperview()
@@ -65,9 +65,9 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
         //这是整个导航栏的背景颜色
         self.backgroundView.frame = self.bounds
         self.backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.backgroundView.backgroundColor = UIColor.clear
-        self.backgroundView.image = UIImage.image(color: NXUI.naviViewBackgroundColor)
-        
+        self.backgroundView.tintColor = NXUI.barBackgroundColor;
+        self.backgroundView.image = UIImage.image(color: NXUI.barBackgroundColor)?.withRenderingMode(.alwaysTemplate)
+
         //整个导航栏的子控件
         self.contentView.frame = self.bounds
         self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -75,7 +75,8 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
         
         self.titleView.frame = CGRect(x: 75.0, y: NXUI.insets.top, width: self.contentView.w-75.0*2, height: self.contentView.h-NXUI.insets.top)
         self.titleView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.titleView.textColor = NXUI.naviViewForegroundColor
+        self.titleView.textColor = NXUI.barForegroundColor
+        self.titleView.tintColor = NXUI.barForegroundColor
         self.titleView.font = NXUI.font(17, true)
         self.titleView.textAlignment = .center
         self.contentView.addSubview(self.titleView)
@@ -156,6 +157,11 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
             }
         }
     }
+    
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.separator.backgroundColor = NXUI.separatorColor.cgColor
+    }
 }
 
 extension NXNaviView {
@@ -208,8 +214,9 @@ extension NXNaviView {
         
         open func setupSubviews(){
             self.frame.size = CGSize(width:70.0, height:44.0)
-            self.setTitleColor(NXUI.darkBlackColor, for: .normal)
+            self.setTitleColor(NXUI.barForegroundColor, for: .normal)
             self.setTitleColor(NXUI.darkGrayColor, for: .highlighted)
+            self.tintColor = NXUI.barForegroundColor;
             self.titleLabel?.font = NXUI.font(17)
         }
         

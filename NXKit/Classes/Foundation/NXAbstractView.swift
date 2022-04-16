@@ -1,5 +1,5 @@
 //
-//  NXApplicationView.swift
+//  NXAbstractView.swift
 //  NXKit
 //
 //  Created by niegaotao on 2021/4/7.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class NXApplicationView: NXView {
+open class NXAbstractView: NXView {
     public let assetView = UIImageView(frame: CGRect.zero)
     public let titleView = UILabel(frame: CGRect.zero)
     public let subtitleView = UILabel(frame: CGRect.zero)
@@ -54,7 +54,7 @@ open class NXApplicationView: NXView {
             return
         }
         
-        NX.View.update(__wrapped.appearance, self)
+        NX.View.update(__wrapped.raw, self)
         NX.View.update(__wrapped.asset, self.assetView)
         NX.View.update(__wrapped.title, self.titleView)
         NX.View.update(__wrapped.subtitle, self.subtitleView)
@@ -62,7 +62,7 @@ open class NXApplicationView: NXView {
         NX.View.update(__wrapped.arrow, self.arrowView)
         
         
-        let __separator = __wrapped.appearance.separator
+        let __separator = __wrapped.raw.separator
         var __isHidden = false
         if __separator.ats.contains(.maxY) || __separator.ats.contains(.maxX) {
             __isHidden = __wrapped.ctxs.at.last
@@ -82,7 +82,7 @@ open class NXApplicationView: NXView {
             var __frame = CGRect.zero
             if __separator.ats.contains(.minY) || __separator.ats.contains(.maxY) {
                 __frame = CGRect(x: __separator.insets.left, y: 0, width: __wrapped.ctxs.width-__separator.insets.left-__separator.insets.right, height: NXUI.pixel)
-                if __wrapped.appearance.separator.ats.contains(.maxY) {
+                if __wrapped.raw.separator.ats.contains(.maxY) {
                     __frame.origin.y = __wrapped.ctxs.height-NXUI.pixel
                 }
             }
@@ -96,6 +96,11 @@ open class NXApplicationView: NXView {
             self.separator.frame = __frame
             self.separator.backgroundColor = __separator.backgroundColor.cgColor
         }
+    }
+    
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.separator.backgroundColor = NXUI.separatorColor.cgColor
     }
 }
 
