@@ -22,10 +22,10 @@ open class NXCameraCaptureController: UIImagePickerController, UIImagePickerCont
         }
 
         if let __image = image {
-            NXUI.showLoading("正在保存", .center, self.view)
+            NX.showLoading("正在保存", .center, self.view)
             NXAsset.saveImage(image: __image) {[weak self] (state, asset) in
                 guard let self = self else {return}
-                NXUI.hideLoading(superview: self.view)
+                NX.hideLoading(superview: self.view)
 
                 if let __asset = asset {
                     let nxAsset = NXAsset(asset: __asset)

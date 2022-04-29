@@ -30,13 +30,13 @@ open class NXMTView: NXLRView<UIImageView, UILabel> {
     
     override open func setupSubviews() {
         super.setupSubviews()
-        mView.frame = CGRect(x: 0, y: 0, width: self.h, height: self.h)
+        mView.frame = CGRect(x: 0, y: 0, width: self.height, height: self.height)
         mView.contentMode = .scaleAspectFill
         
-        tView.frame = CGRect(x: self.h, y: 0, width: self.w-self.h, height: self.h)
+        tView.frame = CGRect(x: self.height, y: 0, width: self.width-self.height, height: self.height)
         tView.textAlignment = .left
-        tView.font = NXUI.font(13)
-        tView.textColor = NXUI.darkGrayColor
+        tView.font = NX.font(13)
+        tView.textColor = NX.darkGrayColor
     }
     
     open var index : Int = 0
@@ -56,15 +56,15 @@ open class NXTTView: NXLRView<UILabel, UILabel> {
     override open func setupSubviews() {
         super.setupSubviews()
         
-        topView.frame = CGRect(x: self.h, y: 0, width: self.w-self.h, height: self.h)
+        topView.frame = CGRect(x: self.height, y: 0, width: self.width-self.height, height: self.height)
         topView.textAlignment = .center
-        topView.font = NXUI.font(13)
-        topView.textColor = NXUI.darkGrayColor
+        topView.font = NX.font(13)
+        topView.textColor = NX.darkGrayColor
         
-        bottomView.frame = CGRect(x: self.h, y: 0, width: self.w-self.h, height: self.h)
+        bottomView.frame = CGRect(x: self.height, y: 0, width: self.width-self.height, height: self.height)
         bottomView.textAlignment = .center
-        bottomView.font = NXUI.font(13)
-        bottomView.textColor = NXUI.darkGrayColor
+        bottomView.font = NX.font(13)
+        bottomView.textColor = NX.darkGrayColor
     }
 }
 

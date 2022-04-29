@@ -38,11 +38,11 @@ open class NXViewControllerAnimation : NSObject, UIViewControllerAnimatedTransit
 
             containerView.addSubview(toView)
             toView.frame = containerView.bounds
-            toView.x = containerView.w
+            toView.x = containerView.width
             toView.autoresizingMask = [.flexibleHeight]
             
             UIView.animate(withDuration: self.duration, delay: 0, options: .curveEaseInOut, animations: {
-                fromView.x = -containerView.w * 0.3
+                fromView.x = -containerView.width * 0.3
                 toView.x = 0
                 
             }, completion:  { (completed) in
@@ -51,14 +51,14 @@ open class NXViewControllerAnimation : NSObject, UIViewControllerAnimatedTransit
         }
         else if self.operation == .pop {
             containerView.addSubview(toView)
-            toView.x = -containerView.w * 0.3
-            toView.h = containerView.h
+            toView.x = -containerView.width * 0.3
+            toView.height = containerView.height
             toView.autoresizingMask = [.flexibleHeight]
             
             containerView.addSubview(fromView)
             
             UIView.animate(withDuration: self.duration, delay: 0, options: .curveEaseInOut, animations: {
-                fromView.x = containerView.w
+                fromView.x = containerView.width
                 toView.x = 0
                 
             }, completion:  { (completed) in

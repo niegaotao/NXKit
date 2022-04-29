@@ -38,7 +38,7 @@ open class NXTextView: UITextView {
     }
     
     open var maximumOfBytes: Int = 0 //小于等于0表示无限制，大于0表示有显示
-    public let accessoryView = NXKeyboardAccessoryView(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: 44))
+    public let accessoryView = NXKeyboardAccessoryView(frame: CGRect(x: 0, y: 0, width: NX.width, height: 44))
     
     override public init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
@@ -102,7 +102,7 @@ open class NXTextView: UITextView {
     }
     
     private func updateSubviews() {
-        placeholderView.textColor = NXUI.lightGrayColor
+        placeholderView.textColor = NX.lightGrayColor
        
         placeholderView.backgroundColor = UIColor.clear
         placeholderView.translatesAutoresizingMaskIntoConstraints = false
@@ -131,10 +131,10 @@ open class NXTextView: UITextView {
                 self.accessoryView.bytesView.text = "\(Int(ceil(Double(byteLength/2))))/\(Int(ceil(Double(maximumOfBytes/2))))"
                 
                 if byteLength == maximumOfBytes {
-                    self.accessoryView.bytesView.textColor = NXUI.color(0xFF3B74, 1)
+                    self.accessoryView.bytesView.textColor = NX.color(0xFF3B74, 1)
                 }
                 else {
-                    self.accessoryView.bytesView.textColor = NXUI.color(0x92929B, 1)
+                    self.accessoryView.bytesView.textColor = NX.color(0x92929B, 1)
                 }
             }
         }
@@ -146,7 +146,7 @@ open class NXTextView: UITextView {
     open override func layoutSubviews() {
         super.layoutSubviews()
         
-        let __font = self.font ?? NXUI.font(16)
+        let __font = self.font ?? NX.font(16)
 
         var __frame = self.placeholderView.frame
         __frame.origin.x = self.textContainerInset.left + self.textContainer.lineFragmentPadding

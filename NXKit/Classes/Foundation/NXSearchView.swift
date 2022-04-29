@@ -21,24 +21,24 @@ open class NXSearchView: NXBackgroundView<UIImageView, UIView>, UITextFieldDeleg
         self.backgroundView.frame = self.bounds
         
         self.contentView.frame = self.bounds
-        self.contentView.backgroundColor = NXUI.color(247, 247, 247)
-        self.contentView.layer.borderColor = NXUI.separatorColor.cgColor
-        self.contentView.layer.borderWidth = NXUI.pixel
+        self.contentView.backgroundColor = NX.color(247, 247, 247)
+        self.contentView.layer.borderColor = NX.separatorColor.cgColor
+        self.contentView.layer.borderWidth = NX.pixel
         self.contentView.layer.cornerRadius = 16.0
         self.contentView.layer.masksToBounds = true
         
         //左侧的放大镜
-        mirrorView.frame = CGRect(x: 16, y: (self.h-16)/2, width: 16, height: 16)
+        mirrorView.frame = CGRect(x: 16, y: (self.height-16)/2, width: 16, height: 16)
         mirrorView.image = UIImage(named: "navi_searchbar.png")
         self.contentView.addSubview(mirrorView)
         
         //文字输入框
-        fieldView.font = NXUI.font(14)
-        fieldView.textColor = NXUI.color(80, 80, 80)
-        fieldView.frame = CGRect(x: 35, y: 0, width: self.w-35, height: self.h)
+        fieldView.font = NX.font(14)
+        fieldView.textColor = NX.color(80, 80, 80)
+        fieldView.frame = CGRect(x: 35, y: 0, width: self.width-35, height: self.height)
         fieldView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         fieldView.clearButtonMode = .whileEditing
-        fieldView.font = NXUI.font(14)
+        fieldView.font = NX.font(14)
         fieldView.minimumFontSize = 14
         fieldView.text = ""
         fieldView.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
@@ -111,6 +111,6 @@ open class NXSearchView: NXBackgroundView<UIImageView, UIView>, UITextFieldDeleg
         self.backgroundView.frame = self.bounds
         self.contentView.frame = self.bounds
         
-        self.fieldView.frame = CGRect(x: 35, y: 0, width: self.w-35, height: self.h)
+        self.fieldView.frame = CGRect(x: 35, y: 0, width: self.width-35, height: self.height)
     }
 }

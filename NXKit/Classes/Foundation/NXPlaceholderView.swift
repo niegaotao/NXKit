@@ -21,8 +21,8 @@ public class NXPlaceholder {
         __sender.value = "暂无数据～"
         __sender.textAlignment = .center
         __sender.numberOfLines = 0
-        __sender.font = NXUI.font(16)
-        __sender.color = NXUI.darkGrayColor
+        __sender.font = NX.font(16)
+        __sender.color = NX.darkGrayColor
     }
 }
 
@@ -50,7 +50,7 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
         if self.ctxs.isHidden == false {
             if let __customizableView = customizableView {
                 __customizableView.isHidden = false
-                __customizableView.frame = CGRect(x: (self.bounds.width-__customizableView.w)/2, y: (self.bounds.height - __customizableView.h)/2, width: __customizableView.w, height: __customizableView.h)
+                __customizableView.frame = CGRect(x: (self.bounds.width-__customizableView.width)/2, y: (self.bounds.height - __customizableView.height)/2, width: __customizableView.width, height: __customizableView.height)
                 self.addSubview(__customizableView)
                 
                 self.contentView.isHidden = true
@@ -68,7 +68,7 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
                 }
                 else if self.ctxs.m.value.count > 0 {
                     if self.ctxs.t.value.hasPrefix("http") {
-                        NXUI.image(self.contentView.lhsView, self.ctxs.m.value)
+                        NX.image(self.contentView.lhsView, self.ctxs.m.value)
                     }
                     else {
                         self.contentView.lhsView.image = UIImage(named: self.ctxs.m.value)

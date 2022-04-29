@@ -9,8 +9,8 @@
 import UIKit
 
 open class NXViewControllerView<N:UIView, C:UIView> : NXView {
-    open var naviView = N(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: NXUI.topOffset))
-    open var contentView = C(frame: CGRect(x: 0, y: NXUI.topOffset, width: NXUI.width, height: NXUI.height-NXUI.topOffset))
+    open var naviView = N(frame: CGRect(x: 0, y: 0, width: NX.width, height: NX.topOffset))
+    open var contentView = C(frame: CGRect(x: 0, y: NX.topOffset, width: NX.width, height: NX.height-NX.topOffset))
     open weak var controller : NXViewController? = nil
 
     open override func setupSubviews() {

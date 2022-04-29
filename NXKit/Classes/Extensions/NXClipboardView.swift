@@ -52,78 +52,78 @@ open class NXClipboardView: NXView {
         public let maxYView = NXAutoresizeView<UIView>(frame: CGRect.zero)
         
         open override func setupSubviews() {
-            self.minXTHSView.backgroundColor = NXUI.mainColor
+            self.minXTHSView.backgroundColor = NX.mainColor
             self.minXTHSView.isUserInteractionEnabled = false
             self.addSubview(self.minXTHSView)
             
-            self.minXBHSView.backgroundColor = NXUI.mainColor
+            self.minXBHSView.backgroundColor = NX.mainColor
             self.minXBHSView.isUserInteractionEnabled = false
             self.addSubview(self.minXBHSView)
             
-            self.maxXTHSView.backgroundColor = NXUI.mainColor
+            self.maxXTHSView.backgroundColor = NX.mainColor
             self.maxXTHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxXTHSView)
             
-            self.maxXBHSView.backgroundColor = NXUI.mainColor
+            self.maxXBHSView.backgroundColor = NX.mainColor
             self.maxXBHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxXBHSView)
             
-            self.minYLHSView.backgroundColor = NXUI.mainColor
+            self.minYLHSView.backgroundColor = NX.mainColor
             self.minYLHSView.isUserInteractionEnabled = false
             self.addSubview(self.minYLHSView)
             
-            self.minYRHSView.backgroundColor = NXUI.mainColor
+            self.minYRHSView.backgroundColor = NX.mainColor
             self.minYRHSView.isUserInteractionEnabled = false
             self.addSubview(self.minYRHSView)
             
-            self.maxYLHSView.backgroundColor = NXUI.mainColor
+            self.maxYLHSView.backgroundColor = NX.mainColor
             self.maxYLHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxYLHSView)
             
-            self.maxYRHSView.backgroundColor = NXUI.mainColor
+            self.maxYRHSView.backgroundColor = NX.mainColor
             self.maxYRHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxYRHSView)
             
             self.minXView.autoresizesSubviews = true
             self.minXView.backgroundColor = UIColor.clear
-            self.minXView.contentView.backgroundColor = NXUI.mainColor
+            self.minXView.contentView.backgroundColor = NX.mainColor
             self.addSubview(self.minXView)
             
             self.maxXView.autoresizesSubviews = true
             self.maxXView.backgroundColor = UIColor.clear
-            self.maxXView.contentView.backgroundColor = NXUI.mainColor
+            self.maxXView.contentView.backgroundColor = NX.mainColor
             self.addSubview(self.maxXView)
             
             self.minYView.autoresizesSubviews = true
             self.minYView.backgroundColor = UIColor.clear
-            self.minYView.contentView.backgroundColor = NXUI.mainColor
+            self.minYView.contentView.backgroundColor = NX.mainColor
             self.addSubview(self.minYView)
             
             self.maxYView.autoresizesSubviews = true
             self.maxYView.backgroundColor = UIColor.clear
-            self.maxYView.contentView.backgroundColor = NXUI.mainColor
+            self.maxYView.contentView.backgroundColor = NX.mainColor
             self.addSubview(self.maxYView)
         }
         
         open override func layoutSubviews() {
             super.layoutSubviews()
             
-            self.minXView.frame = CGRect(x: 0, y: 0, width: self.minXView.w, height: self.h)
-            self.maxXView.frame = CGRect(x: self.w-self.maxXView.w, y: 0, width: self.maxXView.w, height: self.h)
-            self.minYView.frame = CGRect(x: 0, y: 0, width: self.w, height: self.minYView.h)
-            self.maxYView.frame = CGRect(x: 0, y: self.h-self.maxYView.h, width: self.w, height: self.maxYView.h)
+            self.minXView.frame = CGRect(x: 0, y: 0, width: self.minXView.width, height: self.height)
+            self.maxXView.frame = CGRect(x: self.width-self.maxXView.width, y: 0, width: self.maxXView.width, height: self.height)
+            self.minYView.frame = CGRect(x: 0, y: 0, width: self.width, height: self.minYView.height)
+            self.maxYView.frame = CGRect(x: 0, y: self.height-self.maxYView.height, width: self.width, height: self.maxYView.height)
             
-            self.minYLHSView.frame = CGRect(x: 0, y: 0, width: self.minYLHSView.w, height: self.minYLHSView.h)
-            self.minYRHSView.frame = CGRect(x: self.w-self.minYRHSView.w, y: 0, width: self.minYRHSView.w, height: self.minYRHSView.h)
+            self.minYLHSView.frame = CGRect(x: 0, y: 0, width: self.minYLHSView.width, height: self.minYLHSView.height)
+            self.minYRHSView.frame = CGRect(x: self.width-self.minYRHSView.width, y: 0, width: self.minYRHSView.width, height: self.minYRHSView.height)
             
-            self.maxYLHSView.frame = CGRect(x: 0, y: self.h-self.maxYLHSView.h, width: self.maxYLHSView.w, height: self.maxYLHSView.h)
-            self.maxYRHSView.frame = CGRect(x: self.w-self.maxYRHSView.w, y: self.h-self.maxYRHSView.h, width: self.maxYRHSView.w, height: self.maxYRHSView.h)
+            self.maxYLHSView.frame = CGRect(x: 0, y: self.height-self.maxYLHSView.height, width: self.maxYLHSView.width, height: self.maxYLHSView.height)
+            self.maxYRHSView.frame = CGRect(x: self.width-self.maxYRHSView.width, y: self.height-self.maxYRHSView.height, width: self.maxYRHSView.width, height: self.maxYRHSView.height)
             
-            self.minXTHSView.frame = CGRect(x: 0, y: 0, width: self.minXTHSView.w, height: self.minXTHSView.h)
-            self.minXBHSView.frame = CGRect(x: 0, y: self.h-minXBHSView.h, width: self.minXBHSView.w, height: self.minXBHSView.h)
+            self.minXTHSView.frame = CGRect(x: 0, y: 0, width: self.minXTHSView.width, height: self.minXTHSView.height)
+            self.minXBHSView.frame = CGRect(x: 0, y: self.height-minXBHSView.height, width: self.minXBHSView.width, height: self.minXBHSView.height)
             
-            self.maxXTHSView.frame = CGRect(x: self.w-self.maxXTHSView.w, y: 0, width: self.maxXTHSView.w, height: self.maxXTHSView.h)
-            self.maxXBHSView.frame = CGRect(x: self.w-self.maxXBHSView.w, y: self.h-self.maxXBHSView.h, width: self.maxXBHSView.w, height: self.maxXBHSView.h)
+            self.maxXTHSView.frame = CGRect(x: self.width-self.maxXTHSView.width, y: 0, width: self.maxXTHSView.width, height: self.maxXTHSView.height)
+            self.maxXBHSView.frame = CGRect(x: self.width-self.maxXBHSView.width, y: self.height-self.maxXBHSView.height, width: self.maxXBHSView.width, height: self.maxXBHSView.height)
         }
     }
     
@@ -154,41 +154,41 @@ open class NXClipboardView: NXView {
             self.ctxs.clip.height = 1.0
         }
         
-        self.wrappedView.minXView.w = self.ctxs.line.width
+        self.wrappedView.minXView.width = self.ctxs.line.width
         self.wrappedView.minXView.insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: self.ctxs.line.insets)
         
-        self.wrappedView.maxXView.w = self.ctxs.line.width
+        self.wrappedView.maxXView.width = self.ctxs.line.width
         self.wrappedView.maxXView.insets = UIEdgeInsets(top: 0, left: self.ctxs.line.insets, bottom: 0, right: 0)
         
-        self.wrappedView.minYView.h = self.ctxs.line.width
+        self.wrappedView.minYView.height = self.ctxs.line.width
         self.wrappedView.minYView.insets = UIEdgeInsets(top: 0, left: 0, bottom: self.ctxs.line.insets, right: 0)
         
-        self.wrappedView.maxYView.h = self.ctxs.line.width
+        self.wrappedView.maxYView.height = self.ctxs.line.width
         self.wrappedView.maxYView.insets = UIEdgeInsets(top: self.ctxs.line.insets, left: 0, bottom: 0, right: 0)
         
-        self.wrappedView.minYLHSView.w = self.ctxs.line.width * 1.25
-        self.wrappedView.minYLHSView.h = self.ctxs.line.width * 0.5
+        self.wrappedView.minYLHSView.width = self.ctxs.line.width * 1.25
+        self.wrappedView.minYLHSView.height = self.ctxs.line.width * 0.5
         
-        self.wrappedView.minYRHSView.w = self.ctxs.line.width * 1.25
-        self.wrappedView.minYRHSView.h = self.ctxs.line.width * 0.5
+        self.wrappedView.minYRHSView.width = self.ctxs.line.width * 1.25
+        self.wrappedView.minYRHSView.height = self.ctxs.line.width * 0.5
 
-        self.wrappedView.maxYLHSView.w = self.ctxs.line.width * 1.25
-        self.wrappedView.maxYLHSView.h = self.ctxs.line.width * 0.5
+        self.wrappedView.maxYLHSView.width = self.ctxs.line.width * 1.25
+        self.wrappedView.maxYLHSView.height = self.ctxs.line.width * 0.5
         
-        self.wrappedView.maxYRHSView.w = self.ctxs.line.width * 1.25
-        self.wrappedView.maxYRHSView.h = self.ctxs.line.width * 0.5
+        self.wrappedView.maxYRHSView.width = self.ctxs.line.width * 1.25
+        self.wrappedView.maxYRHSView.height = self.ctxs.line.width * 0.5
         
-        self.wrappedView.minXTHSView.w = self.ctxs.line.width * 0.5
-        self.wrappedView.minXTHSView.h = self.ctxs.line.width * 1.25
+        self.wrappedView.minXTHSView.width = self.ctxs.line.width * 0.5
+        self.wrappedView.minXTHSView.height = self.ctxs.line.width * 1.25
         
-        self.wrappedView.minXBHSView.w = self.ctxs.line.width * 0.5
-        self.wrappedView.minXBHSView.h = self.ctxs.line.width * 1.25
+        self.wrappedView.minXBHSView.width = self.ctxs.line.width * 0.5
+        self.wrappedView.minXBHSView.height = self.ctxs.line.width * 1.25
         
-        self.wrappedView.maxXTHSView.w = self.ctxs.line.width * 0.5
-        self.wrappedView.maxXTHSView.h = self.ctxs.line.width * 1.25
+        self.wrappedView.maxXTHSView.width = self.ctxs.line.width * 0.5
+        self.wrappedView.maxXTHSView.height = self.ctxs.line.width * 1.25
         
-        self.wrappedView.maxXBHSView.w = self.ctxs.line.width * 0.5
-        self.wrappedView.maxXBHSView.h = self.ctxs.line.width * 1.25
+        self.wrappedView.maxXBHSView.width = self.ctxs.line.width * 0.5
+        self.wrappedView.maxXBHSView.height = self.ctxs.line.width * 1.25
         
         if self.ctxs.clip.isHidden == false {
             self.wrappedView.isHidden = false
@@ -432,8 +432,8 @@ open class NXClipboardView: NXView {
             var __frame = CGRect.zero
             __frame.origin.x = self.wrappedView.x + __ctxs.mX - __ctxs.x
             __frame.origin.y = self.wrappedView.y + __ctxs.mY - __ctxs.y
-            __frame.size.width = self.wrappedView.w * __ctxs.scale
-            __frame.size.height = self.wrappedView.h * __ctxs.scale
+            __frame.size.width = self.wrappedView.width * __ctxs.scale
+            __frame.size.height = self.wrappedView.height * __ctxs.scale
             
             if __frame.size.width >= self.ctxs.line.width * 2.0
                 && __frame.size.height >= self.ctxs.line.width * 2.0

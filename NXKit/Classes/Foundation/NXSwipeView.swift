@@ -19,7 +19,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         
         (contentView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
         contentView.frame = self.bounds
-        contentView.backgroundColor = NXUI.barBackgroundColor
+        contentView.backgroundColor = NX.barBackgroundColor
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         contentView.showsHorizontalScrollIndicator = false
         contentView.showsVerticalScrollIndicator = false
@@ -30,7 +30,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         if #available(iOS 11.0, *) {
             contentView.contentInsetAdjustmentBehavior = .never
         }
-        self.setupSeparator(color: NXUI.separatorColor, ats: .maxY, insets: UIEdgeInsets.zero)
+        self.setupSeparator(color: NX.separatorColor, ats: .maxY, insets: UIEdgeInsets.zero)
         self.ctxs.slider.sliderView.layer.masksToBounds = true
         self.contentView.addSubview(self.ctxs.slider.sliderView)
     }
@@ -67,19 +67,19 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
             item.color.selected = self.ctxs.color.selected
             item.color.unselected = self.ctxs.color.unselected
             
-            item.width.selected = item.title.selected.stringSize(font: item.font.selected, size: CGSize(width: NXUI.width, height: 44)).width + 2.0
-            item.width.unselected = item.title.unselected.stringSize(font: item.font.unselected, size: CGSize(width: NXUI.width, height: 44)).width + 2.0
+            item.width.selected = item.title.selected.stringSize(font: item.font.selected, size: CGSize(width: NX.width, height: 44)).width + 2.0
+            item.width.unselected = item.title.unselected.stringSize(font: item.font.unselected, size: CGSize(width: NX.width, height: 44)).width + 2.0
         }
         
         if self.ctxs.isEqually {
             let maximumOfComponents = max(min(self.ctxs.maximumOfComponents, CGFloat(self.ctxs.elements.count)),1.0)
-            let widthOfComponents = (self.w - ctxs.insets.left - ctxs.insets.right)/CGFloat(maximumOfComponents)
+            let widthOfComponents = (self.width - ctxs.insets.left - ctxs.insets.right)/CGFloat(maximumOfComponents)
             for (_, item) in self.ctxs.elements.enumerated() {
                 guard let item = item as? NXSwipeView.Element else {
                     continue
                 }
-                item.size.selected = CGSize(width: widthOfComponents, height: self.h)
-                item.size.unselected = CGSize(width: widthOfComponents, height: self.h)
+                item.size.selected = CGSize(width: widthOfComponents, height: self.height)
+                item.size.unselected = CGSize(width: widthOfComponents, height: self.height)
             }
         }
         else {
@@ -87,8 +87,8 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
                 guard let item = item as? NXSwipeView.Element else {
                     continue
                 }
-                item.size.selected = CGSize(width: item.width.selected + self.ctxs.spaceOfComponents, height: self.h)
-                item.size.unselected = CGSize(width: item.width.unselected + self.ctxs.spaceOfComponents, height: self.h)
+                item.size.selected = CGSize(width: item.width.selected + self.ctxs.spaceOfComponents, height: self.height)
+                item.size.unselected = CGSize(width: item.width.unselected + self.ctxs.spaceOfComponents, height: self.height)
             }
         }
         
@@ -97,7 +97,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         
         //矫正位置
         DispatchQueue.main.asyncAfter(delay:0.01) {
-            if self.contentView.contentSize.width > self.contentView.w {
+            if self.contentView.contentSize.width > self.contentView.width {
                 let indexPath = IndexPath(row: self.ctxs.index, section: 0)
                 self.contentView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             }
@@ -111,19 +111,19 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         }
         item.title.selected = title
         item.title.unselected = title
-        item.width.selected = item.title.selected.stringSize(font: item.font.selected, size: CGSize(width: NXUI.width, height: 44)).width + 2.0
-        item.width.unselected = item.title.unselected.stringSize(font: item.font.unselected, size: CGSize(width: NXUI.width, height: 44)).width + 2.0
+        item.width.selected = item.title.selected.stringSize(font: item.font.selected, size: CGSize(width: NX.width, height: 44)).width + 2.0
+        item.width.unselected = item.title.unselected.stringSize(font: item.font.unselected, size: CGSize(width: NX.width, height: 44)).width + 2.0
         
         if self.ctxs.isEqually {
             let maximumOfComponents = max(min(self.ctxs.maximumOfComponents, CGFloat(self.ctxs.count)),1.0)
-            let widthOfComponents = (self.w - ctxs.insets.left - ctxs.insets.right)/CGFloat(maximumOfComponents)
+            let widthOfComponents = (self.width - ctxs.insets.left - ctxs.insets.right)/CGFloat(maximumOfComponents)
             
-            item.size.selected = CGSize(width: widthOfComponents, height: self.h)
-            item.size.unselected = CGSize(width: widthOfComponents, height: self.h)
+            item.size.selected = CGSize(width: widthOfComponents, height: self.height)
+            item.size.unselected = CGSize(width: widthOfComponents, height: self.height)
         }
         else{
-            item.size.selected = CGSize(width: item.width.selected + 16.0, height: self.h)
-            item.size.unselected = CGSize(width: item.width.unselected + 16.0, height: self.h)
+            item.size.selected = CGSize(width: item.width.selected + 16.0, height: self.height)
+            item.size.unselected = CGSize(width: item.width.unselected + 16.0, height: self.height)
         }
         
         self.contentView.reloadData()
@@ -140,7 +140,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         self.resizeSlider(at: index, animated: true)
 
         //矫正位置
-        if contentView.contentSize.width > contentView.w {
+        if contentView.contentSize.width > contentView.width {
             let indexPath = IndexPath(row: self.ctxs.index, section: 0)
             self.contentView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
@@ -172,7 +172,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
             else {
                 __frame.size.height = 3
             }
-            __frame.origin.y = self.h - self.ctxs.slider.insets.bottom - __frame.size.height
+            __frame.origin.y = self.height - self.ctxs.slider.insets.bottom - __frame.size.height
             
             __frame.origin.x = self.ctxs.insets.left + (item.size.selected.width - __frame.size.width)/2.0
             
@@ -199,7 +199,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        self.setupSeparator(color: NXUI.separatorColor, ats: .maxY, insets: UIEdgeInsets.zero)
+        self.setupSeparator(color: NX.separatorColor, ats: .maxY, insets: UIEdgeInsets.zero)
     }
     
     
@@ -261,14 +261,14 @@ extension NXSwipeView {
         
         //字体
         open var font  = NX.Selectable<UIFont> { (_, __sender) in
-            __sender.selected = NXUI.font(15, true)
-            __sender.unselected = NXUI.font(15)
+            __sender.selected = NX.font(15, .bold)
+            __sender.unselected = NX.font(15)
         }
         
         //颜色
         open var color = NX.Selectable<UIColor>{ (_, __sender) in
-            __sender.selected = NXUI.darkBlackColor
-            __sender.unselected = NXUI.darkGrayColor
+            __sender.selected = NX.darkBlackColor
+            __sender.unselected = NX.darkGrayColor
         }
         
         //是否等分
@@ -290,7 +290,7 @@ extension NXSwipeView {
         open var width : CGFloat = 0.0
         open var height : CGFloat = 3.0
         open var insets = UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0)
-        open var backgroundColor = NXUI.mainColor
+        open var backgroundColor = NX.mainColor
         open var radius : CGFloat = 0.0
     }
     
@@ -301,13 +301,13 @@ extension NXSwipeView {
         open var title =  NX.Selectable<String>(completion: nil)
         
         open var font  = NX.Selectable<UIFont> { (_, __sender) in
-            __sender.selected = NXUI.font(15, true)
-            __sender.unselected = NXUI.font(15)
+            __sender.selected = NX.font(15, .bold)
+            __sender.unselected = NX.font(15)
         }
         
         open var color = NX.Selectable<UIColor>{ (_, __sender) in
-            __sender.selected = NXUI.darkBlackColor
-            __sender.unselected = NXUI.darkGrayColor
+            __sender.selected = NX.darkBlackColor
+            __sender.unselected = NX.darkGrayColor
         }
         
         open var size = NX.Selectable<CGSize>{ (_, __sender) in
@@ -334,8 +334,8 @@ extension NXSwipeView {
             
             self.titleView.frame = self.bounds
             self.titleView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            self.titleView.font = NXUI.font(16, true)
-            self.titleView.textColor = NXUI.darkBlackColor
+            self.titleView.font = NX.font(16, .bold)
+            self.titleView.textColor = NX.darkBlackColor
             self.titleView.textAlignment = .center
             self.contentView.addSubview(self.titleView)
         }

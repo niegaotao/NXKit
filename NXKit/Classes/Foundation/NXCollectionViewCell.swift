@@ -20,8 +20,8 @@ open class NXCollectionViewCell: UICollectionViewCell {
     }
     
     open func setup(){
-        arrowView.frame = CGRect(x: contentView.w-NX.insets.right-6, y: (contentView.h-12)/2, width: 6, height: 12)
-        arrowView.image = NXUI.image(named:"icon-arrow.png")
+        arrowView.frame = CGRect(x: contentView.width-NX.insets.right-6, y: (contentView.height-12)/2, width: 6, height: 12)
+        arrowView.image = NX.image(named:"icon-arrow.png")
         arrowView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin]
         arrowView.contentMode = .scaleAspectFill
         arrowView.isHidden = true
@@ -29,11 +29,11 @@ open class NXCollectionViewCell: UICollectionViewCell {
         
         if self.backgroundView == nil {
             self.backgroundView = UIView(frame: CGRect.zero)
-            self.backgroundView?.backgroundColor = NXUI.unselectedBackgroundColor
+            self.backgroundView?.backgroundColor = NX.unselectedBackgroundColor
             self.backgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
         
-        separator.backgroundColor = NXUI.separatorColor.cgColor
+        separator.backgroundColor = NX.separatorColor.cgColor
         separator.isHidden = true
         self.contentView.layer.addSublayer(separator)
     }
@@ -55,6 +55,6 @@ open class NXCollectionViewCell: UICollectionViewCell {
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        self.separator.backgroundColor = NXUI.separatorColor.cgColor
+        self.separator.backgroundColor = NX.separatorColor.cgColor
     }
 }

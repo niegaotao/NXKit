@@ -37,7 +37,7 @@ open class NXSuspendView<T:UIView>: NXView {
                 self.isAnimated = true
                 
                 UIView.animate(withDuration: (animation ? 0.4 : 0.0)) {
-                    self.y = -self.h
+                    self.y = -self.height
                 }
             }
         }

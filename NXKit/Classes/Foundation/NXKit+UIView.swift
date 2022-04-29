@@ -13,9 +13,9 @@ import UIKit
  */
 extension UIView {
     open var x : CGFloat {
-        set(x){
+        set{
             var __frame = self.frame
-            __frame.origin.x = x
+            __frame.origin.x = newValue
             self.frame = __frame
         }
         get{
@@ -24,9 +24,9 @@ extension UIView {
     }
     
     open var y : CGFloat {
-        set(y){
+        set{
             var __frame = self.frame
-            __frame.origin.y = y
+            __frame.origin.y = newValue
             self.frame = __frame
         }
         get{
@@ -34,10 +34,10 @@ extension UIView {
         }
     }
     
-    open var w : CGFloat {
-        set(w){
+    open var width : CGFloat {
+        set{
             var __frame = self.frame
-            __frame.size.width = w
+            __frame.size.width = newValue
             self.frame = __frame
         }
         get{
@@ -45,10 +45,10 @@ extension UIView {
         }
     }
     
-    open var h : CGFloat {
-        set(h){
+    open var height : CGFloat {
+        set{
             var __frame = self.frame
-            __frame.size.height = h
+            __frame.size.height = newValue
             self.frame = __frame
         }
         get{
@@ -71,7 +71,7 @@ extension UIView {
  */
 extension UIView {
     open var association : NXViewAssociation? {
-        set(newValue) {
+        set {
             objc_setAssociatedObject(self, &NXViewAssociation.key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get{
@@ -128,7 +128,7 @@ extension UIView {
     }
     
     //添加上下/左右的边缘分割线
-    public func setupSeparator(color:UIColor, ats: NX.Ats, insets: UIEdgeInsets = UIEdgeInsets.zero, width:CGFloat = NXUI.pixel){
+    public func setupSeparator(color:UIColor, ats: NX.Ats, insets: UIEdgeInsets = UIEdgeInsets.zero, width:CGFloat = NX.pixel){
         let __color = color
         let __width = width
         
@@ -156,16 +156,16 @@ extension UIView {
             separator?.backgroundColor = color.cgColor;
 
             if ats.contains(.minY) {
-                separator?.frame = CGRect(x: insets.left, y: 0, width: self.w-insets.left-insets.right, height: width)
+                separator?.frame = CGRect(x: insets.left, y: 0, width: self.width-insets.left-insets.right, height: width)
             }
             else if ats.contains(.minX) {
-                separator?.frame = CGRect(x: 0, y: insets.top, width: __width, height: self.h-insets.top-insets.bottom)
+                separator?.frame = CGRect(x: 0, y: insets.top, width: __width, height: self.height-insets.top-insets.bottom)
             }
             else if ats.contains(.maxY) {
-                separator?.frame = CGRect(x: insets.left, y: self.h-__width, width: self.w-insets.left-insets.right, height: __width)
+                separator?.frame = CGRect(x: insets.left, y: self.height-__width, width: self.width-insets.left-insets.right, height: __width)
             }
             else if ats.contains(.maxX) {
-                separator?.frame = CGRect(x: self.w-__width, y: 0, width: __width, height: self.h-insets.top-insets.bottom)
+                separator?.frame = CGRect(x: self.width-__width, y: 0, width: __width, height: self.height-insets.top-insets.bottom)
             }
         }
     }

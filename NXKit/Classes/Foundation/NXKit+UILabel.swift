@@ -117,13 +117,13 @@ extension UILabel {
     }
 
     
-    public func addBottomColorView(color: UIColor = NXUI.mainColor.withAlphaComponent(0.85), height: CGFloat = 7) {
+    public func addBottomColorView(color: UIColor = NX.mainColor.withAlphaComponent(0.85), height: CGFloat = 7) {
         guard let str = self.text else {
             return
         }
  
         
-        let width = str.stringWidth(font: self.font, size: CGSize(width: NXUI.width, height: 50))
+        let width = str.stringWidth(font: self.font, size: CGSize(width: NX.width, height: 50))
         let view = UIView.init(frame: CGRect(x: 0, y: 0, width: width, height: height))
 
         if let superView = self.superview {

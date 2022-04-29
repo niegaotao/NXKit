@@ -8,223 +8,119 @@
 
 
 extension NXRouter {
-    /*回调的实例*/
-    public class Wrapped {
+    //*注册信息*/
+    public class URI : NXAny {
+        public var scheme = ""        //scheme
+        public var host = ""          //host
+        public var path = ""          //path
+        public var completion: NX.Completion<Bool, NXRouter.URL>? = nil//注册后的回调action
+    }
+    
+    /*回调信息*/
+    public class URL {
         public var url: String = ""
-        public var query: [String: String]? = nil                   //URL对应解析的参数，输出
         public var info: [String: Any]? = nil                      //打开URL传入的参数，输入
-        public var completion: NX.Completion<Bool, [String: Any]>? = nil//打开URL后的回调
-    }
-    
-    //*这里采用类对象的方式保存注册信息*/
-    open class URI : NSObject {
-        open var url = ""       //url
-        open var scheme = ""        //scheme
-        open var path = ""          //path
-        open var query : [String: String]? = nil                   //URL对应解析的参数，输出
-        open var completion: NX.Completion<Bool, NXRouter.Wrapped?>? = nil//注册后的回调action
-    }
-    
-    //检查过程中的临时变量
-    open class Record : URI {
-        open var isValid = false
-        open var uri: URI? = nil
+        public var completion: NX.Completion<Bool, NXRouter.URL>? = nil//打开URL后的回调
+
+        public var scheme = ""                                  //scheme
+        public var host = ""                                    //host
+        public var path = ""                                    //path
+        public var query = [String: String]()                   //URL对应解析的参数，输出
     }
 }
 
-open class NXRouter {
-    public private(set) var routes = [NXRouter.URI]()                //存储的uris
-    public private(set) var schemes = [String]()                    //支持的schemes
-    public private(set) var isRepeatable = false                    //是否支持重复的path
+open class NXRouter : NSObject {
+    public static let center = NXRouter()
+    public private(set) var uris = [NXRouter.URI]()                 //存储的uris
     open var exception : ((_ url:String) -> ())?                    //对未注册的或异常的一个回调
     
-    public init(schemes: [String], isRepeatable: Bool) {
-        self.schemes.append(contentsOf: schemes)
-        self.isRepeatable = isRepeatable
-    }
-    
     /*新增URL*/
     @discardableResult
-    public func add(_ url: String, completion:@escaping NX.Completion<Bool, NXRouter.Wrapped?>) -> NXRouter.URI? {
-        guard let url = URL(string: url) else {
+    public func add(_ url: String, completion:@escaping NX.Completion<Bool, NXRouter.URL>) -> NXRouter.URI? {
+        guard let url = Foundation.URL(string: url), let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             return nil
         }
-        let record = self.componentsOf(url: url)
-        return self.add(record: record, completion: completion)
-    }
-    
-    /*新增URL*/
-    @discardableResult
-    public func add(schemes:[String], paths: [String], completion:@escaping NX.Completion<Bool, NXRouter.Wrapped?>) -> [NXRouter.URI?] {
-        var currentURIs = [NXRouter.URI?]()
-        for scheme in schemes {
-            if paths.count > 0 {
-                for path in paths {
-                    currentURIs.append(self.add(scheme:scheme, path:path, completion: completion))
-                }
-            }
-            else{
-                //支持无path的注入
-                currentURIs.append(self.add(scheme: scheme, path: "", completion: completion))
-            }
-        }
-        return currentURIs
-    }
-    
-    /*新增URL*/
-    @discardableResult
-    public func add(scheme:String, path: String, completion:@escaping NX.Completion<Bool, NXRouter.Wrapped?>) -> NXRouter.URI? {
-        guard let url = URL(string: scheme + "://" + path) else {
-            return nil
-        }
-        let record = self.componentsOf(url: url)
-        return self.add(record: record, completion: completion)
-    }
-    
-    /*新增URL*/
-    @discardableResult
-    fileprivate func add(record: NXRouter.Record, completion:@escaping NX.Completion<Bool, NXRouter.Wrapped?>) -> NXRouter.URI? {
-        
-        if record.isValid == false {
-            return nil
-        }
-        
-        if isRepeatable == false {
-            if let uri = record.uri {
-                if let index = self.routes.firstIndex(of: uri){
-                    self.routes.remove(at: index)
-                }
-            }
-        }
-        
-        //创建一个资源定位符号
         let uri = NXRouter.URI()
-        uri.url = record.url
-        uri.scheme = record.scheme
-        uri.path = record.path
-        uri.completion = completion
-        routes.append(uri)
+        uri.scheme = components.scheme ?? ""
+        uri.host = components.host ?? ""
+        uri.path = components.path
         
+        
+        if let index = self.uris.firstIndex(where: {return $0.scheme == uri.scheme && $0.host == uri.host && $0.path == uri.path}) {
+            self.uris.remove(at: index)
+        }
+        
+        uri.completion = completion
+        uris.append(uri)
         return uri
+        
     }
-    
-    
     
     /*删除*/
     @discardableResult
-    public func remove(_ url: String, uri: NXRouter.URI? = nil) -> Bool {
-        guard let url = URL(string: url) else {
+    public func remove(_ url: String) -> Bool {
+        guard let url = Foundation.URL(string: url), let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             return false
         }
-        let __components = self.componentsOf(url: url)
-        if __components.isValid == false {
-            return false
-        }
+        self.uris.removeAll(where: {
+            return $0.scheme == (components.scheme ?? "") && $0.host == (components.host ?? "") && $0.path == components.path
+        })
         
-        var isRemoved : Bool = false
-        
-        if let __target = uri {
-            self.routes.removeAll { (__uri) -> Bool in
-                if __target == __uri {
-                    isRemoved = true
-                    return true
-                }
-                return false
-            }
-        }
-        else {
-            self.routes.removeAll { (__uri) -> Bool in
-                if __uri.scheme == __components.scheme && __uri.path == __components.path {
-                    isRemoved = true
-                    return true
-                }
-                return false
-            }
-        }
-        return isRemoved
+        return true
     }
     
     //打开链接
-    public func open(_ url: String, info: [String: Any]?, completion: NX.Completion<Bool, [String: Any]>?) {
-        guard let url = URL(string: url) else {
+    public func open(_ url: String, info: [String: Any]? = nil, completion: NX.Completion<Bool, NXRouter.URL>? = nil) {
+        guard let url = Foundation.URL(string: url), let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             self.exception?(url)
             return
         }
-        let compatible = self.componentsOf(url: url)
-        if compatible.isValid, let uri = compatible.uri {
-            let rawValue = NXRouter.Wrapped()
-            rawValue.url = url.absoluteString
-            rawValue.info = info
-            rawValue.query = compatible.query
-            rawValue.completion = completion
-            uri.completion?(true, rawValue)
+        
+        let urlValue = NXRouter.URL()
+        urlValue.url = url.absoluteString
+        urlValue.info = info
+        urlValue.completion = completion
+        
+        urlValue.scheme = components.scheme ?? ""
+        urlValue.host = components.host ?? ""
+        urlValue.path = components.path
+        
+        if let queryItems = components.queryItems {
+            for query in queryItems {
+                if let value = query.value {
+                    urlValue.query[query.name] = value
+                }
+            }
+        }
+        
+        if let uri = self.uris.first(where: { return $0.scheme == urlValue.scheme && $0.host == urlValue.host && $0.path == urlValue.path}) {
+            uri.completion?(true, urlValue)
         }
         else {
             self.exception?(url.absoluteString)
         }
     }
-    
-    /*检测url的有效性,匹配URL*/
-    public func componentsOf(url: URL) -> NXRouter.Record {
-        let record = NXRouter.Record()
-        if let __scheme = url.scheme , self.schemes.contains(__scheme){
-            record.isValid = true
-            record.url = url.absoluteString
-            record.scheme = __scheme
-            record.path = (url.host ?? "") + url.path
-            record.query = NXRouter.query(url: url)
-        }
-        
-        record.uri = self.routes.first(where: { uri in
-            return (record.scheme.count > 0 ? record.scheme == uri.scheme : true) && (record.path.count > 0 ? record.path == uri.path : true);
-        })
-        
-        return record
-    }
-    
-    
-    /*解析URL自带的参数规则*/
-    class public func query(url: URL) -> [String: String]? {
-        if let query = url.query, query.count > 0 {
-            var dicValue = [String: String]()
-            
-            let components = query.components(separatedBy: "&")
-            for component in components {
-                guard component.count > 0 else {
-                    continue
-                }
-                
-                let values = component.components(separatedBy: "=")
-                if values.count == 2 {
-                    dicValue[values[0]] = values[1]
-                }
-            }
-            
-            return dicValue.count > 0 ? dicValue : nil
-        }
-        return nil
-    }
 }
 
 extension NXRouter {
     //生成路由URL
-    public class func create(scheme:String, path:String, operation:String, data:[String:Any]) -> String {
-        let __operation = NX.encodeURIComponent(operation) ?? operation
-        if data.count > 0 {
-            let encode = NXSerialization.JSONObject(toString:data, encode:true)
-            return "\(scheme)://\(path)?operation=\(__operation)&data=\(encode)"
-        }
-        return "\(scheme)://\(path)?operation=\(__operation)"
-    }
-    
-    public class func create(scheme:String, path:String, query:[String:String], encode:Bool) -> String {
+    public class func create(scheme:String, host:String, path:String, query:[String:Any], encode:Bool) -> String {
         var __querys = [String]()
-        for (queryKey, queryKalue) in query {
-            let __queryKey = encode ? NX.get(string:NX.encodeURIComponent(queryKey), ""): queryKey
-            let __queryValue = encode ? NX.get(string:NX.encodeURIComponent(queryKalue), ""): queryKalue
-            __querys.append("\(__queryKey)=\(__queryValue)")
+        for (queryKey, queryValue) in query {
+            let key = encode ? NX.get(string:NX.encodeURIComponent(queryKey), ""): queryKey
+            var value = ""
+            if let __value = queryValue as? String {
+                value = encode ? NX.get(string:NX.encodeURIComponent(__value), "") : __value
+            }
+            else if let __value = queryValue as? [String:Any] {
+                value = NXSerialization.JSONObject(toString: __value, encode: encode)
+            }
+            else if let __value = queryValue as? [Any] {
+                value = NXSerialization.JSONObject(toString: __value, encode: encode)
+            }
+            __querys.append("\(key)=\(value)")
         }
-        var __actionURL = "\(scheme)://\(path)"
+        var __actionURL = "\(scheme)://\(host)\(path)"
         if __querys.count > 0 {
             __actionURL = __actionURL + "?" + __querys.joined(separator: "&")
         }

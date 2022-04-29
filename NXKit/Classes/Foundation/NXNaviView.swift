@@ -11,7 +11,7 @@ import UIKit
 open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
     open weak var controller : NXViewController?
     
-    open var backBar = NXNaviView.Bar.back(image:NXUI.image(named:"navi-back.png", mode: .alwaysTemplate), title: nil) //默认
+    open var backBar = NXNaviView.Bar.back(image:NX.image(named:"navi-back.png", mode: .alwaysTemplate), title: nil) //默认
     open var backView : UIView? {
         willSet{
             backView?.removeFromSuperview()
@@ -27,7 +27,7 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
         }
     }
     
-    open var titleView = UILabel(frame: CGRect(x: 75.0, y: NXUI.insets.top, width: NXUI.width-75.0*2, height: NXUI.topOffset-NXUI.insets.top))
+    open var titleView = UILabel(frame: CGRect(x: 75.0, y: NX.safeAreaInsets.top, width: NX.width-75.0*2, height: NX.topOffset-NX.safeAreaInsets.top))
     open var centerView : UIView? {
         willSet{
             centerView?.removeFromSuperview()
@@ -65,19 +65,19 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
         //这是整个导航栏的背景颜色
         self.backgroundView.frame = self.bounds
         self.backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.backgroundView.tintColor = NXUI.barBackgroundColor;
-        self.backgroundView.image = UIImage.image(color: NXUI.barBackgroundColor)?.withRenderingMode(.alwaysTemplate)
+        self.backgroundView.tintColor = NX.barBackgroundColor;
+        self.backgroundView.image = UIImage.image(color: NX.barBackgroundColor)?.withRenderingMode(.alwaysTemplate)
 
         //整个导航栏的子控件
         self.contentView.frame = self.bounds
         self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.contentView.backgroundColor = UIColor.clear
         
-        self.titleView.frame = CGRect(x: 75.0, y: NXUI.insets.top, width: self.contentView.w-75.0*2, height: self.contentView.h-NXUI.insets.top)
+        self.titleView.frame = CGRect(x: 75.0, y: NX.safeAreaInsets.top, width: self.contentView.width-75.0*2, height: self.contentView.height-NX.safeAreaInsets.top)
         self.titleView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.titleView.textColor = NXUI.barForegroundColor
-        self.titleView.tintColor = NXUI.barForegroundColor
-        self.titleView.font = NXUI.font(17, true)
+        self.titleView.textColor = NX.barForegroundColor
+        self.titleView.tintColor = NX.barForegroundColor
+        self.titleView.font = NX.font(17, .bold)
         self.titleView.textAlignment = .center
         self.contentView.addSubview(self.titleView)
         
@@ -86,22 +86,22 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
             self?.controller?.backBarAction()
         })
         self.backBar.autoresizingMask = [.flexibleHeight]
-        self.backBar.frame = CGRect(x: 15, y: NXUI.insets.top, width: self.backBar.w, height: self.contentView.h-NXUI.insets.top)
+        self.backBar.frame = CGRect(x: 15, y: NX.safeAreaInsets.top, width: self.backBar.width, height: self.contentView.height-NX.safeAreaInsets.top)
         self.backBar.isHidden = true
         self.contentView.addSubview(self.backBar)
         
-        self.separator.frame = CGRect(x: 0, y: self.contentView.h-NXUI.pixel, width: self.contentView.w, height: NXUI.pixel)
-        self.separator.backgroundColor = NXUI.separatorColor.cgColor
+        self.separator.frame = CGRect(x: 0, y: self.contentView.height-NX.pixel, width: self.contentView.width, height: NX.pixel)
+        self.separator.backgroundColor = NX.separatorColor.cgColor
         self.separator.isHidden = true
         self.contentView.layer.addSublayer(self.separator)
     }
     
     open override func updateSubviews(_ action:String, _ value:Any?){
-        self.separator.frame = CGRect(x: 0, y: self.contentView.h-NXUI.pixel, width: self.contentView.w, height: NXUI.pixel)
+        self.separator.frame = CGRect(x: 0, y: self.contentView.height-NX.pixel, width: self.contentView.width, height: NX.pixel)
         
         if true {
             let size = backBar.frame.size
-            backBar.frame = CGRect(x: 15, y: NXUI.insets.top+(self.contentView.h-NXUI.insets.top-size.height)/2, width: size.width, height: size.height)
+            backBar.frame = CGRect(x: 15, y: NX.safeAreaInsets.top+(self.contentView.height-NX.safeAreaInsets.top-size.height)/2, width: size.width, height: size.height)
             
             if let controller = self.controller,
                 let viewControllers = self.controller?.navigationController?.viewControllers,
@@ -113,7 +113,7 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
         
         if let backView = self.backView {
             let size = backView.frame.size
-            backView.frame = CGRect(x: 15, y: NXUI.insets.top+(self.contentView.h-NXUI.insets.top-size.height)/2, width: size.width, height: size.height)
+            backView.frame = CGRect(x: 15, y: NX.safeAreaInsets.top+(self.contentView.height-NX.safeAreaInsets.top-size.height)/2, width: size.width, height: size.height)
             if backView.superview == nil {
                 self.contentView.addSubview(backView)
             }
@@ -128,13 +128,13 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
                 self.titleView.text = title
             }
             let size = self.titleView.frame.size
-            self.titleView.frame = CGRect(x: self.titleView.x, y: NXUI.insets.top+(self.contentView.h-NXUI.insets.top-size.height)/2, width: size.width, height: size.height)
+            self.titleView.frame = CGRect(x: self.titleView.x, y: NX.safeAreaInsets.top+(self.contentView.height-NX.safeAreaInsets.top-size.height)/2, width: size.width, height: size.height)
         }
         
         
         if let centerView = self.centerView {
             let size = centerView.frame.size
-            centerView.frame = CGRect(x: centerView.x, y: NXUI.insets.top+(self.contentView.h-NXUI.insets.top-size.height)/2, width: size.width, height: size.height)
+            centerView.frame = CGRect(x: centerView.x, y: NX.safeAreaInsets.top+(self.contentView.height-NX.safeAreaInsets.top-size.height)/2, width: size.width, height: size.height)
             if centerView.superview == nil {
                 self.contentView.addSubview(centerView)
             }
@@ -144,14 +144,14 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
         
         if let forwardView = self.forwardView {
             let size = forwardView.frame.size
-            forwardView.frame = CGRect(x: self.contentView.w-15-size.width, y: NXUI.insets.top+(self.contentView.h-NXUI.insets.top-size.height)/2, width: size.width, height: size.height)
+            forwardView.frame = CGRect(x: self.contentView.width-15-size.width, y: NX.safeAreaInsets.top+(self.contentView.height-NX.safeAreaInsets.top-size.height)/2, width: size.width, height: size.height)
             if forwardView.superview == nil {
                 self.contentView.addSubview(forwardView)
             }
         }
         else if let forwardBar = self.forwardBar {
             let size = forwardBar.frame.size
-            forwardBar.frame = CGRect(x: self.contentView.w-15-size.width, y: NXUI.insets.top+(self.contentView.h-NXUI.insets.top-size.height)/2, width: size.width, height: size.height)
+            forwardBar.frame = CGRect(x: self.contentView.width-15-size.width, y: NX.safeAreaInsets.top+(self.contentView.height-NX.safeAreaInsets.top-size.height)/2, width: size.width, height: size.height)
             if forwardBar.superview == nil {
                 self.contentView.addSubview(forwardBar)
             }
@@ -160,7 +160,7 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        self.separator.backgroundColor = NXUI.separatorColor.cgColor
+        self.separator.backgroundColor = NX.separatorColor.cgColor
     }
 }
 
@@ -214,10 +214,10 @@ extension NXNaviView {
         
         open func setupSubviews(){
             self.frame.size = CGSize(width:70.0, height:44.0)
-            self.setTitleColor(NXUI.barForegroundColor, for: .normal)
-            self.setTitleColor(NXUI.darkGrayColor, for: .highlighted)
-            self.tintColor = NXUI.barForegroundColor;
-            self.titleLabel?.font = NXUI.font(17)
+            self.setTitleColor(NX.barForegroundColor, for: .normal)
+            self.setTitleColor(NX.darkGrayColor, for: .highlighted)
+            self.tintColor = NX.barForegroundColor;
+            self.titleLabel?.font = NX.font(17)
         }
         
         open class  func back(image: UIImage?, title: String?) -> NXNaviView.Bar {

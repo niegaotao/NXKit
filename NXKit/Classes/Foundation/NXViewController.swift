@@ -14,13 +14,13 @@ open class NXViewController: UIViewController  {
     public let ctxs = NXViewController.Association()
     
     ///导航栏
-    open var naviView = NXNaviView(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: NXUI.topOffset))
+    open var naviView = NXNaviView(frame: CGRect(x: 0, y: 0, width: NX.width, height: NX.topOffset))
     
     ///内容视图，不会被导航栏覆盖
-    open var contentView = UIView(frame: CGRect(x: 0, y: NXUI.topOffset, width: NXUI.width, height: NXUI.height-NXUI.topOffset))
+    open var contentView = UIView(frame: CGRect(x: 0, y: NX.topOffset, width: NX.width, height: NX.height-NX.topOffset))
     
     ///页面无内容时的加载动画
-    open var animationView = NXUI.AnimationClass.init(frame: CGRect.zero)
+    open var animationView = NX.AnimationClass.init(frame: CGRect.zero)
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -47,11 +47,11 @@ open class NXViewController: UIViewController  {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = NXUI.viewBackgroundColor
+        self.view.backgroundColor = NX.viewBackgroundColor
         
-        self.contentView.frame = CGRect(x: 0, y: NXUI.topOffset, width: self.view.w, height: self.view.h-NXUI.topOffset)
+        self.contentView.frame = CGRect(x: 0, y: NX.topOffset, width: self.view.width, height: self.view.height-NX.topOffset)
         self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.contentView.backgroundColor = NXUI.contentViewBackgroundColor
+        self.contentView.backgroundColor = NX.contentViewBackgroundColor
         self.view.addSubview(self.contentView)
         
         
@@ -59,7 +59,7 @@ open class NXViewController: UIViewController  {
         self.contentView.addSubview(self.animationView)
         
         
-        self.naviView.frame = CGRect(x: 0, y: 0, width: self.view.w, height: NXUI.topOffset)
+        self.naviView.frame = CGRect(x: 0, y: 0, width: self.view.width, height: NX.topOffset)
         self.naviView.autoresizingMask = [.flexibleWidth]
         self.naviView.controller = self
         self.naviView.separator.isHidden = self.ctxs.separator.isHidden
@@ -189,13 +189,13 @@ open class NXViewController: UIViewController  {
             currentValue = viewController.ctxs.statusBarStyle
         }
         
-        if currentValue == NXUI.Bar.unspecified {
+        if currentValue == NX.Bar.unspecified {
             return UIStatusBarStyle.default
         }
-        else if currentValue == NXUI.Bar.light {
+        else if currentValue == NX.Bar.light {
             return UIStatusBarStyle.lightContent
         }
-        else if currentValue == NXUI.Bar.dark {
+        else if currentValue == NX.Bar.dark {
             if #available(iOS 13.0, *) {
                 if UITraitCollection.current.userInterfaceStyle == .dark {
                     return UIStatusBarStyle.lightContent
@@ -220,7 +220,7 @@ open class NXViewController: UIViewController  {
         else if let viewController = self.ctxs.subviewControllers.last, viewController.ctxs.statusBarStyle != .none {
             currentValue = viewController.ctxs.statusBarStyle
         }
-        return currentValue == NXUI.Bar.hidden
+        return currentValue == NX.Bar.hidden
     }
     
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -263,12 +263,12 @@ extension NXViewController {
         
         ///状态栏样式
         open var shouldAutorotate = false
-        open var statusBarStyle = NXUI.Bar.dark
+        open var statusBarStyle = NX.Bar.dark
         open var statusBarHidden = false
         open var orientationMask = UIInterfaceOrientationMask.portrait
         
         ///空页面加载动画
-        open var animationViewClass = NXUI.AnimationClass
+        open var animationViewClass = NX.AnimationClass
        
         ///是否允许手势返回：某些页面会设置不允许手势返回，采用block是因为可以在当前页面接收到右滑手势返回事件
         open var panRecognizer : ((String, UIPanGestureRecognizer) -> (Bool)) = {_, _ in return true}
@@ -280,12 +280,12 @@ extension NXViewController {
         ///转场动画过程中需要的容器视图
         open var transitionView: NXTransitionView?
         ///两级页面之间传递信息
-        open var completion : NX.Completion<String, Any?>? = nil
+        open var event : NX.Completion<String, Any?>? = nil
         ///导航栏顶部的分割线
         public let separator = NX.Separator { (_, __sender) in
             __sender.insets = UIEdgeInsets.zero;
-            __sender.isHidden = NXUI.isSeparatorHidden;
-            __sender.backgroundColor = NXUI.separatorColor;
+            __sender.isHidden = false;
+            __sender.backgroundColor = NX.separatorColor;
         }
         ///覆盖的视图控制器
         public var subviewControllers = [NXViewController]()

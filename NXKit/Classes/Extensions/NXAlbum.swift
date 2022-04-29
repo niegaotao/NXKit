@@ -10,7 +10,7 @@ import UIKit
 import Photos
 
 
-open class NXAlbum : NXAction {
+open class NXAlbum : NXAbstract {
     public var assets = [NXAsset]() //保存自己之前生成的model
         
     convenience public init(title: String, fetchResult: PHFetchResult<AnyObject>?, wrapped:NXAsset.Wrapped) {
@@ -42,20 +42,20 @@ open class NXAlbum : NXAction {
             }
         }
                 
-        self.ctxs.size = CGSize(width: NXUI.width, height: 80)
+        self.ctxs.size = CGSize(width: NX.width, height: 80)
         self.asset.frame = CGRect(x: 16, y: 1, width: 78, height: 78)
         self.asset.cornerRadius = 0.0
         self.asset.isHidden = false
         
-        self.title.frame = CGRect(x: 106, y: 19, width: NXUI.width-136, height: 22)
+        self.title.frame = CGRect(x: 106, y: 19, width: NX.width-136, height: 22)
         self.title.value = title
         self.title.textAlignment = .left
-        self.title.font = NXUI.font(16, true)
+        self.title.font = NX.font(16, .bold)
         self.title.isHidden = false
         
-        self.subtitle.frame = CGRect(x: 106, y: 43, width: NXUI.width-136, height: 18)
+        self.subtitle.frame = CGRect(x: 106, y: 43, width: NX.width-136, height: 18)
         self.subtitle.value = "\(self.assets.count)张"
-        self.subtitle.font = NXUI.font(14, false)
+        self.subtitle.font = NX.font(14, .regular)
         self.subtitle.textAlignment = .left
         self.subtitle.isHidden = false
         
@@ -63,7 +63,7 @@ open class NXAlbum : NXAction {
         
         self.arrow.isHidden = false
         self.arrow.frame = CGRect(x: self.ctxs.width - 16 - 6, y: (self.ctxs.height - 12)/2.0, width: 6, height: 12)
-        self.arrow.image = NXUI.image(named:"icon-arrow.png")
+        self.arrow.image = NX.image(named:"icon-arrow.png")
         
         self.raw.separator.insets = UIEdgeInsets(top: 0, left: 106, bottom: 0, right: 0)
         self.raw.separator.ats = .maxY

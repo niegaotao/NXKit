@@ -200,54 +200,54 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
         viewController.view.backgroundColor = UIColor.clear
         
         viewController.ctxs.transitionView = NXTransitionView(frame: to.view.bounds, owner:viewController)
-        viewController.ctxs.transitionView?.backgroundColor = NXUI.transitionInoutBackgroundColor
+        viewController.ctxs.transitionView?.backgroundColor = NX.transitionInoutBackgroundColor
         to.view.addSubview(viewController.ctxs.transitionView!)
         viewController.ctxs.transitionView?.addSubview(viewController.view)
         
         if viewController.ctxs.orientation == .left {
-            viewController.view.x = -to.view.w
+            viewController.view.x = -to.view.width
             UIView.animate(withDuration: animated ? self.ctxs.duration : 0.0,
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.transitionBackgroundColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionBackgroundColor
             },completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
         }
         else if viewController.ctxs.orientation == .right {
-            viewController.view.x = to.view.w
+            viewController.view.x = to.view.width
             UIView.animate(withDuration: animated ? self.ctxs.duration:0.0,
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.transitionBackgroundColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionBackgroundColor
             }, completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
         }
         else if viewController.ctxs.orientation == .top {
-            viewController.view.y = -to.view.h
+            viewController.view.y = -to.view.height
             UIView.animate(withDuration: animated ? self.ctxs.duration:0.0,
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.transitionBackgroundColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionBackgroundColor
             }, completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
         }
         else if viewController.ctxs.orientation == .bottom {
-            viewController.view.y = to.view.h
+            viewController.view.y = to.view.height
             UIView.animate(withDuration: animated ? self.ctxs.duration:0.0,
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.transitionBackgroundColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionBackgroundColor
             }, completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
@@ -273,8 +273,8 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
-                            viewController.view.x = -viewController.view.w
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.transitionInoutBackgroundColor
+                            viewController.view.x = -viewController.view.width
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionInoutBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -294,8 +294,8 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
-                            viewController.view.x = viewController.view.w
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.transitionInoutBackgroundColor
+                            viewController.view.x = viewController.view.width
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionInoutBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -315,8 +315,8 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
-                            viewController.view.y = -viewController.view.h
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.transitionInoutBackgroundColor
+                            viewController.view.y = -viewController.view.height
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionInoutBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -336,8 +336,8 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
-                            viewController.view.y = viewController.view.h
-                            viewController.ctxs.transitionView?.backgroundColor = NXUI.transitionInoutBackgroundColor
+                            viewController.view.y = viewController.view.height
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionInoutBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil

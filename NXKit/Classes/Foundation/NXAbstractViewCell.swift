@@ -16,7 +16,7 @@ open class NXAbstractTableViewCell<T:UIView>: NXTableViewCell {
         
         self.selectedBackgroundView = UIView(frame: self.bounds)
         self.selectedBackgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.selectedBackgroundView?.backgroundColor = NXUI.selectedBackgroundColor
+        self.selectedBackgroundView?.backgroundColor = NX.selectedBackgroundColor
         
         if let __abstractView = self.abstractView as? NXAbstractView {
             __abstractView.assetView.backgroundColor = UIColor.white
@@ -24,12 +24,12 @@ open class NXAbstractTableViewCell<T:UIView>: NXTableViewCell {
             __abstractView.assetView.layer.masksToBounds = true
             __abstractView.assetView.contentMode = .scaleAspectFill
             __abstractView.titleView.textAlignment = .center
-            __abstractView.titleView.textColor = NXUI.darkBlackColor
-            __abstractView.titleView.font = NXUI.font(16)
+            __abstractView.titleView.textColor = NX.darkBlackColor
+            __abstractView.titleView.font = NX.font(16)
             __abstractView.titleView.numberOfLines = 0
             __abstractView.subtitleView.textAlignment = .center
-            __abstractView.subtitleView.textColor = NXUI.darkGrayColor
-            __abstractView.subtitleView.font = NXUI.font(13)
+            __abstractView.subtitleView.textColor = NX.darkGrayColor
+            __abstractView.subtitleView.font = NX.font(13)
             __abstractView.subtitleView.numberOfLines = 0
             __abstractView.subtitleView.isHidden = true
         }
@@ -37,7 +37,7 @@ open class NXAbstractTableViewCell<T:UIView>: NXTableViewCell {
         
         self.contentView.bringSubviewToFront(self.arrowView)
         
-        separator.backgroundColor = NXUI.separatorColor.cgColor
+        separator.backgroundColor = NX.separatorColor.cgColor
         separator.isHidden = true
     }
     
@@ -46,7 +46,7 @@ open class NXAbstractTableViewCell<T:UIView>: NXTableViewCell {
         if let __abstractView = self.abstractView as? NXAbstractView {
             __abstractView.updateSubviews(action, value)
             
-            if let __wrapped = value as? NXAction, __wrapped.raw.isHighlighted {
+            if let __wrapped = value as? NXAbstract, __wrapped.raw.isHighlighted {
                 self.selectedBackgroundView?.backgroundColor = __wrapped.raw.selectedBackgroundColor
             }
             else{
@@ -69,7 +69,7 @@ open class NXAbstractCollectionViewCell<T:UIView>: NXCollectionViewCell {
         
         self.selectedBackgroundView = UIView(frame: self.bounds)
         self.selectedBackgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.selectedBackgroundView?.backgroundColor = NXUI.selectedBackgroundColor
+        self.selectedBackgroundView?.backgroundColor = NX.selectedBackgroundColor
         
         if let __abstractView = self.abstractView as? NXAbstractView {
             __abstractView.assetView.backgroundColor = UIColor.white
@@ -77,12 +77,12 @@ open class NXAbstractCollectionViewCell<T:UIView>: NXCollectionViewCell {
             __abstractView.assetView.layer.masksToBounds = true
             __abstractView.assetView.contentMode = .scaleAspectFill
             __abstractView.titleView.textAlignment = .center
-            __abstractView.titleView.textColor = NXUI.darkBlackColor
-            __abstractView.titleView.font = NXUI.font(16)
+            __abstractView.titleView.textColor = NX.darkBlackColor
+            __abstractView.titleView.font = NX.font(16)
             __abstractView.titleView.numberOfLines = 0
             __abstractView.subtitleView.textAlignment = .center
-            __abstractView.subtitleView.textColor = NXUI.darkGrayColor
-            __abstractView.subtitleView.font = NXUI.font(13)
+            __abstractView.subtitleView.textColor = NX.darkGrayColor
+            __abstractView.subtitleView.font = NX.font(13)
             __abstractView.subtitleView.numberOfLines = 0
             __abstractView.subtitleView.isHidden = true
         }
@@ -90,7 +90,7 @@ open class NXAbstractCollectionViewCell<T:UIView>: NXCollectionViewCell {
         
         self.contentView.bringSubviewToFront(self.arrowView)
         
-        self.separator.backgroundColor = NXUI.separatorColor.cgColor
+        self.separator.backgroundColor = NX.separatorColor.cgColor
         self.separator.isHidden = true
     }
     
@@ -99,7 +99,7 @@ open class NXAbstractCollectionViewCell<T:UIView>: NXCollectionViewCell {
         if let __abstractView = self.abstractView as? NXAbstractView {
             __abstractView.updateSubviews(action, value)
             
-            if let __wrapped = value as? NXAction, __wrapped.raw.isHighlighted {
+            if let __wrapped = value as? NXAbstract, __wrapped.raw.isHighlighted {
                 self.selectedBackgroundView?.backgroundColor = __wrapped.raw.selectedBackgroundColor
             }
             else{

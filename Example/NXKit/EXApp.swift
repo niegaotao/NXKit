@@ -115,7 +115,7 @@ class EXApp {
         
         if true {
             let headerView = NXLCRView<UIView,UILabel, UIButton>(frame: CGRect(x: 16, y: NXUI.topOffset-44, width: NXUI.width-32, height: 44))
-            headerView.centerView.frame = CGRect(x: headerView.w/3.0, y: 0, width: headerView.w/3.0, height: headerView.h)
+            headerView.centerView.frame = CGRect(x: headerView.width/3.0, y: 0, width: headerView.width/3.0, height: headerView.height)
             headerView.centerView.textAlignment = .center
             headerView.centerView.textColor = UIColor.white
             headerView.centerView.font = NXUI.font(17)

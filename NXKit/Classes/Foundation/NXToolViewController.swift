@@ -10,7 +10,7 @@ import UIKit
 
 open class NXToolViewController: NXContainerController {
 
-    open var toolView = NXToolView(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: NXUI.toolViewOffset + NXUI.bottomOffset))
+    open var toolView = NXToolView(frame: CGRect(x: 0, y: 0, width: NX.width, height: NX.toolViewOffset + NX.bottomOffset))
     open var index : Int = 0
     open var elements = [NXToolView.Element]()
 
@@ -40,10 +40,10 @@ open class NXToolViewController: NXContainerController {
     }
     
     override  open func setupSubviews(){
-        self.toolView.frame = CGRect(x: 0, y: self.view.h-NXUI.toolViewOffset-NXUI.bottomOffset, width: self.view.w, height: NXUI.toolViewOffset+NXUI.bottomOffset)
+        self.toolView.frame = CGRect(x: 0, y: self.view.height-NX.toolViewOffset-NX.bottomOffset, width: self.view.width, height: NX.toolViewOffset+NX.bottomOffset)
         self.toolView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.toolView.controller = self
-        self.toolView.backgroundColor = NXUI.barBackgroundColor
+        self.toolView.backgroundColor = NX.barBackgroundColor
         self.toolView.ctxs.didSelect = {[weak self] (toolView, index) in
             self?.didSelect(at: index)
         }

@@ -22,7 +22,7 @@ open class NXHUD {
         
         open var alpha : CGFloat = 1.0
         open var backgroundColor = UIColor.black.withAlphaComponent(0.8)
-        open var shadowColor = NXUI.shadowColor.cgColor
+        open var shadowColor = NX.shadowColor.cgColor
         open var shadowOpacity : Float = 0.15
         open var shadowOffset = CGSize.zero
         
@@ -30,7 +30,7 @@ open class NXHUD {
         
         open var image : UIImage? = nil
         
-        open var font = NXUI.font(14)
+        open var font = NX.font(14)
         open var textColor = UIColor.white        //文字颜色
         open var numberOfLines : Int = 0
         open var message = ""
@@ -47,7 +47,7 @@ open class NXHUD {
     
     open class WrappedView : NXView {
         open var stateView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        open var animationView = NXUI.HUDAnimationClass.init(frame:CGRect(x: 0, y: 0, width: 50, height: 50))
+        open var animationView = NX.HUDAnimationClass.init(frame:CGRect(x: 0, y: 0, width: 50, height: 50))
         open var messageView = UILabel(frame: CGRect.zero)
         
         public let ctxs = NXHUD.Wrapped { (_, __sender) in
@@ -122,7 +122,7 @@ open class NXHUD {
             __frame.size.width = ceil(__frame.size.width)
             __frame.size.height = ceil(__frame.size.height)
 
-            var __super = CGSize(width: NXUI.width, height: NXUI.height)
+            var __super = CGSize(width: NX.width, height: NX.height)
             if let __superview = self.superview {
                 __super = __superview.frame.size
             }
@@ -278,7 +278,7 @@ extension UIView {
 
     @discardableResult
     open func makeLoading(message: String = "", ats: NX.Ats = .center) -> NXHUD.WrappedView? {
-        return NXHUD.openWrappedView(key: NXHUD.Key.loading.rawValue, image: NXUI.image(named:"icon-animation.png"), message: message, ats: ats, duration: 0, superview: self)
+        return NXHUD.openWrappedView(key: NXHUD.Key.loading.rawValue, image: NX.image(named:"icon-animation.png"), message: message, ats: ats, duration: 0, superview: self)
     }
 
     @discardableResult

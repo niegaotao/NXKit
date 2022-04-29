@@ -62,18 +62,18 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
             self.centerView.frame = self.ctxs.center.frame
             
             if self.ctxs.center.isHidden == false {
-                self.ctxs.width = self.w/CGFloat(self.ctxs.elements.count+1)
+                self.ctxs.width = self.width/CGFloat(self.ctxs.elements.count+1)
             }
             else {
-                self.ctxs.width = self.w/CGFloat(self.ctxs.elements.count)
+                self.ctxs.width = self.width/CGFloat(self.ctxs.elements.count)
             }
             
             for (index, element) in self.ctxs.elements.enumerated() {
-                element.size = CGSize(width: self.ctxs.width, height: NXUI.toolViewOffset)
+                element.size = CGSize(width: self.ctxs.width, height: NX.toolViewOffset)
                 element.elementView.isHidden = false
-                element.elementView.frame = CGRect(x: self.ctxs.width * CGFloat(index), y: 0, width: self.ctxs.width, height: NXUI.toolViewOffset)
+                element.elementView.frame = CGRect(x: self.ctxs.width * CGFloat(index), y: 0, width: self.ctxs.width, height: NX.toolViewOffset)
                 if index >= self.ctxs.elements.count/2 && self.ctxs.center.isHidden == false {
-                    element.elementView.frame = CGRect(x: self.ctxs.width * CGFloat(index+1), y: 0, width: self.ctxs.width, height: NXUI.toolViewOffset)
+                    element.elementView.frame = CGRect(x: self.ctxs.width * CGFloat(index+1), y: 0, width: self.ctxs.width, height: NX.toolViewOffset)
                 }
                 element.elementView.tag = index
                 element.elementView.setupEvents([UIControl.Event.tap]) {[weak self] (e, v) in
@@ -164,12 +164,12 @@ extension NXToolView {
         
         public let separator = NX.Separator { (_, __sender) in
             __sender.isHidden = false
-            __sender.backgroundColor = NXUI.separatorColor
+            __sender.backgroundColor = NX.separatorColor
         }
         
         public let layer = NX.Layer { (_, __sender) in
             __sender.isHidden = true
-            __sender.shadowColor = NXUI.shadowColor
+            __sender.shadowColor = NX.shadowColor
             __sender.shadowOffset = CGSize(width: 0, height: -2)
             __sender.shadowRadius = 2.0
             __sender.shadowOpacity = 0.15
@@ -207,8 +207,8 @@ extension NXToolView {
         })
         
         open var color = NX.Selectable<UIColor>(completion: { (_, __sender) in
-            __sender.selected = NXUI.mainColor
-            __sender.unselected = NXUI.darkGrayColor
+            __sender.selected = NX.mainColor
+            __sender.unselected = NX.darkGrayColor
         })
         
         open var image = NX.Selectable<UIImage>(completion:  { (_, __sender) in
@@ -235,7 +235,7 @@ extension NXToolView {
             isNumeric:Bool,
             isResetable:Bool) = (0, UIColor.red, UIColor.white, UIColor.red, 0, 11, UIEdgeInsets(top: 1.5, left: 1.5, bottom: 1.5, right: 1.5), true, false)
         
-        open var elementView = NXToolView.ElementView(frame: CGRect(x: 0, y: 0, width: NXUI.width/4.0, height: NXUI.toolViewOffset))
+        open var elementView = NXToolView.ElementView(frame: CGRect(x: 0, y: 0, width: NX.width/4.0, height: NX.toolViewOffset))
     }
     
     open class ElementView : NXView {
@@ -247,7 +247,7 @@ extension NXToolView {
             super.setupSubviews()
             self.addSubview(assetView)
             
-            titleView.font = NXUI.font(11)
+            titleView.font = NX.font(11)
             titleView.textAlignment = .center
             self.addSubview(titleView)
             
@@ -272,7 +272,7 @@ extension NXToolView {
             
             let space : CGFloat = __raw.size.height + element.space + __raw.height
             assetView.frame = CGRect(x: (element.width-__raw.size.width)/2.0, y: (element.height - space)/2.0, width: __raw.size.width, height: __raw.size.height)
-            titleView.frame = CGRect(x: 0, y: assetView.frame.maxY + element.space, width: self.w, height: __raw.height)
+            titleView.frame = CGRect(x: 0, y: assetView.frame.maxY + element.space, width: self.width, height: __raw.height)
             
             
             if element.isSelected {
@@ -299,7 +299,7 @@ extension NXToolView {
                         attachmentValue = "99+"
                     }
                     //6.87, 13.13
-                    var __size = attachmentValue.stringSize(font: NXUI.font(element.attachment.size), size: CGSize(width: 100, height: 100))
+                    var __size = attachmentValue.stringSize(font: NX.font(element.attachment.size), size: CGSize(width: 100, height: 100))
                     __size.width = max(element.attachment.insets.left, 0) + __size.width + max(element.attachment.insets.right, 0)
                     __size.height = max(element.attachment.insets.top, 0) + __size.height + max(element.attachment.insets.bottom, 0)
                     if __size.width < __size.height {
@@ -311,7 +311,7 @@ extension NXToolView {
                     markupView.backgroundColor = element.attachment.backgroundColor
                     markupView.text = attachmentValue
                     markupView.textColor = element.attachment.color
-                    markupView.font = NXUI.font(element.attachment.size)
+                    markupView.font = NX.font(element.attachment.size)
                     markupView.frame = CGRect(x: assetView.frame.maxX-__size.width/2.0, y: assetView.frame.minY, width: __size.width, height: __size.height)
                 }
                 else {

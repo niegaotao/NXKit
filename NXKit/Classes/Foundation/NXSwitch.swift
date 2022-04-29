@@ -33,14 +33,14 @@ open class NXSwitch: NXControl {
     public final var tapRecongizer = UITapGestureRecognizer()
     
     //未选中颜色后背景色   默认0xFFFFFF
-    open var offTintColor: UIColor = NXUI.color(0xFFFFFF, 1) {
+    open var offTintColor: UIColor = NX.color(0xFFFFFF, 1) {
         didSet {
             offBackgroundView.backgroundColor = offTintColor
         }
     }
     
     //选中颜色后背景色   默认0xFFFFFF
-    open var onTintColor: UIColor = NXUI.color(0xFFFFFF, 1) {
+    open var onTintColor: UIColor = NX.color(0xFFFFFF, 1) {
         didSet {
             onBackgroundView.backgroundColor = onTintColor
         }
@@ -122,17 +122,17 @@ open class NXSwitch: NXControl {
         offBackgroundView.layer.rasterizationScale = UIScreen.main.scale
         self.addSubview(offBackgroundView)
         
-        thumbView.frame = CGRect(x: 0, y: 0, width: self.h - horizontalAdjustment, height: self.h - horizontalAdjustment)
+        thumbView.frame = CGRect(x: 0, y: 0, width: self.height - horizontalAdjustment, height: self.height - horizontalAdjustment)
         thumbView.backgroundColor = UIColor.white
         thumbView.isUserInteractionEnabled = false
-        thumbView.layer.cornerRadius = thumbView.w / 2.0
+        thumbView.layer.cornerRadius = thumbView.width / 2.0
         thumbView.layer.shadowOffset = CGSize(width: 0, height: 1)
         thumbView.layer.shouldRasterize = true
         thumbView.layer.shadowOpacity = shadowOpacity
         thumbView.layer.shadowRadius = shadowRadius
         thumbView.layer.rasterizationScale = UIScreen.main.scale
         self.addSubview(thumbView)
-        thumbView.center = CGPoint(x: thumbView.w / 2.0, y: self.h / 2.0)
+        thumbView.center = CGPoint(x: thumbView.width / 2.0, y: self.height / 2.0)
         
         self.tapRecongizer.addTarget(self, action: #selector(handleBgTap))
         self.addGestureRecognizer(self.tapRecongizer)
@@ -165,15 +165,15 @@ open class NXSwitch: NXControl {
                 onBackgroundView.alpha = 1.0
                 offBackgroundView.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
                 
-                thumbView.center = CGPoint(x: onBackgroundView.w - (thumbView.w + horizontalAdjustment) / 2.0, y: thumbView.center.y)
-                thumbView.backgroundColor = onThumbTintColor ?? NXUI.mainColor
+                thumbView.center = CGPoint(x: onBackgroundView.width - (thumbView.width + horizontalAdjustment) / 2.0, y: thumbView.center.y)
+                thumbView.backgroundColor = onThumbTintColor ?? NX.mainColor
                 
             } else {
                 onBackgroundView.alpha = 0.0
                 offBackgroundView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 
-                thumbView.center = CGPoint(x: (thumbView.w + horizontalAdjustment) / 2.0, y: thumbView.center.y)
-                thumbView.backgroundColor = offThumbTintColor ?? NXUI.darkGrayColor
+                thumbView.center = CGPoint(x: (thumbView.width + horizontalAdjustment) / 2.0, y: thumbView.center.y)
+                thumbView.backgroundColor = offThumbTintColor ?? NX.darkGrayColor
             }
         }
     }
@@ -194,10 +194,10 @@ open class NXSwitch: NXControl {
     final public func startAnimations(duration: Double, isOn: Bool, completion: ((_ isCompleted:Bool) -> ())? = nil) {
         var centerPoint = CGPoint.zero
         if isOn {
-            centerPoint = CGPoint(x: onBackgroundView.w - (thumbView.w + horizontalAdjustment) / 2.0, y: thumbView.center.y)
+            centerPoint = CGPoint(x: onBackgroundView.width - (thumbView.width + horizontalAdjustment) / 2.0, y: thumbView.center.y)
         }
         else {
-            centerPoint = CGPoint(x: (thumbView.w + horizontalAdjustment) / 2.0, y: thumbView.center.y)
+            centerPoint = CGPoint(x: (thumbView.width + horizontalAdjustment) / 2.0, y: thumbView.center.y)
         }
         
         UIView.animate(withDuration: duration,

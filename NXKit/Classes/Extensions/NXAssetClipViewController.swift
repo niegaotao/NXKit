@@ -16,9 +16,9 @@ open class NXAssetClipViewController: NXViewController {
         __sender.key = -1
         __sender.value = []
     }
-    public let backgroundView = NXCView<UIImageView>(frame: CGRect(x: 10, y: 10, width: NXUI.width-20, height: NXUI.height-NXUI.topOffset-NXUI.bottomOffset-20))
+    public let backgroundView = NXCView<UIImageView>(frame: CGRect(x: 10, y: 10, width: NX.width-20, height: NX.height-NX.topOffset-NX.bottomOffset-20))
     public let clipboardView = NXClipboardView(frame: CGRect.zero)
-    public let footerView = NXCView<UIScrollView>(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: 80+NXUI.bottomOffset))
+    public let footerView = NXCView<UIScrollView>(frame: CGRect(x: 0, y: 0, width: NX.width, height: 80+NX.bottomOffset))
     public var componentViews = [UILabel]()
     
     open override func viewDidLoad() {
@@ -35,17 +35,17 @@ open class NXAssetClipViewController: NXViewController {
     }
     
     override open func setupSubviews() {
-        self.contentView.backgroundColor = NXUI.color(0x181818)
+        self.contentView.backgroundColor = NX.color(0x181818)
         
-        self.backgroundView.backgroundColor = NXUI.color(0x181818)
+        self.backgroundView.backgroundColor = NX.color(0x181818)
         self.backgroundView.contentView.image = self.image
         self.backgroundView.contentView.contentMode = .scaleAspectFit
         self.contentView.addSubview(self.backgroundView)
         
-        self.footerView.frame = CGRect(x: 0, y: self.contentView.h-self.footerView.h, width: self.footerView.w, height: self.footerView.h)
-        self.footerView.backgroundColor = NXUI.color(0x181818)
-        self.footerView.contentView.backgroundColor = NXUI.color(0x181818)
-        self.footerView.setupSeparator(color: NXUI.separatorColor, ats: [])
+        self.footerView.frame = CGRect(x: 0, y: self.contentView.height-self.footerView.height, width: self.footerView.width, height: self.footerView.height)
+        self.footerView.backgroundColor = NX.color(0x181818)
+        self.footerView.contentView.backgroundColor = NX.color(0x181818)
+        self.footerView.setupSeparator(color: NX.separatorColor, ats: [])
         self.contentView.addSubview(self.footerView)
         
         if let image = self.image, image.size.width > 0 && image.size.height > 0, self.clips.value.count >= 1 {
@@ -54,22 +54,22 @@ open class NXAssetClipViewController: NXViewController {
                 self.clips.key = 0
             }
             
-            var __background = CGRect(x: 10, y: 10, width: NXUI.width-20, height: NXUI.height-NXUI.topOffset-NXUI.bottomOffset-20)
+            var __background = CGRect(x: 10, y: 10, width: NX.width-20, height: NX.height-NX.topOffset-NX.bottomOffset-20)
             if self.clips.value.count >= 2 {
                 //有多项可选
-                __background = CGRect(x: 10, y: 10, width: NXUI.width-20, height: NXUI.height-NXUI.topOffset-NXUI.bottomOffset-20-80)
+                __background = CGRect(x: 10, y: 10, width: NX.width-20, height: NX.height-NX.topOffset-NX.bottomOffset-20-80)
                 
                 var offset = CGRect(x: 15, y: 8, width: 52, height: 60)
                 var ctx = CGRect(x: 15, y: 0, width: CGFloat(self.clips.value.count) * offset.size.width + CGFloat(self.clips.value.count - 1)*10.0, height: offset.size.height)
-                if (NXUI.width - ctx.size.width) / 2.0 > ctx.origin.x {
-                    ctx.origin.x = (NXUI.width - ctx.size.width) / 2.0
+                if (NX.width - ctx.size.width) / 2.0 > ctx.origin.x {
+                    ctx.origin.x = (NX.width - ctx.size.width) / 2.0
                 }
                 offset.origin.x = ctx.origin.x
                 
                 for (index, clip) in self.clips.value.enumerated() {
                     let componentView = UILabel(frame: CGRect(x: offset.origin.x, y: offset.origin.y, width: offset.size.width, height: offset.size.height))
                     componentView.tag = index
-                    componentView.font = NXUI.font(13)
+                    componentView.font = NX.font(13)
                     componentView.textAlignment = .center
                     componentView.text = clip.name
                     componentView.layer.cornerRadius = 2.0
@@ -79,10 +79,10 @@ open class NXAssetClipViewController: NXViewController {
                     }
                     if index == self.clips.key {
                         componentView.backgroundColor = UIColor.white
-                        componentView.textColor = NXUI.color(0x181818)
+                        componentView.textColor = NX.color(0x181818)
                     }
                     else {
-                        componentView.backgroundColor = NXUI.color(0x3d3d3d)
+                        componentView.backgroundColor = NX.color(0x3d3d3d)
                         componentView.textColor = UIColor.white
                     }
                     self.footerView.contentView.addSubview(componentView)
@@ -97,7 +97,7 @@ open class NXAssetClipViewController: NXViewController {
                 }
                 offset.origin.x = offset.origin.x + ctx.origin.x
                 self.footerView.isHidden = false
-                self.footerView.contentView.frame = CGRect(x: 0, y: 0, width: NXUI.width, height: 80)
+                self.footerView.contentView.frame = CGRect(x: 0, y: 0, width: NX.width, height: 80)
                 self.footerView.contentView.contentSize = CGSize(width: max(self.footerView.contentView.frame.size.width, offset.origin.x), height: 80)
             }
             else {
@@ -143,7 +143,7 @@ open class NXAssetClipViewController: NXViewController {
         if action == "forward" {
             
             guard let image = self.image, image.size.width > 0 && image.size.height > 0, self.clipboardView.ctxs.size.width > 0 else {
-                self.ctxs.completion?("", nil)
+                self.ctxs.event?("", nil)
                 return
             }
             
@@ -158,11 +158,11 @@ open class NXAssetClipViewController: NXViewController {
             pfsValue.frame.size.height = floor(pfsValue.frame.size.height * pfsValue.scale)
             
             guard let cgImage = image.cgImage?.cropping(to:pfsValue.frame) else {
-                self.ctxs.completion?("", nil)
+                self.ctxs.event?("", nil)
                 return
             }
             let uiImage = UIImage(cgImage:cgImage)
-            self.ctxs.completion?("", uiImage)
+            self.ctxs.event?("", uiImage)
         }
         else if action == "footer" {
             guard let sender = value as? UILabel, sender.tag != self.clips.key else {
@@ -174,10 +174,10 @@ open class NXAssetClipViewController: NXViewController {
                 
                 if index == self.clips.key {
                     componentView.backgroundColor = UIColor.white
-                    componentView.textColor = NXUI.color(0x181818)
+                    componentView.textColor = NX.color(0x181818)
                 }
                 else {
-                    componentView.backgroundColor = NXUI.color(0x3d3d3d)
+                    componentView.backgroundColor = NX.color(0x3d3d3d)
                     componentView.textColor = UIColor.white
                 }
             }

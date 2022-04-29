@@ -11,7 +11,7 @@ import UIKit
 open class NXSwipeViewController: NXContainerController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     open var wrapped = NXSection()
     open var collectionView : NXCollectionView? = nil
-    open var swipeView = NXSwipeView(frame: CGRect(x: 0, y: NXUI.topOffset, width: NXUI.width, height: 44))
+    open var swipeView = NXSwipeView(frame: CGRect(x: 0, y: NX.topOffset, width: NX.width, height: 44))
     
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
         }
         self.view.addSubview(swipeView)
         
-        self.contentView.frame = CGRect(x: 0, y: NXUI.topOffset+44, width: NXUI.width, height: self.view.h-(NXUI.topOffset+44))
+        self.contentView.frame = CGRect(x: 0, y: NX.topOffset+44, width: NX.width, height: self.view.height-(NX.topOffset+44))
         
         collectionView = NXCollectionView(frame: self.contentView.bounds)
         if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -32,7 +32,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
             layout.minimumInteritemSpacing = 0.0
         }
         collectionView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView?.backgroundColor = NXUI.contentViewBackgroundColor
+        collectionView?.backgroundColor = NX.contentViewBackgroundColor
         collectionView?.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
         collectionView?.delegate = self
         collectionView?.dataSource = self
@@ -60,7 +60,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
         if index >= 0 && index < subviewControllers.count {
             self.selectedViewController = self.subviewControllers[index]
         }
-        self.collectionView?.setContentOffset(CGPoint(x: self.view.w * CGFloat(index), y: 0), animated: animated)
+        self.collectionView?.setContentOffset(CGPoint(x: self.view.width * CGFloat(index), y: 0), animated: animated)
     }
     
     open func setupSubviews(_ subviewControllers: [NXViewController], titles:[String], index: Int = 0){
@@ -84,7 +84,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
             vc.ctxs.superviewController = self
             
             let element = NXSwipeViewController.Element()
-            element.ctxs.size = CGSize(width: NXUI.width, height: NXUI.height-NXUI.topOffset)
+            element.ctxs.size = CGSize(width: NX.width, height: NX.height-NX.topOffset)
             element.ctxs.update(NXSwipeViewController.Cell.self, "NXSwipeViewControllerCell" + String(idx+1))
             element.owner = vc
             self.wrapped.elements.append(element)
@@ -100,7 +100,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
         self.swipeView.updateSubviews("update", ["index":index,"items":elements])
         
         if index >= 1 {
-            self.collectionView?.setContentOffset(CGPoint(x: self.view.w * CGFloat(index), y: 0), animated: false)
+            self.collectionView?.setContentOffset(CGPoint(x: self.view.width * CGFloat(index), y: 0), animated: false)
         }
         
         self.collectionView?.reloadData()
@@ -145,7 +145,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
     
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let p = scrollView.contentOffset
-        let index = Int((p.x + CGFloat(NXUI.width) * 0.5) / CGFloat(NXUI.width))
+        let index = Int((p.x + CGFloat(NX.width) * 0.5) / CGFloat(NX.width))
         if index != self.swipeView.ctxs.index && index >= 0 && index < subviewControllers.count {
             self.swipeView.didSelectItem(at: index)
             self.selectedViewController = self.subviewControllers[index]

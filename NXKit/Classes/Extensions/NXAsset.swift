@@ -84,7 +84,7 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
         
         durationView.textAlignment = .right
         durationView.textColor = UIColor.white
-        durationView.font = NXUI.font(12, false)
+        durationView.font = NX.font(12, .regular)
         durationView.isHidden = true
         contentView.addSubview(durationView)
         
@@ -98,7 +98,7 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
         indexView.layer.cornerRadius = 11.5
         indexView.layer.masksToBounds = true
         indexView.textColor = UIColor.white
-        indexView.font = NXUI.font(13, true)
+        indexView.font = NX.font(13, .bold)
         indexView.layer.borderWidth = 1.5
         indexView.textAlignment = .center
         indexView.isUserInteractionEnabled = false
@@ -154,8 +154,8 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
             }
             else {
                 indexView.text = asset.index
-                indexView.backgroundColor = NXUI.mainColor
-                indexView.layer.borderColor = NXUI.mainColor.cgColor
+                indexView.backgroundColor = NX.mainColor
+                indexView.layer.borderColor = NX.mainColor.cgColor
             }
             maskedView.isHidden = true
         }
@@ -165,9 +165,9 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
         super.layoutSubviews()
         
         assetView.frame = contentView.bounds
-        durationView.frame = CGRect(x: 4, y: contentView.h-22, width: contentView.w-8, height: 22)
-        selectionView.frame = CGRect(x: contentView.w-40, y: 0, width: 40, height: 40)
-        indexView.frame = CGRect(x: contentView.w-23-5, y: 5, width: 23, height: 23)
+        durationView.frame = CGRect(x: 4, y: contentView.height-22, width: contentView.width-8, height: 22)
+        selectionView.frame = CGRect(x: contentView.width-40, y: 0, width: 40, height: 40)
+        indexView.frame = CGRect(x: contentView.width-23-5, y: 5, width: 23, height: 23)
         maskedView.frame = contentView.bounds
     }
 }
@@ -231,7 +231,7 @@ extension NXAsset {
         //创建相册信号量
         public static var semaphore = DispatchSemaphore(value: 1)
         //缩略图尺寸
-        public static var size = CGSize(width: Int(NXUI.width/4.0 * CGFloat(UIScreen.main.scale)), height: Int(NXUI.width/4.0 * CGFloat(UIScreen.main.scale)))
+        public static var size = CGSize(width: Int(NX.width/4.0 * CGFloat(UIScreen.main.scale)), height: Int(NX.width/4.0 * CGFloat(UIScreen.main.scale)))
 
         //支持展示的媒体类型
         open var mediaType = PHAssetMediaType.unknown
@@ -573,7 +573,7 @@ extension NXAsset {
         
         var animationView : NXHUD.WrappedView? = nil
         DispatchQueue.main.async {
-            animationView = NXUI.showLoading("正在加载图片...")
+            animationView = NX.showLoading("正在加载图片...")
         }
         
         DispatchQueue.global().async {
@@ -620,7 +620,7 @@ extension NXAsset {
             }
             
             group.notify(queue: DispatchQueue.main, execute: {
-                NXUI.hideLoading(animationView)
+                NX.hideLoading(animationView)
                 completion?(true, outputAssets)
             })
         }

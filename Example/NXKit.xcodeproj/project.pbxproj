@@ -30,8 +30,6 @@
 		866B0C35E26E65D86E9E5FD8 /* Pods-NXKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NXKit_Example.release.xcconfig"; path = "Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		8C051E22B406A1F24D7F2ACE /* Pods_NXKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NXKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB6BA1F31E4F8593CD13FE6 /* NXKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NXKit.podspec; path = ../NXKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		C9C328B427D320DA0074E2BC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		C9C328B527D320DB0074E2BC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		C9C328BD27D3942B0074E2BC /* EXApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXApp.swift; sourceTree = "<group>"; };
 		DF7BD977515B790E949094EE /* Pods-NXKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NXKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		EE5BAF05F07B37A044139B20 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -182,7 +180,6 @@
 			knownRegions = (
 				English,
 				Base,
-				"zh-Hans",
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
@@ -216,12 +213,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ImageViewer/ImageViewer.framework",
-				"${BUILT_PRODUCTS_DIR}/NXKit/NXKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageViewer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NXKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -270,7 +265,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				607FACDA1AFB9204008FA782 /* Base */,
-				C9C328B427D320DA0074E2BC /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -279,7 +273,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				607FACDF1AFB9204008FA782 /* Base */,
-				C9C328B527D320DB0074E2BC /* zh-Hans */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
