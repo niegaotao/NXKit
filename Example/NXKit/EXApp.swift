@@ -114,11 +114,11 @@ class EXApp {
         let __viewController = GalleryViewController(startIndex: 0, itemsDataSource: self, itemsDelegate: self, displacedViewsDataSource: nil, configuration: [.seeAllCloseButtonMode(.none), .deleteButtonMode(.none), .headerViewLayout(HeaderLayout.center(13))])
         
         if true {
-            let headerView = NXLCRView<UIView,UILabel, UIButton>(frame: CGRect(x: 16, y: NXUI.topOffset-44, width: NXUI.width-32, height: 44))
+            let headerView = NXLCRView<UIView,UILabel, UIButton>(frame: CGRect(x: 16, y: NX.topOffset-44, width: NX.width-32, height: 44))
             headerView.centerView.frame = CGRect(x: headerView.width/3.0, y: 0, width: headerView.width/3.0, height: headerView.height)
             headerView.centerView.textAlignment = .center
             headerView.centerView.textColor = UIColor.white
-            headerView.centerView.font = NXUI.font(17)
+            headerView.centerView.font = NX.font(17)
             headerView.centerView.text = "\(__index+1) / \(self.assets.count)"
             __viewController.headerView = headerView
         }
