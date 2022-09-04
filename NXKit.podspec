@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
     s.name             = 'NXKit'
-    s.version          = '1.0.0.220901'
+    s.version          = '1.1.0'
     s.summary          = 'NXKit is a Swift UI framework for iOS.'
     s.description      = <<-DESC
-        NXKit is a Swift UI framework for iOS.
+      NXKit is a UI framework implemented by Swift language for building native apps more easily。
     DESC
     s.homepage         = 'https://github.com/niegaotao/NXKit'
     s.license          = { :type => 'MIT', :file => 'LICENSE' }
