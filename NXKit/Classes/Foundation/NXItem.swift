@@ -303,11 +303,11 @@ open class NXCollection<T:UIView> : NXElementArray<NXSection> {
     
     //UICollectionView 获取header footer
     public func dequeue(_ collectionView: UICollectionView?, _ indexPath:IndexPath, _ type:NXItem.View.RawValue) -> (elelment:NXItem, reusableView:NXCollectionReusableView)? {
-        guard let __collectionView = collectionView, indexPath.section >= 0 && indexPath.section < self.elements.count else {
+        guard let __collectionView = collectionView, (indexPath as NSIndexPath).section >= 0 && (indexPath as NSIndexPath).section < self.elements.count else {
             return nil
         }
         if type == NXItem.View.header.rawValue {
-            guard let element = self.elements[indexPath.section].header else {return nil}
+            guard let element = self.elements[(indexPath as NSIndexPath).section].header else {return nil}
             guard element.ctxs.cls != nil && element.ctxs.reuse.count > 0 else {
                 return nil
             }
@@ -316,7 +316,7 @@ open class NXCollection<T:UIView> : NXElementArray<NXSection> {
             }
         }
         else if type == NXItem.View.footer.rawValue {
-            guard let element = self.elements[indexPath.section].footer else {
+            guard let element = self.elements[(indexPath as NSIndexPath).section].footer else {
                 return nil
             }
             guard element.ctxs.cls != nil && element.ctxs.reuse.count > 0 else {
