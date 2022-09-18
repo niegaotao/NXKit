@@ -12,7 +12,7 @@ import UIKit
  UIView 的大小属性
  */
 extension UIView {
-    open var x : CGFloat {
+    public var x : CGFloat {
         set{
             var __frame = self.frame
             __frame.origin.x = newValue
@@ -23,7 +23,7 @@ extension UIView {
         }
     }
     
-    open var y : CGFloat {
+    public var y : CGFloat {
         set{
             var __frame = self.frame
             __frame.origin.y = newValue
@@ -34,7 +34,7 @@ extension UIView {
         }
     }
     
-    open var width : CGFloat {
+    public var width : CGFloat {
         set{
             var __frame = self.frame
             __frame.size.width = newValue
@@ -45,7 +45,7 @@ extension UIView {
         }
     }
     
-    open var height : CGFloat {
+    public var height : CGFloat {
         set{
             var __frame = self.frame
             __frame.size.height = newValue
@@ -56,11 +56,11 @@ extension UIView {
         }
     }
     
-    open var maxX : CGFloat {
+    public var maxX : CGFloat {
         return self.frame.origin.x + self.frame.size.width
     }
     
-    open var maxY : CGFloat {
+    public var maxY : CGFloat {
         return self.frame.origin.y + self.frame.size.height
     }
 }
@@ -70,7 +70,7 @@ extension UIView {
  UIView 的layer设置
  */
 extension UIView {
-    open var association : NXViewAssociation? {
+    public var association : NXViewAssociation? {
         set {
             objc_setAssociatedObject(self, &NXViewAssociation.key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
@@ -80,15 +80,11 @@ extension UIView {
     }
     
     //
-    open func setupEvent(_ event:UIControl.Event, action:((_ event:UIControl.Event, _ sender:UIView) -> ())?) {
-        self.setupEvents([event], action: action)
-    }
-    
-    open func setupEvents(_ events:[UIControl.Event], action:((_ event:UIControl.Event, _ sender:UIView) -> ())?) {
+    public func setupEvent(_ event:UIControl.Event, action:((_ event:UIControl.Event, _ sender:UIView) -> ())?) {
         if self.association == nil {
-            self.association = NXViewAssociation(sender: self)
+            self.association = NXViewAssociation()
         }
-        self.association?.update(events, action: action)
+        self.association?.addTarget(self, event:event, action: action)
     }
     
     //设置圆角
@@ -148,7 +144,7 @@ extension UIView {
                 separator = CALayer()
                 self.layer.addSublayer(separator!)
                 if self.association == nil {
-                    self.association = NXViewAssociation(sender: self)
+                    self.association = NXViewAssociation()
                 }
                 self.association?.separator = separator
             }
@@ -182,7 +178,7 @@ extension UIView {
     /*
      *  获取当前view的viewcontroller
      */
-    open var superviewController : UIViewController? {
+    public var nextViewController : UIViewController? {
         for view in sequence(first: self.superview, next: { $0?.superview }) {
             if let responder = view?.next {
                 if responder.isKind(of: UIViewController.self){
@@ -278,3 +274,110 @@ extension UIView {
         }
     }
 }
+
+extension UIControl.Event {
+    public static var tap = UIControl.Event(rawValue: 100)//UITapGestureRecognizer
+    public static var longPress = UIControl.Event(rawValue: 101)//UILongPressGestureRecognizer
+    public static var pan = UIControl.Event(rawValue: 102)//UIPanGestureRecognizer
+    public static var pinch = UIControl.Event(rawValue: 103)//UIPinchGestureRecognizer
+    public static var rotation = UIControl.Event(rawValue: 104)//UIRotationGestureRecognizer
+    public static var swipe = UIControl.Event(rawValue: 105)//UISwipeGestureRecognizer
+}
+
+extension UIControl {
+    public class Target : NXAny {
+        public weak var view : UIView?
+        public var event = UIControl.Event.touchUpInside
+        public var recognizer : UIGestureRecognizer?
+        public var completion : ((_ event:UIControl.Event, _ sender:UIView) -> ())?
+        
+        public init(view:UIView, event: UIControl.Event, completion: ( (_: UIControl.Event, _: UIView) -> Void)?) {
+            self.view = view
+            self.event = event
+            self.completion = completion
+        }
+        
+        public required init() {
+            fatalError("init() has not been implemented")
+        }
+        
+        @objc public func invoke(){
+            if event.rawValue < 100 {
+                if let __view = self.view as? UIControl {
+                    self.completion?(self.event, __view)
+                }
+            }
+            else {
+                if let recognizer = self.recognizer, let __view = self.view  {
+                    if recognizer.isKind(of: UILongPressGestureRecognizer.self) {
+                        if recognizer.state == .began {
+                            self.completion?(self.event, __view)
+                        }
+                    }
+                    else {
+                        self.completion?(self.event, __view)
+                    }
+                }
+            }
+        }
+    }
+}
+
+public class NXViewAssociation {
+    static var key = "key"
+    open weak var separator : CALayer? = nil
+    public private(set) var targets = [UIControl.Event.RawValue : UIControl.Target]()
+    
+    public func addTarget(_ targetView: UIView, event:UIControl.Event, action:((_ event:UIControl.Event, _ sender:UIView) -> ())?) {
+        if let target = self.targets[event.rawValue] {
+            target.completion = action
+            return
+        }
+        
+        let wrapped = UIControl.Target(view: targetView, event: event, completion: action)
+        if event.rawValue < 100 {
+            if let control = targetView as? UIControl {
+                control.addTarget(wrapped, action: #selector(UIControl.Target.invoke), for: event)
+                self.targets[event.rawValue] = wrapped
+            }
+        }
+        else {
+            if event == .tap {
+                wrapped.recognizer = UITapGestureRecognizer()
+            }
+            else if event == .longPress {
+                wrapped.recognizer = UILongPressGestureRecognizer()
+            }
+            else if event == .pan {
+                wrapped.recognizer = UIPanGestureRecognizer()
+            }
+            else if event == .pinch {
+                wrapped.recognizer = UIPinchGestureRecognizer()
+            }
+            else if event == .rotation {
+                wrapped.recognizer = UIRotationGestureRecognizer()
+            }
+            else if event == .swipe {
+                wrapped.recognizer = UISwipeGestureRecognizer()
+            }
+            
+            if let __recognizer = wrapped.recognizer {
+                __recognizer.addTarget(wrapped, action: #selector(UIControl.Target.invoke))
+                targetView.addGestureRecognizer(__recognizer)
+                targetView.isUserInteractionEnabled = true
+                wrapped.recognizer = __recognizer
+                self.targets[event.rawValue] = wrapped
+            }
+        }
+    }
+    
+    public func removeTarget(_ targetView: UIView, _ event:UIControl.Event, action:((_ event:UIControl.Event, _ sender:UIView) -> ())?) {
+        if let target = self.targets[event.rawValue] {
+            if let recognizer = target.recognizer {
+                targetView.removeGestureRecognizer(recognizer)
+            }
+            self.targets.removeValue(forKey: event.rawValue)
+        }
+    }
+}
+

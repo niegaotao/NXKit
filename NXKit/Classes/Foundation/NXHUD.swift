@@ -194,7 +194,7 @@ open class NXHUD {
 
 extension NXHUD {
     @discardableResult
-    open class func openWrappedView(key:String, image:UIImage?, message:String, ats:NX.Ats, duration:TimeInterval, superview:UIView) -> NXHUD.WrappedView? {
+    public class func openWrappedView(key:String, image:UIImage?, message:String, ats:NX.Ats, duration:TimeInterval, superview:UIView) -> NXHUD.WrappedView? {
         if image == nil && message.count <= 0 {
             return nil
         }
@@ -240,7 +240,7 @@ extension NXHUD {
     }
     
     @discardableResult
-    open class func closeWrappedView(subview:NXHUD.WrappedView?,  superview:UIView?) -> Bool{
+    public class func closeWrappedView(subview:NXHUD.WrappedView?,  superview:UIView?) -> Bool{
         if let wrappedView = subview {
             UIView.animate(withDuration: wrappedView.ctxs.inoutDuration,
                            delay: wrappedView.ctxs.duration,
@@ -272,17 +272,17 @@ extension NXHUD {
 extension UIView {
     
     @discardableResult
-    open func makeToast(message: String, ats: NX.Ats = .maxY, duration: TimeInterval = 2.0) -> NXHUD.WrappedView? {
+    public func makeToast(message: String, ats: NX.Ats = .maxY, duration: TimeInterval = 2.0) -> NXHUD.WrappedView? {
         return NXHUD.openWrappedView(key: NXHUD.Key.toast.rawValue, image: nil, message: message, ats: ats, duration: duration, superview: self)
     }
 
     @discardableResult
-    open func makeLoading(message: String = "", ats: NX.Ats = .center) -> NXHUD.WrappedView? {
+    public func makeLoading(message: String = "", ats: NX.Ats = .center) -> NXHUD.WrappedView? {
         return NXHUD.openWrappedView(key: NXHUD.Key.loading.rawValue, image: NX.image(named:"icon-animation.png"), message: message, ats: ats, duration: 0, superview: self)
     }
 
     @discardableResult
-    open func hideLoading(animationView:NXHUD.WrappedView? = nil) -> Bool{
+    public func hideLoading(animationView:NXHUD.WrappedView? = nil) -> Bool{
         return NXHUD.closeWrappedView(subview:animationView, superview: self)
     }
 }

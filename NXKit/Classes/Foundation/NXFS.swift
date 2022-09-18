@@ -50,7 +50,7 @@ extension NXFS {
 }
 
 extension NXFS {
-    open class func path(_ directory:NXFS.Directory, _ createAllowed:Bool = true) -> String {
+    public class func path(_ directory:NXFS.Directory, _ createAllowed:Bool = true) -> String {
         if case .sandbox(let specified) = directory {
             var pathValue = NSHomeDirectory()
             if specified.count > 0 {
@@ -101,7 +101,7 @@ extension NXFS {
         return ""
     }
     
-    open class func file(_ directory:NXFS.Directory, _ filename:String, _ createAllowed:Bool = true) -> String {
+    public class func file(_ directory:NXFS.Directory, _ filename:String, _ createAllowed:Bool = true) -> String {
         var path = NXFS.path(directory) + "/\(filename).json"
         if filename.contains(".json") {
             path = NXFS.path(directory) + "/\(filename)"
@@ -113,12 +113,12 @@ extension NXFS {
     }
     
     @discardableResult
-    open class func fileExists(_ path:String) -> Bool {
+    public class func fileExists(_ path:String) -> Bool {
         return FileManager.default.fileExists(atPath: path)
     }
     
     @discardableResult
-    open class func createDirectory(_ path:String) -> Bool {
+    public class func createDirectory(_ path:String) -> Bool {
         do{
             try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
         }
@@ -129,7 +129,7 @@ extension NXFS {
     }
     
     @discardableResult
-    open class func removeDirectory(_ path:String) -> Bool {
+    public class func removeDirectory(_ path:String) -> Bool {
         do{
             try FileManager.default.removeItem(atPath: path)
         }
@@ -140,7 +140,7 @@ extension NXFS {
     }
     
     @discardableResult
-    open class func createFile(_ path:String) -> Bool {
+    public class func createFile(_ path:String) -> Bool {
         if NXFS.fileExists(path) {
             return false
         }
@@ -151,7 +151,7 @@ extension NXFS {
 
 extension NXFS {
     //setValue:写入数据
-    open class func setValue(_ value: Any, forKey: String, directory: NXFS.Directory, filename: String) {
+    public class func setValue(_ value: Any, forKey: String, directory: NXFS.Directory, filename: String) {
         
         if case .bundle(_) = directory {
             return
@@ -185,11 +185,11 @@ extension NXFS {
     }
     
     //value(forKey:从json读取数据:默认不需要后缀名
-    open class func value(forKey: String, directory: NXFS.Directory, filename: String) -> Any? {
+    public class func value(forKey: String, directory: NXFS.Directory, filename: String) -> Any? {
         return NXFS.value(forKey: forKey, directory: directory, filename: filename, isDictionary: true)
     }
     
-    open class func value(forKey: String, directory: NXFS.Directory, filename: String, isDictionary:Bool) -> Any? {
+    public class func value(forKey: String, directory: NXFS.Directory, filename: String, isDictionary:Bool) -> Any? {
         let path = NXFS.file(directory,filename, false)
         if NXFS.fileExists(path) {
             if isDictionary {
@@ -207,7 +207,7 @@ extension NXFS {
     }
     
     //读取内容
-    open class func contentsOf(_ file:String) -> Data? {
+    public class func contentsOf(_ file:String) -> Data? {
         var url : URL? = URL(fileURLWithPath: file)
         if file.hasPrefix("http") {
             url = URL(string: file)

@@ -19,7 +19,7 @@ extension UIImage {
         case landscape, vertical
     }
     
-    open class func image(color:UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0)) -> UIImage? {
+    public class func image(color:UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0)) -> UIImage? {
         UIGraphicsBeginImageContext(size)
         color.set()
         UIRectFill(CGRect(origin: CGPoint.zero, size: size))
@@ -29,7 +29,7 @@ extension UIImage {
     }
     
     //生成渐变色图片
-    open class func image(colors:[UIColor], size:CGSize, start: CGPoint, end: CGPoint) -> UIImage? {
+    public class func image(colors:[UIColor], size:CGSize, start: CGPoint, end: CGPoint) -> UIImage? {
         guard colors.count >= 1 else {
             return nil
         }
@@ -51,7 +51,7 @@ extension UIImage {
         return outoutImage
     }
     
-    open class func image(backgroundColor:UIColor, foregroundColor:UIColor, size:CGSize) -> UIImage? {
+    public class func image(backgroundColor:UIColor, foregroundColor:UIColor, size:CGSize) -> UIImage? {
         let background = UIImage.image(color: backgroundColor, size: size)
         let foreground = UIImage.image(color: foregroundColor.withAlphaComponent(0.5), size: size)
         UIGraphicsBeginImageContext(size)
@@ -73,7 +73,7 @@ extension UIImage {
  
  */
 extension UIImage {
-    open class func resize(image: UIImage?, size:CGSize, by:String) -> UIImage? {
+    public class func resize(image: UIImage?, size:CGSize, by:String) -> UIImage? {
         guard let _image = image else {
             return nil
         }

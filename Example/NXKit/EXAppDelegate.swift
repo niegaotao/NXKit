@@ -36,14 +36,7 @@ class EXAppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = EXApp.naviController
         self.window?.makeKeyAndVisible()
         
-        //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(test), userInfo: nil, repeats: true)
-        
         return true
     }
-    
-    @objc func test(){
-        //NX.print(EXApp.naviController.currentViewController)
-    }
-
 }
 

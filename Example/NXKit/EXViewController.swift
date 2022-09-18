@@ -20,6 +20,7 @@ class EXViewController: NXTableViewController {
             arrSubvalues.append(["title":"NXViewController","operation":"NXViewController"])
             arrSubvalues.append(["title":"NXTableViewController","operation":"NXTableViewController"])
             arrSubvalues.append(["title":"NXCollectionViewController","operation":"NXCollectionViewController"])
+            arrSubvalues.append(["title":"EXToolViewController","operation":"EXToolViewController"])
             self.arrValues.append(arrSubvalues)
         }
         
@@ -119,6 +120,10 @@ class EXViewController: NXTableViewController {
                 else if operation == "NXCollectionViewController" {
                     let vc = NXCollectionViewController()
                     vc.title = operation
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                else if operation == "EXToolViewController" {
+                    let vc = EXToolViewController()
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
                 else if operation == "NXAsset-image-1" {

@@ -19,7 +19,7 @@ open class NXString {
 }
 
 extension NXString {
-    open class func string(_ text:String, _ font:UIFont, _ color:UIColor, _ lineSpacing:CGFloat) -> NXString {
+    public class func string(_ text:String, _ font:UIFont, _ color:UIColor, _ lineSpacing:CGFloat) -> NXString {
         let textWrapper = NXString()
         textWrapper.text = text
         textWrapper.font = font
@@ -28,7 +28,7 @@ extension NXString {
         return textWrapper
     }
     
-    open class func string(_ text:String, _ font:UIFont, _ color:UIColor, _ lineSpacing:CGFloat, _ query:[String:Any]) -> NXString {
+    public class func string(_ text:String, _ font:UIFont, _ color:UIColor, _ lineSpacing:CGFloat, _ query:[String:Any]) -> NXString {
         let textWrapper = NXString()
         textWrapper.text = text
         textWrapper.font = font
@@ -38,7 +38,7 @@ extension NXString {
         return textWrapper
     }
     
-    open class func attributedString(_ text:String, _ font:UIFont, _ color:UIColor, _ lineSpacing:CGFloat) -> NSMutableAttributedString {
+    public class func attributedString(_ text:String, _ font:UIFont, _ color:UIColor, _ lineSpacing:CGFloat) -> NSMutableAttributedString {
         var mapValue = [NSAttributedString.Key:Any]()
         mapValue[NSAttributedString.Key.font] = font
         mapValue[NSAttributedString.Key.foregroundColor] = color
@@ -51,7 +51,7 @@ extension NXString {
         return attributedText
     }
     
-    open class func attributedString(_ strings:[NXString], _ lineSpacing:CGFloat) -> NSMutableAttributedString {
+    public class func attributedString(_ strings:[NXString], _ lineSpacing:CGFloat) -> NSMutableAttributedString {
         let attributedText = NSMutableAttributedString()
         for string in strings {
             var mapValue = [NSAttributedString.Key:Any]()

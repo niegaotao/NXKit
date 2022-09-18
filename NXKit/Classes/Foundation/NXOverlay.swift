@@ -36,13 +36,13 @@ extension NXOverlay {
     public static var overlays = NSHashTable<NXOverlay>(options:[.weakMemory], capacity: 2)
     
     //加入一个弹框
-    open class func push(_ overlay: NXOverlay){
+    public class func push(_ overlay: NXOverlay){
         NXOverlay.overlays.add(overlay)
     }
     
     //移除一个弹框
     @discardableResult
-    open class func pop(_ overlay: NXOverlay?) -> NXOverlay? {
+    public class func pop(_ overlay: NXOverlay?) -> NXOverlay? {
         if let __overlay = overlay, NXOverlay.overlays.contains(__overlay) {
             __overlay.removeFromSuperview()
             NXOverlay.overlays.remove(__overlay)

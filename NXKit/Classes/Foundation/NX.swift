@@ -35,6 +35,10 @@ extension NX {
         if #available(iOS 11.0, *), let __safeAreaInsets = UIApplication.shared.delegate?.window??.safeAreaInsets, __safeAreaInsets.top > 0 {
             __insets.top = __safeAreaInsets.top
             __insets.bottom = __safeAreaInsets.bottom
+            if __insets.top >= 59 {
+                __insets.top = 54
+            }
+            //20, 44, 47, 54
         }
         else if UIApplication.shared.statusBarFrame.size.height > 0 {
             __insets.top = UIApplication.shared.statusBarFrame.size.height
@@ -148,34 +152,45 @@ extension NX {
 // 设备-其他
 extension NX {
     //设备model与产品的映射表
-    static public var devices : [String:String] = {
-        if let value = NXSerialization.file(toDictionary: NX.Association.root + "/NXKit.bundle/NX.bundle/device.json") as? [String:String] {
-            return value
-        }
-        return [:]
+    static public var devices : [String:Any] = {
+        return NXSerialization.file(toDictionary: NX.Association.root + "/NXKit.bundle/NX.bundle/device.json")
     }()
     
-    public struct WH {
-        public var width = CGFloat.zero
-        public var height = CGFloat.zero
-        public var scale = CGFloat.zero
-        public var inches = [CGFloat]()
-    }
+    public static var is320x480x1 : Any = ["width":320,"height":480,"scale":1,"inches":[3.5]]
+    //[iPhone,iPhone3GS]
+
+    public static var is320x480x2 : Any = ["width":320,"height":480,"scale":2,"inches":[3.5]]
+    //[iPhone4,iPhone4S]
     
-    public static var is320x480x1 = NX.WH(width: 320, height: 480, scale: 1, inches: [3.5]) ///[iPhone,iPhone3GS]
-    public static var is320x480x2 = NX.WH(width: 320, height: 480, scale: 2, inches: [3.5]) ///[iPhone4,iPhone4S]
-    public static var is320x568x2 = NX.WH(width: 320, height: 568, scale: 2, inches: [4.0]) ///[iPhone5,iPhone5c,iPhone5S,iPhoneSE1]
+    public static var is320x568x2 : Any = ["width":320,"height":568,"scale":2,"inches":[4.0]]
+    //[iPhone5,iPhone5c,iPhone5S,iPhoneSE1]
         
-    public static var is375x667x2 = NX.WH(width: 375, height: 667, scale: 2, inches: [4.7]) ///[iPhone6,iPhone6s,iPhone7,iPhone8,iPhoneSE2]
-    public static var is375x812x3 = NX.WH(width: 375, height: 812, scale: 3, inches: [5.4,5.8]) ///[iPhone12mini,iPhone13mini],[iPhoneX,iPhoneXs,iPhone11Pro]
+    public static var is375x667x2 : Any = ["width":375,"height":667,"scale":2,"inches":[4.7]]
+    //[iPhone6,iPhone6s,iPhone7,iPhone8,iPhoneSE2,iPhoneSE3]
     
-    public static var is390x844x3 = NX.WH(width: 390, height: 844, scale: 3, inches: [6.1]) ///[iPhone12,iPhone12Pro,iPhone13,iPhone13Pro]
+    public static var is375x812x3 : Any = ["width":375,"height":812,"scale":3,"inches":[5.4, 5.8]]
+    //[iPhone12mini,iPhone13mini],[iPhoneX,iPhoneXs,iPhone11Pro]
     
-    public static var is414x736x3 = NX.WH(width: 414, height: 736, scale: 3, inches: [5.5]) ///[iPhone6Plus,iPhone6sPlus,iPhone7Plus,iPhone8Plus]
-    public static var is414x896x2 = NX.WH(width: 414, height: 896, scale: 2, inches: [6.1]) ///[iPhoneXr,iPhone11]
-    public static var is414x896x3 = NX.WH(width: 414, height: 896, scale: 3, inches: [6.5]) ///[iPhoneXs max,iPhone11ProMax]
+    public static var is390x844x3 : Any = ["width":390,"height":844,"scale":3,"inches":[6.1]]
+    //[iPhone12,iPhone12Pro,iPhone13,iPhone13Pro,iPhone14]
     
-    public static var is428x926x3 = NX.WH(width: 428, height: 926, scale: 3, inches: [6.7]) ///[iPhone12ProMax,iPhone13ProMax]
+    public static var is393x852x3 : Any = ["width":393,"height":852,"scale":3,"inches":[6.1]]
+    //[iPhone14Pro]
+    
+    public static var is414x736x3 : Any = ["width":414,"height":736,"scale":3,"inches":[5.5]]
+    //[iPhone6Plus,iPhone6sPlus,iPhone7Plus,iPhone8Plus]
+    
+    public static var is414x896x2 : Any = ["width":414,"height":896,"scale":2,"inches":[6.1]]
+    //[iPhoneXr,iPhone11]
+    
+    public static var is414x896x3 : Any = ["width":414,"height":896,"scale":3,"inches":[6.5]]
+    //[iPhoneXs max,iPhone11ProMax]
+    
+    public static var is428x926x3 : Any = ["width":428,"height":926,"scale":3,"inches":[6.7]]
+    //[iPhone12ProMax,iPhone13ProMax,iPhone14Plus]
+    
+    public static var is430x932x3 : Any = ["width":430,"height":932,"scale":3,"inches":[6.7]]
+    //[iPhone14ProMax]
 }
 
 
@@ -311,7 +326,7 @@ extension NX {
 
 //重定尺寸
 extension NX {
-    open class func resize(size:CGSize, to:CGSize, mode:UIView.ContentMode) -> CGRect {
+    public class func resize(size:CGSize, to:CGSize, mode:UIView.ContentMode) -> CGRect {
         var __frame = CGRect.zero
         if size.width <= 0 || size.height <= 0 || to.width <= 0 || to.height <= 0 {
             return __frame
@@ -722,7 +737,8 @@ extension NX {
         open var textAlignment = NSTextAlignment.center
         open var numberOfLines: Int = 1
         open var lineSpacing : CGFloat = 2.5
-        open var isAttributed : Bool = false
+        
+        open var attributedString : NSAttributedString? = nil
         open var value = ""
         open var font = NX.font(15)
         
@@ -809,7 +825,7 @@ extension NX {
 
 extension NX.View {
     
-    open class func update(_ metadata:NX.Appearance, _ view:UIView){
+    public class func update(_ metadata:NX.Appearance, _ view:UIView){
         view.backgroundColor = metadata.backgroundColor
         if let __layer = metadata.layer {
             view.layer.cornerRadius = __layer.cornerRadius
@@ -821,7 +837,7 @@ extension NX.View {
         }
     }
 
-    open class func update(_ metadata:NX.Attribute, _ view:UIView){
+    public class func update(_ metadata:NX.Attribute, _ view:UIView){
         if metadata.isHidden {
             view.isHidden = true
             return
@@ -831,13 +847,7 @@ extension NX.View {
             view.frame = metadata.frame
             view.backgroundColor = metadata.backgroundColor
             view.numberOfLines = metadata.numberOfLines
-            if metadata.isAttributed {
-                let paragraph = NSMutableParagraphStyle()
-                paragraph.lineSpacing = metadata.lineSpacing
-                let attributedText = NSAttributedString(string: metadata.value,
-                                                        attributes: [NSAttributedString.Key.font:metadata.font,
-                                                                     NSAttributedString.Key.foregroundColor:metadata.color,
-                                                                     NSAttributedString.Key.paragraphStyle:paragraph])
+            if let attributedText = metadata.attributedString {
                 view.attributedText = attributedText
             }
             else {

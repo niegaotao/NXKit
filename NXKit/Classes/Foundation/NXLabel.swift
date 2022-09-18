@@ -36,9 +36,9 @@ open class NXCopyLabel: NXLabel {
     override open func setupSubviews() {
         super.setupSubviews()
         isUserInteractionEnabled = true
-        self.setupEvents([.longPress]) {[weak self] (e, v) in
-            if e == UIControl.Event.tap {
-                if let longPress = self?.association?.longPressRecognizer {
+        self.setupEvent(.longPress) {[weak self] (e, v) in
+            if e == UIControl.Event.longPress {
+                if let longPress = self?.association?.targets[e.rawValue]?.recognizer as? UILongPressGestureRecognizer  {
                     self?.clickLabel(longPress: longPress)
                 }
             }

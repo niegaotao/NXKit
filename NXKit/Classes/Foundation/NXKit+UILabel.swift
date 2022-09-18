@@ -39,7 +39,7 @@ extension UILabel {
                             completion: completion)
     }
     
-    open func updateSubviews(text: String,
+    public func updateSubviews(text: String,
                      font: UIFont,
                      textColor: UIColor,
                      textAlignment: NSTextAlignment,

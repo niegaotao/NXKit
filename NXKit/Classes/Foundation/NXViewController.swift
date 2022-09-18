@@ -154,8 +154,8 @@ open class NXViewController: UIViewController  {
             self.dismiss(animated: true, completion: nil)
         }
         else if self.ctxs.navigation == .overlay {
-            if let naviController = self.ctxs.superviewController?.navigationController as? NXNavigationController {
-                naviController.closeViewController(self, animated: true)
+            if let navigationController = self.ctxs.superviewController?.navigationController as? NXNavigationController {
+                navigationController.closeViewController(self, animated: true)
             }
         }
     }

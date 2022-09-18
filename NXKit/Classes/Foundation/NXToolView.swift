@@ -11,120 +11,124 @@ import UIKit
 
 open class NXToolView: NXBackgroundView<UIImageView, UIView> {
     open weak var controller : NXToolViewController?
-    public let ctxs = NXToolView.Wrapped()
-    public let centerView = NXToolView.Bar(frame: CGRect(x: 0, y: 0, width: 56, height: 47))
-        
+    public fileprivate(set) var index : Int = 0
+    open var didSelect : NX.Completion<Int, Int>? = nil //每次点击都会调用
+    public let separator = NX.Separator { (_, __sender) in
+        __sender.isHidden = false
+        __sender.backgroundColor = NX.separatorColor
+    }
+    
+    public let shadow = NX.Layer { (_, __sender) in
+        __sender.isHidden = true
+        __sender.shadowColor = NX.shadowColor
+        __sender.shadowOffset = CGSize(width: 0, height: -2)
+        __sender.shadowRadius = 2.0
+        __sender.shadowOpacity = 0.15
+    }
+    
+    open var elements = [NXToolView.Element]()
+    public let centerView = NXToolView.Center { (_, __sender) in
+        __sender.isHidden = true
+    }
+
     override open func setupSubviews() {
         super.setupSubviews()
         
-        self.contentView.setupSeparator(color: self.ctxs.separator.backgroundColor, ats: .minY, insets: .zero)
-        self.contentView.addSubview(centerView)
+        self.contentView.addSubview(centerView.centerView)
     }
     
     override open func updateSubviews(_ action:String, _ value:Any?){
-        if action == "elements" {
-            guard let dicValue = value as? [String:Any] else {
-                return
-            }
-            guard let __elements = dicValue["elements"] as? [NXToolView.Element], __elements.count > 0 else {
-                return
-            }
-            self.ctxs.elements.forEach { (element) in
-                element.elementView.removeFromSuperview()
-            }
-            self.ctxs.elements = __elements
-            self.ctxs.index = dicValue["index"] as? Int ?? 0
-            
-            if self.ctxs.center.isHidden == false {
-                //如果想要显示中间的加大按钮，必须满足常规按钮的个数是偶数个
-                self.ctxs.center.isHidden = (self.ctxs.elements.count % 2 != 0)
-            }
-            
-            if self.ctxs.layer.isHidden == false {
-                //设置阴影
-                self.layer.shadowColor = self.ctxs.layer.shadowColor.cgColor;
-                self.layer.shadowOffset = self.ctxs.layer.shadowOffset
-                self.layer.shadowRadius = self.ctxs.layer.shadowRadius
-                self.layer.shadowOpacity = Float(self.ctxs.layer.shadowOpacity)
-                self.layer.cornerRadius = self.layer.shadowRadius
-                self.layer.masksToBounds = false
-            }
-            else {
-                self.layer.shadowColor = UIColor.clear.cgColor
-                self.layer.masksToBounds = true
-            }
-            
-            self.contentView.association?.separator?.isHidden = self.ctxs.separator.isHidden
-            self.contentView.association?.separator?.backgroundColor = self.ctxs.separator.backgroundColor.cgColor
-            
-            self.centerView.centerView.image = self.ctxs.center.image
-            self.centerView.isHidden = self.ctxs.center.isHidden
-            self.centerView.frame = self.ctxs.center.frame
-            
-            if self.ctxs.center.isHidden == false {
-                self.ctxs.width = self.width/CGFloat(self.ctxs.elements.count+1)
-            }
-            else {
-                self.ctxs.width = self.width/CGFloat(self.ctxs.elements.count)
-            }
-            
-            for (index, element) in self.ctxs.elements.enumerated() {
-                element.size = CGSize(width: self.ctxs.width, height: NX.toolViewOffset)
-                element.elementView.isHidden = false
-                element.elementView.frame = CGRect(x: self.ctxs.width * CGFloat(index), y: 0, width: self.ctxs.width, height: NX.toolViewOffset)
-                if index >= self.ctxs.elements.count/2 && self.ctxs.center.isHidden == false {
-                    element.elementView.frame = CGRect(x: self.ctxs.width * CGFloat(index+1), y: 0, width: self.ctxs.width, height: NX.toolViewOffset)
+        if let dicValue = value as? [String:Any] {
+            if let elements = dicValue["elements"] as? [NXToolView.Element], elements.count > 0 {
+                self.elements.forEach { element in
+                    element.elementView.removeFromSuperview()
                 }
-                element.elementView.tag = index
-                element.elementView.setupEvents([UIControl.Event.tap]) {[weak self] (e, v) in
-                    
-                    guard let __toolView = self,
-                        let __elementView = v as? NXToolView.ElementView,
-                        let __ctxs = self?.ctxs,
-                        __elementView.tag >= 0 && __elementView.tag < __ctxs.elements.count else {
-                        return
-                    }
-                    
-                    if __elementView.tag != __ctxs.index {
-                        //切换选中
-                        self?.didSelect(at: __elementView.tag)
-                        self?.controller?.didSelectViewController(at: __elementView.tag, animated: false)
-                        
-                        //选中的回调
-                        self?.ctxs.didSelect?(__toolView, __elementView.tag)
-                    }
-                    else{
-                        //选中的回调
-                        self?.ctxs.didSelect?(__toolView, __elementView.tag)
-                        //处理连续的双击
-                        self?.ctxs.didReselect?(__toolView, __elementView.tag)
-                    }
-                }
-                self.contentView.addSubview(element.elementView)
+                self.elements = elements
             }
-        }
-        else if action == "index" {
-            guard let dicValue = value as? [String:Any] else {
-                return
+            
+            if let index = dicValue["index"] as? Int {
+                self.index = max(min(index, self.elements.count), 0)
             }
-            let index = dicValue["index"] as? Int ?? 0
-            self.ctxs.index = max(min(index, self.ctxs.elements.count), 0)
         }
         
-        for (index, element) in self.ctxs.elements.enumerated() {
+        if self.centerView.isHidden == false {
+            //如果想要显示中间的加大按钮，必须满足常规按钮的个数是偶数个
+            self.centerView.isHidden = (self.elements.count % 2 != 0)
+        }
+        
+        //设置阴影
+        if self.shadow.isHidden == false {
+            self.layer.shadowColor = self.shadow.shadowColor.cgColor;
+            self.layer.shadowOffset = self.shadow.shadowOffset
+            self.layer.shadowRadius = self.shadow.shadowRadius
+            self.layer.shadowOpacity = Float(self.shadow.shadowOpacity)
+            self.layer.cornerRadius = self.layer.shadowRadius
+            self.layer.masksToBounds = false
+        }
+        else {
+            self.layer.shadowColor = UIColor.clear.cgColor
+            self.layer.masksToBounds = true
+        }
+        
+        //分隔线
+        if self.separator.isHidden == false {
+            self.contentView.setupSeparator(color: self.separator.backgroundColor, ats: .minY, insets: .zero)
+            self.contentView.association?.separator?.isHidden = false
+            self.contentView.association?.separator?.backgroundColor = self.separator.backgroundColor.cgColor
+        }
+        else {
+            self.contentView.association?.separator?.isHidden = true
+        }
+        
+        //中间按钮
+        self.centerView.centerView.updateSubviews("", self.centerView)
+        
+        //tab
+        let size = CGSize(width: self.centerView.isHidden ? self.width/max(CGFloat(self.elements.count), 1) : self.width/CGFloat(self.elements.count+1), height: NX.toolViewOffset)
+        for (index, element) in self.elements.enumerated() {
+            element.size = CGSize(width: size.width, height: size.height)
             element.elementView.isHidden = false
-            element.isSelected = index == self.ctxs.index
+            element.elementView.frame = CGRect(x: size.width * CGFloat(index), y: 0, width: size.width, height: size.height)
+            if index >= self.elements.count/2 && self.centerView.isHidden == false {
+                element.elementView.frame = CGRect(x: size.width * CGFloat(index+1), y: 0, width: size.width, height: size.height)
+            }
+            element.elementView.tag = index
+            element.elementView.setupEvent(UIControl.Event.tap) {[weak self] (e, v) in
+                
+                guard let __toolView = self,
+                    let __elementView = v as? NXToolView.ElementView,
+                    __elementView.tag >= 0 && __elementView.tag < __toolView.elements.count else {
+                    return
+                }
+                
+                let fromValue = __toolView.index
+                let toValue = __elementView.tag
+                if toValue != fromValue {
+                    //切换选中
+                    self?.didSelect(fromValue:fromValue, toValue: toValue)
+                    self?.controller?.didSelectViewController(fromValue:fromValue, toValue: toValue, animated: false)
+                }
+                
+                //选中的回调
+                self?.didSelect?(fromValue, toValue)
+            }
+            self.contentView.addSubview(element.elementView)
+        }
+        
+        for (index, element) in self.elements.enumerated() {
+            element.elementView.isHidden = false
+            element.isSelected = index == self.index
             element.elementView.updateSubviews("", element)
         }
     }
     
-    open func didSelect(at idx: Int){
-        let newValue = max(min(idx, self.ctxs.elements.count), 0)
-        guard self.ctxs.index != newValue else {return}
+    public func didSelect(fromValue:Int, toValue: Int){
+        let newValue = max(min(toValue, self.elements.count), 0)
+        guard self.index != newValue else {return}
         
-        let element = self.ctxs.elements[newValue]
+        let element = self.elements[newValue]
         if element.isSelectable {
-            self.ctxs.index = newValue
+            self.index = newValue
             
             if element.attachment.isResetable {
                 element.attachment.value = 0
@@ -137,13 +141,12 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        
-        if self.ctxs.layer.isHidden == false {
-            //设置阴影
-            self.layer.shadowColor = self.ctxs.layer.shadowColor.cgColor;
-            self.layer.shadowOffset = self.ctxs.layer.shadowOffset
-            self.layer.shadowRadius = self.ctxs.layer.shadowRadius
-            self.layer.shadowOpacity = Float(self.ctxs.layer.shadowOpacity)
+        //设置阴影
+        if self.shadow.isHidden == false {
+            self.layer.shadowColor = self.shadow.shadowColor.cgColor;
+            self.layer.shadowOffset = self.shadow.shadowOffset
+            self.layer.shadowRadius = self.shadow.shadowRadius
+            self.layer.shadowOpacity = Float(self.shadow.shadowOpacity)
             self.layer.cornerRadius = self.layer.shadowRadius
             self.layer.masksToBounds = false
         }
@@ -155,38 +158,17 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
 }
 
 extension NXToolView {
-    open class Wrapped : NSObject {
-        public fileprivate(set) var index : Int = 0
-        public fileprivate(set) var width : CGFloat = 0
-        public fileprivate(set) var elements = [NXToolView.Element]()
-        open var didSelect : NX.Completion<NXToolView, Int>? = nil //没次点击都会调用
-        open var didReselect : NX.Completion<NXToolView, Int>? = nil //已经选中的再次点击
-        
-        public let separator = NX.Separator { (_, __sender) in
-            __sender.isHidden = false
-            __sender.backgroundColor = NX.separatorColor
-        }
-        
-        public let layer = NX.Layer { (_, __sender) in
-            __sender.isHidden = true
-            __sender.shadowColor = NX.shadowColor
-            __sender.shadowOffset = CGSize(width: 0, height: -2)
-            __sender.shadowRadius = 2.0
-            __sender.shadowOpacity = 0.15
-        }
-        
-        public let center = NX.Attribute { (_, __sender) in
-            __sender.isHidden = true
-        }
+    open class Center : NX.Attribute {
+        fileprivate let centerView = NXToolView.CenterView(frame: CGRect(x: 0, y: 0, width: 80, height: 50))
     }
     
-    open class Bar : NXControl {
+    open class CenterView : NXControl {
         open var centerView = UIImageView(frame: CGRect.zero)
         override open func setupSubviews() {
             self.backgroundColor = UIColor.clear
             
             centerView.frame = self.bounds
-            centerView.contentMode = .scaleAspectFill
+            centerView.contentMode = .scaleAspectFit
             centerView.layer.cornerRadius = 0
             centerView.layer.masksToBounds = true
             self.addSubview(centerView)
@@ -196,8 +178,22 @@ extension NXToolView {
             super.layoutSubviews()
             centerView.frame = self.bounds
         }
+        
+        open override func updateSubviews(_ action: String, _ value: Any?) {
+            guard let element = value as? NXToolView.Center else {
+                return
+            }
+            
+            self.isHidden = element.isHidden
+            self.frame = element.frame
+            self.backgroundColor  = element.backgroundColor
+            self.layer.cornerRadius = element.cornerRadius
+            self.centerView.image = element.image
+        }
     }
-    
+}
+
+extension NXToolView {
     open class Element : NX.Rect {
         open var key : String = ""
         
@@ -235,7 +231,7 @@ extension NXToolView {
             isNumeric:Bool,
             isResetable:Bool) = (0, UIColor.red, UIColor.white, UIColor.red, 0, 11, UIEdgeInsets(top: 1.5, left: 1.5, bottom: 1.5, right: 1.5), true, false)
         
-        open var elementView = NXToolView.ElementView(frame: CGRect(x: 0, y: 0, width: NX.width/4.0, height: NX.toolViewOffset))
+        fileprivate let elementView = NXToolView.ElementView(frame: CGRect(x: 0, y: 0, width: NX.width/4.0, height: NX.toolViewOffset))
     }
     
     open class ElementView : NXView {

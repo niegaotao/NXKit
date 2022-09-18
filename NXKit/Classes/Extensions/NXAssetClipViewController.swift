@@ -74,7 +74,7 @@ open class NXAssetClipViewController: NXViewController {
                     componentView.text = clip.name
                     componentView.layer.cornerRadius = 2.0
                     componentView.layer.masksToBounds = true
-                    componentView.setupEvents([.tap]) {[weak self] (_, sender) in
+                    componentView.setupEvent(.tap) {[weak self] (_, sender) in
                         self?.dispose("footer", sender, nil)
                     }
                     if index == self.clips.key {

@@ -12,6 +12,7 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		C9051E2E28D45E6C00F37DCA /* EXToolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9051E2D28D45E6C00F37DCA /* EXToolViewController.swift */; };
 		C9C328BE27D3942B0074E2BC /* EXApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C328BD27D3942B0074E2BC /* EXApp.swift */; };
 		D6425B07A0C9ED4FAC20E2AC /* Pods_NXKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C051E22B406A1F24D7F2ACE /* Pods_NXKit_Example.framework */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 		866B0C35E26E65D86E9E5FD8 /* Pods-NXKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NXKit_Example.release.xcconfig"; path = "Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		8C051E22B406A1F24D7F2ACE /* Pods_NXKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NXKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB6BA1F31E4F8593CD13FE6 /* NXKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NXKit.podspec; path = ../NXKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		C9051E2D28D45E6C00F37DCA /* EXToolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXToolViewController.swift; sourceTree = "<group>"; };
 		C9C328BD27D3942B0074E2BC /* EXApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXApp.swift; sourceTree = "<group>"; };
 		DF7BD977515B790E949094EE /* Pods-NXKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NXKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		EE5BAF05F07B37A044139B20 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				C9C328BD27D3942B0074E2BC /* EXApp.swift */,
 				607FACD51AFB9204008FA782 /* EXAppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* EXViewController.swift */,
+				C9051E2D28D45E6C00F37DCA /* EXToolViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -257,6 +260,7 @@
 				C9C328BE27D3942B0074E2BC /* EXApp.swift in Sources */,
 				607FACD81AFB9204008FA782 /* EXViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* EXAppDelegate.swift in Sources */,
+				C9051E2E28D45E6C00F37DCA /* EXToolViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

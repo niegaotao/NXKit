@@ -80,9 +80,9 @@ open class NXTransitionView: NXView {
                     }
                 }
                 else {
-                    if let naviController = self.owner.ctxs.superviewController?.navigationController as? NXNavigationController {
-                        naviController.closeViewController(owner, animated: true)
-                        UIView.animate(withDuration: naviController.ctxs.duration*0.6) {
+                    if let navigationController = self.owner.ctxs.superviewController?.navigationController as? NXNavigationController {
+                        navigationController.closeViewController(owner, animated: true)
+                        UIView.animate(withDuration: navigationController.ctxs.duration*0.6) {
                             self.owner.view.x = NX.width
                             self.backgroundColor = NX.transitionInoutBackgroundColor
                         }
@@ -98,9 +98,9 @@ open class NXTransitionView: NXView {
                     }
                 }
                 else {
-                    if let naviController = self.owner.ctxs.superviewController?.navigationController as? NXNavigationController {
-                        naviController.closeViewController(owner, animated: true)
-                        UIView.animate(withDuration: naviController.ctxs.duration*0.6) {
+                    if let navigationController = self.owner.ctxs.superviewController?.navigationController as? NXNavigationController {
+                        navigationController.closeViewController(owner, animated: true)
+                        UIView.animate(withDuration: navigationController.ctxs.duration*0.6) {
                             self.owner.view.x = -NX.width
                             self.backgroundColor = NX.transitionInoutBackgroundColor
                         }

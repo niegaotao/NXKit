@@ -41,7 +41,7 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
         super.setupSubviews()
         
         self.layer.masksToBounds = true
-        self.contentView.setupEvents([UIControl.Event.tap]) { [weak self](e, v) in
+        self.contentView.setupEvent(UIControl.Event.tap) { [weak self](e, v) in
             self?.ctxs.completion?("", nil)
         }
     }

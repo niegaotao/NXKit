@@ -10,18 +10,16 @@ import UIKit
 
 open class NXToolViewController: NXContainerController {
 
-    open var toolView = NXToolView(frame: CGRect(x: 0, y: 0, width: NX.width, height: NX.toolViewOffset + NX.bottomOffset))
+    public let toolView = NXToolView(frame: CGRect(x: 0, y: 0, width: NX.width, height: NX.toolViewOffset + NX.bottomOffset))
     open var index : Int = 0
-    open var elements = [NXToolView.Element]()
 
-    
     public convenience init(subviewControllers: [NXViewController], elements:[NXToolView.Element], index:Int){
         self.init(nibName: nil, bundle: nil)
         self.subviewControllers.append(contentsOf: subviewControllers)
         for subviewController in subviewControllers {
             subviewController.ctxs.superviewController = self
         }
-        self.elements.append(contentsOf: elements)
+        self.toolView.elements.append(contentsOf: elements)
         self.index = index;
     }
     
@@ -39,24 +37,21 @@ open class NXToolViewController: NXContainerController {
         self.setupSubviews()
     }
     
-    override  open func setupSubviews(){
+    override open func setupSubviews(){
         self.toolView.frame = CGRect(x: 0, y: self.view.height-NX.toolViewOffset-NX.bottomOffset, width: self.view.width, height: NX.toolViewOffset+NX.bottomOffset)
         self.toolView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.toolView.controller = self
         self.toolView.backgroundColor = NX.barBackgroundColor
-        self.toolView.ctxs.didSelect = {[weak self] (toolView, index) in
-            self?.didSelect(at: index)
-        }
-        self.toolView.ctxs.didReselect = {[weak self] (toolView, index) in
-            self?.didReselect(at: index)
+        self.toolView.didSelect = {[weak self] (fromValue, toValue) in
+            self?.didSelect(fromValue: fromValue, toValue: toValue)
         }
         
         self.index = min(max(0, self.index), subviewControllers.count)
         if self.index >= 0 && self.index < self.subviewControllers.count {
             let toViewController = subviewControllers[self.index]
-            self.transition(nil, toViewController, animated: false)
+            self.fromViewController(nil, toViewController:toViewController, animated: false)
         }
-        self.toolView.updateSubviews("elements", ["index":self.index, "elements":self.elements])
+        self.toolView.updateSubviews("", ["index":self.index])
         self.view.addSubview(toolView)
     }
     
@@ -73,30 +68,30 @@ open class NXToolViewController: NXContainerController {
         }
         
         self.index = min(max(0, index), subviewControllers.count)
-        self.toolView.updateSubviews("elements", ["index":self.index, "elements":elements])
+        self.toolView.updateSubviews("", ["index":self.index, "elements":elements])
 
         if self.index >= 0 && self.index < self.subviewControllers.count {
             let toViewController = subviewControllers[self.index]
-            self.transition(nil, toViewController, animated: false)
+            self.fromViewController(nil, toViewController:toViewController, animated: false)
         }
     }
     
     //选中
-    open func didSelectViewController(at idx: Int, animated : Bool){
-        let newValue = max(min(idx, self.toolView.ctxs.elements.count), 0)
+    public func didSelectViewController(fromValue:Int, toValue: Int, animated : Bool){
+        let newValue = max(min(toValue, self.toolView.elements.count), 0)
         guard self.index != newValue else {return}
         
-        let element = self.toolView.ctxs.elements[newValue]
+        let element = self.toolView.elements[newValue]
         if element.isSelectable {
             let fromViewController = subviewControllers[self.index]
             let toViewController = subviewControllers[newValue]
-            self.transition(fromViewController, toViewController, animated: animated)
-            self.index = idx
+            self.fromViewController(fromViewController, toViewController:toViewController, animated: animated)
+            self.index = newValue
         }
     }
     
     //切换操作
-    open func transition(_ fromViewController:NXViewController?, _ toViewController:NXViewController, animated:Bool) {
+    open func fromViewController(_ fromViewController:NXViewController?, toViewController:NXViewController, animated:Bool) {
         if animated {
             //后期如有动画的需求再扩展
             toViewController.view.frame = self.view.bounds
@@ -119,12 +114,7 @@ open class NXToolViewController: NXContainerController {
     }
     
     //每次点击
-    open func didSelect(at index:Int){
-        
-    }
-    
-    //连续双击
-    open func didReselect(at index:Int){
+    open func didSelect(fromValue:Int, toValue:Int){
         
     }
 }

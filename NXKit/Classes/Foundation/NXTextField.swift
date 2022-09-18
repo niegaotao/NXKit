@@ -38,7 +38,7 @@ open class NXTextField: UITextField {
     open func setup(){
         self.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         self.inputAccessoryView = self.accessoryView
-        self.accessoryView.actionView.setupEvents([.touchUpInside], action: {[weak self] (_,_) in
+        self.accessoryView.actionView.setupEvent(.touchUpInside, action: {[weak self] (_,_) in
             self?.endEditing(true)
         })
     }

@@ -94,7 +94,7 @@ open class NXTextView: UITextView {
             self.accessoryView.bytesView.isHidden = true
         }
         
-        self.accessoryView.actionView.setupEvents([.touchUpInside], action: {[weak self] _, bar in
+        self.accessoryView.actionView.setupEvent(.touchUpInside, action: {[weak self] _, bar in
             self?.endEditing(true)
         })
 

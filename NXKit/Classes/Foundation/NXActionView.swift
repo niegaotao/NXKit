@@ -66,8 +66,16 @@ extension NXActionView {
         actionView.ctxs.header.title.value = title
         actionView.ctxs.header.title.numberOfLines = 0
         actionView.ctxs.header.title.lineSpacing = 3.0
-        actionView.ctxs.header.title.isAttributed = true
         actionView.ctxs.header.title.font = NX.font(17, .bold)
+        if true {
+            let paragraph = NSMutableParagraphStyle()
+            paragraph.lineSpacing = actionView.ctxs.header.title.lineSpacing
+            actionView.ctxs.header.title.attributedString = NSAttributedString(string: actionView.ctxs.header.title.value,
+                                                    attributes: [NSAttributedString.Key.font:actionView.ctxs.header.title.font,
+                                                                 NSAttributedString.Key.foregroundColor:actionView.ctxs.header.title.color,
+                                                        NSAttributedString.Key.paragraphStyle:paragraph])
+        }
+        
         if(title.count > 0){
             var sizeTitle = String.size(of: title,
                                         size: CGSize(width: NX.Association.size.width-40, height: NX.height*0.6),
@@ -92,8 +100,19 @@ extension NXActionView {
         actionView.ctxs.header.center.font = NX.font(15.5, .regular)
         actionView.ctxs.header.center.value = subtitle
         actionView.ctxs.header.center.lineSpacing = 2.5
-        actionView.ctxs.header.center.isAttributed = true
         actionView.ctxs.header.center.numberOfLines = 0
+        if true {
+            let paragraph = NSMutableParagraphStyle()
+            paragraph.lineSpacing = actionView.ctxs.header.center.lineSpacing
+            actionView.ctxs.header.center.attributedString = NSAttributedString(string: actionView.ctxs.header.center.value,
+                                                    attributes: [NSAttributedString.Key.font:actionView.ctxs.header.center.font,
+                                                                 NSAttributedString.Key.foregroundColor:actionView.ctxs.header.center.color,
+                                                                 NSAttributedString.Key.paragraphStyle:paragraph])
+        }
+        
+        
+        
+
         if subtitle.count > 0 {
             var sizeSubtitle = String.size(of: subtitle,
                                            size: CGSize(width: NX.Association.size.width-40, height: NX.height*0.6),
@@ -414,7 +433,7 @@ open class NXActionView: NXAbstractOverlay<NXActionViewAttributes> {
         super.setupSubviews()
         
         //0.背景
-        self.backgroundView.setupEvents([.touchUpInside], action: { [weak self] (event, sender) in
+        self.backgroundView.setupEvent(.touchUpInside, action: { [weak self] (event, sender) in
             guard let __weakself = self else { return }
             __weakself.close(animation: __weakself.ctxs.animation, completion: { (isCompleted) in
                 __weakself.ctxs.close?("background", nil)
@@ -441,13 +460,13 @@ open class NXActionView: NXAbstractOverlay<NXActionViewAttributes> {
                 
         //2.头部
         self.headerView.isHidden = true
-        self.headerView.lhsView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
+        self.headerView.lhsView.setupEvent(.touchUpInside) {[weak self] (e, v) in
             guard let __weakself = self else { return }
             __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
                 __weakself.ctxs.close?("header.lhs", nil)
             })
         }
-        self.headerView.rhsView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
+        self.headerView.rhsView.setupEvent(.touchUpInside) {[weak self] (e, v) in
             guard let __weakself = self else { return }
             __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
                 __weakself.ctxs.close?("header.rhs", nil)
@@ -457,19 +476,19 @@ open class NXActionView: NXAbstractOverlay<NXActionViewAttributes> {
         
         //3.脚部
         self.footerView.isHidden = true
-        self.footerView.lhsView.setupEvents([.touchUpInside]) { [weak self] (e, v) in
+        self.footerView.lhsView.setupEvent(.touchUpInside) { [weak self] (e, v) in
             guard let __weakself = self else { return }
             __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
                 __weakself.ctxs.close?("footer.lhs", nil)
             })
         }
-        self.footerView.centerView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
+        self.footerView.centerView.setupEvent(.touchUpInside) {[weak self] (e, v) in
             guard let __weakself = self else { return }
             __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
                 __weakself.ctxs.close?("footer.center", nil)
             })
         }
-        self.footerView.rhsView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
+        self.footerView.rhsView.setupEvent(.touchUpInside) {[weak self] (e, v) in
             guard let __weakself = self else { return }
             __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
                 __weakself.ctxs.close?("footer.rhs", nil)

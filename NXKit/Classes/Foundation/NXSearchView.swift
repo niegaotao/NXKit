@@ -44,7 +44,7 @@ open class NXSearchView: NXBackgroundView<UIImageView, UIView>, UITextFieldDeleg
         fieldView.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         fieldView.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         fieldView.delegate = self
-        fieldView.setupEvents([.editingChanged]) { [weak self] (v, e) in
+        fieldView.setupEvent(.editingChanged) { [weak self] (v, e) in
             self?.realtimeSearch?("", NX.get(string:self?.fieldView.text, ""))
         }
         fieldView.returnKeyType = .search

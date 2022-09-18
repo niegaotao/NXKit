@@ -95,7 +95,7 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
         self.centerView.tintColor = NX.barForegroundColor
         self.centerView.titleLabel?.font = NX.font(17, .bold)
         self.centerView.contentHorizontalAlignment = .center
-        self.centerView.setupEvents([.touchUpInside]) {[weak self] _, _ in
+        self.centerView.setupEvent(.touchUpInside) {[weak self] _, _ in
             self?.dispose("previewAlbums", nil, nil)
         }
         self.centerView.updateAlignment(.horizontalReverse, 2)
@@ -155,7 +155,7 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
         self.footerView.lhsView.contentHorizontalAlignment = .left
         self.footerView.lhsView.isHidden = self.wrapped.subviews.preview
         self.footerView.lhsView.setTitle("预览(0)", for: .normal)
-        self.footerView.lhsView.setupEvents([.touchUpInside], action: {[weak self] (e, v) in
+        self.footerView.lhsView.setupEvent(.touchUpInside, action: {[weak self] (e, v) in
             self?.dispose("previewAssets", self?.wrapped.assets)
         })
         
@@ -167,7 +167,7 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
         self.footerView.rhsView.titleLabel?.font = NX.font(15, .regular)
         self.footerView.rhsView.isHidden = self.wrapped.subviews.output
         self.footerView.rhsView.setTitle("完成(0/\(self.wrapped.maxOfAssets))", for: .normal)
-        self.footerView.rhsView.setupEvents([.touchUpInside], action: {[weak self] (e, v) in
+        self.footerView.rhsView.setupEvent(.touchUpInside, action: {[weak self] (e, v) in
             self?.dispose("outputAssets", nil)
         })
         self.contentView.addSubview(self.footerView)

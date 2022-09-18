@@ -333,7 +333,7 @@ open class NXCollection<T:UIView> : NXElementArray<NXSection> {
 
 extension NXCollection where T == NXTableView {
     @discardableResult
-    open func addPlaceholderView(_ frame: CGRect) -> NXPlaceholderElement {
+    public func addPlaceholderView(_ frame: CGRect) -> NXPlaceholderElement {
         let e = NXPlaceholderElement()
         e.placeholderView = self.placeholderView
         e.ctxs.update(NXTablePlaceholderViewCell.self, "NXTablePlaceholderViewCell")
@@ -344,7 +344,7 @@ extension NXCollection where T == NXTableView {
     }
 
     
-    open func heightForHeader(at index: Int) -> CGFloat {
+    public func heightForHeader(at index: Int) -> CGFloat {
         if let header = self[index]?.header {
             
             //1.根据自身的高度赋值拿到header的高度
@@ -356,7 +356,7 @@ extension NXCollection where T == NXTableView {
     }
     
     
-    open func heightForRow(at indexPath: IndexPath) -> CGFloat {
+    public func heightForRow(at indexPath: IndexPath) -> CGFloat {
         if let element = self[indexPath] {
             
             //1.根据自己对高度的赋值拿到相应的高度
@@ -374,7 +374,7 @@ extension NXCollection where T == NXTableView {
     }
     
     
-    open func heightForFooter(at index: Int) -> CGFloat {
+    public func heightForFooter(at index: Int) -> CGFloat {
         if let footer = self[index]?.footer {
             //1.根据自身的高度赋值拿到header的高度
             if footer.ctxs.height > 0 {
@@ -386,7 +386,7 @@ extension NXCollection where T == NXTableView {
     
     //新增一个分组,并将新增的分组返回//_ cls: AnyClass = NXTableReusableView.self, _ reuse:String = "NXTableReusableView", _ h:CGFloat = 10.0
     @discardableResult
-    open func addSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
+    public func addSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
         let section = NXSection()
         section.header = NXItem()
         section.header?.ctxs.update(cls, reuse)
@@ -397,7 +397,7 @@ extension NXCollection where T == NXTableView {
     
     //返回最后一个分组，没有则新增并返回最后一个分组
     @discardableResult
-    open func getLastSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
+    public func getLastSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
         if let section = self.elements.last {
             return section
         }
@@ -406,7 +406,7 @@ extension NXCollection where T == NXTableView {
     
     //批量添加单元格到最后一个分组上
     @discardableResult
-    open func addElementsToLastSection(_ items: [NXItem]?) -> NXSection {
+    public func addElementsToLastSection(_ items: [NXItem]?) -> NXSection {
         let section = self.getLastSection(cls: NXTableReusableView.self, reuse: "NXTableReusableView", height: 10)
         section.append(contentsOf: items)
         return section
@@ -429,7 +429,7 @@ extension NXCollection where T == NXCollectionView {
     
     //新增一个分组,并将新增的分组返回//_ cls: AnyClass = NXTableReusableView.self, _ reuse:String = "NXTableReusableView", _ h:CGFloat = 0.0
     @discardableResult
-    open func addSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
+    public func addSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
         let section = NXSection()
         section.header = NXItem()
         section.header?.ctxs.update(cls, reuse)
@@ -440,7 +440,7 @@ extension NXCollection where T == NXCollectionView {
     
     //返回最后一个分组，没有则新增并返回最后一个分组
     @discardableResult
-    open func getLastSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
+    public func getLastSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
         if let section = self.elements.last {
             return section
         }
@@ -449,7 +449,7 @@ extension NXCollection where T == NXCollectionView {
     
     //批量添加单元格到最后一个分组上
     @discardableResult
-    open func addElementsToLastSection(_ items: [NXItem]?) -> NXSection {
+    public func addElementsToLastSection(_ items: [NXItem]?) -> NXSection {
         let section = self.getLastSection(cls: NXCollectionReusableView.self, reuse: "NXCollectionReusableView", height: 0)
         section.append(contentsOf: items)
         return section
