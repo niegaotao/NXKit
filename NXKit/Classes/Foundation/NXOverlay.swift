@@ -21,12 +21,12 @@ open class NXOverlay : NXBackgroundView<UIControl, UIView> {
         case footer = "footer"   //从下方进入->从下方退出[在屏幕底部显示]
     }
     
-    public static let frame = NX.Rect { (_, __sender) in
+    public static let frame = NX.Rect { (__sender) in
         __sender.width = max(min(350.0, NX.width * 0.8), 300.0)
         __sender.x = (NX.width - __sender.width)/2.0
     }
     
-    public static let inset = NX.Rect { (_, __sender) in
+    public static let inset = NX.Rect { (__sender) in
         __sender.x = 20.0
         __sender.width = NXOverlay.frame.width - __sender.x * 2.0
     }
@@ -57,10 +57,10 @@ open class NXOverlayAttributes : NX.Rect {
     open var backgroundColor = NX.transitionBackgroundColor
 
     //关闭的回调, background,lhs,rhs,close,footer
-    open var close : NX.Completion<String, Any?>? = nil
+    open var close : NX.Event<String, Any?>? = nil
     
     //点击选项或者左右按钮消失的回调
-    open var completion : NX.Completion<String, Int>? = nil
+    open var completion : NX.Event<String, Int>? = nil
     
     //弹框打开/关闭的动画
     open var animation = NXOverlay.Animation.center.rawValue
@@ -90,7 +90,7 @@ open class NXAbstractOverlay<Attributes:NXOverlayAttributes>: NXOverlay {
 
         
     //展示:先加window上(后期补一个小动画)
-    open func open(animation: NXOverlay.Animation.RawValue, completion: ((_ isCompleted: Bool) -> ())?){
+    open func open(animation: NXOverlay.Animation.RawValue, completion: NX.Completion<Bool>?){
         UIApplication.shared.keyWindow?.addSubview(self)
         if animation == NXOverlay.Animation.center.rawValue {
             self.contentView.frame = CGRect(x: (self.width-self.contentView.width)/2.0, y: (self.height-self.contentView.height)/2.0, width: self.contentView.width, height: self.contentView.height)
@@ -190,7 +190,7 @@ open class NXAbstractOverlay<Attributes:NXOverlayAttributes>: NXOverlay {
     
     
     //移除：动画结束后才会回调
-    open func close(animation: NXOverlay.Animation.RawValue, completion:((_ isCompleted: Bool) -> ())?){
+    open func close(animation: NXOverlay.Animation.RawValue, completion:NX.Completion<Bool>?){
         if animation == NXOverlay.Animation.center.rawValue {
             
             UIView.animate(withDuration: 0.27, animations: {

@@ -17,9 +17,9 @@ open class NXKVOObserver : NSObject {
         open var key = ""
         open var options: NSKeyValueObservingOptions = []
         open var context: UnsafeMutableRawPointer? = nil
-        open var completion : NX.Completion<String, [NSKeyValueChangeKey : Any]?>? = nil
+        open var completion : NX.Event<String, [NSKeyValueChangeKey : Any]?>? = nil
         
-        public init(object:NSObject, key:String, options:NSKeyValueObservingOptions, context:UnsafeMutableRawPointer?, completion:NX.Completion<String, [NSKeyValueChangeKey : Any]?>?) {
+        public init(object:NSObject, key:String, options:NSKeyValueObservingOptions, context:UnsafeMutableRawPointer?, completion:NX.Event<String, [NSKeyValueChangeKey : Any]?>?) {
             self.object = object
             self.key = key
             self.options = options
@@ -32,7 +32,7 @@ open class NXKVOObserver : NSObject {
         self.observer = observer
     }
     
-    open func add(object: NSObject, key: String, options: NSKeyValueObservingOptions = [], context: UnsafeMutableRawPointer? = nil, completion:NX.Completion<String, [NSKeyValueChangeKey : Any]?>? = nil){
+    open func add(object: NSObject, key: String, options: NSKeyValueObservingOptions = [], context: UnsafeMutableRawPointer? = nil, completion:NX.Event<String, [NSKeyValueChangeKey : Any]?>? = nil){
         if self.observations.contains(where: { kvo in return kvo.object == object && kvo.key == key}) {
             
         }

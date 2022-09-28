@@ -66,7 +66,7 @@ class EXViewController: NXTableViewController {
     }
     
     override func setupSubviews() {
-        self.tableView?.register(NXAbstractViewCell.self, forCellReuseIdentifier: "NXAbstractViewCell")
+        self.tableView.register(NXAbstractViewCell.self, forCellReuseIdentifier: "NXAbstractViewCell")
     }
     
     override func updateSubviews(_ action: String, _ value: Any?) {
@@ -99,7 +99,7 @@ class EXViewController: NXTableViewController {
             }
         }
         
-        self.tableView?.updateSubviews("", nil)
+        self.tableView.updateSubviews("", nil)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

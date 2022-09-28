@@ -166,12 +166,12 @@ open class NXViewController: UIViewController  {
     }
     
     //开始网络请求：处理加载框的开启/关闭,网络异常,参数异常等情况
-    open func request(_ operation:String, _ value:Any?, _ completion: NX.Completion<String, Any?>? = nil){
+    open func request(_ operation:String, _ value:Any?, _ completion: NX.Event<String, Any?>? = nil){
     
     }
     
     //页面内的相关逻辑操作
-    open func dispose(_ operation:String, _ value:Any?, _ completion:NX.Completion<String, Any?>? = nil){
+    open func dispose(_ operation:String, _ value:Any?, _ completion:NX.Event<String, Any?>? = nil){
         
     }
     
@@ -189,13 +189,13 @@ open class NXViewController: UIViewController  {
             currentValue = viewController.ctxs.statusBarStyle
         }
         
-        if currentValue == NX.Bar.unspecified {
+        if currentValue == NX.StatusBarStyle.unspecified {
             return UIStatusBarStyle.default
         }
-        else if currentValue == NX.Bar.light {
+        else if currentValue == NX.StatusBarStyle.light {
             return UIStatusBarStyle.lightContent
         }
-        else if currentValue == NX.Bar.dark {
+        else if currentValue == NX.StatusBarStyle.dark {
             if #available(iOS 13.0, *) {
                 if UITraitCollection.current.userInterfaceStyle == .dark {
                     return UIStatusBarStyle.lightContent
@@ -220,7 +220,7 @@ open class NXViewController: UIViewController  {
         else if let viewController = self.ctxs.subviewControllers.last, viewController.ctxs.statusBarStyle != .none {
             currentValue = viewController.ctxs.statusBarStyle
         }
-        return currentValue == NX.Bar.hidden
+        return currentValue == NX.StatusBarStyle.hidden
     }
     
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -255,15 +255,15 @@ extension NXViewController {
         open var y: Int = 0
         open var z: Int = 0
         
-        open var willAppear : NX.Completion<String, NXViewController>? = nil
-        open var didAppear: NX.Completion<String, NXViewController>? = nil
-        open var willDisappear: NX.Completion<String, NXViewController>? = nil
-        open var didDisappear: NX.Completion<String, NXViewController>? = nil
+        open var willAppear : NX.Event<String, NXViewController>? = nil
+        open var didAppear: NX.Event<String, NXViewController>? = nil
+        open var willDisappear: NX.Event<String, NXViewController>? = nil
+        open var didDisappear: NX.Event<String, NXViewController>? = nil
         
         
         ///状态栏样式
         open var shouldAutorotate = false
-        open var statusBarStyle = NX.Bar.dark
+        open var statusBarStyle = NX.StatusBarStyle.dark
         open var statusBarHidden = false
         open var orientationMask = UIInterfaceOrientationMask.portrait
         
@@ -280,9 +280,9 @@ extension NXViewController {
         ///转场动画过程中需要的容器视图
         open var transitionView: NXTransitionView?
         ///两级页面之间传递信息
-        open var event : NX.Completion<String, Any?>? = nil
+        open var event : NX.Event<String, Any?>? = nil
         ///导航栏顶部的分割线
-        public let separator = NX.Separator { (_, __sender) in
+        public let separator = NX.Separator { (__sender) in
             __sender.insets = UIEdgeInsets.zero;
             __sender.isHidden = false;
             __sender.backgroundColor = NX.separatorColor;

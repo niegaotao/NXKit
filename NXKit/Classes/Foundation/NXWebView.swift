@@ -111,11 +111,11 @@ extension NXWebView {
         open var callbackWithNavigation: ((_ navigation: WKNavigation, _ action:String, _ isCompleted:Bool, _ error:Error?) -> ())? = nil
         
         //弹框的处理:actions表示一个或者多个按钮
-        open var callbackWithAlert:((_ text:String, _ actions:[String], _  completion: @escaping NX.Completion<String, Int>) -> ())? = nil
+        open var callbackWithAlert:((_ text:String, _ actions:[String], _  completion: @escaping NX.Event<String, Int>) -> ())? = nil
         //重定向判断
-        open var navigationAction:((_ navigation:WKNavigationAction, _ completion: @escaping NX.Completion<String, WKNavigationActionPolicy>) -> ())? = nil
+        open var navigationAction:((_ navigation:WKNavigationAction, _ completion: @escaping NX.Event<String, WKNavigationActionPolicy>) -> ())? = nil
         //重定向响应
-        open var navigationResponse:((_ navigation:WKNavigationResponse, _ completion: @escaping NX.Completion<String, WKNavigationResponsePolicy>) -> ())? = nil
+        open var navigationResponse:((_ navigation:WKNavigationResponse, _ completion: @escaping NX.Event<String, WKNavigationResponsePolicy>) -> ())? = nil
         
         //WKScriptMessageHandler
         public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage){

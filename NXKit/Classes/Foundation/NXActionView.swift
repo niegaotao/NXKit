@@ -10,9 +10,9 @@ import UIKit
 
 extension NXActionView {
     @discardableResult
-    class public func alert(title: String, subtitle:String, actions:[String], completion:NX.Completion<String, Int>?) -> NXActionView {
+    class public func alert(title: String, subtitle:String, actions:[String], completion:NX.Event<String, Int>?) -> NXActionView {
         let __actions = actions.map { (title) -> NXAbstract in
-            return NXAbstract(title:title, value: nil, completion: {(_, __action) in
+            return NXAbstract(title:title, value: nil, completion: {(__action) in
                 __action.asset.isHidden = true
                 __action.title.isHidden = false
                 if actions.count == 2 {
@@ -35,7 +35,7 @@ extension NXActionView {
     }
     
     @discardableResult
-    class public func alert(title: String, subtitle:String, actions:[NXAbstract], completion:NX.Completion<String, Int>?) -> NXActionView {
+    class public func alert(title: String, subtitle:String, actions:[NXAbstract], completion:NX.Event<String, Int>?) -> NXActionView {
 
         for (_, action) in actions.enumerated() {
             if actions.count == 2 {
@@ -146,9 +146,9 @@ extension NXActionView {
     }
     
     @discardableResult
-    class public func action(actions: [String], completion:NX.Completion<String, Int>?) -> NXActionView {
+    class public func action(actions: [String], completion:NX.Event<String, Int>?) -> NXActionView {
         let __actions = actions.map { (title) -> NXAbstract in
-            return NXAbstract(title:title, value: nil, completion: { (_,  __action) in
+            return NXAbstract(title:title, value: nil, completion: { (__action) in
                 __action.asset.isHidden = true
                 __action.title.isHidden = false
                 __action.subtitle.isHidden = true
@@ -158,12 +158,12 @@ extension NXActionView {
     }
     
     @discardableResult
-    class public func action(actions: [NXAbstract], completion:NX.Completion<String, Int>?) -> NXActionView {
+    class public func action(actions: [NXAbstract], completion:NX.Event<String, Int>?) -> NXActionView {
         return NXActionView.action(actions: actions, header:.none, footer: .footer(true, false, true,"取消"), completion: completion)
     }
     
     @discardableResult
-    class public func action(actions: [NXAbstract], header:NXActionView.Attachment, footer: NXActionView.Attachment, completion:NX.Completion<String, Int>?) -> NXActionView {
+    class public func action(actions: [NXAbstract], header:NXActionView.Attachment, footer: NXActionView.Attachment, completion:NX.Event<String, Int>?) -> NXActionView {
         
         let actionView = NXActionView(frame: UIScreen.main.bounds)
         //header
@@ -289,14 +289,14 @@ extension NXActionView {
     }
     
     open class Metadata : NX.View {
-        public let title = NX.Attribute { (_, __sender) in
+        public let title = NX.Attribute { (__sender) in
             __sender.textAlignment = .center
             __sender.font = NX.font(18, .bold)
             __sender.color = NX.darkBlackColor
             __sender.backgroundColor = .clear
         }
         
-        public let lhs = NX.Attribute { (_, __sender) in
+        public let lhs = NX.Attribute { (__sender) in
             __sender.frame = CGRect(x: 16, y: (60-44)/2, width: 84, height: 44)
             __sender.font = NX.font(16, .regular)
             __sender.color = NX.mainColor
@@ -304,7 +304,7 @@ extension NXActionView {
             __sender.backgroundColor = .clear
         }
         
-        public let center = NX.Attribute { (_, __sender) in
+        public let center = NX.Attribute { (__sender) in
             __sender.frame = CGRect(x: 100, y: (60-44)/2, width: NX.width-200, height: 44)
             __sender.font = NX.font(16, .bold)
             __sender.color = NX.darkBlackColor
@@ -312,14 +312,14 @@ extension NXActionView {
             __sender.backgroundColor = .clear
         }
         
-        public let rhs = NX.Attribute { (_, __sender) in
+        public let rhs = NX.Attribute { (__sender) in
             __sender.frame = CGRect(x: NX.width-16-84, y: (60-44)/2, width: 84, height: 44)
             __sender.color = NX.mainColor
             __sender.textAlignment = .right
             __sender.backgroundColor = .clear
         }
         
-        public let separator = NX.Separator{(_, __attribute) in
+        public let separator = NX.Separator{(__attribute) in
             
         }
         
@@ -637,7 +637,7 @@ extension NXActionView {
 extension NXActionView {
     open class CenterView : NXCView<NXCollectionView>, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         private(set) var ctxs = NXActionViewAttributes()
-        open var completion : NX.Completion<NXAbstract, Int>? = nil
+        open var completion : NX.Event<NXAbstract, Int>? = nil
         
         open override func setupSubviews() {
             super.setupSubviews()

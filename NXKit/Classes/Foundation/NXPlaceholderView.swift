@@ -9,32 +9,12 @@
 import UIKit
 
 //占位图
-public class NXPlaceholder {
-    static public var frame = CGRect(x: 0, y: 0, width: 320, height: 256)
-    
-    static public var m = NX.Attribute { (_, __sender) in
-        __sender.frame = CGRect(x: 0, y: 0, width: 320, height: 170)
-    }
-    
-    static public var t = NX.Attribute { (_, __sender) in
-        __sender.frame = CGRect(x: 0, y: 175, width: 320, height: 55)
-        __sender.value = "暂无数据～"
-        __sender.textAlignment = .center
-        __sender.numberOfLines = 0
-        __sender.font = NX.font(16)
-        __sender.color = NX.darkGrayColor
-    }
-}
-
-
 open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>> {
-    public let ctxs = NXPlaceholderWrapped()
+    public let ctxs = NXPlaceholderViewDescriptor()
     
     open var assetView : UIImageView { return self.contentView.lhsView }
     open var descriptionView : UILabel { return self.contentView.centerView }
     open var footerView : UIButton { return self.contentView.rhsView }
-
-    
     open var customizableView : UIView? = nil //自定义的默认图
 
     open override func setupSubviews() {
@@ -42,7 +22,7 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
         
         self.layer.masksToBounds = true
         self.contentView.setupEvent(UIControl.Event.tap) { [weak self](e, v) in
-            self?.ctxs.completion?("", nil)
+            self?.ctxs.event?("", nil)
         }
     }
     
@@ -104,28 +84,28 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
     }
 }
 
-open class NXPlaceholderWrapped : NSObject {
+open class NXPlaceholderViewDescriptor {
     open var isHidden = true
     
-    open var completion : NX.Completion<String, Any?>? = nil
+    open var event : NX.Event<String, Any?>? = nil
     
-    open var frame = NXPlaceholder.frame
+    open var frame = CGRect(x: 0, y: 0, width: 320, height: 256)
     
-    public let m = NX.Attribute { (_, __sender) in
-        __sender.frame = NXPlaceholder.m.frame
+    public let m = NX.Attribute { (__sender) in
+        __sender.frame = CGRect(x: 0, y: 0, width: 320, height: 170)
     }
     
-    public let t = NX.Attribute { (_, __sender) in
-        __sender.frame = NXPlaceholder.t.frame
-        __sender.value = NXPlaceholder.t.value
-        __sender.textAlignment = NXPlaceholder.t.textAlignment
-        __sender.numberOfLines = NXPlaceholder.t.numberOfLines
-        __sender.font = NXPlaceholder.t.font
-        __sender.color = NXPlaceholder.t.color
+    public let t = NX.Attribute { (__sender) in
+        __sender.frame = CGRect(x: 0, y: 175, width: 320, height: 55)
+        __sender.value = "暂无数据～"
+        __sender.textAlignment = .center
+        __sender.numberOfLines = 0
+        __sender.font = NX.font(16)
+        __sender.color = NX.darkGrayColor
     }
 }
 
-open class NXPlaceholderElement : NXItem, NXCollectionViewAttributesProtocol {
+open class NXPlaceholderDescriptor : NXItem, NXCollectionViewAttributesProtocol {
     open var placeholderView: NXPlaceholderView?
     open var attributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(row: 0, section: 0))
 }
@@ -140,7 +120,7 @@ open class NXTablePlaceholderViewCell : NXTableViewCell {
     }
     
     override open func updateSubviews(_ action:String, _ value: Any?) {
-        guard let item = value as? NXPlaceholderElement, let placeholderView = item.placeholderView else {
+        guard let item = value as? NXPlaceholderDescriptor, let placeholderView = item.placeholderView else {
             return;
         }
         placeholderView.frame = CGRect(x: 0, y: 0, width: item.ctxs.width, height: item.ctxs.height)
@@ -156,7 +136,7 @@ open class NXCollectionPlaceholderViewCell : NXCollectionViewCell {
     }
     
     override open func updateSubviews(_ action:String, _ value: Any?) {
-        guard let item = value as? NXPlaceholderElement, let placeholderView = item.placeholderView else {
+        guard let item = value as? NXPlaceholderDescriptor, let placeholderView = item.placeholderView else {
             return;
         }
         

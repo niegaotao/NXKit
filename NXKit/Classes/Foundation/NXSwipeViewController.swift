@@ -10,7 +10,7 @@ import UIKit
 
 open class NXSwipeViewController: NXContainerController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     open var wrapped = NXSection()
-    open var collectionView : NXCollectionView? = nil
+    open var collectionView = NXCollectionView(frame: CGRect.zero)
     open var swipeView = NXSwipeView(frame: CGRect(x: 0, y: NX.topOffset, width: NX.width, height: 44))
     
     override open func viewDidLoad() {
@@ -24,35 +24,35 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
         
         self.contentView.frame = CGRect(x: 0, y: NX.topOffset+44, width: NX.width, height: self.view.height-(NX.topOffset+44))
         
-        collectionView = NXCollectionView(frame: self.contentView.bounds)
-        if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+        collectionView.frame = self.contentView.bounds
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
             layout.sectionInset = UIEdgeInsets.zero
             layout.minimumLineSpacing = 0.0
             layout.minimumInteritemSpacing = 0.0
         }
-        collectionView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView?.backgroundColor = NX.contentViewBackgroundColor
-        collectionView?.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
-        collectionView?.delegate = self
-        collectionView?.dataSource = self
-        collectionView?.bounces = false
-        collectionView?.alwaysBounceVertical = false
-        collectionView?.alwaysBounceHorizontal = false
-        collectionView?.showsVerticalScrollIndicator = false
-        collectionView?.showsHorizontalScrollIndicator = false
-        collectionView?.isPagingEnabled = true
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.backgroundColor = NX.contentViewBackgroundColor
+        collectionView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.bounces = false
+        collectionView.alwaysBounceVertical = false
+        collectionView.alwaysBounceHorizontal = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isPagingEnabled = true
         if #available(iOS 11.0, *) {
-            collectionView?.contentInsetAdjustmentBehavior = .never
+            collectionView.contentInsetAdjustmentBehavior = .never
         }
-        self.contentView.addSubview(collectionView!)
+        self.contentView.addSubview(collectionView)
     }
     
     override open func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         if self.subviewControllers.count > 0 {
-            self.collectionView?.reloadData()
+            self.collectionView.reloadData()
         }
     }
     
@@ -60,7 +60,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
         if index >= 0 && index < subviewControllers.count {
             self.selectedViewController = self.subviewControllers[index]
         }
-        self.collectionView?.setContentOffset(CGPoint(x: self.view.width * CGFloat(index), y: 0), animated: animated)
+        self.collectionView.setContentOffset(CGPoint(x: self.view.width * CGFloat(index), y: 0), animated: animated)
     }
     
     open func setupSubviews(_ subviewControllers: [NXViewController], titles:[String], index: Int = 0){
@@ -93,17 +93,17 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
                 self.selectedViewController = vc
             }
         
-            self.collectionView?.register(element.ctxs.cls, forCellWithReuseIdentifier: element.ctxs.reuse)
+            self.collectionView.register(element.ctxs.cls, forCellWithReuseIdentifier: element.ctxs.reuse)
             self.addChild(vc)
         }
         
         self.swipeView.updateSubviews("update", ["index":index,"items":elements])
         
         if index >= 1 {
-            self.collectionView?.setContentOffset(CGPoint(x: self.view.width * CGFloat(index), y: 0), animated: false)
+            self.collectionView.setContentOffset(CGPoint(x: self.view.width * CGFloat(index), y: 0), animated: false)
         }
         
-        self.collectionView?.reloadData()
+        self.collectionView.reloadData()
     }
     
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -113,7 +113,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
                     __owner.view.frame = cell.contentView.bounds
                     cell.contentView.addSubview(__owner.view)
                 }
-                NX.log { return "index=\(indexPath),self.view=\(self.view.frame), \ncontent=\(self.contentView.frame),\ncollection=\(self.collectionView?.frame ?? CGRect.zero), \ncell=\(cell.frame), \ncell.content=\(cell.contentView.frame)"}
+                NX.log { return "index=\(indexPath),self.view=\(self.view.frame), \ncontent=\(self.contentView.frame),\ncollection=\(self.collectionView.frame ?? CGRect.zero), \ncell=\(cell.frame), \ncell.content=\(cell.contentView.frame)"}
             }
             else {
                 rs.cell.updateSubviews("update", rs.element)
@@ -140,7 +140,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return self.collectionView?.bounds.size ?? CGSize(width: 1, height: 1)
+        return self.collectionView.bounds.size ?? CGSize(width: 1, height: 1)
     }
     
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -11,7 +11,7 @@ import UIKit
 
 open class NXTextView: UITextView {
     public let placeholderView = UILabel(frame: CGRect.zero)
-    open var notification : NX.Completion<NSNotification.Name, NXTextView>? = nil
+    open var notification : NX.Event<NSNotification.Name, NXTextView>? = nil
     
     override open var text: String! {
         didSet {

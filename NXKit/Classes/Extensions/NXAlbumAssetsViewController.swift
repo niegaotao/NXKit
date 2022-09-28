@@ -46,7 +46,7 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
         self.request("", nil, nil)
     }
     
-    open override func request(_ operation: String, _ value: Any?, _ completion: NX.Completion<String, Any?>? = nil) {
+    open override func request(_ operation: String, _ value: Any?, _ completion: NX.Event<String, Any?>? = nil) {
         /** 加载图片数据:
          1.创建一个串行队列：不在主队列，不会阻塞主线程。
          2.串行队列保证队列内的任务按顺序执行，即先夹在完图片数据，再刷新UI显示
@@ -146,7 +146,6 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
         
         self.footerView.isHidden = false
         self.footerView.frame = CGRect(x: 0, y: self.contentView.height-50-NX.bottomOffset, width: self.contentView.width, height: 50+NX.bottomOffset)
-        self.footerView.setupSeparator(color: NX.separatorColor, ats: .minY)
         self.footerView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.footerView.backgroundColor = NX.backgroundColor
         self.footerView.lhsView.frame = CGRect(x: 15, y: 7, width: 144, height: 36)
@@ -170,8 +169,13 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
         self.footerView.rhsView.setupEvent(.touchUpInside, action: {[weak self] (e, v) in
             self?.dispose("outputAssets", nil)
         })
+        self.footerView.layer.shadowColor = NX.shadowColor.cgColor;
+        self.footerView.layer.shadowOffset = CGSize(width: 0, height: -2)
+        self.footerView.layer.shadowRadius = 2
+        self.footerView.layer.shadowOpacity = 0.15
+        self.footerView.layer.cornerRadius = 2
+        self.footerView.layer.masksToBounds = false
         self.contentView.addSubview(self.footerView)
-
         
         self.dispose("subcomponents", nil)
     }
@@ -201,7 +205,7 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
         }
     }
     
-    open override func dispose(_ action: String, _ value: Any?, _ completion: NX.Completion<String, Any?>? = nil) {
+    open override func dispose(_ action: String, _ value: Any?, _ completion: NX.Event<String, Any?>? = nil) {
         if action == "previewAssets" {
             guard let assets = value as? [NXAsset] else {return}
             if assets.count == 0 {
@@ -215,7 +219,7 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
             wrapped.isOutputting = true
             NXAsset.outputAssets(assets, self.wrapped, completion:{[weak self] (_, outputs) in
                 self?.wrapped.isOutputting = false
-                NX.previewAssets(type: "NXAsset", assets: outputs, index: 0)
+                NX.previewAssets(assets: outputs, index: 0)
             })
         }
         else if action == "outputAssets" {
@@ -506,6 +510,17 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
         }
         cell.updateSubviews("update", asset)
         return cell
+    }
+    
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        self.footerView.layer.shadowColor = NX.shadowColor.cgColor;
+        self.footerView.layer.shadowOffset = CGSize(width: 0, height: -2)
+        self.footerView.layer.shadowRadius = 2
+        self.footerView.layer.shadowOpacity = 0.15
+        self.footerView.layer.cornerRadius = 2
+        self.footerView.layer.masksToBounds = false
     }
     
     deinit {

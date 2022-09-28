@@ -12,7 +12,7 @@ import UIKit
 open class NXAssetClipViewController: NXViewController {
     open var image : UIImage? = nil
     
-    open var clips = NX.Wrappable<Int, [NXClip], [NXClip]> { (_, __sender) in
+    open var clips = NX.Wrappable<Int, [NXClip], [NXClip]> { (__sender) in
         __sender.key = -1
         __sender.value = []
     }
@@ -139,7 +139,7 @@ open class NXAssetClipViewController: NXViewController {
         }
     }
     
-    open override func dispose(_ action: String, _ value: Any?, _ completion: NX.Completion<String, Any?>? = nil) {
+    open override func dispose(_ action: String, _ value: Any?, _ completion: NX.Event<String, Any?>? = nil) {
         if action == "forward" {
             
             guard let image = self.image, image.size.width > 0 && image.size.height > 0, self.clipboardView.ctxs.size.width > 0 else {

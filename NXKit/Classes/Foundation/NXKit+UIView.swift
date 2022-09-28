@@ -80,7 +80,7 @@ extension UIView {
     }
     
     //
-    public func setupEvent(_ event:UIControl.Event, action:((_ event:UIControl.Event, _ sender:UIView) -> ())?) {
+    public func setupEvent(_ event:UIControl.Event, action:NX.Event<UIControl.Event, UIView>?) {
         if self.association == nil {
             self.association = NXViewAssociation()
         }
@@ -289,9 +289,9 @@ extension UIControl {
         public weak var view : UIView?
         public var event = UIControl.Event.touchUpInside
         public var recognizer : UIGestureRecognizer?
-        public var completion : ((_ event:UIControl.Event, _ sender:UIView) -> ())?
+        public var completion : NX.Event<UIControl.Event, UIView>?
         
-        public init(view:UIView, event: UIControl.Event, completion: ( (_: UIControl.Event, _: UIView) -> Void)?) {
+        public init(view:UIView, event: UIControl.Event, completion: NX.Event<UIControl.Event, UIView>?) {
             self.view = view
             self.event = event
             self.completion = completion
@@ -328,7 +328,7 @@ public class NXViewAssociation {
     open weak var separator : CALayer? = nil
     public private(set) var targets = [UIControl.Event.RawValue : UIControl.Target]()
     
-    public func addTarget(_ targetView: UIView, event:UIControl.Event, action:((_ event:UIControl.Event, _ sender:UIView) -> ())?) {
+    public func addTarget(_ targetView: UIView, event:UIControl.Event, action:NX.Event<UIControl.Event, UIView>?) {
         if let target = self.targets[event.rawValue] {
             target.completion = action
             return
@@ -371,7 +371,7 @@ public class NXViewAssociation {
         }
     }
     
-    public func removeTarget(_ targetView: UIView, _ event:UIControl.Event, action:((_ event:UIControl.Event, _ sender:UIView) -> ())?) {
+    public func removeTarget(_ targetView: UIView, _ event:UIControl.Event) {
         if let target = self.targets[event.rawValue] {
             if let recognizer = target.recognizer {
                 targetView.removeGestureRecognizer(recognizer)

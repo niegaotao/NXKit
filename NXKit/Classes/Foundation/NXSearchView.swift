@@ -54,14 +54,14 @@ open class NXSearchView: NXBackgroundView<UIImageView, UIView>, UITextFieldDeleg
     }
     
     
-    open var completion : NX.Completion<String, [String:Any]>? = nil
+    open var completion : NX.Event<String, [String:Any]>? = nil
     
     //RETURN 按钮点击后回调 查询数据
     //clear, return
-    open var search : NX.Completion<String, String>? = nil
+    open var search : NX.Event<String, String>? = nil
     
     //在不断输入的过程中，下方不断更新展示推荐关键字
-    open var realtimeSearch : NX.Completion<String, String>? = nil
+    open var realtimeSearch : NX.Event<String, String>? = nil
     
     
     open var editable : Bool = true {

@@ -110,9 +110,7 @@ open class NXSerialization {
         if let data = NXSerialization.JSONObject(toData: jsonObject, options: []) {
             let output = NXSerialization.data(toString: data)
             if encode {
-                if let encodeOutput = NX.encodeURIComponent(output) {
-                    return encodeOutput
-                }
+                return NX.encodeURIComponent(output)
             }
             else{
                 return output

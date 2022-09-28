@@ -260,13 +260,13 @@ extension NXSwipeView {
         open var index = 0
         
         //字体
-        open var font  = NX.Selectable<UIFont> { (_, __sender) in
+        open var font  = NX.Selectable<UIFont> { (__sender) in
             __sender.selected = NX.font(15, .bold)
             __sender.unselected = NX.font(15)
         }
         
         //颜色
-        open var color = NX.Selectable<UIColor>{ (_, __sender) in
+        open var color = NX.Selectable<UIColor>{ (__sender) in
             __sender.selected = NX.darkBlackColor
             __sender.unselected = NX.darkGrayColor
         }
@@ -300,27 +300,27 @@ extension NXSwipeView {
 
         open var title =  NX.Selectable<String>(completion: nil)
         
-        open var font  = NX.Selectable<UIFont> { (_, __sender) in
+        open var font  = NX.Selectable<UIFont> { (__sender) in
             __sender.selected = NX.font(15, .bold)
             __sender.unselected = NX.font(15)
         }
         
-        open var color = NX.Selectable<UIColor>{ (_, __sender) in
+        open var color = NX.Selectable<UIColor>{ (__sender) in
             __sender.selected = NX.darkBlackColor
             __sender.unselected = NX.darkGrayColor
         }
         
-        open var size = NX.Selectable<CGSize>{ (_, __sender) in
+        open var size = NX.Selectable<CGSize>{ (__sender) in
             __sender.selected = CGSize.zero
             __sender.unselected = CGSize.zero
         }
         
-        open var width = NX.Selectable<CGFloat> {(_, __sender) in
+        open var width = NX.Selectable<CGFloat> {(__sender) in
             __sender.selected = 0.0
             __sender.unselected = 0.0
         }
         
-        open var textAlignment = NX.Selectable<NSTextAlignment> {(_, __sender) in
+        open var textAlignment = NX.Selectable<NSTextAlignment> {(__sender) in
             __sender.selected = NSTextAlignment.center
             __sender.unselected = NSTextAlignment.center
         }

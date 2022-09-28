@@ -13,14 +13,14 @@ extension NXRouter {
         public var scheme = ""        //scheme
         public var host = ""          //host
         public var path = ""          //path
-        public var completion: NX.Completion<Bool, NXRouter.URL>? = nil//注册后的回调action
+        public var completion: NX.Event<Bool, NXRouter.URL>? = nil//注册后的回调action
     }
     
     /*回调信息*/
     public class URL {
         public var url: String = ""
         public var info: [String: Any]? = nil                      //打开URL传入的参数，输入
-        public var completion: NX.Completion<Bool, NXRouter.URL>? = nil//打开URL后的回调
+        public var completion: NX.Event<Bool, NXRouter.URL>? = nil//打开URL后的回调
 
         public var scheme = ""                                  //scheme
         public var host = ""                                    //host
@@ -36,7 +36,7 @@ open class NXRouter : NSObject {
     
     /*新增URL*/
     @discardableResult
-    public func add(_ url: String, completion:@escaping NX.Completion<Bool, NXRouter.URL>) -> NXRouter.URI? {
+    public func add(_ url: String, completion:@escaping NX.Event<Bool, NXRouter.URL>) -> NXRouter.URI? {
         guard let url = Foundation.URL(string: url), let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             return nil
         }
@@ -70,7 +70,7 @@ open class NXRouter : NSObject {
     }
     
     //打开链接
-    public func open(_ url: String, info: [String: Any]? = nil, completion: NX.Completion<Bool, NXRouter.URL>? = nil) {
+    public func open(_ url: String, info: [String: Any]? = nil, completion: NX.Event<Bool, NXRouter.URL>? = nil) {
         guard let url = Foundation.URL(string: url), let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             self.exception?(url)
             return

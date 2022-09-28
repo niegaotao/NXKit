@@ -64,7 +64,7 @@ open class NXAsset: NXAny {
         }
     }
     
-    open var completion: NX.Completion<Bool, Any?>? = nil
+    open var completion: NX.Event<Bool, Any?>? = nil
 }
 
 
@@ -247,7 +247,7 @@ extension NXAsset {
         open var selectedIdentifiers = [String]()
         open var isAutoclosed = true //当选择一张的时候，选择之后是否自动回电
         open var numberOfColumns = 4 //列表显示多少列,允许[1,2],推荐[3,4,5],允许[6,7]
-        open var completion : NX.Completion<Bool, NXAsset.Output>? = nil//最后的回调
+        open var completion : NX.Event<Bool, NXAsset.Output>? = nil//最后的回调
         
         //操作按钮
         open var subviews : (preview:Bool, camera:Bool, output:Bool) = (false, false, false)
@@ -266,7 +266,7 @@ extension NXAsset {
     }
     
     open class Observer : NSObject, PHPhotoLibraryChangeObserver {
-        open var completion : NX.Completion<String, Any?>? = nil//最后的回调
+        open var completion : NX.Event<String, Any?>? = nil//最后的回调
         public override init() {
             super.init()
             self.register()
@@ -296,8 +296,8 @@ extension NXAsset {
 
 extension NXAsset {
     //打开相册
-    public class func album(open: NX.Completion<Bool, NXAlbumViewController>?,
-                          completion: NX.Completion<Bool, NXAsset.Output>?) {
+    public class func album(open: NX.Event<Bool, NXAlbumViewController>?,
+                          completion: NX.Event<Bool, NXAsset.Output>?) {
         NX.authorization(NX.Authorize.album, DispatchQueue.main, true, { state in
             guard state == NX.AuthorizeState.authorized else {return}
 
@@ -326,8 +326,8 @@ extension NXAsset {
     }
     
     //打开相机
-    public class func camera(open:NX.Completion<Bool, NXCameraViewController>?,
-                         completion:NX.Completion<Bool, NXAsset.Output>?) {
+    public class func camera(open:NX.Event<Bool, NXCameraViewController>?,
+                         completion:NX.Event<Bool, NXAsset.Output>?) {
         NX.authorization(NX.Authorize.camera, DispatchQueue.main, true, {(state) in
             guard state == NX.AuthorizeState.authorized else {return}
             
@@ -501,7 +501,7 @@ extension NXAsset {
 
 extension NXAsset {
     //获取所有的相册列表
-    public class func outputAlbums(_ wrapped: NXAsset.Wrapped, completion: NX.Completion<Bool, [NXAlbum]>?) {
+    public class func outputAlbums(_ wrapped: NXAsset.Wrapped, completion: NX.Event<Bool, [NXAlbum]>?) {
         
         var accessAlbums = [NXAlbum]()
         
@@ -563,7 +563,7 @@ extension NXAsset {
         completion?(true, accessAlbums)
     }
     
-    public class  func outputAssets(_ assets:[NXAsset], _ wrapped: NXAsset.Wrapped, completion:NX.Completion<Bool, [NXAsset]>?){
+    public class  func outputAssets(_ assets:[NXAsset], _ wrapped: NXAsset.Wrapped, completion:NX.Event<Bool, [NXAsset]>?){
         let outputAssets = assets.map { (nxAsset) -> NXAsset in
             let outputAsset = NXAsset(asset: nxAsset.asset, suffixes:wrapped.video.suffixes)
             outputAsset.thumbnail = nxAsset.thumbnail
@@ -633,7 +633,7 @@ extension NXAsset {
     
     
     @discardableResult
-    public class func requestImage(_ asset: PHAsset, _ isNetworkAccessAllowed:Bool, _ size:CGSize, progress:NX.Completion<Double, Any?>?, completion:NX.Completion<Bool, UIImage?>?) -> PHImageRequestID {
+    public class func requestImage(_ asset: PHAsset, _ isNetworkAccessAllowed:Bool, _ size:CGSize, progress:NX.Event<Double, Any?>?, completion:NX.Event<Bool, UIImage?>?) -> PHImageRequestID {
         var isReturnedOrRequestingiCloud = false
         let unaccess = PHImageRequestOptions()
         unaccess.resizeMode = .fast
@@ -677,7 +677,7 @@ extension NXAsset {
     }
     
     @discardableResult
-    public class func requestImageData(_ asset: PHAsset, progress:NX.Completion<Double, Any?>?, completion:NX.Completion<Bool, Data?>?) -> PHImageRequestID {
+    public class func requestImageData(_ asset: PHAsset, progress:NX.Event<Double, Any?>?, completion:NX.Event<Bool, Data?>?) -> PHImageRequestID {
         let access = PHImageRequestOptions()
         if let filename = asset.value(forKey: "filename") as? String, filename.contains("GIF") {
             access.version = .original
@@ -724,7 +724,7 @@ extension NXAsset {
     
     
     @discardableResult
-    public class func requestAVAsset(_ asset: PHAsset, progress:NX.Completion<Double, Any?>?, completion:NX.Completion<Bool, AVAsset?>?) -> PHImageRequestID {
+    public class func requestAVAsset(_ asset: PHAsset, progress:NX.Event<Double, Any?>?, completion:NX.Event<Bool, AVAsset?>?) -> PHImageRequestID {
         let __options = PHVideoRequestOptions()
         __options.deliveryMode = .automatic
         __options.isNetworkAccessAllowed = true

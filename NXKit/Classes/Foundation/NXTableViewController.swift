@@ -10,11 +10,8 @@ import UIKit
 
 
 open class NXTableViewController: NXViewController, UITableViewDelegate, UITableViewDataSource {
-    //表视图样式
-    open var tableViewStyle = NX.tableViewStyle
-    
     //表视图
-    open var tableView: NXTableView? = nil
+    open var tableView = NXTableView(frame: CGRect.zero, style: NX.tableViewStyle)
     //数据源管理对象
     public let data = NXCollection<NXTableView>()
     
@@ -31,21 +28,21 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         self.data.placeholderView.ctxs.isHidden = true
 
         //tableView
-        self.tableView = NXTableView(frame: self.contentView.bounds, style: self.tableViewStyle)
-        self.tableView?.frame = self.contentView.bounds
-        self.tableView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.tableView?.backgroundColor = NX.contentViewBackgroundColor
-        self.tableView?.separatorColor = NX.separatorColor
-        self.tableView?.delegate = self
-        self.tableView?.dataSource = self
-        self.tableView?.separatorStyle = NX.separatorStyle
-        self.tableView?.tableFooterView?.frame = CGRect(x: 0, y: 0, width: self.contentView.width, height: 24)
+        self.tableView.frame = self.contentView.bounds
+        self.tableView.frame = self.contentView.bounds
+        self.tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.tableView.backgroundColor = NX.contentViewBackgroundColor
+        self.tableView.separatorColor = NX.separatorColor
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.separatorStyle = NX.separatorStyle
+        self.tableView.tableFooterView?.frame = CGRect(x: 0, y: 0, width: self.contentView.width, height: 24)
         if #available(iOS 11.0, *) {
-            self.tableView?.contentInsetAdjustmentBehavior = .never
+            self.tableView.contentInsetAdjustmentBehavior = .never
         }
-        self.contentView.addSubview(self.tableView!)
+        self.contentView.addSubview(self.tableView)
 
-        tableView?.data = self.data
+        tableView.data = self.data
         self.data.wrappedView = tableView
         
         self.contentView.bringSubviewToFront(self.animationView)

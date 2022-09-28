@@ -128,7 +128,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     }
     
     ///当push完成后回触发completion
-    open func pushViewController(_ viewController: NXViewController, animated: Bool, completion:NX.Completion<String, NXViewController>?){
+    open func pushViewController(_ viewController: NXViewController, animated: Bool, completion:NX.Event<String, NXViewController>?){
         viewController.ctxs.didAppear = completion
         self.pushViewController(viewController, animated: animated)
     }
@@ -421,10 +421,10 @@ extension NXNavigationController {
         public let semaphore = DispatchSemaphore(value: 1)
         open var duration : TimeInterval = 0.3
         
-        open var willAppear : NX.Completion<String, NXNavigationController>? = nil
-        open var didAppear: NX.Completion<String, NXNavigationController>? = nil
-        open var willDisappear: NX.Completion<String, NXNavigationController>? = nil
-        open var didDisappear: NX.Completion<String, NXNavigationController>? = nil
+        open var willAppear : NX.Event<String, NXNavigationController>? = nil
+        open var didAppear: NX.Event<String, NXNavigationController>? = nil
+        open var willDisappear: NX.Event<String, NXNavigationController>? = nil
+        open var didDisappear: NX.Event<String, NXNavigationController>? = nil
         
         ///初始化方法
         public init(){}

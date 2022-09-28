@@ -10,7 +10,7 @@ import UIKit
 
 open class NXCollectionViewController: NXViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    public var collectionView : NXCollectionView? = nil
+    public var collectionView = NXCollectionView(frame: CGRect.zero)
     public let data = NXCollection<NXCollectionView>()
     
     override open func setup() {
@@ -22,17 +22,17 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView = NXCollectionView(frame: self.contentView.bounds)
-        self.collectionView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.collectionView?.backgroundColor = NX.contentViewBackgroundColor
-        self.collectionView?.delegate = self
-        self.collectionView?.dataSource = self
-        self.collectionView?.alwaysBounceVertical = true
-        self.contentView.addSubview(self.collectionView!)
-        self.collectionView?.data = self.data
+        self.collectionView.frame = self.contentView.bounds
+        self.collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.collectionView.backgroundColor = NX.contentViewBackgroundColor
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.alwaysBounceVertical = true
+        self.contentView.addSubview(self.collectionView)
+        self.collectionView.data = self.data
         self.data.wrappedView = self.collectionView
         if #available(iOS 11.0, *) {
-            collectionView?.contentInsetAdjustmentBehavior = .never
+            collectionView.contentInsetAdjustmentBehavior = .never
         }
         
         self.contentView.bringSubviewToFront(self.animationView)

@@ -27,7 +27,7 @@ extension UILabel {
                             textColor: UIColor,
                             textAlignment: NSTextAlignment,
                             lineSpacing:CGFloat,
-                            completion:NX.Completion<String, NSMutableParagraphStyle>? = nil) {
+                            completion:NX.Event<String, NSMutableParagraphStyle>? = nil) {
         self.init(frame:frame)
         
         self.updateSubviews(text: text,
@@ -45,7 +45,7 @@ extension UILabel {
                      textAlignment: NSTextAlignment,
                      lineSpacing:CGFloat,
                      numberOfLines:Int,
-                     completion:NX.Completion<String, NSMutableParagraphStyle>? = nil){
+                     completion:NX.Event<String, NSMutableParagraphStyle>? = nil){
         self.text = text
         self.font = font
         self.textColor = textColor

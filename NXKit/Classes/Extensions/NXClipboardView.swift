@@ -31,7 +31,7 @@ open class NXClipboardView: NXView {
         //边
         open var ats = NX.Ats.unspefified
         //框选区域的frame
-        public let frame = NX.Wrappable<Bool, CGRect, CGRect> { (_, __sender) in
+        public let frame = NX.Wrappable<Bool, CGRect, CGRect> { (__sender) in
             __sender.oldValue = CGRect.zero;__sender.value = CGRect.zero;}
     }
 
@@ -131,7 +131,7 @@ open class NXClipboardView: NXView {
     public let ctxs = NXClipboardView.Wrapped()
     public let wrappedView = NXClipboardView.WrappedView(frame:CGRect.zero)
     public let panRecognizer = UIPanGestureRecognizer()
-    public let point = NX.Wrappable<UIGestureRecognizer.State, CGPoint, CGPoint>{ (_, __sender) in
+    public let point = NX.Wrappable<UIGestureRecognizer.State, CGPoint, CGPoint>{ (__sender) in
         __sender.key = UIGestureRecognizer.State.possible;__sender.oldValue = CGPoint.zero;__sender.value = CGPoint.zero;}
     public let pinchRecognizer = UIPinchGestureRecognizer()
     

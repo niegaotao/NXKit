@@ -27,7 +27,7 @@ open class NXItem : NXAny {
         open var reuse : String = ""    //单元格重用ID
         open var tag: Int = 0           //根据不同tag来做不同单元格的区分
         
-        open var event: NX.Completion<String, Any?>? = nil  //点击等回调
+        open var event: NX.Event<String, Any?>? = nil  //点击等回调
         
         open var backgroundColor: UIColor? = nil //头部尾部的背景色
         open var at : (first:Bool, last:Bool) = (false, false) //是否是第一个，是否是最后一个
@@ -49,10 +49,10 @@ open class NXItem : NXAny {
         super.init()
     }
     
-    public init(value:[String:Any]?, completion:NX.Completion<String, NXItem>?) {
+    public init(value:[String:Any]?, completion:NX.Completion<NXItem>?) {
         super.init()
         self.ctxs.value = value
-        completion?("init", self)
+        completion?(self)
     }
 }
 
@@ -333,8 +333,8 @@ open class NXCollection<T:UIView> : NXElementArray<NXSection> {
 
 extension NXCollection where T == NXTableView {
     @discardableResult
-    public func addPlaceholderView(_ frame: CGRect) -> NXPlaceholderElement {
-        let e = NXPlaceholderElement()
+    public func addPlaceholderView(_ frame: CGRect) -> NXPlaceholderDescriptor {
+        let e = NXPlaceholderDescriptor()
         e.placeholderView = self.placeholderView
         e.ctxs.update(NXTablePlaceholderViewCell.self, "NXTablePlaceholderViewCell")
         e.ctxs.frame = frame
@@ -416,8 +416,8 @@ extension NXCollection where T == NXTableView {
 
 extension NXCollection where T == NXCollectionView {
     @discardableResult
-    public func addPlaceholderView(_ frame: CGRect) -> NXPlaceholderElement {
-        let e = NXPlaceholderElement()
+    public func addPlaceholderView(_ frame: CGRect) -> NXPlaceholderDescriptor {
+        let e = NXPlaceholderDescriptor()
         e.placeholderView = self.placeholderView
         e.ctxs.update(NXCollectionPlaceholderViewCell.self, "NXPlaceholderViewCell")
         e.ctxs.frame = frame

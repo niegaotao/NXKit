@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'NXKit'
-    s.version          = '1.1.1'
+    s.version          = '1.1.0'
     s.summary          = 'UI framework'
     s.description      = <<-DESC
       NXKit is a UI framework implemented by Swift language for building native apps more easily。

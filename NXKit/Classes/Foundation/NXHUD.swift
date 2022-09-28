@@ -40,7 +40,7 @@ open class NXHUD {
         
         static var wrappedViewKey = "wrappedViewKey"
         
-        init(completion:NX.Completion<String, NXHUD.Wrapped>?) {
+        init(completion:NX.Event<String, NXHUD.Wrapped>?) {
             completion?("", self)
         }
     }
@@ -76,7 +76,7 @@ open class NXHUD {
         
         open override func updateSubviews(_ action: String, _ value: Any?) {
             
-            let state = NX.Wrappable<Int,CGRect, CGRect> { _, __sender in
+            let state = NX.Wrappable<Int,CGRect, CGRect> { __sender in
                 __sender.oldValue.size = CGSize(width: 0, height: 0)
                 __sender.value.size = CGSize(width: 0, height: 0)
             }

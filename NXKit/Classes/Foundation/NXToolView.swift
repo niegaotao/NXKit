@@ -12,13 +12,13 @@ import UIKit
 open class NXToolView: NXBackgroundView<UIImageView, UIView> {
     open weak var controller : NXToolViewController?
     public fileprivate(set) var index : Int = 0
-    open var didSelect : NX.Completion<Int, Int>? = nil //每次点击都会调用
-    public let separator = NX.Separator { (_, __sender) in
+    open var didSelect : NX.Event<Int, Int>? = nil //每次点击都会调用
+    public let separator = NX.Separator { (__sender) in
         __sender.isHidden = false
         __sender.backgroundColor = NX.separatorColor
     }
     
-    public let shadow = NX.Layer { (_, __sender) in
+    public let shadow = NX.Layer { (__sender) in
         __sender.isHidden = true
         __sender.shadowColor = NX.shadowColor
         __sender.shadowOffset = CGSize(width: 0, height: -2)
@@ -27,21 +27,20 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
     }
     
     open var elements = [NXToolView.Element]()
-    public let centerView = NXToolView.Center { (_, __sender) in
+    public let highlighted = NXToolView.Highlighted { (__sender) in
         __sender.isHidden = true
     }
 
     override open func setupSubviews() {
         super.setupSubviews()
-        
-        self.contentView.addSubview(centerView.centerView)
+        self.contentView.addSubview(highlighted.targetView)
     }
     
     override open func updateSubviews(_ action:String, _ value:Any?){
         if let dicValue = value as? [String:Any] {
             if let elements = dicValue["elements"] as? [NXToolView.Element], elements.count > 0 {
                 self.elements.forEach { element in
-                    element.elementView.removeFromSuperview()
+                    element.targetView.removeFromSuperview()
                 }
                 self.elements = elements
             }
@@ -51,9 +50,9 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
             }
         }
         
-        if self.centerView.isHidden == false {
+        if self.highlighted.isHidden == false {
             //如果想要显示中间的加大按钮，必须满足常规按钮的个数是偶数个
-            self.centerView.isHidden = (self.elements.count % 2 != 0)
+            self.highlighted.isHidden = (self.elements.count % 2 != 0)
         }
         
         //设置阴影
@@ -81,19 +80,19 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
         }
         
         //中间按钮
-        self.centerView.centerView.updateSubviews("", self.centerView)
+        self.highlighted.targetView.updateSubviews("", self.highlighted)
         
         //tab
-        let size = CGSize(width: self.centerView.isHidden ? self.width/max(CGFloat(self.elements.count), 1) : self.width/CGFloat(self.elements.count+1), height: NX.toolViewOffset)
+        let size = CGSize(width: self.highlighted.isHidden ? self.width/max(CGFloat(self.elements.count), 1) : self.width/CGFloat(self.elements.count+1), height: NX.toolViewOffset)
         for (index, element) in self.elements.enumerated() {
             element.size = CGSize(width: size.width, height: size.height)
-            element.elementView.isHidden = false
-            element.elementView.frame = CGRect(x: size.width * CGFloat(index), y: 0, width: size.width, height: size.height)
-            if index >= self.elements.count/2 && self.centerView.isHidden == false {
-                element.elementView.frame = CGRect(x: size.width * CGFloat(index+1), y: 0, width: size.width, height: size.height)
+            element.targetView.isHidden = false
+            element.targetView.frame = CGRect(x: size.width * CGFloat(index), y: 0, width: size.width, height: size.height)
+            if index >= self.elements.count/2 && self.highlighted.isHidden == false {
+                element.targetView.frame = CGRect(x: size.width * CGFloat(index+1), y: 0, width: size.width, height: size.height)
             }
-            element.elementView.tag = index
-            element.elementView.setupEvent(UIControl.Event.tap) {[weak self] (e, v) in
+            element.targetView.tag = index
+            element.targetView.setupEvent(UIControl.Event.touchUpInside) {[weak self] (e, v) in
                 
                 guard let __toolView = self,
                     let __elementView = v as? NXToolView.ElementView,
@@ -112,13 +111,13 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
                 //选中的回调
                 self?.didSelect?(fromValue, toValue)
             }
-            self.contentView.addSubview(element.elementView)
+            self.contentView.addSubview(element.targetView)
         }
         
         for (index, element) in self.elements.enumerated() {
-            element.elementView.isHidden = false
+            element.targetView.isHidden = false
             element.isSelected = index == self.index
-            element.elementView.updateSubviews("", element)
+            element.targetView.updateSubviews("", element)
         }
     }
     
@@ -130,8 +129,8 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
         if element.isSelectable {
             self.index = newValue
             
-            if element.attachment.isResetable {
-                element.attachment.value = 0
+            if element.badge.isResetable {
+                element.badge.value = 0
             }
             
             self.updateSubviews("", nil)
@@ -155,101 +154,122 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
             self.layer.masksToBounds = true
         }
     }
+    
+    //处理超出部分的点击
+    open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if self.highlighted.isHidden == false {
+            let convert = self.convert(point, to: self.highlighted.targetView)
+            if self.highlighted.targetView.point(inside: convert, with: event) {
+                return self.highlighted.targetView
+            }
+        }
+        return super.hitTest(point, with: event)
+    }
 }
 
 extension NXToolView {
-    open class Center : NX.Attribute {
-        fileprivate let centerView = NXToolView.CenterView(frame: CGRect(x: 0, y: 0, width: 80, height: 50))
+    open class Highlighted : NX.View {
+        public let image =  NX.Image(completion: nil)
+        public let targetView = NXToolView.HighlightedView(frame: CGRect(x: 0, y: 0, width: 80, height: 50))
+        
+        public required init() {
+            super.init()
+        }
+        
+        public init(completion:NX.Completion<NXToolView.Highlighted>?){
+            super.init()
+            completion?(self)
+        }
     }
     
-    open class CenterView : NXControl {
-        open var centerView = UIImageView(frame: CGRect.zero)
+    open class HighlightedView : NXControl {
+        public let imageView = UIImageView(frame: CGRect.zero)
         override open func setupSubviews() {
             self.backgroundColor = UIColor.clear
             
-            centerView.frame = self.bounds
-            centerView.contentMode = .scaleAspectFit
-            centerView.layer.cornerRadius = 0
-            centerView.layer.masksToBounds = true
-            self.addSubview(centerView)
-        }
-        
-        open override func layoutSubviews() {
-            super.layoutSubviews()
-            centerView.frame = self.bounds
+            imageView.contentMode = .scaleAspectFill
+            imageView.layer.cornerRadius = 0
+            imageView.layer.masksToBounds = true
+            self.addSubview(imageView)
         }
         
         open override func updateSubviews(_ action: String, _ value: Any?) {
-            guard let element = value as? NXToolView.Center else {
+            guard let element = value as? NXToolView.Highlighted else {
                 return
             }
             
-            self.isHidden = element.isHidden
             self.frame = element.frame
+            self.isHidden = element.isHidden
             self.backgroundColor  = element.backgroundColor
             self.layer.cornerRadius = element.cornerRadius
-            self.centerView.image = element.image
+            
+            self.imageView.image = element.image.value?.withRenderingMode(element.image.renderingMode)
+            self.imageView.frame =  element.image.frame
+            self.imageView.tintColor = element.image.color
         }
     }
 }
 
 extension NXToolView {
-    open class Element : NX.Rect {
-        open var key : String = ""
-        
-        open var title = NX.Selectable<String>(completion: { (_, __sender) in
-            __sender.selected = ""
-            __sender.unselected = ""
-        })
-        
-        open var color = NX.Selectable<UIColor>(completion: { (_, __sender) in
+    //消息数量
+    //消息背景色
+    //消息前景色
+    //是否直接显示数字
+    //点击后数字是否清0
+    open class Badge {
+        public var value:Int = 0
+        public var backgroundColor = UIColor.red
+        public var color = UIColor.white
+        public var borderColor = UIColor.red
+        public var borderWidth:CGFloat = 0
+        public var size:CGFloat = 11
+        public var insets = UIEdgeInsets(top: 1.5, left: 1.5, bottom: 1.5, right: 1.5)
+        public var isNumeric = true
+        public var isResetable = false
+    }
+    
+    open class Element : NX.View {
+        public var key : String = ""
+        public let image = NX.Selectable<UIImage>(completion: nil)
+        public let name = NX.Selectable<String>(completion: nil)
+        public let color = NX.Selectable<UIColor>(completion: { (__sender) in
             __sender.selected = NX.mainColor
             __sender.unselected = NX.darkGrayColor
         })
-        
-        open var image = NX.Selectable<UIImage>(completion:  { (_, __sender) in
-        })
-        
-        open var space : CGFloat = 0.0
-        
-        open var isSelected  = false
-        open var isSelectable = true
+        public let badge = NXToolView.Badge()
 
-        //消息数量
-        //消息背景色
-        //消息前景色
-        //是否直接显示数字
-        //点击后数字是否清0
-        open var attachment : (
-            value:Int,
-            backgroundColor:UIColor,
-            color:UIColor,
-            borderColor:UIColor,
-            borderWidth:CGFloat,
-            size:CGFloat,
-            insets:UIEdgeInsets,
-            isNumeric:Bool,
-            isResetable:Bool) = (0, UIColor.red, UIColor.white, UIColor.red, 0, 11, UIEdgeInsets(top: 1.5, left: 1.5, bottom: 1.5, right: 1.5), true, false)
+        public var space : CGFloat = 0.0
+        public var isSelected  = false
+        public var isSelectable = true
         
-        fileprivate let elementView = NXToolView.ElementView(frame: CGRect(x: 0, y: 0, width: NX.width/4.0, height: NX.toolViewOffset))
+        public let targetView = NXToolView.ElementView(frame: CGRect(x: 0, y: 0, width: NX.width/4.0, height: NX.toolViewOffset))
+        
+        public required init() {
+            super.init()
+        }
+        
+        public init(completion:NX.Completion<NXToolView.Element>?){
+            super.init()
+            completion?(self)
+        }
     }
     
-    open class ElementView : NXView {
-        public let assetView  = UIImageView(frame: CGRect.zero)
-        public let titleView  = UILabel(frame: CGRect.zero)
-        public let markupView  = UILabel(frame: CGRect.zero)
+    open class ElementView : NXControl {
+        public let imageView = UIImageView(frame: CGRect.zero)
+        public let nameView = UILabel(frame: CGRect.zero)
+        public let badgeView = UILabel(frame: CGRect.zero)
         
         override open func setupSubviews() {
             super.setupSubviews()
-            self.addSubview(assetView)
+            self.addSubview(imageView)
             
-            titleView.font = NX.font(11)
-            titleView.textAlignment = .center
-            self.addSubview(titleView)
+            nameView.font = NX.font(11)
+            nameView.textAlignment = .center
+            self.addSubview(nameView)
             
-            markupView.layer.masksToBounds = true
-            markupView.textAlignment = .center
-            self.addSubview(markupView)
+            badgeView.layer.masksToBounds = true
+            badgeView.textAlignment = .center
+            self.addSubview(badgeView)
         }
         
         override open func updateSubviews(_ action:String, _ value: Any?) {
@@ -267,60 +287,60 @@ extension NXToolView {
             }
             
             let space : CGFloat = __raw.size.height + element.space + __raw.height
-            assetView.frame = CGRect(x: (element.width-__raw.size.width)/2.0, y: (element.height - space)/2.0, width: __raw.size.width, height: __raw.size.height)
-            titleView.frame = CGRect(x: 0, y: assetView.frame.maxY + element.space, width: self.width, height: __raw.height)
+            imageView.frame = CGRect(x: (element.width-__raw.size.width)/2.0, y: (element.height - space)/2.0, width: __raw.size.width, height: __raw.size.height)
+            nameView.frame = CGRect(x: 0, y: imageView.frame.maxY + element.space, width: self.width, height: __raw.height)
             
             
             if element.isSelected {
-                assetView.image = element.image.selected.withRenderingMode(.alwaysTemplate)
-                assetView.tintColor = element.color.selected
+                imageView.image = element.image.selected.withRenderingMode(.alwaysTemplate)
+                imageView.tintColor = element.color.selected
 
-                titleView.text = element.title.selected
-                titleView.textColor = element.color.selected
+                nameView.text = element.name.selected
+                nameView.textColor = element.color.selected
             }
             else {
-                assetView.image = element.image.unselected.withRenderingMode(.alwaysTemplate)
-                assetView.tintColor = element.color.unselected
+                imageView.image = element.image.unselected.withRenderingMode(.alwaysTemplate)
+                imageView.tintColor = element.color.unselected
 
-                titleView.text = element.title.unselected
-                titleView.textColor = element.color.unselected
+                nameView.text = element.name.unselected
+                nameView.textColor = element.color.unselected
             }
             
-            if element.attachment.value > 0 {
-                markupView.isHidden = false
-                if element.attachment.isNumeric {
+            if element.badge.value > 0 {
+                badgeView.isHidden = false
+                if element.badge.isNumeric {
                     
-                    var attachmentValue = "\(element.attachment.value)"
-                    if element.attachment.value > 99 {
-                        attachmentValue = "99+"
+                    var badgeValue = "\(element.badge.value)"
+                    if element.badge.value > 99 {
+                        badgeValue = "99+"
                     }
                     //6.87, 13.13
-                    var __size = attachmentValue.stringSize(font: NX.font(element.attachment.size), size: CGSize(width: 100, height: 100))
-                    __size.width = max(element.attachment.insets.left, 0) + __size.width + max(element.attachment.insets.right, 0)
-                    __size.height = max(element.attachment.insets.top, 0) + __size.height + max(element.attachment.insets.bottom, 0)
+                    var __size = badgeValue.stringSize(font: NX.font(element.badge.size), size: CGSize(width: 100, height: 100))
+                    __size.width = max(element.badge.insets.left, 0) + __size.width + max(element.badge.insets.right, 0)
+                    __size.height = max(element.badge.insets.top, 0) + __size.height + max(element.badge.insets.bottom, 0)
                     if __size.width < __size.height {
                         __size.width = __size.height
                     }
-                    markupView.layer.borderWidth = element.attachment.borderWidth
-                    markupView.layer.borderColor = element.attachment.borderColor.cgColor
-                    markupView.layer.cornerRadius = __size.height/2.0
-                    markupView.backgroundColor = element.attachment.backgroundColor
-                    markupView.text = attachmentValue
-                    markupView.textColor = element.attachment.color
-                    markupView.font = NX.font(element.attachment.size)
-                    markupView.frame = CGRect(x: assetView.frame.maxX-__size.width/2.0, y: assetView.frame.minY, width: __size.width, height: __size.height)
+                    badgeView.layer.borderWidth = element.badge.borderWidth
+                    badgeView.layer.borderColor = element.badge.borderColor.cgColor
+                    badgeView.layer.cornerRadius = __size.height/2.0
+                    badgeView.backgroundColor = element.badge.backgroundColor
+                    badgeView.text = badgeValue
+                    badgeView.textColor = element.badge.color
+                    badgeView.font = NX.font(element.badge.size)
+                    badgeView.frame = CGRect(x: imageView.frame.maxX-__size.width/2.0, y: imageView.frame.minY, width: __size.width, height: __size.height)
                 }
                 else {
                     let __size = CGSize(width: 6, height: 6)
-                    markupView.layer.borderWidth = 0
-                    markupView.layer.cornerRadius = __size.height/2.0
-                    markupView.backgroundColor = element.attachment.backgroundColor
-                    markupView.text = ""
-                    markupView.frame = CGRect(x: assetView.frame.maxX-__size.width, y: assetView.frame.minY, width: __size.width, height: __size.height)
+                    badgeView.layer.borderWidth = 0
+                    badgeView.layer.cornerRadius = __size.height/2.0
+                    badgeView.backgroundColor = element.badge.backgroundColor
+                    badgeView.text = ""
+                    badgeView.frame = CGRect(x: imageView.frame.maxX-__size.width, y: imageView.frame.minY, width: __size.width, height: __size.height)
                 }
             }
             else {
-                markupView.isHidden = true
+                badgeView.isHidden = true
             }
         }
     }

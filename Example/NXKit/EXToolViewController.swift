@@ -22,11 +22,11 @@ class EXToolViewController: NXToolViewController {
             self.subviewControllers.append(vc)
             
             let item = NXToolView.Element()
-            item.title.selected = "首页"
-            item.title.unselected = "首页"
+            item.name.selected = "首页"
+            item.name.unselected = "首页"
             item.image.selected = UIImage(named: "index_selected.png")!
             item.image.unselected = UIImage(named: "index_selected.png")!
-            item.color.selected = NX.darkBlackColor
+            item.color.selected = UIColor.red
             self.toolView.elements.append(item)
         }
         
@@ -36,11 +36,12 @@ class EXToolViewController: NXToolViewController {
             self.subviewControllers.append(vc)
             
             let item = NXToolView.Element()
-            item.title.selected = "工具"
-            item.title.unselected = "工具"
+            item.name.selected = "工具"
+            item.name.unselected = "工具"
             item.image.selected = UIImage(named: "index_selected.png")!
             item.image.unselected = UIImage(named: "index_selected.png")!
-            item.color.selected = NX.darkBlackColor
+            item.badge.value = 5
+            item.badge.isNumeric = false
             self.toolView.elements.append(item)
         }
         
@@ -50,11 +51,12 @@ class EXToolViewController: NXToolViewController {
             self.subviewControllers.append(vc)
             
             let item = NXToolView.Element()
-            item.title.selected = "发现"
-            item.title.unselected = "发现"
+            item.name.selected = "发现"
+            item.name.unselected = "发现"
             item.image.selected = UIImage(named: "index_selected.png")!
             item.image.unselected = UIImage(named: "index_selected.png")!
-            item.color.selected = NX.darkBlackColor
+            item.badge.value = 5
+            item.badge.isNumeric = true
             self.toolView.elements.append(item)
         }
         
@@ -64,22 +66,34 @@ class EXToolViewController: NXToolViewController {
             self.subviewControllers.append(vc)
             
             let item = NXToolView.Element()
-            item.title.selected = "我的"
-            item.title.unselected = "我的"
+            item.name.selected = "我的"
+            item.name.unselected = "我的"
             item.image.selected = UIImage(named: "index_selected.png")!
             item.image.unselected = UIImage(named: "index_selected.png")!
-            item.color.selected = NX.darkBlackColor
+            item.color.selected = UIColor.red
+            item.badge.value = 100
+            item.badge.isNumeric = true
+            item.badge.isResetable = true
             self.toolView.elements.append(item)
         }
         
         //
         self.toolView.separator.isHidden = true
+        
         self.toolView.shadow.isHidden = false
-        self.toolView.centerView.isHidden = false
-        self.toolView.centerView.image = UIImage(named: "index_+.png")
-        self.toolView.centerView.frame = CGRect(x: (NX.width -  80)/2.0, y: -10, width: 80, height: 50)
-        self.toolView.centerView.backgroundColor = NX.mainColor
-        self.toolView.centerView.cornerRadius = 25
+        
+        self.toolView.highlighted.isHidden = false
+        self.toolView.highlighted.frame = CGRect(x: (NX.width -  80)/2.0, y: -25, width: 80, height: 50)
+        self.toolView.highlighted.cornerRadius = 25
+        self.toolView.highlighted.backgroundColor = UIColor.red
+
+        self.toolView.highlighted.image.value = UIImage(named: "index_+.png")
+        self.toolView.highlighted.image.frame = CGRect(x: 22, y: 7, width: 36, height: 36)
+        self.toolView.highlighted.image.renderingMode = .alwaysTemplate
+        self.toolView.highlighted.image.color = .white
+        self.toolView.highlighted.targetView.setupEvent(.touchUpInside) { event, value in
+            print("点击了中间按钮")
+        }
         self.index = 0
     }
     

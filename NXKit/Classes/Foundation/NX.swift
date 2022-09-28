@@ -18,7 +18,11 @@ open class NX {
     static public let name = NX.infoDictionary["CFBundleDisplayName"] as? String ?? ""
     static public let version = NX.infoDictionary["CFBundleShortVersionString"] as? String ?? ""
     static public let build = NX.infoDictionary["CFBundleVersion"] as? String ?? ""    
-    public typealias Completion<Action, Value> = (_ action:Action, _ value:Value)  -> ()
+}
+
+extension NX {
+    public typealias Completion<Value> = (_ value:Value)  -> ()
+    public typealias Event<Event, Value> = (_ event:Event, _ value:Value)  -> ()
 }
 
 //屏幕
@@ -223,8 +227,8 @@ extension NX {
     }
     
     //初始化的状态栏样式
-    static private(set) var __statusBarStyle = NX.Bar.dark
-    static public var statusBarStyle : NX.Bar {
+    static private(set) var __statusBarStyle = NX.StatusBarStyle.dark
+    static public var statusBarStyle : NX.StatusBarStyle {
         set{
             if newValue !=  .none {
                 __statusBarStyle = newValue
@@ -233,7 +237,6 @@ extension NX {
         get{
             return __statusBarStyle
         }
-        
     }
     
     //暗黑模式的类型
@@ -244,7 +247,7 @@ extension NX {
     }
     
     //状态栏的样式
-    public enum Bar : String {
+    public enum StatusBarStyle : String {
         case none = "none"
         case hidden = "hidden"
         case unspecified = "unspecified"
@@ -278,8 +281,8 @@ extension NX {
     }
     
     //处理图片浏览
-    class public func previewAssets(type:String, assets:[Any], index:Int){
-        NX.Imp.previewAssets?(type, assets, index)
+    class public func previewAssets(assets:[Any], index:Int){
+        NX.Imp.previewAssets?(assets, index)
     }
     
     //设置图像
@@ -375,6 +378,54 @@ extension NX {
 
 //内容横向纵向边缘缩进
 extension NX {
+    open class Point : NXAny {
+        open var x = CGFloat.zero
+        open var y = CGFloat.zero
+        
+        open var origin : CGPoint {
+            set {
+                self.x = newValue.x
+                self.y = newValue.y
+            }
+            get {
+                return CGPoint(x: self.x, y: self.y)
+            }
+        }
+        
+        public required init(){
+            super.init()
+        }
+        
+        public init(completion: NX.Completion<NX.Point>?){
+            super.init()
+            completion?(self)
+        }
+    }
+    
+    open class Size : NXAny {
+        open var width = CGFloat.zero
+        open var height = CGFloat.zero
+        
+        open var size : CGSize {
+            set {
+                self.width = newValue.width
+                self.height = newValue.height
+            }
+            get {
+                return CGSize(width: self.width, height: self.height)
+            }
+        }
+        
+        public required init(){
+            super.init()
+        }
+        
+        public init(completion: NX.Completion<NX.Size>?){
+            super.init()
+            completion?(self)
+        }
+    }
+    
     open class Rect : NXAny {
         open var x = CGFloat.zero
         open var y = CGFloat.zero
@@ -417,9 +468,9 @@ extension NX {
             super.init()
         }
         
-        public init(completion: NX.Completion<String, NX.Rect>?){
+        public init(completion: NX.Completion<NX.Rect>?){
             super.init()
-            completion?("init", self)
+            completion?(self)
         }
     }
 }
@@ -436,17 +487,17 @@ extension NX {
         
         public static var unspefified = NX.Ats(rawValue: 0)
         
-        public static var minX = NX.Ats(rawValue: 1)        //2^0
-        public static var centerX = NX.Ats(rawValue: 2)     //2^1
-        public static var maxX = NX.Ats(rawValue: 4)        //2^2
-        public static var Xs = NX.Ats(rawValue: 7)          //2^0+2^1+2^2
+        public static var minX = NX.Ats(rawValue: 1)        //2^0=0b0001
+        public static var centerX = NX.Ats(rawValue: 2)     //2^1=0b0010
+        public static var maxX = NX.Ats(rawValue: 4)        //2^2=0b0100
+        public static var Xs = NX.Ats(rawValue: 7)          //2^0+2^1+2^2=0b0111
 
-        public static var minY =  NX.Ats(rawValue: 16)      //2^4
-        public static var centerY =  NX.Ats(rawValue: 32)   //2^5
-        public static var maxY = NX.Ats(rawValue: 64)       //2^6
-        public static var Ys = NX.Ats(rawValue: 112)        //2^4+2^5+2^6
+        public static var minY =  NX.Ats(rawValue: 16)      //2^4=0b0001 0000
+        public static var centerY =  NX.Ats(rawValue: 32)   //2^5=0b0010 0000
+        public static var maxY = NX.Ats(rawValue: 64)       //2^6=0b0100 0000
+        public static var Ys = NX.Ats(rawValue: 112)        //2^4+2^5+2^6=0b0111 0000
 
-        public static var center = NX.Ats(rawValue: 34)    //2^1+2^5
+        public static var center = NX.Ats(rawValue: 34)     //2^1+2^5=0b0010 0010
     }
 }
 
@@ -564,7 +615,7 @@ extension NX {
     
     public class Imp {
         //处理图片浏览
-        static public var previewAssets:((_ type:String, _ assets:[Any], _ index:Int) -> ())?
+        static public var previewAssets:((_ assets:[Any], _ index:Int) -> ())?
         
         //设置url
         static public var image : ((_ targetView: UIView?, _ url:String, _ state:UIControl.State) -> ())?
@@ -594,7 +645,12 @@ extension NX {
         static public var hideLoading:((_ animationView:NXHUD.WrappedView?, _ superview:UIView?) -> ())?
         
         //处理网络请求
-        static public var request:((_ request:NXRequest, _ completion:NX.Completion<String, NXRequest>?) -> ())?
+        static public var request:((_ request:NXRequest, _ completion:NX.Event<String, NXResponse>?) -> ())?
+    }
+    
+    //request
+    class public func request(_ request:NXRequest, _ completion:NX.Event<String, NXResponse>?) {
+        NX.Imp.request?(request, completion)
     }
 }
 
@@ -602,12 +658,12 @@ extension NX {
 // 图片
 extension NX {
     //encodeURIComponent
-    class public func encodeURIComponent(_ uri:String) -> String? {
+    class public func encodeURIComponent(_ uri:String) -> String {
         if NX.Imp.encodeURIComponent != nil {
-            return NX.Imp.encodeURIComponent?(uri)
+            return NX.Imp.encodeURIComponent?(uri) ?? ""
         }
         /*!*'();:@&=+$,/?%#[]{}   增加了对"和\ --> !*'();:@&=+$,/?%#[]{}\"\\ */
-        return String.encodeURIComponent(uri)
+        return String.encodeURIComponent(uri) ?? ""
     }
     
     //decodeURIComponent
@@ -704,6 +760,9 @@ extension NX {
     open class View : NX.Rect {
         open var isHidden = false
         open var backgroundColor = NX.backgroundColor
+        open var cornerRadius = CGFloat(0.0)
+        open var masksToBounds : Bool = false
+
         public required init() {
             super.init()
         }
@@ -717,23 +776,37 @@ extension NX {
         
         open var value : Any? = nil
         
-        public let separator = NX.Separator{(_,_) in}
-        
-        open var cornerRadius : CGFloat = 0
+        public let separator = NX.Separator{(_) in}
         open var layer : NX.Layer? = nil
-
+        
         public required init(){
             super.init()
         }
         
-        public init(completion:NX.Completion<String, NX.Appearance>?){
+        public init(completion:NX.Completion<NX.Appearance>?){
             super.init()
-            completion?("init", self)
+            completion?(self)
         }
     }
-
+    
+    open class Image : NX.View {
+        open var color = NX.darkBlackColor
+        open var value : UIImage? = nil
+        open var renderingMode = UIImage.RenderingMode.alwaysOriginal
+        open var layer : NX.Layer? = nil
+        public required init(){
+            super.init()
+        }
+        
+        public init(completion:NX.Completion<NX.Image>?){
+            super.init()
+            completion?(self)
+        }
+    }
+    
     open class Attribute : NX.View {
         open var color = NX.darkBlackColor
+        
         open var textAlignment = NSTextAlignment.center
         open var numberOfLines: Int = 1
         open var lineSpacing : CGFloat = 2.5
@@ -743,17 +816,15 @@ extension NX {
         open var font = NX.font(15)
         
         open var image : UIImage? = nil
-        
-        open var cornerRadius : CGFloat = 0
+        open var renderingMode = UIImage.RenderingMode.alwaysOriginal
         open var layer : NX.Layer? = nil
-        
         public required init(){
             super.init()
         }
         
-        public init(completion:NX.Completion<String, NX.Attribute>?){
+        public init(completion:NX.Completion<NX.Attribute>?){
             super.init()
-            completion?("init", self)
+            completion?(self)
         }
         
         open class func contentHorizontalAlignment(_ textAlignment: NSTextAlignment) -> UIControl.ContentHorizontalAlignment {
@@ -769,8 +840,6 @@ extension NX {
     
     open class Layer : NX.View {
         open var opacity : CGFloat = 0.0
-        open var masksToBounds : Bool = false
-        open var cornerRadius : CGFloat = 0.0
         
         open var borderWidth : CGFloat = 0.0
         open var borderColor = NX.separatorColor
@@ -784,9 +853,9 @@ extension NX {
             super.init()
         }
         
-        public init(completion:NX.Completion<String, NX.Layer>?){
+        public init(completion:NX.Completion<NX.Layer>?){
             super.init()
-            completion?("init", self)
+            completion?(self)
         }
     }
     
@@ -800,11 +869,11 @@ extension NX {
             self.backgroundColor = NX.separatorColor
         }
         
-        public init(completion:NX.Completion<String, NX.Separator>?){
+        public init(completion:NX.Completion<NX.Separator>?){
             super.init()
             self.isHidden = true
             self.backgroundColor = NX.separatorColor
-            completion?("init", self)
+            completion?(self)
         }
     }
 }
@@ -817,8 +886,8 @@ extension NX {
         public init(){
         }
         
-        public init(completion:NX.Completion<String, NX.Widget<View, Value>>?){
-            completion?("init", self)
+        public init(completion:NX.Completion<NX.Widget<View, Value>>?){
+            completion?(self)
         }
     }
 }
@@ -890,14 +959,16 @@ extension NX.View {
             view.frame = metadata.frame
             view.backgroundColor = metadata.backgroundColor
             if let image = metadata.image {
-                view.image = image
+                view.image = image.withRenderingMode(metadata.renderingMode)
+                view.tintColor = metadata.color
             }
             else if metadata.value.count > 0 {
                 if metadata.value.hasPrefix("http") {
                     NX.image(view, metadata.value)
                 }
                 else {
-                    view.image = UIImage(named: metadata.value)
+                    view.image = UIImage(named: metadata.value)?.withRenderingMode(metadata.renderingMode)
+                    view.tintColor = metadata.color
                 }
             }
             else {
@@ -929,37 +1000,27 @@ extension NX.View {
 }
 
 extension NX {
-    
-    open class Disposeable<Value:Any>{
-        open var value : Value? = nil
-        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Disposeable<Value>>?) -> ())? = nil
-        
-        public init(completion: NX.Completion<String, NX.Disposeable<Value>>?) {
-            completion?("", self)
-        }
-    }
-    
     open class Wrappable<Key: NXInitialValue, OldValue:NXInitialValue, Value: NXInitialValue> {
         open var key = Key.initialValue
         open var oldValue = OldValue.initialValue
         open var value = Value.initialValue
         
-        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Wrappable<Key, OldValue, Value>>?) -> ())? = nil
+        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Event<String, NX.Wrappable<Key, OldValue, Value>>?) -> ())? = nil
         
-        public init(completion: NX.Completion<String, NX.Wrappable<Key, OldValue, Value>>?) {
-            completion?("", self)
+        public init(completion: NX.Completion<NX.Wrappable<Key, OldValue, Value>>?) {
+            completion?(self)
         }
     }
     
-    open class Comparable<Minimum: NXInitialValue, Maximum:NXInitialValue, Value: NXInitialValue> {
-        open var minValue = Minimum.initialValue
-        open var maxValue = Maximum.initialValue
+    open class Comparable<MinValue: NXInitialValue, MaxValue:NXInitialValue, Value: NXInitialValue> {
+        open var minValue = MinValue.initialValue
+        open var maxValue = MaxValue.initialValue
         open var value = Value.initialValue
         
-        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Completion<String, NX.Comparable<Minimum, Maximum, Value>>?) -> ())? = nil
+        open var dispose : ((_ action:String, _ value:Any?, _ completion:NX.Event<String, NX.Comparable<MinValue, MaxValue, Value>>?) -> ())? = nil
         
-        public init(completion: NX.Completion<String, NX.Comparable<Minimum, Maximum, Value>>?) {
-            completion?("", self)
+        public init(completion: NX.Completion<NX.Comparable<MinValue, MaxValue, Value>>?) {
+            completion?(self)
         }
     }
     
@@ -967,8 +1028,8 @@ extension NX {
         open var selected = Value.initialValue
         open var unselected = Value.initialValue
                     
-        public init(completion: NX.Completion<String, NX.Selectable<Value>>?){
-            completion?("", self)
+        public init(completion: NX.Completion<NX.Selectable<Value>>?){
+            completion?(self)
         }
     }
 }

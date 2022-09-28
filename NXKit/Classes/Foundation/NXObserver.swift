@@ -21,9 +21,9 @@ open class NXObserver  {
     
     open class Observation : NSObject {
         open var name = ""
-        open var dispose : NX.Completion<String, Any?>? = nil
+        open var dispose : NX.Event<String, Any?>? = nil
 
-        public init(name:String, dispose:NX.Completion<String, Any?>?) {
+        public init(name:String, dispose:NX.Event<String, Any?>?) {
             super.init()
             self.name = name
             self.dispose = dispose
@@ -34,7 +34,7 @@ open class NXObserver  {
         }
     }
     
-    open class func add(observer:AnyObject?, name:String, dispose:NX.Completion<String, Any?>?){
+    open class func add(observer:AnyObject?, name:String, dispose:NX.Event<String, Any?>?){
         guard let __observer = observer, name.count > 0 else {
             return
         }
@@ -50,7 +50,7 @@ open class NXObserver  {
         }
     }
     
-    open class func add(observer:AnyObject?, names:[String], dispose:NX.Completion<String, Any?>?){
+    open class func add(observer:AnyObject?, names:[String], dispose:NX.Event<String, Any?>?){
         names.forEach { (name) in
             self.add(observer: observer, name:name, dispose:dispose)
         }

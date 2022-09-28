@@ -22,7 +22,7 @@ class EXAppDelegate: UIResponder, UIApplicationDelegate {
             EXApp.authorization(type, queue, completion, isAlertable)
         }
         
-        NX.Imp.previewAssets = {(type, assets:[Any], index:Int) in
+        NX.Imp.previewAssets = {(assets:[Any], index:Int) in
             if let __assets = assets as? [NXAsset] {
                 EXApp.center.preview(__assets, 0)
             }
