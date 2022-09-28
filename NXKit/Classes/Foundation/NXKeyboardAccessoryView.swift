@@ -24,9 +24,14 @@ open class NXKeyboardAccessoryView: NXView {
         self.addSubview(actionView)
         
         bytesView.frame = CGRect(x: self.width - 140, y: 0, width: 80, height: self.height)
-        bytesView.textColor = NX.color(0x92929B, 1)
+        bytesView.textColor = NX.lightGrayColor
         bytesView.font = NX.font(12)
         bytesView.textAlignment = .right
         self.addSubview(bytesView)
+    }
+    
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.association?.separator?.backgroundColor = NX.separatorColor.cgColor
     }
 }
