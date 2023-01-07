@@ -101,7 +101,7 @@ open class NXPlaceholderViewDescriptor {
         __sender.textAlignment = .center
         __sender.numberOfLines = 0
         __sender.font = NX.font(16)
-        __sender.color = NX.darkGrayColor
+        __sender.color = NX.lightGrayColor
     }
 }
 

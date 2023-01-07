@@ -10,7 +10,7 @@ import UIKit
 
 open class NXString {
     open var frame = CGRect.zero
-    open var color  = NX.darkBlackColor
+    open var color  = NX.blackColor
     open var lineSpacing : CGFloat = 0.0
     open var text = ""
     open var font = NX.font(15)

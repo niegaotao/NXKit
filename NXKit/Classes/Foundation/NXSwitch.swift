@@ -173,7 +173,7 @@ open class NXSwitch: NXControl {
                 offBackgroundView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 
                 thumbView.center = CGPoint(x: (thumbView.width + horizontalAdjustment) / 2.0, y: thumbView.center.y)
-                thumbView.backgroundColor = offThumbTintColor ?? NX.darkGrayColor
+                thumbView.backgroundColor = offThumbTintColor ?? NX.lightGrayColor
             }
         }
     }

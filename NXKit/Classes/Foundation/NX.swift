@@ -77,9 +77,10 @@ extension NX {
     static public var backgroundColor = NX.color(255, 255, 255, 1)
     //view背景色
     static public var viewBackgroundColor = NX.color(247, 247, 247, 1)
-    //contentView背景色
-    static public var contentViewBackgroundColor = NX.color(247, 247, 247, 1)
-    
+    //未选中背景色
+    static public var cellBackgroundColor = NX.color(255, 255, 255, 1.0)
+    //选中背景色
+    static public var cellSelectedBackgroundColor = NX.color(234, 234, 234, 0.3)
     //naviView背景色
     static public var barBackgroundColor = NX.color(255, 255, 255, 1)
     //naviView背景色
@@ -88,11 +89,6 @@ extension NX {
     //overlay背景色
     static public var overlayBackgroundColor = NX.color(255, 225, 225, 1)
     
-    //未选中背景色
-    static public var unselectedBackgroundColor = NX.color(255, 255, 255, 1.0)
-    //选中背景色
-    static public var selectedBackgroundColor = NX.color(234, 234, 234, 0.3)
-    
     //分割线颜色
     static public var separatorColor = NX.color(235, 235, 240, 1)
     //阴影颜色
@@ -100,13 +96,11 @@ extension NX {
     // 主色
     static public var mainColor = NX.color(51, 120, 246, 1)
     // 深黑
-    static public var darkBlackColor = NX.color(51, 51, 51, 1)
-    // 浅黑
-    static public var lightBlackColor = NX.color(102, 102, 102, 1)
+    static public var blackColor = NX.color(51, 51, 51, 1)
     // 深灰
-    static public var darkGrayColor = NX.color(153, 153, 153, 1)
+    static public var darkGrayColor = NX.color(102, 102, 102, 1)
     // 浅灰
-    static public var lightGrayColor = NX.color(192, 192, 192, 1)
+    static public var lightGrayColor = NX.color(153, 153, 153, 1)
     // 转场前容器视图的Alpha值
     static public var transitionInoutBackgroundColor = NX.color(0, 0, 0, 0)
     // 转场后容器视图的Alpha值
@@ -769,7 +763,7 @@ extension NX {
     }
     
     open class Appearance : NX.View {
-        open var selectedBackgroundColor = NX.selectedBackgroundColor
+        open var selectedBackgroundColor = NX.cellSelectedBackgroundColor
         open var isHighlighted = false
         open var isEnabled = true
         open var isCloseable = true
@@ -790,7 +784,7 @@ extension NX {
     }
     
     open class Image : NX.View {
-        open var color = NX.darkBlackColor
+        open var color = NX.blackColor
         open var value : UIImage? = nil
         open var renderingMode = UIImage.RenderingMode.alwaysOriginal
         open var layer : NX.Layer? = nil
@@ -805,7 +799,7 @@ extension NX {
     }
     
     open class Attribute : NX.View {
-        open var color = NX.darkBlackColor
+        open var color = NX.blackColor
         
         open var textAlignment = NSTextAlignment.center
         open var numberOfLines: Int = 1

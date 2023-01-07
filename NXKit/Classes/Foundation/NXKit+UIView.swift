@@ -302,7 +302,7 @@ extension UIControl {
         }
         
         @objc public func invoke(){
-            if event.rawValue < 100 {
+            if event.rawValue < UIControl.Event.tap.rawValue || event.rawValue > UIControl.Event.swipe.rawValue {
                 if let __view = self.view as? UIControl {
                     self.completion?(self.event, __view)
                 }
@@ -335,7 +335,7 @@ public class NXViewAssociation {
         }
         
         let wrapped = UIControl.Target(view: targetView, event: event, completion: action)
-        if event.rawValue < 100 {
+        if event.rawValue < UIControl.Event.tap.rawValue || event.rawValue > UIControl.Event.swipe.rawValue {
             if let control = targetView as? UIControl {
                 control.addTarget(wrapped, action: #selector(UIControl.Target.invoke), for: event)
                 self.targets[event.rawValue] = wrapped

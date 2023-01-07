@@ -12,8 +12,8 @@ import NXKit
 class EXViewController: NXTableViewController {
     var arrValues = [[[String:Any]]]()
     
-    override func setup() {
-        super.setup()
+    override func initialize() {
+        super.initialize()
         
         if true {
             var arrSubvalues = [[String:Any]]()

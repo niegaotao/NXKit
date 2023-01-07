@@ -13,8 +13,8 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
     public var collectionView = NXCollectionView(frame: CGRect.zero)
     public let data = NXCollection<NXCollectionView>()
     
-    override open func setup() {
-        super.setup()
+    override open func initialize() {
+        super.initialize()
         self.ctxs.index = 1 //用以记录分页加载的索引（从1开始）
         self.ctxs.next = 1 //记录下一页的索引
     }
@@ -24,7 +24,7 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
         
         self.collectionView.frame = self.contentView.bounds
         self.collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.collectionView.backgroundColor = NX.contentViewBackgroundColor
+        self.collectionView.backgroundColor = NX.viewBackgroundColor
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.alwaysBounceVertical = true

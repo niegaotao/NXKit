@@ -23,8 +23,8 @@ open class NXToolViewController: NXContainerController {
         self.index = index;
     }
     
-    override open func setup() {
-        super.setup()
+    override open func initialize() {
+        super.initialize()
         self.ctxs.statusBarStyle = .none
     }
     

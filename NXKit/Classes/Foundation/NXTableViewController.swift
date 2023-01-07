@@ -15,8 +15,8 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
     //数据源管理对象
     public let data = NXCollection<NXTableView>()
     
-    override open func setup() {
-        super.setup()
+    override open func initialize() {
+        super.initialize()
         self.ctxs.index = 1 //用以记录分页加载的索引（从1开始）
         self.ctxs.next = 1 //记录下一页的索引
     }
@@ -31,7 +31,7 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         self.tableView.frame = self.contentView.bounds
         self.tableView.frame = self.contentView.bounds
         self.tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.tableView.backgroundColor = NX.contentViewBackgroundColor
+        self.tableView.backgroundColor = NX.viewBackgroundColor
         self.tableView.separatorColor = NX.separatorColor
         self.tableView.delegate = self
         self.tableView.dataSource = self

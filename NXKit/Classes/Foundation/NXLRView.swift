@@ -36,7 +36,7 @@ open class NXMTView: NXLRView<UIImageView, UILabel> {
         tView.frame = CGRect(x: self.height, y: 0, width: self.width-self.height, height: self.height)
         tView.textAlignment = .left
         tView.font = NX.font(13)
-        tView.textColor = NX.darkGrayColor
+        tView.textColor = NX.lightGrayColor
     }
     
     open var index : Int = 0
@@ -59,12 +59,12 @@ open class NXTTView: NXLRView<UILabel, UILabel> {
         topView.frame = CGRect(x: self.height, y: 0, width: self.width-self.height, height: self.height)
         topView.textAlignment = .center
         topView.font = NX.font(13)
-        topView.textColor = NX.darkGrayColor
+        topView.textColor = NX.lightGrayColor
         
         bottomView.frame = CGRect(x: self.height, y: 0, width: self.width-self.height, height: self.height)
         bottomView.textAlignment = .center
         bottomView.font = NX.font(13)
-        bottomView.textColor = NX.darkGrayColor
+        bottomView.textColor = NX.lightGrayColor
     }
 }
 

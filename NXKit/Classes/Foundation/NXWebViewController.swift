@@ -71,7 +71,7 @@ open class NXWebViewController: NXViewController {
     open override func setupSubviews() {
         self.webView.webViewController = self
         self.webView.frame = self.contentView.bounds
-        self.webView.backgroundColor = NX.contentViewBackgroundColor
+        self.webView.backgroundColor = NX.viewBackgroundColor
         self.webView.isOpaque = false
         self.webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         

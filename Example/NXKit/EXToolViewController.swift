@@ -11,8 +11,8 @@ import NXKit
 
 class EXToolViewController: NXToolViewController {
 
-    override func setup() {
-        super.setup()
+    override func initialize() {
+        super.initialize()
         
         self.ctxs.statusBarStyle = .none
         

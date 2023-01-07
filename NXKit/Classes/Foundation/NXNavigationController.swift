@@ -17,26 +17,26 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        self.setup()
+        self.initialize()
     }
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setup()
+        self.initialize()
     }
     
     public override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
-        self.setup()
+        self.initialize()
     }
     
     public override init(navigationBarClass: AnyClass?, toolbarClass: AnyClass?) {
         super.init(navigationBarClass: navigationBarClass, toolbarClass: toolbarClass)
-        self.setup()
+        self.initialize()
     }
     
     ///设置
-    open func setup() {
+    open func initialize() {
         self.extendedLayoutIncludesOpaqueBars = true
         self.edgesForExtendedLayout = UIRectEdge.all
         if #available(iOS 11.0, *) {
@@ -434,8 +434,8 @@ extension NXNavigationController {
 open class NXWrappedNavigationController<C:UIViewController>: NXNavigationController {
     public let viewController = C()
     
-    open override func setup() {
-        super.setup()
+    open override func initialize() {
+        super.initialize()
         self.pushViewController(viewController, animated:false)
     }
 }

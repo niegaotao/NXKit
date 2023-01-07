@@ -16,7 +16,7 @@ open class NXAbstractTableViewCell<T:UIView>: NXTableViewCell {
         
         self.selectedBackgroundView = UIView(frame: self.bounds)
         self.selectedBackgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.selectedBackgroundView?.backgroundColor = NX.selectedBackgroundColor
+        self.selectedBackgroundView?.backgroundColor = NX.cellSelectedBackgroundColor
         
         if let __abstractView = self.abstractView as? NXAbstractView {
             __abstractView.assetView.backgroundColor = UIColor.white
@@ -24,11 +24,11 @@ open class NXAbstractTableViewCell<T:UIView>: NXTableViewCell {
             __abstractView.assetView.layer.masksToBounds = true
             __abstractView.assetView.contentMode = .scaleAspectFill
             __abstractView.titleView.textAlignment = .center
-            __abstractView.titleView.textColor = NX.darkBlackColor
+            __abstractView.titleView.textColor = NX.blackColor
             __abstractView.titleView.font = NX.font(16)
             __abstractView.titleView.numberOfLines = 0
             __abstractView.subtitleView.textAlignment = .center
-            __abstractView.subtitleView.textColor = NX.darkGrayColor
+            __abstractView.subtitleView.textColor = NX.lightGrayColor
             __abstractView.subtitleView.font = NX.font(13)
             __abstractView.subtitleView.numberOfLines = 0
             __abstractView.subtitleView.isHidden = true
@@ -69,7 +69,7 @@ open class NXAbstractCollectionViewCell<T:UIView>: NXCollectionViewCell {
         
         self.selectedBackgroundView = UIView(frame: self.bounds)
         self.selectedBackgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.selectedBackgroundView?.backgroundColor = NX.selectedBackgroundColor
+        self.selectedBackgroundView?.backgroundColor = NX.cellSelectedBackgroundColor
         
         if let __abstractView = self.abstractView as? NXAbstractView {
             __abstractView.assetView.backgroundColor = UIColor.white
@@ -77,11 +77,11 @@ open class NXAbstractCollectionViewCell<T:UIView>: NXCollectionViewCell {
             __abstractView.assetView.layer.masksToBounds = true
             __abstractView.assetView.contentMode = .scaleAspectFill
             __abstractView.titleView.textAlignment = .center
-            __abstractView.titleView.textColor = NX.darkBlackColor
+            __abstractView.titleView.textColor = NX.blackColor
             __abstractView.titleView.font = NX.font(16)
             __abstractView.titleView.numberOfLines = 0
             __abstractView.subtitleView.textAlignment = .center
-            __abstractView.subtitleView.textColor = NX.darkGrayColor
+            __abstractView.subtitleView.textColor = NX.lightGrayColor
             __abstractView.subtitleView.font = NX.font(13)
             __abstractView.subtitleView.numberOfLines = 0
             __abstractView.subtitleView.isHidden = true

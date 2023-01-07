@@ -24,16 +24,16 @@ open class NXViewController: UIViewController  {
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
+        initialize()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
+        initialize()
     }
     
     ///子类中有需要在viewDidLoad之前的逻辑放在这个函数中，而不用重写构造函数
-    open func setup() {
+    open func initialize() {
         NX.print(NSStringFromClass(self.classForCoder))
         self.extendedLayoutIncludesOpaqueBars = true
         self.edgesForExtendedLayout = UIRectEdge.all
@@ -51,7 +51,7 @@ open class NXViewController: UIViewController  {
         
         self.contentView.frame = CGRect(x: 0, y: NX.topOffset, width: self.view.width, height: self.view.height-NX.topOffset)
         self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.contentView.backgroundColor = NX.contentViewBackgroundColor
+        self.contentView.backgroundColor = NX.viewBackgroundColor
         self.view.addSubview(self.contentView)
         
         
@@ -65,7 +65,7 @@ open class NXViewController: UIViewController  {
         self.naviView.separator.isHidden = self.ctxs.separator.isHidden
         self.naviView.separator.backgroundColor = self.ctxs.separator.backgroundColor.cgColor
         self.view.addSubview(self.naviView)
-        self.naviView.updateSubviews("update", nil)
+        self.naviView.updateSubviews("", nil)
     }
     
     override open func viewWillAppear(_ animated: Bool) {

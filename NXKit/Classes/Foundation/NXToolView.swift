@@ -234,7 +234,7 @@ extension NXToolView {
         public let name = NX.Selectable<String>(completion: nil)
         public let color = NX.Selectable<UIColor>(completion: { (__sender) in
             __sender.selected = NX.mainColor
-            __sender.unselected = NX.darkGrayColor
+            __sender.unselected = NX.lightGrayColor
         })
         public let badge = NXToolView.Badge()
 

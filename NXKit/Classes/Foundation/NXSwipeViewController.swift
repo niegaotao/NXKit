@@ -32,7 +32,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
             layout.minimumInteritemSpacing = 0.0
         }
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = NX.contentViewBackgroundColor
+        collectionView.backgroundColor = NX.viewBackgroundColor
         collectionView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -140,7 +140,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return self.collectionView.bounds.size ?? CGSize(width: 1, height: 1)
+        return self.collectionView.bounds.size 
     }
     
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
