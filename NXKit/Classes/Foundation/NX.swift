@@ -154,40 +154,51 @@ extension NX {
         return NXSerialization.file(toDictionary: NX.Association.root + "/NXKit.bundle/NX.bundle/device.json")
     }()
     
-    public static var is320x480x1 : Any = ["width":320,"height":480,"scale":1,"inches":[3.5]]
+    public struct UI {
+        let width : CGFloat
+        let height : CGFloat
+        let resultions : [Resultion]
+    }
+    
+    public struct Resultion {
+        let scale : CGFloat
+        let inch : CGFloat
+    }
+    
+    public static let is320x480x1 : [String : Any] =  ["width":320,"height":480,"scale":1,"inches":[3.5]]
     //[iPhone,iPhone3GS]
 
-    public static var is320x480x2 : Any = ["width":320,"height":480,"scale":2,"inches":[3.5]]
+    public static var is320x480x2 : [String : Any] = ["width":320,"height":480,"scale":2,"inches":[3.5]]
     //[iPhone4,iPhone4S]
     
-    public static var is320x568x2 : Any = ["width":320,"height":568,"scale":2,"inches":[4.0]]
+    public static var is320x568x2 : [String : Any] = ["width":320,"height":568,"scale":2,"inches":[4.0]]
     //[iPhone5,iPhone5c,iPhone5S,iPhoneSE1]
         
-    public static var is375x667x2 : Any = ["width":375,"height":667,"scale":2,"inches":[4.7]]
+    public static var is375x667x2 : [String : Any] = ["width":375,"height":667,"scale":2,"inches":[4.7]]
     //[iPhone6,iPhone6s,iPhone7,iPhone8,iPhoneSE2,iPhoneSE3]
     
-    public static var is375x812x3 : Any = ["width":375,"height":812,"scale":3,"inches":[5.4, 5.8]]
+    public static var is375x812x3 : [String : Any] = ["width":375,"height":812,"scale":3,"inches":[5.4, 5.8]]
     //[iPhone12mini,iPhone13mini],[iPhoneX,iPhoneXs,iPhone11Pro]
     
-    public static var is390x844x3 : Any = ["width":390,"height":844,"scale":3,"inches":[6.1]]
+    public static var is390x844x3 : [String : Any] = ["width":390,"height":844,"scale":3,"inches":[6.1]]
     //[iPhone12,iPhone12Pro,iPhone13,iPhone13Pro,iPhone14]
     
-    public static var is393x852x3 : Any = ["width":393,"height":852,"scale":3,"inches":[6.1]]
+    public static var is393x852x3 : [String : Any] = ["width":393,"height":852,"scale":3,"inches":[6.1]]
     //[iPhone14Pro]
     
-    public static var is414x736x3 : Any = ["width":414,"height":736,"scale":3,"inches":[5.5]]
+    public static var is414x736x3 : [String : Any] = ["width":414,"height":736,"scale":3,"inches":[5.5]]
     //[iPhone6Plus,iPhone6sPlus,iPhone7Plus,iPhone8Plus]
     
-    public static var is414x896x2 : Any = ["width":414,"height":896,"scale":2,"inches":[6.1]]
+    public static var is414x896x2 : [String : Any] = ["width":414,"height":896,"scale":2,"inches":[6.1]]
     //[iPhoneXr,iPhone11]
     
-    public static var is414x896x3 : Any = ["width":414,"height":896,"scale":3,"inches":[6.5]]
+    public static var is414x896x3 : [String : Any] = ["width":414,"height":896,"scale":3,"inches":[6.5]]
     //[iPhoneXs max,iPhone11ProMax]
     
-    public static var is428x926x3 : Any = ["width":428,"height":926,"scale":3,"inches":[6.7]]
+    public static var is428x926x3 : [String : Any] = ["width":428,"height":926,"scale":3,"inches":[6.7]]
     //[iPhone12ProMax,iPhone13ProMax,iPhone14Plus]
     
-    public static var is430x932x3 : Any = ["width":430,"height":932,"scale":3,"inches":[6.7]]
+    public static var is430x932x3 : [String : Any] = ["width":430,"height":932,"scale":3,"inches":[6.7]]
     //[iPhone14ProMax]
 }
 

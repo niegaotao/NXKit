@@ -34,7 +34,7 @@ open class NXViewController: UIViewController  {
     
     ///子类中有需要在viewDidLoad之前的逻辑放在这个函数中，而不用重写构造函数
     open func initialize() {
-        NX.print(NSStringFromClass(self.classForCoder))
+        NX.print("\(NSStringFromClass(self.classForCoder)), \(Unmanaged<AnyObject>.passUnretained(self as AnyObject).toOpaque())")
         self.extendedLayoutIncludesOpaqueBars = true
         self.edgesForExtendedLayout = UIRectEdge.all
         if #available(iOS 11.0, *) {
@@ -236,7 +236,7 @@ open class NXViewController: UIViewController  {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        NX.print(NSStringFromClass(self.classForCoder))
+        NX.print("\(NSStringFromClass(self.classForCoder)), \(Unmanaged<AnyObject>.passUnretained(self as AnyObject).toOpaque())")
     }
 }
 

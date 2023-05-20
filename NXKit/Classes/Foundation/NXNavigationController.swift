@@ -37,6 +37,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     
     ///设置
     open func initialize() {
+        NX.print("\(NSStringFromClass(self.classForCoder)), \(Unmanaged<AnyObject>.passUnretained(self as AnyObject).toOpaque())")
         self.extendedLayoutIncludesOpaqueBars = true
         self.edgesForExtendedLayout = UIRectEdge.all
         if #available(iOS 11.0, *) {
@@ -411,7 +412,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     }
     
     deinit {
-        NX.print(NSStringFromClass(self.classForCoder))
+        NX.print("\(NSStringFromClass(self.classForCoder)), \(Unmanaged<AnyObject>.passUnretained(self as AnyObject).toOpaque())")
     }
 }
 
