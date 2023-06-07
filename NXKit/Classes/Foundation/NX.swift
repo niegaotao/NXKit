@@ -30,8 +30,8 @@ extension NX {
     static public let width = UIScreen.main.bounds.size.width
     static public let height = UIScreen.main.bounds.size.height
     static public let size = CGSize(width: NX.width, height: NX.height)
-    static public let scale = UIScreen.main.scale
-    static public let pixel = 1.0 / UIScreen.main.scale //一个像素的宽度
+    static public let scale = max(UIScreen.main.scale, 1.0)
+    static public let pixel = 1.0 / NX.scale //一个像素的宽度
     
     //页面缩进
     static public var safeAreaInsets : UIEdgeInsets = {
@@ -525,6 +525,21 @@ extension NX {
         case initialized //初始状态
         case update      //下拉刷新
         case more        //上拉加载更多
+    }
+    
+    public struct Lifecycle : OptionSet {
+        
+        public private(set) var rawValue : Int = -1
+        public init(rawValue:Int) {
+            self.rawValue = rawValue
+        }
+        
+        public static var initialized = NX.Lifecycle(rawValue: 0)
+        
+        public static var viewWillAppear = NX.Lifecycle(rawValue: 1)
+        public static var viewDidAppear = NX.Lifecycle(rawValue: 2)
+        public static var viewWillDisappear = NX.Lifecycle(rawValue: 4)
+        public static var viewDidDisappear = NX.Lifecycle(rawValue: 8)
     }
 }
 
@@ -1270,9 +1285,3 @@ extension NX.Separator : NXInitialValue {
         return NX.Separator() as! Self
     }
 }
-
-
-
-
-
-

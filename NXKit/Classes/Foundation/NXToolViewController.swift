@@ -92,25 +92,16 @@ open class NXToolViewController: NXContainerController {
     
     //切换操作
     open func fromViewController(_ fromViewController:NXViewController?, toViewController:NXViewController, animated:Bool) {
-        if animated {
-            //后期如有动画的需求再扩展
-            toViewController.view.frame = self.view.bounds
-            self.selectedViewController = toViewController
-            self.addChild(toViewController)
-            self.view.insertSubview(toViewController.view, belowSubview: self.toolView)
-            
-            fromViewController?.removeFromParent()
-            fromViewController?.view.removeFromSuperview()
-        }
-        else {
-            toViewController.view.frame = self.view.bounds
-            self.selectedViewController = toViewController
-            self.addChild(toViewController)
-            self.view.insertSubview(toViewController.view, belowSubview: self.toolView)
-            
-            fromViewController?.removeFromParent()
-            fromViewController?.view.removeFromSuperview()
-        }
+        toViewController.view.frame = self.view.bounds
+        self.addChild(toViewController)
+        self.view.insertSubview(toViewController.view, belowSubview: self.toolView)
+        toViewController.didMove(toParent: self)
+        
+        fromViewController?.willMove(toParent: nil)
+        fromViewController?.view.removeFromSuperview()
+        fromViewController?.removeFromParent()
+        
+        self.selectedViewController = toViewController
     }
     
     //每次点击

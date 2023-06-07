@@ -57,30 +57,38 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.ctxs.willAppear?("", self)
-        self.ctxs.willAppear = nil
+        if !self.ctxs.lifecycleValue.contains(NX.Lifecycle.viewWillAppear){
+            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NX.Lifecycle.viewWillAppear)
+            self.ctxs.lifecycle?(NX.Lifecycle.viewWillAppear, self)
+        }
     }
     
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.ctxs.didAppear?("", self)
-        self.ctxs.didAppear = nil
+        if !self.ctxs.lifecycleValue.contains(NX.Lifecycle.viewDidAppear){
+            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NX.Lifecycle.viewDidAppear)
+            self.ctxs.lifecycle?(NX.Lifecycle.viewDidAppear, self)
+        }
     }
     
     
     open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.ctxs.willDisappear?("", self)
-        self.ctxs.willDisappear = nil
+        if !self.ctxs.lifecycleValue.contains(NX.Lifecycle.viewWillDisappear){
+            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NX.Lifecycle.viewWillDisappear)
+            self.ctxs.lifecycle?(NX.Lifecycle.viewWillDisappear, self)
+        }
     }
     
     override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        self.ctxs.didDisappear?("", self)
-        self.ctxs.didDisappear = nil
+        if !self.ctxs.lifecycleValue.contains(NX.Lifecycle.viewDidDisappear){
+            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NX.Lifecycle.viewDidDisappear)
+            self.ctxs.lifecycle?(NX.Lifecycle.viewDidDisappear, self)
+        }
     }
     
     
@@ -130,7 +138,11 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     
     ///当push完成后回触发completion
     open func pushViewController(_ viewController: NXViewController, animated: Bool, completion:NX.Event<String, NXViewController>?){
-        viewController.ctxs.didAppear = completion
+        viewController.ctxs.lifecycle = {lifecycle, vc in
+            if lifecycle.contains(NX.Lifecycle.viewDidAppear){
+                completion?("", vc)
+            }
+        }
         self.pushViewController(viewController, animated: animated)
     }
     
@@ -422,10 +434,8 @@ extension NXNavigationController {
         public let semaphore = DispatchSemaphore(value: 1)
         open var duration : TimeInterval = 0.3
         
-        open var willAppear : NX.Event<String, NXNavigationController>? = nil
-        open var didAppear: NX.Event<String, NXNavigationController>? = nil
-        open var willDisappear: NX.Event<String, NXNavigationController>? = nil
-        open var didDisappear: NX.Event<String, NXNavigationController>? = nil
+        open var lifecycleValue = NX.Lifecycle.initialized;
+        open var lifecycle : NX.Event<NX.Lifecycle, NXNavigationController>? = nil;
         
         ///初始化方法
         public init(){}

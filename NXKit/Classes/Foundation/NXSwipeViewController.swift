@@ -70,6 +70,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
     open func setupSubviews(_ subviewControllers: [NXViewController], elements:[Any], index: Int = 0){
         //移除历史数据
         self.subviewControllers.forEach { (vc) in
+            vc.willMove(toParent: nil)
             vc.removeFromParent()
             vc.view.removeFromSuperview()
         }
@@ -95,6 +96,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
         
             self.collectionView.register(element.ctxs.cls, forCellWithReuseIdentifier: element.ctxs.reuse)
             self.addChild(vc)
+            vc.didMove(toParent: self)
         }
         
         self.swipeView.updateSubviews("update", ["index":index,"items":elements])
