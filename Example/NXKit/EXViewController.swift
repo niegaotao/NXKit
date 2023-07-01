@@ -11,64 +11,84 @@ import NXKit
 
 class EXViewController: NXTableViewController {
     var arrValues = [[[String:Any]]]()
-    
-    override func initialize() {
-        super.initialize()
-        
-        if true {
-            var arrSubvalues = [[String:Any]]()
-            arrSubvalues.append(["title":"NXViewController","operation":"NXViewController"])
-            arrSubvalues.append(["title":"NXTableViewController","operation":"NXTableViewController"])
-            arrSubvalues.append(["title":"NXCollectionViewController","operation":"NXCollectionViewController"])
-            arrSubvalues.append(["title":"EXToolViewController","operation":"EXToolViewController"])
-            self.arrValues.append(arrSubvalues)
-        }
-        
-        if true {
-            var arrSubvalues = [[String:Any]]()
-            arrSubvalues.append(["title":"相册选图:image<=1,push","operation":"NXAsset-image-1"])
-            arrSubvalues.append(["title":"相册选图:image<=9,present","operation":"NXAsset-image-9"])
-            arrSubvalues.append(["title":"相册选图:video<=1,overlay","operation":"NXAsset-video-1"])
-            arrSubvalues.append(["title":"相册选图:video<=9,push","operation":"NXAsset-video-9"])
-            arrSubvalues.append(["title":"相册选图:混合<=12,image<12&&video<=12,present","operation":"NXAsset-12-1"])
-            arrSubvalues.append(["title":"相册选图:混合<=12,image<6&&video<=6,overlay","operation":"NXAsset-12-2"])
-            self.arrValues.append(arrSubvalues)
-        }
-        
-        if true {
-            var arrSubvalues = [[String:Any]]()
-            arrSubvalues.append(["title":"打开相机:拍图","operation":"camera-image"])
-            arrSubvalues.append(["title":"打开相机:拍视频","operation":"camera-video"])
-            self.arrValues.append(arrSubvalues)
-        }
-        
-        if true {
-            var arrSubvalues = [[String:Any]]()
-            arrSubvalues.append(["title":"NXActionView-alert(1个选项)","operation":"NXActionView-alert-1"])
-            arrSubvalues.append(["title":"NXActionView-alert(2个选项)","operation":"NXActionView-alert-2"])
-            arrSubvalues.append(["title":"NXActionView-alert(>=3个选项)","operation":"NXActionView-alert-3"])
-
-            arrSubvalues.append(["title":"NXActionView-action(无头部，无尾部)","operation":"NXActionView-action"])
-            arrSubvalues.append(["title":"NXActionView-action(无头部，有尾部)","operation":"NXActionView-action-footer"])
-            arrSubvalues.append(["title":"NXActionView-action(有头部，有尾部)","operation":"NXActionView-action--header-footer"])
-
-            self.arrValues.append(arrSubvalues)
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.naviView.title = "NXViewController"
         
+        //布局视图
         self.setupSubviews()
-        self.updateSubviews("", nil)
+        //请求数据
+        self.startAnimating()
+        self.request("", nil, { _, value in
+            self.stopAnimating()
+            if let value = value as? [[[String:Any]]] {
+                self.arrValues = value
+                //刷新UI
+                self.updateSubviews("", nil)
+            }
+        })
     }
     
+    //布局视图
     override func setupSubviews() {
         self.tableView.register(NXAbstractViewCell.self, forCellReuseIdentifier: "NXAbstractViewCell")
     }
     
+    //请求数据
+    override func request(_ operation: String, _ value: Any?, _ completion: NX.Event<String, Any?>? = nil) {
+        //模拟在子线程异步请求
+        DispatchQueue.global().asyncAfter(delay: 2) {
+            var arrValues = [[[String:Any]]]()
+            if true {
+                var arrSubvalues = [[String:Any]]()
+                arrSubvalues.append(["title":"NXViewController","operation":"NXViewController"])
+                arrSubvalues.append(["title":"NXTableViewController","operation":"NXTableViewController"])
+                arrSubvalues.append(["title":"NXCollectionViewController","operation":"NXCollectionViewController"])
+                arrSubvalues.append(["title":"EXToolViewController","operation":"EXToolViewController"])
+                arrValues.append(arrSubvalues)
+            }
+            
+            if true {
+                var arrSubvalues = [[String:Any]]()
+                arrSubvalues.append(["title":"相册选图:image<=1,push","operation":"NXAsset-image-1"])
+                arrSubvalues.append(["title":"相册选图:image<=9,present","operation":"NXAsset-image-9"])
+                arrSubvalues.append(["title":"相册选图:video<=1,overlay","operation":"NXAsset-video-1"])
+                arrSubvalues.append(["title":"相册选图:video<=9,push","operation":"NXAsset-video-9"])
+                arrSubvalues.append(["title":"相册选图:混合<=12,image<12&&video<=12,present","operation":"NXAsset-12-1"])
+                arrSubvalues.append(["title":"相册选图:混合<=12,image<6&&video<=6,overlay","operation":"NXAsset-12-2"])
+                arrValues.append(arrSubvalues)
+            }
+            
+            if true {
+                var arrSubvalues = [[String:Any]]()
+                arrSubvalues.append(["title":"打开相机:拍图","operation":"camera-image"])
+                arrSubvalues.append(["title":"打开相机:拍视频","operation":"camera-video"])
+                arrValues.append(arrSubvalues)
+            }
+            
+            if true {
+                var arrSubvalues = [[String:Any]]()
+                arrSubvalues.append(["title":"NXActionView-alert(1个选项)","operation":"NXActionView-alert-1"])
+                arrSubvalues.append(["title":"NXActionView-alert(2个选项)","operation":"NXActionView-alert-2"])
+                arrSubvalues.append(["title":"NXActionView-alert(>=3个选项)","operation":"NXActionView-alert-3"])
+
+                arrSubvalues.append(["title":"NXActionView-action(无头部，无尾部)","operation":"NXActionView-action"])
+                arrSubvalues.append(["title":"NXActionView-action(无头部，有尾部)","operation":"NXActionView-action-footer"])
+                arrSubvalues.append(["title":"NXActionView-action(有头部，有尾部)","operation":"NXActionView-action--header-footer"])
+
+                arrValues.append(arrSubvalues)
+            }
+            
+            //请求回来后回调
+            DispatchQueue.main.async {
+                completion?(operation, arrValues)
+            }
+        }
+    }
+    
+    //刷新UI
     override func updateSubviews(_ action: String, _ value: Any?) {
         self.data.removeAll()
         
