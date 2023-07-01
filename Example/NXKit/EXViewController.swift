@@ -267,7 +267,7 @@ class EXViewController: NXTableViewController {
                     actions.append(NXAbstract(title: "成都", value: nil, completion: nil))
                     actions.append(NXAbstract(title: "重庆", value: nil, completion: nil))
                     actions.append(NXAbstract(title: "武汉", value: nil, completion: nil))
-                    NXActionView.action(actions: actions, header: .none, footer: .footer(true, false, true, "取消"), completion: nil)
+                    NXActionView.action(actions: actions, header: .none, footer: .footer(false, "取消"), completion: nil)
                 }
                 else if operation == "NXActionView-action--header-footer" {
                     var actions = [NXAbstract]()
@@ -283,7 +283,7 @@ class EXViewController: NXTableViewController {
                     actions.append(NXAbstract(title: "长沙", value: nil, completion: nil))
                     actions.append(NXAbstract(title: "郑州", value: nil, completion: nil))
                     actions.append(NXAbstract(title: "合肥", value: nil, completion: nil))
-                    NXActionView.action(actions: actions, header: .header(true, false, true, true, "请选择城市"), footer: .footer(true, false, true, "取消"), completion: nil)
+                    NXActionView.action(actions: actions, header: .header(true, false, true, true, "请选择城市", ""), footer: .footer(false, "取消"), completion: nil)
                 }
             }
         }
