@@ -38,6 +38,7 @@ class EXViewController: NXTableViewController {
     
     //请求数据
     override func request(_ operation: String, _ value: Any?, _ completion: NX.Event<String, Any?>? = nil) {
+        NX.log("request")
         //模拟在子线程异步请求
         DispatchQueue.global().asyncAfter(delay: 2) {
             var arrValues = [[[String:Any]]]()

@@ -68,7 +68,7 @@ open class NXToolViewController: NXContainerController {
         }
         
         self.index = min(max(0, index), subviewControllers.count)
-        self.toolView.updateSubviews("", ["index":self.index, "elements":elements])
+        self.toolView.updateSubviews("", ["index":self.index, "elements":elements] as [String : Any])
 
         if self.index >= 0 && self.index < self.subviewControllers.count {
             let toViewController = subviewControllers[self.index]
