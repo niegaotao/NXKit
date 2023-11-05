@@ -29,7 +29,6 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
 
         //tableView
         self.tableView.frame = self.contentView.bounds
-        self.tableView.frame = self.contentView.bounds
         self.tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.tableView.backgroundColor = NX.viewBackgroundColor
         self.tableView.separatorColor = NX.separatorColor

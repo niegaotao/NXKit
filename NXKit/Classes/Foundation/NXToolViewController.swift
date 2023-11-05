@@ -65,6 +65,7 @@ open class NXToolViewController: NXContainerController {
         self.subviewControllers.append(contentsOf: __subviewControllers)
         for subviewController in __subviewControllers {
             subviewController.ctxs.superviewController = self
+            self.addChild(subviewController)
         }
         
         self.index = min(max(0, index), subviewControllers.count)
@@ -91,17 +92,24 @@ open class NXToolViewController: NXContainerController {
     }
     
     //切换操作
-    open func fromViewController(_ fromViewController:NXViewController?, toViewController:NXViewController, animated:Bool) {
-        toViewController.view.frame = self.view.bounds
-        self.addChild(toViewController)
-        self.view.insertSubview(toViewController.view, belowSubview: self.toolView)
-        toViewController.didMove(toParent: self)
+    open func fromViewController(_ fromViewController:NXViewController?, toViewController:NXViewController?, animated:Bool) {
+        if let toViewController = toViewController {
+            toViewController.view.frame = self.view.bounds
+            toViewController.beginAppearanceTransition(true, animated: true)
+        }
         
-        fromViewController?.willMove(toParent: nil)
-        fromViewController?.view.removeFromSuperview()
-        fromViewController?.removeFromParent()
+        if let fromViewController = fromViewController {
+            fromViewController.beginAppearanceTransition(false, animated: true)
+            fromViewController.view.removeFromSuperview()
+            fromViewController.endAppearanceTransition()
+        }
         
-        self.selectedViewController = toViewController
+        if let toViewController = toViewController {
+            toViewController.view.frame = self.view.bounds
+            self.selectedViewController = toViewController
+            self.view.insertSubview(toViewController.view, belowSubview: self.toolView)
+            toViewController.endAppearanceTransition()
+        }
     }
     
     //每次点击
