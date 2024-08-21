@@ -9,10 +9,6 @@
 import UIKit
 import NXKit
 import Photos
-import ImageViewer
-
-
-
 
 class EXApp {
     static let center = EXApp()
@@ -110,57 +106,5 @@ class EXApp {
     
     func preview(_ assets: [NXAsset], _ index:Int){
         self.assets = assets
-        let __index = min(max(index, 0), self.assets.count-1)
-        let __viewController = GalleryViewController(startIndex: 0, itemsDataSource: self, itemsDelegate: self, displacedViewsDataSource: nil, configuration: [.seeAllCloseButtonMode(.none), .deleteButtonMode(.none), .headerViewLayout(HeaderLayout.center(13))])
-        
-        if true {
-            let headerView = NXLCRView<UIView,UILabel, UIButton>(frame: CGRect(x: 16, y: NX.topOffset-44, width: NX.width-32, height: 44))
-            headerView.centerView.frame = CGRect(x: headerView.width/3.0, y: 0, width: headerView.width/3.0, height: headerView.height)
-            headerView.centerView.textAlignment = .center
-            headerView.centerView.textColor = UIColor.white
-            headerView.centerView.font = NX.font(17)
-            headerView.centerView.text = "\(__index+1) / \(self.assets.count)"
-            __viewController.headerView = headerView
-        }
-        
-        __viewController.landedPageAtIndexCompletion = {[weak __viewController] index in
-            if let __view = __viewController?.headerView as? NXLCRView<UIView,UILabel, UIButton> {
-                __view.centerView.text = "\(index+1) / \(EXApp.center.assets.count)"
-            }
-        }
-
-        __viewController.modalPresentationStyle = .overFullScreen
-        EXApp.naviController.visibleViewController?.present(__viewController, animated: true, completion: nil)
-    }
-}
-
-
-extension EXApp: GalleryItemsDataSource {
-    public func itemCount() -> Int {
-        return self.assets.count
-    }
-            
-    public func provideGalleryItem(_ index: Int) -> GalleryItem {
-        let asset = self.assets[index]
-        if asset.mediaType == .image {
-            return GalleryItem.image { completion in
-                completion(asset.image)
-            }
-        }
-        else if asset.mediaType == .video {
-            return GalleryItem.video(fetchPreviewImageBlock: { completion in
-                completion(asset.image)
-            }, videoURL: URL(string: "https://baidu.com")!)
-        }
-        return GalleryItem.image { completion in
-            completion(asset.image)
-        }
-    }
-}
-                                                   
-      
-extension EXApp: GalleryItemsDelegate {
-    public func removeGalleryItem(at index: Int){
-        
     }
 }

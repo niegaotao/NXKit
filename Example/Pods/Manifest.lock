@@ -1,28 +1,21 @@
 PODS:
-  - ImageViewer (6.0.0)
-  - NXKit (1.2.0):
-    - NXKit/Extensions (= 1.2.0)
-    - NXKit/Foundation (= 1.2.0)
-  - NXKit/Extensions (1.2.0):
+  - NXKit (1.2.1):
+    - NXKit/Extensions (= 1.2.1)
+    - NXKit/Foundation (= 1.2.1)
+  - NXKit/Extensions (1.2.1):
     - NXKit/Foundation
-  - NXKit/Foundation (1.2.0)
+  - NXKit/Foundation (1.2.1)
 
 DEPENDENCIES:
-  - ImageViewer
   - NXKit (from `../`)
-
-SPEC REPOS:
-  trunk:
-    - ImageViewer
 
 EXTERNAL SOURCES:
   NXKit:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ImageViewer: cb88ef1c0ba19161bc10702adfdcebc116a7a59d
-  NXKit: a02a7cefefb8c3802af126363bc614b62e0d85d1
+  NXKit: 2f7db5859128a7c3daf084ccdfe9d768d1687b88
 
-PODFILE CHECKSUM: 237712ad6f66ce0f8058758691de8512d4672593
+PODFILE CHECKSUM: ee0a60d6e4e1affd3909347b738e3f3e60dca823
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1

@@ -16,9 +16,6 @@ open class NXToolViewController: NXContainerController {
     public convenience init(subviewControllers: [NXViewController], elements:[NXToolView.Element], index:Int){
         self.init(nibName: nil, bundle: nil)
         self.subviewControllers.append(contentsOf: subviewControllers)
-        for subviewController in subviewControllers {
-            subviewController.ctxs.superviewController = self
-        }
         self.toolView.elements.append(contentsOf: elements)
         self.index = index;
     }
@@ -38,6 +35,11 @@ open class NXToolViewController: NXContainerController {
     }
     
     override open func setupSubviews(){
+        for subviewController in subviewControllers {
+            subviewController.ctxs.superviewController = self
+            self.addChild(subviewController)
+        }
+        
         self.toolView.frame = CGRect(x: 0, y: self.view.height-NX.toolViewOffset-NX.bottomOffset, width: self.view.width, height: NX.toolViewOffset+NX.bottomOffset)
         self.toolView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.toolView.controller = self
@@ -82,13 +84,11 @@ open class NXToolViewController: NXContainerController {
         let newValue = max(min(toValue, self.toolView.elements.count), 0)
         guard self.index != newValue else {return}
         
-        let element = self.toolView.elements[newValue]
-        if element.isSelectable {
-            let fromViewController = subviewControllers[self.index]
-            let toViewController = subviewControllers[newValue]
-            self.fromViewController(fromViewController, toViewController:toViewController, animated: animated)
-            self.index = newValue
-        }
+        self.toolView.fromView(fromValue: newValue, toValue: toValue, animated: animated)
+        let fromViewController = subviewControllers[self.index]
+        let toViewController = subviewControllers[newValue]
+        self.fromViewController(fromViewController, toViewController:toViewController, animated: animated)
+        self.index = newValue
     }
     
     //切换操作

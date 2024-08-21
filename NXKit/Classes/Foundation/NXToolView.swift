@@ -104,12 +104,8 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
                 let toValue = __elementView.tag
                 if toValue != fromValue {
                     //切换选中
-                    self?.didSelect(fromValue:fromValue, toValue: toValue)
                     self?.controller?.didSelectViewController(fromValue:fromValue, toValue: toValue, animated: false)
                 }
-                
-                //选中的回调
-                self?.didSelect?(fromValue, toValue)
             }
             self.contentView.addSubview(element.targetView)
         }
@@ -121,20 +117,18 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
         }
     }
     
-    public func didSelect(fromValue:Int, toValue: Int){
+    public func fromView(fromValue:Int, toValue: Int, animated:Bool){
         let newValue = max(min(toValue, self.elements.count), 0)
         guard self.index != newValue else {return}
         
         let element = self.elements[newValue]
-        if element.isSelectable {
-            self.index = newValue
-            
-            if element.badge.isResetable {
-                element.badge.value = 0
-            }
-            
-            self.updateSubviews("", nil)
+        self.index = newValue
+        
+        if element.badge.isResetable {
+            element.badge.value = 0
         }
+        
+        self.updateSubviews("", nil)
     }
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -239,9 +233,7 @@ extension NXToolView {
         public let badge = NXToolView.Badge()
 
         public var space : CGFloat = 0.0
-        public var isSelected  = false
-        public var isSelectable = true
-        
+        public var isSelected  = false        
         public let targetView = NXToolView.ElementView(frame: CGRect(x: 0, y: 0, width: NX.width/4.0, height: NX.toolViewOffset))
         
         public required init() {
