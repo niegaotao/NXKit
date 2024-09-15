@@ -230,6 +230,10 @@ extension NXToolView {
             __sender.selected = NX.mainColor
             __sender.unselected = NX.lightGrayColor
         })
+        public let renderingMode = NX.Selectable<UIImage.RenderingMode>(completion: {__sender in
+            __sender.selected = .alwaysTemplate
+            __sender.unselected = .alwaysTemplate
+        })
         public let badge = NXToolView.Badge()
 
         public var space : CGFloat = 0.0
@@ -284,14 +288,14 @@ extension NXToolView {
             
             
             if element.isSelected {
-                imageView.image = element.image.selected.withRenderingMode(.alwaysTemplate)
+                imageView.image = element.image.selected.withRenderingMode(element.renderingMode.selected)
                 imageView.tintColor = element.color.selected
 
                 nameView.text = element.name.selected
                 nameView.textColor = element.color.selected
             }
             else {
-                imageView.image = element.image.unselected.withRenderingMode(.alwaysTemplate)
+                imageView.image = element.image.unselected.withRenderingMode(element.renderingMode.unselected)
                 imageView.tintColor = element.color.unselected
 
                 nameView.text = element.name.unselected

@@ -14,7 +14,7 @@ open class NXViewController: UIViewController  {
     public let ctxs = NXViewController.Association()
     
     ///导航栏
-    open var naviView = NXNaviView(frame: CGRect(x: 0, y: 0, width: NX.width, height: NX.topOffset))
+    open var navigationView = NXNavigationView(frame: CGRect(x: 0, y: 0, width: NX.width, height: NX.topOffset))
     
     ///内容视图，不会被导航栏覆盖
     open var contentView = UIView(frame: CGRect(x: 0, y: NX.topOffset, width: NX.width, height: NX.height-NX.topOffset))
@@ -59,13 +59,13 @@ open class NXViewController: UIViewController  {
         self.contentView.addSubview(self.animationView)
         
         
-        self.naviView.frame = CGRect(x: 0, y: 0, width: self.view.width, height: NX.topOffset)
-        self.naviView.autoresizingMask = [.flexibleWidth]
-        self.naviView.controller = self
-        self.naviView.separator.isHidden = self.ctxs.separator.isHidden
-        self.naviView.separator.backgroundColor = self.ctxs.separator.backgroundColor.cgColor
-        self.view.addSubview(self.naviView)
-        self.naviView.updateSubviews("", nil)
+        self.navigationView.frame = CGRect(x: 0, y: 0, width: self.view.width, height: NX.topOffset)
+        self.navigationView.autoresizingMask = [.flexibleWidth]
+        self.navigationView.controller = self
+        self.navigationView.separator.isHidden = self.ctxs.separator.isHidden
+        self.navigationView.separator.backgroundColor = self.ctxs.separator.backgroundColor.cgColor
+        self.view.addSubview(self.navigationView)
+        self.navigationView.updateSubviews("", nil)
     }
     
     override open func viewWillAppear(_ animated: Bool) {
@@ -252,7 +252,6 @@ open class NXViewController: UIViewController  {
 extension NXViewController {
     open class Association {
         open var index = 0 ///用于记录当前正在请求或者展示的页面index，多用于分页加载
-        open var next = 0  ///用于记录下一页next，多用于分页加载
         open var state = NX.Reload.initialized///当前刷新状态
         
         open var isWrapped : Bool = false ///是否被其他UIViewController包装了，某些情况被包装的需要隐藏掉导航栏
@@ -299,9 +298,11 @@ extension NXViewController {
         
         ///初始化方法
         public init(){}
+        
+        static var index = 0
+        static var next = 0
     }
 }
-
 
 open class NXWrappedViewController<C:UIViewController>: NXViewController {
     public let viewController = C()
@@ -309,7 +310,7 @@ open class NXWrappedViewController<C:UIViewController>: NXViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.naviView.isHidden = true
+        self.navigationView.isHidden = true
         self.contentView.isHidden = true
         
         if let vc = self.viewController as? NXViewController {

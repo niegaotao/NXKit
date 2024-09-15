@@ -24,7 +24,7 @@
 - `NXLCRView<L:UIView, C:UIView, R:UIView>`：包`lhsView`、`centerView`、`rhsView`属性
 - `NXAutoresizeView<C:UIView>`
 - `NXBackgroundView<B:UIView, C:UIView>`：包含`B`类型的`backgroundView`背景视图属性、`C`类型的`contentView`内容视图属性
-- `NXNaviView`：自定义导航栏，仿系统的`UINavigationBar`,被`NXViewController`持有
+- `NXNavigationView`：自定义导航栏，仿系统的`UINavigationBar`,被`NXViewController`持有
 - `NXToolView`：自定义底部工具栏
 - `NXSwipeView`：自定义左右滑动视图，与`NXSwipeViewController`配合使用
 - `NXWebView`

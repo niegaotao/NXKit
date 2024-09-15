@@ -13,12 +13,6 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
     public var collectionView = NXCollectionView(frame: CGRect.zero)
     public let data = NXCollection<NXCollectionView>()
     
-    override open func initialize() {
-        super.initialize()
-        self.ctxs.index = 1 //用以记录分页加载的索引（从1开始）
-        self.ctxs.next = 1 //记录下一页的索引
-    }
-    
     override open func viewDidLoad() {
         super.viewDidLoad()
         

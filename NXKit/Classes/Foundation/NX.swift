@@ -81,9 +81,9 @@ extension NX {
     static public var cellBackgroundColor = NX.color(255, 255, 255, 1.0)
     //选中背景色
     static public var cellSelectedBackgroundColor = NX.color(234, 234, 234, 0.3)
-    //naviView背景色
+    //navigationView背景色
     static public var barBackgroundColor = NX.color(255, 255, 255, 1)
-    //naviView背景色
+    //navigationView背景色
     static public var barForegroundColor = NX.color(51, 51, 51, 1)
     
     //overlay背景色
@@ -508,8 +508,8 @@ extension NX {
     
     public enum Reload : Int {
         case initialized //初始状态
-        case update      //下拉刷新
-        case more        //上拉加载更多
+        case pulldown      //下拉刷新
+        case pullup        //上拉加载更多
     }
     
     public struct Lifecycle : OptionSet {
@@ -1269,5 +1269,11 @@ extension NX.Layer : NXInitialValue {
 extension NX.Separator : NXInitialValue {
     public static var initialValue: Self {
         return NX.Separator() as! Self
+    }
+}
+
+extension UIImage.RenderingMode: NXInitialValue {
+    public static var initialValue: Self {
+        return UIImage.RenderingMode.alwaysOriginal
     }
 }

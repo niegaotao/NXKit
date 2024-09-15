@@ -334,7 +334,7 @@ extension NXAsset {
             let __wrapped = NXCameraViewController()
             __wrapped.modalPresentationStyle = .fullScreen
             __wrapped.view.backgroundColor = .black
-            __wrapped.naviView.isHidden = true
+            __wrapped.navigationView.isHidden = true
             __wrapped.contentView.backgroundColor = .black
             __wrapped.viewController.view.backgroundColor = .black
             __wrapped.viewController.setNavigationBarHidden(true, animated: false)

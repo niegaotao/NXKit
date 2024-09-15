@@ -28,7 +28,7 @@ open class NXToolViewController: NXContainerController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        self.naviView.isHidden = true
+        self.navigationView.isHidden = true
         self.contentView.isHidden = true
         
         self.setupSubviews()

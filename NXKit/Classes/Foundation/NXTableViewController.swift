@@ -15,12 +15,6 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
     //数据源管理对象
     public let data = NXCollection<NXTableView>()
     
-    override open func initialize() {
-        super.initialize()
-        self.ctxs.index = 1 //用以记录分页加载的索引（从1开始）
-        self.ctxs.next = 1 //记录下一页的索引
-    }
-    
     override open func viewDidLoad() {
         super.viewDidLoad()
         

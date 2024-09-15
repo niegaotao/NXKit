@@ -84,7 +84,12 @@ extension UIView {
         if self.association == nil {
             self.association = NXViewAssociation()
         }
-        self.association?.addTarget(self, event:event, action: action)
+        if let action = action {
+            self.association?.addTarget(self, event:event, action: action)
+        }
+        else {
+            self.association?.removeTarget(self, event: event)
+        }
     }
     
     //设置圆角
@@ -371,12 +376,21 @@ public class NXViewAssociation {
         }
     }
     
-    public func removeTarget(_ targetView: UIView, _ event:UIControl.Event) {
-        if let target = self.targets[event.rawValue] {
-            if let recognizer = target.recognizer {
-                targetView.removeGestureRecognizer(recognizer)
+    public func removeTarget(_ targetView: UIView, event: UIControl.Event) {
+        if let wrapped = self.targets[event.rawValue] {
+            if event.rawValue < UIControl.Event.tap.rawValue || event.rawValue > UIControl.Event.swipe.rawValue {
+                if let control = targetView as? UIControl {
+                    control.removeTarget(wrapped, action: #selector(UIControl.Target.invoke), for: event)
+                    self.targets.removeValue(forKey: event.rawValue)
+                }
             }
-            self.targets.removeValue(forKey: event.rawValue)
+            else {
+                if let recognizer = wrapped.recognizer {
+                    targetView.removeGestureRecognizer(recognizer)
+                    self.targets.removeValue(forKey: event.rawValue)
+                    wrapped.recognizer = nil
+                }
+            }
         }
     }
 }

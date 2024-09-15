@@ -54,7 +54,7 @@ open class NXWebViewController: NXViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        self.naviView.title = "加载中..."
+        self.navigationView.title = "加载中..."
         
         self.setupSubviews()
         
@@ -95,9 +95,9 @@ open class NXWebViewController: NXViewController {
         self.backbarView.lhsView.addTarget(self, action: #selector(onBackAction), for: .touchUpInside)
         self.backbarView.rhsView.addTarget(self, action: #selector(onCloseAction), for: .touchUpInside)
         self.backbarView.updateSubviews("", true)
-        self.naviView.backView = backbarView
-        self.naviView.titleView.x = 15.0 + 44.0 + 1.0
-        self.naviView.titleView.width = self.naviView.width - self.naviView.titleView.x * 2.0
+        self.navigationView.backView = backbarView
+        self.navigationView.titleView.x = 15.0 + 44.0 + 1.0
+        self.navigationView.titleView.width = self.navigationView.width - self.navigationView.titleView.x * 2.0
         
         self.progressView.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.size.width, height: self.progressView.frame.size.height)
         self.progressView.autoresizingMask = [.flexibleWidth]
@@ -132,7 +132,7 @@ open class NXWebViewController: NXViewController {
         
         if targetView == self.webView {
             if accessKey == "title" {
-                self.naviView.title = self.webView.title ?? ""
+                self.navigationView.title = self.webView.title ?? ""
             }
             else if accessKey == "estimatedProgress" {
                 self.progressView.alpha = 1.0
@@ -173,13 +173,13 @@ open class NXWebViewController: NXViewController {
         if isCompleted && self.backbarView.isAutoable {
             if self.webView.canGoBack {
                 self.backbarView.updateSubviews("", false)
-                self.naviView.titleView.x = 15.0 + 65.0 + 8.0
-                self.naviView.titleView.width = self.naviView.width - self.naviView.titleView.x * 2.0
+                self.navigationView.titleView.x = 15.0 + 65.0 + 8.0
+                self.navigationView.titleView.width = self.navigationView.width - self.navigationView.titleView.x * 2.0
             }
             else{
                 self.backbarView.updateSubviews("", true)
-                self.naviView.titleView.x = 15.0 + 44.0 + 1.0
-                self.naviView.titleView.width = self.naviView.width - self.naviView.titleView.x * 2.0
+                self.navigationView.titleView.x = 15.0 + 44.0 + 1.0
+                self.navigationView.titleView.width = self.navigationView.width - self.navigationView.titleView.x * 2.0
             }
         }
     }

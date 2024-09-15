@@ -24,10 +24,10 @@ open class NXAssetClipViewController: NXViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.naviView.title = "裁剪"
+        self.navigationView.title = "裁剪"
         
         self.contentView.clipsToBounds = true
-        self.naviView.forwardBar = NXNaviView.Bar.forward(image: nil, title: "保存", completion: {[weak self] (_) in
+        self.navigationView.forwardBar = NXNavigationView.Bar.forward(image: nil, title: "保存", completion: {[weak self] (_) in
             self?.dispose("forward", nil)
         })
         
