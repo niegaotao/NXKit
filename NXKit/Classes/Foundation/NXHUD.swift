@@ -74,7 +74,7 @@ open class NXHUD {
             self.addSubview(self.messageView)
         }
         
-        open override func updateSubviews(_ action: String, _ value: Any?) {
+        open override func updateSubviews(_ value: Any?) {
             
             let state = NX.Wrappable<Int,CGRect, CGRect> { __sender in
                 __sender.oldValue.size = CGSize(width: 0, height: 0)
@@ -211,7 +211,7 @@ extension NXHUD {
         wrappedView.ctxs.message = message
         wrappedView.ctxs.ats = ats
         wrappedView.ctxs.duration = duration
-        wrappedView.updateSubviews("", nil)
+        wrappedView.updateSubviews(nil)
         
         if key == NXHUD.Key.toast.rawValue {
             wrappedView.alpha = 0.0

@@ -108,7 +108,7 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
         contentView.addSubview(maskedView)
     }
     
-    open override func updateSubviews(_ action: String, _ value: Any?){
+    open override func updateSubviews(_ value: Any?){
         guard let asset = value as? NXAsset, let phasset = asset.asset else {
             return
         }
@@ -592,11 +592,11 @@ extension NXAsset {
                                            progress:{value, _ in
                         if value >= 1 {
                             animationView?.ctxs.message = "正在加载图片..."
-                            animationView?.updateSubviews("", nil)
+                            animationView?.updateSubviews(nil)
                         }
                         else {
                             animationView?.ctxs.message = "正在从iCloud加载图片,\(Int(value*100))%..."
-                            animationView?.updateSubviews("", nil)
+                            animationView?.updateSubviews(nil)
                         }
                     },
                                            completion:{ action, value in

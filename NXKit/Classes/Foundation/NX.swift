@@ -58,11 +58,6 @@ extension NX {
         return NX.safeAreaInsets.bottom > 0.0
     }
     
-    //根据isXDisplay处理UI常量信息
-    static public var topOffset : CGFloat {
-        return NX.safeAreaInsets.top + 44.0
-    }
-    
     static public var bottomOffset : CGFloat {
         return NX.safeAreaInsets.bottom
     }
@@ -466,9 +461,7 @@ extension NX {
 }
 
 //内容横向纵向边缘缩进
-extension NX {
-    static public var insets = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
-    
+extension NX {    
     public struct Ats : OptionSet {
         public private(set) var rawValue : Int = 0
         public init(rawValue:Int) {
@@ -613,7 +606,7 @@ extension NX {
         static public var scripts = [WKUserScript]()
         
         //alert/action的单元格最大宽度、高度
-        static public var size = CGSize(width: NX.width*0.8, height: 48.0)
+        static public var size = CGSize(width: min(NX.width - 40 * 2, 350), height: 48.0)
     }
     
     public class Imp {

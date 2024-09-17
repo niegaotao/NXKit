@@ -17,23 +17,23 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
             backView?.removeFromSuperview()
         }
         didSet {
-            self.updateSubviews("", nil)
+            self.updateSubviews(nil)
         }
     }
     
     open var title : String = "" {
         didSet {
-            self.updateSubviews("", nil)
+            self.updateSubviews(nil)
         }
     }
     
-    open var titleView = UILabel(frame: CGRect(x: 75.0, y: NX.safeAreaInsets.top, width: NX.width-75.0*2, height: NX.topOffset-NX.safeAreaInsets.top))
+    open var titleView = UILabel(frame: CGRect(x: 75.0, y: NX.safeAreaInsets.top, width: NX.width-75.0*2, height: 44.0))
     open var centerView : UIView? {
         willSet{
             centerView?.removeFromSuperview()
         }
         didSet {
-            self.updateSubviews("", nil)
+            self.updateSubviews(nil)
         }
     }
     
@@ -42,7 +42,7 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
             forwardBar?.removeFromSuperview()
         }
         didSet {
-            self.updateSubviews("", nil)
+            self.updateSubviews(nil)
         }
     }
     
@@ -51,7 +51,7 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
             forwardView?.removeFromSuperview()
         }
         didSet {
-            self.updateSubviews("", nil)
+            self.updateSubviews(nil)
         }
     }
     
@@ -96,7 +96,7 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
         self.contentView.layer.addSublayer(self.separator)
     }
     
-    open override func updateSubviews(_ action:String, _ value:Any?){
+    open override func updateSubviews(_ value:Any?){
         self.separator.frame = CGRect(x: 0, y: self.contentView.height-NX.pixel, width: self.contentView.width, height: NX.pixel)
         
         if true {

@@ -20,7 +20,7 @@ open class NXCollectionViewCell: UICollectionViewCell {
     }
     
     open func setup(){
-        arrowView.frame = CGRect(x: contentView.width-NX.insets.right-6, y: (contentView.height-12)/2, width: 6, height: 12)
+        arrowView.frame = CGRect(x: contentView.width-16.0-6, y: (contentView.height-12)/2, width: 6, height: 12)
         arrowView.image = NX.image(named:"icon-arrow.png")
         arrowView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin]
         arrowView.contentMode = .scaleAspectFill
@@ -49,7 +49,7 @@ open class NXCollectionViewCell: UICollectionViewCell {
         
     }
     
-    open func updateSubviews(_ action:String, _ value: Any?){
+    open func updateSubviews(_ value: Any?){
         
     }
     

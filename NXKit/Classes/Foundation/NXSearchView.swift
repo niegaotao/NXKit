@@ -50,7 +50,7 @@ open class NXSearchView: NXBackgroundView<UIImageView, UIView>, UITextFieldDeleg
         fieldView.returnKeyType = .search
         self.contentView.addSubview(fieldView)
         
-        self.updateSubviews("placeholder", self.placeholder)
+        self.updateSubviews(self.placeholder)
     }
     
     

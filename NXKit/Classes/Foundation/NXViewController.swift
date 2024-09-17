@@ -14,10 +14,10 @@ open class NXViewController: UIViewController  {
     public let ctxs = NXViewController.Association()
     
     ///导航栏
-    open var navigationView = NXNavigationView(frame: CGRect(x: 0, y: 0, width: NX.width, height: NX.topOffset))
+    open var navigationView = NXNavigationView(frame: CGRect(x: 0, y: 0, width: NX.width, height: NX.safeAreaInsets.top + 44.0))
     
     ///内容视图，不会被导航栏覆盖
-    open var contentView = UIView(frame: CGRect(x: 0, y: NX.topOffset, width: NX.width, height: NX.height-NX.topOffset))
+    open var contentView = UIView(frame: CGRect(x: 0, y: NX.safeAreaInsets.top + 44.0, width: NX.width, height: NX.height-NX.safeAreaInsets.top - 44.0))
     
     ///页面无内容时的加载动画
     open var animationView = NX.AnimationClass.init(frame: CGRect.zero)
@@ -49,7 +49,7 @@ open class NXViewController: UIViewController  {
         
         self.view.backgroundColor = NX.viewBackgroundColor
         
-        self.contentView.frame = CGRect(x: 0, y: NX.topOffset, width: self.view.width, height: self.view.height-NX.topOffset)
+        self.contentView.frame = CGRect(x: 0, y: NX.safeAreaInsets.top + 44.0, width: self.view.width, height: self.view.height-NX.safeAreaInsets.top - 44.0)
         self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.contentView.backgroundColor = NX.viewBackgroundColor
         self.view.addSubview(self.contentView)
@@ -59,13 +59,13 @@ open class NXViewController: UIViewController  {
         self.contentView.addSubview(self.animationView)
         
         
-        self.navigationView.frame = CGRect(x: 0, y: 0, width: self.view.width, height: NX.topOffset)
+        self.navigationView.frame = CGRect(x: 0, y: 0, width: self.view.width, height: NX.safeAreaInsets.top + 44.0)
         self.navigationView.autoresizingMask = [.flexibleWidth]
         self.navigationView.controller = self
         self.navigationView.separator.isHidden = self.ctxs.separator.isHidden
         self.navigationView.separator.backgroundColor = self.ctxs.separator.backgroundColor.cgColor
         self.view.addSubview(self.navigationView)
-        self.navigationView.updateSubviews("", nil)
+        self.navigationView.updateSubviews(nil)
     }
     
     override open func viewWillAppear(_ animated: Bool) {
@@ -129,7 +129,7 @@ open class NXViewController: UIViewController  {
     }
     
     //更新视图：父类不会自动调用
-    open func updateSubviews(_ action: String, _ value: Any?){
+    open func updateSubviews(_ value: Any?){
         
     }
     

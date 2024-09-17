@@ -15,7 +15,7 @@ class EXViewController: NXTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.naviView.title = "NXViewController"
+        self.navigationView.title = "NXViewController"
         
         //布局视图
         self.setupSubviews()
@@ -26,7 +26,7 @@ class EXViewController: NXTableViewController {
             if let value = value as? [[[String:Any]]] {
                 self.arrValues = value
                 //刷新UI
-                self.updateSubviews("", nil)
+                self.updateSubviews(nil)
             }
         })
     }
@@ -90,7 +90,7 @@ class EXViewController: NXTableViewController {
     }
     
     //刷新UI
-    override func updateSubviews(_ action: String, _ value: Any?) {
+    override func updateSubviews(_ value: Any?) {
         self.data.removeAll()
         
         for arrSubvalues in self.arrValues {

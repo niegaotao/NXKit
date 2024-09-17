@@ -49,7 +49,7 @@ open class NXAbstractView: NXView {
         self.layer.addSublayer(separator)
     }
     
-    open override func updateSubviews(_ action:String, _ value:Any?){
+    open override func updateSubviews(_ value:Any?){
         guard let __abstract = value as? NXAbstract else {
             return
         }

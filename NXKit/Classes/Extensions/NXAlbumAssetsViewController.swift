@@ -16,11 +16,11 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
     //配置信息
     private let wrapped = NXAsset.Wrapped()
     //导航栏中间切换相册
-    public let centerView = NXButton(frame: CGRect(x: 75.0, y: NX.safeAreaInsets.top, width: NX.width-75.0*2, height: NX.topOffset-NX.safeAreaInsets.top))
+    public let centerView = NXButton(frame: CGRect(x: 75.0, y: NX.safeAreaInsets.top, width: NX.width-75.0*2, height: 44.0))
     //空页面
     public let placeholderView = NXPlaceholderView(frame: CGRect(x: 0, y: 0, width: NX.width, height: NX.width))
     //展示图片
-    public let collectionView = NXCollectionView(frame: CGRect(x: 0, y:0 , width: NX.width, height: NX.height - NX.topOffset - 50 - NX.bottomOffset))
+    public let collectionView = NXCollectionView(frame: CGRect(x: 0, y:0 , width: NX.width, height: NX.height - NX.safeAreaInsets.top - 44.0 - 50 - NX.bottomOffset))
     //展示底部切换的按钮
     public let footerView = NXLRView<UIButton, UIButton>(frame: CGRect(x: 0, y: -(50+NX.bottomOffset), width: NX.width, height: 50+NX.bottomOffset))
     //观察者
@@ -76,14 +76,14 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
                                 self?.previewAssets(at: 0)
                             }
                             else{
-                                self?.updateSubviews("", nil)
+                                self?.updateSubviews(nil)
                             }
                         }
                     })
                 }
             }
             else {
-                self?.updateSubviews("", nil)
+                self?.updateSubviews(nil)
             }
         }
     }
@@ -180,7 +180,7 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
         self.dispose("subcomponents", nil)
     }
     
-    open override func updateSubviews(_ action:String, _ value: Any?){
+    open override func updateSubviews(_ value: Any?){
         
         if self.wrapped.albums.count > 0 {
             self.placeholderView.isHidden = true
@@ -429,7 +429,7 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
     
     public func previewAssets(at index: Int){
         guard index >= 0 && index < self.wrapped.albums.count else {
-            self.updateSubviews("", nil)
+            self.updateSubviews(nil)
             return;
         }
         self.wrapped.index = index
@@ -444,7 +444,7 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
             }
         }
         
-        self.updateSubviews("", album)
+        self.updateSubviews(album)
         self.collectionView.reloadData()
         
         //滚动到底部
@@ -508,7 +508,7 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
             }
             asset.index = ""
         }
-        cell.updateSubviews("update", asset)
+        cell.updateSubviews(asset)
         return cell
     }
     

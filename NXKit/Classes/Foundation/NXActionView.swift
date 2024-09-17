@@ -60,7 +60,7 @@ extension NXActionView {
         actionView.ctxs.wrap(header: .header(true, false, true, false, title, subtitle))//header
         actionView.ctxs.wrap(center: .center(actions))//center
         actionView.ctxs.wrap(footer: .none)//footer
-        actionView.updateSubviews("", nil)
+        actionView.updateSubviews(nil)
         actionView.ctxs.completion = completion
         actionView.open(animation: actionView.ctxs.animation, completion: nil)
         return actionView
@@ -90,7 +90,7 @@ extension NXActionView {
         actionView.ctxs.wrap(header: header)//header
         actionView.ctxs.wrap(center: .center(actions))//center
         actionView.ctxs.wrap(footer: footer)//footer
-        actionView.updateSubviews("", nil)
+        actionView.updateSubviews(nil)
         actionView.ctxs.completion = completion
         actionView.open(animation: actionView.ctxs.animation, completion: nil)
         return actionView
@@ -393,7 +393,7 @@ public class NXActionView: NXAbstractOverlay<NXActionViewAttributes> {
         self.contentView.addSubview(self.footerView)
     }
     
-    open override func updateSubviews(_ action: String, _ value:Any?) {
+    open override func updateSubviews(_ value:Any?) {
         if self.ctxs.key.contains("center") {
             self.ctxs.animation = NXOverlay.Animation.center.rawValue
             
@@ -452,9 +452,9 @@ public class NXActionView: NXAbstractOverlay<NXActionViewAttributes> {
             self.ctxs.center.frame = __frame
         }
         
-        self.headerView.updateSubviews("",self.ctxs)
-        self.centerView.updateSubviews("", self.ctxs)
-        self.footerView.updateSubviews("", self.ctxs)
+        self.headerView.updateSubviews(self.ctxs)
+        self.centerView.updateSubviews(self.ctxs)
+        self.footerView.updateSubviews(self.ctxs)
 
         
         if self.ctxs.key.contains("center") {
@@ -537,7 +537,7 @@ extension NXActionView {
             self.addSubview(descriptionView)
         }
         
-        public override func updateSubviews(_ action:String, _ value: Any?){
+        public override func updateSubviews(_ value: Any?){
             guard let wrapped = value as? NXActionViewAttributes else {
                 return
             }
@@ -574,7 +574,7 @@ extension NXActionView {
         
         public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
             super.traitCollectionDidChange(previousTraitCollection)
-            self.updateSubviews("", self.value)
+            self.updateSubviews(self.value)
         }
     }
 }
@@ -680,7 +680,7 @@ extension NXActionView {
             self.contentView.delaysContentTouches = false
         }
         
-        public override func updateSubviews(_ action:String, _ value: Any?){
+        public override func updateSubviews(_ value: Any?){
             guard let __wrapped = value as? NXActionViewAttributes else {
                 return
             }
@@ -728,7 +728,7 @@ extension NXActionView {
         public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let action = self.ctxs.center.actions[indexPath.item]
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: action.ctxs.reuse, for: indexPath) as! NXActionViewCell
-            cell.updateSubviews("update", action)
+            cell.updateSubviews(action)
             return cell
         }
         
@@ -798,7 +798,7 @@ extension NXActionView {
             self.backgroundColor = NX.backgroundColor
             
             //初始化一个button
-            contentView.frame = CGRect(x: NX.insets.left, y: 10, width: self.width-NX.insets.left - NX.insets.right, height: 40)
+            contentView.frame = CGRect(x: 16.0, y: 10, width: self.width-16.0 - 16.0, height: 40)
             contentView.titleLabel?.font = NX.font(15)
             contentView.layer.masksToBounds = true
             
@@ -806,7 +806,7 @@ extension NXActionView {
             self.setupSeparator(color: NX.separatorColor, ats: .minY)
         }
 
-        public override func updateSubviews(_ action:String, _ value: Any?){
+        public override func updateSubviews(_ value: Any?){
             guard let wrapped = value as? NXActionViewAttributes else {
                 return
             }
@@ -840,7 +840,7 @@ extension NXActionView {
         
         public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
             super.traitCollectionDidChange(previousTraitCollection)
-            self.updateSubviews("", self.value)
+            self.updateSubviews(self.value)
         }
     }
 }

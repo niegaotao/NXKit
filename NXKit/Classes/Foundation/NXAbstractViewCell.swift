@@ -41,10 +41,10 @@ open class NXAbstractTableViewCell<T:UIView>: NXTableViewCell {
         separator.isHidden = true
     }
     
-    open override func updateSubviews(_ action:String, _ value: Any?){
+    open override func updateSubviews(_ value: Any?){
         self.abstractView.frame = self.contentView.bounds
         if let __abstractView = self.abstractView as? NXAbstractView {
-            __abstractView.updateSubviews(action, value)
+            __abstractView.updateSubviews(value)
             
             if let __wrapped = value as? NXAbstract, __wrapped.raw.isHighlighted {
                 self.selectedBackgroundView?.backgroundColor = __wrapped.raw.selectedBackgroundColor
@@ -56,7 +56,7 @@ open class NXAbstractTableViewCell<T:UIView>: NXTableViewCell {
             self.separator.isHidden = true
         }
         else if let __abstractView = self.abstractView as? NXView  {
-            __abstractView.updateSubviews(action, value)
+            __abstractView.updateSubviews(value)
             self.selectedBackgroundView?.backgroundColor = UIColor.clear
         }
     }
@@ -94,10 +94,10 @@ open class NXAbstractCollectionViewCell<T:UIView>: NXCollectionViewCell {
         self.separator.isHidden = true
     }
     
-    open override func updateSubviews(_ action:String, _ value: Any?){
+    open override func updateSubviews(_ value: Any?){
         self.abstractView.frame = self.contentView.bounds
         if let __abstractView = self.abstractView as? NXAbstractView {
-            __abstractView.updateSubviews(action, value)
+            __abstractView.updateSubviews(value)
             
             if let __wrapped = value as? NXAbstract, __wrapped.raw.isHighlighted {
                 self.selectedBackgroundView?.backgroundColor = __wrapped.raw.selectedBackgroundColor
@@ -109,7 +109,7 @@ open class NXAbstractCollectionViewCell<T:UIView>: NXCollectionViewCell {
             self.separator.isHidden = true
         }
         else if let __abstractView = self.abstractView as? NXView  {
-            __abstractView.updateSubviews(action, value)
+            __abstractView.updateSubviews(value)
             self.selectedBackgroundView?.backgroundColor = UIColor.clear
         }
     }

@@ -27,7 +27,7 @@ open class NXBackbarWrappedView: NXLCRView<NXButton, UIView, NXButton> {
         self.rhsView.tintColor = NX.barForegroundColor
     }
     
-    open override func updateSubviews(_ action: String, _ value: Any?) {
+    open override func updateSubviews(_ value: Any?) {
         let __isHidden = (value as? Bool) ?? true
         self.centerView.isHidden = __isHidden
         self.rhsView.isHidden = __isHidden
@@ -59,11 +59,11 @@ open class NXWebViewController: NXViewController {
         self.setupSubviews()
         
         if url.count > 0 {
-            self.updateSubviews("update", ["url":self.url])
+            self.updateSubviews(["url":self.url])
         }
         else if html.count > 0 {
             if let HTMLURL = Bundle.main.url(forResource: html, withExtension: "") {
-                self.webView.updateSubviews("update", URLRequest(url: HTMLURL))
+                self.webView.updateSubviews(URLRequest(url: HTMLURL))
             }
         }
     }
@@ -94,7 +94,7 @@ open class NXWebViewController: NXViewController {
         self.backbarView.frame = CGRect(x: 0, y: 0, width: 65, height: 44)
         self.backbarView.lhsView.addTarget(self, action: #selector(onBackAction), for: .touchUpInside)
         self.backbarView.rhsView.addTarget(self, action: #selector(onCloseAction), for: .touchUpInside)
-        self.backbarView.updateSubviews("", true)
+        self.backbarView.updateSubviews(true)
         self.navigationView.backView = backbarView
         self.navigationView.titleView.x = 15.0 + 44.0 + 1.0
         self.navigationView.titleView.width = self.navigationView.width - self.navigationView.titleView.x * 2.0
@@ -107,7 +107,7 @@ open class NXWebViewController: NXViewController {
         self.contentView.addSubview(self.progressView)
     }
     
-    open override func updateSubviews(_ action: String, _ value: Any?) {
+    open override func updateSubviews(_ value: Any?) {
         guard let value = value as? [String:Any], let _url = value["url"] as? String else {
             return
         }
@@ -120,7 +120,7 @@ open class NXWebViewController: NXViewController {
             //将网页需要的请求头数据在这里添加
             //HTTPRequest.setValue("user.id", forHTTPHeaderField: "userid")
             
-            self.webView.updateSubviews("update", HTTPRequest)
+            self.webView.updateSubviews(HTTPRequest)
         }
     }
     
@@ -172,12 +172,12 @@ open class NXWebViewController: NXViewController {
         //在这里做导航栏返回按钮
         if isCompleted && self.backbarView.isAutoable {
             if self.webView.canGoBack {
-                self.backbarView.updateSubviews("", false)
+                self.backbarView.updateSubviews(false)
                 self.navigationView.titleView.x = 15.0 + 65.0 + 8.0
                 self.navigationView.titleView.width = self.navigationView.width - self.navigationView.titleView.x * 2.0
             }
             else{
-                self.backbarView.updateSubviews("", true)
+                self.backbarView.updateSubviews(true)
                 self.navigationView.titleView.x = 15.0 + 44.0 + 1.0
                 self.navigationView.titleView.width = self.navigationView.width - self.navigationView.titleView.x * 2.0
             }

@@ -53,7 +53,7 @@ open class NXToolViewController: NXContainerController {
             let toViewController = subviewControllers[self.index]
             self.fromViewController(nil, toViewController:toViewController, animated: false)
         }
-        self.toolView.updateSubviews("", ["index":self.index])
+        self.toolView.updateSubviews(["index":self.index])
         self.view.addSubview(toolView)
     }
     
@@ -71,7 +71,7 @@ open class NXToolViewController: NXContainerController {
         }
         
         self.index = min(max(0, index), subviewControllers.count)
-        self.toolView.updateSubviews("", ["index":self.index, "elements":elements] as [String : Any])
+        self.toolView.updateSubviews(["index":self.index, "elements":elements] as [String : Any])
 
         if self.index >= 0 && self.index < self.subviewControllers.count {
             let toViewController = subviewControllers[self.index]

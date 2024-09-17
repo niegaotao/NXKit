@@ -148,7 +148,6 @@
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				43D540961CC7BB5947BE008F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -208,24 +207,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		43D540961CC7BB5947BE008F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/NXKit/NXKit.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NXKit.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D169CFC3DD4B4D399BE73AAF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

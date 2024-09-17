@@ -36,7 +36,7 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
         self.contentView.addSubview(highlighted.targetView)
     }
     
-    override open func updateSubviews(_ action:String, _ value:Any?){
+    override open func updateSubviews(_ value:Any?){
         if let dicValue = value as? [String:Any] {
             if let elements = dicValue["elements"] as? [NXToolView.Element], elements.count > 0 {
                 self.elements.forEach { element in
@@ -80,7 +80,7 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
         }
         
         //中间按钮
-        self.highlighted.targetView.updateSubviews("", self.highlighted)
+        self.highlighted.targetView.updateSubviews(self.highlighted)
         
         //tab
         let size = CGSize(width: self.highlighted.isHidden ? self.width/max(CGFloat(self.elements.count), 1) : self.width/CGFloat(self.elements.count+1), height: NX.toolViewOffset)
@@ -113,7 +113,7 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
         for (index, element) in self.elements.enumerated() {
             element.targetView.isHidden = false
             element.isSelected = index == self.index
-            element.targetView.updateSubviews("", element)
+            element.targetView.updateSubviews(element)
         }
     }
     
@@ -128,7 +128,7 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
             element.badge.value = 0
         }
         
-        self.updateSubviews("", nil)
+        self.updateSubviews(nil)
     }
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -187,7 +187,7 @@ extension NXToolView {
             self.addSubview(imageView)
         }
         
-        open override func updateSubviews(_ action: String, _ value: Any?) {
+        open override func updateSubviews(_ value: Any?) {
             guard let element = value as? NXToolView.Highlighted else {
                 return
             }
@@ -268,8 +268,8 @@ extension NXToolView {
             self.addSubview(badgeView)
         }
         
-        override open func updateSubviews(_ action:String, _ value: Any?) {
-            super.updateSubviews(action, value)
+        override open func updateSubviews(_ value: Any?) {
+            super.updateSubviews(value)
             
             guard let element = value as? NXToolView.Element else {
                 return

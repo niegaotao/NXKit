@@ -34,7 +34,8 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         self.ctxs.slider.sliderView.layer.masksToBounds = true
         self.contentView.addSubview(self.ctxs.slider.sliderView)
     }
-    open override func updateSubviews(_ action: String, _ value: Any?) {
+    
+    open override func updateSubviews(_ value: Any?) {
         guard let dicValue = value as? [String:Any] else {
             return
         }
@@ -134,6 +135,12 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
     //在Swipeview中：手动点击后 collectionView(_ didSelectItemAt:)中调用NXSwipeView.didSelectItem(_)切换滑块,并通知Controller
     
     open func didSelectItem(at index: Int){
+        if let completion = self.completion {
+            completion(self, index, false)
+        }
+    }
+    
+    open func onSelectItem(at index: Int) {
         self.ctxs.index = index
         
         self.contentView.reloadData()
@@ -214,7 +221,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let rs = self.ctxs.dequeue(collectionView, indexPath), let element = rs.element as? NXSwipeView.Element {
             element.isSelected = (self.ctxs.index == indexPath.item)
-            rs.cell.updateSubviews("", element)
+            rs.cell.updateSubviews(element)
             return rs.cell
         }
         return NXSwipeView.Cell()
@@ -223,10 +230,6 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
     open  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if self.ctxs.index !=  indexPath.item {
             self.didSelectItem(at: indexPath.item)
-            
-            if let completion = self.completion {
-                completion(self, indexPath.item, false)
-            }
         }
     }
     
@@ -270,6 +273,9 @@ extension NXSwipeView {
             __sender.selected = NX.blackColor
             __sender.unselected = NX.lightGrayColor
         }
+        
+        // 顶部选择的实在导航栏上还是contentview上
+        open var displayMode = NXSwipeView.DisplayMode.contentView
         
         //是否等分
         open var isEqually : Bool = true
@@ -326,6 +332,11 @@ extension NXSwipeView {
         }
     }
     
+    public enum DisplayMode: String, CaseIterable {
+        case navigationView
+        case contentView
+    }
+    
     open class Cell : NXCollectionViewCell {
         public let titleView: UILabel = UILabel(frame: CGRect.zero)
         override open func setupSubviews(){
@@ -340,7 +351,7 @@ extension NXSwipeView {
             self.contentView.addSubview(self.titleView)
         }
         
-        override open func updateSubviews(_ action:String, _ value:Any?){
+        override open func updateSubviews(_ value:Any?){
             if let element = value as? NXSwipeView.Element {
                 if element.isSelected {
                     self.titleView.text = element.title.selected

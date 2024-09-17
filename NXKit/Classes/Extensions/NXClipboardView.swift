@@ -146,7 +146,7 @@ open class NXClipboardView: NXView {
         self.addGestureRecognizer(self.panRecognizer)
     }
     
-    open override func updateSubviews(_ action: String, _ value: Any?) {
+    open override func updateSubviews(_ value: Any?) {
         
         if self.ctxs.clip.width <= 0 || self.ctxs.clip.height <= 0 {
             self.ctxs.clip.name = "1:1"

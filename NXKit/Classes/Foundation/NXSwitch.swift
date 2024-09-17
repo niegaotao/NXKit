@@ -90,7 +90,7 @@ open class NXSwitch: NXControl {
      */
     open var shape: NXSwitch.Shape = .oval {
         didSet {
-            self.updateSubviews("shape", nil)
+            self.updateSubviews("shape")
         }
     }
 
@@ -99,7 +99,7 @@ open class NXSwitch: NXControl {
      */
     open var on: Bool = true {
         didSet {
-            self.updateSubviews("on", nil)
+            self.updateSubviews("on")
         }
     }
     
@@ -141,8 +141,8 @@ open class NXSwitch: NXControl {
         on = false
     }
     
-    open override func updateSubviews(_ action:String, _ value:Any?){
-        if action == "shape" {
+    open override func updateSubviews(_ value:Any?){
+        if let value = value as? String, value == "shape" {
             switch self.shape {
                 case .oval:
                     onBackgroundView.layer.cornerRadius = self.frame.size.height / 2.0
@@ -160,7 +160,7 @@ open class NXSwitch: NXControl {
                     thumbView.layer.cornerRadius = 0
             }
         }
-        else if action == "on" {
+        else if let value = value as? String, value == "on" {
             if self.on {
                 onBackgroundView.alpha = 1.0
                 offBackgroundView.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)

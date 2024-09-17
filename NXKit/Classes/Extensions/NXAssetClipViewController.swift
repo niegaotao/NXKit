@@ -16,7 +16,7 @@ open class NXAssetClipViewController: NXViewController {
         __sender.key = -1
         __sender.value = []
     }
-    public let backgroundView = NXCView<UIImageView>(frame: CGRect(x: 10, y: 10, width: NX.width-20, height: NX.height-NX.topOffset-NX.bottomOffset-20))
+    public let backgroundView = NXCView<UIImageView>(frame: CGRect(x: 10, y: 10, width: NX.width-20, height: NX.height-NX.safeAreaInsets.top - 44.0-NX.bottomOffset-20))
     public let clipboardView = NXClipboardView(frame: CGRect.zero)
     public let footerView = NXCView<UIScrollView>(frame: CGRect(x: 0, y: 0, width: NX.width, height: 80+NX.bottomOffset))
     public var componentViews = [UILabel]()
@@ -54,10 +54,10 @@ open class NXAssetClipViewController: NXViewController {
                 self.clips.key = 0
             }
             
-            var __background = CGRect(x: 10, y: 10, width: NX.width-20, height: NX.height-NX.topOffset-NX.bottomOffset-20)
+            var __background = CGRect(x: 10, y: 10, width: NX.width-20, height: NX.height-NX.safeAreaInsets.top - 44.0-NX.bottomOffset-20)
             if self.clips.value.count >= 2 {
                 //有多项可选
-                __background = CGRect(x: 10, y: 10, width: NX.width-20, height: NX.height-NX.topOffset-NX.bottomOffset-20-80)
+                __background = CGRect(x: 10, y: 10, width: NX.width-20, height: NX.height-NX.safeAreaInsets.top - 44.0-NX.bottomOffset-20-80)
                 
                 var offset = CGRect(x: 15, y: 8, width: 52, height: 60)
                 var ctx = CGRect(x: 15, y: 0, width: CGFloat(self.clips.value.count) * offset.size.width + CGFloat(self.clips.value.count - 1)*10.0, height: offset.size.height)
@@ -129,7 +129,7 @@ open class NXAssetClipViewController: NXViewController {
             }
             self.clipboardView.ctxs.clip.isHidden = clip.isHidden
             
-            self.clipboardView.updateSubviews("", nil)
+            self.clipboardView.updateSubviews(nil)
             
             self.backgroundView.addSubview(self.clipboardView)
         }
@@ -187,7 +187,7 @@ open class NXAssetClipViewController: NXViewController {
             self.clipboardView.ctxs.clip.height = self.clips.value[self.clips.key].height
             self.clipboardView.ctxs.clip.isHidden = self.clips.value[self.clips.key].isHidden
             
-            self.clipboardView.updateSubviews("", nil)
+            self.clipboardView.updateSubviews(nil)
             
         }
     }
