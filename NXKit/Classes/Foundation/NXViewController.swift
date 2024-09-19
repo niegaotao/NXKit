@@ -169,7 +169,7 @@ open class NXViewController: UIViewController  {
     }
     
     //返回按钮点击
-    open func backBarAction(){
+    open func onBackPressed(){
         self.close()
     }
     

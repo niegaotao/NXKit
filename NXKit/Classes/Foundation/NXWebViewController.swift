@@ -95,7 +95,7 @@ open class NXWebViewController: NXViewController {
         self.backbarView.lhsView.addTarget(self, action: #selector(onBackAction), for: .touchUpInside)
         self.backbarView.rhsView.addTarget(self, action: #selector(onCloseAction), for: .touchUpInside)
         self.backbarView.updateSubviews(true)
-        self.navigationView.backView = backbarView
+        self.navigationView.leftView = backbarView
         self.navigationView.titleView.x = 15.0 + 44.0 + 1.0
         self.navigationView.titleView.width = self.navigationView.width - self.navigationView.titleView.x * 2.0
         

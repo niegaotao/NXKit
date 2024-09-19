@@ -9,9 +9,7 @@
 import UIKit
 import Photos
 
-
-
-open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegate, UICollectionViewDataSource {
+open class NXAlbumAssetsViewController: NXViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     public func getWrapped() -> NXAsset.Wrapped { self.wrapped }
     //配置信息
     private let wrapped = NXAsset.Wrapped()
@@ -100,17 +98,17 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
         }
         self.centerView.updateAlignment(.horizontalReverse, 2)
         self.navigationView.centerView = self.centerView
-        self.navigationView.backBar.isHidden = false
-        self.navigationView.backBar.updateSubviews(NX.image(named: "navi-close.png", mode: .alwaysTemplate), nil)
-        self.navigationView.backBar.addTarget(nil, action: nil) {[weak self] _ in
+        self.navigationView.backBarButton.isHidden = false
+        self.navigationView.backBarButton.updateSubviews(NX.image(named: "navi-close.png", mode: .alwaysTemplate), nil)
+        self.navigationView.backBarButton.addTarget(nil, action: nil) {[weak self] _ in
             self?.wrapped.close(assets: [])
         }
         
-        self.navigationView.forwardBar = NXNavigationView.Bar.forward(image: NX.image(named: "icon-camera.png", mode: .alwaysTemplate), title: nil, completion: {[weak self] owner in
+        self.navigationView.rightView = NXNavigationView.Bar.forward(image: NX.image(named: "icon-camera.png", mode: .alwaysTemplate), title: nil, completion: {[weak self] owner in
             self?.observer.unregister()
             self?.dispose("openCamera", nil)
         })
-        self.navigationView.forwardBar?.isHidden = self.wrapped.subviews.camera
+        self.navigationView.rightView?.isHidden = self.wrapped.subviews.camera
         
         self.placeholderView.isHidden = true
         self.placeholderView.descriptionView.text = "您的相册没有图片/视频，或者您没有授权\(NX.name)访问您的相册。"
@@ -416,14 +414,14 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
             self.footerView.rhsView.frame = CGRect(x: NX.width-15-__size.width, y: 12, width: __size.width, height: __size.height)
             self.footerView.rhsView.setTitle(__description, for: .normal)
             
-            self.navigationView.forwardBar?.isHidden = self.wrapped.subviews.camera
+            self.navigationView.rightView?.isHidden = self.wrapped.subviews.camera
             || self.wrapped.assets.count >= self.wrapped.maxOfAssets
             || self.wrapped.image.assets.count >= self.wrapped.image.maxOfAssets && self.wrapped.image.maxOfAssets > 0
             || self.wrapped.video.assets.count >= self.wrapped.video.maxOfAssets && self.wrapped.video.maxOfAssets > 0
         }
     }
     
-    @objc override open func backBarAction() {
+    @objc override open func onBackPressed() {
         self.wrapped.close(assets: [])
     }
     

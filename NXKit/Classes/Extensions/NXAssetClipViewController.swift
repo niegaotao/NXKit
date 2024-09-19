@@ -27,7 +27,7 @@ open class NXAssetClipViewController: NXViewController {
         self.navigationView.title = "裁剪"
         
         self.contentView.clipsToBounds = true
-        self.navigationView.forwardBar = NXNavigationView.Bar.forward(image: nil, title: "保存", completion: {[weak self] (_) in
+        self.navigationView.rightView = NXNavigationView.Bar.forward(image: nil, title: "保存", completion: {[weak self] (_) in
             self?.dispose("forward", nil)
         })
         

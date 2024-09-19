@@ -9,12 +9,12 @@
 import UIKit
 
 open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
-    open weak var controller : NXViewController?
+    open weak var controller : UIViewController?
     
-    open var backBar = NXNavigationView.Bar.back(image:NX.image(named:"navi-back.png", mode: .alwaysTemplate), title: nil) //默认
-    open var backView : UIView? {
+    open var backBarButton = NXNavigationView.Bar.back(image:NX.image(named:"navi-back.png", mode: .alwaysTemplate), title: nil) //默认
+    open var leftView : UIView? {
         willSet{
-            backView?.removeFromSuperview()
+            leftView?.removeFromSuperview()
         }
         didSet {
             self.updateSubviews(nil)
@@ -37,18 +37,9 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
         }
     }
     
-    open var forwardBar: NXNavigationView.Bar? {
-        willSet {
-            forwardBar?.removeFromSuperview()
-        }
-        didSet {
-            self.updateSubviews(nil)
-        }
-    }
-    
-    open var forwardView : UIView? {
+    open var rightView : UIView? {
         willSet{
-            forwardView?.removeFromSuperview()
+            rightView?.removeFromSuperview()
         }
         didSet {
             self.updateSubviews(nil)
@@ -82,13 +73,18 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
         self.contentView.addSubview(self.titleView)
         
         
-        self.backBar.addTarget(nil, action: nil, completion:{[weak self] _ in
-            self?.controller?.backBarAction()
+        self.backBarButton.addTarget(nil, action: nil, completion:{[weak self] _ in
+            if let viewController = self?.controller as? NXViewController {
+                viewController.onBackPressed()
+            }
+            else if let navigationController = self?.controller?.navigationController {
+                navigationController.popViewController(animated: true)
+            }
         })
-        self.backBar.autoresizingMask = [.flexibleHeight]
-        self.backBar.frame = CGRect(x: 15, y: NX.safeAreaInsets.top, width: self.backBar.width, height: self.contentView.height-NX.safeAreaInsets.top)
-        self.backBar.isHidden = true
-        self.contentView.addSubview(self.backBar)
+        self.backBarButton.autoresizingMask = [.flexibleHeight]
+        self.backBarButton.frame = CGRect(x: 15, y: NX.safeAreaInsets.top, width: self.backBarButton.width, height: self.contentView.height-NX.safeAreaInsets.top)
+        self.backBarButton.isHidden = true
+        self.contentView.addSubview(self.backBarButton)
         
         self.separator.frame = CGRect(x: 0, y: self.contentView.height-NX.pixel, width: self.contentView.width, height: NX.pixel)
         self.separator.backgroundColor = NX.separatorColor.cgColor
@@ -100,24 +96,24 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
         self.separator.frame = CGRect(x: 0, y: self.contentView.height-NX.pixel, width: self.contentView.width, height: NX.pixel)
         
         if true {
-            let size = backBar.frame.size
-            backBar.frame = CGRect(x: 15, y: NX.safeAreaInsets.top+(self.contentView.height-NX.safeAreaInsets.top-size.height)/2, width: size.width, height: size.height)
+            let size = backBarButton.frame.size
+            backBarButton.frame = CGRect(x: 15, y: NX.safeAreaInsets.top+(self.contentView.height-NX.safeAreaInsets.top-size.height)/2, width: size.width, height: size.height)
             
             if let controller = self.controller,
                 let viewControllers = self.controller?.navigationController?.viewControllers,
                 let index = viewControllers.firstIndex(of: controller), index >= 1 {
-                self.backBar.isHidden = self.backBarHidden
+                self.backBarButton.isHidden = self.backBarHidden
             }
         }
         
         
-        if let backView = self.backView {
-            let size = backView.frame.size
-            backView.frame = CGRect(x: 15, y: NX.safeAreaInsets.top+(self.contentView.height-NX.safeAreaInsets.top-size.height)/2, width: size.width, height: size.height)
-            if backView.superview == nil {
-                self.contentView.addSubview(backView)
+        if let leftView = self.leftView {
+            let size = leftView.frame.size
+            leftView.frame = CGRect(x: 15, y: NX.safeAreaInsets.top+(self.contentView.height-NX.safeAreaInsets.top-size.height)/2, width: size.width, height: size.height)
+            if leftView.superview == nil {
+                self.contentView.addSubview(leftView)
             }
-            self.backBar.isHidden = true
+            self.backBarButton.isHidden = true
         }
         
         if true {
@@ -142,18 +138,11 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
         }
         
         
-        if let forwardView = self.forwardView {
-            let size = forwardView.frame.size
-            forwardView.frame = CGRect(x: self.contentView.width-15-size.width, y: NX.safeAreaInsets.top+(self.contentView.height-NX.safeAreaInsets.top-size.height)/2, width: size.width, height: size.height)
-            if forwardView.superview == nil {
-                self.contentView.addSubview(forwardView)
-            }
-        }
-        else if let forwardBar = self.forwardBar {
-            let size = forwardBar.frame.size
-            forwardBar.frame = CGRect(x: self.contentView.width-15-size.width, y: NX.safeAreaInsets.top+(self.contentView.height-NX.safeAreaInsets.top-size.height)/2, width: size.width, height: size.height)
-            if forwardBar.superview == nil {
-                self.contentView.addSubview(forwardBar)
+        if let rightView = self.rightView {
+            let size = rightView.frame.size
+            rightView.frame = CGRect(x: self.contentView.width-15-size.width, y: NX.safeAreaInsets.top+(self.contentView.height-NX.safeAreaInsets.top-size.height)/2, width: size.width, height: size.height)
+            if rightView.superview == nil {
+                self.contentView.addSubview(rightView)
             }
         }
     }
