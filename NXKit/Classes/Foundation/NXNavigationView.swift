@@ -46,7 +46,7 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
         }
     }
     
-    open var backBarHidden = false
+    open var isBackBarButtonHidden = false
     
     open var separator = CALayer()
     
@@ -102,7 +102,7 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
             if let controller = self.controller,
                 let viewControllers = self.controller?.navigationController?.viewControllers,
                 let index = viewControllers.firstIndex(of: controller), index >= 1 {
-                self.backBarButton.isHidden = self.backBarHidden
+                self.backBarButton.isHidden = self.isBackBarButtonHidden
             }
         }
         
