@@ -10,9 +10,24 @@ import UIKit
 
 
 open class NXToolView: NXBackgroundView<UIImageView, UIView> {
-    open weak var controller : NXToolViewController?
-    public fileprivate(set) var index : Int = 0
-    open var didSelect : NX.Event<Int, Int>? = nil //每次点击都会调用
+    
+    open class Attributes {
+        open var elements = [NXToolView.Element]() //
+        open var index = 0
+        
+        public init(){}
+        
+        @discardableResult
+        func copy(fromValue: NXToolView.Attributes) -> NXToolView.Attributes {
+            self.elements = fromValue.elements
+            self.index = fromValue.index
+            return self
+        }
+    }
+    
+    public let attributes = NXToolView.Attributes()
+    
+    open var onSelect : NX.Event<Int, Int>? = nil //每次点击都会调用
     public let separator = NX.Separator { (__sender) in
         __sender.isHidden = false
         __sender.backgroundColor = NX.separatorColor
@@ -26,7 +41,6 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
         __sender.shadowOpacity = 0.15
     }
     
-    open var elements = [NXToolView.Element]()
     public let highlighted = NXToolView.Highlighted { (__sender) in
         __sender.isHidden = true
     }
@@ -37,22 +51,14 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
     }
     
     override open func updateSubviews(_ value:Any?){
-        if let dicValue = value as? [String:Any] {
-            if let elements = dicValue["elements"] as? [NXToolView.Element], elements.count > 0 {
-                self.elements.forEach { element in
-                    element.targetView.removeFromSuperview()
-                }
-                self.elements = elements
-            }
-            
-            if let index = dicValue["index"] as? Int {
-                self.index = max(min(index, self.elements.count), 0)
-            }
+        if let attributes = value as? NXToolView.Attributes {
+            self.attributes.copy(fromValue: attributes)
+            self.attributes.index = max(min(attributes.index, self.attributes.elements.count), 0)
         }
         
         if self.highlighted.isHidden == false {
             //如果想要显示中间的加大按钮，必须满足常规按钮的个数是偶数个
-            self.highlighted.isHidden = (self.elements.count % 2 != 0)
+            self.highlighted.isHidden = (self.attributes.elements.count % 2 != 0)
         }
         
         //设置阴影
@@ -83,12 +89,12 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
         self.highlighted.targetView.updateSubviews(self.highlighted)
         
         //tab
-        let size = CGSize(width: self.highlighted.isHidden ? self.width/max(CGFloat(self.elements.count), 1) : self.width/CGFloat(self.elements.count+1), height: NX.toolViewOffset)
-        for (index, element) in self.elements.enumerated() {
+        let size = CGSize(width: self.highlighted.isHidden ? self.width/max(CGFloat(self.attributes.elements.count), 1) : self.width/CGFloat(self.attributes.elements.count+1), height: NX.toolViewOffset)
+        for (index, element) in self.attributes.elements.enumerated() {
             element.size = CGSize(width: size.width, height: size.height)
             element.targetView.isHidden = false
             element.targetView.frame = CGRect(x: size.width * CGFloat(index), y: 0, width: size.width, height: size.height)
-            if index >= self.elements.count/2 && self.highlighted.isHidden == false {
+            if index >= self.attributes.elements.count/2 && self.highlighted.isHidden == false {
                 element.targetView.frame = CGRect(x: size.width * CGFloat(index+1), y: 0, width: size.width, height: size.height)
             }
             element.targetView.tag = index
@@ -96,33 +102,43 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
                 
                 guard let __toolView = self,
                     let __elementView = v as? NXToolView.ElementView,
-                    __elementView.tag >= 0 && __elementView.tag < __toolView.elements.count else {
+                      __elementView.tag >= 0 && __elementView.tag < __toolView.attributes.elements.count else {
                     return
                 }
                 
-                let fromValue = __toolView.index
-                let toValue = __elementView.tag
-                if toValue != fromValue {
-                    //切换选中
-                    self?.controller?.didSelectViewController(fromValue:fromValue, toValue: toValue, animated: false)
-                }
+                self?.onSelectView(at: __elementView.tag)
             }
             self.contentView.addSubview(element.targetView)
         }
         
-        for (index, element) in self.elements.enumerated() {
+        for (index, element) in self.attributes.elements.enumerated() {
             element.targetView.isHidden = false
-            element.isSelected = index == self.index
+            element.isSelected = index == self.attributes.index
             element.targetView.updateSubviews(element)
         }
     }
     
-    public func fromView(fromValue:Int, toValue: Int, animated:Bool){
-        let newValue = max(min(toValue, self.elements.count), 0)
-        guard self.index != newValue else {return}
+    open func onSelectView(at index: Int) {
+        if self.attributes.index == index {
+            return
+        }
         
-        let element = self.elements[newValue]
-        self.index = newValue
+        if let completion = self.onSelect {
+            completion(self.attributes.index, index)
+        }
+        else {
+            self.didSelectView(at: index)
+        }
+    }
+    
+    open func didSelectView(at index: Int){
+        guard
+            index >= 0,
+            index < self.attributes.elements.count,
+            self.attributes.index != index else {return}
+        
+        let element = self.attributes.elements[index]
+        self.attributes.index = index
         
         if element.badge.isResetable {
             element.badge.value = 0

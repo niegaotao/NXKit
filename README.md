@@ -47,7 +47,7 @@
 - `NXCollectionViewController`：`NXCollectionView`视图控制器
 - `NXWebViewController`：`NXWebView`视图控制器
 - `NXNavigationController`：导航控制器
-- `NXContainerController`：容器控制器
+- `NXChildrenViewController`：容器控制器
 - `NXToolViewController`：仿系统`UITabBarController`
 - `NXSwipeViewController`：仿系统`UIPageViewController`
 

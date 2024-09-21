@@ -54,10 +54,8 @@ open class NXViewController: UIViewController  {
         self.contentView.backgroundColor = NX.viewBackgroundColor
         self.view.addSubview(self.contentView)
         
-        
         self.animationView.frame = self.contentView.bounds
         self.contentView.addSubview(self.animationView)
-        
         
         self.navigationView.frame = CGRect(x: 0, y: 0, width: self.view.width, height: NX.safeAreaInsets.top + 44.0)
         self.navigationView.autoresizingMask = [.flexibleWidth]
@@ -77,7 +75,7 @@ open class NXViewController: UIViewController  {
         }
         
         //更新状态栏样式
-        self.updateNavigationBar()
+        self.updateNavigationAppearance()
     }
     
     override open func viewDidAppear(_ animated: Bool) {
@@ -134,21 +132,8 @@ open class NXViewController: UIViewController  {
     }
     
     //更新导航栏：父类会自动调用
-    open func updateNavigationBar() {
-        if let superviewController = self.ctxs.superviewController {
-            if let viewController = superviewController as? NXToolViewController, viewController.selectedViewController == self {
-                superviewController.updateNavigationBar()
-            }
-            else if superviewController.ctxs.subviewControllers.last == self {
-                superviewController.updateNavigationBar()
-            }
-            else {
-                self.setNeedsStatusBarAppearanceUpdate()
-            }
-        }
-        else {
-            self.setNeedsStatusBarAppearanceUpdate()
-        }
+    open func updateNavigationAppearance() {
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     ///关闭当前控制器
@@ -179,7 +164,7 @@ open class NXViewController: UIViewController  {
     }
     
     //页面内的相关逻辑操作
-    open func dispose(_ operation:String, _ value:Any?, _ completion:NX.Event<String, Any?>? = nil){
+    open func dispose(_ operation:String, _ value:Any?, _ completion: NX.Event<String, Any?>? = nil){
         
     }
     
@@ -189,46 +174,11 @@ open class NXViewController: UIViewController  {
     }
     
     open override var preferredStatusBarStyle: UIStatusBarStyle {
-        var currentValue = self.ctxs.statusBarStyle
-        if let viewController = self as? NXToolViewController, let selectedViewController = viewController.selectedViewController {
-            currentValue = selectedViewController.ctxs.statusBarStyle
-        }
-        else if let viewController = self.ctxs.subviewControllers.last, viewController.ctxs.statusBarStyle != .none {
-            currentValue = viewController.ctxs.statusBarStyle
-        }
-        
-        if currentValue == NX.StatusBarStyle.unspecified {
-            return UIStatusBarStyle.default
-        }
-        else if currentValue == NX.StatusBarStyle.light {
-            return UIStatusBarStyle.lightContent
-        }
-        else if currentValue == NX.StatusBarStyle.dark {
-            if #available(iOS 13.0, *) {
-                if UITraitCollection.current.userInterfaceStyle == .dark {
-                    return UIStatusBarStyle.lightContent
-                }
-                else {
-                    return UIStatusBarStyle.darkContent
-                }
-            }
-            else{
-                return UIStatusBarStyle.default
-            }
-        }
-        return UIStatusBarStyle.lightContent
+        return self.ctxs.statusBarStyle
     }
 
     open override var prefersStatusBarHidden: Bool {
-        var currentValue = self.ctxs.statusBarStyle
-
-        if let viewController =  self as? NXToolViewController, let selectedViewController = viewController.selectedViewController {
-            currentValue = selectedViewController.ctxs.statusBarStyle
-        }
-        else if let viewController = self.ctxs.subviewControllers.last, viewController.ctxs.statusBarStyle != .none {
-            currentValue = viewController.ctxs.statusBarStyle
-        }
-        return currentValue == NX.StatusBarStyle.hidden
+        return self.ctxs.statusBarHidden
     }
     
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -253,21 +203,14 @@ extension NXViewController {
     open class Association {
         open var index = 0 ///用于记录当前正在请求或者展示的页面index，多用于分页加载
         open var state = NX.Reload.initialized///当前刷新状态
-        
-        open var isWrapped : Bool = false ///是否被其他UIViewController包装了，某些情况被包装的需要隐藏掉导航栏
         open var isEmpty : Bool = true ///页面是否为空，如有缓存数据则可置为false。false不用展示加载动画
-        
-        ///以下三个备用，可以使用的场景比如存储分段选择控件的selectedIndex
-        open var x: Int = 0
-        open var y: Int = 0
-        open var z: Int = 0
         
         open var lifecycleValue = NX.Lifecycle.initialized;
         open var lifecycle : NX.Event<NX.Lifecycle, NXViewController>? = nil;
         
         ///状态栏样式
         open var shouldAutorotate = false
-        open var statusBarStyle = NX.StatusBarStyle.dark
+        open var statusBarStyle = UIStatusBarStyle.default
         open var statusBarHidden = false
         open var orientationMask = UIInterfaceOrientationMask.portrait
         
@@ -275,7 +218,7 @@ extension NXViewController {
         open var animationViewClass = NX.AnimationClass
        
         ///是否允许手势返回：某些页面会设置不允许手势返回，采用block是因为可以在当前页面接收到右滑手势返回事件
-        open var panRecognizer : ((String, UIPanGestureRecognizer) -> (Bool)) = {_, _ in return true}
+        open var onBackInvoked : ((String, UIPanGestureRecognizer) -> (Bool)) = {_, _ in return true}
         
         ///进行的什么操作
         open var navigation = NX.Navigation.push
@@ -292,15 +235,12 @@ extension NXViewController {
             __sender.backgroundColor = NX.separatorColor;
         }
         ///覆盖的视图控制器
-        public var subviewControllers = [NXViewController]()
+        public var viewControllers = [NXViewController]()
         ///容器试图管理器
         public weak var superviewController : NXViewController? = nil
         
         ///初始化方法
         public init(){}
-        
-        static var index = 0
-        static var next = 0
     }
 }
 

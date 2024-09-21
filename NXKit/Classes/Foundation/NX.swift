@@ -112,11 +112,11 @@ extension NX {
     }
     
     //创建浅色/暗黑模式的颜色
-    public class func color(_ lightColor:UIColor, _ darkColor:UIColor? = nil) -> UIColor {
+    public class func color(_ lightColor: UIColor, _ darkColor: UIColor? = nil) -> UIColor {
         if #available(iOS 13.0, *) {
-            return UIColor.init { (__collection) -> UIColor in
-                if let __darkColor = darkColor, NX.darkMode == NX.DarkMode.dark {
-                    return __darkColor
+            return UIColor.init { (collection) -> UIColor in
+                if collection.userInterfaceStyle == .dark, let darkColor = darkColor {
+                    return darkColor
                 }
                 return lightColor
             }
@@ -185,61 +185,7 @@ extension NX {
 
 //用户设定的暗黑模式类型
 extension NX {
-    static private(set) var __darkMode = NX.DarkMode.light
-    static public var darkMode : NX.DarkMode {
-        set{
-            __darkMode = newValue
-        }
-        get{
-            if __darkMode == NX.DarkMode.light {
-                return NX.DarkMode.light
-            }
-            else if __darkMode == NX.DarkMode.dark {
-                if #available(iOS 13.0, *) {
-                    return NX.DarkMode.dark
-                }
-                return NX.DarkMode.light
-            }
-            else {
-                if #available(iOS 13.0, *) {
-                    if UITraitCollection.current.userInterfaceStyle == .dark {
-                        return NX.DarkMode.dark
-                    }
-                }
-                return NX.DarkMode.light
-            }
-        }
-    }
-    
-    //初始化的状态栏样式
-    static private(set) var __statusBarStyle = NX.StatusBarStyle.dark
-    static public var statusBarStyle : NX.StatusBarStyle {
-        set{
-            if newValue !=  .none {
-                __statusBarStyle = newValue
-            }
-        }
-        get{
-            return __statusBarStyle
-        }
-    }
-    
-    //暗黑模式的类型
-    public enum DarkMode : String {
-        case unspecified = "unspecified"
-        case light = "light"
-        case dark = "dark"
-    }
-    
-    //状态栏的样式
-    public enum StatusBarStyle : String {
-        case none = "none"
-        case hidden = "hidden"
-        case unspecified = "unspecified"
-        case light = "light"
-        case dark = "dark"
-    }
-    
+    static public var userInterfaceStyle = UIUserInterfaceStyle.light
 }
 
 

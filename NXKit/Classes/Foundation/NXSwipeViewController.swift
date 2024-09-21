@@ -8,24 +8,41 @@
 
 import UIKit
 
-open class NXSwipeViewController: NXContainerController, UIScrollViewDelegate {
+open class NXSwipeViewController: NXChildrenViewController, UIScrollViewDelegate {
     open var scrollView = UIScrollView(frame: CGRect.zero)
     open var swipeView = NXSwipeView(frame: CGRect(x: 0, y: 0, width: NX.width, height: 44))
     
-    open class Attributes {
+    open class Attributes: NXSwipeView.Attributes {
         open var viewControllers = [NXViewController]()
-        open var elements = [Any]() //
-        open var index = 0
+        open var location = NXSwipeViewController.Location.contentView
+        override public init(){}
+        
+        @discardableResult
+        func copy(fromValue: NXSwipeViewController.Attributes) -> NXSwipeViewController.Attributes {
+            super.copy(fromValue: fromValue)
+            self.viewControllers = fromValue.viewControllers
+            self.location = fromValue.location
+            return self
+        }
     }
     
-    public let attributes = Attributes()
+    public enum Location: String, CaseIterable {
+        case navigationView
+        case contentView
+    }
+    
+    public let attributes = NXSwipeViewController.Attributes()
     
     override open func viewDidLoad() {
         super.viewDidLoad()
     
+        self.setupSubviews()
+    }
+    
+    open override func setupSubviews() {
         //滚动的容器
-        self.swipeView.completion = {[weak self] (swipeView, index, animated) in
-            self?.swipeView(swipeView: swipeView, index: index, animated: animated)
+        self.swipeView.onSelect = {[weak self] (fromIndex, toIndex) in
+            self?.didSelectViewController(fromValue: fromIndex, toValue: toIndex)
         }
         
         scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -48,21 +65,22 @@ open class NXSwipeViewController: NXContainerController, UIScrollViewDelegate {
         super.viewDidLayoutSubviews()
     }
     
-    open func swipeView(swipeView:NXSwipeView, index: Int, animated: Bool){
-        if index >= 0 && index < subviewControllers.count {
-            self.selectedViewController = self.subviewControllers[index]
-        }
-        self.scrollView.setContentOffset(CGPoint(x: self.view.width * CGFloat(index), y: 0), animated: animated)
+    //选中
+    public func didSelectViewController(fromValue:Int, toValue: Int){
+        guard toValue >= 0,
+              toValue < self.attributes.viewControllers.count,
+            self.attributes.index != toValue else {return}
+        
+        self.currentViewController = self.viewControllers[toValue]
+        self.scrollView.setContentOffset(CGPoint(x: self.view.width * CGFloat(toValue), y: 0), animated: true)
     }
     
     open override func updateSubviews(_ value: Any?) {
         if let attributes = value as? NXSwipeViewController.Attributes {
-            self.attributes.index = attributes.index
-            self.attributes.viewControllers = attributes.viewControllers
-            self.attributes.elements = attributes.elements
+            self.attributes.copy(fromValue: attributes)
         }
   
-        if self.swipeView.ctxs.displayMode == .navigationView {
+        if self.attributes.location == .navigationView {
             swipeView.frame = CGRect(x: 80, y: 0, width: NX.width - 80 * 2, height: 44)
             navigationView.centerView = self.swipeView
             navigationView.updateSubviews(nil)
@@ -70,7 +88,7 @@ open class NXSwipeViewController: NXContainerController, UIScrollViewDelegate {
             scrollView.frame = CGRect(x: 0, y: 0, width: NX.width, height: self.contentView.height)
             scrollView.contentSize = self.contentView.bounds.size
         }
-        else if self.swipeView.ctxs.displayMode == .contentView {
+        else if self.attributes.location == .contentView {
             swipeView.frame = CGRect(x: 0, y: 0, width: NX.width, height: 44)
             contentView.addSubview(swipeView)
             
@@ -79,31 +97,30 @@ open class NXSwipeViewController: NXContainerController, UIScrollViewDelegate {
         }
         
         //移除历史数据
-        self.subviewControllers.forEach { (vc) in
+        self.viewControllers.forEach { (vc) in
             vc.removeFromParent()
             if vc.isViewLoaded {
                 vc.view.removeFromSuperview()
             }
         }
-        self.subviewControllers.removeAll()
+        self.viewControllers.removeAll()
         
         //拼接新数据
-        self.subviewControllers.append(contentsOf: attributes.viewControllers)
-        self.scrollView.contentSize = CGSize(width: self.contentView.width * Double(self.subviewControllers.count),
+        self.viewControllers.append(contentsOf: attributes.viewControllers)
+        self.scrollView.contentSize = CGSize(width: self.contentView.width * Double(self.viewControllers.count),
                                              height: self.contentView.height)
-        for (idx, vc) in self.subviewControllers.enumerated() {
-            vc.ctxs.isWrapped = true
+        for (idx, vc) in self.viewControllers.enumerated() {
             vc.ctxs.superviewController = self
             self.addChild(vc)
             
             if attributes.index == idx {
-                self.selectedViewController = vc
+                self.currentViewController = vc
                 vc.view.frame = CGRect(origin: CGPoint(x: self.contentView.width * Double(attributes.index), y: 0), size: self.contentView.frame.size)
                 self.scrollView.addSubview(vc.view)
             }
         }
         
-        self.swipeView.updateSubviews(["index":attributes.index,"items":attributes.elements] as [String : Any])
+        self.swipeView.updateSubviews(self.attributes)
         
         if attributes.index >= 1 {
             self.scrollView.setContentOffset(CGPoint(x: self.view.width * CGFloat(attributes.index), y: 0), animated: false)
@@ -113,10 +130,11 @@ open class NXSwipeViewController: NXContainerController, UIScrollViewDelegate {
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let p = scrollView.contentOffset
         let index = Int((p.x + CGFloat(NX.width) * 0.5) / CGFloat(NX.width))
-        if index < subviewControllers.count {
-            self.swipeView.onSelectItem(at: index)
-            self.selectedViewController = self.subviewControllers[index]
-            if let vc = self.selectedViewController {
+        if index < viewControllers.count {
+            self.attributes.index = index
+            self.swipeView.didSelectView(at: index)
+            self.currentViewController = self.viewControllers[index]
+            if let vc = self.currentViewController {
                 vc.view.frame = CGRect(origin: CGPoint(x: self.contentView.width * Double(index), y: 0), size: self.contentView.frame.size)
                 self.scrollView.addSubview(vc.view)
             }

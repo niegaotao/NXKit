@@ -179,10 +179,10 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
             //某些页面会设置不允许手势返回，采用block是因为可以在当前页面接收到右滑手势返回事件
             if let fromViewController = self.topViewController as? NXViewController {
                 //如过有弹出的自定义视图不支持手势返回
-                if fromViewController.ctxs.subviewControllers.count > 0 {
+                if fromViewController.ctxs.viewControllers.count > 0 {
                     return false
                 }
-                return fromViewController.ctxs.panRecognizer("", panRecognizer)
+                return fromViewController.ctxs.onBackInvoked("", panRecognizer)
             }
             
             //支持返回
@@ -206,7 +206,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
         ctxs.semaphore.wait()
         viewController.ctxs.navigation = .overlay
         
-        to.ctxs.subviewControllers.append(viewController)
+        to.ctxs.viewControllers.append(viewController)
         viewController.ctxs.superviewController = to
         
         viewController.view.frame = to.view.bounds
@@ -278,7 +278,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     ///   - animated: 是否需要动画
     open func closeViewController(_ viewController: NXViewController, animated: Bool){
         guard let parentViewController = viewController.ctxs.superviewController else {return}
-        guard let index = parentViewController.ctxs.subviewControllers.lastIndex(of: viewController) else { return }
+        guard let index = parentViewController.ctxs.viewControllers.lastIndex(of: viewController) else { return }
         self.ctxs.semaphore.wait()
         if viewController.ctxs.orientation == .left {
             self.view.isUserInteractionEnabled = false
@@ -293,10 +293,10 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                 viewController.ctxs.transitionView = nil
                 viewController.ctxs.superviewController = nil
                 
-                parentViewController.ctxs.subviewControllers.remove(at: index)
+                parentViewController.ctxs.viewControllers.remove(at: index)
                 self.view.isUserInteractionEnabled = true
                 if let vc = self.currentViewController as? NXViewController {
-                    vc.updateNavigationBar()
+                    vc.updateNavigationAppearance()
                 }
                 self.ctxs.semaphore.signal()
             })
@@ -314,10 +314,10 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                 viewController.ctxs.transitionView = nil
                 viewController.ctxs.superviewController = nil
                 
-                parentViewController.ctxs.subviewControllers.remove(at: index)
+                parentViewController.ctxs.viewControllers.remove(at: index)
                 self.view.isUserInteractionEnabled = true
                 if let vc = self.currentViewController as? NXViewController {
-                    vc.updateNavigationBar()
+                    vc.updateNavigationAppearance()
                 }
                 self.ctxs.semaphore.signal()
             })
@@ -335,10 +335,10 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                 viewController.ctxs.transitionView = nil
                 viewController.ctxs.superviewController = nil
                 
-                parentViewController.ctxs.subviewControllers.remove(at: index)
+                parentViewController.ctxs.viewControllers.remove(at: index)
                 self.view.isUserInteractionEnabled = true
                 if let vc = self.currentViewController as? NXViewController {
-                    vc.updateNavigationBar()
+                    vc.updateNavigationAppearance()
                 }
                 self.ctxs.semaphore.signal()
             })
@@ -356,10 +356,10 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                 viewController.ctxs.transitionView = nil
                 viewController.ctxs.superviewController = nil
                 
-                parentViewController.ctxs.subviewControllers.remove(at: index)
+                parentViewController.ctxs.viewControllers.remove(at: index)
                 self.view.isUserInteractionEnabled = true
                 if let vc = self.currentViewController as? NXViewController {
-                    vc.updateNavigationBar()
+                    vc.updateNavigationAppearance()
                 }
                 self.ctxs.semaphore.signal()
             })
@@ -410,13 +410,13 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
         else {
             //这种情况没有模态控制器
             if let vc = __returnViewController as? NXViewController {
-                if let __vc = vc.ctxs.subviewControllers.last {
+                if let __vc = vc.ctxs.viewControllers.last {
                     //先查找自定义加上去的视图控制器
                     return __vc
                 }
                 else if let __vc = __returnViewController as? NXToolViewController {
                     //再查找NXToolViewController中的
-                    return __vc.selectedViewController
+                    return __vc.currentViewController
                 }
             }
             return __returnViewController

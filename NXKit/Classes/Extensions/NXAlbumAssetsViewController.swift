@@ -23,6 +23,8 @@ open class NXAlbumAssetsViewController: NXViewController, UICollectionViewDelega
     public let footerView = NXLRView<UIButton, UIButton>(frame: CGRect(x: 0, y: -(50+NX.bottomOffset), width: NX.width, height: 50+NX.bottomOffset))
     //观察者
     public let observer = NXAsset.Observer()
+    //选中了第几个相册
+    public var index = 0
     
     override open func initialize(){
         super.initialize()
@@ -374,11 +376,13 @@ open class NXAlbumAssetsViewController: NXViewController, UICollectionViewDelega
                 NX.showToast(message: "您的相册没有图片/视频，或者您没有授权\(NX.name)访问您的相册。", .center, self.contentView)
                 return
             }
-            NXActionView.action(actions: self.wrapped.albums, header: .header(false, false, true, true, "请选择相册",""), footer: .whitespace(32)) { (_, index) in
-                guard index != self.ctxs.x else {
+            NXActionView.action(actions: self.wrapped.albums, 
+                                header: .header(false, false, true, true, "请选择相册",""),
+                                footer: .whitespace(32)) { (_, index) in
+                guard index != self.index else {
                     return;
                 }
-                self.ctxs.x = index
+                self.index = index
                 self.previewAssets(at: index)
             }
         }
@@ -453,7 +457,7 @@ open class NXAlbumAssetsViewController: NXViewController, UICollectionViewDelega
     }
     
     ///UICollectionViewDelegate, UICollectionViewDataSource
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, onSelectViewAt indexPath: IndexPath) {
         let asset = self.wrapped.previewAssets[indexPath.item]
         if self.wrapped.assets.contains(asset) && self.wrapped.assets.count > 0{
             self.dispose("previewAssets", self.wrapped.assets, nil)
