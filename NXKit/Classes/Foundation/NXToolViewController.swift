@@ -18,7 +18,7 @@ open class NXToolViewController: NXChildrenViewController {
         public override init(){}
         
         @discardableResult
-        func copy(fromValue: NXToolViewController.Attributes) -> NXToolViewController.Attributes {
+        public func copy(fromValue: NXToolViewController.Attributes) -> NXToolViewController.Attributes {
             super.copy(fromValue: fromValue)
             self.viewControllers = fromValue.viewControllers
             return self

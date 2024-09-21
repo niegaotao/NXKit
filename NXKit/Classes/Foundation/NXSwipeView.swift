@@ -14,7 +14,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         open var elements = [NXSwipeView.Element]()
         open var index = 0
         open var insets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-        
+        open var location = NXSwipeView.Location.contentView
         open var selected = AppearanceAttributes() // 选中的效果
         open var unselected = AppearanceAttributes(font: NX.font(15), color: NX.lightGrayColor) //不选中的效果
         open var isEqually : Bool = true //是否等分
@@ -25,10 +25,11 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         public init() {}
         
         @discardableResult
-        func copy(fromValue: NXSwipeView.Attributes) -> NXSwipeView.Attributes {
+        public func copy(fromValue: NXSwipeView.Attributes) -> NXSwipeView.Attributes {
             self.elements = fromValue.elements
             self.index = fromValue.index
             self.insets = fromValue.insets
+            self.location = fromValue.location
             self.selected = fromValue.selected
             self.unselected = fromValue.unselected
             self.isEqually = fromValue.isEqually
@@ -37,6 +38,11 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
             self.slider = fromValue.slider
             return self
         }
+    }
+    
+    public enum Location: String, CaseIterable {
+        case navigationView
+        case contentView
     }
     
     open class AppearanceAttributes {

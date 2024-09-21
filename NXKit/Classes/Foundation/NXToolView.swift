@@ -18,7 +18,7 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
         public init(){}
         
         @discardableResult
-        func copy(fromValue: NXToolView.Attributes) -> NXToolView.Attributes {
+        public func copy(fromValue: NXToolView.Attributes) -> NXToolView.Attributes {
             self.elements = fromValue.elements
             self.index = fromValue.index
             return self

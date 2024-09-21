@@ -14,21 +14,15 @@ open class NXSwipeViewController: NXChildrenViewController, UIScrollViewDelegate
     
     open class Attributes: NXSwipeView.Attributes {
         open var viewControllers = [NXViewController]()
-        open var location = NXSwipeViewController.Location.contentView
+        
         override public init(){}
         
         @discardableResult
-        func copy(fromValue: NXSwipeViewController.Attributes) -> NXSwipeViewController.Attributes {
+        public func copy(fromValue: NXSwipeViewController.Attributes) -> NXSwipeViewController.Attributes {
             super.copy(fromValue: fromValue)
             self.viewControllers = fromValue.viewControllers
-            self.location = fromValue.location
             return self
         }
-    }
-    
-    public enum Location: String, CaseIterable {
-        case navigationView
-        case contentView
     }
     
     public let attributes = NXSwipeViewController.Attributes()
