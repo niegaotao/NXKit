@@ -15,8 +15,8 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         open var index = 0
         open var insets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         open var location = NXSwipeView.Location.contentView
-        open var selected = AppearanceAttributes() // 选中的效果
-        open var unselected = AppearanceAttributes(font: NXKit.font(15), color: NXKit.lightGrayColor) //不选中的效果
+        open var selectedAppearance = NXSwipeView.AppearanceAttributes() // 选中的效果
+        open var unselectedAppearance = NXSwipeView.AppearanceAttributes(font: NXKit.font(15), color: NXKit.lightGrayColor) //不选中的效果
         open var isEqually : Bool = true //是否等分
         open var maximumOfComponents : CGFloat = 5.0 //进行宽度的等分（isEqually == true 生效）
         open var spaceOfComponents : CGFloat = 16.0 //两个元素之间的间距（isEqually == false 生效）
@@ -30,8 +30,8 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
             self.index = fromValue.index
             self.insets = fromValue.insets
             self.location = fromValue.location
-            self.selected = fromValue.selected
-            self.unselected = fromValue.unselected
+            self.selectedAppearance = fromValue.selectedAppearance
+            self.unselectedAppearance = fromValue.unselectedAppearance
             self.isEqually = fromValue.isEqually
             self.maximumOfComponents = fromValue.maximumOfComponents
             self.spaceOfComponents = fromValue.spaceOfComponents
@@ -88,18 +88,18 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
             self.attributes.index = min(max(0, self.attributes.index), self.attributes.elements.count)
         }
         
-        for (_, item) in self.attributes.elements.enumerated() {
+        for item in self.attributes.elements {
             if item.ctxs.cls == nil || item.ctxs.reuse.count <= 0 {
                 item.ctxs.update(NXSwipeView.Cell.self, "NXSwipeViewCell")
             }
             self.contentView.register(item.ctxs.cls, forCellWithReuseIdentifier: item.ctxs.reuse)
             
-            item.selected.attributes = self.attributes.selected
-            item.unselected.attributes = self.attributes.unselected
+            item.selected.appearance = self.attributes.selectedAppearance
+            item.unselected.appearance = self.attributes.unselectedAppearance
             
-            item.selected.width = item.title.stringSize(font: self.attributes.selected.font,
+            item.selected.width = item.title.stringSize(font: self.attributes.selectedAppearance.font,
                                                         size: CGSize(width: NXKit.width, height: 44)).width + 2.0
-            item.unselected.width = item.title.stringSize(font: self.attributes.unselected.font,
+            item.unselected.width = item.title.stringSize(font: self.attributes.unselectedAppearance.font,
                                                           size: CGSize(width: NXKit.width, height: 44)).width + 2.0
         }
         
@@ -134,9 +134,9 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
     open func update(title: String, at index: Int) {
         let item = self.attributes.elements[index]
         item.title = title
-        item.selected.width = title.stringSize(font: attributes.selected.font,
+        item.selected.width = title.stringSize(font: attributes.selectedAppearance.font,
                                                size: CGSize(width: NXKit.width, height: 44)).width + 2.0
-        item.unselected.width = title.stringSize(font: attributes.unselected.font,
+        item.unselected.width = title.stringSize(font: attributes.unselectedAppearance.font,
                                                  size: CGSize(width: NXKit.width, height: 44)).width + 2.0
         
         if self.attributes.isEqually {
@@ -296,12 +296,12 @@ extension NXSwipeView {
     open class ElementAttributes {
         open var width = Double.zero
         open var size = CGSize.zero
-        open var attributes: AppearanceAttributes? = nil
+        fileprivate var appearance: NXSwipeView.AppearanceAttributes? = nil
         
-        init(width: Double = Double.zero, size: CGSize = CGSize.zero, attributes: AppearanceAttributes? = nil) {
+        init(width: Double = Double.zero, size: CGSize = CGSize.zero, appearance: AppearanceAttributes? = nil) {
             self.width = width
             self.size = size
-            self.attributes = attributes
+            self.appearance = appearance
         }
     }
     
@@ -309,8 +309,8 @@ extension NXSwipeView {
         open var isSelected = false
         open var isSelectable = true
         open var title = ""
-        public let selected = ElementAttributes()
-        public let unselected = ElementAttributes()
+        public let selected = NXSwipeView.ElementAttributes()
+        public let unselected = NXSwipeView.ElementAttributes()
     }
     
     open class Cell : NXCollectionViewCell {
@@ -327,10 +327,10 @@ extension NXSwipeView {
         override open func updateSubviews(_ value: Any?){
             if let element = value as? NXSwipeView.Element {
                 self.titleView.text = element.title
-                if let attributes = element.isSelected ? element.selected.attributes : element.unselected.attributes {
-                    self.titleView.textColor = attributes.color
-                    self.titleView.font = attributes.font
-                    self.titleView.textAlignment = attributes.textAlignment
+                if let appearance = element.isSelected ? element.selected.appearance : element.unselected.appearance {
+                    self.titleView.textColor = appearance.color
+                    self.titleView.font = appearance.font
+                    self.titleView.textAlignment = appearance.textAlignment
                 }
             }
         }
