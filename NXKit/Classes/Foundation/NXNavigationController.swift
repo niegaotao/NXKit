@@ -37,7 +37,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     
     ///设置
     open func initialize() {
-        NX.print("\(NSStringFromClass(self.classForCoder)), \(Unmanaged<AnyObject>.passUnretained(self as AnyObject).toOpaque())")
+        NXKit.print("\(NSStringFromClass(self.classForCoder)), \(Unmanaged<AnyObject>.passUnretained(self as AnyObject).toOpaque())")
         self.extendedLayoutIncludesOpaqueBars = true
         self.edgesForExtendedLayout = UIRectEdge.all
         if #available(iOS 11.0, *) {
@@ -57,18 +57,18 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if !self.ctxs.lifecycleValue.contains(NX.Lifecycle.viewWillAppear){
-            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NX.Lifecycle.viewWillAppear)
-            self.ctxs.lifecycle?(NX.Lifecycle.viewWillAppear, self)
+        if !self.ctxs.lifecycleValue.contains(NXKit.Lifecycle.viewWillAppear){
+            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NXKit.Lifecycle.viewWillAppear)
+            self.ctxs.lifecycle?(NXKit.Lifecycle.viewWillAppear, self)
         }
     }
     
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if !self.ctxs.lifecycleValue.contains(NX.Lifecycle.viewDidAppear){
-            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NX.Lifecycle.viewDidAppear)
-            self.ctxs.lifecycle?(NX.Lifecycle.viewDidAppear, self)
+        if !self.ctxs.lifecycleValue.contains(NXKit.Lifecycle.viewDidAppear){
+            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NXKit.Lifecycle.viewDidAppear)
+            self.ctxs.lifecycle?(NXKit.Lifecycle.viewDidAppear, self)
         }
     }
     
@@ -76,18 +76,18 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if !self.ctxs.lifecycleValue.contains(NX.Lifecycle.viewWillDisappear){
-            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NX.Lifecycle.viewWillDisappear)
-            self.ctxs.lifecycle?(NX.Lifecycle.viewWillDisappear, self)
+        if !self.ctxs.lifecycleValue.contains(NXKit.Lifecycle.viewWillDisappear){
+            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NXKit.Lifecycle.viewWillDisappear)
+            self.ctxs.lifecycle?(NXKit.Lifecycle.viewWillDisappear, self)
         }
     }
     
     override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        if !self.ctxs.lifecycleValue.contains(NX.Lifecycle.viewDidDisappear){
-            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NX.Lifecycle.viewDidDisappear)
-            self.ctxs.lifecycle?(NX.Lifecycle.viewDidDisappear, self)
+        if !self.ctxs.lifecycleValue.contains(NXKit.Lifecycle.viewDidDisappear){
+            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NXKit.Lifecycle.viewDidDisappear)
+            self.ctxs.lifecycle?(NXKit.Lifecycle.viewDidDisappear, self)
         }
     }
     
@@ -137,9 +137,9 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     }
     
     ///当push完成后回触发completion
-    open func pushViewController(_ viewController: NXViewController, animated: Bool, completion:NX.Event<String, NXViewController>?){
+    open func pushViewController(_ viewController: NXViewController, animated: Bool, completion: NXKit.Event<String, NXViewController>?){
         viewController.ctxs.lifecycle = {lifecycle, vc in
-            if lifecycle.contains(NX.Lifecycle.viewDidAppear){
+            if lifecycle.contains(NXKit.Lifecycle.viewDidAppear){
                 completion?("", vc)
             }
         }
@@ -213,7 +213,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
         viewController.view.backgroundColor = UIColor.clear
         
         viewController.ctxs.transitionView = NXTransitionView(frame: to.view.bounds, owner:viewController)
-        viewController.ctxs.transitionView?.backgroundColor = NX.transitionInoutBackgroundColor
+        viewController.ctxs.transitionView?.backgroundColor = NXKit.transitionInoutBackgroundColor
         to.view.addSubview(viewController.ctxs.transitionView!)
         viewController.ctxs.transitionView?.addSubview(viewController.view)
         
@@ -224,7 +224,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionBackgroundColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXKit.transitionBackgroundColor
             },completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
@@ -236,7 +236,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionBackgroundColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXKit.transitionBackgroundColor
             }, completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
@@ -248,7 +248,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionBackgroundColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXKit.transitionBackgroundColor
             }, completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
@@ -260,7 +260,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionBackgroundColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXKit.transitionBackgroundColor
             }, completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
@@ -287,7 +287,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = -viewController.view.width
-                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionInoutBackgroundColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXKit.transitionInoutBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -308,7 +308,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = viewController.view.width
-                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionInoutBackgroundColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXKit.transitionInoutBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -329,7 +329,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = -viewController.view.height
-                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionInoutBackgroundColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXKit.transitionInoutBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -350,7 +350,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = viewController.view.height
-                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionInoutBackgroundColor
+                            viewController.ctxs.transitionView?.backgroundColor = NXKit.transitionInoutBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -371,7 +371,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     
     //移除栈中非栈顶的控制器
     @discardableResult
-    open func skipViewController(_ vc:UIViewController?) -> Bool {
+    open func skipViewController(_ vc: UIViewController?) -> Bool {
         guard let __vc = vc else {
             return false
         }
@@ -383,7 +383,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     
     //移除栈中非栈顶的控制器
     @discardableResult
-    open func skipViewControllers(_ __viewControllers:[UIViewController]) -> Bool {
+    open func skipViewControllers(_ __viewControllers: [UIViewController]) -> Bool {
         self.viewControllers.removeAll { (__viewController) -> Bool in
             return __viewControllers.contains(__viewController)
         }
@@ -424,7 +424,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     }
     
     deinit {
-        NX.print("\(NSStringFromClass(self.classForCoder)), \(Unmanaged<AnyObject>.passUnretained(self as AnyObject).toOpaque())")
+        NXKit.print("\(NSStringFromClass(self.classForCoder)), \(Unmanaged<AnyObject>.passUnretained(self as AnyObject).toOpaque())")
     }
 }
 
@@ -434,15 +434,15 @@ extension NXNavigationController {
         public let semaphore = DispatchSemaphore(value: 1)
         open var duration : TimeInterval = 0.3
         
-        open var lifecycleValue = NX.Lifecycle.initialized;
-        open var lifecycle : NX.Event<NX.Lifecycle, NXNavigationController>? = nil;
+        open var lifecycleValue = NXKit.Lifecycle.initialized;
+        open var lifecycle : NXKit.Event<NXKit.Lifecycle, NXNavigationController>? = nil;
         
         ///初始化方法
         public init(){}
     }
 }
 
-open class NXWrappedNavigationController<C:UIViewController>: NXNavigationController {
+open class NXWrappedNavigationController<C: UIViewController>: NXNavigationController {
     public let viewController = C()
     
     open override func initialize() {

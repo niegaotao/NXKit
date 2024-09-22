@@ -25,7 +25,7 @@ open class NXControl: UIControl {
         
     }
     
-    open func updateSubviews(_ value:Any?){
+    open func updateSubviews(_ value: Any?){
         
     }
 }

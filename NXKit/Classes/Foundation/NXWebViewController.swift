@@ -14,17 +14,17 @@ open class NXBackbarWrappedView: NXLCRView<NXButton, UIView, NXButton> {
     override open func setupSubviews() {
         super.setupSubviews()
         self.lhsView.frame = CGRect(x: 0, y: 0, width: 32, height: 44)
-        self.lhsView.setImage(NX.image(named:"navi-back.png", mode: .alwaysTemplate), for: .normal)
+        self.lhsView.setImage(NXKit.image(named:"navi-back.png", mode: .alwaysTemplate), for: .normal)
         self.lhsView.contentHorizontalAlignment = .left
-        self.lhsView.tintColor = NX.barForegroundColor
+        self.lhsView.tintColor = NXKit.barForegroundColor
         
-        self.centerView.frame = CGRect(x: 32, y: 14, width: NX.pixel, height: 16)
-        self.centerView.backgroundColor = NX.barForegroundColor.withAlphaComponent(0.6)
+        self.centerView.frame = CGRect(x: 32, y: 14, width: NXKit.pixel, height: 16)
+        self.centerView.backgroundColor = NXKit.barForegroundColor.withAlphaComponent(0.6)
         
         self.rhsView.frame = CGRect(x: 33, y: 0, width: 32, height: 44)
-        self.rhsView.setImage(NX.image(named:"navi-close.png", mode: .alwaysTemplate), for: .normal)
+        self.rhsView.setImage(NXKit.image(named:"navi-close.png", mode: .alwaysTemplate), for: .normal)
         self.rhsView.contentHorizontalAlignment = .right
-        self.rhsView.tintColor = NX.barForegroundColor
+        self.rhsView.tintColor = NXKit.barForegroundColor
     }
     
     open override func updateSubviews(_ value: Any?) {
@@ -71,7 +71,7 @@ open class NXWebViewController: NXViewController {
     open override func setupSubviews() {
         self.webView.webViewController = self
         self.webView.frame = self.contentView.bounds
-        self.webView.backgroundColor = NX.viewBackgroundColor
+        self.webView.backgroundColor = NXKit.viewBackgroundColor
         self.webView.isOpaque = false
         self.webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
@@ -83,7 +83,7 @@ open class NXWebViewController: NXViewController {
                 self?.callbackWithCompletion(isCompleted, error)
             }
         }
-        self.webView.ctxs.callbackWithValue = {[weak self] (value:[String:Any])  in
+        self.webView.ctxs.callbackWithValue = {[weak self] (value: [String: Any])  in
             self?.callbackWithValue(value)
         }
         self.contentView.addSubview(self.webView)
@@ -101,14 +101,14 @@ open class NXWebViewController: NXViewController {
         
         self.progressView.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.size.width, height: self.progressView.frame.size.height)
         self.progressView.autoresizingMask = [.flexibleWidth]
-        self.progressView.progressTintColor = NX.mainColor
+        self.progressView.progressTintColor = NXKit.mainColor
         self.progressView.trackTintColor = UIColor.clear
         self.progressView.alpha = 0.0
         self.contentView.addSubview(self.progressView)
     }
     
     open override func updateSubviews(_ value: Any?) {
-        guard let value = value as? [String:Any], let _url = value["url"] as? String else {
+        guard let value = value as? [String: Any], let _url = value["url"] as? String else {
             return
         }
         if let __url = URL(string: _url) {
@@ -166,8 +166,8 @@ open class NXWebViewController: NXViewController {
         self.close()
     }
     
-    open func callbackWithCompletion(_ isCompleted: Bool, _ error:Error?){
-        NX.log { return "isCompleted = \(isCompleted)"}
+    open func callbackWithCompletion(_ isCompleted: Bool, _ error: Error?){
+        NXKit.log { return "isCompleted = \(isCompleted)"}
         
         //在这里做导航栏返回按钮
         if isCompleted && self.backbarView.isAutoable {
@@ -184,7 +184,7 @@ open class NXWebViewController: NXViewController {
         }
     }
     
-    open func callbackWithValue(_ value:[String:Any]){
+    open func callbackWithValue(_ value: [String: Any]){
     
     }
     

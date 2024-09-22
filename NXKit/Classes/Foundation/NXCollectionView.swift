@@ -46,12 +46,12 @@ open class NXCollectionView: UICollectionView, UIGestureRecognizerDelegate {
     
     public override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
-        self.backgroundColor = NX.viewBackgroundColor
+        self.backgroundColor = NXKit.viewBackgroundColor
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.backgroundColor = NX.viewBackgroundColor
+        self.backgroundColor = NXKit.viewBackgroundColor
     }
     
     override open var safeAreaInsets: UIEdgeInsets {

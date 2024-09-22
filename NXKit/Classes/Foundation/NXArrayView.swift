@@ -9,7 +9,7 @@
 import UIKit
 
 
-open class NXArrayView<S:UIView>: NXView {
+open class NXArrayView<S: UIView>: NXView {
     
     public enum Axis {
         case row
@@ -21,7 +21,7 @@ open class NXArrayView<S:UIView>: NXView {
     open var radius = CGFloat(36.0)
     open var axis = Axis.row
   
-    open func componentView(at index:Int) -> S {
+    open func componentView(at index: Int) -> S {
         if index >= 0 && index < self.componentViews.count {
             return self.componentViews[index]
         }
@@ -33,7 +33,7 @@ open class NXArrayView<S:UIView>: NXView {
     
     
     //子类手动调用
-    open func prepareSubviews(_ capacity:Int) {
+    open func prepareSubviews(_ capacity: Int) {
         var __numberOfSubviews = capacity - self.componentViews.count;
         while __numberOfSubviews >= 1 {
             let contentView = S(frame: CGRect.zero)

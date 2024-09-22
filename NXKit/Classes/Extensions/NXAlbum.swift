@@ -13,7 +13,7 @@ import Photos
 open class NXAlbum : NXAbstract {
     public var assets = [NXAsset]() //保存自己之前生成的model
         
-    convenience public init(title: String, fetchResult: PHFetchResult<AnyObject>?, wrapped:NXAsset.Wrapped) {
+    convenience public init(title: String, fetchResult: PHFetchResult<AnyObject>?, wrapped: NXAsset.Wrapped) {
         self.init(title: title, value: nil, completion:nil)
         self.ctxs.update(NXActionViewCell.self, "NXActionViewCell")
         
@@ -42,20 +42,20 @@ open class NXAlbum : NXAbstract {
             }
         }
                 
-        self.ctxs.size = CGSize(width: NX.width, height: 80)
+        self.ctxs.size = CGSize(width: NXKit.width, height: 80)
         self.asset.frame = CGRect(x: 16, y: 1, width: 78, height: 78)
         self.asset.cornerRadius = 0.0
         self.asset.isHidden = false
         
-        self.title.frame = CGRect(x: 106, y: 19, width: NX.width-136, height: 22)
+        self.title.frame = CGRect(x: 106, y: 19, width: NXKit.width-136, height: 22)
         self.title.value = title
         self.title.textAlignment = .left
-        self.title.font = NX.font(16, .bold)
+        self.title.font = NXKit.font(16, .bold)
         self.title.isHidden = false
         
-        self.subtitle.frame = CGRect(x: 106, y: 43, width: NX.width-136, height: 18)
+        self.subtitle.frame = CGRect(x: 106, y: 43, width: NXKit.width-136, height: 18)
         self.subtitle.value = "\(self.assets.count)张"
-        self.subtitle.font = NX.font(14, .regular)
+        self.subtitle.font = NXKit.font(14, .regular)
         self.subtitle.textAlignment = .left
         self.subtitle.isHidden = false
         
@@ -63,7 +63,7 @@ open class NXAlbum : NXAbstract {
         
         self.arrow.isHidden = false
         self.arrow.frame = CGRect(x: self.ctxs.width - 16 - 6, y: (self.ctxs.height - 12)/2.0, width: 6, height: 12)
-        self.arrow.image = NX.image(named:"icon-arrow.png")
+        self.arrow.image = NXKit.image(named:"icon-arrow.png")
         
         self.raw.separator.insets = UIEdgeInsets(top: 0, left: 106, bottom: 0, right: 0)
         self.raw.separator.ats = .maxY

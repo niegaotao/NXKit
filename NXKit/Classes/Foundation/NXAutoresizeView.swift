@@ -8,10 +8,10 @@
 
 import UIKit
 
-open class NXAutoresizeView<C:UIView>: NXView {
+open class NXAutoresizeView<C: UIView>: NXView {
     open var contentView = C(frame: CGRect.zero)
     
-    open var completion : NX.Event<String, Any?>? = nil
+    open var completion : NXKit.Event<String, Any?>? = nil
     open var insets = UIEdgeInsets.zero
     open override func setupSubviews() {
         super.setupSubviews()

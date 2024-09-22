@@ -10,7 +10,7 @@ import UIKit
 import Photos
 
 open class NXAsset: NXAny {
-    open var value = [String:Any]()
+    open var value = [String: Any]()
     
     open var mediaType = PHAssetMediaType.unknown//类型
     open var size : CGSize = CGSize.zero //宽度高度
@@ -33,7 +33,7 @@ open class NXAsset: NXAny {
         super.init()
     }
     
-    convenience public init(asset: PHAsset?, suffixes:[String] = []) {
+    convenience public init(asset: PHAsset?, suffixes: [String] = []) {
         self.init()
         
         if let __asset = asset {
@@ -42,7 +42,7 @@ open class NXAsset: NXAny {
             
             self.size = CGSize(width: __asset.pixelWidth, height: __asset.pixelHeight)
             self.duration = __asset.duration
-            self.filename = NX.get(string: __asset.value(forKey: "filename") as? String, "")
+            self.filename = NXKit.get(string: __asset.value(forKey: "filename") as? String, "")
             
             if __asset.mediaType == .video {
                 if suffixes.count > 0 {
@@ -64,7 +64,7 @@ open class NXAsset: NXAny {
         }
     }
     
-    open var completion: NX.Event<Bool, Any?>? = nil
+    open var completion: NXKit.Event<Bool, Any?>? = nil
 }
 
 
@@ -84,7 +84,7 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
         
         durationView.textAlignment = .right
         durationView.textColor = UIColor.white
-        durationView.font = NX.font(12, .regular)
+        durationView.font = NXKit.font(12, .regular)
         durationView.isHidden = true
         contentView.addSubview(durationView)
         
@@ -98,7 +98,7 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
         indexView.layer.cornerRadius = 11.5
         indexView.layer.masksToBounds = true
         indexView.textColor = UIColor.white
-        indexView.font = NX.font(13, .bold)
+        indexView.font = NXKit.font(13, .bold)
         indexView.layer.borderWidth = 1.5
         indexView.textAlignment = .center
         indexView.isUserInteractionEnabled = false
@@ -134,7 +134,7 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
             durationView.isHidden = false
             let minute : Int = Int(floor(phasset.duration/60))
             let second : Int = Int(phasset.duration - Double(minute * 60))
-            durationView.text = String(format: "%02d'%02d\"", arguments:[minute,second])
+            durationView.text = String(format: "%02d'%02d\"", arguments: [minute,second])
         }
         else if asset.mediaType == .audio {
             
@@ -154,8 +154,8 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
             }
             else {
                 indexView.text = asset.index
-                indexView.backgroundColor = NX.mainColor.withAlphaComponent(0.5)
-                indexView.layer.borderColor = NX.mainColor.cgColor
+                indexView.backgroundColor = NXKit.mainColor.withAlphaComponent(0.5)
+                indexView.layer.borderColor = NXKit.mainColor.cgColor
             }
             maskedView.isHidden = true
         }
@@ -189,7 +189,7 @@ extension NXAsset {
         open var video = NXAsset.Preset()
         open var audio = NXAsset.Preset()
 
-        open func add(_ value:NXAsset) {
+        open func add(_ value: NXAsset) {
             if value.mediaType == .image {
                 self.assets.append(value)
                 self.image.assets.append(value)
@@ -200,7 +200,7 @@ extension NXAsset {
             }
         }
         
-        open func remove(_ value:NXAsset) {
+        open func remove(_ value: NXAsset) {
             if value.mediaType == .image {
                 self.assets.removeAll { (loopValue) -> Bool in return loopValue == value }
                 self.image.assets.removeAll { (loopValue) -> Bool in return loopValue == value }
@@ -231,7 +231,7 @@ extension NXAsset {
         //创建相册信号量
         public static var semaphore = DispatchSemaphore(value: 1)
         //缩略图尺寸
-        public static var size = CGSize(width: Int(NX.width/4.0 * CGFloat(UIScreen.main.scale)), height: Int(NX.width/4.0 * CGFloat(UIScreen.main.scale)))
+        public static var size = CGSize(width: Int(NXKit.width/4.0 * CGFloat(UIScreen.main.scale)), height: Int(NXKit.width/4.0 * CGFloat(UIScreen.main.scale)))
 
         //支持展示的媒体类型
         open var mediaType = PHAssetMediaType.unknown
@@ -247,13 +247,13 @@ extension NXAsset {
         open var selectedIdentifiers = [String]()
         open var isAutoclosed = true //当选择一张的时候，选择之后是否自动回电
         open var numberOfColumns = 4 //列表显示多少列,允许[1,2],推荐[3,4,5],允许[6,7]
-        open var completion : NX.Event<Bool, NXAsset.Output>? = nil//最后的回调
+        open var completion : NXKit.Event<Bool, NXAsset.Output>? = nil//最后的回调
         
         //操作按钮
-        open var subviews : (preview:Bool, camera:Bool, output:Bool) = (false, false, false)
+        open var subviews : (preview: Bool, camera: Bool, output: Bool) = (false, false, false)
         
         //处理数据
-        public func close(assets:[NXAsset]){
+        public func close(assets: [NXAsset]){
             let output = NXAsset.Output()
             output.assets = assets
             output.contentViewController = self.contentViewController
@@ -266,7 +266,7 @@ extension NXAsset {
     }
     
     open class Observer : NSObject, PHPhotoLibraryChangeObserver {
-        open var completion : NX.Event<String, Any?>? = nil//最后的回调
+        open var completion : NXKit.Event<String, Any?>? = nil//最后的回调
         public override init() {
             super.init()
             self.register()
@@ -296,10 +296,10 @@ extension NXAsset {
 
 extension NXAsset {
     //打开相册
-    public class func album(open: NX.Event<Bool, NXAlbumViewController>?,
-                          completion: NX.Event<Bool, NXAsset.Output>?) {
-        NX.authorization(NX.Authorize.album, DispatchQueue.main, true, { state in
-            guard state == NX.AuthorizeState.authorized else {return}
+    public class func album(open: NXKit.Event<Bool, NXAlbumViewController>?,
+                          completion: NXKit.Event<Bool, NXAsset.Output>?) {
+        NXKit.authorization(NXKit.Authorize.album, DispatchQueue.main, true, { state in
+            guard state == NXKit.AuthorizeState.authorized else {return}
 
             let __wrapped = NXAlbumViewController()
             __wrapped.modalPresentationStyle = .fullScreen
@@ -326,10 +326,10 @@ extension NXAsset {
     }
     
     //打开相机
-    public class func camera(open:NX.Event<Bool, NXCameraViewController>?,
-                         completion:NX.Event<Bool, NXAsset.Output>?) {
-        NX.authorization(NX.Authorize.camera, DispatchQueue.main, true, {(state) in
-            guard state == NX.AuthorizeState.authorized else {return}
+    public class func camera(open: NXKit.Event<Bool, NXCameraViewController>?,
+                         completion: NXKit.Event<Bool, NXAsset.Output>?) {
+        NXKit.authorization(NXKit.Authorize.camera, DispatchQueue.main, true, {(state) in
+            guard state == NXKit.AuthorizeState.authorized else {return}
             
             let __wrapped = NXCameraViewController()
             __wrapped.modalPresentationStyle = .fullScreen
@@ -351,7 +351,7 @@ extension NXAsset {
 
 extension NXAsset {
     //这个地方存在同时创建多个同名相册的情况:采用信号量的方案来解决
-    public class func fetchCollection(name: String, queue:DispatchQueue, autocreate:Bool, completion:@escaping ((_ album:PHAssetCollection?) -> ())){
+    public class func fetchCollection(name: String, queue:DispatchQueue, autocreate: Bool, completion:@escaping ((_ album:PHAssetCollection?) -> ())){
         if name.count == 0 {
             //指定的相册名称为空，则保存到相机胶卷
             let albums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
@@ -418,23 +418,23 @@ extension NXAsset {
     }
     
     //保存图片到相册
-    public class func saveImage(image: UIImage, name: String = NX.name, queue:DispatchQueue = DispatchQueue.main, completion: ((_ isCompleted: Bool, _ asset:PHAsset?) -> ())?) {
+    public class func saveImage(image: UIImage, name: String = NXKit.name, queue:DispatchQueue = DispatchQueue.main, completion: ((_ isCompleted: Bool, _ asset:PHAsset?) -> ())?) {
         NXAsset.save(assets: [image], name: name, queue:queue, completion:{ (state, assets) in
             completion?(state, assets.first)
         })
     }
     
     //保存视频到相册
-    public class func saveVideo(fileURL:URL, name: String = NX.name, queue:DispatchQueue = DispatchQueue.main, completion: ((_ isCompleted: Bool, _ asset:PHAsset?) -> ())?){
+    public class func saveVideo(fileURL:URL, name: String = NXKit.name, queue:DispatchQueue = DispatchQueue.main, completion: ((_ isCompleted: Bool, _ asset:PHAsset?) -> ())?){
         NXAsset.save(assets: [fileURL], name: name, queue:queue, completion:{ (state, assets) in
             completion?(state, assets.first)
         })
     }
     
     //保存视频/图片到系统相册
-    public class func save(assets:[Any], name: String, queue:DispatchQueue, completion: ((_ isCompleted: Bool, _ assets:[PHAsset]) -> ())?) {
+    public class func save(assets: [Any], name: String, queue:DispatchQueue, completion: ((_ isCompleted: Bool, _ assets: [PHAsset]) -> ())?) {
         //相册授权
-        NX.authorization(.album, queue, false) { (status) in
+        NXKit.authorization(.album, queue, false) { (status) in
             guard status == .authorized else {
                 queue.async {
                     completion?(false, [])
@@ -501,7 +501,7 @@ extension NXAsset {
 
 extension NXAsset {
     //获取所有的相册列表
-    public class func outputAlbums(_ wrapped: NXAsset.Wrapped, completion: NX.Event<Bool, [NXAlbum]>?) {
+    public class func outputAlbums(_ wrapped: NXAsset.Wrapped, completion: NXKit.Event<Bool, [NXAlbum]>?) {
         
         var accessAlbums = [NXAlbum]()
         
@@ -563,7 +563,7 @@ extension NXAsset {
         completion?(true, accessAlbums)
     }
     
-    public class  func outputAssets(_ assets:[NXAsset], _ wrapped: NXAsset.Wrapped, completion:NX.Event<Bool, [NXAsset]>?){
+    public class  func outputAssets(_ assets: [NXAsset], _ wrapped: NXAsset.Wrapped, completion: NXKit.Event<Bool, [NXAsset]>?){
         let outputAssets = assets.map { (nxAsset) -> NXAsset in
             let outputAsset = NXAsset(asset: nxAsset.asset, suffixes:wrapped.video.suffixes)
             outputAsset.thumbnail = nxAsset.thumbnail
@@ -573,7 +573,7 @@ extension NXAsset {
         
         var animationView : NXHUD.WrappedView? = nil
         DispatchQueue.main.async {
-            animationView = NX.showLoading("正在加载图片...")
+            animationView = NXKit.showLoading("正在加载图片...")
         }
         
         DispatchQueue.global().async {
@@ -620,7 +620,7 @@ extension NXAsset {
             }
             
             group.notify(queue: DispatchQueue.main, execute: {
-                NX.hideLoading(animationView)
+                NXKit.hideLoading(animationView)
                 completion?(true, outputAssets)
             })
         }
@@ -633,21 +633,21 @@ extension NXAsset {
     
     
     @discardableResult
-    public class func requestImage(_ asset: PHAsset, _ isNetworkAccessAllowed:Bool, _ size:CGSize, progress:NX.Event<Double, Any?>?, completion:NX.Event<Bool, UIImage?>?) -> PHImageRequestID {
+    public class func requestImage(_ asset: PHAsset, _ isNetworkAccessAllowed: Bool, _ size: CGSize, progress: NXKit.Event<Double, Any?>?, completion: NXKit.Event<Bool, UIImage?>?) -> PHImageRequestID {
         var isReturnedOrRequestingiCloud = false
         let unaccess = PHImageRequestOptions()
         unaccess.resizeMode = .fast
         unaccess.isNetworkAccessAllowed = false
         return PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: unaccess) {(result, info) in
             
-            if NX.isLoggable, var info = info {
+            if NXKit.isLoggable, var info = info {
                 info["image"] = result
-                NX.log{return info}
+                NXKit.log{return info}
             }
-            let dicValue = info as? [String:Any] ?? [:]
-            let isInCloud = NX.get(bool: dicValue["PHImageResultIsInCloudKey"] as? Bool, false)
-            let isDegraded = NX.get(bool: dicValue["PHImageResultIsDegradedKey"] as? Bool, false)
-            let isCancelled = NX.get(bool: dicValue["PHImageCancelledKey"] as? Bool, false)
+            let dicValue = info as? [String: Any] ?? [:]
+            let isInCloud = NXKit.get(bool: dicValue["PHImageResultIsInCloudKey"] as? Bool, false)
+            let isDegraded = NXKit.get(bool: dicValue["PHImageResultIsDegradedKey"] as? Bool, false)
+            let isCancelled = NXKit.get(bool: dicValue["PHImageCancelledKey"] as? Bool, false)
             if isCancelled {return}
             
             if isDegraded {
@@ -677,7 +677,7 @@ extension NXAsset {
     }
     
     @discardableResult
-    public class func requestImageData(_ asset: PHAsset, progress:NX.Event<Double, Any?>?, completion:NX.Event<Bool, Data?>?) -> PHImageRequestID {
+    public class func requestImageData(_ asset: PHAsset, progress: NXKit.Event<Double, Any?>?, completion: NXKit.Event<Bool, Data?>?) -> PHImageRequestID {
         let access = PHImageRequestOptions()
         if let filename = asset.value(forKey: "filename") as? String, filename.contains("GIF") {
             access.version = .original
@@ -693,11 +693,11 @@ extension NXAsset {
         if #available(iOS 13, *) {
             return PHImageManager.default().requestImageDataAndOrientation(for: asset, options: access) { data, dataUTI, orientation, info in
                 
-                var dicValue = info as? [String:Any] ?? [:]
-                let isCancelled = NX.get(bool: dicValue["PHImageCancelledKey"] as? Bool, false)
-                if NX.isLoggable {
+                var dicValue = info as? [String: Any] ?? [:]
+                let isCancelled = NXKit.get(bool: dicValue["PHImageCancelledKey"] as? Bool, false)
+                if NXKit.isLoggable {
                     dicValue.removeValue(forKey: "PHImageFileDataKey")
-                    NX.log{return dicValue}
+                    NXKit.log{return dicValue}
                 }
                 
                 if isCancelled == false {
@@ -707,12 +707,12 @@ extension NXAsset {
         }
         else {
             return PHImageManager.default().requestImageData(for: asset, options: access) { (data, dataUTI, orientation, info) in
-                var dicValue = info as? [String:Any] ?? [:]
-                let isCancelled = NX.get(bool: dicValue["PHImageCancelledKey"] as? Bool, false)
+                var dicValue = info as? [String: Any] ?? [:]
+                let isCancelled = NXKit.get(bool: dicValue["PHImageCancelledKey"] as? Bool, false)
 
-                if NX.isLoggable {
+                if NXKit.isLoggable {
                     dicValue.removeValue(forKey: "PHImageFileDataKey")
-                    NX.log{return dicValue}
+                    NXKit.log{return dicValue}
                 }
                 
                 if isCancelled == false {
@@ -724,7 +724,7 @@ extension NXAsset {
     
     
     @discardableResult
-    public class func requestAVAsset(_ asset: PHAsset, progress:NX.Event<Double, Any?>?, completion:NX.Event<Bool, AVAsset?>?) -> PHImageRequestID {
+    public class func requestAVAsset(_ asset: PHAsset, progress: NXKit.Event<Double, Any?>?, completion: NXKit.Event<Bool, AVAsset?>?) -> PHImageRequestID {
         let __options = PHVideoRequestOptions()
         __options.deliveryMode = .automatic
         __options.isNetworkAccessAllowed = true
@@ -734,8 +734,8 @@ extension NXAsset {
             }
         }
         return PHImageManager.default().requestAVAsset(forVideo: asset, options: __options) { (avasset, mix, info) in
-            if NX.isLoggable, let info = info {
-                NX.log{return info}
+            if NXKit.isLoggable, let info = info {
+                NXKit.log{return info}
             }
             completion?(true, avasset)
         }

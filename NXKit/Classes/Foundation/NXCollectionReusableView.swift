@@ -27,13 +27,13 @@ open class NXCollectionReusableView: UICollectionReusableView {
     
     open func setup(){
         arrowView.frame = CGRect(x: self.width-16.0-6, y: (self.height-12)/2, width: 6, height: 12)
-        arrowView.image = NX.image(named:"icon-arrow.png")
+        arrowView.image = NXKit.image(named:"icon-arrow.png")
         arrowView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin]
         arrowView.contentMode = .scaleAspectFill
         arrowView.isHidden = true
         self.addSubview(arrowView)
         
-        separator.backgroundColor = NX.separatorColor.cgColor
+        separator.backgroundColor = NXKit.separatorColor.cgColor
         separator.isHidden = true
         self.layer.addSublayer(separator)
     }

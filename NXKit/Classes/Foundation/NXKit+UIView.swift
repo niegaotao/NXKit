@@ -80,7 +80,7 @@ extension UIView {
     }
     
     //
-    public func setupEvent(_ event:UIControl.Event, action:NX.Event<UIControl.Event, UIView>?) {
+    public func setupEvent(_ event:UIControl.Event, action: NXKit.Event<UIControl.Event, UIView>?) {
         if self.association == nil {
             self.association = NXViewAssociation()
         }
@@ -93,7 +93,7 @@ extension UIView {
     }
     
     //设置圆角
-    public func setupCorner(rect:CGRect, corners:UIRectCorner, radii:CGSize) {
+    public func setupCorner(rect:CGRect, corners:UIRectCorner, radii: CGSize) {
         let maskPath = UIBezierPath.init(roundedRect: rect, byRoundingCorners: corners, cornerRadii: radii)
         if let maskLayer = self.layer.mask as? CAShapeLayer {
             maskLayer.frame = self.bounds
@@ -129,7 +129,7 @@ extension UIView {
     }
     
     //添加上下/左右的边缘分割线
-    public func setupSeparator(color:UIColor, ats: NX.Ats, insets: UIEdgeInsets = UIEdgeInsets.zero, width:CGFloat = NX.pixel){
+    public func setupSeparator(color: UIColor, ats: NXKit.Ats, insets: UIEdgeInsets = UIEdgeInsets.zero, width: CGFloat = NXKit.pixel){
         let __color = color
         let __width = width
         
@@ -198,7 +198,7 @@ extension UIView {
 
 //添加虚线边框
 extension UIView {
-    public func drawDashLine(strokeColor: UIColor, lineWidth: CGFloat = 1, lineLength: Int = 3, lineSpacing: Int = 3, ats: NX.Ats) {
+    public func drawDashLine(strokeColor: UIColor, lineWidth: CGFloat = 1, lineLength: Int = 3, lineSpacing: Int = 3, ats: NXKit.Ats) {
         
         let shapeLayer = CAShapeLayer()
         shapeLayer.bounds = self.bounds
@@ -238,7 +238,7 @@ extension UIView {
     }
     
     ///画实线边框
-    func drawLine(strokeColor: UIColor, lineWidth: CGFloat, ats: NX.Ats) {
+    func drawLine(strokeColor: UIColor, lineWidth: CGFloat, ats: NXKit.Ats) {
         if ats.contains(.minY) && ats.contains(.minX) && ats.contains(.maxY) && ats.contains(.maxX) {
             self.layer.borderWidth = lineWidth
             self.layer.borderColor = strokeColor.cgColor
@@ -294,9 +294,9 @@ extension UIControl {
         public weak var view : UIView?
         public var event = UIControl.Event.touchUpInside
         public var recognizer : UIGestureRecognizer?
-        public var completion : NX.Event<UIControl.Event, UIView>?
+        public var completion : NXKit.Event<UIControl.Event, UIView>?
         
-        public init(view:UIView, event: UIControl.Event, completion: NX.Event<UIControl.Event, UIView>?) {
+        public init(view: UIView, event: UIControl.Event, completion: NXKit.Event<UIControl.Event, UIView>?) {
             self.view = view
             self.event = event
             self.completion = completion
@@ -333,7 +333,7 @@ public class NXViewAssociation {
     open weak var separator : CALayer? = nil
     public private(set) var targets = [UIControl.Event.RawValue : UIControl.Target]()
     
-    public func addTarget(_ targetView: UIView, event:UIControl.Event, action:NX.Event<UIControl.Event, UIView>?) {
+    public func addTarget(_ targetView: UIView, event:UIControl.Event, action: NXKit.Event<UIControl.Event, UIView>?) {
         if let target = self.targets[event.rawValue] {
             target.completion = action
             return

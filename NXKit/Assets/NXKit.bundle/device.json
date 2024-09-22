@@ -124,7 +124,7 @@
     "i386":"Simulator x86",
     "x86_64":"Simulator x64",
     
-    "specifications":[
+    "specifications": [
         {
             "name":"iPhone 1G",
             "resolution":{

@@ -10,7 +10,7 @@ import UIKit
 
 open class NXSwipeViewController: NXChildrenViewController, UIScrollViewDelegate {
     open var scrollView = UIScrollView(frame: CGRect.zero)
-    open var swipeView = NXSwipeView(frame: CGRect(x: 0, y: 0, width: NX.width, height: 44))
+    open var swipeView = NXSwipeView(frame: CGRect(x: 0, y: 0, width: NXKit.width, height: 44))
     
     open class Attributes: NXSwipeView.Attributes {
         open var viewControllers = [NXViewController]()
@@ -40,7 +40,7 @@ open class NXSwipeViewController: NXChildrenViewController, UIScrollViewDelegate
         }
         
         scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        scrollView.backgroundColor = NX.viewBackgroundColor
+        scrollView.backgroundColor = NXKit.viewBackgroundColor
         scrollView.contentInset = UIEdgeInsets.zero
         scrollView.delegate = self
         scrollView.bounces = false
@@ -60,7 +60,7 @@ open class NXSwipeViewController: NXChildrenViewController, UIScrollViewDelegate
     }
     
     //选中
-    public func didSelectViewController(fromValue:Int, toValue: Int){
+    public func didSelectViewController(fromValue: Int, toValue: Int){
         guard toValue >= 0,
               toValue < self.attributes.viewControllers.count,
             self.attributes.index != toValue else {return}
@@ -75,18 +75,18 @@ open class NXSwipeViewController: NXChildrenViewController, UIScrollViewDelegate
         }
   
         if self.attributes.location == .navigationView {
-            swipeView.frame = CGRect(x: 80, y: 0, width: NX.width - 80 * 2, height: 44)
+            swipeView.frame = CGRect(x: 80, y: 0, width: NXKit.width - 80 * 2, height: 44)
             navigationView.centerView = self.swipeView
             navigationView.updateSubviews(nil)
             
-            scrollView.frame = CGRect(x: 0, y: 0, width: NX.width, height: self.contentView.height)
+            scrollView.frame = CGRect(x: 0, y: 0, width: NXKit.width, height: self.contentView.height)
             scrollView.contentSize = self.contentView.bounds.size
         }
         else if self.attributes.location == .contentView {
-            swipeView.frame = CGRect(x: 0, y: 0, width: NX.width, height: 44)
+            swipeView.frame = CGRect(x: 0, y: 0, width: NXKit.width, height: 44)
             contentView.addSubview(swipeView)
             
-            scrollView.frame = CGRect(x: 0, y: 44, width: NX.width, height: self.contentView.height-44)
+            scrollView.frame = CGRect(x: 0, y: 44, width: NXKit.width, height: self.contentView.height-44)
             scrollView.contentSize = self.contentView.bounds.size
         }
         
@@ -123,7 +123,7 @@ open class NXSwipeViewController: NXChildrenViewController, UIScrollViewDelegate
     
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let p = scrollView.contentOffset
-        let index = Int((p.x + CGFloat(NX.width) * 0.5) / CGFloat(NX.width))
+        let index = Int((p.x + CGFloat(NXKit.width) * 0.5) / CGFloat(NXKit.width))
         if index < viewControllers.count {
             self.attributes.index = index
             self.swipeView.didSelectView(at: index)

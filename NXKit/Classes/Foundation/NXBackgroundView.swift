@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class NXBackgroundView<B:UIView, C:UIView> : NXView {
+open class NXBackgroundView<B: UIView, C: UIView> : NXView {
     open var backgroundView = B(frame: CGRect.zero)
     open var contentView = C(frame: CGRect.zero)
     

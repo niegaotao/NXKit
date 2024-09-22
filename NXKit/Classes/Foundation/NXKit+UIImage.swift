@@ -19,7 +19,7 @@ extension UIImage {
         case landscape, vertical
     }
     
-    public class func image(color:UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0)) -> UIImage? {
+    public class func image(color: UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0)) -> UIImage? {
         UIGraphicsBeginImageContext(size)
         color.set()
         UIRectFill(CGRect(origin: CGPoint.zero, size: size))
@@ -29,7 +29,7 @@ extension UIImage {
     }
     
     //生成渐变色图片
-    public class func image(colors:[UIColor], size:CGSize, start: CGPoint, end: CGPoint) -> UIImage? {
+    public class func image(colors: [UIColor], size: CGSize, start: CGPoint, end: CGPoint) -> UIImage? {
         guard colors.count >= 1 else {
             return nil
         }
@@ -51,7 +51,7 @@ extension UIImage {
         return outoutImage
     }
     
-    public class func image(backgroundColor:UIColor, foregroundColor:UIColor, size:CGSize) -> UIImage? {
+    public class func image(backgroundColor: UIColor, foregroundColor: UIColor, size: CGSize) -> UIImage? {
         let background = UIImage.image(color: backgroundColor, size: size)
         let foreground = UIImage.image(color: foregroundColor.withAlphaComponent(0.5), size: size)
         UIGraphicsBeginImageContext(size)
@@ -73,7 +73,7 @@ extension UIImage {
  
  */
 extension UIImage {
-    public class func resize(image: UIImage?, size:CGSize, by:String) -> UIImage? {
+    public class func resize(image: UIImage?, size: CGSize, by: String) -> UIImage? {
         guard let _image = image else {
             return nil
         }
@@ -96,7 +96,7 @@ extension UIImage {
      具体做法是先按照内容压缩，最多10次，防止失真；然后等比例缩放
      */
     public func compressImageToByte(length: Int) -> Data {
-        var compression:CGFloat = 1
+        var compression: CGFloat = 1
         var data = self.jpegData(compressionQuality: compression)!
         
         guard data.count > length else {
@@ -104,8 +104,8 @@ extension UIImage {
         }
         
         //二分法查找,每次查找范围为[length * 0.9, length) 找到一个合适的compression
-        var max:CGFloat = 1
-        var min:CGFloat = 0
+        var max: CGFloat = 1
+        var min: CGFloat = 0
         
         for _ in 0...10 {
             compression = (max + min) / 2
@@ -127,12 +127,12 @@ extension UIImage {
         
         var resultImage = UIImage(data: data as Data)!
         
-        var lastDataLength:Int = 0
+        var lastDataLength: Int = 0
         while data.count > length && data.count != lastDataLength {
             lastDataLength = data.count
             
             let ratio:Float = Float(length) / Float(data.count)
-            let size:CGSize = CGSize(width: CGFloat(Int(Float(resultImage.size.width) * sqrtf(ratio))), height:CGFloat(Int(Float(resultImage.size.height) * sqrtf(ratio))))
+            let size: CGSize = CGSize(width: CGFloat(Int(Float(resultImage.size.width) * sqrtf(ratio))), height: CGFloat(Int(Float(resultImage.size.height) * sqrtf(ratio))))
             
             UIGraphicsBeginImageContext(size)
             resultImage.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: size))
@@ -152,7 +152,7 @@ extension UIImage {
  获取图片的平均色值
  */
 extension UIImage {
-    public class func avarageColor(image:UIImage?) -> UIColor? {
+    public class func avarageColor(image: UIImage?) -> UIColor? {
         guard let image = image else {
             return nil
         }
@@ -184,7 +184,7 @@ extension UIImage {
 
 extension UIImage {
     //把图像调整为头部朝上的方向
-    public class func fixedOrientation(image:UIImage?) -> UIImage? {
+    public class func fixedOrientation(image: UIImage?) -> UIImage? {
         guard let image = image else {
             return nil
         }
@@ -201,7 +201,7 @@ extension UIImage {
     }
     
     //返回特定颜色的图片
-    public class func image(image:UIImage?, color: UIColor, blendMode: CGBlendMode = .destinationIn) -> UIImage? {
+    public class func image(image: UIImage?, color: UIColor, blendMode: CGBlendMode = .destinationIn) -> UIImage? {
         guard let image = image else {
             return nil
         }

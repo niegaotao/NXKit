@@ -15,7 +15,7 @@ open class NXCollectionViewLayouter : UICollectionViewLayout {
         open var count = Int.zero //已经加入的对象的个数
         open var offset = CGPoint.zero //偏移
         open var width = CGFloat.zero//宽度
-        init(index:Int, count:Int, offset:CGPoint){
+        init(index: Int, count: Int, offset: CGPoint){
             super.init()
             self.index = index
             self.count = count
@@ -34,7 +34,7 @@ open class NXCollectionViewLayouter : UICollectionViewLayout {
     open private(set) var direction = UICollectionView.ScrollDirection.vertical
     open private(set) var added = 0;
     
-    public init(size:CGSize, insets:UIEdgeInsets, numberOfColumns:Int, direction:UICollectionView.ScrollDirection){
+    public init(size: CGSize, insets: UIEdgeInsets, numberOfColumns: Int, direction: UICollectionView.ScrollDirection){
         super.init()
         self.size = size
         self.insets = insets
@@ -62,7 +62,7 @@ open class NXCollectionViewLayouter : UICollectionViewLayout {
         }
     }
     
-    open func sizeAttributes(type:String, section: NXSection) -> CGSize {
+    open func sizeAttributes(type: String, section: NXSection) -> CGSize {
         var __size = CGSize.zero
         if self.direction == .vertical {
             if type == NXItem.View.cell.rawValue {
@@ -87,7 +87,7 @@ open class NXCollectionViewLayouter : UICollectionViewLayout {
         return __size
     }
     
-    open func updateAttributes(_ attributes: UICollectionViewLayoutAttributes, type:String, size:CGSize, section: NXSection, sections:[NXSection]) {
+    open func updateAttributes(_ attributes: UICollectionViewLayoutAttributes, type: String, size: CGSize, section: NXSection, sections: [NXSection]) {
         var __frame = CGRect.zero
         __frame.size = size
         

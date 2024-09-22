@@ -10,7 +10,7 @@ import UIKit
 
 open class NXToolViewController: NXChildrenViewController {
 
-    public let toolView = NXToolView(frame: CGRect(x: 0, y: 0, width: NX.width, height: NX.toolViewOffset + NX.bottomOffset))
+    public let toolView = NXToolView(frame: CGRect(x: 0, y: 0, width: NXKit.width, height: NXKit.toolViewOffset + NXKit.bottomOffset))
     
     open class Attributes: NXToolView.Attributes {
         open var viewControllers = [NXViewController]()
@@ -37,9 +37,9 @@ open class NXToolViewController: NXChildrenViewController {
     }
     
     override open func setupSubviews(){
-        self.toolView.frame = CGRect(x: 0, y: self.view.height-NX.toolViewOffset-NX.bottomOffset, width: self.view.width, height: NX.toolViewOffset+NX.bottomOffset)
+        self.toolView.frame = CGRect(x: 0, y: self.view.height-NXKit.toolViewOffset-NXKit.bottomOffset, width: self.view.width, height: NXKit.toolViewOffset+NXKit.bottomOffset)
         self.toolView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
-        self.toolView.backgroundColor = NX.barBackgroundColor
+        self.toolView.backgroundColor = NXKit.barBackgroundColor
         self.toolView.onSelect = {[weak self] (fromValue, toValue) in
             self?.didSelectViewController(fromValue: fromValue, toValue: toValue)
         }
@@ -74,7 +74,7 @@ open class NXToolViewController: NXChildrenViewController {
     }
     
     //选中
-    public func didSelectViewController(fromValue:Int, toValue: Int){
+    public func didSelectViewController(fromValue: Int, toValue: Int){
         guard toValue >= 0,
               toValue < self.attributes.viewControllers.count,
             self.attributes.index != toValue else {return}
@@ -87,7 +87,7 @@ open class NXToolViewController: NXChildrenViewController {
     }
     
     //切换操作
-    open func fromViewController(_ fromViewController:NXViewController?, toViewController:NXViewController?, animated:Bool) {
+    open func fromViewController(_ fromViewController: NXViewController?, toViewController: NXViewController?, animated: Bool) {
         if let toViewController = toViewController {
             toViewController.view.frame = self.view.bounds
             toViewController.beginAppearanceTransition(true, animated: true)

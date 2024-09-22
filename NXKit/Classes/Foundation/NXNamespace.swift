@@ -54,8 +54,8 @@ extension NXNamespace where RawValue : UIView {
 /*使用*/
 func test(){
     let v = UIView()
-    v.nx.debug()
-    v.nx.debug()
+    v.NXKit.debug()
+    v.NXKit.debug()
 }
 */
 

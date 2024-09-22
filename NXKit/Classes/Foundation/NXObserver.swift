@@ -15,26 +15,26 @@ open class NXObserver  {
         open var observations = [NXObserver.Observation]();
         
         deinit {
-            NX.print(NSStringFromClass(self.classForCoder))
+            NXKit.print(NSStringFromClass(self.classForCoder))
         }
     }
     
     open class Observation : NSObject {
         open var name = ""
-        open var dispose : NX.Event<String, Any?>? = nil
+        open var dispose : NXKit.Event<String, Any?>? = nil
 
-        public init(name:String, dispose:NX.Event<String, Any?>?) {
+        public init(name: String, dispose: NXKit.Event<String, Any?>?) {
             super.init()
             self.name = name
             self.dispose = dispose
         }
         
         deinit {
-            NX.print(NSStringFromClass(self.classForCoder))
+            NXKit.print(NSStringFromClass(self.classForCoder))
         }
     }
     
-    open class func add(observer:AnyObject?, name:String, dispose:NX.Event<String, Any?>?){
+    open class func add(observer: AnyObject?, name: String, dispose: NXKit.Event<String, Any?>?){
         guard let __observer = observer, name.count > 0 else {
             return
         }
@@ -50,7 +50,7 @@ open class NXObserver  {
         }
     }
     
-    open class func add(observer:AnyObject?, names:[String], dispose:NX.Event<String, Any?>?){
+    open class func add(observer: AnyObject?, names: [String], dispose: NXKit.Event<String, Any?>?){
         names.forEach { (name) in
             self.add(observer: observer, name:name, dispose:dispose)
         }
@@ -68,7 +68,7 @@ open class NXObserver  {
         }
     }
     
-    open class func remove(observer:AnyObject?, name:String?){
+    open class func remove(observer: AnyObject?, name: String?){
         if let __observer = observer, let array = self.sets.object(forKey: __observer) {
             if let __name = name, __name.count > 0 {
                 array.observations.removeAll { (item) -> Bool in return item.name == __name}

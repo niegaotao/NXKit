@@ -14,7 +14,7 @@ public struct NXTableDescriptor {
     
     public init(){}
     
-    public init(placeholder:Bool, calc:Bool) {
+    public init(placeholder: Bool, calc: Bool) {
         self.placeholder = placeholder
         self.calc = calc
     }
@@ -38,9 +38,9 @@ open class NXTableView: UITableView {
         self.estimatedRowHeight = 0
         self.estimatedSectionFooterHeight = 0
         self.estimatedSectionHeaderHeight = 0
-        self.backgroundColor = NX.viewBackgroundColor
+        self.backgroundColor = NXKit.viewBackgroundColor
         self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.separatorColor = NX.separatorColor
+        self.separatorColor = NXKit.separatorColor
         if #available(iOS 11.0, *) {
             self.contentInsetAdjustmentBehavior = .never
         }
@@ -52,10 +52,10 @@ open class NXTableView: UITableView {
             self.sectionHeaderHeight = 10
             self.sectionFooterHeight = 0
         }
-        self.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: NX.width, height: 0.01))
+        self.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: NXKit.width, height: 0.01))
         self.tableHeaderView?.backgroundColor = UIColor.clear
         
-        self.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: NX.width, height: 0.01))
+        self.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: NXKit.width, height: 0.01))
         self.tableFooterView?.backgroundColor = UIColor.clear
     }
     
@@ -65,7 +65,7 @@ open class NXTableView: UITableView {
     
     
     //设置下拉刷新时候跟导航栏保持一致颜色
-    open func updateBackdropView(colors:[UIColor], start:CGPoint, end:CGPoint) {
+    open func updateBackdropView(colors: [UIColor], start: CGPoint, end: CGPoint) {
         if self.backdropView == nil {
             self.backdropView = UIImageView(frame: self.bounds)
             self.backdropView?.frame = self.bounds.offsetBy(dx: 0, dy: -self.bounds.size.height)
@@ -79,7 +79,7 @@ open class NXTableView: UITableView {
     }
     
     //是否显示默认图
-    open func updateSubviews(_ action:String, _ value:Any?) {
+    open func updateSubviews(_ action: String, _ value: Any?) {
         if let __value = value as? NXTableDescriptor {
             self.data?.placeholderView.ctxs.isHidden = !__value.placeholder
             self.data?.calcAt = __value.calc
@@ -100,7 +100,7 @@ open class NXTableView: UITableView {
                 
                 if __tableWrapper.placeholderView.ctxs.isHidden == false {
 
-                    var size  = CGSize(width: NX.width, height: 0)
+                    var size  = CGSize(width: NXKit.width, height: 0)
                     if __tableWrapper.placeholderView.ctxs.frame.width > 0 && __tableWrapper.placeholderView.ctxs.frame.height > 0 {
                         size.height = __tableWrapper.placeholderView.ctxs.frame.height
                     }

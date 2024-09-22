@@ -48,7 +48,7 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
                 }
                 else if self.ctxs.m.value.count > 0 {
                     if self.ctxs.t.value.hasPrefix("http") {
-                        NX.image(self.contentView.lhsView, self.ctxs.m.value)
+                        NXKit.image(self.contentView.lhsView, self.ctxs.m.value)
                     }
                     else {
                         self.contentView.lhsView.image = UIImage(named: self.ctxs.m.value)
@@ -87,21 +87,21 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
 open class NXPlaceholderViewDescriptor {
     open var isHidden = true
     
-    open var event : NX.Event<String, Any?>? = nil
+    open var event : NXKit.Event<String, Any?>? = nil
     
     open var frame = CGRect(x: 0, y: 0, width: 320, height: 256)
     
-    public let m = NX.Attribute { (__sender) in
+    public let m = NXKit.Attribute { (__sender) in
         __sender.frame = CGRect(x: 0, y: 0, width: 320, height: 170)
     }
     
-    public let t = NX.Attribute { (__sender) in
+    public let t = NXKit.Attribute { (__sender) in
         __sender.frame = CGRect(x: 0, y: 175, width: 320, height: 55)
         __sender.value = "暂无数据～"
         __sender.textAlignment = .center
         __sender.numberOfLines = 0
-        __sender.font = NX.font(16)
-        __sender.color = NX.lightGrayColor
+        __sender.font = NXKit.font(16)
+        __sender.color = NXKit.lightGrayColor
     }
 }
 

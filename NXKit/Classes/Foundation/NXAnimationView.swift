@@ -18,7 +18,7 @@ open class NXAnimationView: NXImageView {
         self.isHidden = true
         self.contentMode = .scaleAspectFill
         self.backgroundColor = UIColor.clear
-        self.image = NX.image(named:"icon-animation.png")
+        self.image = NXKit.image(named:"icon-animation.png")
     }
     
     //开始动画
@@ -82,7 +82,7 @@ open class NXAnimationWrappedView: NXAutoresizeView<NXAnimationView> {
     }
     
     //结束动画
-    open func stopAnimating(_ isCompleted:Bool = true) {
+    open func stopAnimating(_ isCompleted: Bool = true) {
         self.contentView.stopAnimating()
         self.isHidden = true
     }

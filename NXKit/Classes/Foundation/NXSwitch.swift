@@ -33,14 +33,14 @@ open class NXSwitch: NXControl {
     public final var tapRecongizer = UITapGestureRecognizer()
     
     //未选中颜色后背景色   默认0xFFFFFF
-    open var offTintColor: UIColor = NX.color(0xFFFFFF, 1) {
+    open var offTintColor: UIColor = NXKit.color(0xFFFFFF, 1) {
         didSet {
             offBackgroundView.backgroundColor = offTintColor
         }
     }
     
     //选中颜色后背景色   默认0xFFFFFF
-    open var onTintColor: UIColor = NX.color(0xFFFFFF, 1) {
+    open var onTintColor: UIColor = NXKit.color(0xFFFFFF, 1) {
         didSet {
             onBackgroundView.backgroundColor = onTintColor
         }
@@ -141,7 +141,7 @@ open class NXSwitch: NXControl {
         on = false
     }
     
-    open override func updateSubviews(_ value:Any?){
+    open override func updateSubviews(_ value: Any?){
         if let value = value as? String, value == "shape" {
             switch self.shape {
                 case .oval:
@@ -166,14 +166,14 @@ open class NXSwitch: NXControl {
                 offBackgroundView.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
                 
                 thumbView.center = CGPoint(x: onBackgroundView.width - (thumbView.width + horizontalAdjustment) / 2.0, y: thumbView.center.y)
-                thumbView.backgroundColor = onThumbTintColor ?? NX.mainColor
+                thumbView.backgroundColor = onThumbTintColor ?? NXKit.mainColor
                 
             } else {
                 onBackgroundView.alpha = 0.0
                 offBackgroundView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 
                 thumbView.center = CGPoint(x: (thumbView.width + horizontalAdjustment) / 2.0, y: thumbView.center.y)
-                thumbView.backgroundColor = offThumbTintColor ?? NX.lightGrayColor
+                thumbView.backgroundColor = offThumbTintColor ?? NXKit.lightGrayColor
             }
         }
     }
@@ -191,7 +191,7 @@ open class NXSwitch: NXControl {
         }
     }
     
-    final public func startAnimations(duration: Double, isOn: Bool, completion: ((_ isCompleted:Bool) -> ())? = nil) {
+    final public func startAnimations(duration: Double, isOn: Bool, completion: ((_ isCompleted: Bool) -> ())? = nil) {
         var centerPoint = CGPoint.zero
         if isOn {
             centerPoint = CGPoint(x: onBackgroundView.width - (thumbView.width + horizontalAdjustment) / 2.0, y: thumbView.center.y)

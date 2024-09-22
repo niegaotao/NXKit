@@ -10,16 +10,16 @@ import UIKit
 
 open class NXString {
     open var frame = CGRect.zero
-    open var color  = NX.blackColor
+    open var color  = NXKit.blackColor
     open var lineSpacing : CGFloat = 0.0
     open var text = ""
-    open var font = NX.font(15)
-    open var query = [String:Any]()
+    open var font = NXKit.font(15)
+    open var query = [String: Any]()
     public init(){}
 }
 
 extension NXString {
-    public class func string(_ text:String, _ font:UIFont, _ color:UIColor, _ lineSpacing:CGFloat) -> NXString {
+    public class func string(_ text: String, _ font:UIFont, _ color: UIColor, _ lineSpacing: CGFloat) -> NXString {
         let textWrapper = NXString()
         textWrapper.text = text
         textWrapper.font = font
@@ -28,7 +28,7 @@ extension NXString {
         return textWrapper
     }
     
-    public class func string(_ text:String, _ font:UIFont, _ color:UIColor, _ lineSpacing:CGFloat, _ query:[String:Any]) -> NXString {
+    public class func string(_ text: String, _ font:UIFont, _ color: UIColor, _ lineSpacing: CGFloat, _ query: [String: Any]) -> NXString {
         let textWrapper = NXString()
         textWrapper.text = text
         textWrapper.font = font
@@ -38,8 +38,8 @@ extension NXString {
         return textWrapper
     }
     
-    public class func attributedString(_ text:String, _ font:UIFont, _ color:UIColor, _ lineSpacing:CGFloat) -> NSMutableAttributedString {
-        var mapValue = [NSAttributedString.Key:Any]()
+    public class func attributedString(_ text: String, _ font:UIFont, _ color: UIColor, _ lineSpacing: CGFloat) -> NSMutableAttributedString {
+        var mapValue = [NSAttributedString.Key: Any]()
         mapValue[NSAttributedString.Key.font] = font
         mapValue[NSAttributedString.Key.foregroundColor] = color
         mapValue[NSAttributedString.Key.paragraphStyle] = {
@@ -51,10 +51,10 @@ extension NXString {
         return attributedText
     }
     
-    public class func attributedString(_ strings:[NXString], _ lineSpacing:CGFloat) -> NSMutableAttributedString {
+    public class func attributedString(_ strings: [NXString], _ lineSpacing: CGFloat) -> NSMutableAttributedString {
         let attributedText = NSMutableAttributedString()
         for string in strings {
-            var mapValue = [NSAttributedString.Key:Any]()
+            var mapValue = [NSAttributedString.Key: Any]()
             mapValue[NSAttributedString.Key.font] = string.font
             mapValue[NSAttributedString.Key.foregroundColor] = string.color
             mapValue[NSAttributedString.Key.paragraphStyle] = {

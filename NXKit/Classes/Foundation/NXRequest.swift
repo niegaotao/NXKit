@@ -15,8 +15,8 @@ open class NXRequest: NXAny {
     
     open var path = ""
     open var url = ""
-    open var headers = [String:String]()
-    open var data = [String:Any]()
+    open var headers = [String: String]()
+    open var data = [String: Any]()
     
     open var isEncrypted = false //上行参数是否加密
     open var isDecrypted = false //下行参数是否解密
@@ -33,7 +33,7 @@ open class NXResponse: NXAny {
     
     open var code = -1
     open var error = ""
-    open var data = [String:Any]()
+    open var data = [String: Any]()
     
     open var isSucceed : Bool {
         return self.code == 200 || self.code == 0

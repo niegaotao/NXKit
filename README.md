@@ -19,11 +19,11 @@
 
 ##### 1.2.基础UI
 - `NXView`：`setupSubviews`、`updateSubviews`方法用于初始化视图和刷新视图
-- `NXCView<C:UIView>`：包含`C`类型的`contentView`内容视图属性
-- `NXLRView<L:UIView, R:UIView>`：包含`L`类型的`lhsView`、`R`类型的`rhsView`属性
-- `NXLCRView<L:UIView, C:UIView, R:UIView>`：包`lhsView`、`centerView`、`rhsView`属性
-- `NXAutoresizeView<C:UIView>`
-- `NXBackgroundView<B:UIView, C:UIView>`：包含`B`类型的`backgroundView`背景视图属性、`C`类型的`contentView`内容视图属性
+- `NXCView<C: UIView>`：包含`C`类型的`contentView`内容视图属性
+- `NXLRView<L: UIView, R: UIView>`：包含`L`类型的`lhsView`、`R`类型的`rhsView`属性
+- `NXLCRView<L: UIView, C: UIView, R: UIView>`：包`lhsView`、`centerView`、`rhsView`属性
+- `NXAutoresizeView<C: UIView>`
+- `NXBackgroundView<B: UIView, C: UIView>`：包含`B`类型的`backgroundView`背景视图属性、`C`类型的`contentView`内容视图属性
 - `NXNavigationView`：自定义导航栏，仿系统的`UINavigationBar`,被`NXViewController`持有
 - `NXToolView`：自定义底部工具栏
 - `NXSwipeView`：自定义左右滑动视图，与`NXSwipeViewController`配合使用
@@ -36,8 +36,8 @@
 - `NXCollectionReusableView`
 - `NXAnimationView`：动画视图
 - `NXAbstractView`
-- `NXAbstractTableViewCell<T:UIView>`
-- `NXAbstractCollectionViewCell<T:UIView>`
+- `NXAbstractTableViewCell<T: UIView>`
+- `NXAbstractCollectionViewCell<T: UIView>`
 - `NXAbstractViewCell`
 - `NXActionViewCell`
 

@@ -30,7 +30,7 @@ open class NXWebView: WKWebView {
     
     public override init(frame: CGRect, configuration: WKWebViewConfiguration) {
         if #available(iOS 11.0, *) {
-            for scheme in NX.Association.schemes {
+            for scheme in NXKit.Association.schemes {
                 configuration.setURLSchemeHandler(self.ctxs, forURLScheme: scheme)
             }
         }
@@ -52,15 +52,15 @@ open class NXWebView: WKWebView {
         
         //注册js对象，设置UI和导航的代理
         //window.webkit.messageHandlers.rrxc.postMessage({"action":"rrxc://"})
-        if NX.Association.names.count > 0 {
-            for name in NX.Association.names {
+        if NXKit.Association.names.count > 0 {
+            for name in NXKit.Association.names {
                 self.configuration.userContentController.add(self.ctxs, name: name)
             }
         }
         
         //注入js脚本
-        if NX.Association.scripts.count > 0 {
-            for script in NX.Association.scripts {
+        if NXKit.Association.scripts.count > 0 {
+            for script in NXKit.Association.scripts {
                 self.configuration.userContentController.addUserScript(WKUserScript(source: script.source, injectionTime: script.injectionTime, forMainFrameOnly: script.isForMainFrameOnly))
             }
         }
@@ -70,19 +70,19 @@ open class NXWebView: WKWebView {
             guard error == nil, let ua = retValue as? String, ua.count > 0 else {
                 return
             }
-            NX.log { return "navigator.userAgent=\(ua)"}
+            NXKit.log { return "navigator.userAgent=\(ua)"}
         }
     }
     
-    open func updateSubviews(_ value:Any?){
+    open func updateSubviews(_ value: Any?){
         if let request = value as? URLRequest {
             self.load(request)
         }
     }
     
     deinit {
-        NX.print(NSStringFromClass(self.classForCoder))
-        for name in NX.Association.names {
+        NXKit.print(NSStringFromClass(self.classForCoder))
+        for name in NXKit.Association.names {
             self.configuration.userContentController.removeScriptMessageHandler(forName: name)
         }
     }
@@ -99,28 +99,28 @@ extension NXWebView {
         public fileprivate(set) weak var contentView: NXWebView?
         
         //派发一个操作的回调 isCompleted表示表示是否已经处理完成，第二次调用传值为true已经完成
-        open var dispatchWithValue : ((_ value:[String:Any], _ isDisposed:Bool) -> ())? = nil
+        open var dispatchWithValue : ((_ value: [String: Any], _ isDisposed: Bool) -> ())? = nil
         //这个函数主要处理:本模块没有实现的特殊的回调需求
-        open var callbackWithValue : ((_ value:[String:Any]) -> ())? = nil
+        open var callbackWithValue : ((_ value: [String: Any]) -> ())? = nil
         //临时导航:action=start-false-nil/redirect/result
-        open var callbackWithProvisionalNavigation : ((_ navigation: WKNavigation, _ action:String, _ isCompleted:Bool, _ error:Error?) -> ())? = nil
+        open var callbackWithProvisionalNavigation : ((_ navigation: WKNavigation, _ action: String, _ isCompleted: Bool, _ error: Error?) -> ())? = nil
         //导航:action=start-false-nil/result
-        open var callbackWithNavigation: ((_ navigation: WKNavigation, _ action:String, _ isCompleted:Bool, _ error:Error?) -> ())? = nil
+        open var callbackWithNavigation: ((_ navigation: WKNavigation, _ action: String, _ isCompleted: Bool, _ error: Error?) -> ())? = nil
         
         //弹框的处理:actions表示一个或者多个按钮
-        open var callbackWithAlert:((_ text:String, _ actions:[String], _  completion: @escaping NX.Event<String, Int>) -> ())? = nil
+        open var callbackWithAlert:((_ text: String, _ actions: [String], _  completion: @escaping NXKit.Event<String, Int>) -> ())? = nil
         //重定向判断
-        open var navigationAction:((_ navigation:WKNavigationAction, _ completion: @escaping NX.Event<String, WKNavigationActionPolicy>) -> ())? = nil
+        open var navigationAction:((_ navigation:WKNavigationAction, _ completion: @escaping NXKit.Event<String, WKNavigationActionPolicy>) -> ())? = nil
         //重定向响应
-        open var navigationResponse:((_ navigation:WKNavigationResponse, _ completion: @escaping NX.Event<String, WKNavigationResponsePolicy>) -> ())? = nil
+        open var navigationResponse:((_ navigation:WKNavigationResponse, _ completion: @escaping NXKit.Event<String, WKNavigationResponsePolicy>) -> ())? = nil
         
         //WKScriptMessageHandler
         public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage){
-            if NX.Association.names.contains(message.name) {
-                NX.log { return "message.name=\(message.name),\nmessage.body=\(message.body)"}
+            if NXKit.Association.names.contains(message.name) {
+                NXKit.log { return "message.name=\(message.name),\nmessage.body=\(message.body)"}
                 // 依据协定好的数据格式将参数转成dic
-                if let value = message.body as? [String:Any] {
-                    //1.支持未经处理的[String:Any]结构
+                if let value = message.body as? [String: Any] {
+                    //1.支持未经处理的[String: Any]结构
                     dispose(scheme:message.name, mapValue:value)
                 }
                 else if let value = message.body as? String {
@@ -251,14 +251,14 @@ extension NXWebView {
                 //处理白名单/黑名单的业务
                 completion(WKNavigationActionPolicy.allow)
             }
-            else if NX.Association.scheme == scheme {
+            else if NXKit.Association.scheme == scheme {
                 //这种事通过自定义url重定向打开页面的或常用操作的
-                self.dispose(scheme:NX.Association.scheme, mapValue: ["action":url.absoluteString])
+                self.dispose(scheme: NXKit.Association.scheme, mapValue: ["action":url.absoluteString])
                 completion(WKNavigationActionPolicy.cancel)
             }
-            else if NX.Association.openURLs.contains(scheme) {
+            else if NXKit.Association.openURLs.contains(scheme) {
                 //这种是在网页中通过重定向的方式：常用App的，目前支持一下微信/AppStore
-                NX.open(url, [:])
+                NXKit.open(url, [:])
                 completion(WKNavigationActionPolicy.cancel)
             }
             else{
@@ -267,7 +267,7 @@ extension NXWebView {
         }
         
         //先在这里做优先级的判断和跳转处理
-        public func dispose(scheme:String, mapValue: [String:Any]){
+        public func dispose(scheme: String, mapValue: [String: Any]){
             //参数的检查
             guard mapValue.count > 0, let __contentView = self.contentView else {return}
             
@@ -276,7 +276,7 @@ extension NXWebView {
             
             //如果返回true，则NXURLNavigator自己有能力处理本次操作，反之返回false
             //如果返回false，则回调给具体的业务模块去处理
-            if let isDisposed = NX.dispose("action", __contentView, mapValue, __contentView.webViewController), isDisposed == true {
+            if let isDisposed = NXKit.dispose("action", __contentView, mapValue, __contentView.webViewController), isDisposed == true {
                 //如果能处理
             }
             else {
@@ -300,16 +300,16 @@ extension NXWebView {
         
         @available(iOS 11.0, *)
         public func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
-            NX.dispose("task", webView, ["task":urlSchemeTask,"status":"start"], self.contentView?.webViewController)
+            NXKit.dispose("task", webView, ["task":urlSchemeTask,"status":"start"], self.contentView?.webViewController)
         }
         
         @available(iOS 11.0, *)
         public func webView(_ webView: WKWebView, stop urlSchemeTask: WKURLSchemeTask) {
-            NX.dispose("task", webView, ["task":urlSchemeTask,"status":"stop"], self.contentView?.webViewController)
+            NXKit.dispose("task", webView, ["task":urlSchemeTask,"status":"stop"], self.contentView?.webViewController)
         }
         
         deinit {
-            NX.print(NSStringFromClass(self.classForCoder))
+            NXKit.print(NSStringFromClass(self.classForCoder))
         }
     }
 }

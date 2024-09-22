@@ -16,11 +16,11 @@ class EXApp {
     
     
     //获取授权/请求授权入口
-    open class func authorization(_ category: NX.Authorize, _ queue:DispatchQueue, _ completion:((NX.AuthorizeState) -> ())?, _ alert: Bool = true){
+    open class func authorization(_ category: NXKit.Authorize, _ queue:DispatchQueue, _ completion:((NXKit.AuthorizeState) -> ())?, _ alert: Bool = true){
         self.albumAuthorization(queue, true, completion)
     }
     
-    private class func albumAuthorization(_ queue:DispatchQueue, _ alert:Bool, _ completion:((NX.AuthorizeState) -> ())?){
+    private class func albumAuthorization(_ queue:DispatchQueue, _ alert:Bool, _ completion:((NXKit.AuthorizeState) -> ())?){
         if #available(iOS 14.0, *) {
             let access = PHAccessLevel.readWrite
             let status = PHPhotoLibrary.authorizationStatus(for: access)
@@ -95,8 +95,8 @@ class EXApp {
     }
     
 
-    open class func description(_ type: NX.Authorize, _ completion:((_ index:Int) -> ())? = nil){
-        NXActionView.alert(title: "温馨提示", subtitle: "\(NX.name)访问您的相册用户快速选择和保存照片，请打开设置->\(NX.name)，开启相册访问权限。", actions: ["好的",], completion: nil)
+    open class func description(_ type: NXKit.Authorize, _ completion:((_ index:Int) -> ())? = nil){
+        NXActionView.alert(title: "温馨提示", subtitle: "\(NXKit.name)访问您的相册用户快速选择和保存照片，请打开设置->\(NXKit.name)，开启相册访问权限。", actions: ["好的",], completion: nil)
     }
     
     

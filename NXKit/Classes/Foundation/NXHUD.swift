@@ -22,15 +22,15 @@ open class NXHUD {
         
         open var alpha : CGFloat = 1.0
         open var backgroundColor = UIColor.black.withAlphaComponent(0.8)
-        open var shadowColor = NX.shadowColor.cgColor
+        open var shadowColor = NXKit.shadowColor.cgColor
         open var shadowOpacity : Float = 0.15
         open var shadowOffset = CGSize.zero
         
-        open var ats = NX.Ats.center   //位置默认居中
+        open var ats = NXKit.Ats.center   //位置默认居中
         
         open var image : UIImage? = nil
         
-        open var font = NX.font(14)
+        open var font = NXKit.font(14)
         open var textColor = UIColor.white        //文字颜色
         open var numberOfLines : Int = 0
         open var message = ""
@@ -40,14 +40,14 @@ open class NXHUD {
         
         static var wrappedViewKey = "wrappedViewKey"
         
-        init(completion:NX.Event<String, NXHUD.Wrapped>?) {
+        init(completion: NXKit.Event<String, NXHUD.Wrapped>?) {
             completion?("", self)
         }
     }
     
     open class WrappedView : NXView {
         open var stateView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        open var animationView = NX.HUDAnimationClass.init(frame:CGRect(x: 0, y: 0, width: 50, height: 50))
+        open var animationView = NXKit.HUDAnimationClass.init(frame:CGRect(x: 0, y: 0, width: 50, height: 50))
         open var messageView = UILabel(frame: CGRect.zero)
         
         public let ctxs = NXHUD.Wrapped { (_, __sender) in
@@ -76,7 +76,7 @@ open class NXHUD {
         
         open override func updateSubviews(_ value: Any?) {
             
-            let state = NX.Wrappable<Int,CGRect, CGRect> { __sender in
+            let state = NXKit.Wrappable<Int,CGRect, CGRect> { __sender in
                 __sender.oldValue.size = CGSize(width: 0, height: 0)
                 __sender.value.size = CGSize(width: 0, height: 0)
             }
@@ -122,7 +122,7 @@ open class NXHUD {
             __frame.size.width = ceil(__frame.size.width)
             __frame.size.height = ceil(__frame.size.height)
 
-            var __super = CGSize(width: NX.width, height: NX.height)
+            var __super = CGSize(width: NXKit.width, height: NXKit.height)
             if let __superview = self.superview {
                 __super = __superview.frame.size
             }
@@ -187,14 +187,14 @@ open class NXHUD {
         }
         
         deinit {
-            NX.print(NSStringFromClass(self.classForCoder))
+            NXKit.print(NSStringFromClass(self.classForCoder))
         }
     }
 }
 
 extension NXHUD {
     @discardableResult
-    public class func openWrappedView(key:String, image:UIImage?, message:String, ats:NX.Ats, duration:TimeInterval, superview:UIView) -> NXHUD.WrappedView? {
+    public class func openWrappedView(key: String, image: UIImage?, message: String, ats: NXKit.Ats, duration:TimeInterval, superview: UIView) -> NXHUD.WrappedView? {
         if image == nil && message.count <= 0 {
             return nil
         }
@@ -240,7 +240,7 @@ extension NXHUD {
     }
     
     @discardableResult
-    public class func closeWrappedView(subview:NXHUD.WrappedView?,  superview:UIView?) -> Bool{
+    public class func closeWrappedView(subview: NXHUD.WrappedView?,  superview: UIView?) -> Bool{
         if let wrappedView = subview {
             UIView.animate(withDuration: wrappedView.ctxs.inoutDuration,
                            delay: wrappedView.ctxs.duration,
@@ -272,17 +272,17 @@ extension NXHUD {
 extension UIView {
     
     @discardableResult
-    public func makeToast(message: String, ats: NX.Ats = .maxY, duration: TimeInterval = 2.0) -> NXHUD.WrappedView? {
+    public func makeToast(message: String, ats: NXKit.Ats = .maxY, duration: TimeInterval = 2.0) -> NXHUD.WrappedView? {
         return NXHUD.openWrappedView(key: NXHUD.Key.toast.rawValue, image: nil, message: message, ats: ats, duration: duration, superview: self)
     }
 
     @discardableResult
-    public func makeLoading(message: String = "", ats: NX.Ats = .center) -> NXHUD.WrappedView? {
-        return NXHUD.openWrappedView(key: NXHUD.Key.loading.rawValue, image: NX.image(named:"icon-animation.png"), message: message, ats: ats, duration: 0, superview: self)
+    public func makeLoading(message: String = "", ats: NXKit.Ats = .center) -> NXHUD.WrappedView? {
+        return NXHUD.openWrappedView(key: NXHUD.Key.loading.rawValue, image: NXKit.image(named:"icon-animation.png"), message: message, ats: ats, duration: 0, superview: self)
     }
 
     @discardableResult
-    public func hideLoading(animationView:NXHUD.WrappedView? = nil) -> Bool{
+    public func hideLoading(animationView: NXHUD.WrappedView? = nil) -> Bool{
         return NXHUD.closeWrappedView(subview:animationView, superview: self)
     }
 }

@@ -27,15 +27,15 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
     
     public let attributes = NXToolView.Attributes()
     
-    open var onSelect : NX.Event<Int, Int>? = nil //每次点击都会调用
-    public let separator = NX.Separator { (__sender) in
+    open var onSelect : NXKit.Event<Int, Int>? = nil //每次点击都会调用
+    public let separator = NXKit.Separator { (__sender) in
         __sender.isHidden = false
-        __sender.backgroundColor = NX.separatorColor
+        __sender.backgroundColor = NXKit.separatorColor
     }
     
-    public let shadow = NX.Layer { (__sender) in
+    public let shadow = NXKit.Layer { (__sender) in
         __sender.isHidden = true
-        __sender.shadowColor = NX.shadowColor
+        __sender.shadowColor = NXKit.shadowColor
         __sender.shadowOffset = CGSize(width: 0, height: -2)
         __sender.shadowRadius = 2.0
         __sender.shadowOpacity = 0.15
@@ -50,7 +50,7 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
         self.contentView.addSubview(highlighted.targetView)
     }
     
-    override open func updateSubviews(_ value:Any?){
+    override open func updateSubviews(_ value: Any?){
         if let attributes = value as? NXToolView.Attributes {
             self.attributes.copy(fromValue: attributes)
             self.attributes.index = max(min(attributes.index, self.attributes.elements.count), 0)
@@ -89,7 +89,7 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
         self.highlighted.targetView.updateSubviews(self.highlighted)
         
         //tab
-        let size = CGSize(width: self.highlighted.isHidden ? self.width/max(CGFloat(self.attributes.elements.count), 1) : self.width/CGFloat(self.attributes.elements.count+1), height: NX.toolViewOffset)
+        let size = CGSize(width: self.highlighted.isHidden ? self.width/max(CGFloat(self.attributes.elements.count), 1) : self.width/CGFloat(self.attributes.elements.count+1), height: NXKit.toolViewOffset)
         for (index, element) in self.attributes.elements.enumerated() {
             element.size = CGSize(width: size.width, height: size.height)
             element.targetView.isHidden = false
@@ -178,15 +178,15 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
 }
 
 extension NXToolView {
-    open class Highlighted : NX.View {
-        public let image =  NX.Image(completion: nil)
+    open class Highlighted : NXKit.View {
+        public let image =  NXKit.Image(completion: nil)
         public let targetView = NXToolView.HighlightedView(frame: CGRect(x: 0, y: 0, width: 80, height: 50))
         
         public required init() {
             super.init()
         }
         
-        public init(completion:NX.Completion<NXToolView.Highlighted>?){
+        public init(completion: NXKit.Completion<NXToolView.Highlighted>?){
             super.init()
             completion?(self)
         }
@@ -227,26 +227,26 @@ extension NXToolView {
     //是否直接显示数字
     //点击后数字是否清0
     open class Badge {
-        public var value:Int = 0
+        public var value: Int = 0
         public var backgroundColor = UIColor.red
         public var color = UIColor.white
         public var borderColor = UIColor.red
-        public var borderWidth:CGFloat = 0
-        public var size:CGFloat = 11
+        public var borderWidth: CGFloat = 0
+        public var size: CGFloat = 11
         public var insets = UIEdgeInsets(top: 1.5, left: 1.5, bottom: 1.5, right: 1.5)
         public var isNumeric = true
         public var isResetable = false
     }
     
-    open class Element : NX.View {
+    open class Element : NXKit.View {
         public var key : String = ""
-        public let image = NX.Selectable<UIImage>(completion: nil)
-        public let name = NX.Selectable<String>(completion: nil)
-        public let color = NX.Selectable<UIColor>(completion: { (__sender) in
-            __sender.selected = NX.mainColor
-            __sender.unselected = NX.lightGrayColor
+        public let image = NXKit.Selectable<UIImage>(completion: nil)
+        public let name = NXKit.Selectable<String>(completion: nil)
+        public let color = NXKit.Selectable<UIColor>(completion: { (__sender) in
+            __sender.selected = NXKit.mainColor
+            __sender.unselected = NXKit.lightGrayColor
         })
-        public let renderingMode = NX.Selectable<UIImage.RenderingMode>(completion: {__sender in
+        public let renderingMode = NXKit.Selectable<UIImage.RenderingMode>(completion: {__sender in
             __sender.selected = .alwaysTemplate
             __sender.unselected = .alwaysTemplate
         })
@@ -254,13 +254,13 @@ extension NXToolView {
 
         public var space : CGFloat = 0.0
         public var isSelected  = false        
-        public let targetView = NXToolView.ElementView(frame: CGRect(x: 0, y: 0, width: NX.width/4.0, height: NX.toolViewOffset))
+        public let targetView = NXToolView.ElementView(frame: CGRect(x: 0, y: 0, width: NXKit.width/4.0, height: NXKit.toolViewOffset))
         
         public required init() {
             super.init()
         }
         
-        public init(completion:NX.Completion<NXToolView.Element>?){
+        public init(completion: NXKit.Completion<NXToolView.Element>?){
             super.init()
             completion?(self)
         }
@@ -275,7 +275,7 @@ extension NXToolView {
             super.setupSubviews()
             self.addSubview(imageView)
             
-            nameView.font = NX.font(11)
+            nameView.font = NXKit.font(11)
             nameView.textAlignment = .center
             self.addSubview(nameView)
             
@@ -290,7 +290,7 @@ extension NXToolView {
             guard let element = value as? NXToolView.Element else {
                 return
             }
-            var __raw : (size:CGSize, height:CGFloat) = (CGSize(width: 28.0, height: 28.0), 14.0)
+            var __raw : (size: CGSize, height: CGFloat) = (CGSize(width: 28.0, height: 28.0), 14.0)
             if element.isSelected {
                 __raw.size = element.image.selected.size
             }
@@ -327,7 +327,7 @@ extension NXToolView {
                         badgeValue = "99+"
                     }
                     //6.87, 13.13
-                    var __size = badgeValue.stringSize(font: NX.font(element.badge.size), size: CGSize(width: 100, height: 100))
+                    var __size = badgeValue.stringSize(font: NXKit.font(element.badge.size), size: CGSize(width: 100, height: 100))
                     __size.width = max(element.badge.insets.left, 0) + __size.width + max(element.badge.insets.right, 0)
                     __size.height = max(element.badge.insets.top, 0) + __size.height + max(element.badge.insets.bottom, 0)
                     if __size.width < __size.height {
@@ -339,7 +339,7 @@ extension NXToolView {
                     badgeView.backgroundColor = element.badge.backgroundColor
                     badgeView.text = badgeValue
                     badgeView.textColor = element.badge.color
-                    badgeView.font = NX.font(element.badge.size)
+                    badgeView.font = NXKit.font(element.badge.size)
                     badgeView.frame = CGRect(x: imageView.frame.maxX-__size.width/2.0, y: imageView.frame.minY, width: __size.width, height: __size.height)
                 }
                 else {

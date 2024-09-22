@@ -21,9 +21,9 @@ open class NXSearchView: NXBackgroundView<UIImageView, UIView>, UITextFieldDeleg
         self.backgroundView.frame = self.bounds
         
         self.contentView.frame = self.bounds
-        self.contentView.backgroundColor = NX.color(247, 247, 247)
-        self.contentView.layer.borderColor = NX.separatorColor.cgColor
-        self.contentView.layer.borderWidth = NX.pixel
+        self.contentView.backgroundColor = NXKit.color(247, 247, 247)
+        self.contentView.layer.borderColor = NXKit.separatorColor.cgColor
+        self.contentView.layer.borderWidth = NXKit.pixel
         self.contentView.layer.cornerRadius = 16.0
         self.contentView.layer.masksToBounds = true
         
@@ -33,19 +33,19 @@ open class NXSearchView: NXBackgroundView<UIImageView, UIView>, UITextFieldDeleg
         self.contentView.addSubview(mirrorView)
         
         //文字输入框
-        fieldView.font = NX.font(14)
-        fieldView.textColor = NX.color(80, 80, 80)
+        fieldView.font = NXKit.font(14)
+        fieldView.textColor = NXKit.color(80, 80, 80)
         fieldView.frame = CGRect(x: 35, y: 0, width: self.width-35, height: self.height)
         fieldView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         fieldView.clearButtonMode = .whileEditing
-        fieldView.font = NX.font(14)
+        fieldView.font = NXKit.font(14)
         fieldView.minimumFontSize = 14
         fieldView.text = ""
         fieldView.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         fieldView.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         fieldView.delegate = self
         fieldView.setupEvent(.editingChanged) { [weak self] (v, e) in
-            self?.realtimeSearch?("", NX.get(string:self?.fieldView.text, ""))
+            self?.realtimeSearch?("", NXKit.get(string:self?.fieldView.text, ""))
         }
         fieldView.returnKeyType = .search
         self.contentView.addSubview(fieldView)
@@ -54,14 +54,14 @@ open class NXSearchView: NXBackgroundView<UIImageView, UIView>, UITextFieldDeleg
     }
     
     
-    open var completion : NX.Event<String, [String:Any]>? = nil
+    open var completion : NXKit.Event<String, [String: Any]>? = nil
     
     //RETURN 按钮点击后回调 查询数据
     //clear, return
-    open var search : NX.Event<String, String>? = nil
+    open var search : NXKit.Event<String, String>? = nil
     
     //在不断输入的过程中，下方不断更新展示推荐关键字
-    open var realtimeSearch : NX.Event<String, String>? = nil
+    open var realtimeSearch : NXKit.Event<String, String>? = nil
     
     
     open var editable : Bool = true {
@@ -93,7 +93,7 @@ open class NXSearchView: NXBackgroundView<UIImageView, UIView>, UITextFieldDeleg
     //MARK:UITextFieldDelegate
     //点击键盘"搜索"后的事件
     open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.search?("return", NX.get(string:textField.text, ""))
+        self.search?("return", NXKit.get(string:textField.text, ""))
         return true
     }
     

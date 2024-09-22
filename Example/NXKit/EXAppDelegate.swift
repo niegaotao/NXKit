@@ -18,11 +18,11 @@ class EXAppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         //授权
-        NX.Imp.authorization = { (type, queue, isAlertable ,completion) in
+        NXKit.Imp.authorization = { (type, queue, isAlertable ,completion) in
             EXApp.authorization(type, queue, completion, isAlertable)
         }
         
-        NX.Imp.previewAssets = {(assets:[Any], index:Int) in
+        NXKit.Imp.previewAssets = {(assets:[Any], index:Int) in
             if let __assets = assets as? [NXAsset] {
                 EXApp.center.preview(__assets, 0)
             }

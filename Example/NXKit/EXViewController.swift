@@ -37,8 +37,8 @@ class EXViewController: NXTableViewController {
     }
     
     //请求数据
-    override func request(_ operation: String, _ value: Any?, _ completion: NX.Event<String, Any?>? = nil) {
-        NX.log("request")
+    override func request(_ operation: String, _ value: Any?, _ completion: NXKit.Event<String, Any?>? = nil) {
+        NXKit.log("request")
         //模拟在子线程异步请求
         DispatchQueue.global().asyncAfter(delay: 2) {
             var arrValues = [[[String:Any]]]()
@@ -98,21 +98,21 @@ class EXViewController: NXTableViewController {
             for dicValue in arrSubvalues {
                 let item = NXAbstract(value: dicValue, completion: nil)
                 item.ctxs.update(NXAbstractViewCell.self, "NXAbstractViewCell");
-                item.ctxs.size = CGSize(width: NX.width, height: 56)
+                item.ctxs.size = CGSize(width: NXKit.width, height: 56)
                 
                 item.asset.isHidden = true
                 
                 item.title.isHidden = false
-                item.title.value = NX.get(string: dicValue["title"] as? String)
-                item.title.frame = CGRect(x: 15, y: 0, width: NX.width-30, height: item.ctxs.height)
+                item.title.value = NXKit.get(string: dicValue["title"] as? String)
+                item.title.frame = CGRect(x: 15, y: 0, width: NXKit.width-30, height: item.ctxs.height)
                 
                 item.subtitle.isHidden = true
                 
                 item.value.isHidden = true
                 
                 item.arrow.isHidden = false
-                item.arrow.frame = CGRect(x: NX.width-15-6, y: (item.ctxs.height - 12)/2.0, width: 6, height: 12)
-                item.arrow.image = NX.image(named: "icon-arrow.png")
+                item.arrow.frame = CGRect(x: NXKit.width-15-6, y: (item.ctxs.height - 12)/2.0, width: 6, height: 12)
+                item.arrow.image = NXKit.image(named: "icon-arrow.png")
 
                 item.raw.separator.ats = .maxY
                 item.raw.separator.insets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
@@ -162,7 +162,7 @@ class EXViewController: NXTableViewController {
                         value.wrapped.numberOfColumns = 4
                         self.navigationController?.pushViewController(value, animated: true)
                     }, completion: { action, value in
-                        NX.print("count:\(value.assets.count)")
+                        NXKit.print("count:\(value.assets.count)")
                         self.navigationController?.popViewController(animated: true)
                     })
                 }
@@ -179,7 +179,7 @@ class EXViewController: NXTableViewController {
                         value.wrapped.subviews = (true, false, false)
                         self.present(value, animated: true, completion: nil)
                     }, completion: { action, value in
-                        NX.print("count:\(value.assets.count)")
+                        NXKit.print("count:\(value.assets.count)")
                         self.dismiss(animated: true, completion: nil)
                     })
                 }
@@ -197,7 +197,7 @@ class EXViewController: NXTableViewController {
                         value.ctxs.orientation = .bottom
                         (self.navigationController as? NXNavigationController)?.openViewController(value, animated: true)
                     }, completion: { action, value in
-                        NX.print("count:\(value.assets.count)")
+                        NXKit.print("count:\(value.assets.count)")
                         (self.navigationController as? NXNavigationController)?.closeViewController(value.contentViewController!, animated: true)
 
                     })
@@ -214,7 +214,7 @@ class EXViewController: NXTableViewController {
                         value.wrapped.mediaType = .video
                         self.navigationController?.pushViewController(value, animated: true)
                     }, completion: { action, value in
-                        NX.print("count:\(value.assets.count)")
+                        NXKit.print("count:\(value.assets.count)")
                         self.navigationController?.popViewController(animated: true)
                     })
                 }
@@ -230,7 +230,7 @@ class EXViewController: NXTableViewController {
                         value.wrapped.mediaType = .unknown
                         self.present(value, animated: true, completion: nil)
                     }, completion: { action, value in
-                        NX.print("count:\(value.assets.count)")
+                        NXKit.print("count:\(value.assets.count)")
                         self.dismiss(animated: true, completion: nil)
                     })
                 }
@@ -247,7 +247,7 @@ class EXViewController: NXTableViewController {
                         value.ctxs.orientation = .bottom
                         (self.navigationController as? NXNavigationController)?.openViewController(value, animated: true)
                     }, completion: { action, value in
-                        NX.print("count:\(value.assets.count)")
+                        NXKit.print("count:\(value.assets.count)")
                         (self.navigationController as? NXNavigationController)?.closeViewController(value.contentViewController!, animated: true)
                     })
                 }
@@ -255,7 +255,7 @@ class EXViewController: NXTableViewController {
                     NXAsset.camera(open: { action, value in
                         self.navigationController?.pushViewController(value, animated: true)
                     }, completion: { action, value in
-                        NX.print("count:\(value.assets.count)")
+                        NXKit.print("count:\(value.assets.count)")
                         self.navigationController?.popViewController(animated: true)
                     })
                 }
@@ -263,7 +263,7 @@ class EXViewController: NXTableViewController {
                     NXAsset.camera(open: { action, value in
                         self.present(value, animated: true, completion: nil)
                     }, completion: { action, value in
-                        NX.print("count:\(value.assets.count)")
+                        NXKit.print("count:\(value.assets.count)")
                         self.dismiss(animated: true, completion: nil)
                     })
                 }

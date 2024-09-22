@@ -16,7 +16,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         open var insets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         open var location = NXSwipeView.Location.contentView
         open var selected = AppearanceAttributes() // 选中的效果
-        open var unselected = AppearanceAttributes(font: NX.font(15), color: NX.lightGrayColor) //不选中的效果
+        open var unselected = AppearanceAttributes(font: NXKit.font(15), color: NXKit.lightGrayColor) //不选中的效果
         open var isEqually : Bool = true //是否等分
         open var maximumOfComponents : CGFloat = 5.0 //进行宽度的等分（isEqually == true 生效）
         open var spaceOfComponents : CGFloat = 16.0 //两个元素之间的间距（isEqually == false 生效）
@@ -46,11 +46,11 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
     }
     
     open class AppearanceAttributes {
-        open var font = NX.font(15, .bold)
-        open var color = NX.blackColor
+        open var font = NXKit.font(15, .bold)
+        open var color = NXKit.blackColor
         open var textAlignment = NSTextAlignment.center
         
-        init(font: UIFont = NX.font(15, .bold), color: UIColor = NX.blackColor, textAlignment: NSTextAlignment = .center) {
+        init(font: UIFont = NXKit.font(15, .bold), color: UIColor = NXKit.blackColor, textAlignment: NSTextAlignment = .center) {
             self.font = font
             self.color = color
             self.textAlignment = textAlignment
@@ -59,14 +59,14 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
     
     open var attributes = NXSwipeView.Attributes()
     open var sliderView = UIView(frame: CGRect.zero)
-    open var onSelect : NX.Event<Int, Int>? = nil //每次点击都会调用
+    open var onSelect : NXKit.Event<Int, Int>? = nil //每次点击都会调用
     
     override open func setupSubviews() {
         super.setupSubviews()
                 
         (contentView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
         contentView.frame = self.bounds
-        contentView.backgroundColor = NX.barBackgroundColor
+        contentView.backgroundColor = NXKit.barBackgroundColor
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         contentView.showsHorizontalScrollIndicator = false
         contentView.showsVerticalScrollIndicator = false
@@ -77,7 +77,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         if #available(iOS 11.0, *) {
             contentView.contentInsetAdjustmentBehavior = .never
         }
-        self.setupSeparator(color: NX.separatorColor, ats: .maxY, insets: UIEdgeInsets.zero)
+        self.setupSeparator(color: NXKit.separatorColor, ats: .maxY, insets: UIEdgeInsets.zero)
         self.sliderView.layer.masksToBounds = true
         self.contentView.addSubview(self.sliderView)
     }
@@ -98,9 +98,9 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
             item.unselected.attributes = self.attributes.unselected
             
             item.selected.width = item.title.stringSize(font: self.attributes.selected.font,
-                                                        size: CGSize(width: NX.width, height: 44)).width + 2.0
+                                                        size: CGSize(width: NXKit.width, height: 44)).width + 2.0
             item.unselected.width = item.title.stringSize(font: self.attributes.unselected.font,
-                                                          size: CGSize(width: NX.width, height: 44)).width + 2.0
+                                                          size: CGSize(width: NXKit.width, height: 44)).width + 2.0
         }
         
         if self.attributes.isEqually {
@@ -131,13 +131,13 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
     }
     
     //更新title，index为第几个：从0开始
-    open func update(title:String, at index: Int) {
+    open func update(title: String, at index: Int) {
         let item = self.attributes.elements[index]
         item.title = title
         item.selected.width = title.stringSize(font: attributes.selected.font,
-                                               size: CGSize(width: NX.width, height: 44)).width + 2.0
+                                               size: CGSize(width: NXKit.width, height: 44)).width + 2.0
         item.unselected.width = title.stringSize(font: attributes.unselected.font,
-                                                 size: CGSize(width: NX.width, height: 44)).width + 2.0
+                                                 size: CGSize(width: NXKit.width, height: 44)).width + 2.0
         
         if self.attributes.isEqually {
             let maximumOfComponents = max(min(self.attributes.maximumOfComponents, CGFloat(self.attributes.elements.count)),1.0)
@@ -181,7 +181,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
     }
     
     
-    open func resizeSlider(at index:Int, animated:Bool){
+    open func resizeSlider(at index: Int, animated: Bool){
         self.sliderView.isHidden = self.attributes.slider.isHidden
         self.sliderView.layer.cornerRadius = self.attributes.slider.radius
         self.sliderView.backgroundColor = self.attributes.slider.backgroundColor
@@ -228,7 +228,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        self.setupSeparator(color: NX.separatorColor, ats: .maxY, insets: UIEdgeInsets.zero)
+        self.setupSeparator(color: NXKit.separatorColor, ats: .maxY, insets: UIEdgeInsets.zero)
     }
     
     
@@ -289,7 +289,7 @@ extension NXSwipeView {
         open var isHidden = false
         open var size = CGSize(width: 0, height: 3.0)
         open var insets = UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0)
-        open var backgroundColor = NX.mainColor
+        open var backgroundColor = NXKit.mainColor
         open var radius : CGFloat = 0.0
     }
     
@@ -324,7 +324,7 @@ extension NXSwipeView {
             self.contentView.addSubview(self.titleView)
         }
         
-        override open func updateSubviews(_ value:Any?){
+        override open func updateSubviews(_ value: Any?){
             if let element = value as? NXSwipeView.Element {
                 self.titleView.text = element.title
                 if let attributes = element.isSelected ? element.selected.attributes : element.unselected.attributes {
