@@ -60,6 +60,8 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
 
     override open func setupSubviews() {
         super.setupSubviews()
+        self.backgroundView.image = UIImage.image(color: NXKit.barBackgroundColor)?.withRenderingMode(.alwaysTemplate)
+        self.backgroundView.tintColor = NXKit.barBackgroundColor
         self.contentView.addSubview(highlighted.targetView)
     }
     

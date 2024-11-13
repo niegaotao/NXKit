@@ -107,7 +107,7 @@ open class NXViewController: UIViewController  {
     
     //开始动画
     open func startAnimating(){
-        if self.ctxs.isEmpty {
+        if !self.ctxs.isLoaded {
             self.animationView.superview?.bringSubviewToFront(self.animationView)
             self.animationView.startAnimating()
         }
@@ -116,8 +116,8 @@ open class NXViewController: UIViewController  {
     //结束动画
     open func stopAnimating(_ isCompleted: Bool = true){
         self.animationView.stopAnimating(isCompleted)
-        if self.ctxs.isEmpty {
-            self.ctxs.isEmpty = false
+        if !self.ctxs.isLoaded {
+            self.ctxs.isLoaded = false
         }
     }
     
@@ -203,7 +203,7 @@ extension NXViewController {
     open class Association {
         open var index = 0 ///用于记录当前正在请求或者展示的页面index，多用于分页加载
         open var state = NXKit.Reload.initialized///当前刷新状态
-        open var isEmpty : Bool = true ///页面是否为空，如有缓存数据则可置为false。false不用展示加载动画
+        open var isLoaded : Bool = false /// 页面是否加载成功过
         
         open var lifecycleValue = NXKit.Lifecycle.initialized;
         open var lifecycle : NXKit.Event<NXKit.Lifecycle, NXViewController>? = nil;
@@ -218,7 +218,7 @@ extension NXViewController {
         open var animationViewClass = NXKit.AnimationClass
        
         ///是否允许手势返回：某些页面会设置不允许手势返回，采用block是因为可以在当前页面接收到右滑手势返回事件
-        open var onBackInvoked : ((String, UIPanGestureRecognizer) -> (Bool)) = {_, _ in return true}
+        open var onBackInvoked : ((UIPanGestureRecognizer) -> (Bool)) = {_ in return true}
         
         ///进行的什么操作
         open var navigation = NXKit.Navigation.push

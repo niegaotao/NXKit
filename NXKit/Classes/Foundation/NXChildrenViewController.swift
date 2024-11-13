@@ -10,9 +10,9 @@ import UIKit
 
 open class NXChildrenViewController: NXViewController {
     //子控制器数组
-    open var viewControllers = [NXViewController]()
+    open var viewControllers = [UIViewController]()
     //当前选中(展示)的视图控制器
-    open var currentViewController : NXViewController? = nil
+    open var currentViewController : UIViewController? = nil
     
     open override var childForStatusBarStyle: UIViewController? {
         return self.currentViewController
@@ -24,7 +24,12 @@ open class NXChildrenViewController: NXViewController {
     
     open override func updateNavigationAppearance() {
         if let currentViewController = self.currentViewController {
-            currentViewController.updateNavigationAppearance()
+            if let currentViewController = currentViewController as? NXViewController {
+                currentViewController.updateNavigationAppearance()
+            }
+            else {
+                currentViewController.setNeedsStatusBarAppearanceUpdate()
+            }
             return
         }
         super.updateNavigationAppearance()

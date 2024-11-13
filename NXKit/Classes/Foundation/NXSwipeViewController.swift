@@ -9,7 +9,7 @@
 import UIKit
 
 open class NXSwipeViewController: NXChildrenViewController, UIScrollViewDelegate {
-    open var scrollView = UIScrollView(frame: CGRect.zero)
+    open var scrollView = NXScrollView(frame: CGRect.zero)
     open var swipeView = NXSwipeView(frame: CGRect(x: 0, y: 0, width: NXKit.width, height: 44))
     
     open class Attributes: NXSwipeView.Attributes {
@@ -49,6 +49,7 @@ open class NXSwipeViewController: NXChildrenViewController, UIScrollViewDelegate
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.isPagingEnabled = true
+        scrollView.isSupportedMultirecognizers = true
         if #available(iOS 11.0, *) {
             scrollView.contentInsetAdjustmentBehavior = .never
         }
@@ -104,7 +105,9 @@ open class NXSwipeViewController: NXChildrenViewController, UIScrollViewDelegate
         self.scrollView.contentSize = CGSize(width: self.contentView.width * Double(self.viewControllers.count),
                                              height: self.contentView.height)
         for (idx, vc) in self.viewControllers.enumerated() {
-            vc.ctxs.superviewController = self
+            if let vc = vc as? NXViewController {
+                vc.ctxs.superviewController = self
+            }
             self.addChild(vc)
             
             if attributes.index == idx {
