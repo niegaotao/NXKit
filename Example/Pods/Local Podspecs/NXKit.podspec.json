@@ -1,6 +1,6 @@
 {
   "name": "NXKit",
-  "version": "1.4.1",
+  "version": "1.4.3",
   "summary": "UI framework",
   "description": "NXKit is a UI framework implemented by Swift language for building native apps more easily。",
   "homepage": "https://github.com/niegaotao/NXKit",
@@ -13,10 +13,10 @@
   },
   "source": {
     "git": "https://github.com/niegaotao/NXKit.git",
-    "tag": "1.4.1"
+    "tag": "1.4.3"
   },
   "platforms": {
-    "ios": "12.0"
+    "ios": "13.0"
   },
   "swift_versions": "5.0",
   "frameworks": [

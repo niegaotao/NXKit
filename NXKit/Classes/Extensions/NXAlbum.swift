@@ -15,19 +15,20 @@ open class NXAlbum : NXAbstract {
         
     convenience public init(title: String, fetchResult: PHFetchResult<AnyObject>?, wrapped: NXAsset.Wrapped) {
         self.init(title: title, value: nil, completion:nil)
-        self.ctxs.update(NXActionViewCell.self, "NXActionViewCell")
+        self.reuse.cls = NXActionViewCell.self
+        self.reuse.id = "NXActionViewCell"
         
         //生成NXAsset对象
         if let __fetchResult = fetchResult as? PHFetchResult<PHAsset> {
             for index in 0 ..< __fetchResult.count {
                 let phasset = __fetchResult[index]
-                let __asset = NXAsset(asset: phasset, suffixes:wrapped.video.suffixes)
+                let __asset = NXAsset(wrappedValue: phasset, suffixes:wrapped.video.suffixes)
                 self.assets.append(__asset)
             }
         }
         
         //获取封面
-        if let __asset = self.assets.last, let phasset = __asset.asset {
+        if let __asset = self.assets.last, let phasset = __asset.wrappedValue as? PHAsset {
             if let __thumbnail = __asset.thumbnail {
                 self.asset.image = __thumbnail
             }
@@ -42,7 +43,7 @@ open class NXAlbum : NXAbstract {
             }
         }
                 
-        self.ctxs.size = CGSize(width: NXKit.width, height: 80)
+        self.size = CGSize(width: NXKit.width, height: 80)
         self.asset.frame = CGRect(x: 16, y: 1, width: 78, height: 78)
         self.asset.cornerRadius = 0.0
         self.asset.isHidden = false
@@ -62,7 +63,7 @@ open class NXAlbum : NXAbstract {
         self.value.isHidden = true
         
         self.arrow.isHidden = false
-        self.arrow.frame = CGRect(x: self.ctxs.width - 16 - 6, y: (self.ctxs.height - 12)/2.0, width: 6, height: 12)
+        self.arrow.frame = CGRect(x: self.size.width - 16 - 6, y: (self.size.height - 12)/2.0, width: 6, height: 12)
         self.arrow.image = NXKit.image(named:"icon-arrow.png")
         
         self.raw.separator.insets = UIEdgeInsets(top: 0, left: 106, bottom: 0, right: 0)

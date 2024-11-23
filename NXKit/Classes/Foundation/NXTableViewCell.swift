@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class NXTableViewCell: UITableViewCell {
+open class NXTableViewCell: UITableViewCell, NXViewProtocol {
     open var value : Any? = nil
     open var arrowView = UIImageView(frame: CGRect.zero)
     open var separator = CALayer()
@@ -44,13 +44,10 @@ open class NXTableViewCell: UITableViewCell {
         self.backgroundView?.layer.addSublayer(separator)
     }
     
-    /// 子类直接重写该方法进行UI视图的初始化和布局
     open func setupSubviews(){
         
     }
     
-    
-    /// 子类重写该方法进行数据绑定操作
     open func updateSubviews(_ value: Any?){
         
     }

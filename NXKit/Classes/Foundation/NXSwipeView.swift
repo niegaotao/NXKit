@@ -21,6 +21,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         open var maximumOfComponents : CGFloat = 5.0 //进行宽度的等分（isEqually == true 生效）
         open var spaceOfComponents : CGFloat = 16.0 //两个元素之间的间距（isEqually == false 生效）
         open var slider = NXSwipeView.Slider() //底部滑块
+        open var separator = NXKit.Separator()
         
         public init() {}
         
@@ -36,6 +37,7 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
             self.maximumOfComponents = fromValue.maximumOfComponents
             self.spaceOfComponents = fromValue.spaceOfComponents
             self.slider = fromValue.slider
+            self.separator = fromValue.separator
             return self
         }
     }
@@ -77,7 +79,6 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         if #available(iOS 11.0, *) {
             contentView.contentInsetAdjustmentBehavior = .never
         }
-        self.setupSeparator(color: NXKit.separatorColor, ats: .maxY, insets: UIEdgeInsets.zero)
         self.sliderView.layer.masksToBounds = true
         self.contentView.addSubview(self.sliderView)
     }
@@ -88,11 +89,15 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
             self.attributes.index = min(max(0, self.attributes.index), self.attributes.elements.count)
         }
         
+        self.setupSeparator(color: self.attributes.separator.backgroundColor, ats: .maxY, insets: self.attributes.separator.insets)
+        self.association?.separator?.isHidden = self.attributes.separator.isHidden
+        
         for item in self.attributes.elements {
-            if item.ctxs.cls == nil || item.ctxs.reuse.count <= 0 {
-                item.ctxs.update(NXSwipeView.Cell.self, "NXSwipeViewCell")
+            if item.reuse.cls == nil || item.reuse.id.count <= 0 {
+                item.reuse.cls = NXSwipeView.Cell.self
+                item.reuse.id = "NXSwipeViewCell"
             }
-            self.contentView.register(item.ctxs.cls, forCellWithReuseIdentifier: item.ctxs.reuse)
+            self.contentView.register(item.reuse.cls, forCellWithReuseIdentifier: item.reuse.id)
             
             item.selected.appearance = self.attributes.selectedAppearance
             item.unselected.appearance = self.attributes.unselectedAppearance
@@ -228,7 +233,8 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        self.setupSeparator(color: NXKit.separatorColor, ats: .maxY, insets: UIEdgeInsets.zero)
+        self.setupSeparator(color: self.attributes.separator.backgroundColor, ats: .maxY, insets: self.attributes.separator.insets)
+        self.association?.separator?.isHidden = self.attributes.separator.isHidden
     }
     
     
@@ -289,7 +295,7 @@ extension NXSwipeView {
         open var isHidden = false
         open var size = CGSize(width: 0, height: 3.0)
         open var insets = UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0)
-        open var backgroundColor = NXKit.mainColor
+        open var backgroundColor = NXKit.primaryColor
         open var radius : CGFloat = 0.0
     }
     

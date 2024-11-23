@@ -8,7 +8,12 @@
 
 import UIKit
 
-open class NXAnimationView: NXImageView {
+public protocol NXAnimationViewProtocol: NSObjectProtocol {
+    func startAnimating()
+    func stopAnimating()
+}
+
+open class NXAnimationView: NXImageView, NXAnimationViewProtocol {
     //动画时长
     open var duration : CFTimeInterval = 1.0
     //是否在动画
@@ -55,8 +60,7 @@ open class NXAnimationView: NXImageView {
     }
 }
 
-
-open class NXAnimationWrappedView: NXAutoresizeView<NXAnimationView> {
+open class NXAnimationWrappedView: NXAutoresizeView<NXAnimationView>, NXAnimationViewProtocol {
     //转圈的视图
     open var animation = CGSize(width: 50, height: 50)
     
@@ -82,7 +86,7 @@ open class NXAnimationWrappedView: NXAutoresizeView<NXAnimationView> {
     }
     
     //结束动画
-    open func stopAnimating(_ isCompleted: Bool = true) {
+    open func stopAnimating() {
         self.contentView.stopAnimating()
         self.isHidden = true
     }

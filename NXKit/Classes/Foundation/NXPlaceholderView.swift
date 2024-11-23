@@ -123,7 +123,7 @@ open class NXTablePlaceholderViewCell : NXTableViewCell {
         guard let item = value as? NXPlaceholderDescriptor, let placeholderView = item.placeholderView else {
             return;
         }
-        placeholderView.frame = CGRect(x: 0, y: 0, width: item.ctxs.width, height: item.ctxs.height)
+        placeholderView.frame = CGRect(x: 0, y: 0, width: item.size.width, height: item.size.height)
         placeholderView.updateSubviews(value)
         self.backgroundView?.backgroundColor = placeholderView.backgroundColor
         self.contentView.addSubview(placeholderView)
@@ -140,7 +140,7 @@ open class NXCollectionPlaceholderViewCell : NXCollectionViewCell {
             return;
         }
         
-        placeholderView.frame = CGRect(x: 0, y: 0, width: item.ctxs.width, height: item.ctxs.height)
+        placeholderView.frame = CGRect(x: 0, y: 0, width: item.size.width, height: item.size.height)
         placeholderView.updateSubviews(value)
         self.backgroundView?.backgroundColor = placeholderView.backgroundColor
         self.contentView.addSubview(placeholderView)

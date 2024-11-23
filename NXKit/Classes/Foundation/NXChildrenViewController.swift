@@ -21,17 +21,4 @@ open class NXChildrenViewController: NXViewController {
     open override var childForStatusBarHidden: UIViewController? {
         return self.currentViewController
     }
-    
-    open override func updateNavigationAppearance() {
-        if let currentViewController = self.currentViewController {
-            if let currentViewController = currentViewController as? NXViewController {
-                currentViewController.updateNavigationAppearance()
-            }
-            else {
-                currentViewController.setNeedsStatusBarAppearanceUpdate()
-            }
-            return
-        }
-        super.updateNavigationAppearance()
-    }
 }

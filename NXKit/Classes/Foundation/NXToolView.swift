@@ -30,9 +30,9 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
     }
     
     open class AppearanceAttributes {
-        open var color = NXKit.mainColor
+        open var color = NXKit.primaryColor
         open var renderingMode = UIImage.RenderingMode.alwaysTemplate
-        init(color: UIColor = NXKit.mainColor, renderingMode: UIImage.RenderingMode = .alwaysTemplate) {
+        init(color: UIColor = NXKit.primaryColor, renderingMode: UIImage.RenderingMode = .alwaysTemplate) {
             self.color = color
             self.renderingMode = renderingMode
         }

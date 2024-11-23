@@ -9,7 +9,7 @@
 import UIKit
 
 
-open class NXControl: UIControl {
+open class NXControl: UIControl, NXViewProtocol {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

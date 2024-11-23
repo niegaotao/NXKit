@@ -65,10 +65,10 @@ open class NXAbstractView: NXView {
         let __separator = __abstract.raw.separator
         var __isHidden = false
         if __separator.ats.contains(.maxY) || __separator.ats.contains(.maxX) {
-            __isHidden = __abstract.ctxs.at.last
+            __isHidden = __abstract.at.last
         }
         else if __separator.ats.contains(.minY) || __separator.ats.contains(.minX) {
-            __isHidden = __abstract.ctxs.at.first
+            __isHidden = __abstract.at.first
         }
         else {
             __isHidden = true
@@ -81,15 +81,15 @@ open class NXAbstractView: NXView {
             self.separator.isHidden = false
             var __frame = CGRect.zero
             if __separator.ats.contains(.minY) || __separator.ats.contains(.maxY) {
-                __frame = CGRect(x: __separator.insets.left, y: 0, width: __abstract.ctxs.width-__separator.insets.left-__separator.insets.right, height: NXKit.pixel)
+                __frame = CGRect(x: __separator.insets.left, y: 0, width: __abstract.size.width-__separator.insets.left-__separator.insets.right, height: NXKit.pixel)
                 if __abstract.raw.separator.ats.contains(.maxY) {
-                    __frame.origin.y = __abstract.ctxs.height-NXKit.pixel
+                    __frame.origin.y = __abstract.size.height-NXKit.pixel
                 }
             }
             else if __separator.ats.contains(.minX) || __separator.ats.contains(.maxX){
-                __frame = CGRect(x: 0, y: __separator.insets.top, width: NXKit.pixel, height: __abstract.ctxs.height-__separator.insets.top-__separator.insets.bottom)
+                __frame = CGRect(x: 0, y: __separator.insets.top, width: NXKit.pixel, height: __abstract.size.height-__separator.insets.top-__separator.insets.bottom)
                 if __separator.ats.contains(.maxX) {
-                    __frame.origin.x = __abstract.ctxs.width-NXKit.pixel
+                    __frame.origin.x = __abstract.size.width-NXKit.pixel
                 }
             }
             

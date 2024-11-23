@@ -30,10 +30,6 @@ open class NXSwipeViewController: NXChildrenViewController, UIScrollViewDelegate
     override open func viewDidLoad() {
         super.viewDidLoad()
     
-        self.setupSubviews()
-    }
-    
-    open override func setupSubviews() {
         //滚动的容器
         self.swipeView.onSelect = {[weak self] (fromIndex, toIndex) in
             self?.didSelectViewController(fromValue: fromIndex, toValue: toIndex)
@@ -54,10 +50,6 @@ open class NXSwipeViewController: NXChildrenViewController, UIScrollViewDelegate
             scrollView.contentInsetAdjustmentBehavior = .never
         }
         self.contentView.addSubview(scrollView)
-    }
-    
-    override open func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
     }
     
     //选中

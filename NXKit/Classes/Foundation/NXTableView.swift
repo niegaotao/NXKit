@@ -20,7 +20,7 @@ public struct NXTableDescriptor {
     }
 }
 
-open class NXTableView: UITableView {
+open class NXTableView: UITableView, NXViewProtocol {
     open var backdropView : UIImageView? = nil
     weak open var data : NXCollection<NXTableView>?
     
@@ -79,7 +79,7 @@ open class NXTableView: UITableView {
     }
     
     //是否显示默认图
-    open func updateSubviews(_ action: String, _ value: Any?) {
+    open func updateSubviews(_ value: Any?) {
         if let __value = value as? NXTableDescriptor {
             self.data?.placeholderView.ctxs.isHidden = !__value.placeholder
             self.data?.calcAt = __value.calc
@@ -116,11 +116,14 @@ open class NXTableView: UITableView {
             if __tableWrapper.calcAt {
                 __tableWrapper.elements.forEach { (__section) in
                     __section.elements.forEach { (__element) in
-                        __element.ctxs.at.first = false
-                        __element.ctxs.at.last = false
+                        var __element = __element
+                        __element.at.first = false
+                        __element.at.last = false
                     }
-                    __section.elements.first?.ctxs.at.first = true
-                    __section.elements.last?.ctxs.at.last = true
+                    var first = __section.elements.first
+                    var last = __section.elements.last
+                    first?.at.first = true
+                    last?.at.last = true
                 }
             }
         }

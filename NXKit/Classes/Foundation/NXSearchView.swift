@@ -47,14 +47,17 @@ open class NXSearchView: NXBackgroundView<UIImageView, UIView>, UITextFieldDeleg
         fieldView.setupEvent(.editingChanged) { [weak self] (v, e) in
             self?.realtimeSearch?("", NXKit.get(string:self?.fieldView.text, ""))
         }
+        fieldView.accessoryView.actionView.setupEvent(.touchUpInside) {[weak self] event, value in
+            guard let self = self else {return}
+            let keyboard = self.fieldView.text ?? ""
+            self.search?("return", keyboard)
+            self.fieldView.resignFirstResponder()
+        }
         fieldView.returnKeyType = .search
         self.contentView.addSubview(fieldView)
         
         self.updateSubviews(self.placeholder)
     }
-    
-    
-    open var completion : NXKit.Event<String, [String: Any]>? = nil
     
     //RETURN 按钮点击后回调 查询数据
     //clear, return

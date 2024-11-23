@@ -28,8 +28,6 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
         if #available(iOS 11.0, *) {
             collectionView.contentInsetAdjustmentBehavior = .never
         }
-        
-        self.contentView.bringSubviewToFront(self.animationView)
     }
     
     ///代理方法数据源方法
@@ -79,15 +77,15 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return self.data[indexPath]?.ctxs.size ?? CGSize(width: 1, height: 1)
+        return self.data[indexPath]?.size ?? CGSize(width: 1, height: 1)
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return self.data[section]?.header?.ctxs.size ?? CGSize.zero
+        return self.data[section]?.header?.size ?? CGSize.zero
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return self.data[section]?.footer?.ctxs.size ?? CGSize.zero
+        return self.data[section]?.footer?.size ?? CGSize.zero
     }
     
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

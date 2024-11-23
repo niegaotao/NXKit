@@ -11,7 +11,7 @@ import UIKit
 
 open class NXTableViewController: NXViewController, UITableViewDelegate, UITableViewDataSource {
     //表视图
-    open var tableView = NXTableView(frame: CGRect.zero, style: NXKit.tableViewStyle)
+    open var tableView = NXTableView(frame: CGRect.zero, style: .grouped)
     //数据源管理对象
     public let data = NXCollection<NXTableView>()
     
@@ -28,7 +28,7 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         self.tableView.separatorColor = NXKit.separatorColor
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.separatorStyle = NXKit.separatorStyle
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tableView.tableFooterView?.frame = CGRect(x: 0, y: 0, width: self.contentView.width, height: 24)
         if #available(iOS 11.0, *) {
             self.tableView.contentInsetAdjustmentBehavior = .never
@@ -37,8 +37,6 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
 
         tableView.data = self.data
         self.data.wrappedView = tableView
-        
-        self.contentView.bringSubviewToFront(self.animationView)
     }
     
     
@@ -74,12 +72,12 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         }
         else {
             if let header = self.data[index]?.header {
-                if let cls = header.ctxs.cls as? NXTableReusableView.Type {
-                    let reusableView = cls.init(reuseIdentifier:header.ctxs.reuse)
+                if let cls = header.reuse.cls as? NXTableReusableView.Type {
+                    let reusableView = cls.init(reuseIdentifier:header.reuse.id)
                     reusableView.updateSubviews(header)
                     return reusableView
                 }
-                else if let cls = header.ctxs.cls as? UIView.Type {
+                else if let cls = header.reuse.cls as? UIView.Type {
                     return cls.init()
                 }
             }
@@ -120,12 +118,12 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         }
         else {
             if let footer = self.data[index]?.footer {
-                if let cls = footer.ctxs.cls as? NXTableReusableView.Type {
-                    let reusableView = cls.init(reuseIdentifier:footer.ctxs.reuse)
+                if let cls = footer.reuse.cls as? NXTableReusableView.Type {
+                    let reusableView = cls.init(reuseIdentifier:footer.reuse.id)
                     reusableView.updateSubviews(footer)
                     return reusableView
                 }
-                else if let cls = footer.ctxs.cls as? UIView.Type {
+                else if let cls = footer.reuse.cls as? UIView.Type {
                     return cls.init()
                 }
             }

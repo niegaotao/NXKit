@@ -20,7 +20,7 @@ open class NXViewController: UIViewController  {
     open var contentView = UIView(frame: CGRect(x: 0, y: NXKit.safeAreaInsets.top + 44.0, width: NXKit.width, height: NXKit.height-NXKit.safeAreaInsets.top - 44.0))
     
     ///页面无内容时的加载动画
-    open var animationView = NXKit.AnimationClass.init(frame: CGRect.zero)
+    open var animationView: (UIView & NXAnimationViewProtocol)?
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -51,17 +51,11 @@ open class NXViewController: UIViewController  {
         
         self.contentView.frame = CGRect(x: 0, y: NXKit.safeAreaInsets.top + 44.0, width: self.view.width, height: self.view.height-NXKit.safeAreaInsets.top - 44.0)
         self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.contentView.backgroundColor = NXKit.viewBackgroundColor
         self.view.addSubview(self.contentView)
-        
-        self.animationView.frame = self.contentView.bounds
-        self.contentView.addSubview(self.animationView)
         
         self.navigationView.frame = CGRect(x: 0, y: 0, width: self.view.width, height: NXKit.safeAreaInsets.top + 44.0)
         self.navigationView.autoresizingMask = [.flexibleWidth]
         self.navigationView.controller = self
-        self.navigationView.separator.isHidden = self.ctxs.separator.isHidden
-        self.navigationView.separator.backgroundColor = self.ctxs.separator.backgroundColor.cgColor
         self.view.addSubview(self.navigationView)
         self.navigationView.updateSubviews(nil)
     }
@@ -108,16 +102,20 @@ open class NXViewController: UIViewController  {
     //开始动画
     open func startAnimating(){
         if !self.ctxs.isLoaded {
-            self.animationView.superview?.bringSubviewToFront(self.animationView)
-            self.animationView.startAnimating()
+            if let animationView = self.animationView {
+                animationView.frame = self.contentView.bounds
+                self.contentView.addSubview(animationView)
+                contentView.bringSubviewToFront(animationView)
+                animationView.startAnimating()
+            }
         }
     }
     
     //结束动画
     open func stopAnimating(_ isCompleted: Bool = true){
-        self.animationView.stopAnimating(isCompleted)
+        self.animationView?.stopAnimating()
         if !self.ctxs.isLoaded {
-            self.ctxs.isLoaded = false
+            self.ctxs.isLoaded = true
         }
     }
     
@@ -182,7 +180,7 @@ open class NXViewController: UIViewController  {
     }
     
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return self.ctxs.orientationMask
+        return self.ctxs.supportedOrientations
     }
     
     override open func present(_ viewController: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
@@ -212,10 +210,7 @@ extension NXViewController {
         open var shouldAutorotate = false
         open var statusBarStyle = UIStatusBarStyle.default
         open var statusBarHidden = false
-        open var orientationMask = UIInterfaceOrientationMask.portrait
-        
-        ///空页面加载动画
-        open var animationViewClass = NXKit.AnimationClass
+        open var supportedOrientations = UIInterfaceOrientationMask.portrait
        
         ///是否允许手势返回：某些页面会设置不允许手势返回，采用block是因为可以在当前页面接收到右滑手势返回事件
         open var onBackInvoked : ((UIPanGestureRecognizer) -> (Bool)) = {_ in return true}
@@ -228,12 +223,6 @@ extension NXViewController {
         open var transitionView: NXTransitionView?
         ///两级页面之间传递信息
         open var event : NXKit.Event<String, Any?>? = nil
-        ///导航栏顶部的分割线
-        public let separator = NXKit.Separator { (__sender) in
-            __sender.insets = UIEdgeInsets.zero;
-            __sender.isHidden = false;
-            __sender.backgroundColor = NXKit.separatorColor;
-        }
         ///覆盖的视图控制器
         public var viewControllers = [NXViewController]()
         ///容器试图管理器

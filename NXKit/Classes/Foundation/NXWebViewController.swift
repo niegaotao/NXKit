@@ -101,7 +101,7 @@ open class NXWebViewController: NXViewController {
         
         self.progressView.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.size.width, height: self.progressView.frame.size.height)
         self.progressView.autoresizingMask = [.flexibleWidth]
-        self.progressView.progressTintColor = NXKit.mainColor
+        self.progressView.progressTintColor = NXKit.primaryColor
         self.progressView.trackTintColor = UIColor.clear
         self.progressView.alpha = 0.0
         self.contentView.addSubview(self.progressView)

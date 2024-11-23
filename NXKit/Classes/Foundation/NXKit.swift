@@ -10,7 +10,6 @@ import UIKit
 import WebKit
 import AVFoundation
 
-
 //应用程序信息
 open class NXKit {
     static public let infoDictionary = Bundle.main.infoDictionary ?? [:]
@@ -58,16 +57,14 @@ extension NXKit {
         return NXKit.safeAreaInsets.bottom > 0.0
     }
     
-    static public var bottomOffset : CGFloat {
-        return NXKit.safeAreaInsets.bottom
-    }
-    
     static public var toolViewOffset : CGFloat = 49.0
 }
 
 
 // 颜色
 extension NXKit {
+    // 主色
+    static public var primaryColor = NXKit.color(51, 120, 246, 1)
     //背景色
     static public var backgroundColor = NXKit.color(255, 255, 255, 1)
     //view背景色
@@ -88,8 +85,6 @@ extension NXKit {
     static public var separatorColor = NXKit.color(235, 235, 240, 1)
     //阴影颜色
     static public var shadowColor = NXKit.color(56, 79, 134, 1)
-    // 主色
-    static public var mainColor = NXKit.color(51, 120, 246, 1)
     // 深黑
     static public var blackColor = NXKit.color(51, 51, 51, 1)
     // 深灰
@@ -188,18 +183,6 @@ extension NXKit {
     static public var userInterfaceStyle = UIUserInterfaceStyle.light
 }
 
-
-//全局UI
-extension NXKit {
-    static public var tableViewStyle = UITableView.Style.grouped
-    static public var separatorStyle = UITableViewCell.SeparatorStyle.none
-    
-    static public var AnimationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self //空页面加载动画类型
-    static public var HUDAnimationClass : NXAnimationWrappedView.Type = NXAnimationWrappedView.self//loading
-}
-
-
-
 //获取框架中的资源文件
 extension NXKit {
     //加载获取bundle中图片
@@ -212,7 +195,7 @@ extension NXKit {
     }
     
     //处理图片浏览
-    class public func previewAssets(assets: [Any], index: Int){
+    class public func previewAssets(assets: [Any], index: Int) {
         NXKit.Imp.previewAssets?(assets, index)
     }
     
@@ -310,8 +293,8 @@ extension NXKit {
 //内容横向纵向边缘缩进
 extension NXKit {
     open class Point: NXAny {
-        open var x = CGFloat.zero
-        open var y = CGFloat.zero
+        open var x = Double.zero
+        open var y = Double.zero
         
         open var origin: CGPoint {
             set {
@@ -334,8 +317,8 @@ extension NXKit {
     }
     
     open class Size: NXAny {
-        open var width = CGFloat.zero
-        open var height = CGFloat.zero
+        open var width = Double.zero
+        open var height = Double.zero
         
         open var size: CGSize {
             set {
@@ -358,10 +341,10 @@ extension NXKit {
     }
     
     open class Rect: NXAny {
-        open var x = CGFloat.zero
-        open var y = CGFloat.zero
-        open var width = CGFloat.zero
-        open var height = CGFloat.zero
+        open var x = Double.zero
+        open var y = Double.zero
+        open var width = Double.zero
+        open var height = Double.zero
         
         open var origin: CGPoint {
             set {
@@ -575,7 +558,7 @@ extension NXKit {
         static public var webView : ((_ action: String, _ contentView: WKWebView, _ value: [String: Any],  _ viewController: NXWebViewController?) -> Bool)?
         
         //这里处理单元格高度的通过autoLayout计算的一种回调
-        static public var tableView : ((_ tableView: UITableView?, _ value: NXItem, _ indexPath: IndexPath) -> CGFloat)?
+        static public var tableView : ((_ tableView: UITableView?, _ value: any NXAnyRepresentable, _ indexPath: IndexPath) -> CGFloat)?
         
         //处理toast
         static public var showToast:((_ message: String, _ ats: NXKit.Ats , _ superview: UIView?) -> NXHUD.WrappedView?)?
@@ -643,7 +626,7 @@ extension NXKit {
     }
     
     //这里处理单元格高度的通过autoLayout计算的一种回调
-    class public func heightForRow(_ tableView:UITableView?, _ value: NXItem, _ indexPath: IndexPath) -> CGFloat? {
+    class public func heightForRow(_ tableView:UITableView?, _ value: any NXAnyRepresentable, _ indexPath: IndexPath) -> CGFloat? {
         return NXKit.Imp.tableView?(tableView, value, indexPath)
     }
 }

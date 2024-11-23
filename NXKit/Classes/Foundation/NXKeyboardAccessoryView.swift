@@ -19,7 +19,7 @@ open class NXKeyboardAccessoryView: NXView {
         
         actionView.frame = CGRect(x: self.width - 55, y: 0, width: 50, height: self.height)
         actionView.setTitle("确定", for: .normal)
-        actionView.setTitleColor(NXKit.mainColor, for: .normal)
+        actionView.setTitleColor(NXKit.primaryColor, for: .normal)
         actionView.titleLabel?.font = NXKit.font(16, .bold)
         self.addSubview(actionView)
         

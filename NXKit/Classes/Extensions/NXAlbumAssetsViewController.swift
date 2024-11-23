@@ -18,9 +18,9 @@ open class NXAlbumAssetsViewController: NXViewController, UICollectionViewDelega
     //空页面
     public let placeholderView = NXPlaceholderView(frame: CGRect(x: 0, y: 0, width: NXKit.width, height: NXKit.width))
     //展示图片
-    public let collectionView = NXCollectionView(frame: CGRect(x: 0, y:0 , width: NXKit.width, height: NXKit.height - NXKit.safeAreaInsets.top - 44.0 - 50 - NXKit.bottomOffset))
+    public let collectionView = NXCollectionView(frame: CGRect(x: 0, y:0 , width: NXKit.width, height: NXKit.height - NXKit.safeAreaInsets.top - 44.0 - 50 - NXKit.safeAreaInsets.bottom))
     //展示底部切换的按钮
-    public let footerView = NXLRView<UIButton, UIButton>(frame: CGRect(x: 0, y: -(50+NXKit.bottomOffset), width: NXKit.width, height: 50+NXKit.bottomOffset))
+    public let footerView = NXLRView<UIButton, UIButton>(frame: CGRect(x: 0, y: -(50+NXKit.safeAreaInsets.bottom), width: NXKit.width, height: 50+NXKit.safeAreaInsets.bottom))
     //观察者
     public let observer = NXAsset.Observer()
     //选中了第几个相册
@@ -62,14 +62,13 @@ open class NXAlbumAssetsViewController: NXViewController, UICollectionViewDelega
         NXKit.authorization(NXKit.Authorize.album, DispatchQueue.main, true) {[weak self] (state) in
             //1.授权
             if state == .authorized, let self = self {
-                self.contentView.addSubview(self.animationView)
-                self.animationView.startAnimating()
+                self.startAnimating()
                 DispatchQueue(label: "serialQueue", attributes: .init(rawValue: 0)).async {
                     NXAsset.outputAlbums(self.wrapped, completion: { [weak self] (_, albums) in
                         self?.wrapped.albums = albums
                         
                         DispatchQueue.main.async {[weak self] in
-                            self?.animationView.stopAnimating()
+                            self?.stopAnimating()
                             
                             //2.获取资源
                             if let count = self?.wrapped.albums.count, count > 0  {
@@ -123,7 +122,7 @@ open class NXAlbumAssetsViewController: NXViewController, UICollectionViewDelega
         itemSize = floor(itemSize * NXKit.scale)/NXKit.scale//因为屏幕渲染的最小的大小为1/NXKit.scale
         
         self.collectionView.isHidden = false
-        self.collectionView.frame = CGRect(x: 0, y:0 , width: self.contentView.width, height: self.contentView.height - 50 - NXKit.bottomOffset)
+        self.collectionView.frame = CGRect(x: 0, y:0 , width: self.contentView.width, height: self.contentView.height - 50 - NXKit.safeAreaInsets.bottom)
         if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.minimumLineSpacing = 2
             layout.minimumInteritemSpacing = 1
@@ -145,11 +144,11 @@ open class NXAlbumAssetsViewController: NXViewController, UICollectionViewDelega
 
         
         self.footerView.isHidden = false
-        self.footerView.frame = CGRect(x: 0, y: self.contentView.height-50-NXKit.bottomOffset, width: self.contentView.width, height: 50+NXKit.bottomOffset)
+        self.footerView.frame = CGRect(x: 0, y: self.contentView.height-50-NXKit.safeAreaInsets.bottom, width: self.contentView.width, height: 50+NXKit.safeAreaInsets.bottom)
         self.footerView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.footerView.backgroundColor = NXKit.backgroundColor
         self.footerView.lhsView.frame = CGRect(x: 15, y: 7, width: 144, height: 36)
-        self.footerView.lhsView.setTitleColor(NXKit.mainColor, for: .normal)
+        self.footerView.lhsView.setTitleColor(NXKit.primaryColor, for: .normal)
         self.footerView.lhsView.titleLabel?.font = NXKit.font(16, .regular)
         self.footerView.lhsView.contentHorizontalAlignment = .left
         self.footerView.lhsView.isHidden = self.wrapped.subviews.preview
@@ -162,7 +161,7 @@ open class NXAlbumAssetsViewController: NXViewController, UICollectionViewDelega
         self.footerView.rhsView.layer.cornerRadius = 18
         self.footerView.rhsView.layer.masksToBounds = true
         self.footerView.rhsView.setTitleColor(UIColor.white, for: .normal)
-        self.footerView.rhsView.setBackgroundImage(UIImage.image(color: NXKit.mainColor), for: .normal)
+        self.footerView.rhsView.setBackgroundImage(UIImage.image(color: NXKit.primaryColor), for: .normal)
         self.footerView.rhsView.titleLabel?.font = NXKit.font(15, .regular)
         self.footerView.rhsView.isHidden = self.wrapped.subviews.output
         self.footerView.rhsView.setTitle("完成(0/\(self.wrapped.maxOfAssets))", for: .normal)
@@ -548,7 +547,7 @@ extension NXAlbumAssetsViewController : UIImagePickerControllerDelegate, UINavig
                 NXKit.hideLoading(superview: self.view)
                                 
                 if let __asset = asset {
-                    let nxAsset = NXAsset(asset: __asset, suffixes: self.wrapped.suffixes)
+                    let nxAsset = NXAsset(wrappedValue: __asset, suffixes: self.wrapped.suffixes)
                     nxAsset.image = __output
                     nxAsset.thumbnail = __output
                     

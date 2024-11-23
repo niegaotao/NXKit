@@ -1,10 +1,7 @@
 PODS:
-  - NXKit (1.4.1):
-    - NXKit/Extensions (= 1.4.1)
-    - NXKit/Foundation (= 1.4.1)
-  - NXKit/Extensions (1.4.1):
-    - NXKit/Foundation
-  - NXKit/Foundation (1.4.1)
+  - NXKit (1.4.3):
+    - NXKit/Extensions (= 1.4.3)
+    - NXKit/Foundation (= 1.4.3)
 
 DEPENDENCIES:
   - NXKit (from `../`)
@@ -14,8 +11,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  NXKit: 6fd7acde07e22b6233e312ea3521abb739aeb1c3
+  NXKit: 030a2097d59f7024ab36a7157da4303cc0e35107
 
 PODFILE CHECKSUM: b4db60396e243016e6399d224aeddcf96e0db1e2
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2
