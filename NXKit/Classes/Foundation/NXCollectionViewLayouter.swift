@@ -87,12 +87,12 @@ open class NXCollectionViewLayouter : UICollectionViewLayout {
         return __size
     }
     
-    open func updateAttributes(_ attributes: UICollectionViewLayoutAttributes, type: String, size: CGSize, section: NXSection, sections: [NXSection]) {
+    open func updateAttributes(_ attributes: UICollectionViewLayoutAttributes, type: String, size: CGSize, section: (any NXArrayRepresentable), sections: [(any NXArrayRepresentable)]) {
         var __frame = CGRect.zero
         __frame.size = size
         
         if self.direction == .vertical {
-            let index = sections.firstIndex(of: section) ?? -1
+            let index = sections.firstIndex { loopValue in return ObjectIdentifier(loopValue) == ObjectIdentifier(section) } ?? -1
             
             if type == NXItem.View.cell.rawValue {
                 //1.找出插入到哪一列

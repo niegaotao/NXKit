@@ -15,8 +15,8 @@ open class NXAlbum : NXAbstract {
         
     convenience public init(title: String, fetchResult: PHFetchResult<AnyObject>?, wrapped: NXAsset.Wrapped) {
         self.init(title: title, value: nil, completion:nil)
-        self.cls = NXActionViewCell.self
-        self.reuse = "NXActionViewCell"
+        self.reuse.cls = NXActionViewCell.self
+        self.reuse.id = "NXActionViewCell"
         
         //生成NXAsset对象
         if let __fetchResult = fetchResult as? PHFetchResult<PHAsset> {

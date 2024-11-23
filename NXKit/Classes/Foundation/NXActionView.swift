@@ -695,8 +695,8 @@ extension NXActionView {
             }
             
             metadata.actions.forEach { (option) in
-                if let cls = option.cls as? NXCollectionViewCell.Type {
-                    self.contentView.register(cls, forCellWithReuseIdentifier: option.reuse)
+                if let cls = option.reuse.cls as? NXCollectionViewCell.Type {
+                    self.contentView.register(cls, forCellWithReuseIdentifier: option.reuse.id)
                 }
             }
             self.contentView.dataSource = self
@@ -727,7 +727,7 @@ extension NXActionView {
         
         public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let action = self.ctxs.center.actions[indexPath.item]
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: action.reuse, for: indexPath) as! NXActionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: action.reuse.id, for: indexPath) as! NXActionViewCell
             cell.updateSubviews(action)
             return cell
         }

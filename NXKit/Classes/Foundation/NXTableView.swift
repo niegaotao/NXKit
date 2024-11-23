@@ -116,11 +116,14 @@ open class NXTableView: UITableView, NXViewProtocol {
             if __tableWrapper.calcAt {
                 __tableWrapper.elements.forEach { (__section) in
                     __section.elements.forEach { (__element) in
+                        var __element = __element
                         __element.at.first = false
                         __element.at.last = false
                     }
-                    __section.elements.first?.at.first = true
-                    __section.elements.last?.at.last = true
+                    var first = __section.elements.first
+                    var last = __section.elements.last
+                    first?.at.first = true
+                    last?.at.last = true
                 }
             }
         }

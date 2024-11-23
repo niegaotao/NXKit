@@ -72,12 +72,12 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         }
         else {
             if let header = self.data[index]?.header {
-                if let cls = header.cls as? NXTableReusableView.Type {
-                    let reusableView = cls.init(reuseIdentifier:header.reuse)
+                if let cls = header.reuse.cls as? NXTableReusableView.Type {
+                    let reusableView = cls.init(reuseIdentifier:header.reuse.id)
                     reusableView.updateSubviews(header)
                     return reusableView
                 }
-                else if let cls = header.cls as? UIView.Type {
+                else if let cls = header.reuse.cls as? UIView.Type {
                     return cls.init()
                 }
             }
@@ -118,12 +118,12 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         }
         else {
             if let footer = self.data[index]?.footer {
-                if let cls = footer.cls as? NXTableReusableView.Type {
-                    let reusableView = cls.init(reuseIdentifier:footer.reuse)
+                if let cls = footer.reuse.cls as? NXTableReusableView.Type {
+                    let reusableView = cls.init(reuseIdentifier:footer.reuse.id)
                     reusableView.updateSubviews(footer)
                     return reusableView
                 }
-                else if let cls = footer.cls as? UIView.Type {
+                else if let cls = footer.reuse.cls as? UIView.Type {
                     return cls.init()
                 }
             }

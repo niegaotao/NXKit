@@ -8,27 +8,259 @@
 
 import UIKit
 
-public protocol NXAnyRepresentable {
+public protocol NXAnyRepresentable: AnyObject, Equatable {
     var frame: NXKit.Rect {get}
-    var additionalValue : [String: Any]? {get}
-    var cls : AnyClass? {get}
-    var reuse : String {get}
-    var backgroundColor: UIColor? {get}
-    var event: NXKit.Event<String, Any?>? {get}
-    var at : (first: Bool, last: Bool) {get}
+    var reuse: NXReuseDescriptor {get}
+    var additionalValue : [String: Any]? {get set}
+    var backgroundColor: UIColor? {get set}
+    var event: NXKit.Event<String, Any?>? {get set}
+    var at : (first: Bool, last: Bool) {get set}
     var tag: Int {get set}
 }
 
-public class NXAnyReuseable {
+extension NXAnyRepresentable {
+    public static func == (lhs: any NXAnyRepresentable, rhs: any NXAnyRepresentable) -> Bool {
+        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+    }
+    
+    public func update(_ cls: AnyClass, _ reuse: String){
+        self.reuse.cls = cls
+        self.reuse.id = reuse
+    }
+}
+
+public protocol NXArrayRepresentable: NXAnyRepresentable {
+    var header: (any NXAnyRepresentable)? {get set}
+    var elements: [any NXAnyRepresentable] {get set}
+    var footer: (any NXAnyRepresentable)? {get set}
+    
+    var lineSpacing: CGFloat {get set}
+    var interitemSpacing: CGFloat {get set}
+    var insets: UIEdgeInsets {get set}
+}
+
+extension NXArrayRepresentable {
+    public subscript(index: Int) -> (any NXAnyRepresentable)? {
+        if index >= 0 && index < elements.count {
+            return self.elements[index]
+        }
+        return nil
+    }
+    
+    public func append(_ newValue: (any NXAnyRepresentable)?){
+        if let value = newValue {
+            self.elements.append(value)
+        }
+    }
+
+    public func append(contentsOf contents: [(any NXAnyRepresentable)]?){
+        if let contents = contents, contents.count > 0 {
+            elements.append(contentsOf:contents)
+        }
+    }
+    
+    @discardableResult
+    public func insert(_ value: (any NXAnyRepresentable)?, at index: Int) -> Bool {
+        if let value = value, index >= 0 && index <= elements.count {
+            elements.insert(value, at: index)
+            return true
+        }
+        return false
+    }
+    
+    @discardableResult
+    public func remove(_ value: (any NXAnyRepresentable)?) -> Bool {
+        if let value = value {
+            let identifier = ObjectIdentifier(value)
+            let count = elements.count
+            elements.removeAll { loopValue in
+                return ObjectIdentifier(loopValue) == identifier
+            }
+            return elements.count != count
+        }
+        return false
+    }
+    
+    @discardableResult
+    public func remove(at index: Int) -> Bool {
+        if index >= 0 && index < elements.count {
+            elements.remove(at: index)
+            return true
+        }
+        return false
+    }
+    
+    public func removeAll() {
+        elements.removeAll()
+    }
+    
+    @discardableResult
+    public func replace(_ value: (any NXAnyRepresentable)?, at index: Int) -> Bool {
+        if let value = value, index >= 0 && index < elements.count {
+            self.elements.replaceSubrange(index...index, with: [value])
+            return true
+        }
+        return false
+    }
+    
+    public var count : Int {
+        return elements.count
+    }
+}
+
+extension NXArrayRepresentable {
+    //tableView 获取重用cell
+    public func dequeue(_ tableView: UITableView, _ indexPath : IndexPath) -> (element: any NXAnyRepresentable, cell: NXTableViewCell)? {
+        guard indexPath.row >= 0 && indexPath.row < self.elements.count else {
+            return nil
+        }
+        let element = self.elements[indexPath.row]
+        
+        guard element.reuse.id.count > 0 else {
+            return nil
+        }
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: element.reuse.id, for: indexPath) as? NXTableViewCell {
+            return (element, cell)
+        }
+        return nil
+    }
+    
+    
+    //tableView 获取重用cell
+    public func dequeue(_ collectionView: UICollectionView, _ indexPath : IndexPath) -> (element: any NXAnyRepresentable, cell: NXCollectionViewCell)? {
+        guard indexPath.row >= 0 && indexPath.row < self.elements.count else {
+            return nil
+        }
+        let element = self.elements[indexPath.row]
+        
+        guard element.reuse.id.count > 0 else {
+            return nil
+        }
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: element.reuse.id, for: indexPath) as? NXCollectionViewCell {
+            return (element, cell)
+        }
+        return nil
+    }
+}
+
+public protocol NX2DArrayRepresentable: AnyObject {
+    var elements: [any NXArrayRepresentable] {get set}
+}
+
+extension NX2DArrayRepresentable {
+    public subscript(index: Int) -> (any NXArrayRepresentable)? {
+        if index >= 0 && index < elements.count {
+            return self.elements[index]
+        }
+        return nil
+    }
+    
+    public subscript(indexPath: IndexPath) -> (any NXAnyRepresentable)? {
+        if indexPath.section >= 0 && indexPath.section < elements.count {
+            let __section = elements[indexPath.section]
+            if indexPath.row >= 0 && indexPath.row < __section.elements.count {
+                return __section.elements[indexPath.row]
+            }
+        }
+        return nil
+    }
+    
+    public func append(_ newValue: (any NXArrayRepresentable)?){
+        if let value = newValue {
+            elements.append(value)
+        }
+    }
+
+    public func append(contentsOf contents: [(any NXArrayRepresentable)]?){
+        if let contents = contents, contents.count > 0 {
+            elements.append(contentsOf:contents)
+        }
+    }
+    
+    @discardableResult
+    public func insert(_ value: (any NXArrayRepresentable)?, at index: Int) -> Bool {
+        if let value = value, index >= 0 && index <= elements.count {
+            elements.insert(value, at: index)
+            return true
+        }
+        return false
+    }
+    
+    @discardableResult
+    public func remove(_ value: (any NXArrayRepresentable)?) -> Bool {
+        if let value = value {
+            let identifier = ObjectIdentifier(value)
+            let count = elements.count
+            elements.removeAll { loopValue in
+                return ObjectIdentifier(loopValue) == identifier
+            }
+            return elements.count != count
+        }
+        return false
+    }
+    
+    @discardableResult
+    public func remove(at index: Int) -> Bool {
+        if index >= 0 && index < elements.count {
+            elements.remove(at: index)
+            return true
+        }
+        return false
+    }
+    
+    @discardableResult
+    public func remove(at indexPath: IndexPath) -> Bool {
+        if let section = self[indexPath.section] {
+            section.elements.remove(at: indexPath.row)
+            return true
+        }
+        return false
+    }
+    
+    public func removeAll() {
+        elements.removeAll()
+    }
+    
+    @discardableResult
+    public func replace(_ value: (any NXArrayRepresentable)?, at index: Int) -> Bool {
+        if let value = value, index >= 0 && index < elements.count {
+            self.elements.replaceSubrange(index...index, with: [value])
+            return true
+        }
+        return false
+    }
+    
+    public var count : Int {
+        return elements.count
+    }
+    
+    @discardableResult
+    public func indexPath(of element: (any NXAnyRepresentable)?) -> IndexPath? {
+        guard let element  = element, elements.count > 0 else {
+            return nil
+        }
+                
+        for (i, section) in elements.enumerated() {
+            for (j, row) in section.elements.enumerated() {
+                if ObjectIdentifier(row) == ObjectIdentifier(element) {
+                    return IndexPath(row: j, section: i)
+                }
+            }
+        }
+        return nil
+    }
+}
+
+public class NXReuseDescriptor {
     public var cls: AnyClass?
     public var id: String = ""
 }
 
 open class NXItem : NXAny, NXAnyRepresentable {
-    public var frame = NXKit.Rect()
+    public let frame = NXKit.Rect()
     public var additionalValue: [String : Any]?
-    public var cls: AnyClass?
-    public var reuse: String = ""
+    public let reuse = NXReuseDescriptor()
     public var backgroundColor: UIColor?
     public var event: NXKit.Event<String, Any?>?
     public var at: (first: Bool, last: Bool) = (false, false)
@@ -49,11 +281,6 @@ open class NXItem : NXAny, NXAnyRepresentable {
         self.additionalValue = value
         completion?(self)
     }
-    
-    open func update(_ cls: AnyClass, _ reuse: String){
-        self.cls = cls
-        self.reuse = reuse
-    }
 }
 
 public protocol NXCollectionViewAttributesProtocol {
@@ -72,231 +299,61 @@ open class NXWrappable<T>: NXItem {
     }
 }
 
-
-open class NXElementArray<Element: NXItem> : NXItem {
-    //分组下所有的单元格对象
-    open var elements = [Element]()
-    
-    //通过下标访问时加一层判断，防止越界crash
-    open subscript(index: Int) -> Element? {
-        if index >= 0 && index < elements.count {
-            return self.elements[index]
-        }
-        return nil
-    }
-    
-    //添加一个元素
-    open func append(_ newValue: Element?){
-        if let value = newValue {
-            elements.append(value)
-        }
-    }
-
-    //批量添加元素
-    open func append(contentsOf contents: [Element]?){
-        if let contents = contents, contents.count > 0 {
-            elements.append(contentsOf:contents)
-        }
-    }
-    
-    //插入某个元素到指定索引位置
-    //如果index=elements.count，则操作同append(_:)
-    @discardableResult
-    open func insert(_ value: Element?, at index: Int) -> Bool {
-        if let value = value, index >= 0 && index <= elements.count {
-            elements.insert(value, at: index)
-            return true
-        }
-        return false
-    }
-    
-    //移除一个元素，找到第一个就会移除,返回值true表示元素存在并且成功移除
-    @discardableResult
-    open func remove(_ value: Element?) -> Bool {
-        if let value = value, let index = elements.firstIndex(of: value) {
-            elements.remove(at: index)
-            return true
-        }
-        return false
-    }
-    
-    //按照索引取删除元素:返回值true表示成功移除
-    @discardableResult
-    open func remove(at index: Int) -> Bool {
-        if index >= 0 && index < elements.count {
-            elements.remove(at: index)
-            return true
-        }
-        return false
-    }
-    
-    //移除所有的elements中的所有元素
-    open func removeAll() {
-        elements.removeAll()
-    }
-    
-    //替换某个元素
-    @discardableResult
-    open func replace(_ value: Element?, at index: Int) -> Bool {
-        if let value = value, index >= 0 && index < elements.count {
-            self.elements.replaceSubrange(index...index, with: [value])
-            return true
-        }
-        return false
-    }
-    
-    //elements中NXItem元素的个数
-    open var count : Int {
-        return elements.count
-    }
-}
-
 //分组基类
-open class NXSection : NXElementArray<NXItem> {
-    open var header : NXItem? = nil             //头部的块，默认为nil
-    //elements
-    open var footer: NXItem? = nil              //尾部的块，默认为nil
+open class NXSection: NXItem, NXArrayRepresentable {
+    open var header: (any NXAnyRepresentable)? = nil             //头部的块，默认为nil
+    open var elements = [(any NXAnyRepresentable)]()
+    open var footer: (any NXAnyRepresentable)? = nil              //尾部的块，默认为nil
     
     //这三个属性在UICollectionView中会用到，在UITableView中不会用到
     open var lineSpacing = CGFloat.zero
     open var interitemSpacing = CGFloat.zero
     open var insets = UIEdgeInsets.zero
-
-    //tableView 获取重用cell
-    public func dequeue(_ tableView: UITableView, _ indexPath : IndexPath) -> (element: NXItem, cell: NXTableViewCell)? {
-        guard indexPath.row >= 0 && indexPath.row < self.elements.count else {
-            return nil
-        }
-        let element = self.elements[indexPath.row]
-        
-        guard element.reuse.count > 0 else {
-            return nil
-        }
-        
-        if let cell = tableView.dequeueReusableCell(withIdentifier: element.reuse, for: indexPath) as? NXTableViewCell {
-            return (element, cell)
-        }
-        return nil
-    }
-    
-    
-    //tableView 获取重用cell
-    public func dequeue(_ collectionView: UICollectionView, _ indexPath : IndexPath) -> (element: NXItem, cell: NXCollectionViewCell)? {
-        guard indexPath.row >= 0 && indexPath.row < self.elements.count else {
-            return nil
-        }
-        let element = self.elements[indexPath.row]
-        
-        guard element.reuse.count > 0 else {
-            return nil
-        }
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: element.reuse, for: indexPath) as? NXCollectionViewCell {
-            return (element, cell)
-        }
-        return nil
-    }
 }
 
-
-
-
-//三维模型的基类：通用于 UITableView 数据模型和 UICollectionView 数据模型
-open class NXCollection<T: UIView> : NXElementArray<NXSection> {
+open class NXCollection<T: UIView> : NSObject, NX2DArrayRepresentable {
+    open var elements = [(any NXArrayRepresentable)]()
+    
     open weak var wrappedView : T? = nil
     
     public let placeholderView = NXPlaceholderView()
     
-    //是否展示第一个section的头部
     open var showsFirstSectionHeader = false
-    //是否显示最后一个section的尾部
     open var showsLastSectionFooter = false
-    //计算相对位置关系:默认不计算
     open var calcAt = false
-    
-    //根据IndexPath访问一个元素
-    open subscript(indexPath: IndexPath) -> NXItem? {
-        if indexPath.section >= 0 && indexPath.section < elements.count {
-            let __section = elements[indexPath.section]
-            if indexPath.row >= 0 && indexPath.row < __section.elements.count {
-                return __section.elements[indexPath.row]
-            }
-        }
-        return nil
-    }
-    
-    //根据indexPath去删除单元格
-    @discardableResult
-    open func remove(at indexPath: IndexPath) -> Bool {
-        if let section = self[indexPath.section] {
-            return section.remove(at: indexPath.row)
-        }
-        return false
-    }
-    
-    //元素所在的索引
-    @discardableResult
-    open func indexPath(of element: NXItem?) -> IndexPath? {
-        guard let element  = element, elements.count > 0 else {
-            return nil;
-        }
-                
-        for (i, section) in elements.enumerated() {
-            for (j, row) in section.elements.enumerated() {
-                if row == element {
-                    return IndexPath(row: j, section: i)
-                }
-            }
-        }
-        return nil
-    }
-    
-    //根据indexPath插入一个元素
-    @discardableResult
-    open func insert(_ element: NXItem?, at indexPath: IndexPath) -> Bool {
-        if let section = self[indexPath.section] {
-            return section.insert(element, at: indexPath.row)
-        }
-        return false
-    }
-    
-    //移除不带单元格的分组
-    open func removeEmpty(){
-        self.elements.removeAll { section in
-            return section.elements.count == 0
-        }
-    }
-    
 
     //UITableView 获取element/cell
-    public func dequeue(_ tableView: UITableView?, _ indexPath : IndexPath) -> (element: NXItem, cell: NXTableViewCell)? {
+    public func dequeue(_ tableView: UITableView?, _ indexPath : IndexPath) -> (element: any NXAnyRepresentable, cell: NXTableViewCell)? {
         guard let __tableView = tableView, indexPath.section >= 0 && indexPath.section < self.elements.count else {
             return nil
         }
-        let section = self.elements[indexPath.section]
-        return section.dequeue(__tableView, indexPath)
+        if let section = self.elements[indexPath.section] as? NXSection {
+            return section.dequeue(__tableView, indexPath)
+        }
+        return nil
     }
     
     //UITableView header footer
-    public func dequeue(_ tableView:UITableView?, _ index: Int, _ type: NXItem.View.RawValue) -> (element: NXItem, reusableView: NXTableReusableView)?{
+    public func dequeue(_ tableView:UITableView?, _ index: Int, _ type: NXItem.View.RawValue) -> (element: any NXAnyRepresentable, reusableView: NXTableReusableView)?{
         guard let __tableView = tableView, index >= 0 && index < self.elements.count else {
             return nil
         }
                 
         if type == NXItem.View.header.rawValue {
             guard let header = self.elements[index].header else {return nil}
-            guard header.cls != nil && header.reuse.count > 0 else {
+            guard header.reuse.cls != nil && header.reuse.id.count > 0 else {
                 return nil
             }
-            if let reusableView = __tableView.dequeueReusableHeaderFooterView(withIdentifier: header.reuse) as? NXTableReusableView {
+            if let reusableView = __tableView.dequeueReusableHeaderFooterView(withIdentifier: header.reuse.id) as? NXTableReusableView {
                 return (header, reusableView)
             }
         }
         else if type == NXItem.View.footer.rawValue {
             guard let footer = self.elements[index].footer else { return nil}
-            guard footer.cls != nil && footer.reuse.count > 0 else {
+            guard footer.reuse.cls != nil && footer.reuse.id.count > 0 else {
                 return nil
             }
-            if let reusableView = __tableView.dequeueReusableHeaderFooterView(withIdentifier: footer.reuse) as? NXTableReusableView {
+            if let reusableView = __tableView.dequeueReusableHeaderFooterView(withIdentifier: footer.reuse.id) as? NXTableReusableView {
                 return (footer, reusableView)
             }
         }
@@ -305,25 +362,27 @@ open class NXCollection<T: UIView> : NXElementArray<NXSection> {
     }
     
     //UICollectionView 获取element/cell
-    public func dequeue(_ collectionView: UICollectionView?, _ indexPath : IndexPath) -> (element: NXItem, cell: NXCollectionViewCell)? {
+    public func dequeue(_ collectionView: UICollectionView?, _ indexPath : IndexPath) -> (element: any NXAnyRepresentable, cell: NXCollectionViewCell)? {
         guard let __collectionView = collectionView, indexPath.section >= 0 && indexPath.section < self.elements.count else {
             return nil
         }
-        let section = self.elements[indexPath.section]
-        return section.dequeue(__collectionView, indexPath)
+        if let section = self.elements[indexPath.section] as? NXSection {
+            return section.dequeue(__collectionView, indexPath)
+        }
+        return nil
     }
     
     //UICollectionView 获取header footer
-    public func dequeue(_ collectionView: UICollectionView?, _ indexPath:IndexPath, _ type: NXItem.View.RawValue) -> (elelment: NXItem, reusableView: NXCollectionReusableView)? {
+    public func dequeue(_ collectionView: UICollectionView?, _ indexPath:IndexPath, _ type: NXItem.View.RawValue) -> (elelment: any NXAnyRepresentable, reusableView: NXCollectionReusableView)? {
         guard let __collectionView = collectionView, (indexPath as NSIndexPath).section >= 0 && (indexPath as NSIndexPath).section < self.elements.count else {
             return nil
         }
         if type == NXItem.View.header.rawValue {
             guard let element = self.elements[(indexPath as NSIndexPath).section].header else {return nil}
-            guard element.cls != nil && element.reuse.count > 0 else {
+            guard element.reuse.cls != nil && element.reuse.id.count > 0 else {
                 return nil
             }
-            if let reusableView = __collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: element.reuse, for: indexPath) as? NXCollectionReusableView {
+            if let reusableView = __collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: element.reuse.id, for: indexPath) as? NXCollectionReusableView {
                 return (element, reusableView)
             }
         }
@@ -331,10 +390,10 @@ open class NXCollection<T: UIView> : NXElementArray<NXSection> {
             guard let element = self.elements[(indexPath as NSIndexPath).section].footer else {
                 return nil
             }
-            guard element.cls != nil && element.reuse.count > 0 else {
+            guard element.reuse.cls != nil && element.reuse.id.count > 0 else {
                 return nil
             }
-            if let reusableView = __collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: element.reuse, for: indexPath) as? NXCollectionReusableView {
+            if let reusableView = __collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: element.reuse.id, for: indexPath) as? NXCollectionReusableView {
                 return (element, reusableView)
             }
         }
@@ -348,8 +407,8 @@ extension NXCollection where T == NXTableView {
     public func addPlaceholderView(_ frame: CGRect) -> NXPlaceholderDescriptor {
         let e = NXPlaceholderDescriptor()
         e.placeholderView = self.placeholderView
-        e.cls = NXTablePlaceholderViewCell.self
-        e.reuse = "NXTablePlaceholderViewCell"
+        e.reuse.cls = NXTablePlaceholderViewCell.self
+        e.reuse.id = "NXTablePlaceholderViewCell"
         e.frame.frame = frame
         self.addElementsToLastSection([e])
         self.wrappedView?.register(NXTablePlaceholderViewCell.self, forCellReuseIdentifier: "NXTablePlaceholderViewCell")
@@ -386,10 +445,8 @@ extension NXCollection where T == NXTableView {
         return 0.0
     }
     
-    
     public func heightForFooter(at index: Int) -> CGFloat {
         if let footer = self[index]?.footer {
-            //1.根据自身的高度赋值拿到header的高度
             if footer.frame.height > 0 {
                 return footer.frame.height
             }
@@ -397,30 +454,28 @@ extension NXCollection where T == NXTableView {
         return 0.0
     }
     
-    //新增一个分组,并将新增的分组返回//_ cls: AnyClass = NXTableReusableView.self, _ reuse: String = "NXTableReusableView", _ h: CGFloat = 10.0
     @discardableResult
-    public func addSection(cls: AnyClass, reuse: String, height: CGFloat) -> NXSection {
+    public func addSection(cls: AnyClass, reuse: String, height: CGFloat) -> any NXArrayRepresentable {
         let section = NXSection()
-        section.header = NXItem()
-        section.header?.cls = cls
-        section.header?.reuse = reuse
-        section.header?.frame.height = height
-        self.append(section)
+        let header = NXItem()
+        header.reuse.cls = cls
+        header.reuse.id = reuse
+        header.frame.height = height
+        section.header = header
+        self.elements.append(section)
         return section
     }
     
-    //返回最后一个分组，没有则新增并返回最后一个分组
     @discardableResult
-    public func getLastSection(cls: AnyClass, reuse: String, height: CGFloat) -> NXSection {
-        if let section = self.elements.last {
+    public func getLastSection(cls: AnyClass, reuse: String, height: CGFloat) -> any NXArrayRepresentable  {
+        if let section = self.elements.last as? NXSection {
             return section
         }
         return addSection(cls:cls, reuse:reuse, height: height)
     }
     
-    //批量添加单元格到最后一个分组上
     @discardableResult
-    public func addElementsToLastSection(_ items: [NXItem]?) -> NXSection {
+    public func addElementsToLastSection(_ items: [NXItem]?) -> any NXArrayRepresentable  {
         let section = self.getLastSection(cls: NXTableReusableView.self, reuse: "NXTableReusableView", height: 10)
         section.append(contentsOf: items)
         return section
@@ -433,8 +488,8 @@ extension NXCollection where T == NXCollectionView {
     public func addPlaceholderView(_ frame: CGRect) -> NXPlaceholderDescriptor {
         let e = NXPlaceholderDescriptor()
         e.placeholderView = self.placeholderView
-        e.cls = NXCollectionPlaceholderViewCell.self
-        e.reuse = "NXPlaceholderViewCell"
+        e.reuse.cls = NXCollectionPlaceholderViewCell.self
+        e.reuse.id = "NXPlaceholderViewCell"
         e.frame.frame = frame
         self.addElementsToLastSection([e])
         
@@ -446,18 +501,19 @@ extension NXCollection where T == NXCollectionView {
     @discardableResult
     public func addSection(cls: AnyClass, reuse: String, height: CGFloat) -> NXSection {
         let section = NXSection()
-        section.header = NXItem()
-        section.header?.cls = cls
-        section.header?.reuse = reuse
-        section.header?.frame.height = height
-        self.append(section)
+        let header = NXItem()
+        header.reuse.cls = cls
+        header.reuse.id = reuse
+        header.frame.height = height
+        section.header = header
+        self.elements.append(section)
         return section
     }
     
     //返回最后一个分组，没有则新增并返回最后一个分组
     @discardableResult
     public func getLastSection(cls: AnyClass, reuse: String, height: CGFloat) -> NXSection {
-        if let section = self.elements.last {
+        if let section = self.elements.last as? NXSection {
             return section
         }
         return addSection(cls:cls, reuse:reuse, height: height)
@@ -466,7 +522,7 @@ extension NXCollection where T == NXCollectionView {
     //批量添加单元格到最后一个分组上
     @discardableResult
     public func addElementsToLastSection(_ items: [NXItem]?) -> NXSection {
-        let section = self.getLastSection(cls: NXCollectionReusableView.self, reuse: "NXCollectionReusableView", height: 0)
+        var section = self.getLastSection(cls: NXCollectionReusableView.self, reuse: "NXCollectionReusableView", height: 0)
         section.append(contentsOf: items)
         return section
     }

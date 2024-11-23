@@ -558,7 +558,7 @@ extension NXKit {
         static public var webView : ((_ action: String, _ contentView: WKWebView, _ value: [String: Any],  _ viewController: NXWebViewController?) -> Bool)?
         
         //这里处理单元格高度的通过autoLayout计算的一种回调
-        static public var tableView : ((_ tableView: UITableView?, _ value: NXItem, _ indexPath: IndexPath) -> CGFloat)?
+        static public var tableView : ((_ tableView: UITableView?, _ value: any NXAnyRepresentable, _ indexPath: IndexPath) -> CGFloat)?
         
         //处理toast
         static public var showToast:((_ message: String, _ ats: NXKit.Ats , _ superview: UIView?) -> NXHUD.WrappedView?)?
@@ -626,7 +626,7 @@ extension NXKit {
     }
     
     //这里处理单元格高度的通过autoLayout计算的一种回调
-    class public func heightForRow(_ tableView:UITableView?, _ value: NXItem, _ indexPath: IndexPath) -> CGFloat? {
+    class public func heightForRow(_ tableView:UITableView?, _ value: any NXAnyRepresentable, _ indexPath: IndexPath) -> CGFloat? {
         return NXKit.Imp.tableView?(tableView, value, indexPath)
     }
 }

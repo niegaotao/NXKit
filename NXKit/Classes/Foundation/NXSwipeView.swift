@@ -89,11 +89,11 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         }
         
         for item in self.attributes.elements {
-            if item.cls == nil || item.reuse.count <= 0 {
-                item.cls = NXSwipeView.Cell.self
-                item.reuse = "NXSwipeViewCell"
+            if item.reuse.cls == nil || item.reuse.id.count <= 0 {
+                item.reuse.cls = NXSwipeView.Cell.self
+                item.reuse.id = "NXSwipeViewCell"
             }
-            self.contentView.register(item.cls, forCellWithReuseIdentifier: item.reuse)
+            self.contentView.register(item.reuse.cls, forCellWithReuseIdentifier: item.reuse.id)
             
             item.selected.appearance = self.attributes.selectedAppearance
             item.unselected.appearance = self.attributes.unselectedAppearance
