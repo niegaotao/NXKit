@@ -37,6 +37,15 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
         }
     }
     
+    open var rightBarButton : NXNavigationView.Bar? {
+        willSet{
+            rightBarButton?.removeFromSuperview()
+        }
+        didSet {
+            self.updateSubviews(nil)
+        }
+    }
+    
     open var rightView : UIView? {
         willSet{
             rightView?.removeFromSuperview()
@@ -142,6 +151,13 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
             rightView.frame = CGRect(x: self.contentView.width-15-size.width, y: NXKit.safeAreaInsets.top+(self.contentView.height-NXKit.safeAreaInsets.top-size.height)/2, width: size.width, height: size.height)
             if rightView.superview == nil {
                 self.contentView.addSubview(rightView)
+            }
+        }
+        else if let rightBarButton = self.rightBarButton {
+            let size = rightBarButton.frame.size
+            rightBarButton.frame = CGRect(x: self.contentView.width-15-size.width, y: NXKit.safeAreaInsets.top+(self.contentView.height-NXKit.safeAreaInsets.top-size.height)/2, width: size.width, height: size.height)
+            if rightBarButton.superview == nil {
+                self.contentView.addSubview(rightBarButton)
             }
         }
     }

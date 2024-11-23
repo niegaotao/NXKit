@@ -52,56 +52,56 @@ open class NXClipboardView: NXView {
         public let maxYView = NXAutoresizeView<UIView>(frame: CGRect.zero)
         
         open override func setupSubviews() {
-            self.minXTHSView.backgroundColor = NXKit.mainColor
+            self.minXTHSView.backgroundColor = NXKit.primaryColor
             self.minXTHSView.isUserInteractionEnabled = false
             self.addSubview(self.minXTHSView)
             
-            self.minXBHSView.backgroundColor = NXKit.mainColor
+            self.minXBHSView.backgroundColor = NXKit.primaryColor
             self.minXBHSView.isUserInteractionEnabled = false
             self.addSubview(self.minXBHSView)
             
-            self.maxXTHSView.backgroundColor = NXKit.mainColor
+            self.maxXTHSView.backgroundColor = NXKit.primaryColor
             self.maxXTHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxXTHSView)
             
-            self.maxXBHSView.backgroundColor = NXKit.mainColor
+            self.maxXBHSView.backgroundColor = NXKit.primaryColor
             self.maxXBHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxXBHSView)
             
-            self.minYLHSView.backgroundColor = NXKit.mainColor
+            self.minYLHSView.backgroundColor = NXKit.primaryColor
             self.minYLHSView.isUserInteractionEnabled = false
             self.addSubview(self.minYLHSView)
             
-            self.minYRHSView.backgroundColor = NXKit.mainColor
+            self.minYRHSView.backgroundColor = NXKit.primaryColor
             self.minYRHSView.isUserInteractionEnabled = false
             self.addSubview(self.minYRHSView)
             
-            self.maxYLHSView.backgroundColor = NXKit.mainColor
+            self.maxYLHSView.backgroundColor = NXKit.primaryColor
             self.maxYLHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxYLHSView)
             
-            self.maxYRHSView.backgroundColor = NXKit.mainColor
+            self.maxYRHSView.backgroundColor = NXKit.primaryColor
             self.maxYRHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxYRHSView)
             
             self.minXView.autoresizesSubviews = true
             self.minXView.backgroundColor = UIColor.clear
-            self.minXView.contentView.backgroundColor = NXKit.mainColor
+            self.minXView.contentView.backgroundColor = NXKit.primaryColor
             self.addSubview(self.minXView)
             
             self.maxXView.autoresizesSubviews = true
             self.maxXView.backgroundColor = UIColor.clear
-            self.maxXView.contentView.backgroundColor = NXKit.mainColor
+            self.maxXView.contentView.backgroundColor = NXKit.primaryColor
             self.addSubview(self.maxXView)
             
             self.minYView.autoresizesSubviews = true
             self.minYView.backgroundColor = UIColor.clear
-            self.minYView.contentView.backgroundColor = NXKit.mainColor
+            self.minYView.contentView.backgroundColor = NXKit.primaryColor
             self.addSubview(self.minYView)
             
             self.maxYView.autoresizesSubviews = true
             self.maxYView.backgroundColor = UIColor.clear
-            self.maxYView.contentView.backgroundColor = NXKit.mainColor
+            self.maxYView.contentView.backgroundColor = NXKit.primaryColor
             self.addSubview(self.maxYView)
         }
         
@@ -198,15 +198,15 @@ open class NXClipboardView: NXView {
             pfsValue.y = self.ctxs.clip.height / self.ctxs.size.height
             if pfsValue.x >= pfsValue.y {
                 //宽度撑满
-                pfsValue.width = self.ctxs.size.width
+                pfsValue.width = self.frame.size.width
                 pfsValue.height = pfsValue.width * (self.ctxs.clip.height / self.ctxs.clip.width)
             }
             else {
                 //高度撑满
-                pfsValue.height = self.ctxs.size.height
+                pfsValue.height = self.frame.size.height
                 pfsValue.width = pfsValue.height * (self.ctxs.clip.width / self.ctxs.clip.height)
             }
-            self.ctxs.frame.oldValue = CGRect(x:(self.ctxs.size.width - pfsValue.width)/2.0, y:(self.ctxs.size.height - pfsValue.height)/2.0, width:pfsValue.width, height:pfsValue.height)
+            self.ctxs.frame.oldValue = CGRect(x:(self.frame.size.width - pfsValue.width)/2.0, y:(self.frame.size.height - pfsValue.height)/2.0, width:pfsValue.width, height:pfsValue.height)
             self.ctxs.frame.value = self.ctxs.frame.oldValue
             self.wrappedView.frame = self.ctxs.frame.value
             
@@ -269,7 +269,7 @@ open class NXClipboardView: NXView {
                     __frame.origin.x = __frame.origin.x + __translation.x
                     __frame.size.width = __frame.size.width - __translation.x
                     if __frame.size.width >= self.ctxs.line.width * 2.0
-                        && __frame.size.width <= self.ctxs.size.width {
+                        && __frame.size.width <= self.frame.size.width {
                         self.ctxs.frame.value = __frame
                         self.wrappedView.frame = __frame
                     }
@@ -278,7 +278,7 @@ open class NXClipboardView: NXView {
                     var __frame = self.wrappedView.frame
                     __frame.size.width = __frame.size.width + __translation.x
                     if __frame.size.width >= self.ctxs.line.width * 2.0
-                        && __frame.size.width <= self.ctxs.size.width {
+                        && __frame.size.width <= self.frame.size.width {
                         self.ctxs.frame.value = __frame
                         self.wrappedView.frame = __frame
                     }
@@ -288,7 +288,7 @@ open class NXClipboardView: NXView {
                     __frame.origin.y = __frame.origin.y + __translation.y
                     __frame.size.height = __frame.size.height - __translation.y
                     if __frame.size.height >= self.ctxs.line.width * 2.0
-                        && __frame.size.height <= self.ctxs.size.height {
+                        && __frame.size.height <= self.frame.size.height {
                         self.ctxs.frame.value = __frame
                         self.wrappedView.frame = __frame
                     }
@@ -297,7 +297,7 @@ open class NXClipboardView: NXView {
                     var __frame = self.wrappedView.frame
                     __frame.size.height = __frame.size.height + __translation.y
                     if __frame.size.height >= self.ctxs.line.width * 2.0
-                        && __frame.size.height <= self.ctxs.size.height {
+                        && __frame.size.height <= self.frame.size.height {
                         self.ctxs.frame.value = __frame
                         self.wrappedView.frame = __frame
                     }
@@ -305,15 +305,15 @@ open class NXClipboardView: NXView {
             }
             else {
                 var __frame = self.wrappedView.frame
-                if __frame.width > self.ctxs.size.width {
-                    __frame.size.width = self.ctxs.size.width
+                if __frame.width > self.frame.size.width {
+                    __frame.size.width = self.frame.size.width
                     if self.ctxs.clip.isResizable == false {
                         __frame.size.height = __frame.size.width * (self.ctxs.clip.height / self.ctxs.clip.width)
                     }
                 }
                 
-                if __frame.height > self.ctxs.size.height {
-                    __frame.size.height = self.ctxs.size.height
+                if __frame.height > self.frame.size.height {
+                    __frame.size.height = self.frame.size.height
                     if self.ctxs.clip.isResizable == false {
                         __frame.size.width = __frame.size.height * (self.ctxs.clip.width / self.ctxs.clip.height)
                     }
@@ -322,16 +322,16 @@ open class NXClipboardView: NXView {
                     __frame.origin.x = 0
                 }
                 
-                if __frame.maxX > self.ctxs.size.width {
-                    __frame.origin.x = self.ctxs.size.width - __frame.width
+                if __frame.maxX > self.frame.size.width {
+                    __frame.origin.x = self.frame.size.width - __frame.width
                 }
                 
                 if __frame.minY < 0 {
                     __frame.origin.y = 0
                 }
                 
-                if __frame.maxY > self.ctxs.size.height {
-                    __frame.origin.y =  self.ctxs.size.height - __frame.height
+                if __frame.maxY > self.frame.size.height {
+                    __frame.origin.y =  self.frame.size.height - __frame.height
                 }
                 self.ctxs.frame.value = __frame
                 UIView.animate(withDuration: 0.15) {
@@ -363,16 +363,16 @@ open class NXClipboardView: NXView {
                 __frame.origin.x = 0
             }
             
-            if __frame.maxX > self.ctxs.size.width {
-                __frame.size.width = self.ctxs.size.width - __frame.origin.x
+            if __frame.maxX > self.frame.size.width {
+                __frame.size.width = self.frame.size.width - __frame.origin.x
             }
             
             if __frame.minY < 0 {
                 __frame.origin.y = 0
             }
             
-            if __frame.maxY > self.ctxs.size.height {
-                __frame.size.height = self.ctxs.size.height - __frame.origin.y
+            if __frame.maxY > self.frame.size.height {
+                __frame.size.height = self.frame.size.height - __frame.origin.y
             }
             
             if self.point.key == .began || self.point.key == .changed {
@@ -437,8 +437,8 @@ open class NXClipboardView: NXView {
             
             if __frame.size.width >= self.ctxs.line.width * 2.0
                 && __frame.size.height >= self.ctxs.line.width * 2.0
-                && __frame.size.width <= self.ctxs.size.width
-                && __frame.size.height <= self.ctxs.size.height {
+                && __frame.size.width <= self.frame.size.width
+                && __frame.size.height <= self.frame.size.height {
                 self.ctxs.frame.value = __frame
                 self.wrappedView.frame = __frame
             }
@@ -446,15 +446,15 @@ open class NXClipboardView: NXView {
         else {
             var __frame = self.wrappedView.frame
 
-            if __frame.width > self.ctxs.size.width {
-                __frame.size.width = self.ctxs.size.width
+            if __frame.width > self.frame.size.width {
+                __frame.size.width = self.frame.size.width
                 if self.ctxs.clip.isResizable == false {
                     __frame.size.height = __frame.size.width * (self.ctxs.clip.height / self.ctxs.clip.width)
                 }
             }
             
-            if __frame.height > self.ctxs.size.height {
-                __frame.size.height = self.ctxs.size.height
+            if __frame.height > self.frame.size.height {
+                __frame.size.height = self.frame.size.height
                 if self.ctxs.clip.isResizable == false {
                     __frame.size.width = __frame.size.height * (self.ctxs.clip.width / self.ctxs.clip.height)
                 }
@@ -464,16 +464,16 @@ open class NXClipboardView: NXView {
                 __frame.origin.x = 0
             }
             
-            if __frame.maxX > self.ctxs.size.width {
-                __frame.origin.x = self.ctxs.size.width - __frame.width
+            if __frame.maxX > self.frame.size.width {
+                __frame.origin.x = self.frame.size.width - __frame.width
             }
             
             if __frame.minY < 0 {
                 __frame.origin.y = 0
             }
             
-            if __frame.maxY > self.ctxs.size.height {
-                __frame.origin.y = self.ctxs.size.height - __frame.height
+            if __frame.maxY > self.frame.size.height {
+                __frame.origin.y = self.frame.size.height - __frame.height
             }
             
             self.ctxs.frame.value = __frame

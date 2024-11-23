@@ -8,7 +8,12 @@
 
 import UIKit
 
-open class NXView: UIView {
+public protocol NXViewProtocol: NSObject {
+    func setupSubviews()
+    func updateSubviews(_ value: Any?)
+}
+
+open class NXView: UIView, NXViewProtocol {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,12 +25,10 @@ open class NXView: UIView {
         setupSubviews()
     }
     
-    //只需要重载该方法做视图的初始化（以免使用继承的时候写构造方法的同时，还需要写 init?(coder:)）
     open func setupSubviews(){
         
     }
     
-    //只需要重载该方法做视图的更新
     open func updateSubviews(_ value: Any?){
     
     }

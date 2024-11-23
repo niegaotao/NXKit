@@ -89,10 +89,11 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         }
         
         for item in self.attributes.elements {
-            if item.ctxs.cls == nil || item.ctxs.reuse.count <= 0 {
-                item.ctxs.update(NXSwipeView.Cell.self, "NXSwipeViewCell")
+            if item.cls == nil || item.reuse.count <= 0 {
+                item.cls = NXSwipeView.Cell.self
+                item.reuse = "NXSwipeViewCell"
             }
-            self.contentView.register(item.ctxs.cls, forCellWithReuseIdentifier: item.ctxs.reuse)
+            self.contentView.register(item.cls, forCellWithReuseIdentifier: item.reuse)
             
             item.selected.appearance = self.attributes.selectedAppearance
             item.unselected.appearance = self.attributes.unselectedAppearance
@@ -289,7 +290,7 @@ extension NXSwipeView {
         open var isHidden = false
         open var size = CGSize(width: 0, height: 3.0)
         open var insets = UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0)
-        open var backgroundColor = NXKit.mainColor
+        open var backgroundColor = NXKit.primaryColor
         open var radius : CGFloat = 0.0
     }
     

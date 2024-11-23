@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class NXLabel: UILabel {
+open class NXLabel: UILabel, NXViewProtocol {
     open var value : [String: Any]?
     
     public override init(frame: CGRect) {
@@ -25,7 +25,7 @@ open class NXLabel: UILabel {
         
     }
     
-    open func updateSubviews(_ action: String, _ value: Any?){
+    open func updateSubviews(_ value: Any?){
     
     }
 }

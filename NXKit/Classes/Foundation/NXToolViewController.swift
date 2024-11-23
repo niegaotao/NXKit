@@ -10,7 +10,7 @@ import UIKit
 
 open class NXToolViewController: NXChildrenViewController {
 
-    public let toolView = NXToolView(frame: CGRect(x: 0, y: 0, width: NXKit.width, height: NXKit.toolViewOffset + NXKit.bottomOffset))
+    public let toolView = NXToolView(frame: CGRect(x: 0, y: 0, width: NXKit.width, height: NXKit.toolViewOffset + NXKit.safeAreaInsets.bottom))
     
     open class Attributes: NXToolView.Attributes {
         open var viewControllers = [UIViewController]()
@@ -37,7 +37,7 @@ open class NXToolViewController: NXChildrenViewController {
     }
     
     override open func setupSubviews(){
-        self.toolView.frame = CGRect(x: 0, y: self.view.height-NXKit.toolViewOffset-NXKit.bottomOffset, width: self.view.width, height: NXKit.toolViewOffset+NXKit.bottomOffset)
+        self.toolView.frame = CGRect(x: 0, y: self.view.height-NXKit.toolViewOffset-NXKit.safeAreaInsets.bottom, width: self.view.width, height: NXKit.toolViewOffset+NXKit.safeAreaInsets.bottom)
         self.toolView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.toolView.onSelect = {[weak self] (fromValue, toValue) in
             self?.didSelectViewController(fromValue: fromValue, toValue: toValue)

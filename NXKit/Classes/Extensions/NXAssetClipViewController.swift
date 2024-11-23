@@ -16,9 +16,9 @@ open class NXAssetClipViewController: NXViewController {
         __sender.key = -1
         __sender.value = []
     }
-    public let backgroundView = NXCView<UIImageView>(frame: CGRect(x: 10, y: 10, width: NXKit.width-20, height: NXKit.height-NXKit.safeAreaInsets.top - 44.0-NXKit.bottomOffset-20))
+    public let backgroundView = NXCView<UIImageView>(frame: CGRect(x: 10, y: 10, width: NXKit.width-20, height: NXKit.height-NXKit.safeAreaInsets.top - 44.0-NXKit.safeAreaInsets.bottom-20))
     public let clipboardView = NXClipboardView(frame: CGRect.zero)
-    public let footerView = NXCView<UIScrollView>(frame: CGRect(x: 0, y: 0, width: NXKit.width, height: 80+NXKit.bottomOffset))
+    public let footerView = NXCView<UIScrollView>(frame: CGRect(x: 0, y: 0, width: NXKit.width, height: 80+NXKit.safeAreaInsets.bottom))
     public var componentViews = [UILabel]()
     
     open override func viewDidLoad() {
@@ -54,10 +54,10 @@ open class NXAssetClipViewController: NXViewController {
                 self.clips.key = 0
             }
             
-            var __background = CGRect(x: 10, y: 10, width: NXKit.width-20, height: NXKit.height-NXKit.safeAreaInsets.top - 44.0-NXKit.bottomOffset-20)
+            var __background = CGRect(x: 10, y: 10, width: NXKit.width-20, height: NXKit.height-NXKit.safeAreaInsets.top - 44.0-NXKit.safeAreaInsets.bottom-20)
             if self.clips.value.count >= 2 {
                 //有多项可选
-                __background = CGRect(x: 10, y: 10, width: NXKit.width-20, height: NXKit.height-NXKit.safeAreaInsets.top - 44.0-NXKit.bottomOffset-20-80)
+                __background = CGRect(x: 10, y: 10, width: NXKit.width-20, height: NXKit.height-NXKit.safeAreaInsets.top - 44.0-NXKit.safeAreaInsets.bottom-20-80)
                 
                 var offset = CGRect(x: 15, y: 8, width: 52, height: 60)
                 var ctx = CGRect(x: 15, y: 0, width: CGFloat(self.clips.value.count) * offset.size.width + CGFloat(self.clips.value.count - 1)*10.0, height: offset.size.height)
@@ -116,8 +116,8 @@ open class NXAssetClipViewController: NXViewController {
             
             self.clipboardView.frame = __frame
             self.clipboardView.backgroundColor = UIColor.clear
-            self.clipboardView.ctxs.size.width = __frame.size.width
-            self.clipboardView.ctxs.size.height = __frame.size.height
+            self.clipboardView.frame.size.width = __frame.size.width
+            self.clipboardView.frame.size.height = __frame.size.height
             
             let clip = self.clips.value[self.clips.key]
             self.clipboardView.ctxs.clip.isResizable = clip.isResizable
@@ -142,7 +142,7 @@ open class NXAssetClipViewController: NXViewController {
     open override func dispose(_ action: String, _ value: Any?, _ completion: NXKit.Event<String, Any?>? = nil) {
         if action == "forward" {
             
-            guard let image = self.image, image.size.width > 0 && image.size.height > 0, self.clipboardView.ctxs.size.width > 0 else {
+            guard let image = self.image, image.size.width > 0 && image.size.height > 0, self.clipboardView.frame.size.width > 0 else {
                 self.ctxs.event?("", nil)
                 return
             }
@@ -150,7 +150,7 @@ open class NXAssetClipViewController: NXViewController {
             var pfsValue : (size: CGSize, scale: CGFloat, frame: CGRect) = (CGSize.zero, 1.0, CGRect.zero)
             pfsValue.size.width = image.size.width * image.scale
             pfsValue.size.height = image.size.height * image.scale
-            pfsValue.scale = pfsValue.size.width / self.clipboardView.ctxs.size.width
+            pfsValue.scale = pfsValue.size.width / self.clipboardView.frame.size.width
             pfsValue.frame = self.clipboardView.wrappedView.frame
             pfsValue.frame.origin.x = floor(pfsValue.frame.origin.x * pfsValue.scale)
             pfsValue.frame.origin.y = floor(pfsValue.frame.origin.y * pfsValue.scale)

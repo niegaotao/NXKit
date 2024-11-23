@@ -8,42 +8,37 @@
 
 import UIKit
 
+public protocol NXAnyRepresentable {
+    var frame: NXKit.Rect {get}
+    var additionalValue : [String: Any]? {get}
+    var cls : AnyClass? {get}
+    var reuse : String {get}
+    var backgroundColor: UIColor? {get}
+    var event: NXKit.Event<String, Any?>? {get}
+    var at : (first: Bool, last: Bool) {get}
+    var tag: Int {get set}
+}
 
-//单元格基类
-open class NXItem : NXAny {
+public class NXAnyReuseable {
+    public var cls: AnyClass?
+    public var id: String = ""
+}
+
+open class NXItem : NXAny, NXAnyRepresentable {
+    public var frame = NXKit.Rect()
+    public var additionalValue: [String : Any]?
+    public var cls: AnyClass?
+    public var reuse: String = ""
+    public var backgroundColor: UIColor?
+    public var event: NXKit.Event<String, Any?>?
+    public var at: (first: Bool, last: Bool) = (false, false)
+    public var tag: Int = 0
     
-    //视图类型
     public enum View : String{
         case header = "header"
         case cell = "cell"
         case footer = "footer"
     }
-    
-    //记录单元格类型和重用ID的对象
-    open class Contexts : NXKit.Rect {
-        open var value : [String: Any]? = nil
-        
-        open var cls : AnyClass?        //单元格/视图类型, e.g. NXTableViewCell.self
-        open var reuse : String = ""    //单元格重用ID
-        open var tag: Int = 0           //根据不同tag来做不同单元格的区分
-        
-        open var event: NXKit.Event<String, Any?>? = nil  //点击等回调
-        
-        open var backgroundColor: UIColor? = nil //头部尾部的背景色
-        open var at : (first: Bool, last: Bool) = (false, false) //是否是第一个，是否是最后一个
-        
-        convenience public init(_ cls: AnyClass, _ reuse: String) {
-            self.init()
-            self.update(cls, reuse)
-        }
-        
-        open func update(_ cls: AnyClass, _ reuse: String){
-            self.cls = cls
-            self.reuse = reuse
-        }
-    }
-    
-    public let ctxs = NXItem.Contexts()
 
     public required init() {
         super.init()
@@ -51,8 +46,13 @@ open class NXItem : NXAny {
     
     public init(value: [String: Any]?, completion: NXKit.Completion<NXItem>?) {
         super.init()
-        self.ctxs.value = value
+        self.additionalValue = value
         completion?(self)
+    }
+    
+    open func update(_ cls: AnyClass, _ reuse: String){
+        self.cls = cls
+        self.reuse = reuse
     }
 }
 
@@ -169,11 +169,11 @@ open class NXSection : NXElementArray<NXItem> {
         }
         let element = self.elements[indexPath.row]
         
-        guard element.ctxs.reuse.count > 0 else {
+        guard element.reuse.count > 0 else {
             return nil
         }
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: element.ctxs.reuse, for: indexPath) as? NXTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: element.reuse, for: indexPath) as? NXTableViewCell {
             return (element, cell)
         }
         return nil
@@ -187,10 +187,10 @@ open class NXSection : NXElementArray<NXItem> {
         }
         let element = self.elements[indexPath.row]
         
-        guard element.ctxs.reuse.count > 0 else {
+        guard element.reuse.count > 0 else {
             return nil
         }
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: element.ctxs.reuse, for: indexPath) as? NXCollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: element.reuse, for: indexPath) as? NXCollectionViewCell {
             return (element, cell)
         }
         return nil
@@ -284,19 +284,19 @@ open class NXCollection<T: UIView> : NXElementArray<NXSection> {
                 
         if type == NXItem.View.header.rawValue {
             guard let header = self.elements[index].header else {return nil}
-            guard header.ctxs.cls != nil && header.ctxs.reuse.count > 0 else {
+            guard header.cls != nil && header.reuse.count > 0 else {
                 return nil
             }
-            if let reusableView = __tableView.dequeueReusableHeaderFooterView(withIdentifier: header.ctxs.reuse) as? NXTableReusableView {
+            if let reusableView = __tableView.dequeueReusableHeaderFooterView(withIdentifier: header.reuse) as? NXTableReusableView {
                 return (header, reusableView)
             }
         }
         else if type == NXItem.View.footer.rawValue {
             guard let footer = self.elements[index].footer else { return nil}
-            guard footer.ctxs.cls != nil && footer.ctxs.reuse.count > 0 else {
+            guard footer.cls != nil && footer.reuse.count > 0 else {
                 return nil
             }
-            if let reusableView = __tableView.dequeueReusableHeaderFooterView(withIdentifier: footer.ctxs.reuse) as? NXTableReusableView {
+            if let reusableView = __tableView.dequeueReusableHeaderFooterView(withIdentifier: footer.reuse) as? NXTableReusableView {
                 return (footer, reusableView)
             }
         }
@@ -320,10 +320,10 @@ open class NXCollection<T: UIView> : NXElementArray<NXSection> {
         }
         if type == NXItem.View.header.rawValue {
             guard let element = self.elements[(indexPath as NSIndexPath).section].header else {return nil}
-            guard element.ctxs.cls != nil && element.ctxs.reuse.count > 0 else {
+            guard element.cls != nil && element.reuse.count > 0 else {
                 return nil
             }
-            if let reusableView = __collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: element.ctxs.reuse, for: indexPath) as? NXCollectionReusableView {
+            if let reusableView = __collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: element.reuse, for: indexPath) as? NXCollectionReusableView {
                 return (element, reusableView)
             }
         }
@@ -331,10 +331,10 @@ open class NXCollection<T: UIView> : NXElementArray<NXSection> {
             guard let element = self.elements[(indexPath as NSIndexPath).section].footer else {
                 return nil
             }
-            guard element.ctxs.cls != nil && element.ctxs.reuse.count > 0 else {
+            guard element.cls != nil && element.reuse.count > 0 else {
                 return nil
             }
-            if let reusableView = __collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: element.ctxs.reuse, for: indexPath) as? NXCollectionReusableView {
+            if let reusableView = __collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: element.reuse, for: indexPath) as? NXCollectionReusableView {
                 return (element, reusableView)
             }
         }
@@ -348,8 +348,9 @@ extension NXCollection where T == NXTableView {
     public func addPlaceholderView(_ frame: CGRect) -> NXPlaceholderDescriptor {
         let e = NXPlaceholderDescriptor()
         e.placeholderView = self.placeholderView
-        e.ctxs.update(NXTablePlaceholderViewCell.self, "NXTablePlaceholderViewCell")
-        e.ctxs.frame = frame
+        e.cls = NXTablePlaceholderViewCell.self
+        e.reuse = "NXTablePlaceholderViewCell"
+        e.frame.frame = frame
         self.addElementsToLastSection([e])
         self.wrappedView?.register(NXTablePlaceholderViewCell.self, forCellReuseIdentifier: "NXTablePlaceholderViewCell")
         return e
@@ -360,8 +361,8 @@ extension NXCollection where T == NXTableView {
         if let header = self[index]?.header {
             
             //1.根据自身的高度赋值拿到header的高度
-            if header.ctxs.height > 0 {
-                return header.ctxs.height
+            if header.frame.height > 0 {
+                return header.frame.height
             }
         }
         return 0.0
@@ -372,8 +373,8 @@ extension NXCollection where T == NXTableView {
         if let element = self[indexPath] {
             
             //1.根据自己对高度的赋值拿到相应的高度
-            if element.ctxs.height > 0 {
-                return element.ctxs.height
+            if element.frame.height > 0 {
+                return element.frame.height
             }
             
             //2.根据FD中的自适应返回单元格的高度
@@ -389,8 +390,8 @@ extension NXCollection where T == NXTableView {
     public func heightForFooter(at index: Int) -> CGFloat {
         if let footer = self[index]?.footer {
             //1.根据自身的高度赋值拿到header的高度
-            if footer.ctxs.height > 0 {
-                return footer.ctxs.height
+            if footer.frame.height > 0 {
+                return footer.frame.height
             }
         }
         return 0.0
@@ -401,8 +402,9 @@ extension NXCollection where T == NXTableView {
     public func addSection(cls: AnyClass, reuse: String, height: CGFloat) -> NXSection {
         let section = NXSection()
         section.header = NXItem()
-        section.header?.ctxs.update(cls, reuse)
-        section.header?.ctxs.height = height
+        section.header?.cls = cls
+        section.header?.reuse = reuse
+        section.header?.frame.height = height
         self.append(section)
         return section
     }
@@ -431,8 +433,9 @@ extension NXCollection where T == NXCollectionView {
     public func addPlaceholderView(_ frame: CGRect) -> NXPlaceholderDescriptor {
         let e = NXPlaceholderDescriptor()
         e.placeholderView = self.placeholderView
-        e.ctxs.update(NXCollectionPlaceholderViewCell.self, "NXPlaceholderViewCell")
-        e.ctxs.frame = frame
+        e.cls = NXCollectionPlaceholderViewCell.self
+        e.reuse = "NXPlaceholderViewCell"
+        e.frame.frame = frame
         self.addElementsToLastSection([e])
         
         self.wrappedView?.register(NXCollectionPlaceholderViewCell.self, forCellWithReuseIdentifier: "NXPlaceholderViewCell")
@@ -444,8 +447,9 @@ extension NXCollection where T == NXCollectionView {
     public func addSection(cls: AnyClass, reuse: String, height: CGFloat) -> NXSection {
         let section = NXSection()
         section.header = NXItem()
-        section.header?.ctxs.update(cls, reuse)
-        section.header?.ctxs.height = height
+        section.header?.cls = cls
+        section.header?.reuse = reuse
+        section.header?.frame.height = height
         self.append(section)
         return section
     }

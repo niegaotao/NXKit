@@ -56,11 +56,11 @@ open class NXAbstract: NXItem {
     
     public convenience init(title: String, value: [String: Any]?, completion: NXKit.Completion<NXAbstract>?) {
         self.init(value:value, completion:nil)
-        self.ctxs.update(NXActionViewCell.self, "NXActionViewCell")
-        self.ctxs.size = CGSize(width: NXKit.width, height: NXKit.Association.size.height)
-        
+        self.cls = NXActionViewCell.self
+        self.reuse = "NXActionViewCell"
+        self.frame.size = CGSize(width: NXKit.width, height: NXKit.Association.size.height)
         self.title.value = title
-        self.title.frame = CGRect(x: 16, y: 0, width: NXKit.width-32, height: self.ctxs.height)
+        self.title.frame = CGRect(x: 16, y: 0, width: NXKit.width-32, height: self.frame.height)
         self.title.textAlignment = .center
         completion?(self)
     }

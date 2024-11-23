@@ -28,7 +28,7 @@ open class NXCameraCaptureController: UIImagePickerController, UIImagePickerCont
                 NXKit.hideLoading(superview: self.view)
 
                 if let __asset = asset {
-                    let nxAsset = NXAsset(asset: __asset)
+                    let nxAsset = NXAsset(wrappedValue: __asset)
                     nxAsset.image = __image
                     nxAsset.thumbnail = __image
                     

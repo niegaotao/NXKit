@@ -8,8 +8,7 @@
 
 import UIKit
 
-
-open class NXImageView: UIImageView {
+open class NXImageView: UIImageView, NXViewProtocol {
     open var value: [String: Any]?  //给UIImageView赋值
     
     public init(){
@@ -32,7 +31,7 @@ open class NXImageView: UIImageView {
     }
     
     
-    open func updateSubviews(_ action: String, _ value: Any?){
+    open func updateSubviews(_ value: Any?){
     
     }
 }

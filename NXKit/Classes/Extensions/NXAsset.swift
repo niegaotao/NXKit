@@ -9,7 +9,14 @@
 import UIKit
 import Photos
 
+public protocol NXAssetProtocol: NSObjectProtocol {}
+
+extension PHAsset: NXAssetProtocol {}
+extension UIImage: NXAssetProtocol {}
+
 open class NXAsset: NXAny {
+    public let wrappedValue: NXAssetProtocol
+    
     open var value = [String: Any]()
     
     open var mediaType = PHAssetMediaType.unknown//类型
@@ -17,7 +24,6 @@ open class NXAsset: NXAny {
     open var url : String = ""
     open var file : String = ""
     
-    open var asset : PHAsset? = nil
     open var duration: TimeInterval = 0 //时长
     
     open var filename : String = "" //文件名
@@ -29,15 +35,11 @@ open class NXAsset: NXAny {
     open var index : String = ""
     
     
-    public required init() {
+    public required init(wrappedValue: NXAssetProtocol, suffixes: [String] = []) {
+        self.wrappedValue = wrappedValue
         super.init()
-    }
-    
-    convenience public init(asset: PHAsset?, suffixes: [String] = []) {
-        self.init()
         
-        if let __asset = asset {
-            self.asset = __asset
+        if let __asset = wrappedValue as? PHAsset {
             self.mediaType = __asset.mediaType
             
             self.size = CGSize(width: __asset.pixelWidth, height: __asset.pixelHeight)
@@ -62,6 +64,10 @@ open class NXAsset: NXAny {
                 self.isSelectable = true
             }
         }
+    }
+    
+    public required init() {
+        fatalError("init() has not been implemented")
     }
     
     open var completion: NXKit.Event<Bool, Any?>? = nil
@@ -109,7 +115,7 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
     }
     
     open override func updateSubviews(_ value: Any?){
-        guard let asset = value as? NXAsset, let phasset = asset.asset else {
+        guard let asset = value as? NXAsset, let phasset = asset.wrappedValue as? PHAsset else {
             return
         }
         self.value = asset
@@ -154,8 +160,8 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
             }
             else {
                 indexView.text = asset.index
-                indexView.backgroundColor = NXKit.mainColor.withAlphaComponent(0.5)
-                indexView.layer.borderColor = NXKit.mainColor.cgColor
+                indexView.backgroundColor = NXKit.primaryColor.withAlphaComponent(0.5)
+                indexView.layer.borderColor = NXKit.primaryColor.cgColor
             }
             maskedView.isHidden = true
         }
@@ -542,7 +548,7 @@ extension NXAsset {
         
         if wrapped.selectedIdentifiers.count > 0, let album = accessAlbums.first {
             let filterAssets = album.assets.filter { (asset) -> Bool in
-                if let __phasset = asset.asset {
+                if let __phasset = asset.wrappedValue as? PHAsset {
                     return wrapped.selectedIdentifiers.contains(__phasset.localIdentifier)
                 }
                 return false
@@ -551,7 +557,7 @@ extension NXAsset {
             if filterAssets.count > 0 {
                 for identifier in wrapped.selectedIdentifiers {
                     for asset in filterAssets {
-                        if let __phasset = asset.asset, __phasset.localIdentifier == identifier {
+                        if let __phasset = asset.wrappedValue as? PHAsset, __phasset.localIdentifier == identifier {
                             wrapped.add(asset)
                             break
                         }
@@ -565,7 +571,7 @@ extension NXAsset {
     
     public class  func outputAssets(_ assets: [NXAsset], _ wrapped: NXAsset.Wrapped, completion: NXKit.Event<Bool, [NXAsset]>?){
         let outputAssets = assets.map { (nxAsset) -> NXAsset in
-            let outputAsset = NXAsset(asset: nxAsset.asset, suffixes:wrapped.video.suffixes)
+            let outputAsset = NXAsset(wrappedValue: nxAsset.wrappedValue, suffixes:wrapped.video.suffixes)
             outputAsset.thumbnail = nxAsset.thumbnail
             outputAsset.image = nxAsset.image
             return outputAsset
@@ -584,7 +590,7 @@ extension NXAsset {
                 group.enter()
                 semaphore.wait()
                 
-                if let __phasset = __outputAsset.asset {
+                if let __phasset = __outputAsset.wrappedValue as? PHAsset {
                     let size = NXClip.resize(by: wrapped.resizeBy, CGSize(width: __phasset.pixelWidth, height: __phasset.pixelHeight), wrapped.resize, true)
                     NXAsset.requestImage(__phasset,
                                            true,

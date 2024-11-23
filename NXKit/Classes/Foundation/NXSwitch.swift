@@ -166,7 +166,7 @@ open class NXSwitch: NXControl {
                 offBackgroundView.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
                 
                 thumbView.center = CGPoint(x: onBackgroundView.width - (thumbView.width + horizontalAdjustment) / 2.0, y: thumbView.center.y)
-                thumbView.backgroundColor = onThumbTintColor ?? NXKit.mainColor
+                thumbView.backgroundColor = onThumbTintColor ?? NXKit.primaryColor
                 
             } else {
                 onBackgroundView.alpha = 0.0

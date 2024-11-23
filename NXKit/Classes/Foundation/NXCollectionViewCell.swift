@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class NXCollectionViewCell: UICollectionViewCell {
+open class NXCollectionViewCell: UICollectionViewCell, NXViewProtocol {
     open var arrowView = UIImageView(frame: CGRect.zero)
     open var separator = CALayer()
     open var value : Any? = nil
