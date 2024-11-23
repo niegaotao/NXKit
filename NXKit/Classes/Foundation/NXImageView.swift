@@ -8,31 +8,25 @@
 
 import UIKit
 
+open class NXImageView: UIImageView, NXViewProtocol {
+    open var value: [String: Any]? // 给UIImageView赋值
 
-open class NXImageView: UIImageView {
-    open var value: [String: Any]?  //给UIImageView赋值
-    
-    public init(){
+    public init() {
         super.init(frame: CGRect.zero)
-        self.setupSubviews()
+        setupSubviews()
     }
-    
-    public override init(frame: CGRect) {
+
+    override public init(frame: CGRect) {
         super.init(frame: frame)
-        self.setupSubviews()
+        setupSubviews()
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setupSubviews()
+        setupSubviews()
     }
-    
-    open func setupSubviews(){
-        
-    }
-    
-    
-    open func updateSubviews(_ action: String, _ value: Any?){
-    
-    }
+
+    open func setupSubviews() {}
+
+    open func updateSubviews(_: Any?) {}
 }

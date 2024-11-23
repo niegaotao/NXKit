@@ -8,53 +8,50 @@
 
 import UIKit
 
-open class NXCollectionViewCell: UICollectionViewCell {
+open class NXCollectionViewCell: UICollectionViewCell, NXViewProtocol {
     open var arrowView = UIImageView(frame: CGRect.zero)
     open var separator = CALayer()
-    open var value : Any? = nil
-    
-    public override init(frame: CGRect) {
+    open var value: Any? = nil
+
+    override public init(frame: CGRect) {
         super.init(frame: frame)
-        self.setup()
-        self.setupSubviews()
+        setup()
+        setupSubviews()
     }
-    
-    open func setup(){
-        arrowView.frame = CGRect(x: contentView.width-16.0-6, y: (contentView.height-12)/2, width: 6, height: 12)
-        arrowView.image = NXKit.image(named:"icon-arrow.png")
+
+    open func setup() {
+        arrowView.frame = CGRect(x: contentView.width - 16.0 - 6, y: (contentView.height - 12) / 2, width: 6, height: 12)
+        arrowView.image = NXKit.image(named: "icon-arrow.png")
         arrowView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin]
         arrowView.contentMode = .scaleAspectFill
         arrowView.isHidden = true
-        self.contentView.addSubview(arrowView)
-        
-        if self.backgroundView == nil {
-            self.backgroundView = UIView(frame: CGRect.zero)
-            self.backgroundView?.backgroundColor = NXKit.cellBackgroundColor
-            self.backgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        contentView.addSubview(arrowView)
+
+        if backgroundView == nil {
+            backgroundView = UIView(frame: CGRect.zero)
+            backgroundView?.backgroundColor = NXKit.cellBackgroundColor
+            backgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
-        
+
         separator.backgroundColor = NXKit.separatorColor.cgColor
         separator.isHidden = true
-        self.contentView.layer.addSublayer(separator)
+        contentView.layer.addSublayer(separator)
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setup()
-        self.setupSubviews()
+        setup()
+        setupSubviews()
     }
-    
-    ///MARK: 子类重写该方法初始化视图
-    open func setupSubviews(){
-        
-    }
-    
-    open func updateSubviews(_ value: Any?){
-        
-    }
-    
-    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+
+    // MARK: 子类重写该方法初始化视图
+
+    open func setupSubviews() {}
+
+    open func updateSubviews(_: Any?) {}
+
+    override open func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        self.separator.backgroundColor = NXKit.separatorColor.cgColor
+        separator.backgroundColor = NXKit.separatorColor.cgColor
     }
 }

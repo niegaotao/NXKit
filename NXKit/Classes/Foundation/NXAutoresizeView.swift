@@ -10,41 +10,38 @@ import UIKit
 
 open class NXAutoresizeView<C: UIView>: NXView {
     open var contentView = C(frame: CGRect.zero)
-    
-    open var completion : NXKit.Event<String, Any?>? = nil
+
+    open var completion: NXKit.Event<String, Any?>? = nil
     open var insets = UIEdgeInsets.zero
-    open override func setupSubviews() {
+    override open func setupSubviews() {
         super.setupSubviews()
-        
-        self.autoresizesSubviews = true
-        
-        self.contentView.frame = self.bounds
-        self.addSubview(self.contentView)
+
+        autoresizesSubviews = true
+
+        contentView.frame = bounds
+        addSubview(contentView)
     }
-    
-    open override func updateSubviews(_ value: Any?) {
+
+    override open func updateSubviews(_ value: Any?) {
         super.updateSubviews(value)
-        
-        self.completion?("updateSubviews", self)
+
+        completion?("updateSubviews", self)
     }
-    
-    open override func layoutSubviews() {
+
+    override open func layoutSubviews() {
         super.layoutSubviews()
-        
-        if self.autoresizesSubviews {
-            self.contentView.frame = CGRect(x: self.insets.left,
-                                            y: self.insets.top,
-                                            width: self.frame.size.width-self.insets.left-self.insets.right,
-                                            height: self.frame.size.height-self.insets.top-self.insets.bottom)
+
+        if autoresizesSubviews {
+            contentView.frame = CGRect(x: insets.left,
+                                       y: insets.top,
+                                       width: frame.size.width - insets.left - insets.right,
+                                       height: frame.size.height - insets.top - insets.bottom)
         }
-        
-        self.completion?("layoutSubviews", self)
+
+        completion?("layoutSubviews", self)
     }
-    
-    open override func draw(_ rect: CGRect) {
-        self.completion?("draw", self)
+
+    override open func draw(_: CGRect) {
+        completion?("draw", self)
     }
 }
-
-
-

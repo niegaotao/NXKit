@@ -9,30 +9,30 @@
 import UIKit
 
 open class NXTableReusableView: UITableViewHeaderFooterView {
-    open var value : Any? = nil
-    required public override init(reuseIdentifier: String?) {
+    open var value: Any? = nil
+    override public required init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        self.setupSubviews()
+        setupSubviews()
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupSubviews()
     }
-    
-    open func setupSubviews(){
-        let __backgroundView = UIView(frame: self.bounds)
+
+    open func setupSubviews() {
+        let __backgroundView = UIView(frame: bounds)
         __backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         __backgroundView.backgroundColor = UIColor.clear
-        self.backgroundView = __backgroundView
-        
-        self.contentView.backgroundColor = UIColor.clear
+        backgroundView = __backgroundView
+
+        contentView.backgroundColor = UIColor.clear
     }
-    
+
     open func updateSubviews(_ value: Any?) {
         if let element = value as? NXItem {
             self.value = element
-            self.contentView.backgroundColor = element.ctxs.backgroundColor ?? UIColor.clear
+            contentView.backgroundColor = element.backgroundColor ?? UIColor.clear
         }
     }
 }

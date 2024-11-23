@@ -8,17 +8,15 @@
 
 import UIKit
 
-
 open class NXAbstractTableViewCell<T: UIView>: NXTableViewCell {
     public let abstractView = T(frame: CGRect.zero)
-    
-    open override func setupSubviews(){
-        
-        self.selectedBackgroundView = UIView(frame: self.bounds)
-        self.selectedBackgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.selectedBackgroundView?.backgroundColor = NXKit.cellSelectedBackgroundColor
-        
-        if let __abstractView = self.abstractView as? NXAbstractView {
+
+    override open func setupSubviews() {
+        selectedBackgroundView = UIView(frame: bounds)
+        selectedBackgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        selectedBackgroundView?.backgroundColor = NXKit.cellSelectedBackgroundColor
+
+        if let __abstractView = abstractView as? NXAbstractView {
             __abstractView.assetView.backgroundColor = UIColor.white
             __abstractView.assetView.layer.cornerRadius = 12
             __abstractView.assetView.layer.masksToBounds = true
@@ -33,45 +31,42 @@ open class NXAbstractTableViewCell<T: UIView>: NXTableViewCell {
             __abstractView.subtitleView.numberOfLines = 0
             __abstractView.subtitleView.isHidden = true
         }
-        self.contentView.addSubview(self.abstractView)
-        
-        self.contentView.bringSubviewToFront(self.arrowView)
-        
+        contentView.addSubview(abstractView)
+
+        contentView.bringSubviewToFront(arrowView)
+
         separator.backgroundColor = NXKit.separatorColor.cgColor
         separator.isHidden = true
     }
-    
-    open override func updateSubviews(_ value: Any?){
-        self.abstractView.frame = self.contentView.bounds
-        if let __abstractView = self.abstractView as? NXAbstractView {
+
+    override open func updateSubviews(_ value: Any?) {
+        abstractView.frame = contentView.bounds
+        if let __abstractView = abstractView as? NXAbstractView {
             __abstractView.updateSubviews(value)
-            
+
             if let __wrapped = value as? NXAbstract, __wrapped.raw.isHighlighted {
-                self.selectedBackgroundView?.backgroundColor = __wrapped.raw.selectedBackgroundColor
+                selectedBackgroundView?.backgroundColor = __wrapped.raw.selectedBackgroundColor
+            } else {
+                selectedBackgroundView?.backgroundColor = UIColor.clear
             }
-            else{
-                self.selectedBackgroundView?.backgroundColor = UIColor.clear
-            }
-            self.arrowView.isHidden = true
-            self.separator.isHidden = true
-        }
-        else if let __abstractView = self.abstractView as? NXView  {
+            arrowView.isHidden = true
+            separator.isHidden = true
+        } else if let __abstractView = abstractView as? NXView {
             __abstractView.updateSubviews(value)
-            self.selectedBackgroundView?.backgroundColor = UIColor.clear
+            selectedBackgroundView?.backgroundColor = UIColor.clear
         }
     }
 }
 
 open class NXAbstractCollectionViewCell<T: UIView>: NXCollectionViewCell {
     public let abstractView = T(frame: CGRect.zero)
-    
-    open override func setupSubviews(){
-        
-        self.selectedBackgroundView = UIView(frame: self.bounds)
-        self.selectedBackgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.selectedBackgroundView?.backgroundColor = NXKit.cellSelectedBackgroundColor
-        
-        if let __abstractView = self.abstractView as? NXAbstractView {
+
+    override open func setupSubviews() {
+        selectedBackgroundView = UIView(frame: bounds)
+        selectedBackgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        selectedBackgroundView?.backgroundColor = NXKit.cellSelectedBackgroundColor
+
+        if let __abstractView = abstractView as? NXAbstractView {
             __abstractView.assetView.backgroundColor = UIColor.white
             __abstractView.assetView.layer.cornerRadius = 12
             __abstractView.assetView.layer.masksToBounds = true
@@ -86,37 +81,33 @@ open class NXAbstractCollectionViewCell<T: UIView>: NXCollectionViewCell {
             __abstractView.subtitleView.numberOfLines = 0
             __abstractView.subtitleView.isHidden = true
         }
-        self.contentView.addSubview(self.abstractView)
-        
-        self.contentView.bringSubviewToFront(self.arrowView)
-        
-        self.separator.backgroundColor = NXKit.separatorColor.cgColor
-        self.separator.isHidden = true
+        contentView.addSubview(abstractView)
+
+        contentView.bringSubviewToFront(arrowView)
+
+        separator.backgroundColor = NXKit.separatorColor.cgColor
+        separator.isHidden = true
     }
-    
-    open override func updateSubviews(_ value: Any?){
-        self.abstractView.frame = self.contentView.bounds
-        if let __abstractView = self.abstractView as? NXAbstractView {
+
+    override open func updateSubviews(_ value: Any?) {
+        abstractView.frame = contentView.bounds
+        if let __abstractView = abstractView as? NXAbstractView {
             __abstractView.updateSubviews(value)
-            
+
             if let __wrapped = value as? NXAbstract, __wrapped.raw.isHighlighted {
-                self.selectedBackgroundView?.backgroundColor = __wrapped.raw.selectedBackgroundColor
+                selectedBackgroundView?.backgroundColor = __wrapped.raw.selectedBackgroundColor
+            } else {
+                selectedBackgroundView?.backgroundColor = UIColor.clear
             }
-            else{
-                self.selectedBackgroundView?.backgroundColor = UIColor.clear
-            }
-            self.arrowView.isHidden = true
-            self.separator.isHidden = true
-        }
-        else if let __abstractView = self.abstractView as? NXView  {
+            arrowView.isHidden = true
+            separator.isHidden = true
+        } else if let __abstractView = abstractView as? NXView {
             __abstractView.updateSubviews(value)
-            self.selectedBackgroundView?.backgroundColor = UIColor.clear
+            selectedBackgroundView?.backgroundColor = UIColor.clear
         }
     }
 }
 
-open class NXAbstractViewCell : NXAbstractTableViewCell<NXAbstractView> {}
+open class NXAbstractViewCell: NXAbstractTableViewCell<NXAbstractView> {}
 
-open class NXActionViewCell : NXAbstractCollectionViewCell<NXAbstractView> {}
-
-
+open class NXActionViewCell: NXAbstractCollectionViewCell<NXAbstractView> {}

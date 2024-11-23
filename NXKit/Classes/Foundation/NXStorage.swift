@@ -8,49 +8,48 @@
 
 import Foundation
 
-//NSString, NSData, NSNumber, NSDate, NSArray, and NSDictionary
+// NSString, NSData, NSNumber, NSDate, NSArray, and NSDictionary
 
 open class NXStorage {
     public static let center = NXStorage()
     public fileprivate(set) var rootValue = [String: Any]()
     public fileprivate(set) var rootKey = "__rootKey"
-    public init(){
-        if let __rootValue = UserDefaults.standard.object(forKey: rootKey) as? [String: Any]{
-            self.rootValue = __rootValue;
+    public init() {
+        if let __rootValue = UserDefaults.standard.object(forKey: rootKey) as? [String: Any] {
+            rootValue = __rootValue
         }
     }
-    
+
     @discardableResult
     open func value(forKey key: String) -> Any? {
-        if let __value = self.rootValue[key] {
+        if let __value = rootValue[key] {
             return __value
         }
         return nil
     }
-    
+
     @discardableResult
     open func set(_ value: Any?, forKey key: String) -> Bool {
         guard key.count > 0 else {
             return false
         }
         if let value = value {
-            self.rootValue[key] = value
+            rootValue[key] = value
+        } else {
+            rootValue.removeValue(forKey: key)
         }
-        else {
-            self.rootValue.removeValue(forKey: key)
-        }
-        UserDefaults.standard.setValue(self.rootValue, forKey: self.rootKey)
+        UserDefaults.standard.setValue(rootValue, forKey: rootKey)
         UserDefaults.standard.synchronize()
         return true
     }
-    
+
     @discardableResult
     open func removeValue(forKey key: String) -> Bool {
         guard key.count > 0 else {
             return false
         }
-        self.rootValue.removeValue(forKey: key)
-        UserDefaults.standard.setValue(self.rootValue, forKey: self.rootKey)
+        rootValue.removeValue(forKey: key)
+        UserDefaults.standard.setValue(rootValue, forKey: rootKey)
         UserDefaults.standard.synchronize()
         return true
     }

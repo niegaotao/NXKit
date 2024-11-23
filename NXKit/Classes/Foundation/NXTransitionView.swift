@@ -15,91 +15,81 @@ import UIKit
  */
 
 open class NXTransitionView: NXView {
-    
     open weak var owner: NXViewController!
-    
-    public var p : CGPoint = CGPoint.zero
-    lazy private var panRecognizer : UIPanGestureRecognizer = {
+
+    public var p: CGPoint = .zero
+    private lazy var panRecognizer: UIPanGestureRecognizer = {
         let __panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panRecognizerAction))
         __panRecognizer.isEnabled = false
         return __panRecognizer
     }()
-    
+
     public init(frame: CGRect, owner: NXViewController) {
         super.init(frame: frame)
         self.owner = owner
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     override open func setupSubviews() {
-        self.addGestureRecognizer(self.panRecognizer)
+        addGestureRecognizer(panRecognizer)
     }
-    
+
     override open func addSubview(_ view: UIView) {
         super.addSubview(view)
-        
+
         if let viewController = view.next as? NXViewController, viewController == owner {
             if owner.ctxs.orientation == .bottom || owner.ctxs.orientation == .top {
                 panRecognizer.isEnabled = false
-            }
-            else{
+            } else {
                 panRecognizer.isEnabled = true
             }
         }
     }
-    
-    
+
     @objc open func panRecognizerAction() {
         let point = panRecognizer.translation(in: self)
         if panRecognizer.state == .began {
-            self.p = point
-        }
-        else if panRecognizer.state == .changed {
-            var affineValue = point.x - self.p.x
-            
+            p = point
+        } else if panRecognizer.state == .changed {
+            var affineValue = point.x - p.x
+
             if owner.ctxs.orientation == .right {
-                if affineValue < 0 { affineValue = 0}
-                if affineValue > NXKit.width { affineValue = NXKit.width}
-            }
-            else if owner.ctxs.orientation == .left {
-                if affineValue > 0 { affineValue = 0}
-                if affineValue < -NXKit.width { affineValue = -NXKit.width}
+                if affineValue < 0 { affineValue = 0 }
+                if affineValue > NXKit.width { affineValue = NXKit.width }
+            } else if owner.ctxs.orientation == .left {
+                if affineValue > 0 { affineValue = 0 }
+                if affineValue < -NXKit.width { affineValue = -NXKit.width }
             }
             owner.view.x = affineValue
-        }
-        else {
+        } else {
             if owner.ctxs.orientation == .right {
-                if owner.view.x < NXKit.width/3.0 {
+                if owner.view.x < NXKit.width / 3.0 {
                     UIView.animate(withDuration: 0.2) {
                         self.owner.view.x = 0.0
                         self.backgroundColor = NXKit.transitionBackgroundColor
                     }
-                }
-                else {
-                    if let navigationController = self.owner.ctxs.superviewController?.navigationController as? NXNavigationController {
+                } else {
+                    if let navigationController = owner.ctxs.superviewController?.navigationController as? NXNavigationController {
                         navigationController.closeViewController(owner, animated: true)
-                        UIView.animate(withDuration: navigationController.ctxs.duration*0.6) {
+                        UIView.animate(withDuration: navigationController.ctxs.duration * 0.6) {
                             self.owner.view.x = NXKit.width
                             self.backgroundColor = NXKit.transitionInoutBackgroundColor
                         }
                     }
-                    
                 }
-            }
-            else {
-                if owner.view.x > -NXKit.width/3.0 {
+            } else {
+                if owner.view.x > -NXKit.width / 3.0 {
                     UIView.animate(withDuration: 0.2) {
                         self.owner.view.x = 0.0
                         self.backgroundColor = NXKit.transitionBackgroundColor
                     }
-                }
-                else {
-                    if let navigationController = self.owner.ctxs.superviewController?.navigationController as? NXNavigationController {
+                } else {
+                    if let navigationController = owner.ctxs.superviewController?.navigationController as? NXNavigationController {
                         navigationController.closeViewController(owner, animated: true)
-                        UIView.animate(withDuration: navigationController.ctxs.duration*0.6) {
+                        UIView.animate(withDuration: navigationController.ctxs.duration * 0.6) {
                             self.owner.view.x = -NXKit.width
                             self.backgroundColor = NXKit.transitionInoutBackgroundColor
                         }

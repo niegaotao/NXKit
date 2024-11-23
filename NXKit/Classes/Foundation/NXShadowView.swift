@@ -9,39 +9,37 @@
 import UIKit
 
 open class NXShadowView: NXCView<UIView> {
-    
     override open func setupSubviews() {
         super.setupSubviews()
-        
-        self.backgroundColor = NXKit.backgroundColor
-        self.layer.cornerRadius = 6.0
-        self.layer.shadowRadius = 6.0
-        self.layer.shadowColor = NXKit.shadowColor.cgColor
-        self.layer.shadowOpacity = 0.10
-        self.layer.shadowOffset = CGSize.zero
-        self.layer.masksToBounds = false
-        
-        self.contentView.frame = self.bounds
-        self.contentView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-        self.contentView.backgroundColor = NXKit.backgroundColor
-        self.contentView.layer.cornerRadius = 6.0
-        self.contentView.layer.masksToBounds = true
-        self.addSubview(contentView)
+
+        backgroundColor = NXKit.backgroundColor
+        layer.cornerRadius = 6.0
+        layer.shadowRadius = 6.0
+        layer.shadowColor = NXKit.shadowColor.cgColor
+        layer.shadowOpacity = 0.10
+        layer.shadowOffset = CGSize.zero
+        layer.masksToBounds = false
+
+        contentView.frame = bounds
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        contentView.backgroundColor = NXKit.backgroundColor
+        contentView.layer.cornerRadius = 6.0
+        contentView.layer.masksToBounds = true
+        addSubview(contentView)
     }
-    
+
     override open func addSubview(_ view: UIView) {
-        if view == self.contentView {
+        if view == contentView {
             super.addSubview(view)
-        }
-        else{
-            self.contentView.addSubview(view)
+        } else {
+            contentView.addSubview(view)
         }
     }
-    
-    open override func layoutSubviews() {
+
+    override open func layoutSubviews() {
         super.layoutSubviews()
-        
-        self.layer.shadowRadius = self.layer.cornerRadius
-        self.contentView.layer.cornerRadius = self.layer.cornerRadius
+
+        layer.shadowRadius = layer.cornerRadius
+        contentView.layer.cornerRadius = layer.cornerRadius
     }
 }
