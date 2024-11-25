@@ -16,12 +16,12 @@ extension NXActionView {
                 __action.asset.isHidden = true
                 __action.title.isHidden = false
                 if actions.count == 2 {
-                    __action.frame.size = CGSize(width: NXKit.Association.size.width*0.5, height: NXKit.Association.size.height)
-                    __action.title.frame = CGRect(x: 0, y: 0, width: __action.frame.width, height: __action.frame.height)
+                    __action.size = CGSize(width: NXKit.Association.size.width*0.5, height: NXKit.Association.size.height)
+                    __action.title.frame = CGRect(x: 0, y: 0, width: __action.size.width, height: __action.size.height)
                 }
                 else {
-                    __action.frame.size = CGSize(width: NXKit.Association.size.width, height: NXKit.Association.size.height)
-                    __action.title.frame = CGRect(x: 0, y: 0, width: __action.frame.width, height: __action.frame.height)
+                    __action.size = CGSize(width: NXKit.Association.size.width, height: NXKit.Association.size.height)
+                    __action.title.frame = CGRect(x: 0, y: 0, width: __action.size.width, height: __action.size.height)
                 }
                 __action.title.color = NXKit.blackColor
                 __action.title.font = NXKit.font(16, .bold)
@@ -39,12 +39,12 @@ extension NXActionView {
 
         for (_, action) in actions.enumerated() {
             if actions.count == 2 {
-                action.frame.size = CGSize(width: NXKit.Association.size.width*0.5, height: NXKit.Association.size.height)
-                action.title.frame = CGRect(x: 0, y: 0, width: action.frame.width, height: action.frame.height)
+                action.size = CGSize(width: NXKit.Association.size.width*0.5, height: NXKit.Association.size.height)
+                action.title.frame = CGRect(x: 0, y: 0, width: action.size.width, height: action.size.height)
             }
             else {
-                action.frame.size = CGSize(width: NXKit.Association.size.width, height: NXKit.Association.size.height)
-                action.title.frame = CGRect(x: 0, y: 0, width: NXKit.Association.size.width, height: action.frame.height)
+                action.size = CGSize(width: NXKit.Association.size.width, height: NXKit.Association.size.height)
+                action.title.frame = CGRect(x: 0, y: 0, width: NXKit.Association.size.width, height: action.size.height)
             }
         }
         
@@ -594,8 +594,8 @@ extension NXActionView {
                 if metadata.actions.count == 2 {
                     for index in 0...1 {
                         let action = metadata.actions[index]
-                        action.frame.width = metadata.frame.width * 0.5
-                        action.title.frame = CGRect(x: 0, y: 0, width: action.frame.width, height: action.frame.height)
+                        action.size.width = metadata.frame.width * 0.5
+                        action.title.frame = CGRect(x: 0, y: 0, width: action.size.width, height: action.size.height)
                         action.raw.isHighlighted = true
                         action.raw.isEnabled = true
                         if(index == 0){
@@ -604,48 +604,48 @@ extension NXActionView {
                         else{
                             action.raw.separator.ats = []
                         }
-                        contentSize.height = action.frame.height
+                        contentSize.height = action.size.height
                     }
                 }
                 else {
                     //1个/3个/4个
                     for index in 0...metadata.actions.count-1 {
                         let action = metadata.actions[index]
-                        action.frame.width = metadata.frame.width
-                        action.title.frame = CGRect(x: 0, y: 0, width: action.frame.width, height: action.frame.height)
+                        action.size.width = metadata.size.width
+                        action.title.frame = CGRect(x: 0, y: 0, width: action.size.width, height: action.size.height)
                         action.raw.isHighlighted = true
                         action.raw.isEnabled = true
                         action.raw.separator.ats = (index == metadata.actions.count-1) ? [] : .maxY;
                         
-                        contentSize.height = contentSize.height + action.frame.height
+                        contentSize.height = contentSize.height + action.size.height
                     }
                 }
                 wrapped.isAnimation = false
             }
             else if wrapped.key == NXActionView.Key.action.rawValue {
                 for (index, action) in metadata.actions.enumerated() {
-                    action.frame.width = metadata.frame.width;
+                    action.size.width = metadata.frame.width;
                     action.raw.separator.ats = (index == metadata.actions.count-1) ? []: .maxY;
                     
-                    contentSize.height = contentSize.height + action.frame.height
+                    contentSize.height = contentSize.height + action.size.height
                 }
             }
             else if wrapped.key == NXActionView.Key.flow.rawValue {
                 var offsetValue : (x: CGFloat, y: CGFloat, rowHeight: CGFloat) = (0,0,0)
                 for (idx, action) in metadata.actions.enumerated() {
-                    if offsetValue.x + action.frame.width <= metadata.frame.width {
+                    if offsetValue.x + action.size.width <= metadata.frame.width {
                         //可以排在同一行
-                        offsetValue.x = offsetValue.x + action.frame.width
-                        if offsetValue.rowHeight < action.frame.height {
-                            offsetValue.rowHeight = action.frame.height
+                        offsetValue.x = offsetValue.x + action.size.width
+                        if offsetValue.rowHeight < action.size.height {
+                            offsetValue.rowHeight = action.size.height
                         }
                     }
                     else {
                         //新开一行
                         offsetValue.y = offsetValue.y + offsetValue.rowHeight
                         
-                        offsetValue.x = action.frame.width
-                        offsetValue.rowHeight = action.frame.height
+                        offsetValue.x = action.size.width
+                        offsetValue.rowHeight = action.size.height
                     }
                     if idx == metadata.actions.count - 1 {
                         offsetValue.y = offsetValue.y + offsetValue.rowHeight
@@ -722,7 +722,7 @@ extension NXActionView {
         
         public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
             let action = self.ctxs.center.actions[indexPath.item]
-            return action.frame.size
+            return action.size
         }
         
         public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

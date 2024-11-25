@@ -43,7 +43,7 @@ open class NXAlbum : NXAbstract {
             }
         }
                 
-        self.frame.size = CGSize(width: NXKit.width, height: 80)
+        self.size = CGSize(width: NXKit.width, height: 80)
         self.asset.frame = CGRect(x: 16, y: 1, width: 78, height: 78)
         self.asset.cornerRadius = 0.0
         self.asset.isHidden = false
@@ -63,7 +63,7 @@ open class NXAlbum : NXAbstract {
         self.value.isHidden = true
         
         self.arrow.isHidden = false
-        self.arrow.frame = CGRect(x: self.frame.width - 16 - 6, y: (self.frame.height - 12)/2.0, width: 6, height: 12)
+        self.arrow.frame = CGRect(x: self.size.width - 16 - 6, y: (self.size.height - 12)/2.0, width: 6, height: 12)
         self.arrow.image = NXKit.image(named:"icon-arrow.png")
         
         self.raw.separator.insets = UIEdgeInsets(top: 0, left: 106, bottom: 0, right: 0)

@@ -9,8 +9,9 @@
 import UIKit
 
 public protocol NXAnyRepresentable: AnyObject, Equatable {
-    var frame: NXKit.Rect {get}
     var reuse: NXReuseDescriptor {get}
+    var size: CGSize {get set}
+    
     var additionalValue : [String: Any]? {get set}
     var backgroundColor: UIColor? {get set}
     var event: NXKit.Event<String, Any?>? {get set}
@@ -258,9 +259,10 @@ public class NXReuseDescriptor {
 }
 
 open class NXItem : NXAny, NXAnyRepresentable {
-    public let frame = NXKit.Rect()
-    public var additionalValue: [String : Any]?
     public let reuse = NXReuseDescriptor()
+    public var size = CGSize()
+    
+    public var additionalValue: [String : Any]?
     public var backgroundColor: UIColor?
     public var event: NXKit.Event<String, Any?>?
     public var at: (first: Bool, last: Bool) = (false, false)
@@ -409,7 +411,8 @@ extension NXCollection where T == NXTableView {
         e.placeholderView = self.placeholderView
         e.reuse.cls = NXTablePlaceholderViewCell.self
         e.reuse.id = "NXTablePlaceholderViewCell"
-        e.frame.frame = frame
+        e.size.width = frame.size.width
+        e.size.height = frame.size.height
         self.addElementsToLastSection([e])
         self.wrappedView?.register(NXTablePlaceholderViewCell.self, forCellReuseIdentifier: "NXTablePlaceholderViewCell")
         return e
@@ -420,8 +423,8 @@ extension NXCollection where T == NXTableView {
         if let header = self[index]?.header {
             
             //1.根据自身的高度赋值拿到header的高度
-            if header.frame.height > 0 {
-                return header.frame.height
+            if header.size.height > 0 {
+                return header.size.height
             }
         }
         return 0.0
@@ -432,8 +435,8 @@ extension NXCollection where T == NXTableView {
         if let element = self[indexPath] {
             
             //1.根据自己对高度的赋值拿到相应的高度
-            if element.frame.height > 0 {
-                return element.frame.height
+            if element.size.height > 0 {
+                return element.size.height
             }
             
             //2.根据FD中的自适应返回单元格的高度
@@ -447,8 +450,8 @@ extension NXCollection where T == NXTableView {
     
     public func heightForFooter(at index: Int) -> CGFloat {
         if let footer = self[index]?.footer {
-            if footer.frame.height > 0 {
-                return footer.frame.height
+            if footer.size.height > 0 {
+                return footer.size.height
             }
         }
         return 0.0
@@ -460,7 +463,7 @@ extension NXCollection where T == NXTableView {
         let header = NXItem()
         header.reuse.cls = cls
         header.reuse.id = reuse
-        header.frame.height = height
+        header.size.height = height
         section.header = header
         self.elements.append(section)
         return section
@@ -490,7 +493,8 @@ extension NXCollection where T == NXCollectionView {
         e.placeholderView = self.placeholderView
         e.reuse.cls = NXCollectionPlaceholderViewCell.self
         e.reuse.id = "NXPlaceholderViewCell"
-        e.frame.frame = frame
+        e.size.width = frame.width
+        e.size.height = frame.height
         self.addElementsToLastSection([e])
         
         self.wrappedView?.register(NXCollectionPlaceholderViewCell.self, forCellWithReuseIdentifier: "NXPlaceholderViewCell")
@@ -504,7 +508,7 @@ extension NXCollection where T == NXCollectionView {
         let header = NXItem()
         header.reuse.cls = cls
         header.reuse.id = reuse
-        header.frame.height = height
+        header.size.height = height
         section.header = header
         self.elements.append(section)
         return section

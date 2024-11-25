@@ -58,9 +58,9 @@ open class NXAbstract: NXItem {
         self.init(value:value, completion:nil)
         self.reuse.cls = NXActionViewCell.self
         self.reuse.id = "NXActionViewCell"
-        self.frame.size = CGSize(width: NXKit.width, height: NXKit.Association.size.height)
+        self.size = CGSize(width: NXKit.width, height: NXKit.Association.size.height)
         self.title.value = title
-        self.title.frame = CGRect(x: 16, y: 0, width: NXKit.width-32, height: self.frame.height)
+        self.title.frame = CGRect(x: 16, y: 0, width: NXKit.width-32, height: self.size.height)
         self.title.textAlignment = .center
         completion?(self)
     }

@@ -87,7 +87,7 @@ open class NXHUD {
             }
             
             if self.ctxs.message.count > 0 {
-                let __size = String.size(of: self.ctxs.message, size: CGSize(width: NXOverlay.frame.width-self.ctxs.insets.left-self.ctxs.insets.right-1, height: 200), font: self.ctxs.font) { (style) in
+                let __size = String.size(of: self.ctxs.message, size: CGSize(width: NXOverlay.frame.width-self.ctxs.insets.left-self.ctxs.insets.right-1.0, height: 200), font: self.ctxs.font) { (style) in
                     style.lineSpacing = 2.0
                 }
                 state.value.size.width = __size.width + 1

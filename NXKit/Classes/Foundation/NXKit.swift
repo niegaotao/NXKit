@@ -293,8 +293,8 @@ extension NXKit {
 //内容横向纵向边缘缩进
 extension NXKit {
     open class Point: NXAny {
-        open var x = CGFloat.zero
-        open var y = CGFloat.zero
+        open var x = Double.zero
+        open var y = Double.zero
         
         open var origin: CGPoint {
             set {
@@ -317,8 +317,8 @@ extension NXKit {
     }
     
     open class Size: NXAny {
-        open var width = CGFloat.zero
-        open var height = CGFloat.zero
+        open var width = Double.zero
+        open var height = Double.zero
         
         open var size: CGSize {
             set {
@@ -341,10 +341,10 @@ extension NXKit {
     }
     
     open class Rect: NXAny {
-        open var x = CGFloat.zero
-        open var y = CGFloat.zero
-        open var width = CGFloat.zero
-        open var height = CGFloat.zero
+        open var x = Double.zero
+        open var y = Double.zero
+        open var width = Double.zero
+        open var height = Double.zero
         
         open var origin: CGPoint {
             set {
