@@ -44,6 +44,15 @@ open class NXToolViewController: NXChildrenViewController {
         view.addSubview(toolView)
     }
 
+    override open func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let safeFrame = view.safeAreaLayoutGuide.layoutFrame
+        let height = min(view.bounds.height, NXKit.toolViewOffset + view.safeAreaInsets.bottom)
+        toolView.frame = CGRect(x: safeFrame.minX, y: view.bounds.maxY - height,
+                                width: safeFrame.width, height: height)
+        currentViewController?.viewIfLoaded?.frame = view.bounds
+    }
+
     override open func updateSubviews(_ value: Any?) {
         if let attributes = value as? NXToolViewController.Attributes {
             self.attributes.copy(fromValue: attributes)

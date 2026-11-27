@@ -47,15 +47,30 @@ open class NXViewController: UIViewController {
 
         view.backgroundColor = NXKit.viewBackgroundColor
 
-        contentView.frame = CGRect(x: 0, y: NXKit.safeAreaInsets.top + 44.0, width: view.width, height: view.height - NXKit.safeAreaInsets.top - 44.0)
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(contentView)
 
-        navigationView.frame = CGRect(x: 0, y: 0, width: view.width, height: NXKit.safeAreaInsets.top + 44.0)
         navigationView.autoresizingMask = [.flexibleWidth]
         navigationView.controller = self
         view.addSubview(navigationView)
+        layoutPageViews()
         navigationView.updateSubviews(nil)
+    }
+
+    override open func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        layoutPageViews()
+    }
+
+    private func layoutPageViews() {
+        let safeFrame = view.safeAreaLayoutGuide.layoutFrame
+        let barHeight = min(view.bounds.height, view.safeAreaInsets.top + 44)
+        navigationView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: barHeight)
+        contentView.frame = CGRect(x: safeFrame.minX, y: barHeight, width: safeFrame.width,
+                                   height: max(0, view.bounds.height - barHeight))
+        if let animationView = animationView, animationView.superview === contentView {
+            animationView.frame = contentView.bounds
+        }
     }
 
     override open func viewWillAppear(_ animated: Bool) {

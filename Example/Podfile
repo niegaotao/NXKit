@@ -1,6 +1,7 @@
 use_frameworks!
 
-platform :ios, '12.0'
+minimum_ios_version = '15.0'
+platform :ios, minimum_ios_version
 
 target 'NXKit_Example' do
   pod 'NXKit', :path => '../'
@@ -11,6 +12,7 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
       target.build_configurations.each do |config|
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = minimum_ios_version
           config.build_settings['CODE_SIGN_IDENTITY'] = ''
       end
   end

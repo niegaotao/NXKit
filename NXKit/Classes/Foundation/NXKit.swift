@@ -26,30 +26,37 @@ public extension NXKit {
 
 // 屏幕
 public extension NXKit {
-    static let width = UIScreen.main.bounds.size.width
-    static let height = UIScreen.main.bounds.size.height
-    static let size = CGSize(width: NXKit.width, height: NXKit.height)
-    static let scale = max(UIScreen.main.scale, 1.0)
-    static let pixel = 1.0 / NXKit.scale // 一个像素的宽度
-
-    // 页面缩进
-    static var safeAreaInsets: UIEdgeInsets = {
-        var __insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
-        if #available(iOS 11.0, *), let __safeAreaInsets = UIApplication.shared.delegate?.window??.safeAreaInsets, __safeAreaInsets.top > 0 {
-            __insets.top = __safeAreaInsets.top
-            __insets.bottom = __safeAreaInsets.bottom
-            if __insets.top >= 59 {
-                __insets.top = 54
+    /// 前台场景的主窗口，供没有容器上下文的公共方法使用。
+    static var mainWindow: UIWindow? {
+        guard Thread.isMainThread else { return nil }
+        let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+        let orderedScenes = scenes.filter { $0.activationState == .foregroundActive }
+            + scenes.filter { $0.activationState == .foregroundInactive }
+        for scene in orderedScenes {
+            if let window = scene.keyWindow
+                ?? scene.windows.first(where: { !$0.isHidden && $0.windowLevel == .normal }) {
+                return window
             }
-            // 20, 44, 47, 54
-        } else if UIApplication.shared.statusBarFrame.size.height > 0 {
-            __insets.top = UIApplication.shared.statusBarFrame.size.height
         }
-        if __insets.top > 20, __insets.bottom == 0 {
-            __insets.bottom = 34.0
-        }
-        return __insets
-    }()
+        return UIApplication.shared.delegate?.window ?? nil
+    }
+
+    static var width: CGFloat { size.width }
+    static var height: CGFloat { size.height }
+    static var size: CGSize {
+        mainWindow?.windowScene?.coordinateSpace.bounds.size
+            ?? mainWindow?.bounds.size
+            ?? UIScreen.main.bounds.size
+    }
+    static var scale: CGFloat { max(mainWindow?.traitCollection.displayScale ?? UIScreen.main.scale, 1) }
+    static var pixel: CGFloat { 1 / scale }
+
+    private static var customSafeAreaInsets: UIEdgeInsets?
+
+    static var safeAreaInsets: UIEdgeInsets {
+        get { customSafeAreaInsets ?? mainWindow?.safeAreaInsets ?? .zero }
+        set { customSafeAreaInsets = newValue }
+    }
 
     // 判断是不是X屏幕
     static var isXDisplay: Bool {
@@ -203,30 +210,30 @@ public extension NXKit {
 public extension NXKit {
     // toast
     @discardableResult
-    class func showToast(message: String, _ ats: NXKit.Ats = .center, _ superview: UIView? = UIApplication.shared.keyWindow) -> NXHUD.WrappedView? {
+    class func showToast(message: String, _ ats: NXKit.Ats = .center, _ superview: UIView? = NXKit.mainWindow) -> NXHUD.WrappedView? {
         if let handler = NXKit.Imp.showToast {
             return handler(message, ats, superview)
         } else {
-            return (superview ?? UIApplication.shared.keyWindow)?.makeToast(message: message, ats: ats)
+            return (superview ?? NXKit.mainWindow)?.makeToast(message: message, ats: ats)
         }
     }
 
     // 处理loading
     @discardableResult
-    class func showLoading(_ message: String, _ ats: NXKit.Ats = .center, _ superview: UIView? = UIApplication.shared.keyWindow) -> NXHUD.WrappedView? {
+    class func showLoading(_ message: String, _ ats: NXKit.Ats = .center, _ superview: UIView? = NXKit.mainWindow) -> NXHUD.WrappedView? {
         if let handler = NXKit.Imp.showLoading {
             return handler(message, ats, superview)
         } else {
-            return (superview ?? UIApplication.shared.keyWindow)?.makeLoading(message: message, ats: ats)
+            return (superview ?? NXKit.mainWindow)?.makeLoading(message: message, ats: ats)
         }
     }
 
     // 处理loading
-    class func hideLoading(_ animationView: NXHUD.WrappedView? = nil, superview: UIView? = UIApplication.shared.keyWindow) {
+    class func hideLoading(_ animationView: NXHUD.WrappedView? = nil, superview: UIView? = NXKit.mainWindow) {
         if let handler = NXKit.Imp.hideLoading {
             handler(animationView, superview)
         } else {
-            (superview ?? UIApplication.shared.keyWindow)?.hideLoading()
+            (superview ?? NXKit.mainWindow)?.hideLoading()
         }
     }
 }

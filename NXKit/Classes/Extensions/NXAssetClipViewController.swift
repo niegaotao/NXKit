@@ -53,15 +53,12 @@ open class NXAssetClipViewController: NXViewController {
                 clips.key = 0
             }
 
-            var __background = CGRect(x: 10, y: 10, width: NXKit.width - 20, height: NXKit.height - NXKit.safeAreaInsets.top - 44.0 - NXKit.safeAreaInsets.bottom - 20)
             if clips.value.count >= 2 {
                 // 有多项可选
-                __background = CGRect(x: 10, y: 10, width: NXKit.width - 20, height: NXKit.height - NXKit.safeAreaInsets.top - 44.0 - NXKit.safeAreaInsets.bottom - 20 - 80)
-
                 var offset = CGRect(x: 15, y: 8, width: 52, height: 60)
                 var ctx = CGRect(x: 15, y: 0, width: CGFloat(clips.value.count) * offset.size.width + CGFloat(clips.value.count - 1) * 10.0, height: offset.size.height)
-                if (NXKit.width - ctx.size.width) / 2.0 > ctx.origin.x {
-                    ctx.origin.x = (NXKit.width - ctx.size.width) / 2.0
+                if (contentView.bounds.width - ctx.size.width) / 2.0 > ctx.origin.x {
+                    ctx.origin.x = (contentView.bounds.width - ctx.size.width) / 2.0
                 }
                 offset.origin.x = ctx.origin.x
 
@@ -94,43 +91,81 @@ open class NXAssetClipViewController: NXViewController {
                 }
                 offset.origin.x = offset.origin.x + ctx.origin.x
                 footerView.isHidden = false
-                footerView.contentView.frame = CGRect(x: 0, y: 0, width: NXKit.width, height: 80)
+                footerView.contentView.frame = CGRect(x: 0, y: 0, width: contentView.bounds.width, height: 80)
                 footerView.contentView.contentSize = CGSize(width: max(footerView.contentView.frame.size.width, offset.origin.x), height: 80)
             } else {
                 // 仅有一项
                 footerView.isHidden = true
             }
 
-            let __pfsValue = max(image.size.width / __background.size.width, image.size.height / __background.size.height)
-            let __size = CGSize(width: image.size.width / __pfsValue, height: image.size.height / __pfsValue)
-            let __frame = CGRect(x: (__background.size.width - __size.width) / 2.0,
-                                 y: (__background.size.height - __size.height) / 2.0,
-                                 width: __size.width,
-                                 height: __size.height)
-            backgroundView.frame = __background
-            backgroundView.contentView.frame = __frame
-
-            clipboardView.frame = __frame
             clipboardView.backgroundColor = UIColor.clear
-            clipboardView.frame.size.width = __frame.size.width
-            clipboardView.frame.size.height = __frame.size.height
+            backgroundView.addSubview(clipboardView)
+            layoutCropViews()
+            let imageSize = clipboardView.bounds.size
 
             let clip = clips.value[clips.key]
             clipboardView.ctxs.clip.isResizable = clip.isResizable
             clipboardView.ctxs.clip.width = clip.width
             clipboardView.ctxs.clip.height = clip.height
             if clipboardView.ctxs.clip.width <= 0 || clipboardView.ctxs.clip.height <= 0 {
-                clipboardView.ctxs.clip.width = __size.width
-                clipboardView.ctxs.clip.height = __size.height
+                clipboardView.ctxs.clip.width = imageSize.width
+                clipboardView.ctxs.clip.height = imageSize.height
             }
             clipboardView.ctxs.clip.isHidden = clip.isHidden
 
             clipboardView.updateSubviews(nil)
 
-            backgroundView.addSubview(clipboardView)
         } else {
             clipboardView.isHidden = true
             footerView.isHidden = true
+        }
+    }
+
+    override open func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        layoutCropViews()
+    }
+
+    private func layoutCropViews() {
+        guard let image = image, image.size.width > 0, image.size.height > 0,
+              !clips.value.isEmpty else { return }
+        let width = contentView.bounds.width
+        let height = contentView.bounds.height
+        let bottom = view.safeAreaInsets.bottom
+        let optionsHeight: CGFloat = clips.value.count > 1 ? 80 : 0
+        let footerHeight = min(height, optionsHeight + bottom)
+        footerView.frame = CGRect(x: 0, y: height - footerHeight, width: width, height: footerHeight)
+        footerView.contentView.frame = CGRect(x: 0, y: 0, width: width, height: optionsHeight)
+        let itemsWidth = CGFloat(componentViews.count) * 62 - 10
+        let itemStartX = max(15, (width - itemsWidth) / 2)
+        for (index, item) in componentViews.enumerated() {
+            item.frame.origin.x = itemStartX + 62 * CGFloat(index)
+        }
+        footerView.contentView.contentSize = CGSize(width: max(width, itemStartX + itemsWidth + 15),
+                                                   height: optionsHeight)
+
+        let available = CGRect(x: 10, y: 10, width: max(0, width - 20),
+                               height: max(0, height - footerHeight - 20))
+        let scale = min(available.width / image.size.width, available.height / image.size.height)
+        guard scale > 0 else { return }
+        let size = CGSize(width: image.size.width * scale, height: image.size.height * scale)
+        let imageFrame = CGRect(x: (available.width - size.width) / 2,
+                                y: (available.height - size.height) / 2,
+                                width: size.width, height: size.height)
+        let oldSize = clipboardView.bounds.size
+        backgroundView.frame = available
+        backgroundView.contentView.frame = imageFrame
+        clipboardView.frame = imageFrame
+        clipboardView.ctxs.size = size
+
+        // 保留用户在原图中的选区，随显示比例同步缩放。
+        if oldSize.width > 0, oldSize.height > 0, oldSize != size {
+            let transform = CGAffineTransform(scaleX: size.width / oldSize.width,
+                                              y: size.height / oldSize.height)
+            let selection = clipboardView.ctxs.frame
+            selection.oldValue = selection.oldValue.applying(transform)
+            selection.value = selection.value.applying(transform)
+            clipboardView.wrappedView.frame = selection.value
         }
     }
 

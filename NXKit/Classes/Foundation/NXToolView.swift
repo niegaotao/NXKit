@@ -105,14 +105,7 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
         highlighted.targetView.updateSubviews(highlighted)
 
         // tab
-        let size = CGSize(width: highlighted.isHidden ? width / max(CGFloat(attributes.elements.count), 1) : width / CGFloat(attributes.elements.count + 1), height: NXKit.toolViewOffset)
         for (index, element) in attributes.elements.enumerated() {
-            element.size = CGSize(width: size.width, height: size.height)
-            element.targetView.isHidden = false
-            element.targetView.frame = CGRect(x: size.width * CGFloat(index), y: 0, width: size.width, height: size.height)
-            if index >= attributes.elements.count / 2 && highlighted.isHidden == false {
-                element.targetView.frame = CGRect(x: size.width * CGFloat(index + 1), y: 0, width: size.width, height: size.height)
-            }
             element.targetView.tag = index
             element.targetView.setupEvent(UIControl.Event.touchUpInside) { [weak self] _, v in
 
@@ -131,6 +124,25 @@ open class NXToolView: NXBackgroundView<UIImageView, UIView> {
         for (index, element) in attributes.elements.enumerated() {
             element.targetView.isHidden = false
             element.isSelected = index == attributes.index
+        }
+        layoutElements()
+    }
+
+    override open func layoutSubviews() {
+        super.layoutSubviews()
+        layoutElements()
+    }
+
+    private func layoutElements() {
+        let hasHighlight = !highlighted.isHidden
+        let slotCount = attributes.elements.count + (hasHighlight ? 1 : 0)
+        let width = bounds.width / CGFloat(max(slotCount, 1))
+        highlighted.targetView.center.x = bounds.midX
+        for (index, element) in attributes.elements.enumerated() {
+            let slot = hasHighlight && index >= attributes.elements.count / 2 ? index + 1 : index
+            let size = CGSize(width: width, height: NXKit.toolViewOffset)
+            element.size = size
+            element.targetView.frame = CGRect(origin: CGPoint(x: width * CGFloat(slot), y: 0), size: size)
             element.targetView.updateSubviews(element)
         }
     }

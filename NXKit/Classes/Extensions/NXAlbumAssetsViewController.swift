@@ -116,9 +116,6 @@ open class NXAlbumAssetsViewController: NXViewController, UICollectionViewDelega
         if wrapped.numberOfColumns < 1 || wrapped.numberOfColumns > 7 {
             wrapped.numberOfColumns = 4
         }
-        var itemSize = (NXKit.width - 12 * 2 - 2 * CGFloat(wrapped.numberOfColumns - 1)) / CGFloat(wrapped.numberOfColumns)
-        itemSize = floor(itemSize * NXKit.scale) / NXKit.scale // 因为屏幕渲染的最小的大小为1/NXKit.scale
-
         collectionView.isHidden = false
         collectionView.frame = CGRect(x: 0, y: 0, width: contentView.width, height: contentView.height - 50 - NXKit.safeAreaInsets.bottom)
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -126,7 +123,6 @@ open class NXAlbumAssetsViewController: NXViewController, UICollectionViewDelega
             layout.minimumInteritemSpacing = 1
             layout.sectionInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
             layout.scrollDirection = .vertical
-            layout.itemSize = CGSize(width: itemSize, height: itemSize)
         }
 
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -154,7 +150,7 @@ open class NXAlbumAssetsViewController: NXViewController, UICollectionViewDelega
             self?.dispose("previewAssets", self?.wrapped.assets)
         })
 
-        footerView.rhsView.frame = CGRect(x: NXKit.width - 15 - 88, y: 7, width: 88, height: 36)
+        footerView.rhsView.frame = CGRect(x: footerView.bounds.width - 15 - 88, y: 7, width: 88, height: 36)
         footerView.rhsView.layer.cornerRadius = 18
         footerView.rhsView.layer.masksToBounds = true
         footerView.rhsView.setTitleColor(UIColor.white, for: .normal)
@@ -174,6 +170,30 @@ open class NXAlbumAssetsViewController: NXViewController, UICollectionViewDelega
         contentView.addSubview(footerView)
 
         dispose("subcomponents", nil)
+    }
+
+    override open func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        let width = contentView.bounds.width
+        let height = contentView.bounds.height
+        let footerHeight = min(height, 50 + view.safeAreaInsets.bottom)
+        footerView.frame = CGRect(x: 0, y: height - footerHeight, width: width, height: footerHeight)
+        footerView.rhsView.frame.origin.x = max(0, width - 15 - footerView.rhsView.bounds.width)
+        collectionView.frame = CGRect(x: 0, y: 0, width: width, height: height - footerHeight)
+        placeholderView.frame = CGRect(x: 0, y: 0, width: width, height: min(width, height))
+
+        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        let columns = CGFloat(max(1, wrapped.numberOfColumns))
+        let insets = layout.sectionInset
+        let availableWidth = width - insets.left - insets.right - layout.minimumInteritemSpacing * (columns - 1)
+        let scale = max(collectionView.traitCollection.displayScale, 1)
+        let side = max(1, floor(availableWidth / columns * scale) / scale)
+        let size = CGSize(width: side, height: side)
+        if layout.itemSize != size {
+            layout.itemSize = size
+            layout.invalidateLayout()
+        }
     }
 
     override open func updateSubviews(_ value: Any?) {
@@ -394,7 +414,7 @@ open class NXAlbumAssetsViewController: NXViewController, UICollectionViewDelega
             var __size = String.size(of: __description, size: CGSize(width: 200, height: 36), font: NXKit.font(15))
             __size.width = __size.width + 24
             __size.height = 36
-            footerView.rhsView.frame = CGRect(x: NXKit.width - 15 - __size.width, y: 12, width: __size.width, height: __size.height)
+            footerView.rhsView.frame = CGRect(x: footerView.bounds.width - 15 - __size.width, y: 12, width: __size.width, height: __size.height)
             footerView.rhsView.setTitle(__description, for: .normal)
 
             navigationView.rightView?.isHidden = wrapped.subviews.camera

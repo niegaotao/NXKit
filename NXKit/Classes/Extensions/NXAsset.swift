@@ -224,7 +224,15 @@ extension NXAsset {
         // 创建相册信号量
         public static var semaphore = DispatchSemaphore(value: 1)
         // 缩略图尺寸
-        public static var size = CGSize(width: Int(NXKit.width / 4.0 * CGFloat(UIScreen.main.scale)), height: Int(NXKit.width / 4.0 * CGFloat(UIScreen.main.scale)))
+        private static var customSize: CGSize?
+
+        public static var size: CGSize {
+            get {
+                let side = (NXKit.width / 4 * NXKit.scale).rounded(.down)
+                return customSize ?? CGSize(width: side, height: side)
+            }
+            set { customSize = newValue }
+        }
 
         // 支持展示的媒体类型
         open var mediaType = PHAssetMediaType.unknown

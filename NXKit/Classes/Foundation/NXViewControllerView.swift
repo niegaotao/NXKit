@@ -20,6 +20,15 @@ open class NXViewControllerView<N: UIView, C: UIView>: NXView {
         addSubview(navigationView)
     }
 
+    override open func layoutSubviews() {
+        super.layoutSubviews()
+        let safeFrame = safeAreaLayoutGuide.layoutFrame
+        let barHeight = min(bounds.height, safeAreaInsets.top + 44)
+        navigationView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: barHeight)
+        contentView.frame = CGRect(x: safeFrame.minX, y: barHeight, width: safeFrame.width,
+                                   height: max(0, bounds.height - barHeight))
+    }
+
     override open func updateSubviews(_ value: Any?) {
         if let __navigationView = navigationView as? NXView {
             __navigationView.updateSubviews(value)

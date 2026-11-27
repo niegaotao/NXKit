@@ -90,7 +90,11 @@ open class NXAbstractOverlay<Attributes: NXOverlayAttributes>: NXOverlay {
 
     // 展示:先加window上(后期补一个小动画)
     open func open(animation: NXOverlay.Animation.RawValue, completion: NXKit.Completion<Bool>?) {
-        UIApplication.shared.keyWindow?.addSubview(self)
+        guard let window = NXKit.mainWindow else {
+            completion?(false)
+            return
+        }
+        window.addSubview(self)
         if animation == NXOverlay.Animation.center.rawValue {
             contentView.frame = CGRect(x: (width - contentView.width) / 2.0, y: (height - contentView.height) / 2.0, width: contentView.width, height: contentView.height)
 

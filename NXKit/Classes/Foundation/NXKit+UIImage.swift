@@ -34,7 +34,7 @@ public extension UIImage {
         if colors.count == 1 {
             return UIImage.image(color: colors[0], size: size)
         }
-        UIGraphicsBeginImageContextWithOptions(size, true, UIScreen.main.scale)
+        UIGraphicsBeginImageContextWithOptions(size, true, NXKit.scale)
         guard let context = UIGraphicsGetCurrentContext() else {
             UIGraphicsEndImageContext()
             return nil

@@ -6,26 +6,104 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		65356E389A75B118329D272175C636AA /* NXKit */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 942340E30F64095A9F555312F08A0CFD /* Build configuration list for PBXAggregateTarget "NXKit" */;
-			buildPhases = (
-			);
-			dependencies = (
-			);
-			name = NXKit;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
-		13323CBDEE077561C8D9C9FF9502FFC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
-		6F689ED4A3DB9BC71C48BC2766A70CD7 /* Pods-NXKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCF09BD414568D5F9E6EBAC4B46A7EC /* Pods-NXKit_Example-dummy.m */; };
-		949F8AFFFBCFB1ADA48EF3C4DAE519BE /* Pods-NXKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7935F9FE49AD48F0D4D37335AF933767 /* Pods-NXKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		01781A0B9A4AFA610F78512FFC737AFD /* NXAbstract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6AFF1DA067794073A8901947584D4D /* NXAbstract.swift */; };
+		05687B2F4CCBBE18AC1AFC2A845E2574 /* NXPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E002BB0504FDF1EE0DD5A0B3BCFA9A /* NXPlaceholderView.swift */; };
+		061CD87469E7686516F34462FB7F7D34 /* NXKit-NXKit in Resources */ = {isa = PBXBuildFile; fileRef = E63DF99DCD4379F20D3F2B193AA61FC9 /* NXKit-NXKit */; };
+		07C4D5D0E046497180A51CE4B91DE9CD /* NXKit+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E861042E36B28CFB97A2675C45D2CB6 /* NXKit+String.swift */; };
+		13AB3F252AA2DBE6E770CDE03EBD51CB /* NXRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EFDB0FD5C425F1CC640B8CBADC1A8E /* NXRuntime.swift */; };
+		15C1A96DF005DE3226937A61FC82F9B1 /* NXCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DE42F730987DAAE35B9F9C584030BE /* NXCollectionView.swift */; };
+		1DF92593627DB73C68D34BECF97C3913 /* NXCollectionViewLayouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B95A74AD4EA6AB64D5E70F46597D2B /* NXCollectionViewLayouter.swift */; };
+		25A74E63433A488CDFDE85AA2DDBF362 /* NXClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F6468AF9AA8A6622A5821B578BEA4 /* NXClip.swift */; };
+		25ECF52E163A38A20154A0DE287A0C25 /* NXAutoresizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C451AD4B978A62871382BD2E238E2F20 /* NXAutoresizeView.swift */; };
+		26828FEFE666A39BEB2B53CA914D073B /* NXTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF697CC03751D516901CFBA0F9C956C /* NXTableView.swift */; };
+		289B593DDADEEEFFDC1C1E81E5F96895 /* NXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2949CD8B9FB5F0A7EBB57928FD514B14 /* NXCollectionViewCell.swift */; };
+		2A2080B49C4A6010D22C5179972A6530 /* NXKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183A8F871FCF41013B5F7A98E91FE6ED /* NXKit.swift */; };
+		31C8A5D0319EB72375D32F32CD631F04 /* NXKit+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77690A210AD1F058C74DAEE77C188E0C /* NXKit+UIImage.swift */; };
+		34223BC39DD74D76CEB5A4F5BBC5102C /* NXChildrenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2930A33F0BF1DAC0D701FA74CA141EA3 /* NXChildrenViewController.swift */; };
+		356CB0F35B0EFAB570E59EB65FE58FA4 /* NXKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E45166C6999F519A5C39A851B863328B /* NXKit.bundle */; };
+		3687DEB2ED5AAE64E46BE805065FAEB0 /* NXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A0FC94E9E50AECF77205BD5B8C225 /* NXView.swift */; };
+		44AD3E390F8D7A7414FFAEE91CF5AE94 /* NXRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046888524B1899AB5F62EE7BC77F3AD3 /* NXRouter.swift */; };
+		4A7E8E8F53F4D519DAF3094473246FA9 /* NXString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E113260E383BBE448CE3C49C79AF982 /* NXString.swift */; };
+		4E6C01A71B4BB133E78D2A64612F6E9A /* NXWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9B15491A98BBD1C210BC39AA85629E /* NXWebViewController.swift */; };
+		5399309522C51452A1C62995C0132ADA /* NXScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C57FDDDB04A0EC29FF43DDAE6B7E952 /* NXScrollView.swift */; };
+		55AE9571764751419574DCBE94FC7F89 /* NXOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54115A07C65918A762A700837A0F2043 /* NXOverlay.swift */; };
+		56B7A959D20C03677E5C56ED72981D83 /* NXObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B82C471F5BD20B88B221BFCE741B46 /* NXObserver.swift */; };
+		5A77BAF24F75653D75FE9BC96665A81A /* NXKit+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D2BED1F28A2D103136377A5ACC35F /* NXKit+UILabel.swift */; };
+		5F1F5E7AB9D88B6B8CF0F6F2F5E2358E /* NXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA58AAFE0CF42AEE74C764D3EB01C4EC /* NXViewController.swift */; };
+		611C61C066F073155BCB1D801B1C5841 /* NXKit+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19042DB5444001E92B8FDEF1129E391D /* NXKit+UIButton.swift */; };
+		641572ADF58F00106D50CF07FE33D577 /* NXStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D58FD312DFC6CCEF5B016A5C7CAE6D /* NXStorage.swift */; };
+		666B9AD8F13900DDB0B7927DD08F98BB /* NXCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16726EA597240CDD1CF395E444F36462 /* NXCView.swift */; };
+		66DB9FEF5B07BFF88D9E9B2D1FAFF2C3 /* NXClipboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0A6030926A5E91A7600359E5DEB7F5 /* NXClipboardView.swift */; };
+		66E83A36BC39A92BBEC337882E8C0671 /* NXAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EA3E7C51F038B932EBC45146F2F9F /* NXAnimationView.swift */; };
+		69CDAD42EC21BAD252ABE454DF9A14AB /* NXToolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA6CEE0580D1DCB09B127F1DBBFC972 /* NXToolViewController.swift */; };
+		6F0FA28A7438F5A921BE47DD560C62BD /* NXCameraCaptureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5241D69629EEB3485D5069A204E53F3A /* NXCameraCaptureController.swift */; };
+		6F689ED4A3DB9BC71C48BC2766A70CD7 /* Pods-NXKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A1D0F9E4D64BFFAADBB98E017589C5 /* Pods-NXKit_Example-dummy.m */; };
+		72EC834439D65C56C64212C44C8E199C /* NXSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48DCB5859DE7CDF9EA723FFDB95F3D1 /* NXSwipeViewController.swift */; };
+		7476EEF830C56A5869BC39FDFAD1DBF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D81617CAA1204D998E4C0C7E1B3DA8BF /* UIKit.framework */; };
+		7492BB8C09359C51CF1DED82191CF785 /* NXAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B2ECF6CF28AB5BA415ED6754F152C /* NXAsset.swift */; };
+		774287372C47F3244F3C05AB42579D11 /* NXArrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BAC33121C8114290EB84C992D4155B /* NXArrayView.swift */; };
+		77668D68BDAC8B5981B6DFF99154455B /* NXTableReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BB7B8196606401BC0BF19B2E8EBF98 /* NXTableReusableView.swift */; };
+		78CC057C7D95F590BD90076124C702A0 /* NXLCRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23616CE463264ACBD2AC1116E6786D1 /* NXLCRView.swift */; };
+		7CBB5BB7E3CC42A41C9D32F57C662705 /* NXTransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A831870CAF4BD833F3D57C420DDED7 /* NXTransitionView.swift */; };
+		7DD72827908B84CE112B16C966EBFC1B /* NXHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD86A325F234893CEEEC2444C44435D /* NXHUD.swift */; };
+		8021A4602E84770DDA6F871E5EE3B668 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D0629B8BF330FF9DE71ABB83307CFC1 /* Foundation.framework */; };
+		845A7F929C058522C342C7699B54DA16 /* NXKeyboardAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E198895C7E241EF052EEC5A9FB4076 /* NXKeyboardAccessoryView.swift */; };
+		879CD9C3CC3ED2839D858CA4A04640B4 /* NXSuspendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDA64F939A43683EBC330F4854D23C9 /* NXSuspendView.swift */; };
+		894A5200BC6206981301C9D8373AA3EE /* NXViewControllerAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97BA92B75F0D499E3AC4E3AA9326CAC /* NXViewControllerAnimation.swift */; };
+		8AABCCCF9F448D4AF29B80547CB94A9D /* NXKVOObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA03D6492BEAEA22F67A62C65A7C7E3 /* NXKVOObserver.swift */; };
+		8B3175FCACF775E7864D527F13AF4D1B /* NXCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16ADB2CA1EB12FDDC131747A60B68D /* NXCollectionViewController.swift */; };
+		8B410FDDE3A08123E34003383EA3DDBB /* NXKit+DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD601717749669F08F065B0F7FAC4CCA /* NXKit+DispatchQueue.swift */; };
+		8D1B01A4A26435609D4F823243DB4E1B /* NXAnylayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9BF7DD2DED3EDA33691E1FD592EFCE /* NXAnylayerView.swift */; };
+		91688AE9D5D010234D06AF163E48800E /* NXSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBC6E7EDA66B7D8DB91FC95FA512618 /* NXSerialization.swift */; };
+		917029D252788B5B6D7482264B5407B5 /* NXTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB666BA2E7A0FBA5595A0F1C0B34612E /* NXTableViewCell.swift */; };
+		918AD040320EB6726A1C4AF850F60864 /* NXNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D672EFED3E3FA49B1E641A361E9FDA85 /* NXNavigationView.swift */; };
+		935EC89BDB4014623E2C5CE7B7CAC1F2 /* NXControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E741B8E59FB5B9F93B06DB594E81C390 /* NXControl.swift */; };
+		93E59BF29E27925659E71D2B69734C5A /* NXAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803DBFF7B236A6FC387CE25D6B385DC /* NXAlbumViewController.swift */; };
+		949F8AFFFBCFB1ADA48EF3C4DAE519BE /* Pods-NXKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 64EF34CC54C1F46726361D12D570644C /* Pods-NXKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		94C99F7918D0DFD8D4F0EC16640D2852 /* NXImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D1BC1C341244AE0E07E88DC9FA24CC /* NXImageView.swift */; };
+		979CCF0A29706CC915437ACF4803D6A7 /* NXWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF184B55CDE22DBE37CED02A782763 /* NXWebView.swift */; };
+		9A443AA785EDECAF7341BA25E66270D8 /* NXKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 81284A559F52D3371175CF5B70636EAE /* NXKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9D6E7FCA8EF1A93BDF0E633F5DB08DF7 /* NXItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CC949918F01AB9E7ECEBA372FFE8D6 /* NXItem.swift */; };
+		A5E36F65716D5E483FB74C85C7F1EBEE /* NXFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCFF860DBCEFDF6564554CCB35E47B /* NXFS.swift */; };
+		B3B5C05C4F1B3DDF51FDB7744C46A527 /* NXAbstractViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41594C07EBD598820B20C9216F22FE /* NXAbstractViewCell.swift */; };
+		B4236CE17F152FC2F10B6A5257385D39 /* NXSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738A42A24ED7B074EFAABD2853F55D2 /* NXSearchView.swift */; };
+		B52A87664CE8D81A8AA1FD58961C969F /* NXSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47D5EC53CEFE4DF752393AEBF449187 /* NXSwipeView.swift */; };
+		B8B9B58AEC53B91CEB87D4D39FBDD6B1 /* NXKit+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE23AFB793956622B58DBAF40A125B /* NXKit+UIView.swift */; };
+		B8F08E44254DFBE36661CF7FECB5C3D2 /* NXBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB392CB8ED6BD6DBFB705A3C642C62 /* NXBackgroundView.swift */; };
+		C0CCAD88871F95E8DA1F7B2A44B9D13E /* NXAny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201C7B91E11DCF7948423C7458388A90 /* NXAny.swift */; };
+		C257BE43A525949EEAD6752875FCE972 /* NXLRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAB3B4A9C8AAF0F4CB6BA95D54D8583 /* NXLRView.swift */; };
+		C39A2762B6881AC6062DD61A50129D21 /* NXLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7171F0AF47D91FC069584657919AFA04 /* NXLabel.swift */; };
+		C85B4BA6717EF1D5B6105C8C6E99AF81 /* NXActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF53583B2E1C14F19F6E2014AA1C378D /* NXActionView.swift */; };
+		C96FF44C77170F1D20CDD0334B8081CA /* NXViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A59BD932BCD6C5E251C04E32800AD63 /* NXViewControllerView.swift */; };
+		C9CD91748DA02C8CC27640B59A8CD995 /* NXCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A6E61FE2E4A308008AB7F244C38671 /* NXCollectionReusableView.swift */; };
+		CD8674213983B356EA76A546DB72E724 /* NXAbstractView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810A073916407FC5F82C4C5C8736559E /* NXAbstractView.swift */; };
+		D20183E713E6FB9E5E795640DC5E4CF5 /* NXNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8592CC5C78A328CAA8B3068F1F6A228C /* NXNavigationController.swift */; };
+		D34289FD53337F0993DC5F02540C833F /* NXKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A800EF1E91AE74040C4688A45297F1 /* NXKit-dummy.m */; };
+		D47BEF9210C3534663C0D70BBED3BD21 /* NXSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191E76E4C425D3AE6338015D77B2F6C0 /* NXSwitch.swift */; };
+		D6CE8A6EB974D1F3DFD5B97AD1E9D036 /* NXShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372CAC451EACCEC39D017C64529C3B0 /* NXShadowView.swift */; };
+		D709BA0852DFB6919319E250525D317B /* NXAssetClipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E0601416DCFECFE01ED38CDFF445BF /* NXAssetClipViewController.swift */; };
+		DC65D58CB9BCFEB7D2947C6AB5AB3F26 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D0629B8BF330FF9DE71ABB83307CFC1 /* Foundation.framework */; };
+		DDC575F4EDDB71AD8AA6E0DE18737C42 /* NXTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F4FB049F2C83ADB41537205684E556 /* NXTextField.swift */; };
+		DE475E63EBCD4DAB74DA785FB4E3593D /* NXAlbumAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5205A62C40AA649B88794EC601FA2BF /* NXAlbumAssetsViewController.swift */; };
+		E3279D6FB2D52D9C585B2EAF0F514DEA /* NXButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12949C8A3C39533D37102550244C5FB0 /* NXButton.swift */; };
+		E50A96394C54CFF1543FC0D756EAE7A9 /* NXCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2B9266D658F1EDDDA636D8BAEA43CE /* NXCameraViewController.swift */; };
+		E686164E36B872E9522372FEB70D3D44 /* NXTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250684BE07683727C4378F07E77E5763 /* NXTextView.swift */; };
+		E7AFAF658F8AE55B3DAD63A8B494E89F /* NXToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621FCF715A34DF02668EEAD353B44428 /* NXToolView.swift */; };
+		EB94BFBF77E360EA013D9BC3BC96D13F /* NXRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C48960A16C707C4EA58AD70DD808B83 /* NXRequest.swift */; };
+		ED93F5E1B277C38BF9D9E7639DE5C32E /* NXAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96350265261FE14D2ADC9C531A12ADA /* NXAlbum.swift */; };
+		FD9F6A6A9B0DF0359CEDB520B87B5C8F /* NXTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A102FEDA4D02C98B68C7E00F4E2698 /* NXTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		43B733734F8E14DADC9144E15F6ED67B /* PBXContainerItemProxy */ = {
+		46A4114D37ED0E8D64CE0CA1D9401B24 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4E8176B9C15F8A61E959200B92017EE1;
+			remoteInfo = "NXKit-NXKit";
+		};
+		9DF0ECB7979D071970BCC7A6BFAB3B99 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -35,131 +113,339 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		378BE588DFA24621018A5A2E029C26B8 /* NXKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = NXKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		6C112397A88651B107152A0F7DDBBCC9 /* Pods-NXKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NXKit_Example.modulemap"; sourceTree = "<group>"; };
-		71F35EE0C952CFF786C757A52291532A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		7935F9FE49AD48F0D4D37335AF933767 /* Pods-NXKit_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NXKit_Example-umbrella.h"; sourceTree = "<group>"; };
-		7D842C811720A2F274C13DA26A4FDA3C /* Pods-NXKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NXKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		8691D8D65A408C9EC5CCBB68F2DAA639 /* Pods-NXKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NXKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		007B2ECF6CF28AB5BA415ED6754F152C /* NXAsset.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXAsset.swift; path = NXKit/Classes/Extensions/NXAsset.swift; sourceTree = "<group>"; };
+		01E002BB0504FDF1EE0DD5A0B3BCFA9A /* NXPlaceholderView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXPlaceholderView.swift; path = NXKit/Classes/Foundation/NXPlaceholderView.swift; sourceTree = "<group>"; };
+		046888524B1899AB5F62EE7BC77F3AD3 /* NXRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXRouter.swift; path = NXKit/Classes/Foundation/NXRouter.swift; sourceTree = "<group>"; };
+		0F7BE328F958B1B12DE81F4FF15ADF74 /* ResourceBundle-NXKit-NXKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-NXKit-NXKit-Info.plist"; sourceTree = "<group>"; };
+		10B5C3E0C538B3894BA64037AD9CBC52 /* NXKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "NXKit-Info.plist"; sourceTree = "<group>"; };
+		11B82C471F5BD20B88B221BFCE741B46 /* NXObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXObserver.swift; path = NXKit/Classes/Foundation/NXObserver.swift; sourceTree = "<group>"; };
+		12949C8A3C39533D37102550244C5FB0 /* NXButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXButton.swift; path = NXKit/Classes/Foundation/NXButton.swift; sourceTree = "<group>"; };
+		1405B606F01CCC7786B234DF9003AA25 /* Pods-NXKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NXKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		16726EA597240CDD1CF395E444F36462 /* NXCView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXCView.swift; path = NXKit/Classes/Foundation/NXCView.swift; sourceTree = "<group>"; };
+		169567A82AC4760ED77D7F139EAED388 /* NXKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NXKit.release.xcconfig; sourceTree = "<group>"; };
+		183A8F871FCF41013B5F7A98E91FE6ED /* NXKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXKit.swift; path = NXKit/Classes/Foundation/NXKit.swift; sourceTree = "<group>"; };
+		19042DB5444001E92B8FDEF1129E391D /* NXKit+UIButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NXKit+UIButton.swift"; path = "NXKit/Classes/Foundation/NXKit+UIButton.swift"; sourceTree = "<group>"; };
+		191E76E4C425D3AE6338015D77B2F6C0 /* NXSwitch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXSwitch.swift; path = NXKit/Classes/Foundation/NXSwitch.swift; sourceTree = "<group>"; };
+		19CC949918F01AB9E7ECEBA372FFE8D6 /* NXItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXItem.swift; path = NXKit/Classes/Foundation/NXItem.swift; sourceTree = "<group>"; };
+		1A2D2BED1F28A2D103136377A5ACC35F /* NXKit+UILabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NXKit+UILabel.swift"; path = "NXKit/Classes/Foundation/NXKit+UILabel.swift"; sourceTree = "<group>"; };
+		1B2B9266D658F1EDDDA636D8BAEA43CE /* NXCameraViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXCameraViewController.swift; path = NXKit/Classes/Extensions/NXCameraViewController.swift; sourceTree = "<group>"; };
+		1E8EA3E7C51F038B932EBC45146F2F9F /* NXAnimationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXAnimationView.swift; path = NXKit/Classes/Foundation/NXAnimationView.swift; sourceTree = "<group>"; };
+		201C7B91E11DCF7948423C7458388A90 /* NXAny.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXAny.swift; path = NXKit/Classes/Foundation/NXAny.swift; sourceTree = "<group>"; };
+		24FB5BA1302A12D8E8344B0F2E5A7144 /* Pods-NXKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NXKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		250684BE07683727C4378F07E77E5763 /* NXTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXTextView.swift; path = NXKit/Classes/Foundation/NXTextView.swift; sourceTree = "<group>"; };
+		28A831870CAF4BD833F3D57C420DDED7 /* NXTransitionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXTransitionView.swift; path = NXKit/Classes/Foundation/NXTransitionView.swift; sourceTree = "<group>"; };
+		2930A33F0BF1DAC0D701FA74CA141EA3 /* NXChildrenViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXChildrenViewController.swift; path = NXKit/Classes/Foundation/NXChildrenViewController.swift; sourceTree = "<group>"; };
+		2949CD8B9FB5F0A7EBB57928FD514B14 /* NXCollectionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXCollectionViewCell.swift; path = NXKit/Classes/Foundation/NXCollectionViewCell.swift; sourceTree = "<group>"; };
+		2CAB3B4A9C8AAF0F4CB6BA95D54D8583 /* NXLRView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXLRView.swift; path = NXKit/Classes/Foundation/NXLRView.swift; sourceTree = "<group>"; };
+		3372CAC451EACCEC39D017C64529C3B0 /* NXShadowView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXShadowView.swift; path = NXKit/Classes/Foundation/NXShadowView.swift; sourceTree = "<group>"; };
+		36BB7B8196606401BC0BF19B2E8EBF98 /* NXTableReusableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXTableReusableView.swift; path = NXKit/Classes/Foundation/NXTableReusableView.swift; sourceTree = "<group>"; };
+		38F544C42D6615964709C83B914FFF82 /* NXKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = NXKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		3B9BF7DD2DED3EDA33691E1FD592EFCE /* NXAnylayerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXAnylayerView.swift; path = NXKit/Classes/Foundation/NXAnylayerView.swift; sourceTree = "<group>"; };
+		3C48960A16C707C4EA58AD70DD808B83 /* NXRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXRequest.swift; path = NXKit/Classes/Foundation/NXRequest.swift; sourceTree = "<group>"; };
+		3D41594C07EBD598820B20C9216F22FE /* NXAbstractViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXAbstractViewCell.swift; path = NXKit/Classes/Foundation/NXAbstractViewCell.swift; sourceTree = "<group>"; };
+		4738A42A24ED7B074EFAABD2853F55D2 /* NXSearchView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXSearchView.swift; path = NXKit/Classes/Foundation/NXSearchView.swift; sourceTree = "<group>"; };
+		49F4FB049F2C83ADB41537205684E556 /* NXTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXTextField.swift; path = NXKit/Classes/Foundation/NXTextField.swift; sourceTree = "<group>"; };
+		4E861042E36B28CFB97A2675C45D2CB6 /* NXKit+String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NXKit+String.swift"; path = "NXKit/Classes/Foundation/NXKit+String.swift"; sourceTree = "<group>"; };
+		4F6AFF1DA067794073A8901947584D4D /* NXAbstract.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXAbstract.swift; path = NXKit/Classes/Foundation/NXAbstract.swift; sourceTree = "<group>"; };
+		51B2187008C3F3960B2BE9AF46507AA6 /* NXKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NXKit.modulemap; sourceTree = "<group>"; };
+		5241D69629EEB3485D5069A204E53F3A /* NXCameraCaptureController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXCameraCaptureController.swift; path = NXKit/Classes/Extensions/NXCameraCaptureController.swift; sourceTree = "<group>"; };
+		52FE23AFB793956622B58DBAF40A125B /* NXKit+UIView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NXKit+UIView.swift"; path = "NXKit/Classes/Foundation/NXKit+UIView.swift"; sourceTree = "<group>"; };
+		54115A07C65918A762A700837A0F2043 /* NXOverlay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXOverlay.swift; path = NXKit/Classes/Foundation/NXOverlay.swift; sourceTree = "<group>"; };
+		5440B40E69CE90ACF6D459D400FE6ED7 /* Pods-NXKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NXKit_Example.release.xcconfig"; sourceTree = "<group>"; };
+		55D1BC1C341244AE0E07E88DC9FA24CC /* NXImageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXImageView.swift; path = NXKit/Classes/Foundation/NXImageView.swift; sourceTree = "<group>"; };
+		59A102FEDA4D02C98B68C7E00F4E2698 /* NXTableViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXTableViewController.swift; path = NXKit/Classes/Foundation/NXTableViewController.swift; sourceTree = "<group>"; };
+		5D0629B8BF330FF9DE71ABB83307CFC1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		5F69386CF41B131FB792226AAC642EE0 /* NXKit */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = NXKit; path = NXKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		621FCF715A34DF02668EEAD353B44428 /* NXToolView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXToolView.swift; path = NXKit/Classes/Foundation/NXToolView.swift; sourceTree = "<group>"; };
+		64EF34CC54C1F46726361D12D570644C /* Pods-NXKit_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NXKit_Example-umbrella.h"; sourceTree = "<group>"; };
+		67DE42F730987DAAE35B9F9C584030BE /* NXCollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXCollectionView.swift; path = NXKit/Classes/Foundation/NXCollectionView.swift; sourceTree = "<group>"; };
+		6C0A6030926A5E91A7600359E5DEB7F5 /* NXClipboardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXClipboardView.swift; path = NXKit/Classes/Extensions/NXClipboardView.swift; sourceTree = "<group>"; };
+		7171F0AF47D91FC069584657919AFA04 /* NXLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXLabel.swift; path = NXKit/Classes/Foundation/NXLabel.swift; sourceTree = "<group>"; };
+		77690A210AD1F058C74DAEE77C188E0C /* NXKit+UIImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NXKit+UIImage.swift"; path = "NXKit/Classes/Foundation/NXKit+UIImage.swift"; sourceTree = "<group>"; };
+		78BAFE4FC54880F30EDF0C721CA6B172 /* Pods-NXKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NXKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		7A59BD932BCD6C5E251C04E32800AD63 /* NXViewControllerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXViewControllerView.swift; path = NXKit/Classes/Foundation/NXViewControllerView.swift; sourceTree = "<group>"; };
+		7E113260E383BBE448CE3C49C79AF982 /* NXString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXString.swift; path = NXKit/Classes/Foundation/NXString.swift; sourceTree = "<group>"; };
+		7FAB392CB8ED6BD6DBFB705A3C642C62 /* NXBackgroundView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXBackgroundView.swift; path = NXKit/Classes/Foundation/NXBackgroundView.swift; sourceTree = "<group>"; };
+		810A073916407FC5F82C4C5C8736559E /* NXAbstractView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXAbstractView.swift; path = NXKit/Classes/Foundation/NXAbstractView.swift; sourceTree = "<group>"; };
+		81284A559F52D3371175CF5B70636EAE /* NXKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NXKit-umbrella.h"; sourceTree = "<group>"; };
+		8592CC5C78A328CAA8B3068F1F6A228C /* NXNavigationController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXNavigationController.swift; path = NXKit/Classes/Foundation/NXNavigationController.swift; sourceTree = "<group>"; };
+		86EC9D27703AACB5EF9A9A9E42FEF4F1 /* Pods-NXKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-NXKit_Example-frameworks.sh"; sourceTree = "<group>"; };
+		8C57FDDDB04A0EC29FF43DDAE6B7E952 /* NXScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXScrollView.swift; path = NXKit/Classes/Foundation/NXScrollView.swift; sourceTree = "<group>"; };
+		8DF697CC03751D516901CFBA0F9C956C /* NXTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXTableView.swift; path = NXKit/Classes/Foundation/NXTableView.swift; sourceTree = "<group>"; };
+		8FA6CEE0580D1DCB09B127F1DBBFC972 /* NXToolViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXToolViewController.swift; path = NXKit/Classes/Foundation/NXToolViewController.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		AB0FBD61A5C794EB12D8328EB38DE84D /* Pods-NXKit_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NXKit_Example-Info.plist"; sourceTree = "<group>"; };
-		ABCC2C455E34618A5462F073FC904116 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		ADCF09BD414568D5F9E6EBAC4B46A7EC /* Pods-NXKit_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NXKit_Example-dummy.m"; sourceTree = "<group>"; };
-		CD363FDF8F77B0A0F590CEE4A47D600D /* Pods-NXKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NXKit_Example.release.xcconfig"; sourceTree = "<group>"; };
-		D5F985C8D79D3EC57DEBC3D3F18A5FF3 /* NXKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NXKit.release.xcconfig; sourceTree = "<group>"; };
-		E6BAD998CC52925E9F8118D839967C37 /* NXKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NXKit.debug.xcconfig; sourceTree = "<group>"; };
+		9EBC6E7EDA66B7D8DB91FC95FA512618 /* NXSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXSerialization.swift; path = NXKit/Classes/Foundation/NXSerialization.swift; sourceTree = "<group>"; };
+		A1E198895C7E241EF052EEC5A9FB4076 /* NXKeyboardAccessoryView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXKeyboardAccessoryView.swift; path = NXKit/Classes/Foundation/NXKeyboardAccessoryView.swift; sourceTree = "<group>"; };
+		A23616CE463264ACBD2AC1116E6786D1 /* NXLCRView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXLCRView.swift; path = NXKit/Classes/Foundation/NXLCRView.swift; sourceTree = "<group>"; };
+		A41B110D04C4973F89C050B29C3728FF /* Pods-NXKit_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NXKit_Example-Info.plist"; sourceTree = "<group>"; };
+		ADD86A325F234893CEEEC2444C44435D /* NXHUD.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXHUD.swift; path = NXKit/Classes/Foundation/NXHUD.swift; sourceTree = "<group>"; };
+		B1E0601416DCFECFE01ED38CDFF445BF /* NXAssetClipViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXAssetClipViewController.swift; path = NXKit/Classes/Extensions/NXAssetClipViewController.swift; sourceTree = "<group>"; };
+		B2D58FD312DFC6CCEF5B016A5C7CAE6D /* NXStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXStorage.swift; path = NXKit/Classes/Foundation/NXStorage.swift; sourceTree = "<group>"; };
+		B5EFDB0FD5C425F1CC640B8CBADC1A8E /* NXRuntime.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXRuntime.swift; path = NXKit/Classes/Foundation/NXRuntime.swift; sourceTree = "<group>"; };
+		B6A800EF1E91AE74040C4688A45297F1 /* NXKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NXKit-dummy.m"; sourceTree = "<group>"; };
+		B803DBFF7B236A6FC387CE25D6B385DC /* NXAlbumViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXAlbumViewController.swift; path = NXKit/Classes/Extensions/NXAlbumViewController.swift; sourceTree = "<group>"; };
+		B80A13553E4A390902591C5427FF658D /* Pods-NXKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NXKit_Example.modulemap"; sourceTree = "<group>"; };
+		BBCF184B55CDE22DBE37CED02A782763 /* NXWebView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXWebView.swift; path = NXKit/Classes/Foundation/NXWebView.swift; sourceTree = "<group>"; };
+		BDDA64F939A43683EBC330F4854D23C9 /* NXSuspendView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXSuspendView.swift; path = NXKit/Classes/Foundation/NXSuspendView.swift; sourceTree = "<group>"; };
+		BF9B15491A98BBD1C210BC39AA85629E /* NXWebViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXWebViewController.swift; path = NXKit/Classes/Foundation/NXWebViewController.swift; sourceTree = "<group>"; };
+		C0F10A82F28F3826E60148C69BA165FE /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		C34DAA5091FB3F286DB1B156F11FF152 /* NXKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NXKit-prefix.pch"; sourceTree = "<group>"; };
+		C451AD4B978A62871382BD2E238E2F20 /* NXAutoresizeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXAutoresizeView.swift; path = NXKit/Classes/Foundation/NXAutoresizeView.swift; sourceTree = "<group>"; };
+		C48DCB5859DE7CDF9EA723FFDB95F3D1 /* NXSwipeViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXSwipeViewController.swift; path = NXKit/Classes/Foundation/NXSwipeViewController.swift; sourceTree = "<group>"; };
+		C5205A62C40AA649B88794EC601FA2BF /* NXAlbumAssetsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXAlbumAssetsViewController.swift; path = NXKit/Classes/Extensions/NXAlbumAssetsViewController.swift; sourceTree = "<group>"; };
+		C6A6E61FE2E4A308008AB7F244C38671 /* NXCollectionReusableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXCollectionReusableView.swift; path = NXKit/Classes/Foundation/NXCollectionReusableView.swift; sourceTree = "<group>"; };
+		C6B50384054DAEB3B78ACE04D4DA4493 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		C8BAC33121C8114290EB84C992D4155B /* NXArrayView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXArrayView.swift; path = NXKit/Classes/Foundation/NXArrayView.swift; sourceTree = "<group>"; };
+		C9A1D0F9E4D64BFFAADBB98E017589C5 /* Pods-NXKit_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NXKit_Example-dummy.m"; sourceTree = "<group>"; };
+		CBFCFF860DBCEFDF6564554CCB35E47B /* NXFS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXFS.swift; path = NXKit/Classes/Foundation/NXFS.swift; sourceTree = "<group>"; };
+		CC16ADB2CA1EB12FDDC131747A60B68D /* NXCollectionViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXCollectionViewController.swift; path = NXKit/Classes/Foundation/NXCollectionViewController.swift; sourceTree = "<group>"; };
+		CFA03D6492BEAEA22F67A62C65A7C7E3 /* NXKVOObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXKVOObserver.swift; path = NXKit/Classes/Foundation/NXKVOObserver.swift; sourceTree = "<group>"; };
+		D672EFED3E3FA49B1E641A361E9FDA85 /* NXNavigationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXNavigationView.swift; path = NXKit/Classes/Foundation/NXNavigationView.swift; sourceTree = "<group>"; };
+		D81617CAA1204D998E4C0C7E1B3DA8BF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		DCE7898AE8E51D4444EF427CAA0A56A2 /* NXKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NXKit.debug.xcconfig; sourceTree = "<group>"; };
+		DF53583B2E1C14F19F6E2014AA1C378D /* NXActionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXActionView.swift; path = NXKit/Classes/Foundation/NXActionView.swift; sourceTree = "<group>"; };
+		E45166C6999F519A5C39A851B863328B /* NXKit.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = NXKit.bundle; path = NXKit/Assets/NXKit.bundle; sourceTree = "<group>"; };
+		E47D5EC53CEFE4DF752393AEBF449187 /* NXSwipeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXSwipeView.swift; path = NXKit/Classes/Foundation/NXSwipeView.swift; sourceTree = "<group>"; };
+		E63DF99DCD4379F20D3F2B193AA61FC9 /* NXKit-NXKit */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "NXKit-NXKit"; path = NXKit.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		E741B8E59FB5B9F93B06DB594E81C390 /* NXControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXControl.swift; path = NXKit/Classes/Foundation/NXControl.swift; sourceTree = "<group>"; };
+		EA58AAFE0CF42AEE74C764D3EB01C4EC /* NXViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXViewController.swift; path = NXKit/Classes/Foundation/NXViewController.swift; sourceTree = "<group>"; };
 		EB17C0E675035DFC9E8607FA570E5F65 /* Pods-NXKit_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-NXKit_Example"; path = Pods_NXKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF11F4DA9DD74F9E5196ED83B1B65B2E /* Pods-NXKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NXKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		EB666BA2E7A0FBA5595A0F1C0B34612E /* NXTableViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXTableViewCell.swift; path = NXKit/Classes/Foundation/NXTableViewCell.swift; sourceTree = "<group>"; };
+		EC1A0FC94E9E50AECF77205BD5B8C225 /* NXView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXView.swift; path = NXKit/Classes/Foundation/NXView.swift; sourceTree = "<group>"; };
+		F19F6468AF9AA8A6622A5821B578BEA4 /* NXClip.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXClip.swift; path = NXKit/Classes/Foundation/NXClip.swift; sourceTree = "<group>"; };
+		F8B95A74AD4EA6AB64D5E70F46597D2B /* NXCollectionViewLayouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXCollectionViewLayouter.swift; path = NXKit/Classes/Foundation/NXCollectionViewLayouter.swift; sourceTree = "<group>"; };
+		F96350265261FE14D2ADC9C531A12ADA /* NXAlbum.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXAlbum.swift; path = NXKit/Classes/Extensions/NXAlbum.swift; sourceTree = "<group>"; };
+		F97BA92B75F0D499E3AC4E3AA9326CAC /* NXViewControllerAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NXViewControllerAnimation.swift; path = NXKit/Classes/Foundation/NXViewControllerAnimation.swift; sourceTree = "<group>"; };
+		FD601717749669F08F065B0F7FAC4CCA /* NXKit+DispatchQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NXKit+DispatchQueue.swift"; path = "NXKit/Classes/Foundation/NXKit+DispatchQueue.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		18DF20E4C4555C18C4E98B62A598F937 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5CB5CD11079ECEDD54CEECE1FF1F95E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC65D58CB9BCFEB7D2947C6AB5AB3F26 /* Foundation.framework in Frameworks */,
+				7476EEF830C56A5869BC39FDFAD1DBF7 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FBC00D42FCE64C8C7CD37400DE5AC5C0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13323CBDEE077561C8D9C9FF9502FFC0 /* Foundation.framework in Frameworks */,
+				8021A4602E84770DDA6F871E5EE3B668 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		06EFCF3096CC5D6D5DB8DB7D3FE0AAD6 /* Pod */ = {
+		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ABCC2C455E34618A5462F073FC904116 /* LICENSE */,
-				378BE588DFA24621018A5A2E029C26B8 /* NXKit.podspec */,
-				71F35EE0C952CFF786C757A52291532A /* README.md */,
+				581D157A7B3B06F693AB3AA19A9AB32E /* iOS */,
 			);
-			name = Pod;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		527F8D3FFEDC5150B38D194C05473F74 /* Pods-NXKit_Example */ = {
+		2A3D7C05CA68AB30D340F37418DE7D5B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6C112397A88651B107152A0F7DDBBCC9 /* Pods-NXKit_Example.modulemap */,
-				EF11F4DA9DD74F9E5196ED83B1B65B2E /* Pods-NXKit_Example-acknowledgements.markdown */,
-				7D842C811720A2F274C13DA26A4FDA3C /* Pods-NXKit_Example-acknowledgements.plist */,
-				ADCF09BD414568D5F9E6EBAC4B46A7EC /* Pods-NXKit_Example-dummy.m */,
-				AB0FBD61A5C794EB12D8328EB38DE84D /* Pods-NXKit_Example-Info.plist */,
-				7935F9FE49AD48F0D4D37335AF933767 /* Pods-NXKit_Example-umbrella.h */,
-				8691D8D65A408C9EC5CCBB68F2DAA639 /* Pods-NXKit_Example.debug.xcconfig */,
-				CD363FDF8F77B0A0F590CEE4A47D600D /* Pods-NXKit_Example.release.xcconfig */,
+				5F69386CF41B131FB792226AAC642EE0 /* NXKit */,
+				E63DF99DCD4379F20D3F2B193AA61FC9 /* NXKit-NXKit */,
+				EB17C0E675035DFC9E8607FA570E5F65 /* Pods-NXKit_Example */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		36C9DE353D4DC3697B288A4C27AFE504 /* Pods-NXKit_Example */ = {
+			isa = PBXGroup;
+			children = (
+				B80A13553E4A390902591C5427FF658D /* Pods-NXKit_Example.modulemap */,
+				24FB5BA1302A12D8E8344B0F2E5A7144 /* Pods-NXKit_Example-acknowledgements.markdown */,
+				1405B606F01CCC7786B234DF9003AA25 /* Pods-NXKit_Example-acknowledgements.plist */,
+				C9A1D0F9E4D64BFFAADBB98E017589C5 /* Pods-NXKit_Example-dummy.m */,
+				86EC9D27703AACB5EF9A9A9E42FEF4F1 /* Pods-NXKit_Example-frameworks.sh */,
+				A41B110D04C4973F89C050B29C3728FF /* Pods-NXKit_Example-Info.plist */,
+				64EF34CC54C1F46726361D12D570644C /* Pods-NXKit_Example-umbrella.h */,
+				78BAFE4FC54880F30EDF0C721CA6B172 /* Pods-NXKit_Example.debug.xcconfig */,
+				5440B40E69CE90ACF6D459D400FE6ED7 /* Pods-NXKit_Example.release.xcconfig */,
 			);
 			name = "Pods-NXKit_Example";
 			path = "Target Support Files/Pods-NXKit_Example";
 			sourceTree = "<group>";
 		};
-		65FF89783F143F45F5BBE4277DE98E0F /* Targets Support Files */ = {
+		3915AE0A9E2E4FDB3DADC3479E9A519D /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
-				527F8D3FFEDC5150B38D194C05473F74 /* Pods-NXKit_Example */,
+				4F6AFF1DA067794073A8901947584D4D /* NXAbstract.swift */,
+				810A073916407FC5F82C4C5C8736559E /* NXAbstractView.swift */,
+				3D41594C07EBD598820B20C9216F22FE /* NXAbstractViewCell.swift */,
+				DF53583B2E1C14F19F6E2014AA1C378D /* NXActionView.swift */,
+				1E8EA3E7C51F038B932EBC45146F2F9F /* NXAnimationView.swift */,
+				201C7B91E11DCF7948423C7458388A90 /* NXAny.swift */,
+				3B9BF7DD2DED3EDA33691E1FD592EFCE /* NXAnylayerView.swift */,
+				C8BAC33121C8114290EB84C992D4155B /* NXArrayView.swift */,
+				C451AD4B978A62871382BD2E238E2F20 /* NXAutoresizeView.swift */,
+				7FAB392CB8ED6BD6DBFB705A3C642C62 /* NXBackgroundView.swift */,
+				12949C8A3C39533D37102550244C5FB0 /* NXButton.swift */,
+				2930A33F0BF1DAC0D701FA74CA141EA3 /* NXChildrenViewController.swift */,
+				F19F6468AF9AA8A6622A5821B578BEA4 /* NXClip.swift */,
+				C6A6E61FE2E4A308008AB7F244C38671 /* NXCollectionReusableView.swift */,
+				67DE42F730987DAAE35B9F9C584030BE /* NXCollectionView.swift */,
+				2949CD8B9FB5F0A7EBB57928FD514B14 /* NXCollectionViewCell.swift */,
+				CC16ADB2CA1EB12FDDC131747A60B68D /* NXCollectionViewController.swift */,
+				F8B95A74AD4EA6AB64D5E70F46597D2B /* NXCollectionViewLayouter.swift */,
+				E741B8E59FB5B9F93B06DB594E81C390 /* NXControl.swift */,
+				16726EA597240CDD1CF395E444F36462 /* NXCView.swift */,
+				CBFCFF860DBCEFDF6564554CCB35E47B /* NXFS.swift */,
+				ADD86A325F234893CEEEC2444C44435D /* NXHUD.swift */,
+				55D1BC1C341244AE0E07E88DC9FA24CC /* NXImageView.swift */,
+				19CC949918F01AB9E7ECEBA372FFE8D6 /* NXItem.swift */,
+				A1E198895C7E241EF052EEC5A9FB4076 /* NXKeyboardAccessoryView.swift */,
+				E45166C6999F519A5C39A851B863328B /* NXKit.bundle */,
+				183A8F871FCF41013B5F7A98E91FE6ED /* NXKit.swift */,
+				FD601717749669F08F065B0F7FAC4CCA /* NXKit+DispatchQueue.swift */,
+				4E861042E36B28CFB97A2675C45D2CB6 /* NXKit+String.swift */,
+				19042DB5444001E92B8FDEF1129E391D /* NXKit+UIButton.swift */,
+				77690A210AD1F058C74DAEE77C188E0C /* NXKit+UIImage.swift */,
+				1A2D2BED1F28A2D103136377A5ACC35F /* NXKit+UILabel.swift */,
+				52FE23AFB793956622B58DBAF40A125B /* NXKit+UIView.swift */,
+				CFA03D6492BEAEA22F67A62C65A7C7E3 /* NXKVOObserver.swift */,
+				7171F0AF47D91FC069584657919AFA04 /* NXLabel.swift */,
+				A23616CE463264ACBD2AC1116E6786D1 /* NXLCRView.swift */,
+				2CAB3B4A9C8AAF0F4CB6BA95D54D8583 /* NXLRView.swift */,
+				8592CC5C78A328CAA8B3068F1F6A228C /* NXNavigationController.swift */,
+				D672EFED3E3FA49B1E641A361E9FDA85 /* NXNavigationView.swift */,
+				11B82C471F5BD20B88B221BFCE741B46 /* NXObserver.swift */,
+				54115A07C65918A762A700837A0F2043 /* NXOverlay.swift */,
+				01E002BB0504FDF1EE0DD5A0B3BCFA9A /* NXPlaceholderView.swift */,
+				3C48960A16C707C4EA58AD70DD808B83 /* NXRequest.swift */,
+				046888524B1899AB5F62EE7BC77F3AD3 /* NXRouter.swift */,
+				B5EFDB0FD5C425F1CC640B8CBADC1A8E /* NXRuntime.swift */,
+				8C57FDDDB04A0EC29FF43DDAE6B7E952 /* NXScrollView.swift */,
+				4738A42A24ED7B074EFAABD2853F55D2 /* NXSearchView.swift */,
+				9EBC6E7EDA66B7D8DB91FC95FA512618 /* NXSerialization.swift */,
+				3372CAC451EACCEC39D017C64529C3B0 /* NXShadowView.swift */,
+				B2D58FD312DFC6CCEF5B016A5C7CAE6D /* NXStorage.swift */,
+				7E113260E383BBE448CE3C49C79AF982 /* NXString.swift */,
+				BDDA64F939A43683EBC330F4854D23C9 /* NXSuspendView.swift */,
+				E47D5EC53CEFE4DF752393AEBF449187 /* NXSwipeView.swift */,
+				C48DCB5859DE7CDF9EA723FFDB95F3D1 /* NXSwipeViewController.swift */,
+				191E76E4C425D3AE6338015D77B2F6C0 /* NXSwitch.swift */,
+				36BB7B8196606401BC0BF19B2E8EBF98 /* NXTableReusableView.swift */,
+				8DF697CC03751D516901CFBA0F9C956C /* NXTableView.swift */,
+				EB666BA2E7A0FBA5595A0F1C0B34612E /* NXTableViewCell.swift */,
+				59A102FEDA4D02C98B68C7E00F4E2698 /* NXTableViewController.swift */,
+				49F4FB049F2C83ADB41537205684E556 /* NXTextField.swift */,
+				250684BE07683727C4378F07E77E5763 /* NXTextView.swift */,
+				621FCF715A34DF02668EEAD353B44428 /* NXToolView.swift */,
+				8FA6CEE0580D1DCB09B127F1DBBFC972 /* NXToolViewController.swift */,
+				28A831870CAF4BD833F3D57C420DDED7 /* NXTransitionView.swift */,
+				EC1A0FC94E9E50AECF77205BD5B8C225 /* NXView.swift */,
+				EA58AAFE0CF42AEE74C764D3EB01C4EC /* NXViewController.swift */,
+				F97BA92B75F0D499E3AC4E3AA9326CAC /* NXViewControllerAnimation.swift */,
+				7A59BD932BCD6C5E251C04E32800AD63 /* NXViewControllerView.swift */,
+				BBCF184B55CDE22DBE37CED02A782763 /* NXWebView.swift */,
+				BF9B15491A98BBD1C210BC39AA85629E /* NXWebViewController.swift */,
+			);
+			name = Foundation;
+			sourceTree = "<group>";
+		};
+		581D157A7B3B06F693AB3AA19A9AB32E /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				5D0629B8BF330FF9DE71ABB83307CFC1 /* Foundation.framework */,
+				D81617CAA1204D998E4C0C7E1B3DA8BF /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7D01732F11582A1E559C4E9CED718B0A /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				36C9DE353D4DC3697B288A4C27AFE504 /* Pods-NXKit_Example */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		BAC038B56BD0429F42BFFC57D904C4F5 /* Development Pods */ = {
+		8F57F16AFDD40878FFA2B980BEE3A11F /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				FA26143662639A8518331A692D89841E /* NXKit */,
+				51B2187008C3F3960B2BE9AF46507AA6 /* NXKit.modulemap */,
+				B6A800EF1E91AE74040C4688A45297F1 /* NXKit-dummy.m */,
+				10B5C3E0C538B3894BA64037AD9CBC52 /* NXKit-Info.plist */,
+				C34DAA5091FB3F286DB1B156F11FF152 /* NXKit-prefix.pch */,
+				81284A559F52D3371175CF5B70636EAE /* NXKit-umbrella.h */,
+				DCE7898AE8E51D4444EF427CAA0A56A2 /* NXKit.debug.xcconfig */,
+				169567A82AC4760ED77D7F139EAED388 /* NXKit.release.xcconfig */,
+				0F7BE328F958B1B12DE81F4FF15ADF74 /* ResourceBundle-NXKit-NXKit-Info.plist */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/NXKit";
+			sourceTree = "<group>";
+		};
+		93F9A338CC4FE74876558480CF258A78 /* NXKit */ = {
+			isa = PBXGroup;
+			children = (
+				BF4A89F3D5BEDB4D91905FBE58B1EE23 /* Extensions */,
+				3915AE0A9E2E4FDB3DADC3479E9A519D /* Foundation */,
+				EA52B35C85F740AEC3A3020E4C19B9FB /* Pod */,
+				8F57F16AFDD40878FFA2B980BEE3A11F /* Support Files */,
+			);
+			name = NXKit;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		B9937F9FA4826DF785F4D57C82E7AB91 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				93F9A338CC4FE74876558480CF258A78 /* NXKit */,
 			);
 			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		BF4A89F3D5BEDB4D91905FBE58B1EE23 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F96350265261FE14D2ADC9C531A12ADA /* NXAlbum.swift */,
+				C5205A62C40AA649B88794EC601FA2BF /* NXAlbumAssetsViewController.swift */,
+				B803DBFF7B236A6FC387CE25D6B385DC /* NXAlbumViewController.swift */,
+				007B2ECF6CF28AB5BA415ED6754F152C /* NXAsset.swift */,
+				B1E0601416DCFECFE01ED38CDFF445BF /* NXAssetClipViewController.swift */,
+				5241D69629EEB3485D5069A204E53F3A /* NXCameraCaptureController.swift */,
+				1B2B9266D658F1EDDDA636D8BAEA43CE /* NXCameraViewController.swift */,
+				6C0A6030926A5E91A7600359E5DEB7F5 /* NXClipboardView.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				BAC038B56BD0429F42BFFC57D904C4F5 /* Development Pods */,
-				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				FFD345606CF184AD53D1F5128E2864EA /* Products */,
-				65FF89783F143F45F5BBE4277DE98E0F /* Targets Support Files */,
+				B9937F9FA4826DF785F4D57C82E7AB91 /* Development Pods */,
+				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
+				2A3D7C05CA68AB30D340F37418DE7D5B /* Products */,
+				7D01732F11582A1E559C4E9CED718B0A /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+		EA52B35C85F740AEC3A3020E4C19B9FB /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				E4801F62A6B08CD9B5410329F1A18FDE /* iOS */,
+				C6B50384054DAEB3B78ACE04D4DA4493 /* LICENSE */,
+				38F544C42D6615964709C83B914FFF82 /* NXKit.podspec */,
+				C0F10A82F28F3826E60148C69BA165FE /* README.md */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D64075FF8C1E76D17F55D6FB874B969A /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				E6BAD998CC52925E9F8118D839967C37 /* NXKit.debug.xcconfig */,
-				D5F985C8D79D3EC57DEBC3D3F18A5FF3 /* NXKit.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/NXKit";
-			sourceTree = "<group>";
-		};
-		E4801F62A6B08CD9B5410329F1A18FDE /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		FA26143662639A8518331A692D89841E /* NXKit */ = {
-			isa = PBXGroup;
-			children = (
-				06EFCF3096CC5D6D5DB8DB7D3FE0AAD6 /* Pod */,
-				D64075FF8C1E76D17F55D6FB874B969A /* Support Files */,
-			);
-			name = NXKit;
-			path = ../..;
-			sourceTree = "<group>";
-		};
-		FFD345606CF184AD53D1F5128E2864EA /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EB17C0E675035DFC9E8607FA570E5F65 /* Pods-NXKit_Example */,
-			);
-			name = Products;
+			name = Pod;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,9 +459,53 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		590447F732B7C92DEF0F9A8CE3DA8DFE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A443AA785EDECAF7341BA25E66270D8 /* NXKit-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		4E8176B9C15F8A61E959200B92017EE1 /* NXKit-NXKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3250D6DA685E4A63CB094D21377A85B5 /* Build configuration list for PBXNativeTarget "NXKit-NXKit" */;
+			buildPhases = (
+				1354A51FF124223275FFA54193133499 /* Sources */,
+				18DF20E4C4555C18C4E98B62A598F937 /* Frameworks */,
+				F94253470B95809E00BCF8D2BFA63A6B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "NXKit-NXKit";
+			productName = NXKit;
+			productReference = E63DF99DCD4379F20D3F2B193AA61FC9 /* NXKit-NXKit */;
+			productType = "com.apple.product-type.bundle";
+		};
+		65356E389A75B118329D272175C636AA /* NXKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A0C68163B853F6E9793C4CCD67DB0F53 /* Build configuration list for PBXNativeTarget "NXKit" */;
+			buildPhases = (
+				590447F732B7C92DEF0F9A8CE3DA8DFE /* Headers */,
+				EB157CEEF1F0E7F3012267CD3B6441DC /* Sources */,
+				E5CB5CD11079ECEDD54CEECE1FF1F95E /* Frameworks */,
+				D1B02C180A88DDADBEC65E45376F3E0D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B0B87C4C34306C43DC4DE3F140023036 /* PBXTargetDependency */,
+			);
+			name = NXKit;
+			productName = NXKit;
+			productReference = 5F69386CF41B131FB792226AAC642EE0 /* NXKit */;
+			productType = "com.apple.product-type.framework";
+		};
 		A27922037616902C383BEB287333A082 /* Pods-NXKit_Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B37C6840A1773FFB73ACB98D214F0E73 /* Build configuration list for PBXNativeTarget "Pods-NXKit_Example" */;
@@ -188,7 +518,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				061FC75043DE553F88175F9D2CAD94BD /* PBXTargetDependency */,
+				68A3585426822A93ADD522477BE9C35D /* PBXTargetDependency */,
 			);
 			name = "Pods-NXKit_Example";
 			productName = Pods_NXKit_Example;
@@ -214,12 +544,13 @@
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			minimizedProjectReferenceProxies = 0;
-			preferredProjectObjectVersion = 77;
-			productRefGroup = FFD345606CF184AD53D1F5128E2864EA /* Products */;
+			preferredProjectObjectVersion = 100;
+			productRefGroup = 2A3D7C05CA68AB30D340F37418DE7D5B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				65356E389A75B118329D272175C636AA /* NXKit */,
+				4E8176B9C15F8A61E959200B92017EE1 /* NXKit-NXKit */,
 				A27922037616902C383BEB287333A082 /* Pods-NXKit_Example */,
 			);
 		};
@@ -233,9 +564,117 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D1B02C180A88DDADBEC65E45376F3E0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				061CD87469E7686516F34462FB7F7D34 /* NXKit-NXKit in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F94253470B95809E00BCF8D2BFA63A6B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				356CB0F35B0EFAB570E59EB65FE58FA4 /* NXKit.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1354A51FF124223275FFA54193133499 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB157CEEF1F0E7F3012267CD3B6441DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01781A0B9A4AFA610F78512FFC737AFD /* NXAbstract.swift in Sources */,
+				CD8674213983B356EA76A546DB72E724 /* NXAbstractView.swift in Sources */,
+				B3B5C05C4F1B3DDF51FDB7744C46A527 /* NXAbstractViewCell.swift in Sources */,
+				C85B4BA6717EF1D5B6105C8C6E99AF81 /* NXActionView.swift in Sources */,
+				ED93F5E1B277C38BF9D9E7639DE5C32E /* NXAlbum.swift in Sources */,
+				DE475E63EBCD4DAB74DA785FB4E3593D /* NXAlbumAssetsViewController.swift in Sources */,
+				93E59BF29E27925659E71D2B69734C5A /* NXAlbumViewController.swift in Sources */,
+				66E83A36BC39A92BBEC337882E8C0671 /* NXAnimationView.swift in Sources */,
+				C0CCAD88871F95E8DA1F7B2A44B9D13E /* NXAny.swift in Sources */,
+				8D1B01A4A26435609D4F823243DB4E1B /* NXAnylayerView.swift in Sources */,
+				774287372C47F3244F3C05AB42579D11 /* NXArrayView.swift in Sources */,
+				7492BB8C09359C51CF1DED82191CF785 /* NXAsset.swift in Sources */,
+				D709BA0852DFB6919319E250525D317B /* NXAssetClipViewController.swift in Sources */,
+				25ECF52E163A38A20154A0DE287A0C25 /* NXAutoresizeView.swift in Sources */,
+				B8F08E44254DFBE36661CF7FECB5C3D2 /* NXBackgroundView.swift in Sources */,
+				E3279D6FB2D52D9C585B2EAF0F514DEA /* NXButton.swift in Sources */,
+				6F0FA28A7438F5A921BE47DD560C62BD /* NXCameraCaptureController.swift in Sources */,
+				E50A96394C54CFF1543FC0D756EAE7A9 /* NXCameraViewController.swift in Sources */,
+				34223BC39DD74D76CEB5A4F5BBC5102C /* NXChildrenViewController.swift in Sources */,
+				25A74E63433A488CDFDE85AA2DDBF362 /* NXClip.swift in Sources */,
+				66DB9FEF5B07BFF88D9E9B2D1FAFF2C3 /* NXClipboardView.swift in Sources */,
+				C9CD91748DA02C8CC27640B59A8CD995 /* NXCollectionReusableView.swift in Sources */,
+				15C1A96DF005DE3226937A61FC82F9B1 /* NXCollectionView.swift in Sources */,
+				289B593DDADEEEFFDC1C1E81E5F96895 /* NXCollectionViewCell.swift in Sources */,
+				8B3175FCACF775E7864D527F13AF4D1B /* NXCollectionViewController.swift in Sources */,
+				1DF92593627DB73C68D34BECF97C3913 /* NXCollectionViewLayouter.swift in Sources */,
+				935EC89BDB4014623E2C5CE7B7CAC1F2 /* NXControl.swift in Sources */,
+				666B9AD8F13900DDB0B7927DD08F98BB /* NXCView.swift in Sources */,
+				A5E36F65716D5E483FB74C85C7F1EBEE /* NXFS.swift in Sources */,
+				7DD72827908B84CE112B16C966EBFC1B /* NXHUD.swift in Sources */,
+				94C99F7918D0DFD8D4F0EC16640D2852 /* NXImageView.swift in Sources */,
+				9D6E7FCA8EF1A93BDF0E633F5DB08DF7 /* NXItem.swift in Sources */,
+				845A7F929C058522C342C7699B54DA16 /* NXKeyboardAccessoryView.swift in Sources */,
+				2A2080B49C4A6010D22C5179972A6530 /* NXKit.swift in Sources */,
+				8B410FDDE3A08123E34003383EA3DDBB /* NXKit+DispatchQueue.swift in Sources */,
+				07C4D5D0E046497180A51CE4B91DE9CD /* NXKit+String.swift in Sources */,
+				611C61C066F073155BCB1D801B1C5841 /* NXKit+UIButton.swift in Sources */,
+				31C8A5D0319EB72375D32F32CD631F04 /* NXKit+UIImage.swift in Sources */,
+				5A77BAF24F75653D75FE9BC96665A81A /* NXKit+UILabel.swift in Sources */,
+				B8B9B58AEC53B91CEB87D4D39FBDD6B1 /* NXKit+UIView.swift in Sources */,
+				D34289FD53337F0993DC5F02540C833F /* NXKit-dummy.m in Sources */,
+				8AABCCCF9F448D4AF29B80547CB94A9D /* NXKVOObserver.swift in Sources */,
+				C39A2762B6881AC6062DD61A50129D21 /* NXLabel.swift in Sources */,
+				78CC057C7D95F590BD90076124C702A0 /* NXLCRView.swift in Sources */,
+				C257BE43A525949EEAD6752875FCE972 /* NXLRView.swift in Sources */,
+				D20183E713E6FB9E5E795640DC5E4CF5 /* NXNavigationController.swift in Sources */,
+				918AD040320EB6726A1C4AF850F60864 /* NXNavigationView.swift in Sources */,
+				56B7A959D20C03677E5C56ED72981D83 /* NXObserver.swift in Sources */,
+				55AE9571764751419574DCBE94FC7F89 /* NXOverlay.swift in Sources */,
+				05687B2F4CCBBE18AC1AFC2A845E2574 /* NXPlaceholderView.swift in Sources */,
+				EB94BFBF77E360EA013D9BC3BC96D13F /* NXRequest.swift in Sources */,
+				44AD3E390F8D7A7414FFAEE91CF5AE94 /* NXRouter.swift in Sources */,
+				13AB3F252AA2DBE6E770CDE03EBD51CB /* NXRuntime.swift in Sources */,
+				5399309522C51452A1C62995C0132ADA /* NXScrollView.swift in Sources */,
+				B4236CE17F152FC2F10B6A5257385D39 /* NXSearchView.swift in Sources */,
+				91688AE9D5D010234D06AF163E48800E /* NXSerialization.swift in Sources */,
+				D6CE8A6EB974D1F3DFD5B97AD1E9D036 /* NXShadowView.swift in Sources */,
+				641572ADF58F00106D50CF07FE33D577 /* NXStorage.swift in Sources */,
+				4A7E8E8F53F4D519DAF3094473246FA9 /* NXString.swift in Sources */,
+				879CD9C3CC3ED2839D858CA4A04640B4 /* NXSuspendView.swift in Sources */,
+				B52A87664CE8D81A8AA1FD58961C969F /* NXSwipeView.swift in Sources */,
+				72EC834439D65C56C64212C44C8E199C /* NXSwipeViewController.swift in Sources */,
+				D47BEF9210C3534663C0D70BBED3BD21 /* NXSwitch.swift in Sources */,
+				77668D68BDAC8B5981B6DFF99154455B /* NXTableReusableView.swift in Sources */,
+				26828FEFE666A39BEB2B53CA914D073B /* NXTableView.swift in Sources */,
+				917029D252788B5B6D7482264B5407B5 /* NXTableViewCell.swift in Sources */,
+				FD9F6A6A9B0DF0359CEDB520B87B5C8F /* NXTableViewController.swift in Sources */,
+				DDC575F4EDDB71AD8AA6E0DE18737C42 /* NXTextField.swift in Sources */,
+				E686164E36B872E9522372FEB70D3D44 /* NXTextView.swift in Sources */,
+				E7AFAF658F8AE55B3DAD63A8B494E89F /* NXToolView.swift in Sources */,
+				69CDAD42EC21BAD252ABE454DF9A14AB /* NXToolViewController.swift in Sources */,
+				7CBB5BB7E3CC42A41C9D32F57C662705 /* NXTransitionView.swift in Sources */,
+				3687DEB2ED5AAE64E46BE805065FAEB0 /* NXView.swift in Sources */,
+				5F1F5E7AB9D88B6B8CF0F6F2F5E2358E /* NXViewController.swift in Sources */,
+				894A5200BC6206981301C9D8373AA3EE /* NXViewControllerAnimation.swift in Sources */,
+				C96FF44C77170F1D20CDD0334B8081CA /* NXViewControllerView.swift in Sources */,
+				979CCF0A29706CC915437ACF4803D6A7 /* NXWebView.swift in Sources */,
+				4E6C01A71B4BB133E78D2A64612F6E9A /* NXWebViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F939C77E2CA40F71FDEE88D03D1AECB9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -247,34 +686,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		061FC75043DE553F88175F9D2CAD94BD /* PBXTargetDependency */ = {
+		68A3585426822A93ADD522477BE9C35D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = NXKit;
 			target = 65356E389A75B118329D272175C636AA /* NXKit */;
-			targetProxy = 43B733734F8E14DADC9144E15F6ED67B /* PBXContainerItemProxy */;
+			targetProxy = 9DF0ECB7979D071970BCC7A6BFAB3B99 /* PBXContainerItemProxy */;
+		};
+		B0B87C4C34306C43DC4DE3F140023036 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "NXKit-NXKit";
+			target = 4E8176B9C15F8A61E959200B92017EE1 /* NXKit-NXKit */;
+			targetProxy = 46A4114D37ED0E8D64CE0CA1D9401B24 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		2585FCB53C4E923D70A25AB747BB655E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D5F985C8D79D3EC57DEBC3D3F18A5FF3 /* NXKit.release.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		2B9E26EAE2CD392AD762421F663075A1 /* Debug */ = {
+		90D4D09BCB6A4660E43ACBE9ECB6FE9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -327,7 +754,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -340,9 +767,9 @@
 			};
 			name = Debug;
 		};
-		2D65F7DD1E4BCE2C137F35955EBD5687 /* Debug */ = {
+		91DFFC5B2AE2B235CDC712871118CB3F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8691D8D65A408C9EC5CCBB68F2DAA639 /* Pods-NXKit_Example.debug.xcconfig */;
+			baseConfigurationReference = 5440B40E69CE90ACF6D459D400FE6ED7 /* Pods-NXKit_Example.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -360,7 +787,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example.modulemap";
@@ -372,12 +799,13 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
-		63FAF33E1C55B71A5F5A8B3CC8749F99 /* Release */ = {
+		9553C89E183877A5CB2F3C6801BEC129 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -427,7 +855,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -439,9 +867,120 @@
 			};
 			name = Release;
 		};
-		AFB98B0DB9ADF7C4B3EFC84D918F46C0 /* Release */ = {
+		9829BD4265C4102C5707F18DB4700D72 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD363FDF8F77B0A0F590CEE4A47D600D /* Pods-NXKit_Example.release.xcconfig */;
+			baseConfigurationReference = DCE7898AE8E51D4444EF427CAA0A56A2 /* NXKit.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_IDENTITY = "";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/NXKit";
+				IBSC_MODULE = NXKit;
+				INFOPLIST_FILE = "Target Support Files/NXKit/ResourceBundle-NXKit-NXKit-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_NAME = NXKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		B33769AB556687F4A9BB10C840A80955 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DCE7898AE8E51D4444EF427CAA0A56A2 /* NXKit.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/NXKit/NXKit-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/NXKit/NXKit-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/NXKit/NXKit.modulemap";
+				PRODUCT_MODULE_NAME = NXKit;
+				PRODUCT_NAME = NXKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BB4EC83A905F99C8DD112D14A4AB55F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 169567A82AC4760ED77D7F139EAED388 /* NXKit.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/NXKit/NXKit-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/NXKit/NXKit-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/NXKit/NXKit.modulemap";
+				PRODUCT_MODULE_NAME = NXKit;
+				PRODUCT_NAME = NXKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C3E6E8889D60ECF5A163F2D2F0762317 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 169567A82AC4760ED77D7F139EAED388 /* NXKit.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_IDENTITY = "";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/NXKit";
+				IBSC_MODULE = NXKit;
+				INFOPLIST_FILE = "Target Support Files/NXKit/ResourceBundle-NXKit-NXKit-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_NAME = NXKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		FE24E988A6FA3B7343B010288469C1F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 78BAFE4FC54880F30EDF0C721CA6B172 /* Pods-NXKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -459,7 +998,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-NXKit_Example/Pods-NXKit_Example.modulemap";
@@ -471,46 +1010,37 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		F530D452F9726613D99DF6BCEE36118D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6BAD998CC52925E9F8118D839967C37 /* NXKit.debug.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+		3250D6DA685E4A63CB094D21377A85B5 /* Build configuration list for PBXNativeTarget "NXKit-NXKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2B9E26EAE2CD392AD762421F663075A1 /* Debug */,
-				63FAF33E1C55B71A5F5A8B3CC8749F99 /* Release */,
+				9829BD4265C4102C5707F18DB4700D72 /* Debug */,
+				C3E6E8889D60ECF5A163F2D2F0762317 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		942340E30F64095A9F555312F08A0CFD /* Build configuration list for PBXAggregateTarget "NXKit" */ = {
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F530D452F9726613D99DF6BCEE36118D /* Debug */,
-				2585FCB53C4E923D70A25AB747BB655E /* Release */,
+				90D4D09BCB6A4660E43ACBE9ECB6FE9A /* Debug */,
+				9553C89E183877A5CB2F3C6801BEC129 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A0C68163B853F6E9793C4CCD67DB0F53 /* Build configuration list for PBXNativeTarget "NXKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B33769AB556687F4A9BB10C840A80955 /* Debug */,
+				BB4EC83A905F99C8DD112D14A4AB55F8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -518,8 +1048,8 @@
 		B37C6840A1773FFB73ACB98D214F0E73 /* Build configuration list for PBXNativeTarget "Pods-NXKit_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2D65F7DD1E4BCE2C137F35955EBD5687 /* Debug */,
-				AFB98B0DB9ADF7C4B3EFC84D918F46C0 /* Release */,
+				FE24E988A6FA3B7343B010288469C1F4 /* Debug */,
+				91DFFC5B2AE2B235CDC712871118CB3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

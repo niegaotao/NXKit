@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol NXAnyRepresentable: AnyObject, Equatable {
+public protocol NXAnyRepresentable: AnyObject {
     var reuse: NXReuseDescriptor { get }
     var size: CGSize { get set }
 
@@ -20,10 +20,6 @@ public protocol NXAnyRepresentable: AnyObject, Equatable {
 }
 
 public extension NXAnyRepresentable {
-    static func == (lhs: any NXAnyRepresentable, rhs: any NXAnyRepresentable) -> Bool {
-        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
-    }
-
     func update(_ cls: AnyClass, _ reuse: String) {
         self.reuse.cls = cls
         self.reuse.id = reuse

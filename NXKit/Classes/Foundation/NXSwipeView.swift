@@ -82,7 +82,17 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         contentView.addSubview(sliderView)
     }
 
+    private var previousLayoutSize = CGSize.zero
+
+    override open func layoutSubviews() {
+        super.layoutSubviews()
+        if bounds.size != previousLayoutSize {
+            updateSubviews(nil)
+        }
+    }
+
     override open func updateSubviews(_ value: Any?) {
+        previousLayoutSize = bounds.size
         if let attributes = value as? NXSwipeView.Attributes {
             self.attributes.copy(fromValue: attributes)
             self.attributes.index = min(max(0, self.attributes.index), self.attributes.elements.count)
@@ -102,14 +112,14 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
             item.unselected.appearance = attributes.unselectedAppearance
 
             item.selected.width = item.title.stringSize(font: attributes.selectedAppearance.font,
-                                                        size: CGSize(width: NXKit.width, height: 44)).width + 2.0
+                                                        size: CGSize(width: max(1, bounds.width), height: 44)).width + 2.0
             item.unselected.width = item.title.stringSize(font: attributes.unselectedAppearance.font,
-                                                          size: CGSize(width: NXKit.width, height: 44)).width + 2.0
+                                                          size: CGSize(width: max(1, bounds.width), height: 44)).width + 2.0
         }
 
         if attributes.isEqually {
             let maximumOfComponents = max(min(attributes.maximumOfComponents, CGFloat(attributes.elements.count)), 1.0)
-            let widthOfComponents = (width - attributes.insets.left - attributes.insets.right) / CGFloat(maximumOfComponents)
+            let widthOfComponents = max(0, width - attributes.insets.left - attributes.insets.right) / maximumOfComponents
             for (_, item) in attributes.elements.enumerated() {
                 item.selected.size = CGSize(width: widthOfComponents, height: height)
                 item.unselected.size = CGSize(width: widthOfComponents, height: height)
@@ -126,7 +136,8 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
 
         // 矫正位置
         DispatchQueue.main.asyncAfter(delay: 0.01) {
-            if self.contentView.contentSize.width > self.contentView.width {
+            if self.attributes.elements.indices.contains(self.attributes.index),
+               self.contentView.contentSize.width > self.contentView.width {
                 let indexPath = IndexPath(row: self.attributes.index, section: 0)
                 self.contentView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             }
@@ -138,13 +149,13 @@ open class NXSwipeView: NXBackgroundView<UIImageView, NXCollectionView>, UIColle
         let item = attributes.elements[index]
         item.title = title
         item.selected.width = title.stringSize(font: attributes.selectedAppearance.font,
-                                               size: CGSize(width: NXKit.width, height: 44)).width + 2.0
+                                               size: CGSize(width: max(1, bounds.width), height: 44)).width + 2.0
         item.unselected.width = title.stringSize(font: attributes.unselectedAppearance.font,
-                                                 size: CGSize(width: NXKit.width, height: 44)).width + 2.0
+                                                 size: CGSize(width: max(1, bounds.width), height: 44)).width + 2.0
 
         if attributes.isEqually {
             let maximumOfComponents = max(min(attributes.maximumOfComponents, CGFloat(attributes.elements.count)), 1.0)
-            let widthOfComponents = (width - attributes.insets.left - attributes.insets.right) / CGFloat(maximumOfComponents)
+            let widthOfComponents = max(0, width - attributes.insets.left - attributes.insets.right) / maximumOfComponents
 
             item.selected.size = CGSize(width: widthOfComponents, height: height)
             item.unselected.size = CGSize(width: widthOfComponents, height: height)

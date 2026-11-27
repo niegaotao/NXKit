@@ -109,7 +109,7 @@ open class NXSwitch: NXControl {
         onBackgroundView.backgroundColor = onTintColor
         onBackgroundView.layer.cornerRadius = onBackgroundView.y
         onBackgroundView.layer.shouldRasterize = true
-        onBackgroundView.layer.rasterizationScale = UIScreen.main.scale
+        onBackgroundView.layer.rasterizationScale = traitCollection.displayScale
         addSubview(onBackgroundView)
 
         offBackgroundView.isUserInteractionEnabled = false
@@ -117,7 +117,7 @@ open class NXSwitch: NXControl {
         offBackgroundView.backgroundColor = offTintColor
         offBackgroundView.layer.cornerRadius = onBackgroundView.y
         offBackgroundView.layer.shouldRasterize = true
-        offBackgroundView.layer.rasterizationScale = UIScreen.main.scale
+        offBackgroundView.layer.rasterizationScale = traitCollection.displayScale
         addSubview(offBackgroundView)
 
         thumbView.frame = CGRect(x: 0, y: 0, width: height - horizontalAdjustment, height: height - horizontalAdjustment)
@@ -128,7 +128,7 @@ open class NXSwitch: NXControl {
         thumbView.layer.shouldRasterize = true
         thumbView.layer.shadowOpacity = shadowOpacity
         thumbView.layer.shadowRadius = shadowRadius
-        thumbView.layer.rasterizationScale = UIScreen.main.scale
+        thumbView.layer.rasterizationScale = traitCollection.displayScale
         addSubview(thumbView)
         thumbView.center = CGPoint(x: thumbView.width / 2.0, y: height / 2.0)
 

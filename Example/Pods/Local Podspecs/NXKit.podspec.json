@@ -37,9 +37,7 @@
       "name": "Extensions",
       "source_files": "NXKit/Classes/Extensions/*",
       "dependencies": {
-        "NXKit/Foundation": [
-
-        ]
+        "NXKit/Foundation": []
       }
     }
   ],

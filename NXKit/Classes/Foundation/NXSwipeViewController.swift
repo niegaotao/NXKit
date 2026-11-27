@@ -59,7 +59,7 @@ open class NXSwipeViewController: NXChildrenViewController, UIScrollViewDelegate
               attributes.index != toValue else { return }
 
         currentViewController = viewControllers[toValue]
-        scrollView.setContentOffset(CGPoint(x: view.width * CGFloat(toValue), y: 0), animated: true)
+        scrollView.setContentOffset(CGPoint(x: scrollView.bounds.width * CGFloat(toValue), y: 0), animated: true)
     }
 
     override open func updateSubviews(_ value: Any?) {
@@ -68,18 +68,9 @@ open class NXSwipeViewController: NXChildrenViewController, UIScrollViewDelegate
         }
 
         if attributes.location == .navigationView {
-            swipeView.frame = CGRect(x: 80, y: 0, width: NXKit.width - 80 * 2, height: 44)
             navigationView.centerView = swipeView
-            navigationView.updateSubviews(nil)
-
-            scrollView.frame = CGRect(x: 0, y: 0, width: NXKit.width, height: contentView.height)
-            scrollView.contentSize = contentView.bounds.size
-        } else if attributes.location == .contentView {
-            swipeView.frame = CGRect(x: 0, y: 0, width: NXKit.width, height: 44)
+        } else {
             contentView.addSubview(swipeView)
-
-            scrollView.frame = CGRect(x: 0, y: 44, width: NXKit.width, height: contentView.height - 44)
-            scrollView.contentSize = contentView.bounds.size
         }
 
         // 移除历史数据
@@ -110,20 +101,55 @@ open class NXSwipeViewController: NXChildrenViewController, UIScrollViewDelegate
 
         swipeView.updateSubviews(attributes)
 
-        if attributes.index >= 1 {
-            scrollView.setContentOffset(CGPoint(x: view.width * CGFloat(attributes.index), y: 0), animated: false)
+        layoutPages()
+    }
+
+    override open func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        layoutPages()
+    }
+
+    private var isLayingOutPages = false
+
+    private func layoutPages() {
+        let inNavigation = attributes.location == .navigationView
+        let width = contentView.bounds.width
+        let top: CGFloat = inNavigation ? 0 : 44
+        let barWidth = inNavigation ? max(0, width - 160) : width
+        let pageFrame = CGRect(x: 0, y: top, width: width, height: max(0, contentView.bounds.height - top))
+        let sizeChanged = scrollView.bounds.size != pageFrame.size
+        let selectedIndex = attributes.index
+        let barSize = CGSize(width: barWidth, height: 44)
+        if swipeView.bounds.size != barSize {
+            swipeView.frame.size = barSize
+            if inNavigation { navigationView.setNeedsLayout() }
+        }
+        isLayingOutPages = true
+        defer { isLayingOutPages = false }
+        scrollView.frame = pageFrame
+        scrollView.contentSize = CGSize(width: width * CGFloat(viewControllers.count), height: pageFrame.height)
+        for (index, controller) in viewControllers.enumerated() {
+            controller.viewIfLoaded?.frame = CGRect(x: width * CGFloat(index), y: 0,
+                                                    width: width, height: pageFrame.height)
+        }
+        if sizeChanged || (!scrollView.isDragging && !scrollView.isDecelerating) {
+            let offset = CGPoint(x: width * CGFloat(selectedIndex), y: 0)
+            if scrollView.contentOffset != offset {
+                scrollView.contentOffset = offset
+            }
         }
     }
 
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let p = scrollView.contentOffset
-        let index = Int((p.x + CGFloat(NXKit.width) * 0.5) / CGFloat(NXKit.width))
-        if index < viewControllers.count {
+        let width = scrollView.bounds.width
+        guard width > 0, !isLayingOutPages else { return }
+        let index = Int((scrollView.contentOffset.x / width).rounded())
+        if viewControllers.indices.contains(index) {
             attributes.index = index
             swipeView.didSelectView(at: index)
             currentViewController = viewControllers[index]
             if let vc = currentViewController {
-                vc.view.frame = CGRect(origin: CGPoint(x: contentView.width * Double(index), y: 0), size: contentView.frame.size)
+                vc.view.frame = CGRect(origin: CGPoint(x: width * CGFloat(index), y: 0), size: scrollView.bounds.size)
                 self.scrollView.addSubview(vc.view)
             }
         }

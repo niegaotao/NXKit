@@ -89,6 +89,16 @@ class EXViewController: NXTableViewController {
         }
     }
 
+    private var lastTableWidth: CGFloat = 0
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let width = tableView.bounds.width
+        guard width > 0, width != lastTableWidth else { return }
+        lastTableWidth = width
+        updateSubviews(nil)
+    }
+
     // 刷新UI
     override func updateSubviews(_: Any?) {
         data.removeAll()
@@ -97,21 +107,21 @@ class EXViewController: NXTableViewController {
             let section = data.addSection(cls: NXTableReusableView.self, reuse: "NXTableReusableView", height: 10)
             for dicValue in arrSubvalues {
                 let item = NXAbstract(value: dicValue, completion: nil)
-                item.ctxs.update(NXAbstractViewCell.self, "NXAbstractViewCell")
-                item.ctxs.size = CGSize(width: NXKit.width, height: 56)
+                item.update(NXAbstractViewCell.self, "NXAbstractViewCell")
+                item.size = CGSize(width: tableView.bounds.width, height: 56)
 
                 item.asset.isHidden = true
 
                 item.title.isHidden = false
                 item.title.value = NXKit.get(string: dicValue["title"] as? String)
-                item.title.frame = CGRect(x: 15, y: 0, width: NXKit.width - 30, height: item.ctxs.height)
+                item.title.frame = CGRect(x: 15, y: 0, width: tableView.bounds.width - 30, height: item.size.height)
 
                 item.subtitle.isHidden = true
 
                 item.value.isHidden = true
 
                 item.arrow.isHidden = false
-                item.arrow.frame = CGRect(x: NXKit.width - 15 - 6, y: (item.ctxs.height - 12) / 2.0, width: 6, height: 12)
+                item.arrow.frame = CGRect(x: tableView.bounds.width - 15 - 6, y: (item.size.height - 12) / 2.0, width: 6, height: 12)
                 item.arrow.image = NXKit.image(named: "icon-arrow.png")
 
                 item.raw.separator.ats = .maxY
@@ -120,14 +130,14 @@ class EXViewController: NXTableViewController {
             }
         }
 
-        tableView.updateSubviews("", nil)
+        tableView.updateSubviews(nil)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
         if let item = data[indexPath] as? NXAbstract {
-            if let operation = item.ctxs.value?["operation"] as? String, operation.count > 0 {
+            if let operation = item.additionalValue?["operation"] as? String, operation.count > 0 {
                 if operation == "NXViewController" {
                     let vc = NXViewController()
                     vc.title = operation

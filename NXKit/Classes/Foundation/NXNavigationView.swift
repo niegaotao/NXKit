@@ -27,10 +27,11 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
         }
     }
 
-    open var titleView = UILabel(frame: CGRect(x: 75.0, y: NXKit.safeAreaInsets.top, width: NXKit.width - 75.0 * 2, height: 44.0))
+    open var titleView = UILabel(frame: .zero)
     open var centerView: UIView? {
         willSet {
             centerView?.removeFromSuperview()
+            if centerView != nil && newValue == nil { titleView.isHidden = false }
         }
         didSet {
             updateSubviews(nil)
@@ -73,7 +74,7 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         contentView.backgroundColor = UIColor.clear
 
-        titleView.frame = CGRect(x: 75.0, y: NXKit.safeAreaInsets.top, width: contentView.width - 75.0 * 2, height: contentView.height - NXKit.safeAreaInsets.top)
+        titleView.frame = CGRect(x: 75.0, y: safeAreaInsets.top, width: max(0, contentView.width - 75.0 * 2), height: contentView.height - safeAreaInsets.top)
         titleView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         titleView.textColor = NXKit.barForegroundColor
         titleView.tintColor = NXKit.barForegroundColor
@@ -89,7 +90,7 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
             }
         })
         backBarButton.autoresizingMask = [.flexibleHeight]
-        backBarButton.frame = CGRect(x: 15, y: NXKit.safeAreaInsets.top, width: backBarButton.width, height: contentView.height - NXKit.safeAreaInsets.top)
+        backBarButton.frame = CGRect(x: 15, y: safeAreaInsets.top, width: backBarButton.width, height: contentView.height - safeAreaInsets.top)
         backBarButton.isHidden = true
         contentView.addSubview(backBarButton)
 
@@ -99,12 +100,26 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
         contentView.layer.addSublayer(separator)
     }
 
+    override open func layoutSubviews() {
+        super.layoutSubviews()
+        layoutBarItems()
+    }
+
     override open func updateSubviews(_: Any?) {
-        separator.frame = CGRect(x: 0, y: contentView.height - NXKit.pixel, width: contentView.width, height: NXKit.pixel)
+        layoutBarItems()
+    }
+
+    private func layoutBarItems() {
+        let leading = safeAreaInsets.left + 15
+        let trailing = contentView.bounds.width - safeAreaInsets.right - 15
+        let itemTop = safeAreaInsets.top
+        let itemHeight = max(0, contentView.bounds.height - itemTop)
+        let pixel = 1 / max(traitCollection.displayScale, 1)
+        separator.frame = CGRect(x: 0, y: contentView.height - pixel, width: contentView.width, height: pixel)
 
         if true {
             let size = backBarButton.frame.size
-            backBarButton.frame = CGRect(x: 15, y: NXKit.safeAreaInsets.top + (contentView.height - NXKit.safeAreaInsets.top - size.height) / 2, width: size.width, height: size.height)
+            backBarButton.frame = CGRect(x: leading, y: itemTop + (itemHeight - size.height) / 2, width: size.width, height: size.height)
 
             if let controller = controller,
                let viewControllers = self.controller?.navigationController?.viewControllers,
@@ -116,7 +131,7 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
 
         if let leftView = leftView {
             let size = leftView.frame.size
-            leftView.frame = CGRect(x: 15, y: NXKit.safeAreaInsets.top + (contentView.height - NXKit.safeAreaInsets.top - size.height) / 2, width: size.width, height: size.height)
+            leftView.frame = CGRect(x: leading, y: itemTop + (itemHeight - size.height) / 2, width: size.width, height: size.height)
             if leftView.superview == nil {
                 contentView.addSubview(leftView)
             }
@@ -129,13 +144,13 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
             } else if let title = controller?.title, title.count > 0 {
                 titleView.text = title
             }
-            let size = titleView.frame.size
-            titleView.frame = CGRect(x: titleView.x, y: NXKit.safeAreaInsets.top + (contentView.height - NXKit.safeAreaInsets.top - size.height) / 2, width: size.width, height: size.height)
+            let margin = max(safeAreaInsets.left, safeAreaInsets.right) + 75
+            titleView.frame = CGRect(x: margin, y: itemTop, width: max(0, bounds.width - margin * 2), height: itemHeight)
         }
 
         if let centerView = centerView {
             let size = centerView.frame.size
-            centerView.frame = CGRect(x: centerView.x, y: NXKit.safeAreaInsets.top + (contentView.height - NXKit.safeAreaInsets.top - size.height) / 2, width: size.width, height: size.height)
+            centerView.frame = CGRect(x: leading + max(0, trailing - leading - size.width) / 2, y: itemTop + (itemHeight - size.height) / 2, width: min(size.width, max(0, trailing - leading)), height: size.height)
             if centerView.superview == nil {
                 contentView.addSubview(centerView)
             }
@@ -144,13 +159,13 @@ open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
 
         if let rightView = rightView {
             let size = rightView.frame.size
-            rightView.frame = CGRect(x: contentView.width - 15 - size.width, y: NXKit.safeAreaInsets.top + (contentView.height - NXKit.safeAreaInsets.top - size.height) / 2, width: size.width, height: size.height)
+            rightView.frame = CGRect(x: trailing - size.width, y: itemTop + (itemHeight - size.height) / 2, width: size.width, height: size.height)
             if rightView.superview == nil {
                 contentView.addSubview(rightView)
             }
         } else if let rightBarButton = rightBarButton {
             let size = rightBarButton.frame.size
-            rightBarButton.frame = CGRect(x: contentView.width - 15 - size.width, y: NXKit.safeAreaInsets.top + (contentView.height - NXKit.safeAreaInsets.top - size.height) / 2, width: size.width, height: size.height)
+            rightBarButton.frame = CGRect(x: trailing - size.width, y: itemTop + (itemHeight - size.height) / 2, width: size.width, height: size.height)
             if rightBarButton.superview == nil {
                 contentView.addSubview(rightBarButton)
             }

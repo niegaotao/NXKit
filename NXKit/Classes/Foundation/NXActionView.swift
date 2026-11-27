@@ -52,7 +52,7 @@ public extension NXActionView {
          center:20,60,actionView.ctxs.header.frame.width - 40, __height
          空白20
          */
-        let actionView = NXActionView(frame: UIScreen.main.bounds)
+        let actionView = NXActionView(frame: CGRect(origin: .zero, size: NXKit.size))
         actionView.ctxs.key = NXActionView.Key.alert.rawValue
         actionView.ctxs.wrap(header: .header(true, false, true, false, title, subtitle)) // header
         actionView.ctxs.wrap(center: .center(actions)) // center
@@ -82,7 +82,7 @@ public extension NXActionView {
 
     @discardableResult
     class func action(actions: [NXAbstract], header: NXActionView.Attachment, footer: NXActionView.Attachment, completion: NXKit.Event<String, Int>?) -> NXActionView {
-        let actionView = NXActionView(frame: UIScreen.main.bounds)
+        let actionView = NXActionView(frame: CGRect(origin: .zero, size: NXKit.size))
         actionView.ctxs.key = NXActionView.Key.action.rawValue
         actionView.ctxs.wrap(header: header) // header
         actionView.ctxs.wrap(center: .center(actions)) // center
@@ -367,11 +367,31 @@ public class NXActionView: NXAbstractOverlay<NXActionViewAttributes> {
         contentView.addSubview(footerView)
     }
 
+    override public func open(animation: NXOverlay.Animation.RawValue, completion: NXKit.Completion<Bool>?) {
+        if let window = NXKit.mainWindow {
+            frame = window.bounds
+            autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        }
+        super.open(animation: animation, completion: completion)
+    }
+
+    private var laidOutSafeFrame = CGRect.null
+
+    override open func layoutSubviews() {
+        super.layoutSubviews()
+        let safeFrame = safeAreaLayoutGuide.layoutFrame
+        if laidOutSafeFrame != safeFrame {
+            updateSubviews(nil)
+        }
+    }
+
     override open func updateSubviews(_: Any?) {
+        let safeFrame = safeAreaLayoutGuide.layoutFrame
+        laidOutSafeFrame = safeFrame
         if ctxs.key.contains("center") {
             ctxs.animation = NXOverlay.Animation.center.rawValue
 
-            ctxs.size = CGSize(width: NXKit.width * 0.8, height: 0.0)
+            ctxs.size = CGSize(width: safeFrame.width * 0.8, height: 0.0)
             contentView.layer.cornerRadius = 8
             contentView.layer.masksToBounds = true
             contentView.backgroundColor = NXKit.backgroundColor
@@ -379,7 +399,7 @@ public class NXActionView: NXAbstractOverlay<NXActionViewAttributes> {
         } else if ctxs.key.contains("footer") {
             ctxs.animation = NXOverlay.Animation.footer.rawValue
 
-            ctxs.size = CGSize(width: NXKit.width * 1.0, height: 0.0)
+            ctxs.size = CGSize(width: safeFrame.width, height: 0.0)
 
             if ctxs.devide > 0 {
                 ctxs.center.backgroundColor = NXKit.viewBackgroundColor
@@ -393,7 +413,7 @@ public class NXActionView: NXAbstractOverlay<NXActionViewAttributes> {
         ctxs.center.frame.size.width = ctxs.size.width
 
         ctxs.center.frame.size.height = NXActionView.Center.center(ctxs).height
-        ctxs.center.frame.size.height = min(ctxs.center.frame.height, ctxs.max - ctxs.header.frame.size.height - ctxs.footer.frame.height) // 最优高度
+        ctxs.center.frame.size.height = max(0, min(ctxs.center.frame.height, min(ctxs.max, safeFrame.height * 0.70) - ctxs.header.frame.size.height - ctxs.footer.frame.height)) // 最优高度
 
         // 1
         if ctxs.header.frame.size.height > 0 {
@@ -427,9 +447,9 @@ public class NXActionView: NXAbstractOverlay<NXActionViewAttributes> {
         footerView.updateSubviews(ctxs)
 
         if ctxs.key.contains("center") {
-            contentView.frame = CGRect(x: (ctxs.size.width - ctxs.size.width) / 2.0, y: (ctxs.size.height - ctxs.size.height) / 2.0, width: ctxs.size.width, height: ctxs.size.height)
+            contentView.frame = CGRect(x: safeFrame.midX - ctxs.size.width / 2, y: safeFrame.midY - ctxs.size.height / 2, width: ctxs.size.width, height: ctxs.size.height)
         } else if ctxs.key.contains("footer") {
-            contentView.frame = CGRect(x: (frame.size.width - ctxs.size.width) / 2.0, y: frame.size.height - ctxs.size.height, width: ctxs.size.width, height: ctxs.size.height)
+            contentView.frame = CGRect(x: safeFrame.minX, y: bounds.maxY - ctxs.size.height, width: ctxs.size.width, height: ctxs.size.height)
         }
     }
 }

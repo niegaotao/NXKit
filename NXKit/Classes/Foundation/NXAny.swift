@@ -10,7 +10,7 @@ import UIKit
 
 open class NXAny: Equatable {
     public static func == (lhs: NXAny, rhs: NXAny) -> Bool {
-        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+        return lhs === rhs
     }
 
     public required init() {}

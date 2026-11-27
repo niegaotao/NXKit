@@ -11,8 +11,6 @@ import UIKit
 
 @UIApplicationMain
 class EXAppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
-
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // 授权
         NXKit.Imp.authorization = { type, queue, isAlertable, completion in
@@ -25,14 +23,20 @@ class EXAppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        window = UIWindow(frame: UIScreen.main.bounds)
-        if #available(iOS 13.0, *) {
-            self.window?.overrideUserInterfaceStyle = .light
-        }
-        EXApp.naviController.pushViewController(EXViewController(), animated: false)
-        window?.rootViewController = EXApp.naviController
-        window?.makeKeyAndVisible()
-
         return true
+    }
+}
+
+class EXSceneDelegate: UIResponder, UIWindowSceneDelegate {
+    var window: UIWindow?
+
+    func scene(_ scene: UIScene, willConnectTo _: UISceneSession, options _: UIScene.ConnectionOptions) {
+        guard let windowScene = scene as? UIWindowScene else { return }
+        let window = UIWindow(windowScene: windowScene)
+        window.overrideUserInterfaceStyle = .light
+        EXApp.naviController.setViewControllers([EXViewController()], animated: false)
+        window.rootViewController = EXApp.naviController
+        self.window = window
+        window.makeKeyAndVisible()
     }
 }
