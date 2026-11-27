@@ -14,7 +14,6 @@ import UIKit
  3.基础功能类似于UINavigationTransitionView,即让即将展示的控制器视图在这个视图上做动画
  */
 
-
 open class NXTransitionView: NXView {
     
     open weak var owner: NXViewController!

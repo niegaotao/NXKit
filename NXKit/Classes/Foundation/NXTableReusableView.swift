@@ -35,12 +35,4 @@ open class NXTableReusableView: UITableViewHeaderFooterView {
             self.contentView.backgroundColor = element.ctxs.backgroundColor ?? UIColor.clear
         }
     }
-    
-    open func willDisplay(_ data: Any?){
-    
-    }
-    
-    open func didEndDisplay(_ data: Any?){
-    
-    }
 }

@@ -106,6 +106,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
         guard let targetEntity = (edge.value(forKey: "_targets") as? [NSObject])?.first else { return }
         guard let target = targetEntity.value(forKey: "target") else { return }
         let action = Selector(("handleNavigationTransition:"))
+        edge.isEnabled = false
         
         panRecognizer.addTarget(target, action: action)
         panRecognizer.delegate = self as UIGestureRecognizerDelegate
@@ -182,7 +183,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                 if fromViewController.ctxs.viewControllers.count > 0 {
                     return false
                 }
-                return fromViewController.ctxs.onBackInvoked("", panRecognizer)
+                return fromViewController.ctxs.onBackInvoked(panRecognizer)
             }
             
             //支持返回
@@ -434,8 +435,8 @@ extension NXNavigationController {
         public let semaphore = DispatchSemaphore(value: 1)
         open var duration : TimeInterval = 0.3
         
-        open var lifecycleValue = NXKit.Lifecycle.initialized;
-        open var lifecycle : NXKit.Event<NXKit.Lifecycle, NXNavigationController>? = nil;
+        open var lifecycleValue = NXKit.Lifecycle.initialized
+        open var lifecycle : NXKit.Event<NXKit.Lifecycle, NXNavigationController>? = nil
         
         ///初始化方法
         public init(){}
