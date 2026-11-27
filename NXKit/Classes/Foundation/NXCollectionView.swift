@@ -11,7 +11,7 @@ import UIKit
 open class NXCollectionView: UICollectionView, UIGestureRecognizerDelegate {
     open weak var value : NXCollectionWrapper?
     
-    open var wrapped : NXCollectionView.Wrapped? {
+    open var ctxs : NXCollectionView.Wrapped? {
         if let __wrapper = self.collectionViewLayout as? NXCollectionView.Wrapped {
             return __wrapper
         }

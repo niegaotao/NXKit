@@ -25,10 +25,10 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
         self.contentView.frame = CGRect(x: 0, y: NXUI.topOffset+44, width: NXUI.width, height: self.view.h-(NXUI.topOffset+44))
         
         collectionView = NXCollectionView(frame: self.contentView.bounds)
-        collectionView?.wrapped?.scrollDirection = .horizontal
-        collectionView?.wrapped?.sectionInset = UIEdgeInsets.zero
-        collectionView?.wrapped?.minimumLineSpacing = 0.0
-        collectionView?.wrapped?.minimumInteritemSpacing = 0.0
+        collectionView?.ctxs?.scrollDirection = .horizontal
+        collectionView?.ctxs?.sectionInset = UIEdgeInsets.zero
+        collectionView?.ctxs?.minimumLineSpacing = 0.0
+        collectionView?.ctxs?.minimumInteritemSpacing = 0.0
         collectionView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView?.backgroundColor = NX.collectionViewBackgroundColor
         collectionView?.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
@@ -144,7 +144,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let p = scrollView.contentOffset
         let index = Int((p.x + CGFloat(NXUI.width) * 0.5) / CGFloat(NXUI.width))
-        if index != self.swipeView.wrapped.index && index >= 0 && index < subviewControllers.count {
+        if index != self.swipeView.ctxs.index && index >= 0 && index < subviewControllers.count {
             self.swipeView.didSelectItem(at: index)
             self.selectedViewController = self.subviewControllers[index]
         }

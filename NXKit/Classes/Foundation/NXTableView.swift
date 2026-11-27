@@ -81,11 +81,11 @@ open class NXTableView: UITableView {
     //是否显示默认图
     open func updateSubviews(_ action:String, _ value:Any?) {
         if let __value = value as? NXTableDescriptor {
-            self.value?.placeholderView.wrapped.isHidden = !__value.placeholder
+            self.value?.placeholderView.ctxs.isHidden = !__value.placeholder
             self.value?.calcAt = __value.calc
         }
         else {
-            self.value?.placeholderView.wrapped.isHidden = false
+            self.value?.placeholderView.ctxs.isHidden = false
             self.value?.calcAt = true
         }
         
@@ -98,11 +98,11 @@ open class NXTableView: UITableView {
         if let __tableWrapper = self.value {
             if __tableWrapper.sections.isEmpty {
                 
-                if __tableWrapper.placeholderView.wrapped.isHidden == false {
+                if __tableWrapper.placeholderView.ctxs.isHidden == false {
 
                     var size  = CGSize(width: NXUI.width, height: 0)
-                    if __tableWrapper.placeholderView.wrapped.frame.width > 0 && __tableWrapper.placeholderView.wrapped.frame.height > 0 {
-                        size.height = __tableWrapper.placeholderView.wrapped.frame.height
+                    if __tableWrapper.placeholderView.ctxs.frame.width > 0 && __tableWrapper.placeholderView.ctxs.frame.height > 0 {
+                        size.height = __tableWrapper.placeholderView.ctxs.frame.height
                     }
                     else {
                         var ___remainder = self.h - (self.tableHeaderView?.h ?? 0) - (self.tableFooterView?.h ?? 0)

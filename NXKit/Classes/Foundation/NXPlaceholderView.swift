@@ -10,7 +10,7 @@ import UIKit
 
 
 open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>> {
-    public let wrapped = NXPlaceholderView.Wrapped()
+    public let ctxs = NXPlaceholderView.Wrapped()
     
     open var assetView : UIImageView { return self.contentView.lhsView }
     open var descriptionView : UILabel { return self.contentView.centerView }
@@ -23,7 +23,7 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
         super.setupSubviews()
         
         self.layer.masksToBounds = true
-        self.contentView.frame = self.wrapped.frame
+        self.contentView.frame = self.ctxs.frame
         self.contentView.lhsView.frame = NX.Placeholder.m.frame
         if NX.Placeholder.m.image != nil {
             self.contentView.lhsView.image = NX.Placeholder.m.image
@@ -51,12 +51,12 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
         self.contentView.rhsView.isHidden = true
         
         self.contentView.setupEvents([UIControl.Event.tap]) { [weak self](e, v) in
-            self?.wrapped.completion?("", nil)
+            self?.ctxs.completion?("", nil)
         }
     }
     
     open override func updateSubviews(_ action: String, _ value: Any?) {
-        if self.wrapped.isHidden == false {
+        if self.ctxs.isHidden == false {
             
             if let __customizableView = customizableView {
                 __customizableView.isHidden = false

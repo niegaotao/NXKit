@@ -54,9 +54,9 @@ extension NXActionView {
         
         /*
          空白：20
-         title:20,20,actionView.wrapped.header.frame.width - 40, 30
+         title:20,20,actionView.ctxs.header.frame.width - 40, 30
          空白10
-         center:20,60,actionView.wrapped.header.frame.width - 40, __height
+         center:20,60,actionView.ctxs.header.frame.width - 40, __height
          空白20
          */
         let actionView = NXActionView(frame: UIScreen.main.bounds)
@@ -86,6 +86,7 @@ extension NXActionView {
         actionView.ctxs.header.rhs.isHidden = true
         
         //center
+        actionView.ctxs.center.isHidden = false
         actionView.ctxs.center.actions = actions
         
         //footer
@@ -95,8 +96,8 @@ extension NXActionView {
         setup?("setup", actionView)
                 
         actionView.updateSubviews(NXActionView.Key.alert.rawValue, nil)
-        actionView.completion = completion
-        actionView.open(animation: actionView.animation, completion: nil)
+        actionView.ctxs.completion = completion
+        actionView.open(animation: actionView.ctxs.animation, completion: nil)
         return actionView
     }
     
@@ -109,12 +110,12 @@ extension NXActionView {
                 __action.subtitle.isHidden = true
             })
         }
-        return NXActionView.action(actions: __actions, header:(.none, ""), footer: (.footer(true, false, true), "取消"), initialize: nil, completion: completion)
+        return NXActionView.action(actions: __actions, header:.none, footer: .footer(true, false, true,"取消"), initialize: nil, completion: completion)
     }
     
     @discardableResult
     class public func action(actions: [NXAction], completion:NX.Completion<String, Int>?) -> NXActionView {
-        return NXActionView.action(actions: actions, header:(.none, ""), footer: (.footer(true, false, true), "取消"), initialize:nil, completion: completion)
+        return NXActionView.action(actions: actions, header:.none, footer: .footer(true, false, true,"取消"), initialize:nil, completion: completion)
     }
     
     @discardableResult
@@ -123,7 +124,7 @@ extension NXActionView {
         let actionView = NXActionView(frame: UIScreen.main.bounds)
         //header
         
-        if case .header(let lhs, let center, let rhs, let title) = header.enumeration {
+        if case .header(let lhs, let center, let rhs, let title, let value) = header {
             actionView.ctxs.header.isHidden = false
             actionView.ctxs.header.frame.size = CGSize(width: NXUI.width, height: 60)
             actionView.ctxs.header.separator.ats = NX.Ats.maxY
@@ -135,7 +136,7 @@ extension NXActionView {
             
             actionView.ctxs.header.center.isHidden = center
             if actionView.ctxs.header.center.isHidden == false {
-                actionView.ctxs.header.center.value = header.title
+                actionView.ctxs.header.center.value = value
             }
             
             actionView.ctxs.header.rhs.isHidden = rhs
@@ -145,9 +146,9 @@ extension NXActionView {
 
             actionView.ctxs.header.title.isHidden = title
         }
-        else if case .whitespace = header.enumeration {
+        else if case .whitespace(let height) = header {
             actionView.ctxs.header.isHidden = false
-            actionView.ctxs.header.frame.size = CGSize(width: NXUI.width, height: 32)
+            actionView.ctxs.header.frame.size = CGSize(width: NXUI.width, height: height)
             actionView.ctxs.header.separator.ats = NX.Ats.maxY
             
             actionView.ctxs.header.title.isHidden = true
@@ -155,7 +156,7 @@ extension NXActionView {
             actionView.ctxs.header.center.isHidden = true
             actionView.ctxs.header.rhs.isHidden = true
         }
-        else if case .custom(let customView) = header.enumeration {
+        else if case .custom(let customView) = header {
             actionView.ctxs.header.isHidden = false
             actionView.ctxs.header.frame.size = CGSize(width: NXUI.width, height: customView.frame.size.height)
             actionView.ctxs.header.separator.ats = NX.Ats.maxY
@@ -166,7 +167,7 @@ extension NXActionView {
             actionView.ctxs.header.rhs.isHidden = true
             actionView.ctxs.header.customView = customView
         }
-        else if case .none = header.enumeration {
+        else if case .none = header {
             actionView.ctxs.header.isHidden = true
             actionView.ctxs.header.frame.size = CGSize(width: NXUI.width, height: 0)
             actionView.ctxs.header.separator.ats = []
@@ -179,12 +180,12 @@ extension NXActionView {
         
         //center
         actionView.ctxs.center.actions = actions
+        actionView.ctxs.center.isHidden = false
 
         //footer
-        actionView.ctxs.footer.isHidden = false
         actionView.ctxs.footer.separator.ats = []
-        actionView.ctxs.footer.center.value = footer.title.count > 0 ? footer.title : "取消"
-        if case .footer(let lhs, let center, let rhs) = footer.enumeration {
+        if case .footer(let lhs, let center, let rhs, let value) = footer {
+            actionView.ctxs.footer.isHidden = false
             actionView.ctxs.footer.frame.size = CGSize(width: NXUI.width, height: 60+NXUI.bottomOffset)
             actionView.ctxs.footer.title.isHidden = true
             actionView.ctxs.footer.lhs.isHidden = lhs
@@ -192,10 +193,12 @@ extension NXActionView {
             actionView.ctxs.footer.center.frame = CGRect(x: 0, y: 0, width: NXUI.width, height: 60)
             actionView.ctxs.footer.center.font = NX.font(17)
             actionView.ctxs.footer.center.color = NX.mainColor
+            actionView.ctxs.footer.center.value = value.count > 0 ? value : "取消"
             actionView.ctxs.footer.rhs.isHidden = rhs
         }
-        else if case .whitespace = footer.enumeration {
-            actionView.ctxs.footer.frame.size = CGSize(width: NXUI.width, height: 32.0+NXUI.bottomOffset)
+        else if case .whitespace(let height) = footer {
+            actionView.ctxs.footer.isHidden = true
+            actionView.ctxs.footer.frame.size = CGSize(width: NXUI.width, height: height+NXUI.bottomOffset)
             actionView.ctxs.footer.title.isHidden = true
             actionView.ctxs.footer.lhs.isHidden = true
             actionView.ctxs.footer.center.isHidden = true
@@ -203,7 +206,7 @@ extension NXActionView {
             
             actionView.ctxs.devide = 0.0
         }
-        else if case .custom(let customView) = footer.enumeration {
+        else if case .custom(let customView) = footer {
             actionView.ctxs.footer.frame.size = CGSize(width: NXUI.width, height: customView.frame.size.height+NXUI.bottomOffset)
             actionView.ctxs.footer.title.isHidden = true
             actionView.ctxs.footer.lhs.isHidden = true
@@ -211,7 +214,8 @@ extension NXActionView {
             actionView.ctxs.footer.rhs.isHidden = true
             actionView.ctxs.footer.customView = customView
         }
-        else if case .none = footer.enumeration {
+        else if case .none = footer {
+            actionView.ctxs.footer.isHidden = true
             actionView.ctxs.footer.frame.size = CGSize(width: NXUI.width, height: NXUI.bottomOffset)
             actionView.ctxs.footer.title.isHidden = true
             actionView.ctxs.footer.lhs.isHidden = true
@@ -224,8 +228,8 @@ extension NXActionView {
         initialize?("initialize", actionView)
         
         actionView.updateSubviews(NXActionView.Key.action.rawValue, nil)
-        actionView.completion = completion
-        actionView.open(animation: actionView.animation, completion: nil)
+        actionView.ctxs.completion = completion
+        actionView.open(animation: actionView.ctxs.animation, completion: nil)
         return actionView
     }
 }
@@ -355,14 +359,13 @@ extension NXActionView {
         }
     }
     
-    public enum Enumeration {
-        case header(_ lhs:Bool, _ center:Bool, _ rhs:Bool, _ title:Bool)
-        case footer(_ lhs:Bool, _ center:Bool, _ rhs:Bool)
-        case whitespace                                //视图存在，但是没有任何需要展示的信息
+    public enum Attachment {
+        case header(_ lhs:Bool, _ center:Bool, _ rhs:Bool, _ title:Bool, _ value:String)
+        case footer(_ lhs:Bool, _ center:Bool, _ rhs:Bool, _ value:String)
+        case whitespace(_ height:CGFloat)            //视图存在，但是没有任何需要展示的信息
         case custom(_ customView:UIView)             //定制
         case none                                   //无底部
     }
-    public typealias Attachment = (enumeration:NXActionView.Enumeration, title:String)
 }
 
 open class NXActionViewAttributes: NXOverlayAttributes {
@@ -371,12 +374,11 @@ open class NXActionViewAttributes: NXOverlayAttributes {
     open var center = NXActionView.Metadata()
     open var footer = NXActionView.Metadata()
     open var devide = CGFloat(6.0) //底部分开的高度，默认是6pt(只有在底部高度>0的时候有效)
-    open var max = NXUI.height * 0.80
+    open var max = NXUI.height * 0.75
     open var isAnimation = true
 }
 
-open class NXActionView: NXOverlay {
-    public let ctxs = NXActionViewAttributes()
+open class NXActionView: NXOverlayView<NXActionViewAttributes> {
     public let headerView = NXActionView.HeaderView(frame:CGRect.zero)
     public let centerView = NXActionView.CenterView(frame:CGRect.zero)
     public let footerView = NXActionView.FooterView(frame:CGRect.zero)
@@ -387,60 +389,63 @@ open class NXActionView: NXOverlay {
         //0.背景
         self.backgroundView.setupEvents([.touchUpInside], action: { [weak self] (event, sender) in
             guard let __weakself = self else { return }
-            __weakself.close(animation: __weakself.animation, completion: { (isCompleted) in
-                __weakself.closeCompletion?("background", nil)
+            __weakself.close(animation: __weakself.ctxs.animation, completion: { (isCompleted) in
+                __weakself.ctxs.closeCompletion?("background", nil)
             })
         })
-                
-        //1.头部
-        self.headerView.isHidden = true
-        self.headerView.lhsView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
-            guard let __weakself = self else { return }
-            __weakself.close(animation: __weakself.animation, completion: {(_ isCompleted) in
-                __weakself.closeCompletion?("header.lhs", nil)
-            })
-        }
-        self.headerView.rhsView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
-            guard let __weakself = self else { return }
-            __weakself.close(animation: __weakself.animation, completion: {(_ isCompleted) in
-                __weakself.closeCompletion?("header.rhs", nil)
-            })
-        }
-        self.contentView.addSubview(self.headerView)
         
-        //2.中间
+        self.contentView.backgroundColor = NX.backgroundColor
+
+        
+        //1.中间
         self.centerView.isHidden = true
         self.centerView.completion = {[weak self] (_ action:NXAction, _ index: Int) in
             guard let __weakself = self else { return }
             if action.appearance.isCloseable {
-                __weakself.close(animation: __weakself.animation, completion: { (isCompleted) in
-                    __weakself.completion?("", index)
+                __weakself.close(animation: __weakself.ctxs.animation, completion: { (isCompleted) in
+                    __weakself.ctxs.completion?("", index)
                 })
             }
             else {
-                __weakself.completion?("", index)
+                __weakself.ctxs.completion?("", index)
             }
         }
         self.contentView.addSubview(self.centerView)
+                
+        //2.头部
+        self.headerView.isHidden = true
+        self.headerView.lhsView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
+            guard let __weakself = self else { return }
+            __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
+                __weakself.ctxs.closeCompletion?("header.lhs", nil)
+            })
+        }
+        self.headerView.rhsView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
+            guard let __weakself = self else { return }
+            __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
+                __weakself.ctxs.closeCompletion?("header.rhs", nil)
+            })
+        }
+        self.contentView.addSubview(self.headerView)
         
         //3.脚部
         self.footerView.isHidden = true
         self.footerView.lhsView.setupEvents([.touchUpInside]) { [weak self] (e, v) in
             guard let __weakself = self else { return }
-            __weakself.close(animation: __weakself.animation, completion: {(_ isCompleted) in
-                __weakself.closeCompletion?("footer.lhs", nil)
+            __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
+                __weakself.ctxs.closeCompletion?("footer.lhs", nil)
             })
         }
         self.footerView.centerView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
             guard let __weakself = self else { return }
-            __weakself.close(animation: __weakself.animation, completion: {(_ isCompleted) in
-                __weakself.closeCompletion?("footer.center", nil)
+            __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
+                __weakself.ctxs.closeCompletion?("footer.center", nil)
             })
         }
         self.footerView.rhsView.setupEvents([.touchUpInside]) {[weak self] (e, v) in
             guard let __weakself = self else { return }
-            __weakself.close(animation: __weakself.animation, completion: {(_ isCompleted) in
-                __weakself.closeCompletion?("footer.rhs", nil)
+            __weakself.close(animation: __weakself.ctxs.animation, completion: {(_ isCompleted) in
+                __weakself.ctxs.closeCompletion?("footer.rhs", nil)
             })
         }
         self.contentView.addSubview(self.footerView)
@@ -450,7 +455,7 @@ open class NXActionView: NXOverlay {
         self.ctxs.key = action
         
         if self.ctxs.key.contains("center") {
-            self.animation = NXOverlay.Animation.center.rawValue
+            self.ctxs.animation = NXOverlay.Animation.center.rawValue
             
             self.ctxs.size = CGSize(width: NXUI.width * 0.8, height: 0.0)
             self.contentView.layer.cornerRadius = 8
@@ -458,16 +463,17 @@ open class NXActionView: NXOverlay {
             self.contentView.backgroundColor = NX.backgroundColor
             self.backgroundView.isUserInteractionEnabled = false
         }
-        else if self.ctxs.key.contains("footer"){
-            self.animation = NXOverlay.Animation.footer.rawValue
+        else if self.ctxs.key.contains("footer") {
+            self.ctxs.animation = NXOverlay.Animation.footer.rawValue
+            
+            self.ctxs.size = CGSize(width: NXUI.width * 1.0, height: 0.0)
             
             if self.ctxs.devide > 0 {
-                self.contentView.backgroundColor = NX.contentViewBackgroundColor
+                self.ctxs.center.backgroundColor = NX.contentViewBackgroundColor
             }
             else {
-                self.contentView.backgroundColor = NX.backgroundColor
+                self.ctxs.center.backgroundColor = NX.backgroundColor
             }
-            self.ctxs.size = CGSize(width: NXUI.width * 1.0, height: 0.0)
         }
         
         self.ctxs.header.frame.size.width = self.ctxs.size.width
@@ -481,43 +487,35 @@ open class NXActionView: NXOverlay {
         //1
         if self.ctxs.header.frame.size.height > 0 {
             self.ctxs.header.frame.origin = CGPoint(x: 0, y: 0)
-            self.headerView.frame = self.ctxs.header.frame
             self.ctxs.size.height = self.ctxs.size.height + self.ctxs.header.frame.size.height
-            
-            self.headerView.updateSubviews("update",self.ctxs)
-            self.headerView.isHidden = false
         }
-        else{
-            self.headerView.isHidden = true
-        }
+        
         
         //2
         if self.ctxs.center.frame.size.height > 0 {
             self.ctxs.center.frame.origin = CGPoint(x: 0, y: self.ctxs.size.height)
-            self.centerView.frame = self.ctxs.center.frame
             self.ctxs.size.height = self.ctxs.size.height + self.ctxs.center.frame.size.height
-            
-            self.centerView.updateSubviews("update", self.ctxs)
-            self.centerView.isHidden = false
         }
-        else {
-            self.centerView.isHidden = true
-        }
-        
+
         //3
         if self.ctxs.footer.frame.size.height > 0 {
             self.ctxs.size.height = self.ctxs.size.height + ctxs.devide
-            
             self.ctxs.footer.frame.origin = CGPoint(x: 0, y: self.ctxs.size.height)
-            self.footerView.frame = self.ctxs.footer.frame
             self.ctxs.size.height = self.ctxs.size.height + self.ctxs.footer.frame.size.height
-            
-            self.footerView.updateSubviews("update", self.ctxs)
-            self.footerView.isHidden = false
         }
-        else{
-            self.footerView.isHidden = true
+        
+        if self.ctxs.key.contains("footer") && self.ctxs.center.isHidden == false {
+            self.ctxs.center.insets = UIEdgeInsets(top: self.ctxs.header.height, left: 0, bottom: self.ctxs.footer.height, right: 0)
+            var __frame = self.ctxs.center.frame
+            __frame.origin.y = 0
+            __frame.size.height = __frame.size.height  + self.ctxs.center.insets.top + self.ctxs.center.insets.bottom
+            self.ctxs.center.frame = __frame
         }
+        
+        self.headerView.updateSubviews("update",self.ctxs)
+        self.centerView.updateSubviews("update", self.ctxs)
+        self.footerView.updateSubviews("update", self.ctxs)
+
         
         if self.ctxs.key.contains("center") {
             self.contentView.frame = CGRect(x: (self.frame.size.width - self.ctxs.size.width)/2.0, y: (self.frame.size.height-self.ctxs.size.height)/2.0, width: self.ctxs.size.width, height: self.ctxs.size.height)
@@ -553,9 +551,13 @@ extension NXActionView {
                 return
             }
             let metadata = wrapped.header
-            
+
+            self.isHidden = metadata.isHidden
+            self.frame = metadata.frame
             self.backgroundColor = metadata.backgroundColor
-            self.frame.size.height = metadata.frame.size.height
+            if metadata.isHidden {
+                return
+            }
             
             if let __customView = metadata.customView {
                 __customView.isHidden = false
@@ -580,17 +582,17 @@ extension NXActionView {
 
 extension NXActionView {
     open class CenterView : NXCView<NXCollectionView>, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-        private(set) var wrapped = NXActionViewAttributes()
+        private(set) var ctxs = NXActionViewAttributes()
         open var completion : NX.Completion<NXAction, Int>? = nil
         
         open override func setupSubviews() {
             super.setupSubviews()
             
             self.contentView.frame = self.bounds
-            self.contentView.wrapped?.minimumLineSpacing = 0.0
-            self.contentView.wrapped?.minimumInteritemSpacing = 0.0
-            self.contentView.wrapped?.scrollDirection = .vertical
-            self.contentView.wrapped?.sectionInset = UIEdgeInsets.zero
+            self.contentView.ctxs?.minimumLineSpacing = 0.0
+            self.contentView.ctxs?.minimumInteritemSpacing = 0.0
+            self.contentView.ctxs?.scrollDirection = .vertical
+            self.contentView.ctxs?.sectionInset = UIEdgeInsets.zero
             self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             self.contentView.backgroundColor = NX.backgroundColor
             self.contentView.delaysContentTouches = false
@@ -600,8 +602,15 @@ extension NXActionView {
             guard let __wrapped = value as? NXActionViewAttributes else {
                 return
             }
-            self.wrapped = __wrapped
+            self.ctxs = __wrapped
             let metadata = __wrapped.center
+            self.isHidden = metadata.isHidden
+            self.frame = metadata.frame
+            self.backgroundColor = metadata.backgroundColor
+            
+            if metadata.isHidden {
+                return
+            }
             
             metadata.actions.forEach { (option) in
                 if let cls = option.ctxs.cls as? NXCollectionViewCell.Type {
@@ -617,6 +626,7 @@ extension NXActionView {
                 self.contentView.isHidden = true
             }
             else{
+                self.contentView.backgroundColor = metadata.backgroundColor
                 self.contentView.isHidden = false
                 self.contentView.contentInset = metadata.insets
                 self.contentView.frame = self.bounds
@@ -625,23 +635,23 @@ extension NXActionView {
         }
         
         public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return self.wrapped.center.actions.count
+            return self.ctxs.center.actions.count
         }
         
         public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-            let action = self.wrapped.center.actions[indexPath.item]
+            let action = self.ctxs.center.actions[indexPath.item]
             return action.ctxs.size
         }
         
         public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let action = self.wrapped.center.actions[indexPath.item]
+            let action = self.ctxs.center.actions[indexPath.item]
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: action.ctxs.reuse, for: indexPath) as! NXActionViewCell
             cell.updateSubviews("update", action)
             return cell
         }
         
         public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-            if self.wrapped.isAnimation == true {
+            if self.ctxs.isAnimation == true {
                 var rotation = CATransform3DMakeTranslation(0, -2, 0.0)
                 rotation.m43 = 1.0 / -600.0
                 cell.layer.shadowColor = UIColor.black.cgColor
@@ -658,7 +668,7 @@ extension NXActionView {
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
-                    self.wrapped.isAnimation = false
+                    self.ctxs.isAnimation = false
                 }
             }
         }
@@ -666,7 +676,7 @@ extension NXActionView {
         public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             collectionView.deselectItem(at: indexPath, animated: true)
             
-            let action = self.wrapped.center.actions[indexPath.item]
+            let action = self.ctxs.center.actions[indexPath.item]
             if action.appearance.isEnabled == true {
                 self.completion?(action, indexPath.item)
             }
@@ -681,8 +691,13 @@ extension NXActionView {
                 return
             }
             let metadata = wrapped.footer
+            self.isHidden = metadata.isHidden
+            self.frame = metadata.frame
             self.backgroundColor = metadata.backgroundColor
-            self.frame.size.height = metadata.frame.size.height
+           
+            if metadata.isHidden {
+                return
+            }
             
             if let __customView = metadata.customView {
                 __customView.isHidden = false
