@@ -17,7 +17,7 @@ extension String {
     /*
      md5
      */
-    public static func md5(_ value:String) -> String {
+    public static func md5(_ value: String) -> String {
         let cStr = value.cString(using: .utf8)
         let buff = UnsafeMutablePointer<UInt8>.allocate(capacity: 16)
         
@@ -34,7 +34,7 @@ extension String {
     
     
     //base64加密
-    public static func base64Encode(_ value:String) -> String {
+    public static func base64Encode(_ value: String) -> String {
         if let data = value.data(using: String.Encoding.utf8) {
             return data.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
         }
@@ -43,7 +43,7 @@ extension String {
     
     
     //base64解密
-    public static func base64Decode(_ value:String) -> String {
+    public static func base64Decode(_ value: String) -> String {
         if let data = Data(base64Encoded: value, options: NSData.Base64DecodingOptions(rawValue: 0)) {
             return String(data: data, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue)) ?? ""
         }
@@ -52,15 +52,15 @@ extension String {
     
     
     //encodeURIComponent
-    public static func encodeURIComponent(_ uri:String) -> String? {
+    public static func encodeURIComponent(_ uri: String) -> String? {
         /*!*'();:@&=+$,/?%#[]{}   增加了对"和\ --> !*'();:@&=+$,/?%#[]{}\"\\ */
-        let allowedCharacters = CharacterSet(charactersIn: NX.Association.characters).inverted
+        let allowedCharacters = CharacterSet(charactersIn: NXKit.Association.characters).inverted
         let retValue = uri.addingPercentEncoding(withAllowedCharacters: allowedCharacters)
         return retValue ?? ""
     }
     
     //decodeURIComponent
-    public static func decodeURIComponent(_ uri:String) -> String {
+    public static func decodeURIComponent(_ uri: String) -> String {
         let retValue = uri.removingPercentEncoding
         return retValue ?? ""
     }
@@ -85,7 +85,7 @@ extension String {
         return __countOfBytes
     }
     
-    public static func substringOfBytes(_ value: String, countOfBytes:Int) -> String {
+    public static func substringOfBytes(_ value: String, countOfBytes: Int) -> String {
         
         var __countOfBytes : Int = 0
         for (index, subvalue) in value.enumerated() {
@@ -157,7 +157,7 @@ extension String {
         if __text.isEmpty {
             return CGSize.zero
         }
-        var options = [NSAttributedString.Key:Any]()
+        var options = [NSAttributedString.Key: Any]()
         options[NSAttributedString.Key.font] = font
         if style != nil {
             let paragraphStyle = NSMutableParagraphStyle()
@@ -250,7 +250,7 @@ extension String {
      */
     public func classFromString() -> UIViewController? {
         //Swift中命名空间的概念
-        let namespace = NX.namespace
+        let namespace = NXKit.namespace
         if namespace.isEmpty {
             return nil
         }

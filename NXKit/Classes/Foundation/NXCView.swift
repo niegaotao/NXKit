@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class NXCView<C:UIView>: NXView {
+open class NXCView<C: UIView>: NXView {
     open var contentView = C(frame: CGRect.zero)
     
     open override func setupSubviews() {

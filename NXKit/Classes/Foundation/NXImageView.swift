@@ -32,7 +32,7 @@ open class NXImageView: UIImageView {
     }
     
     
-    open func updateSubviews(_ action: String, _ value:Any?){
+    open func updateSubviews(_ action: String, _ value: Any?){
     
     }
 }

@@ -26,7 +26,7 @@ open class NXView: UIView {
     }
     
     //只需要重载该方法做视图的更新
-    open func updateSubviews(_ value:Any?){
+    open func updateSubviews(_ value: Any?){
     
     }
 }

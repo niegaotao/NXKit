@@ -35,12 +35,12 @@ open class NXButton: UIButton {
     }
     
     //
-    open func updateSubviews(_ action: String, _ value:Any?){
+    open func updateSubviews(_ action: String, _ value: Any?){
     
     }
     
     //根据状态设置背景，icon/title/titleColor
-    open func set(backgroundImage:UIImage?, image:UIImage?, title:String?, titleColor:UIColor?, for state: UIControl.State){
+    open func set(backgroundImage: UIImage?, image: UIImage?, title: String?, titleColor: UIColor?, for state: UIControl.State){
         self.setBackgroundImage(backgroundImage, for: state)
         self.setImage(image, for: state)
         self.setTitle(title, for: state)
@@ -48,16 +48,16 @@ open class NXButton: UIButton {
     }
     
     //设置边框
-    open func setBorder(_ color:UIColor, width:CGFloat, masksToBounds:Bool) {
+    open func setBorder(_ color: UIColor, width: CGFloat, masksToBounds: Bool) {
         self.layer.borderColor = color.cgColor
         self.layer.borderWidth = width
         self.layer.masksToBounds = masksToBounds
     }
     
     //设置icon/title的方位
-    open func updateAlignment(_ axis: NXButton.Axis, _ space:CGFloat = 0.0){
-        let __size : (raw:CGSize, image:CGSize, title:CGSize) = (self.bounds.size, (self.imageView?.bounds.size ?? CGSize.zero), (self.titleLabel?.bounds.size ?? CGSize.zero))
-        let __centerX : (raw:CGFloat, image:CGFloat, title:CGFloat) = (self.bounds.width/2.0, (self.bounds.width-__size.title.width)/2.0,(self.bounds.width+__size.image.width)/2.0)
+    open func updateAlignment(_ axis: NXButton.Axis, _ space: CGFloat = 0.0){
+        let __size : (raw: CGSize, image: CGSize, title: CGSize) = (self.bounds.size, (self.imageView?.bounds.size ?? CGSize.zero), (self.titleLabel?.bounds.size ?? CGSize.zero))
+        let __centerX : (raw: CGFloat, image: CGFloat, title: CGFloat) = (self.bounds.width/2.0, (self.bounds.width-__size.title.width)/2.0,(self.bounds.width+__size.image.width)/2.0)
         
         if axis == .vertical {
             self.titleEdgeInsets = UIEdgeInsets(top: __size.image.height/2.0+space/2.0, left: -(__centerX.title-__centerX.raw), bottom: -(__size.image.height/2.0+space/2.0), right: __centerX.title-__centerX.raw)

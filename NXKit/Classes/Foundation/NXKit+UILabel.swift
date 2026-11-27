@@ -26,8 +26,8 @@ extension UILabel {
                             font: UIFont,
                             textColor: UIColor,
                             textAlignment: NSTextAlignment,
-                            lineSpacing:CGFloat,
-                            completion:NX.Event<String, NSMutableParagraphStyle>? = nil) {
+                            lineSpacing: CGFloat,
+                            completion: NXKit.Event<String, NSMutableParagraphStyle>? = nil) {
         self.init(frame:frame)
         
         self.updateSubviews(text: text,
@@ -43,9 +43,9 @@ extension UILabel {
                      font: UIFont,
                      textColor: UIColor,
                      textAlignment: NSTextAlignment,
-                     lineSpacing:CGFloat,
-                     numberOfLines:Int,
-                     completion:NX.Event<String, NSMutableParagraphStyle>? = nil){
+                     lineSpacing: CGFloat,
+                     numberOfLines: Int,
+                     completion: NXKit.Event<String, NSMutableParagraphStyle>? = nil){
         self.text = text
         self.font = font
         self.textColor = textColor
@@ -117,13 +117,13 @@ extension UILabel {
     }
 
     
-    public func addBottomColorView(color: UIColor = NX.mainColor.withAlphaComponent(0.85), height: CGFloat = 7) {
+    public func addBottomColorView(color: UIColor = NXKit.mainColor.withAlphaComponent(0.85), height: CGFloat = 7) {
         guard let str = self.text else {
             return
         }
  
         
-        let width = str.stringWidth(font: self.font, size: CGSize(width: NX.width, height: 50))
+        let width = str.stringWidth(font: self.font, size: CGSize(width: NXKit.width, height: 50))
         let view = UIView.init(frame: CGRect(x: 0, y: 0, width: width, height: height))
 
         if let superView = self.superview {

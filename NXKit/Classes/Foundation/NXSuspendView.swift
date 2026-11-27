@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class NXSuspendView<T:UIView>: NXView {
+open class NXSuspendView<T: UIView>: NXView {
     public let contentView = T()
     open var isAnimated : Bool = false
 

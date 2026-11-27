@@ -13,17 +13,17 @@ open class NXShadowView: NXCView<UIView> {
     override open func setupSubviews() {
         super.setupSubviews()
         
-        self.backgroundColor = NX.backgroundColor
+        self.backgroundColor = NXKit.backgroundColor
         self.layer.cornerRadius = 6.0
         self.layer.shadowRadius = 6.0
-        self.layer.shadowColor = NX.shadowColor.cgColor
+        self.layer.shadowColor = NXKit.shadowColor.cgColor
         self.layer.shadowOpacity = 0.10
         self.layer.shadowOffset = CGSize.zero
         self.layer.masksToBounds = false
         
         self.contentView.frame = self.bounds
         self.contentView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-        self.contentView.backgroundColor = NX.backgroundColor
+        self.contentView.backgroundColor = NXKit.backgroundColor
         self.contentView.layer.cornerRadius = 6.0
         self.contentView.layer.masksToBounds = true
         self.addSubview(contentView)

@@ -21,19 +21,19 @@ open class NXOverlay : NXBackgroundView<UIControl, UIView> {
         case footer = "footer"   //从下方进入->从下方退出[在屏幕底部显示]
     }
     
-    public static let frame = NX.Rect { (__sender) in
-        __sender.width = max(min(350.0, NX.width * 0.8), 300.0)
-        __sender.x = (NX.width - __sender.width)/2.0
+    public static let frame = NXKit.Rect { (__sender) in
+        __sender.width = max(min(350.0, NXKit.width * 0.8), 300.0)
+        __sender.x = (NXKit.width - __sender.width)/2.0
     }
     
-    public static let inset = NX.Rect { (__sender) in
+    public static let inset = NXKit.Rect { (__sender) in
         __sender.x = 20.0
         __sender.width = NXOverlay.frame.width - __sender.x * 2.0
     }
 }
 
 extension NXOverlay {
-    public static var overlays = NSHashTable<NXOverlay>(options:[.weakMemory], capacity: 2)
+    public static var overlays = NSHashTable<NXOverlay>(options: [.weakMemory], capacity: 2)
     
     //加入一个弹框
     public class func push(_ overlay: NXOverlay){
@@ -52,15 +52,15 @@ extension NXOverlay {
     }
 }
 
-open class NXOverlayAttributes : NX.Rect {
-    open var inoutBackgroundColor = NX.transitionInoutBackgroundColor
-    open var backgroundColor = NX.transitionBackgroundColor
+open class NXOverlayAttributes : NXKit.Rect {
+    open var inoutBackgroundColor = NXKit.transitionInoutBackgroundColor
+    open var backgroundColor = NXKit.transitionBackgroundColor
 
     //关闭的回调, background,lhs,rhs,close,footer
-    open var close : NX.Event<String, Any?>? = nil
+    open var close : NXKit.Event<String, Any?>? = nil
     
     //点击选项或者左右按钮消失的回调
-    open var completion : NX.Event<String, Int>? = nil
+    open var completion : NXKit.Event<String, Int>? = nil
     
     //弹框打开/关闭的动画
     open var animation = NXOverlay.Animation.center.rawValue
@@ -70,7 +70,7 @@ open class NXOverlayAttributes : NX.Rect {
     }
 }
 
-open class NXAbstractOverlay<Attributes:NXOverlayAttributes>: NXOverlay {
+open class NXAbstractOverlay<Attributes: NXOverlayAttributes>: NXOverlay {
     //上下文
     public let ctxs = Attributes()
     
@@ -90,13 +90,13 @@ open class NXAbstractOverlay<Attributes:NXOverlayAttributes>: NXOverlay {
 
         
     //展示:先加window上(后期补一个小动画)
-    open func open(animation: NXOverlay.Animation.RawValue, completion: NX.Completion<Bool>?){
+    open func open(animation: NXOverlay.Animation.RawValue, completion: NXKit.Completion<Bool>?){
         UIApplication.shared.keyWindow?.addSubview(self)
         if animation == NXOverlay.Animation.center.rawValue {
             self.contentView.frame = CGRect(x: (self.width-self.contentView.width)/2.0, y: (self.height-self.contentView.height)/2.0, width: self.contentView.width, height: self.contentView.height)
 
-            let fromValue : (frame:CGRect, alpha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame, 0.0, CGAffineTransform.identity.scaledBy(x: 1.08, y: 1.08))
-            let toValue : (frame:CGRect, alpha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame, self.contentView.alpha, CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0))
+            let fromValue : (frame:CGRect, alpha: CGFloat, transform:CGAffineTransform) = (self.contentView.frame, 0.0, CGAffineTransform.identity.scaledBy(x: 1.08, y: 1.08))
+            let toValue : (frame:CGRect, alpha: CGFloat, transform:CGAffineTransform) = (self.contentView.frame, self.contentView.alpha, CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0))
             
             self.backgroundView.backgroundColor = self.ctxs.inoutBackgroundColor
             self.contentView.transform = fromValue.transform
@@ -112,9 +112,9 @@ open class NXAbstractOverlay<Attributes:NXOverlayAttributes>: NXOverlay {
         }
         else if animation == NXOverlay.Animation.footer.rawValue {
             self.contentView.frame = CGRect(x: (self.width-self.contentView.width)/2.0, y: self.height-self.contentView.height, width: self.contentView.width, height: self.contentView.height)
-            let toValue : (frame:CGRect, alpha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame, self.contentView.alpha, CGAffineTransform.identity)
+            let toValue : (frame:CGRect, alpha: CGFloat, transform:CGAffineTransform) = (self.contentView.frame, self.contentView.alpha, CGAffineTransform.identity)
             
-            let fromValue : (frame:CGRect, alpha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame.offsetBy(dx: 0, dy: self.contentView.height), self.contentView.alpha, CGAffineTransform.identity)
+            let fromValue : (frame:CGRect, alpha: CGFloat, transform:CGAffineTransform) = (self.contentView.frame.offsetBy(dx: 0, dy: self.contentView.height), self.contentView.alpha, CGAffineTransform.identity)
             
             self.backgroundView.backgroundColor = self.ctxs.inoutBackgroundColor
             self.contentView.alpha = fromValue.alpha
@@ -130,9 +130,9 @@ open class NXAbstractOverlay<Attributes:NXOverlayAttributes>: NXOverlay {
         }
         else if animation == NXOverlay.Animation.header.rawValue {
             self.contentView.frame = CGRect(x: (self.width-self.contentView.width)/2.0, y: 0, width: self.contentView.width, height: self.contentView.height)
-            let toValue : (frame:CGRect, alpha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame, self.contentView.alpha, CGAffineTransform.identity)
+            let toValue : (frame:CGRect, alpha: CGFloat, transform:CGAffineTransform) = (self.contentView.frame, self.contentView.alpha, CGAffineTransform.identity)
             
-            let fromValue : (frame:CGRect, alpha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame.offsetBy(dx: 0, dy: -self.contentView.height), self.contentView.alpha, CGAffineTransform.identity)
+            let fromValue : (frame:CGRect, alpha: CGFloat, transform:CGAffineTransform) = (self.contentView.frame.offsetBy(dx: 0, dy: -self.contentView.height), self.contentView.alpha, CGAffineTransform.identity)
             
             self.backgroundView.backgroundColor = self.ctxs.inoutBackgroundColor
             self.contentView.alpha = fromValue.alpha
@@ -148,9 +148,9 @@ open class NXAbstractOverlay<Attributes:NXOverlayAttributes>: NXOverlay {
         }
         else if animation == NXOverlay.Animation.drop.rawValue {
             self.contentView.frame = CGRect(x: (self.width-self.contentView.width)/2.0, y: (self.height-self.contentView.height)/2.0, width: self.contentView.width, height: self.contentView.height)
-            let toValue : (frame:CGRect, aplha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame, self.contentView.alpha, CGAffineTransform.identity)
+            let toValue : (frame:CGRect, aplha: CGFloat, transform:CGAffineTransform) = (self.contentView.frame, self.contentView.alpha, CGAffineTransform.identity)
             
-            let fromValue : (frame:CGRect, aplha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame.offsetBy(dx: 0, dy: -toValue.frame.maxY), self.contentView.alpha, CGAffineTransform.identity)
+            let fromValue : (frame:CGRect, aplha: CGFloat, transform:CGAffineTransform) = (self.contentView.frame.offsetBy(dx: 0, dy: -toValue.frame.maxY), self.contentView.alpha, CGAffineTransform.identity)
             
             self.backgroundView.backgroundColor = self.ctxs.inoutBackgroundColor
             self.contentView.alpha = fromValue.aplha
@@ -166,9 +166,9 @@ open class NXAbstractOverlay<Attributes:NXOverlayAttributes>: NXOverlay {
         }
         else if animation == NXOverlay.Animation.raise.rawValue {
             self.contentView.frame = CGRect(x: (self.width-self.contentView.width)/2.0, y: (self.height-self.contentView.height)/2.0, width: self.contentView.width, height: self.contentView.height)
-            let toValue : (frame:CGRect, aplha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame, self.contentView.alpha, CGAffineTransform.identity)
+            let toValue : (frame:CGRect, aplha: CGFloat, transform:CGAffineTransform) = (self.contentView.frame, self.contentView.alpha, CGAffineTransform.identity)
             
-            let fromValue : (frame:CGRect, aplha:CGFloat, transform:CGAffineTransform) = (self.contentView.frame.offsetBy(dx: 0, dy: toValue.frame.maxY), self.contentView.alpha, CGAffineTransform.identity)
+            let fromValue : (frame:CGRect, aplha: CGFloat, transform:CGAffineTransform) = (self.contentView.frame.offsetBy(dx: 0, dy: toValue.frame.maxY), self.contentView.alpha, CGAffineTransform.identity)
             
             self.backgroundView.backgroundColor = self.ctxs.inoutBackgroundColor
             self.contentView.alpha = fromValue.aplha
@@ -190,12 +190,12 @@ open class NXAbstractOverlay<Attributes:NXOverlayAttributes>: NXOverlay {
     
     
     //移除：动画结束后才会回调
-    open func close(animation: NXOverlay.Animation.RawValue, completion:NX.Completion<Bool>?){
+    open func close(animation: NXOverlay.Animation.RawValue, completion: NXKit.Completion<Bool>?){
         if animation == NXOverlay.Animation.center.rawValue {
             
             UIView.animate(withDuration: 0.27, animations: {
                 self.contentView.transform = CGAffineTransform.identity.scaledBy(x: 0.96, y: 0.96)
-                self.backgroundView.backgroundColor = NX.transitionInoutBackgroundColor
+                self.backgroundView.backgroundColor = NXKit.transitionInoutBackgroundColor
                 self.contentView.alpha = 0.0
             }, completion: { (completed) in
                 self.removeFromSuperview()
@@ -203,11 +203,11 @@ open class NXAbstractOverlay<Attributes:NXOverlayAttributes>: NXOverlay {
             })
         }
         else if animation == NXOverlay.Animation.footer.rawValue {
-            let fromValue : (frame:CGRect, aplha:CGFloat) = (self.contentView.frame, self.contentView.alpha)
-            let toValue : (frame:CGRect, aplha:CGFloat) = (fromValue.frame.offsetBy(dx: 0, dy: self.contentView.height), self.contentView.alpha)
+            let fromValue : (frame:CGRect, aplha: CGFloat) = (self.contentView.frame, self.contentView.alpha)
+            let toValue : (frame:CGRect, aplha: CGFloat) = (fromValue.frame.offsetBy(dx: 0, dy: self.contentView.height), self.contentView.alpha)
             
             UIView.animate(withDuration: 0.27, animations: {
-                self.backgroundView.backgroundColor = NX.transitionInoutBackgroundColor
+                self.backgroundView.backgroundColor = NXKit.transitionInoutBackgroundColor
                 self.contentView.frame = toValue.frame
             }, completion: { (finished) in
                 self.removeFromSuperview()
@@ -215,11 +215,11 @@ open class NXAbstractOverlay<Attributes:NXOverlayAttributes>: NXOverlay {
             })
         }
         else if animation == NXOverlay.Animation.header.rawValue {
-            let fromValue : (frame:CGRect, aplha:CGFloat) = (self.contentView.frame, self.contentView.alpha)
-            let toValue : (frame:CGRect, aplha:CGFloat) = (fromValue.frame.offsetBy(dx: 0, dy: -self.contentView.height), self.contentView.alpha)
+            let fromValue : (frame:CGRect, aplha: CGFloat) = (self.contentView.frame, self.contentView.alpha)
+            let toValue : (frame:CGRect, aplha: CGFloat) = (fromValue.frame.offsetBy(dx: 0, dy: -self.contentView.height), self.contentView.alpha)
             
             UIView.animate(withDuration: 0.27, animations: {
-                self.backgroundView.backgroundColor = NX.transitionInoutBackgroundColor
+                self.backgroundView.backgroundColor = NXKit.transitionInoutBackgroundColor
                 self.contentView.frame = toValue.frame
             }, completion: { (finished) in
                 self.removeFromSuperview()
@@ -227,11 +227,11 @@ open class NXAbstractOverlay<Attributes:NXOverlayAttributes>: NXOverlay {
             })
         }
         else if animation == NXOverlay.Animation.drop.rawValue {
-            let fromValue : (frame:CGRect, aplha:CGFloat) = (self.contentView.frame, self.contentView.alpha)
-            let toValue : (frame:CGRect, aplha:CGFloat) = (fromValue.frame.offsetBy(dx: 0, dy: self.contentView.maxY), self.contentView.alpha)
+            let fromValue : (frame:CGRect, aplha: CGFloat) = (self.contentView.frame, self.contentView.alpha)
+            let toValue : (frame:CGRect, aplha: CGFloat) = (fromValue.frame.offsetBy(dx: 0, dy: self.contentView.maxY), self.contentView.alpha)
             
             UIView.animate(withDuration: 0.27, animations: {
-                self.backgroundView.backgroundColor = NX.transitionInoutBackgroundColor
+                self.backgroundView.backgroundColor = NXKit.transitionInoutBackgroundColor
                 self.contentView.frame = toValue.frame
             }, completion: {(completed) in
                 self.removeFromSuperview()
@@ -239,11 +239,11 @@ open class NXAbstractOverlay<Attributes:NXOverlayAttributes>: NXOverlay {
             })
         }
         else if animation == NXOverlay.Animation.raise.rawValue {
-            let fromValue : (frame:CGRect, aplha:CGFloat) = (self.contentView.frame, self.contentView.alpha)
-            let toValue : (frame:CGRect, aplha:CGFloat) = (fromValue.frame.offsetBy(dx: 0, dy: -self.contentView.maxY), self.contentView.alpha)
+            let fromValue : (frame:CGRect, aplha: CGFloat) = (self.contentView.frame, self.contentView.alpha)
+            let toValue : (frame:CGRect, aplha: CGFloat) = (fromValue.frame.offsetBy(dx: 0, dy: -self.contentView.maxY), self.contentView.alpha)
             
             UIView.animate(withDuration: 0.27, animations: {
-                self.backgroundView.backgroundColor = NX.transitionInoutBackgroundColor
+                self.backgroundView.backgroundColor = NXKit.transitionInoutBackgroundColor
                 self.contentView.frame = toValue.frame
             }, completion: {(completed) in
                 self.removeFromSuperview()
@@ -257,6 +257,6 @@ open class NXAbstractOverlay<Attributes:NXOverlayAttributes>: NXOverlay {
     }
     
     deinit {
-        NX.print(NSStringFromClass(self.classForCoder))
+        NXKit.print(NSStringFromClass(self.classForCoder))
     }
 }

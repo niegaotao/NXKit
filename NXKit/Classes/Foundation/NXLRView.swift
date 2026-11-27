@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class NXLRView<L:UIView, R:UIView>: NXView {
+open class NXLRView<L: UIView, R: UIView>: NXView {
     public var lhsView = L(frame: CGRect.zero) //左侧
     public var rhsView = R(frame: CGRect.zero) //右侧
     
@@ -35,12 +35,12 @@ open class NXMTView: NXLRView<UIImageView, UILabel> {
         
         tView.frame = CGRect(x: self.height, y: 0, width: self.width-self.height, height: self.height)
         tView.textAlignment = .left
-        tView.font = NX.font(13)
-        tView.textColor = NX.lightGrayColor
+        tView.font = NXKit.font(13)
+        tView.textColor = NXKit.lightGrayColor
     }
     
     open var index : Int = 0
-    open var value : [String:Any]? = nil
+    open var value : [String: Any]? = nil
 }
 
 //纵向的2个label
@@ -58,13 +58,13 @@ open class NXTTView: NXLRView<UILabel, UILabel> {
         
         topView.frame = CGRect(x: self.height, y: 0, width: self.width-self.height, height: self.height)
         topView.textAlignment = .center
-        topView.font = NX.font(13)
-        topView.textColor = NX.lightGrayColor
+        topView.font = NXKit.font(13)
+        topView.textColor = NXKit.lightGrayColor
         
         bottomView.frame = CGRect(x: self.height, y: 0, width: self.width-self.height, height: self.height)
         bottomView.textAlignment = .center
-        bottomView.font = NX.font(13)
-        bottomView.textColor = NX.lightGrayColor
+        bottomView.font = NXKit.font(13)
+        bottomView.textColor = NXKit.lightGrayColor
     }
 }
 

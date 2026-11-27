@@ -14,24 +14,24 @@ open class NXKeyboardAccessoryView: NXView {
     public var isEnabled : Bool = true
     open override func setupSubviews() {
         
-        self.backgroundColor = NX.viewBackgroundColor
-        self.setupSeparator(color: NX.separatorColor, ats: .minY, insets: UIEdgeInsets.zero)
+        self.backgroundColor = NXKit.viewBackgroundColor
+        self.setupSeparator(color: NXKit.separatorColor, ats: .minY, insets: UIEdgeInsets.zero)
         
         actionView.frame = CGRect(x: self.width - 55, y: 0, width: 50, height: self.height)
         actionView.setTitle("确定", for: .normal)
-        actionView.setTitleColor(NX.mainColor, for: .normal)
-        actionView.titleLabel?.font = NX.font(16, .bold)
+        actionView.setTitleColor(NXKit.mainColor, for: .normal)
+        actionView.titleLabel?.font = NXKit.font(16, .bold)
         self.addSubview(actionView)
         
         bytesView.frame = CGRect(x: self.width - 140, y: 0, width: 80, height: self.height)
-        bytesView.textColor = NX.lightGrayColor
-        bytesView.font = NX.font(12)
+        bytesView.textColor = NXKit.lightGrayColor
+        bytesView.font = NXKit.font(12)
         bytesView.textAlignment = .right
         self.addSubview(bytesView)
     }
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        self.association?.separator?.backgroundColor = NX.separatorColor.cgColor
+        self.association?.separator?.backgroundColor = NXKit.separatorColor.cgColor
     }
 }

@@ -50,7 +50,7 @@ extension NXFS {
 }
 
 extension NXFS {
-    public class func path(_ directory:NXFS.Directory, _ createAllowed:Bool = true) -> String {
+    public class func path(_ directory: NXFS.Directory, _ createAllowed: Bool = true) -> String {
         if case .sandbox(let specified) = directory {
             var pathValue = NSHomeDirectory()
             if specified.count > 0 {
@@ -101,7 +101,7 @@ extension NXFS {
         return ""
     }
     
-    public class func file(_ directory:NXFS.Directory, _ filename:String, _ createAllowed:Bool = true) -> String {
+    public class func file(_ directory: NXFS.Directory, _ filename: String, _ createAllowed: Bool = true) -> String {
         var path = NXFS.path(directory) + "/\(filename).json"
         if filename.contains(".json") {
             path = NXFS.path(directory) + "/\(filename)"
@@ -113,12 +113,12 @@ extension NXFS {
     }
     
     @discardableResult
-    public class func fileExists(_ path:String) -> Bool {
+    public class func fileExists(_ path: String) -> Bool {
         return FileManager.default.fileExists(atPath: path)
     }
     
     @discardableResult
-    public class func createDirectory(_ path:String) -> Bool {
+    public class func createDirectory(_ path: String) -> Bool {
         do{
             try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
         }
@@ -129,7 +129,7 @@ extension NXFS {
     }
     
     @discardableResult
-    public class func removeDirectory(_ path:String) -> Bool {
+    public class func removeDirectory(_ path: String) -> Bool {
         do{
             try FileManager.default.removeItem(atPath: path)
         }
@@ -140,7 +140,7 @@ extension NXFS {
     }
     
     @discardableResult
-    public class func createFile(_ path:String) -> Bool {
+    public class func createFile(_ path: String) -> Bool {
         if NXFS.fileExists(path) {
             return false
         }
@@ -167,19 +167,19 @@ extension NXFS {
             
             let data = NXSerialization.JSONObject(toData: map, options: [.prettyPrinted]) as NSData?
             let result = data?.write(toFile: path, atomically: true) ?? false
-            NX.print("JSON:save result is: \(String(describing: result))")
+            NXKit.print("JSON:save result is: \(String(describing: result))")
         }
         else{
             //存储的key不存在，则将内容直接存入该文件[这种需要验证传入值的类型为数组或者map
-            if let mapValue = value as? [String:Any] {
+            if let mapValue = value as? [String: Any] {
                 let data = NXSerialization.JSONObject(toData: mapValue, options: [.prettyPrinted]) as NSData?
                 let result = data?.write(toFile: path, atomically: true) ?? false
-                NX.print("JSON:save result is: \(String(describing: result))")
+                NXKit.print("JSON:save result is: \(String(describing: result))")
             }
             else if let arrValue = value as? [Any?] {
                 let data = NXSerialization.JSONObject(toData: arrValue, options: [.prettyPrinted]) as NSData?
                 let result = data?.write(toFile: path, atomically: true) ?? false
-                NX.print("JSON:save result is: \(String(describing: result))")
+                NXKit.print("JSON:save result is: \(String(describing: result))")
             }
         }
     }
@@ -189,7 +189,7 @@ extension NXFS {
         return NXFS.value(forKey: forKey, directory: directory, filename: filename, isDictionary: true)
     }
     
-    public class func value(forKey: String, directory: NXFS.Directory, filename: String, isDictionary:Bool) -> Any? {
+    public class func value(forKey: String, directory: NXFS.Directory, filename: String, isDictionary: Bool) -> Any? {
         let path = NXFS.file(directory,filename, false)
         if NXFS.fileExists(path) {
             if isDictionary {
@@ -207,7 +207,7 @@ extension NXFS {
     }
     
     //读取内容
-    public class func contentsOf(_ file:String) -> Data? {
+    public class func contentsOf(_ file: String) -> Data? {
         var url : URL? = URL(fileURLWithPath: file)
         if file.hasPrefix("http") {
             url = URL(string: file)
@@ -231,17 +231,17 @@ extension NXFS {
 
 extension NXFS {
     open class MIME {
-        static var mimes = [String:String]()
+        static var mimes = [String: String]()
         
-        public class func fetch(_ filename:String) -> String {
+        public class func fetch(_ filename: String) -> String {
             var url : URL? = URL(string: filename)
             if filename.hasPrefix("http") == false {
                 url = URL(fileURLWithPath: filename)
             }
-            return NXFS.MIME.fetchMIME(NX.get(string:url?.pathExtension, ""))
+            return NXFS.MIME.fetchMIME(NXKit.get(string:url?.pathExtension, ""))
         }
         
-        public class func fetchMIME(_ fileExtension:String) -> String {
+        public class func fetchMIME(_ fileExtension: String) -> String {
             if NXFS.MIME.mimes.count == 0 {
                 NXFS.MIME.mimes[".png"] = "image/png"
                 NXFS.MIME.mimes[".jpg"] = "image/jpeg"

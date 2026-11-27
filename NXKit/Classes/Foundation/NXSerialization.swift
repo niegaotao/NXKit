@@ -27,8 +27,8 @@ open class NXSerialization {
         
     
     //data -> toDictionary
-    public class func data(toDictionary data: Data?) -> [String:Any] {
-        if let map = NXSerialization.data(toObject: data) as? [String:Any] {
+    public class func data(toDictionary data: Data?) -> [String: Any] {
+        if let map = NXSerialization.data(toObject: data) as? [String: Any] {
             return map
         }
         return [:]
@@ -44,7 +44,7 @@ open class NXSerialization {
     
     //=========================================
     //map/array->data
-    public class func JSONObject(toData jsonObject:Any, options:JSONSerialization.WritingOptions) -> Data? {
+    public class func JSONObject(toData jsonObject: Any, options: JSONSerialization.WritingOptions) -> Data? {
         if JSONSerialization.isValidJSONObject(jsonObject) {
             do{
                 let data = try JSONSerialization.data(withJSONObject: jsonObject, options: options)
@@ -65,7 +65,7 @@ open class NXSerialization {
     
     //=========================================
     //data-string
-    public class func data(toString data:Data?) -> String {
+    public class func data(toString data: Data?) -> String {
         if let data = data {
             return String(data: data, encoding: .utf8) ?? ""
         }
@@ -75,11 +75,11 @@ open class NXSerialization {
     
     //=========================================
     //jsonstring->(decode->) data
-    public class func JSONString(toData value: String?, decode:Bool) -> Data? {
+    public class func JSONString(toData value: String?, decode: Bool) -> Data? {
         if let value = value {
             var newValue = value
             if decode {
-                newValue = NX.decodeURIComponent(newValue)
+                newValue = NXKit.decodeURIComponent(newValue)
             }
             return newValue.data(using: String.Encoding.utf8)
         }
@@ -89,7 +89,7 @@ open class NXSerialization {
     
     //=========================================
     //jsonstring->(decode->) data -> toDictionary
-    public class func JSONString(toDictionary value: String?, decode:Bool) -> [String:Any] {
+    public class func JSONString(toDictionary value: String?, decode: Bool) -> [String: Any] {
         if let data = NXSerialization.JSONString(toData: value, decode: decode) {
             return NXSerialization.data(toDictionary: data)
         }
@@ -97,7 +97,7 @@ open class NXSerialization {
     }
     
     //jsonstring->(decode->) data -> toArray
-    public class func JSONString(toArray value: String?, decode:Bool) -> [Any] {
+    public class func JSONString(toArray value: String?, decode: Bool) -> [Any] {
         if let data = NXSerialization.JSONString(toData: value, decode: decode) {
             return NXSerialization.data(toArray: data)
         }
@@ -106,11 +106,11 @@ open class NXSerialization {
     
     //=========================================
     //map/array->data->string->(urlencode)->string)
-    public class func JSONObject(toString jsonObject:Any, encode: Bool) -> String {
+    public class func JSONObject(toString jsonObject: Any, encode: Bool) -> String {
         if let data = NXSerialization.JSONObject(toData: jsonObject, options: []) {
             let output = NXSerialization.data(toString: data)
             if encode {
-                return NX.encodeURIComponent(output)
+                return NXKit.encodeURIComponent(output)
             }
             else{
                 return output
@@ -120,7 +120,7 @@ open class NXSerialization {
     }
     
     //filepath -> data
-    public class func file(toData path:String?) -> Data? {
+    public class func file(toData path: String?) -> Data? {
         guard let path = path else {return nil}
         let url = URL(fileURLWithPath: path)
         do{
@@ -134,13 +134,13 @@ open class NXSerialization {
     
     
     //filepath -> data -> toDictionary
-    public class func file(toDictionary path:String?) -> [String: Any] {
+    public class func file(toDictionary path: String?) -> [String: Any] {
         guard let path = path else {return [:]}
         return NXSerialization.data(toDictionary: NXSerialization.file(toData: path))
     }
     
     //filepath -> data -> toArray
-    public class func file(toArray path:String?) -> [Any] {
+    public class func file(toArray path: String?) -> [Any] {
         guard let path = path else {return []}
         return NXSerialization.data(toArray: NXSerialization.file(toData: path))
     }

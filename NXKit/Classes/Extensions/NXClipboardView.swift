@@ -15,7 +15,7 @@ open class NXClipboardView: NXView {
         
         public init(){}
         
-        public init(width:CGFloat, insets:CGFloat) {
+        public init(width: CGFloat, insets: CGFloat) {
             self.width = width
             self.insets = insets
         }
@@ -29,9 +29,9 @@ open class NXClipboardView: NXView {
         //线条相关属性
         open var line = NXClipboardView.Line()
         //边
-        open var ats = NX.Ats.unspefified
+        open var ats = NXKit.Ats.unspefified
         //框选区域的frame
-        public let frame = NX.Wrappable<Bool, CGRect, CGRect> { (__sender) in
+        public let frame = NXKit.Wrappable<Bool, CGRect, CGRect> { (__sender) in
             __sender.oldValue = CGRect.zero;__sender.value = CGRect.zero;}
     }
 
@@ -52,56 +52,56 @@ open class NXClipboardView: NXView {
         public let maxYView = NXAutoresizeView<UIView>(frame: CGRect.zero)
         
         open override func setupSubviews() {
-            self.minXTHSView.backgroundColor = NX.mainColor
+            self.minXTHSView.backgroundColor = NXKit.mainColor
             self.minXTHSView.isUserInteractionEnabled = false
             self.addSubview(self.minXTHSView)
             
-            self.minXBHSView.backgroundColor = NX.mainColor
+            self.minXBHSView.backgroundColor = NXKit.mainColor
             self.minXBHSView.isUserInteractionEnabled = false
             self.addSubview(self.minXBHSView)
             
-            self.maxXTHSView.backgroundColor = NX.mainColor
+            self.maxXTHSView.backgroundColor = NXKit.mainColor
             self.maxXTHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxXTHSView)
             
-            self.maxXBHSView.backgroundColor = NX.mainColor
+            self.maxXBHSView.backgroundColor = NXKit.mainColor
             self.maxXBHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxXBHSView)
             
-            self.minYLHSView.backgroundColor = NX.mainColor
+            self.minYLHSView.backgroundColor = NXKit.mainColor
             self.minYLHSView.isUserInteractionEnabled = false
             self.addSubview(self.minYLHSView)
             
-            self.minYRHSView.backgroundColor = NX.mainColor
+            self.minYRHSView.backgroundColor = NXKit.mainColor
             self.minYRHSView.isUserInteractionEnabled = false
             self.addSubview(self.minYRHSView)
             
-            self.maxYLHSView.backgroundColor = NX.mainColor
+            self.maxYLHSView.backgroundColor = NXKit.mainColor
             self.maxYLHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxYLHSView)
             
-            self.maxYRHSView.backgroundColor = NX.mainColor
+            self.maxYRHSView.backgroundColor = NXKit.mainColor
             self.maxYRHSView.isUserInteractionEnabled = false
             self.addSubview(self.maxYRHSView)
             
             self.minXView.autoresizesSubviews = true
             self.minXView.backgroundColor = UIColor.clear
-            self.minXView.contentView.backgroundColor = NX.mainColor
+            self.minXView.contentView.backgroundColor = NXKit.mainColor
             self.addSubview(self.minXView)
             
             self.maxXView.autoresizesSubviews = true
             self.maxXView.backgroundColor = UIColor.clear
-            self.maxXView.contentView.backgroundColor = NX.mainColor
+            self.maxXView.contentView.backgroundColor = NXKit.mainColor
             self.addSubview(self.maxXView)
             
             self.minYView.autoresizesSubviews = true
             self.minYView.backgroundColor = UIColor.clear
-            self.minYView.contentView.backgroundColor = NX.mainColor
+            self.minYView.contentView.backgroundColor = NXKit.mainColor
             self.addSubview(self.minYView)
             
             self.maxYView.autoresizesSubviews = true
             self.maxYView.backgroundColor = UIColor.clear
-            self.maxYView.contentView.backgroundColor = NX.mainColor
+            self.maxYView.contentView.backgroundColor = NXKit.mainColor
             self.addSubview(self.maxYView)
         }
         
@@ -131,7 +131,7 @@ open class NXClipboardView: NXView {
     public let ctxs = NXClipboardView.Wrapped()
     public let wrappedView = NXClipboardView.WrappedView(frame:CGRect.zero)
     public let panRecognizer = UIPanGestureRecognizer()
-    public let point = NX.Wrappable<UIGestureRecognizer.State, CGPoint, CGPoint>{ (__sender) in
+    public let point = NXKit.Wrappable<UIGestureRecognizer.State, CGPoint, CGPoint>{ (__sender) in
         __sender.key = UIGestureRecognizer.State.possible;__sender.oldValue = CGPoint.zero;__sender.value = CGPoint.zero;}
     public let pinchRecognizer = UIPinchGestureRecognizer()
     
@@ -193,7 +193,7 @@ open class NXClipboardView: NXView {
         if self.ctxs.clip.isHidden == false {
             self.wrappedView.isHidden = false
             
-            let pfsValue = NX.Rect(completion:nil)
+            let pfsValue = NXKit.Rect(completion:nil)
             pfsValue.x = self.ctxs.clip.width / self.ctxs.size.width
             pfsValue.y = self.ctxs.clip.height / self.ctxs.size.height
             if pfsValue.x >= pfsValue.y {
@@ -421,7 +421,7 @@ open class NXClipboardView: NXView {
     @objc func pinchRecognizerAction(_ pinchRecognizer: UIPinchGestureRecognizer) {
         if pinchRecognizer.state == .began || pinchRecognizer.state == .changed {
 
-            var __ctxs : (center:CGPoint, scale:CGFloat, x:CGFloat, y:CGFloat, mX:CGFloat, mY:CGFloat) = (CGPoint.zero, 0.0, 0.0, 0.0, 0.0, 0.0)
+            var __ctxs : (center: CGPoint, scale: CGFloat, x: CGFloat, y: CGFloat, mX: CGFloat, mY: CGFloat) = (CGPoint.zero, 0.0, 0.0, 0.0, 0.0, 0.0)
             __ctxs.center = pinchRecognizer.location(in: self)
             __ctxs.scale = pinchRecognizer.scale
             __ctxs.x = self.wrappedView.x - __ctxs.center.x

@@ -20,17 +20,17 @@ open class NXItem : NXAny {
     }
     
     //记录单元格类型和重用ID的对象
-    open class Contexts : NX.Rect {
+    open class Contexts : NXKit.Rect {
         open var value : [String: Any]? = nil
         
         open var cls : AnyClass?        //单元格/视图类型, e.g. NXTableViewCell.self
         open var reuse : String = ""    //单元格重用ID
         open var tag: Int = 0           //根据不同tag来做不同单元格的区分
         
-        open var event: NX.Event<String, Any?>? = nil  //点击等回调
+        open var event: NXKit.Event<String, Any?>? = nil  //点击等回调
         
         open var backgroundColor: UIColor? = nil //头部尾部的背景色
-        open var at : (first:Bool, last:Bool) = (false, false) //是否是第一个，是否是最后一个
+        open var at : (first: Bool, last: Bool) = (false, false) //是否是第一个，是否是最后一个
         
         convenience public init(_ cls: AnyClass, _ reuse: String) {
             self.init()
@@ -49,7 +49,7 @@ open class NXItem : NXAny {
         super.init()
     }
     
-    public init(value:[String:Any]?, completion:NX.Completion<NXItem>?) {
+    public init(value: [String: Any]?, completion: NXKit.Completion<NXItem>?) {
         super.init()
         self.ctxs.value = value
         completion?(self)
@@ -73,7 +73,7 @@ open class NXWrappable<T>: NXItem {
 }
 
 
-open class NXElementArray<Element:NXItem> : NXItem {
+open class NXElementArray<Element: NXItem> : NXItem {
     //分组下所有的单元格对象
     open var elements = [Element]()
     
@@ -102,7 +102,7 @@ open class NXElementArray<Element:NXItem> : NXItem {
     //插入某个元素到指定索引位置
     //如果index=elements.count，则操作同append(_:)
     @discardableResult
-    open func insert(_ value: Element?, at index:Int) -> Bool {
+    open func insert(_ value: Element?, at index: Int) -> Bool {
         if let value = value, index >= 0 && index <= elements.count {
             elements.insert(value, at: index)
             return true
@@ -163,7 +163,7 @@ open class NXSection : NXElementArray<NXItem> {
     open var insets = UIEdgeInsets.zero
 
     //tableView 获取重用cell
-    public func dequeue(_ tableView: UITableView, _ indexPath : IndexPath) -> (element: NXItem, cell:NXTableViewCell)? {
+    public func dequeue(_ tableView: UITableView, _ indexPath : IndexPath) -> (element: NXItem, cell: NXTableViewCell)? {
         guard indexPath.row >= 0 && indexPath.row < self.elements.count else {
             return nil
         }
@@ -181,7 +181,7 @@ open class NXSection : NXElementArray<NXItem> {
     
     
     //tableView 获取重用cell
-    public func dequeue(_ collectionView: UICollectionView, _ indexPath : IndexPath) -> (element: NXItem, cell:NXCollectionViewCell)? {
+    public func dequeue(_ collectionView: UICollectionView, _ indexPath : IndexPath) -> (element: NXItem, cell: NXCollectionViewCell)? {
         guard indexPath.row >= 0 && indexPath.row < self.elements.count else {
             return nil
         }
@@ -201,7 +201,7 @@ open class NXSection : NXElementArray<NXItem> {
 
 
 //三维模型的基类：通用于 UITableView 数据模型和 UICollectionView 数据模型
-open class NXCollection<T:UIView> : NXElementArray<NXSection> {
+open class NXCollection<T: UIView> : NXElementArray<NXSection> {
     open weak var wrappedView : T? = nil
     
     public let placeholderView = NXPlaceholderView()
@@ -268,7 +268,7 @@ open class NXCollection<T:UIView> : NXElementArray<NXSection> {
     
 
     //UITableView 获取element/cell
-    public func dequeue(_ tableView: UITableView?, _ indexPath : IndexPath) -> (element: NXItem, cell:NXTableViewCell)? {
+    public func dequeue(_ tableView: UITableView?, _ indexPath : IndexPath) -> (element: NXItem, cell: NXTableViewCell)? {
         guard let __tableView = tableView, indexPath.section >= 0 && indexPath.section < self.elements.count else {
             return nil
         }
@@ -277,7 +277,7 @@ open class NXCollection<T:UIView> : NXElementArray<NXSection> {
     }
     
     //UITableView header footer
-    public func dequeue(_ tableView:UITableView?, _ index:Int, _ type:NXItem.View.RawValue) -> (element:NXItem, reusableView:NXTableReusableView)?{
+    public func dequeue(_ tableView:UITableView?, _ index: Int, _ type: NXItem.View.RawValue) -> (element: NXItem, reusableView: NXTableReusableView)?{
         guard let __tableView = tableView, index >= 0 && index < self.elements.count else {
             return nil
         }
@@ -305,7 +305,7 @@ open class NXCollection<T:UIView> : NXElementArray<NXSection> {
     }
     
     //UICollectionView 获取element/cell
-    public func dequeue(_ collectionView: UICollectionView?, _ indexPath : IndexPath) -> (element: NXItem, cell:NXCollectionViewCell)? {
+    public func dequeue(_ collectionView: UICollectionView?, _ indexPath : IndexPath) -> (element: NXItem, cell: NXCollectionViewCell)? {
         guard let __collectionView = collectionView, indexPath.section >= 0 && indexPath.section < self.elements.count else {
             return nil
         }
@@ -314,7 +314,7 @@ open class NXCollection<T:UIView> : NXElementArray<NXSection> {
     }
     
     //UICollectionView 获取header footer
-    public func dequeue(_ collectionView: UICollectionView?, _ indexPath:IndexPath, _ type:NXItem.View.RawValue) -> (elelment:NXItem, reusableView:NXCollectionReusableView)? {
+    public func dequeue(_ collectionView: UICollectionView?, _ indexPath:IndexPath, _ type: NXItem.View.RawValue) -> (elelment: NXItem, reusableView: NXCollectionReusableView)? {
         guard let __collectionView = collectionView, (indexPath as NSIndexPath).section >= 0 && (indexPath as NSIndexPath).section < self.elements.count else {
             return nil
         }
@@ -377,7 +377,7 @@ extension NXCollection where T == NXTableView {
             }
             
             //2.根据FD中的自适应返回单元格的高度
-            if let height = NX.heightForRow(self.wrappedView, element, indexPath), height > 0 {
+            if let height = NXKit.heightForRow(self.wrappedView, element, indexPath), height > 0 {
                 return height
             }
         }
@@ -396,9 +396,9 @@ extension NXCollection where T == NXTableView {
         return 0.0
     }
     
-    //新增一个分组,并将新增的分组返回//_ cls: AnyClass = NXTableReusableView.self, _ reuse:String = "NXTableReusableView", _ h:CGFloat = 10.0
+    //新增一个分组,并将新增的分组返回//_ cls: AnyClass = NXTableReusableView.self, _ reuse: String = "NXTableReusableView", _ h: CGFloat = 10.0
     @discardableResult
-    public func addSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
+    public func addSection(cls: AnyClass, reuse: String, height: CGFloat) -> NXSection {
         let section = NXSection()
         section.header = NXItem()
         section.header?.ctxs.update(cls, reuse)
@@ -409,7 +409,7 @@ extension NXCollection where T == NXTableView {
     
     //返回最后一个分组，没有则新增并返回最后一个分组
     @discardableResult
-    public func getLastSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
+    public func getLastSection(cls: AnyClass, reuse: String, height: CGFloat) -> NXSection {
         if let section = self.elements.last {
             return section
         }
@@ -439,9 +439,9 @@ extension NXCollection where T == NXCollectionView {
         return e
     }
     
-    //新增一个分组,并将新增的分组返回//_ cls: AnyClass = NXTableReusableView.self, _ reuse:String = "NXTableReusableView", _ h:CGFloat = 0.0
+    //新增一个分组,并将新增的分组返回//_ cls: AnyClass = NXTableReusableView.self, _ reuse: String = "NXTableReusableView", _ h: CGFloat = 0.0
     @discardableResult
-    public func addSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
+    public func addSection(cls: AnyClass, reuse: String, height: CGFloat) -> NXSection {
         let section = NXSection()
         section.header = NXItem()
         section.header?.ctxs.update(cls, reuse)
@@ -452,7 +452,7 @@ extension NXCollection where T == NXCollectionView {
     
     //返回最后一个分组，没有则新增并返回最后一个分组
     @discardableResult
-    public func getLastSection(cls: AnyClass, reuse:String, height:CGFloat) -> NXSection {
+    public func getLastSection(cls: AnyClass, reuse: String, height: CGFloat) -> NXSection {
         if let section = self.elements.last {
             return section
         }

@@ -19,7 +19,7 @@ open class NXClip : NXAny {
         super.init()
     }
     
-    convenience public init(name:String, isResizable:Bool, width:CGFloat, height:CGFloat, isHidden:Bool) {
+    convenience public init(name: String, isResizable: Bool, width: CGFloat, height: CGFloat, isHidden: Bool) {
         self.init()
         self.name = name
         self.isResizable = isResizable
@@ -33,7 +33,7 @@ open class NXClip : NXAny {
     public static let area = "area" //开平方（图片宽高相乘/目标宽高相乘）：作为缩放系数
     public static let none = "none" //不缩放
     
-    open class func resize(by:String, _ targetSize:CGSize, _ fixedSize:CGSize, _ floorAllowed:Bool) -> CGSize {
+    open class func resize(by: String, _ targetSize: CGSize, _ fixedSize: CGSize, _ floorAllowed: Bool) -> CGSize {
         var retValue = targetSize
         if targetSize.width == 0 || targetSize.height == 0 || fixedSize.width == 0 || fixedSize.height == 0 {
             return retValue
@@ -71,7 +71,7 @@ open class NXClip : NXAny {
         return retValue
     }
     
-    open class func resize(_ image:UIImage, _ size:CGSize) -> UIImage? {
+    open class func resize(_ image: UIImage, _ size: CGSize) -> UIImage? {
         if size.width <= 0 || size.height == 0 {
             return nil
         }

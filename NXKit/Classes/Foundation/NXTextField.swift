@@ -11,7 +11,7 @@ import UIKit
 
 open class NXTextField: UITextField {
     open var maximumOfBytes: Int = 0
-    public let accessoryView = NXKeyboardAccessoryView(frame: CGRect(x: 0, y: 0, width: NX.width, height: 44))
+    public let accessoryView = NXKeyboardAccessoryView(frame: CGRect(x: 0, y: 0, width: NXKit.width, height: 44))
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,10 +69,10 @@ open class NXTextField: UITextField {
                     self.accessoryView.bytesView.text = "\(Int(ceil(Double(byteLength/2))))/\(Int(ceil(Double(maximumOfBytes/2))))"
                     
                     if byteLength == maximumOfBytes {
-                        self.accessoryView.bytesView.textColor = NX.color(0xFF3B74, 1)
+                        self.accessoryView.bytesView.textColor = NXKit.color(0xFF3B74, 1)
                     }
                     else {
-                        self.accessoryView.bytesView.textColor = NX.lightGrayColor
+                        self.accessoryView.bytesView.textColor = NXKit.lightGrayColor
                     }
                 }
             }

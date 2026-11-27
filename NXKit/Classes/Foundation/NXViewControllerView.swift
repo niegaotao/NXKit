@@ -8,9 +8,9 @@
 
 import UIKit
 
-open class NXViewControllerView<N:UIView, C:UIView> : NXView {
-    open var navigationView = N(frame: CGRect(x: 0, y: 0, width: NX.width, height: NX.safeAreaInsets.top + 44.0))
-    open var contentView = C(frame: CGRect(x: 0, y: NX.safeAreaInsets.top + 44.0, width: NX.width, height: NX.height-NX.safeAreaInsets.top - 44.0))
+open class NXViewControllerView<N: UIView, C: UIView> : NXView {
+    open var navigationView = N(frame: CGRect(x: 0, y: 0, width: NXKit.width, height: NXKit.safeAreaInsets.top + 44.0))
+    open var contentView = C(frame: CGRect(x: 0, y: NXKit.safeAreaInsets.top + 44.0, width: NXKit.width, height: NXKit.height-NXKit.safeAreaInsets.top - 44.0))
     open weak var controller : NXViewController? = nil
 
     open override func setupSubviews() {

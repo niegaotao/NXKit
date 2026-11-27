@@ -13,14 +13,14 @@ extension NXRouter {
         public var scheme = ""        //scheme
         public var host = ""          //host
         public var path = ""          //path
-        public var completion: NX.Event<Bool, NXRouter.URL>? = nil//注册后的回调action
+        public var completion: NXKit.Event<Bool, NXRouter.URL>? = nil//注册后的回调action
     }
     
     /*回调信息*/
     public class URL {
         public var url: String = ""
         public var info: [String: Any]? = nil                      //打开URL传入的参数，输入
-        public var completion: NX.Event<Bool, NXRouter.URL>? = nil//打开URL后的回调
+        public var completion: NXKit.Event<Bool, NXRouter.URL>? = nil//打开URL后的回调
 
         public var scheme = ""                                  //scheme
         public var host = ""                                    //host
@@ -32,11 +32,11 @@ extension NXRouter {
 open class NXRouter : NSObject {
     public static let center = NXRouter()
     public private(set) var uris = [NXRouter.URI]()                 //存储的uris
-    open var exception : ((_ url:String) -> ())?                    //对未注册的或异常的一个回调
+    open var exception : ((_ url: String) -> ())?                    //对未注册的或异常的一个回调
     
     /*新增URL*/
     @discardableResult
-    public func add(_ url: String, completion:@escaping NX.Event<Bool, NXRouter.URL>) -> NXRouter.URI? {
+    public func add(_ url: String, completion:@escaping NXKit.Event<Bool, NXRouter.URL>) -> NXRouter.URI? {
         guard let url = Foundation.URL(string: url), let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             return nil
         }
@@ -70,7 +70,7 @@ open class NXRouter : NSObject {
     }
     
     //打开链接
-    public func open(_ url: String, info: [String: Any]? = nil, completion: NX.Event<Bool, NXRouter.URL>? = nil) {
+    public func open(_ url: String, info: [String: Any]? = nil, completion: NXKit.Event<Bool, NXRouter.URL>? = nil) {
         guard let url = Foundation.URL(string: url), let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             self.exception?(url)
             return
@@ -104,15 +104,15 @@ open class NXRouter : NSObject {
 
 extension NXRouter {
     //生成路由URL
-    public class func create(scheme:String, host:String, path:String, query:[String:Any], encode:Bool) -> String {
+    public class func create(scheme: String, host: String, path: String, query: [String: Any], encode: Bool) -> String {
         var __querys = [String]()
         for (queryKey, queryValue) in query {
-            let key = encode ? NX.get(string:NX.encodeURIComponent(queryKey), ""): queryKey
+            let key = encode ? NXKit.get(string: NXKit.encodeURIComponent(queryKey), ""): queryKey
             var value = ""
             if let __value = queryValue as? String {
-                value = encode ? NX.get(string:NX.encodeURIComponent(__value), "") : __value
+                value = encode ? NXKit.get(string: NXKit.encodeURIComponent(__value), "") : __value
             }
-            else if let __value = queryValue as? [String:Any] {
+            else if let __value = queryValue as? [String: Any] {
                 value = NXSerialization.JSONObject(toString: __value, encode: encode)
             }
             else if let __value = queryValue as? [Any] {

@@ -12,16 +12,16 @@ import Foundation
 
 open class NXStorage {
     public static let center = NXStorage()
-    public fileprivate(set) var rootValue = [String:Any]()
+    public fileprivate(set) var rootValue = [String: Any]()
     public fileprivate(set) var rootKey = "__rootKey"
     public init(){
-        if let __rootValue = UserDefaults.standard.object(forKey: rootKey) as? [String:Any]{
+        if let __rootValue = UserDefaults.standard.object(forKey: rootKey) as? [String: Any]{
             self.rootValue = __rootValue;
         }
     }
     
     @discardableResult
-    open func value(forKey key:String) -> Any? {
+    open func value(forKey key: String) -> Any? {
         if let __value = self.rootValue[key] {
             return __value
         }
@@ -29,7 +29,7 @@ open class NXStorage {
     }
     
     @discardableResult
-    open func set(_ value:Any?, forKey key:String) -> Bool {
+    open func set(_ value: Any?, forKey key: String) -> Bool {
         guard key.count > 0 else {
             return false
         }
