@@ -16,18 +16,17 @@ class EXToolViewController: NXToolViewController {
         super.viewDidLoad()
         
         let attributes = EXToolViewController.Attributes()
-        
+        attributes.selectedAppearance.color = UIColor.red
+
         if true {
             let vc = NXViewController()
             vc.title = "首页"
             attributes.viewControllers.append(vc)
             
             let item = NXToolView.Element()
-            item.name.selected = "首页"
-            item.name.unselected = "首页"
-            item.image.selected = UIImage(named: "index_selected.png")!
-            item.image.unselected = UIImage(named: "index_selected.png")!
-            item.color.selected = UIColor.red
+            item.title = "首页"
+            item.selected.image = UIImage(named: "index_selected.png")!
+            item.unselected.image = UIImage(named: "index_selected.png")!
             attributes.elements.append(item)
         }
         
@@ -37,12 +36,11 @@ class EXToolViewController: NXToolViewController {
             attributes.viewControllers.append(vc)
             
             let item = NXToolView.Element()
-            item.name.selected = "工具"
-            item.name.unselected = "工具"
-            item.image.selected = UIImage(named: "index_selected.png")!
-            item.image.unselected = UIImage(named: "index_selected.png")!
+            item.title = "工具"
+            item.selected.image = UIImage(named: "index_selected.png")!
+            item.unselected.image = UIImage(named: "index_selected.png")!
             item.badge.value = 5
-            item.badge.isNumeric = false
+            item.badge.type = .dot
             attributes.elements.append(item)
         }
         
@@ -52,12 +50,11 @@ class EXToolViewController: NXToolViewController {
             attributes.viewControllers.append(vc)
             
             let item = NXToolView.Element()
-            item.name.selected = "发现"
-            item.name.unselected = "发现"
-            item.image.selected = UIImage(named: "index_selected.png")!
-            item.image.unselected = UIImage(named: "index_selected.png")!
+            item.title = "发现"
+            item.selected.image = UIImage(named: "index_selected.png")!
+            item.unselected.image = UIImage(named: "index_selected.png")!
             item.badge.value = 5
-            item.badge.isNumeric = true
+            item.badge.type = .numeric
             attributes.elements.append(item)
         }
         
@@ -67,13 +64,11 @@ class EXToolViewController: NXToolViewController {
             attributes.viewControllers.append(vc)
             
             let item = NXToolView.Element()
-            item.name.selected = "我的"
-            item.name.unselected = "我的"
-            item.image.selected = UIImage(named: "index_selected.png")!
-            item.image.unselected = UIImage(named: "index_selected.png")!
-            item.color.selected = UIColor.red
+            item.title = "我的"
+            item.selected.image = UIImage(named: "index_selected.png")!
+            item.unselected.image = UIImage(named: "index_selected.png")!
             item.badge.value = 100
-            item.badge.isNumeric = true
+            item.badge.type = .numeric
             item.badge.isResetable = true
             attributes.elements.append(item)
         }
