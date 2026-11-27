@@ -8,80 +8,75 @@
 
 import UIKit
 
-
 open class NXTextField: UITextField {
     open var maximumOfBytes: Int = 0
     public let accessoryView = NXKeyboardAccessoryView(frame: CGRect(x: 0, y: 0, width: NXKit.width, height: 44))
-    
-    public override init(frame: CGRect) {
+
+    override public init(frame: CGRect) {
         super.init(frame: frame)
-        self.setup()
+        setup()
     }
-    
+
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setup()
+        setup()
     }
-    
+
     public convenience init(frame: CGRect, maximumOfBytes: Int) {
         self.init(frame: frame)
         self.maximumOfBytes = maximumOfBytes
-        self.setupSubviews()
+        setupSubviews()
     }
-    
+
     override open var text: String? {
         didSet {
             textDidChange()
         }
     }
-        
-    open func setup(){
-        self.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
-        self.inputAccessoryView = self.accessoryView
-        self.accessoryView.actionView.setupEvent(.touchUpInside, action: {[weak self] (_,_) in
+
+    open func setup() {
+        addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        inputAccessoryView = accessoryView
+        accessoryView.actionView.setupEvent(.touchUpInside, action: { [weak self] _, _ in
             self?.endEditing(true)
         })
     }
-    
-    open func setupSubviews(){
+
+    open func setupSubviews() {
         if maximumOfBytes > 0 {
-            self.accessoryView.bytesView.isHidden = false
-            self.accessoryView.bytesView.text = "0/\(Int(ceil(Double(maximumOfBytes/2))))"
-        }
-        else{
-            self.accessoryView.bytesView.isHidden = true
+            accessoryView.bytesView.isHidden = false
+            accessoryView.bytesView.text = "0/\(Int(ceil(Double(maximumOfBytes / 2))))"
+        } else {
+            accessoryView.bytesView.isHidden = true
         }
     }
 
     @objc private func textDidChange() {
         if maximumOfBytes > 0 {
             if accessoryView.isEnabled {
-                self.accessoryView.bytesView.isHidden = false
+                accessoryView.bytesView.isHidden = false
                 if var textStr = text {
                     var byteLength = String.countOfBytes(textStr)
-                    
+
                     if byteLength > maximumOfBytes {
-                        textStr = String.substringOfBytes(textStr, countOfBytes:maximumOfBytes)
+                        textStr = String.substringOfBytes(textStr, countOfBytes: maximumOfBytes)
                         text = textStr
                     }
-                    
+
                     byteLength = String.countOfBytes(textStr)
-                    self.accessoryView.bytesView.text = "\(Int(ceil(Double(byteLength/2))))/\(Int(ceil(Double(maximumOfBytes/2))))"
-                    
+                    accessoryView.bytesView.text = "\(Int(ceil(Double(byteLength / 2))))/\(Int(ceil(Double(maximumOfBytes / 2))))"
+
                     if byteLength == maximumOfBytes {
-                        self.accessoryView.bytesView.textColor = NXKit.color(0xFF3B74, 1)
-                    }
-                    else {
-                        self.accessoryView.bytesView.textColor = NXKit.lightGrayColor
+                        accessoryView.bytesView.textColor = NXKit.color(0xFF3B74, 1)
+                    } else {
+                        accessoryView.bytesView.textColor = NXKit.lightGrayColor
                     }
                 }
+            } else {
+                accessoryView.bytesView.isHidden = true
             }
-            else {
-                self.accessoryView.bytesView.isHidden = true
-            }
-        }
-        else{
-            self.accessoryView.bytesView.isHidden = true
+        } else {
+            accessoryView.bytesView.isHidden = true
         }
     }
 }

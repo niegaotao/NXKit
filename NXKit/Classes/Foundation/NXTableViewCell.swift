@@ -8,55 +8,48 @@
 
 import UIKit
 
-open class NXTableViewCell: UITableViewCell {
-    open var value : Any? = nil
+open class NXTableViewCell: UITableViewCell, NXViewProtocol {
+    open var value: Any? = nil
     open var arrowView = UIImageView(frame: CGRect.zero)
     open var separator = CALayer()
-    
-    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+
+    override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.setup()
-        self.setupSubviews()
+        setup()
+        setupSubviews()
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setup()
-        self.setupSubviews()
+        setup()
+        setupSubviews()
     }
-    
-    open func setup(){
-        arrowView.frame = CGRect(x: contentView.width-16.0-6, y: (contentView.height-12)/2, width: 6, height: 12)
-        arrowView.image = NXKit.image(named:"icon-arrow.png")
+
+    open func setup() {
+        arrowView.frame = CGRect(x: contentView.width - 16.0 - 6, y: (contentView.height - 12) / 2, width: 6, height: 12)
+        arrowView.image = NXKit.image(named: "icon-arrow.png")
         arrowView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin]
         arrowView.contentMode = .scaleAspectFill
         arrowView.isHidden = true
-        self.contentView.addSubview(arrowView)
-        
-        if self.backgroundView == nil {
-            self.backgroundView = UIView(frame: CGRect.zero)
-            self.backgroundView?.backgroundColor = NXKit.cellBackgroundColor
-            self.backgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        contentView.addSubview(arrowView)
+
+        if backgroundView == nil {
+            backgroundView = UIView(frame: CGRect.zero)
+            backgroundView?.backgroundColor = NXKit.cellBackgroundColor
+            backgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
-        
+
         separator.backgroundColor = NXKit.separatorColor.cgColor
         separator.isHidden = true
-        self.backgroundView?.layer.addSublayer(separator)
+        backgroundView?.layer.addSublayer(separator)
     }
-    
-    /// 子类直接重写该方法进行UI视图的初始化和布局
-    open func setupSubviews(){
-        
-    }
-    
-    
-    /// 子类重写该方法进行数据绑定操作
-    open func updateSubviews(_ value: Any?){
-        
-    }
-    
-    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+
+    open func setupSubviews() {}
+
+    open func updateSubviews(_: Any?) {}
+
+    override open func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        self.separator.backgroundColor = NXKit.separatorColor.cgColor
+        separator.backgroundColor = NXKit.separatorColor.cgColor
     }
 }

@@ -9,12 +9,11 @@
 import UIKit
 
 open class NXAlbumViewController: NXWrappedViewController<NXWrappedNavigationController<NXAlbumAssetsViewController>> {
-    
-    open var wrapped : NXAsset.Wrapped {
-        self.viewController.viewController.getWrapped()
+    open var wrapped: NXAsset.Wrapped {
+        viewController.viewController.getWrapped()
     }
-    
-    open override func viewDidLoad() {
+
+    override open func viewDidLoad() {
         super.viewDidLoad()
     }
 }

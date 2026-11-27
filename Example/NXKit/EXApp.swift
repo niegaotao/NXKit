@@ -6,21 +6,20 @@
 //  Copyright © 2022 CocoaPods. All rights reserved.
 //
 
-import UIKit
 import NXKit
 import Photos
+import UIKit
 
 class EXApp {
     static let center = EXApp()
     static let naviController = NXNavigationController()
-    
-    
-    //获取授权/请求授权入口
-    open class func authorization(_ category: NXKit.Authorize, _ queue:DispatchQueue, _ completion:((NXKit.AuthorizeState) -> ())?, _ alert: Bool = true){
-        self.albumAuthorization(queue, true, completion)
+
+    // 获取授权/请求授权入口
+    open class func authorization(_: NXKit.Authorize, _ queue: DispatchQueue, _ completion: ((NXKit.AuthorizeState) -> Void)?, _: Bool = true) {
+        albumAuthorization(queue, true, completion)
     }
-    
-    private class func albumAuthorization(_ queue:DispatchQueue, _ alert:Bool, _ completion:((NXKit.AuthorizeState) -> ())?){
+
+    private class func albumAuthorization(_ queue: DispatchQueue, _ alert: Bool, _ completion: ((NXKit.AuthorizeState) -> Void)?) {
         if #available(iOS 14.0, *) {
             let access = PHAccessLevel.readWrite
             let status = PHPhotoLibrary.authorizationStatus(for: access)
@@ -28,15 +27,13 @@ class EXApp {
                 queue.async {
                     completion?(.authorized)
                 }
-            }
-            else if status == .notDetermined {
-                PHPhotoLibrary.requestAuthorization(for: access) { (substatus) in
+            } else if status == .notDetermined {
+                PHPhotoLibrary.requestAuthorization(for: access) { substatus in
                     if substatus == .authorized {
                         queue.async {
                             completion?(.authorized)
                         }
-                    }
-                    else {
+                    } else {
                         queue.async {
                             completion?(.denied)
                         }
@@ -47,7 +44,7 @@ class EXApp {
                     }
                 }
             }
-            
+
             else {
                 queue.async {
                     completion?(.denied)
@@ -57,22 +54,19 @@ class EXApp {
                     EXApp.description(.album)
                 }
             }
-        }
-        else {
+        } else {
             let status = PHPhotoLibrary.authorizationStatus()
             if status == .authorized {
                 queue.async {
                     completion?(.authorized)
                 }
-            }
-            else if status == .notDetermined {
-                PHPhotoLibrary.requestAuthorization { (substatus) in
+            } else if status == .notDetermined {
+                PHPhotoLibrary.requestAuthorization { substatus in
                     if substatus == .authorized {
                         queue.async {
                             completion?(.authorized)
                         }
-                    }
-                    else{
+                    } else {
                         queue.async {
                             completion?(.denied)
                         }
@@ -82,9 +76,8 @@ class EXApp {
                         }
                     }
                 }
-            }
-            else{
-                queue.async  {
+            } else {
+                queue.async {
                     completion?(.denied)
                 }
                 if alert {
@@ -93,18 +86,14 @@ class EXApp {
             }
         }
     }
-    
 
-    open class func description(_ type: NXKit.Authorize, _ completion:((_ index:Int) -> ())? = nil){
-        NXActionView.alert(title: "温馨提示", subtitle: "\(NXKit.name)访问您的相册用户快速选择和保存照片，请打开设置->\(NXKit.name)，开启相册访问权限。", actions: ["好的",], completion: nil)
+    open class func description(_: NXKit.Authorize, _: ((_ index: Int) -> Void)? = nil) {
+        NXActionView.alert(title: "温馨提示", subtitle: "\(NXKit.name)访问您的相册用户快速选择和保存照片，请打开设置->\(NXKit.name)，开启相册访问权限。", actions: ["好的"], completion: nil)
     }
-    
-    
-    
-    
+
     open var assets = [NXAsset]()
-    
-    func preview(_ assets: [NXAsset], _ index:Int){
+
+    func preview(_ assets: [NXAsset], _: Int) {
         self.assets = assets
     }
 }

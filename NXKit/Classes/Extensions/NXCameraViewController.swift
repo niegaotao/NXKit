@@ -9,13 +9,11 @@
 import UIKit
 
 open class NXCameraViewController: NXWrappedViewController<NXCameraCaptureController> {
-
-    open var wrapped : NXAsset.Wrapped {
-        self.viewController.getWrapped()
+    open var wrapped: NXAsset.Wrapped {
+        viewController.getWrapped()
     }
-    
-    open override func viewDidLoad() {
+
+    override open func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 }

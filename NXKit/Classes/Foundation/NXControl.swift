@@ -8,24 +8,18 @@
 
 import UIKit
 
-
-open class NXControl: UIControl {
-    
-    public override init(frame: CGRect) {
+open class NXControl: UIControl, NXViewProtocol {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupSubviews()
     }
-    
-    open func setupSubviews(){
-        
-    }
-    
-    open func updateSubviews(_ value: Any?){
-        
-    }
+
+    open func setupSubviews() {}
+
+    open func updateSubviews(_: Any?) {}
 }

@@ -10,16 +10,16 @@ import UIKit
 
 open class NXString {
     open var frame = CGRect.zero
-    open var color  = NXKit.blackColor
-    open var lineSpacing : CGFloat = 0.0
+    open var color = NXKit.blackColor
+    open var lineSpacing: CGFloat = 0.0
     open var text = ""
     open var font = NXKit.font(15)
     open var query = [String: Any]()
-    public init(){}
+    public init() {}
 }
 
-extension NXString {
-    public class func string(_ text: String, _ font:UIFont, _ color: UIColor, _ lineSpacing: CGFloat) -> NXString {
+public extension NXString {
+    class func string(_ text: String, _ font: UIFont, _ color: UIColor, _ lineSpacing: CGFloat) -> NXString {
         let textWrapper = NXString()
         textWrapper.text = text
         textWrapper.font = font
@@ -27,8 +27,8 @@ extension NXString {
         textWrapper.lineSpacing = lineSpacing
         return textWrapper
     }
-    
-    public class func string(_ text: String, _ font:UIFont, _ color: UIColor, _ lineSpacing: CGFloat, _ query: [String: Any]) -> NXString {
+
+    class func string(_ text: String, _ font: UIFont, _ color: UIColor, _ lineSpacing: CGFloat, _ query: [String: Any]) -> NXString {
         let textWrapper = NXString()
         textWrapper.text = text
         textWrapper.font = font
@@ -37,8 +37,8 @@ extension NXString {
         textWrapper.query = query
         return textWrapper
     }
-    
-    public class func attributedString(_ text: String, _ font:UIFont, _ color: UIColor, _ lineSpacing: CGFloat) -> NSMutableAttributedString {
+
+    class func attributedString(_ text: String, _ font: UIFont, _ color: UIColor, _ lineSpacing: CGFloat) -> NSMutableAttributedString {
         var mapValue = [NSAttributedString.Key: Any]()
         mapValue[NSAttributedString.Key.font] = font
         mapValue[NSAttributedString.Key.foregroundColor] = color
@@ -50,8 +50,8 @@ extension NXString {
         let attributedText = NSMutableAttributedString(string: text, attributes: mapValue)
         return attributedText
     }
-    
-    public class func attributedString(_ strings: [NXString], _ lineSpacing: CGFloat) -> NSMutableAttributedString {
+
+    class func attributedString(_ strings: [NXString], _ lineSpacing: CGFloat) -> NSMutableAttributedString {
         let attributedText = NSMutableAttributedString()
         for string in strings {
             var mapValue = [NSAttributedString.Key: Any]()
@@ -63,10 +63,10 @@ extension NXString {
                 paragraphStyle.lineHeightMultiple = 1.25
                 return paragraphStyle
             }()
-            
+
             let subattributedText = NSMutableAttributedString(string: string.text, attributes: mapValue)
             if string.query.count > 0 {
-                subattributedText.addAttribute(NSAttributedString.Key.link, value: "app://query?query="+NXSerialization.JSONObject(toString: string.query, encode: true), range: NSMakeRange(0, (string.text as NSString).length))
+                subattributedText.addAttribute(NSAttributedString.Key.link, value: "app://query?query=" + NXSerialization.JSONObject(toString: string.query, encode: true), range: NSMakeRange(0, (string.text as NSString).length))
             }
             attributedText.append(subattributedText)
         }

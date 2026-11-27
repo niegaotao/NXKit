@@ -8,34 +8,33 @@
 
 import UIKit
 
-
 open class NXSearchView: NXBackgroundView<UIImageView, UIView>, UITextFieldDelegate {
     public let mirrorView = UIImageView(frame: CGRect(x: 16, y: 0, width: 16, height: 16))
     public let fieldView = NXTextField(frame: CGRect(x: 35, y: 0, width: 0, height: 0), maximumOfBytes: 100)
-    
+
     public private(set) var placeholder = "输入关键词"
-    
+
     override open func setupSubviews() {
         super.setupSubviews()
-        
-        self.backgroundView.frame = self.bounds
-        
-        self.contentView.frame = self.bounds
-        self.contentView.backgroundColor = NXKit.color(247, 247, 247)
-        self.contentView.layer.borderColor = NXKit.separatorColor.cgColor
-        self.contentView.layer.borderWidth = NXKit.pixel
-        self.contentView.layer.cornerRadius = 16.0
-        self.contentView.layer.masksToBounds = true
-        
-        //左侧的放大镜
-        mirrorView.frame = CGRect(x: 16, y: (self.height-16)/2, width: 16, height: 16)
+
+        backgroundView.frame = bounds
+
+        contentView.frame = bounds
+        contentView.backgroundColor = NXKit.color(247, 247, 247)
+        contentView.layer.borderColor = NXKit.separatorColor.cgColor
+        contentView.layer.borderWidth = NXKit.pixel
+        contentView.layer.cornerRadius = 16.0
+        contentView.layer.masksToBounds = true
+
+        // 左侧的放大镜
+        mirrorView.frame = CGRect(x: 16, y: (height - 16) / 2, width: 16, height: 16)
         mirrorView.image = UIImage(named: "navi_searchbar.png")
-        self.contentView.addSubview(mirrorView)
-        
-        //文字输入框
+        contentView.addSubview(mirrorView)
+
+        // 文字输入框
         fieldView.font = NXKit.font(14)
         fieldView.textColor = NXKit.color(80, 80, 80)
-        fieldView.frame = CGRect(x: 35, y: 0, width: self.width-35, height: self.height)
+        fieldView.frame = CGRect(x: 35, y: 0, width: width - 35, height: height)
         fieldView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         fieldView.clearButtonMode = .whileEditing
         fieldView.font = NXKit.font(14)
@@ -44,73 +43,76 @@ open class NXSearchView: NXBackgroundView<UIImageView, UIView>, UITextFieldDeleg
         fieldView.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         fieldView.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         fieldView.delegate = self
-        fieldView.setupEvent(.editingChanged) { [weak self] (v, e) in
-            self?.realtimeSearch?("", NXKit.get(string:self?.fieldView.text, ""))
+        fieldView.setupEvent(.editingChanged) { [weak self] _, _ in
+            self?.realtimeSearch?("", NXKit.get(string: self?.fieldView.text, ""))
+        }
+        fieldView.accessoryView.actionView.setupEvent(.touchUpInside) { [weak self] _, _ in
+            guard let self = self else { return }
+            let keyboard = self.fieldView.text ?? ""
+            self.search?("return", keyboard)
+            self.fieldView.resignFirstResponder()
         }
         fieldView.returnKeyType = .search
-        self.contentView.addSubview(fieldView)
-        
-        self.updateSubviews(self.placeholder)
+        contentView.addSubview(fieldView)
+
+        updateSubviews(placeholder)
     }
-    
-    
-    open var completion : NXKit.Event<String, [String: Any]>? = nil
-    
-    //RETURN 按钮点击后回调 查询数据
-    //clear, return
-    open var search : NXKit.Event<String, String>? = nil
-    
-    //在不断输入的过程中，下方不断更新展示推荐关键字
-    open var realtimeSearch : NXKit.Event<String, String>? = nil
-    
-    
-    open var editable : Bool = true {
+
+    // RETURN 按钮点击后回调 查询数据
+    // clear, return
+    open var search: NXKit.Event<String, String>? = nil
+
+    // 在不断输入的过程中，下方不断更新展示推荐关键字
+    open var realtimeSearch: NXKit.Event<String, String>? = nil
+
+    open var editable: Bool = true {
         didSet {
             fieldView.isEnabled = editable
         }
     }
-    
-    func addTarget(_ target: Any, action: Selector){
-        self.isUserInteractionEnabled = true
-        self.addGestureRecognizer(UITapGestureRecognizer(target: target, action: action))
+
+    func addTarget(_ target: Any, action: Selector) {
+        isUserInteractionEnabled = true
+        addGestureRecognizer(UITapGestureRecognizer(target: target, action: action))
     }
-    
+
     @discardableResult
     override open func becomeFirstResponder() -> Bool {
         return fieldView.becomeFirstResponder()
     }
-    
+
     @discardableResult
     override open func resignFirstResponder() -> Bool {
         return fieldView.resignFirstResponder()
     }
-    
+
     @discardableResult
-    open func isFirstResponder() -> Bool  {
+    open func isFirstResponder() -> Bool {
         return fieldView.isFirstResponder
     }
-    
-    //MARK:UITextFieldDelegate
-    //点击键盘"搜索"后的事件
+
+    // MARK: UITextFieldDelegate
+
+    // 点击键盘"搜索"后的事件
     open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.search?("return", NXKit.get(string:textField.text, ""))
+        search?("return", NXKit.get(string: textField.text, ""))
         return true
     }
-    
-    //点击清理
-    open func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        self.fieldView.text = ""
+
+    // 点击清理
+    open func textFieldShouldClear(_: UITextField) -> Bool {
+        fieldView.text = ""
         DispatchQueue.main.asyncAfter(delay: 0.1) {
             self.search?("clear", "")
         }
         return true
     }
-    
-    open override func layoutSubviews() {
+
+    override open func layoutSubviews() {
         super.layoutSubviews()
-        self.backgroundView.frame = self.bounds
-        self.contentView.frame = self.bounds
-        
-        self.fieldView.frame = CGRect(x: 35, y: 0, width: self.width-35, height: self.height)
+        backgroundView.frame = bounds
+        contentView.frame = bounds
+
+        fieldView.frame = CGRect(x: 35, y: 0, width: width - 35, height: height)
     }
 }
