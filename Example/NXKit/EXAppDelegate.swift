@@ -1,21 +1,34 @@
 //
-//  AppDelegate.swift
+//  EXAppDelegate.swift
 //  NXKit
 //
-//  Created by niegaotao on 04/17/2019.
-//  Copyright (c) 2019 niegaotao. All rights reserved.
+//  Created by niegaotao on 09/18/2021.
+//  Copyright (c) 2021 niegaotao. All rights reserved.
 //
 
 import UIKit
+import NXKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class EXAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        if #available(iOS 13.0, *) {
+            let rect = self.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
+            NX.print("-------\(rect)")
+        } else {
+            // Fallback on earlier versions
+        }
+        self.window?.rootViewController = NXNavigationController(rootViewController: EXViewController())
+        self.window?.makeKeyAndVisible()
         return true
     }
 

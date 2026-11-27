@@ -1,0 +1,6 @@
+framework module NXKit {
+  umbrella header "NXKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
