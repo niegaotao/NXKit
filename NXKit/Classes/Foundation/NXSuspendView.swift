@@ -3,6 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/1/5.
+//  Copyright (c) 2020 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -36,7 +37,7 @@ open class NXSuspendView<T:UIView>: NXView {
                 self.isAnimated = true
                 
                 UIView.animate(withDuration: (animation ? 0.4 : 0.0)) {
-                    self.y = -self.h
+                    self.y = -self.height
                 }
             }
         }

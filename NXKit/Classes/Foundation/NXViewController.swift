@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/5/8.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -11,13 +11,13 @@ import UIKit
 open class NXViewController: UIViewController  {
 
     ///ctxs.index用于记录分页加载的索引，xyz备用
-    public let ctxs = NXViewController.Association<Int>()
+    public let ctxs = NXViewController.Association()
     
     ///导航栏
-    open var naviView = NXNaviView(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: NXUI.topOffset))
+    open var naviView = NXNaviView(frame: CGRect(x: 0, y: 0, width: NX.width, height: NX.topOffset))
     
     ///内容视图，不会被导航栏覆盖
-    open var contentView = UIView(frame: CGRect(x: 0, y: NXUI.topOffset, width: NXUI.width, height: NXUI.height-NXUI.topOffset))
+    open var contentView = UIView(frame: CGRect(x: 0, y: NX.topOffset, width: NX.width, height: NX.height-NX.topOffset))
     
     ///页面无内容时的加载动画
     open var animationView = NX.AnimationClass.init(frame: CGRect.zero)
@@ -49,7 +49,7 @@ open class NXViewController: UIViewController  {
         
         self.view.backgroundColor = NX.viewBackgroundColor
         
-        self.contentView.frame = CGRect(x: 0, y: NXUI.topOffset, width: self.view.w, height: self.view.h-NXUI.topOffset)
+        self.contentView.frame = CGRect(x: 0, y: NX.topOffset, width: self.view.width, height: self.view.height-NX.topOffset)
         self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.contentView.backgroundColor = NX.contentViewBackgroundColor
         self.view.addSubview(self.contentView)
@@ -59,7 +59,7 @@ open class NXViewController: UIViewController  {
         self.contentView.addSubview(self.animationView)
         
         
-        self.naviView.frame = CGRect(x: 0, y: 0, width: self.view.w, height: NXUI.topOffset)
+        self.naviView.frame = CGRect(x: 0, y: 0, width: self.view.width, height: NX.topOffset)
         self.naviView.autoresizingMask = [.flexibleWidth]
         self.naviView.controller = self
         self.naviView.separator.isHidden = self.ctxs.separator.isHidden
@@ -94,7 +94,7 @@ open class NXViewController: UIViewController  {
     
     override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
+
         self.ctxs.didDisappear?("", self)
         self.ctxs.didDisappear = nil
     }
@@ -127,10 +127,7 @@ open class NXViewController: UIViewController  {
     
     //更新导航栏：父类会自动调用
     open func updateNavigationBar() {
-        if NX.isViewControllerBasedStatusBarAppearance == false {
-            NX.statusBarStyle = self.ctxs.statusBarStyle
-        }
-        else if let superviewController = self.ctxs.superviewController {
+        if let superviewController = self.ctxs.superviewController {
             if let viewController = superviewController as? NXToolViewController, viewController.selectedViewController == self {
                 superviewController.updateNavigationBar()
             }
@@ -157,8 +154,8 @@ open class NXViewController: UIViewController  {
             self.dismiss(animated: true, completion: nil)
         }
         else if self.ctxs.navigation == .overlay {
-            if let naviController = self.ctxs.superviewController?.navigationController as? NXNavigationController {
-                naviController.removeSubviewController(self, animated: true)
+            if let navigationController = self.ctxs.superviewController?.navigationController as? NXNavigationController {
+                navigationController.closeViewController(self, animated: true)
             }
         }
     }
@@ -169,12 +166,12 @@ open class NXViewController: UIViewController  {
     }
     
     //开始网络请求：处理加载框的开启/关闭,网络异常,参数异常等情况
-    open func request(_ operation:String, _ value:Any?, _ completion: NX.Completion<String, Any?>? = nil){
+    open func request(_ operation:String, _ value:Any?, _ completion: NX.Event<String, Any?>? = nil){
     
     }
     
     //页面内的相关逻辑操作
-    open func dispose(_ operation:String, _ value:Any?, _ completion:NX.Completion<String, Any?>? = nil){
+    open func dispose(_ operation:String, _ value:Any?, _ completion:NX.Event<String, Any?>? = nil){
         
     }
     
@@ -185,20 +182,20 @@ open class NXViewController: UIViewController  {
     
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         var currentValue = self.ctxs.statusBarStyle
-        if let viewController =  self as? NXToolViewController, let selectedViewController = viewController.selectedViewController {
+        if let viewController = self as? NXToolViewController, let selectedViewController = viewController.selectedViewController {
             currentValue = selectedViewController.ctxs.statusBarStyle
         }
         else if let viewController = self.ctxs.subviewControllers.last, viewController.ctxs.statusBarStyle != .none {
             currentValue = viewController.ctxs.statusBarStyle
         }
         
-        if currentValue == NX.Bar.unspecified {
+        if currentValue == NX.StatusBarStyle.unspecified {
             return UIStatusBarStyle.default
         }
-        else if currentValue == NX.Bar.light {
+        else if currentValue == NX.StatusBarStyle.light {
             return UIStatusBarStyle.lightContent
         }
-        else if currentValue == NX.Bar.dark {
+        else if currentValue == NX.StatusBarStyle.dark {
             if #available(iOS 13.0, *) {
                 if UITraitCollection.current.userInterfaceStyle == .dark {
                     return UIStatusBarStyle.lightContent
@@ -223,7 +220,7 @@ open class NXViewController: UIViewController  {
         else if let viewController = self.ctxs.subviewControllers.last, viewController.ctxs.statusBarStyle != .none {
             currentValue = viewController.ctxs.statusBarStyle
         }
-        return currentValue == NX.Bar.hidden
+        return currentValue == NX.StatusBarStyle.hidden
     }
     
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -245,10 +242,10 @@ open class NXViewController: UIViewController  {
 
 
 extension NXViewController {
-    open class Association<Index:NXInitialValue> {
-        open var index = Index.initialValue ///用于记录当前正在请求或者展示的页面index，多用于分页加载
-        open var next = Index.initialValue  ///用于记录下一页next，多用于分页加载
-        open var reload = NX.Reload.initialized///当前刷新状态
+    open class Association {
+        open var index = 0 ///用于记录当前正在请求或者展示的页面index，多用于分页加载
+        open var next = 0  ///用于记录下一页next，多用于分页加载
+        open var state = NX.Reload.initialized///当前刷新状态
         
         open var isWrapped : Bool = false ///是否被其他UIViewController包装了，某些情况被包装的需要隐藏掉导航栏
         open var isEmpty : Bool = true ///页面是否为空，如有缓存数据则可置为false。false不用展示加载动画
@@ -258,15 +255,15 @@ extension NXViewController {
         open var y: Int = 0
         open var z: Int = 0
         
-        open var willAppear : NX.Completion<String, NXViewController>? = nil
-        open var didAppear: NX.Completion<String, NXViewController>? = nil
-        open var willDisappear: NX.Completion<String, NXViewController>? = nil
-        open var didDisappear: NX.Completion<String, NXViewController>? = nil
+        open var willAppear : NX.Event<String, NXViewController>? = nil
+        open var didAppear: NX.Event<String, NXViewController>? = nil
+        open var willDisappear: NX.Event<String, NXViewController>? = nil
+        open var didDisappear: NX.Event<String, NXViewController>? = nil
         
         
         ///状态栏样式
         open var shouldAutorotate = false
-        open var statusBarStyle = NX.Bar.dark
+        open var statusBarStyle = NX.StatusBarStyle.dark
         open var statusBarHidden = false
         open var orientationMask = UIInterfaceOrientationMask.portrait
         
@@ -283,11 +280,11 @@ extension NXViewController {
         ///转场动画过程中需要的容器视图
         open var transitionView: NXTransitionView?
         ///两级页面之间传递信息
-        open var completion : NX.Completion<String, Any?>? = nil
+        open var event : NX.Event<String, Any?>? = nil
         ///导航栏顶部的分割线
-        public let separator = NX.Separator { (_, __sender) in
+        public let separator = NX.Separator { (__sender) in
             __sender.insets = UIEdgeInsets.zero;
-            __sender.isHidden = NX.isSeparatorHidden;
+            __sender.isHidden = false;
             __sender.backgroundColor = NX.separatorColor;
         }
         ///覆盖的视图控制器

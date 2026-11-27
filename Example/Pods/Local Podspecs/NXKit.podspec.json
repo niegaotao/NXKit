@@ -1,19 +1,19 @@
 {
   "name": "NXKit",
-  "version": "0.9.9",
-  "summary": "NXKit is a Swift UI framework for iOS.",
-  "description": "NXKit is a Swift UI framework for iOS.",
+  "version": "1.1.1",
+  "summary": "UI framework",
+  "description": "NXKit is a UI framework implemented by Swift language for building native apps more easily。",
   "homepage": "https://github.com/niegaotao/NXKit",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "niegaotao": "niegaotao@163.com"
+    "niegaotao": "247268158@qq.com"
   },
   "source": {
-    "git": "git@github.com:niegaotao/NXKit.git",
-    "tag": "0.9.9"
+    "git": "https://github.com/niegaotao/NXKit.git",
+    "tag": "1.1.1"
   },
   "platforms": {
     "ios": "9.0"

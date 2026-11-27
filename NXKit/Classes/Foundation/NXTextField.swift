@@ -3,6 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/6/17.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -10,7 +11,7 @@ import UIKit
 
 open class NXTextField: UITextField {
     open var maximumOfBytes: Int = 0
-    public let accessoryView = NXKeyboardAccessoryView(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: 44))
+    public let accessoryView = NXKeyboardAccessoryView(frame: CGRect(x: 0, y: 0, width: NX.width, height: 44))
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,7 +38,7 @@ open class NXTextField: UITextField {
     open func setup(){
         self.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         self.inputAccessoryView = self.accessoryView
-        self.accessoryView.actionView.setupEvents([.touchUpInside], action: {[weak self] (_,_) in
+        self.accessoryView.actionView.setupEvent(.touchUpInside, action: {[weak self] (_,_) in
             self?.endEditing(true)
         })
     }

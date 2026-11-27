@@ -3,7 +3,7 @@
 //  NXSerialization
 //
 //  Created by niegaotao on 2020/8/3.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 open class NXSerialization {
@@ -110,9 +110,7 @@ open class NXSerialization {
         if let data = NXSerialization.JSONObject(toData: jsonObject, options: []) {
             let output = NXSerialization.data(toString: data)
             if encode {
-                if let encodeOutput = NX.encodeURIComponent(output) {
-                    return encodeOutput
-                }
+                return NX.encodeURIComponent(output)
             }
             else{
                 return output

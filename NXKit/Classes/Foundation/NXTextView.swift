@@ -3,6 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/6/17.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 
@@ -10,7 +11,7 @@ import UIKit
 
 open class NXTextView: UITextView {
     public let placeholderView = UILabel(frame: CGRect.zero)
-    open var notification : NX.Completion<NSNotification.Name, NXTextView>? = nil
+    open var notification : NX.Event<NSNotification.Name, NXTextView>? = nil
     
     override open var text: String! {
         didSet {
@@ -37,7 +38,7 @@ open class NXTextView: UITextView {
     }
     
     open var maximumOfBytes: Int = 0 //小于等于0表示无限制，大于0表示有显示
-    public let accessoryView = NXKeyboardAccessoryView(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: 44))
+    public let accessoryView = NXKeyboardAccessoryView(frame: CGRect(x: 0, y: 0, width: NX.width, height: 44))
     
     override public init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
@@ -93,7 +94,7 @@ open class NXTextView: UITextView {
             self.accessoryView.bytesView.isHidden = true
         }
         
-        self.accessoryView.actionView.setupEvents([.touchUpInside], action: {[weak self] _, bar in
+        self.accessoryView.actionView.setupEvent(.touchUpInside, action: {[weak self] _, bar in
             self?.endEditing(true)
         })
 

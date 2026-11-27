@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/11/1.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -12,13 +12,13 @@ import UIKit
 open class NXAssetClipViewController: NXViewController {
     open var image : UIImage? = nil
     
-    open var clips = NX.Wrappable<Int, [NXAsset.Clip], [NXAsset.Clip]> { (_, __sender) in
-        __sender.is = -1
+    open var clips = NX.Wrappable<Int, [NXClip], [NXClip]> { (__sender) in
+        __sender.key = -1
         __sender.value = []
     }
-    public let backgroundView = NXCView<UIImageView>(frame: CGRect(x: 10, y: 10, width: NXUI.width-20, height: NXUI.height-NXUI.topOffset-NXUI.bottomOffset-20))
+    public let backgroundView = NXCView<UIImageView>(frame: CGRect(x: 10, y: 10, width: NX.width-20, height: NX.height-NX.topOffset-NX.bottomOffset-20))
     public let clipboardView = NXClipboardView(frame: CGRect.zero)
-    public let footerView = NXCView<UIScrollView>(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: 80+NXUI.bottomOffset))
+    public let footerView = NXCView<UIScrollView>(frame: CGRect(x: 0, y: 0, width: NX.width, height: 80+NX.bottomOffset))
     public var componentViews = [UILabel]()
     
     open override func viewDidLoad() {
@@ -42,7 +42,7 @@ open class NXAssetClipViewController: NXViewController {
         self.backgroundView.contentView.contentMode = .scaleAspectFit
         self.contentView.addSubview(self.backgroundView)
         
-        self.footerView.frame = CGRect(x: 0, y: self.contentView.h-self.footerView.h, width: self.footerView.w, height: self.footerView.h)
+        self.footerView.frame = CGRect(x: 0, y: self.contentView.height-self.footerView.height, width: self.footerView.width, height: self.footerView.height)
         self.footerView.backgroundColor = NX.color(0x181818)
         self.footerView.contentView.backgroundColor = NX.color(0x181818)
         self.footerView.setupSeparator(color: NX.separatorColor, ats: [])
@@ -50,19 +50,19 @@ open class NXAssetClipViewController: NXViewController {
         
         if let image = self.image, image.size.width > 0 && image.size.height > 0, self.clips.value.count >= 1 {
             
-            if self.clips.is < 0 || self.clips.is >= self.clips.value.count {
-                self.clips.is = 0
+            if self.clips.key < 0 || self.clips.key >= self.clips.value.count {
+                self.clips.key = 0
             }
             
-            var __background = CGRect(x: 10, y: 10, width: NXUI.width-20, height: NXUI.height-NXUI.topOffset-NXUI.bottomOffset-20)
+            var __background = CGRect(x: 10, y: 10, width: NX.width-20, height: NX.height-NX.topOffset-NX.bottomOffset-20)
             if self.clips.value.count >= 2 {
                 //有多项可选
-                __background = CGRect(x: 10, y: 10, width: NXUI.width-20, height: NXUI.height-NXUI.topOffset-NXUI.bottomOffset-20-80)
+                __background = CGRect(x: 10, y: 10, width: NX.width-20, height: NX.height-NX.topOffset-NX.bottomOffset-20-80)
                 
                 var offset = CGRect(x: 15, y: 8, width: 52, height: 60)
                 var ctx = CGRect(x: 15, y: 0, width: CGFloat(self.clips.value.count) * offset.size.width + CGFloat(self.clips.value.count - 1)*10.0, height: offset.size.height)
-                if (NXUI.width - ctx.size.width) / 2.0 > ctx.origin.x {
-                    ctx.origin.x = (NXUI.width - ctx.size.width) / 2.0
+                if (NX.width - ctx.size.width) / 2.0 > ctx.origin.x {
+                    ctx.origin.x = (NX.width - ctx.size.width) / 2.0
                 }
                 offset.origin.x = ctx.origin.x
                 
@@ -74,10 +74,10 @@ open class NXAssetClipViewController: NXViewController {
                     componentView.text = clip.name
                     componentView.layer.cornerRadius = 2.0
                     componentView.layer.masksToBounds = true
-                    componentView.setupEvents([.tap]) {[weak self] (_, sender) in
+                    componentView.setupEvent(.tap) {[weak self] (_, sender) in
                         self?.dispose("footer", sender, nil)
                     }
-                    if index == self.clips.is {
+                    if index == self.clips.key {
                         componentView.backgroundColor = UIColor.white
                         componentView.textColor = NX.color(0x181818)
                     }
@@ -97,7 +97,7 @@ open class NXAssetClipViewController: NXViewController {
                 }
                 offset.origin.x = offset.origin.x + ctx.origin.x
                 self.footerView.isHidden = false
-                self.footerView.contentView.frame = CGRect(x: 0, y: 0, width: NXUI.width, height: 80)
+                self.footerView.contentView.frame = CGRect(x: 0, y: 0, width: NX.width, height: 80)
                 self.footerView.contentView.contentSize = CGSize(width: max(self.footerView.contentView.frame.size.width, offset.origin.x), height: 80)
             }
             else {
@@ -119,7 +119,7 @@ open class NXAssetClipViewController: NXViewController {
             self.clipboardView.ctxs.size.width = __frame.size.width
             self.clipboardView.ctxs.size.height = __frame.size.height
             
-            let clip = self.clips.value[self.clips.is]
+            let clip = self.clips.value[self.clips.key]
             self.clipboardView.ctxs.clip.isResizable = clip.isResizable
             self.clipboardView.ctxs.clip.width = clip.width
             self.clipboardView.ctxs.clip.height = clip.height
@@ -139,11 +139,11 @@ open class NXAssetClipViewController: NXViewController {
         }
     }
     
-    open override func dispose(_ action: String, _ value: Any?, _ completion: NX.Completion<String, Any?>? = nil) {
+    open override func dispose(_ action: String, _ value: Any?, _ completion: NX.Event<String, Any?>? = nil) {
         if action == "forward" {
             
             guard let image = self.image, image.size.width > 0 && image.size.height > 0, self.clipboardView.ctxs.size.width > 0 else {
-                self.ctxs.completion?("", nil)
+                self.ctxs.event?("", nil)
                 return
             }
             
@@ -158,21 +158,21 @@ open class NXAssetClipViewController: NXViewController {
             pfsValue.frame.size.height = floor(pfsValue.frame.size.height * pfsValue.scale)
             
             guard let cgImage = image.cgImage?.cropping(to:pfsValue.frame) else {
-                self.ctxs.completion?("", nil)
+                self.ctxs.event?("", nil)
                 return
             }
             let uiImage = UIImage(cgImage:cgImage)
-            self.ctxs.completion?("", uiImage)
+            self.ctxs.event?("", uiImage)
         }
         else if action == "footer" {
-            guard let sender = value as? UILabel, sender.tag != self.clips.is else {
+            guard let sender = value as? UILabel, sender.tag != self.clips.key else {
                 return
             }
-            self.clips.is = sender.tag
+            self.clips.key = sender.tag
             
             for (index, componentView) in self.componentViews.enumerated() {
                 
-                if index == self.clips.is {
+                if index == self.clips.key {
                     componentView.backgroundColor = UIColor.white
                     componentView.textColor = NX.color(0x181818)
                 }
@@ -182,10 +182,10 @@ open class NXAssetClipViewController: NXViewController {
                 }
             }
             
-            self.clipboardView.ctxs.clip.isResizable = self.clips.value[self.clips.is].isResizable
-            self.clipboardView.ctxs.clip.width = self.clips.value[self.clips.is].width
-            self.clipboardView.ctxs.clip.height = self.clips.value[self.clips.is].height
-            self.clipboardView.ctxs.clip.isHidden = self.clips.value[self.clips.is].isHidden
+            self.clipboardView.ctxs.clip.isResizable = self.clips.value[self.clips.key].isResizable
+            self.clipboardView.ctxs.clip.width = self.clips.value[self.clips.key].width
+            self.clipboardView.ctxs.clip.height = self.clips.value[self.clips.key].height
+            self.clipboardView.ctxs.clip.isHidden = self.clips.value[self.clips.key].isHidden
             
             self.clipboardView.updateSubviews("", nil)
             

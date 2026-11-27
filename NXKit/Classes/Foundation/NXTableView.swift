@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/6/20.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -22,7 +22,7 @@ public struct NXTableDescriptor {
 
 open class NXTableView: UITableView {
     open var backdropView : UIImageView? = nil
-    weak open var value : NXTableWrapper?
+    weak open var data : NXCollection<NXTableView>?
     
     public override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -38,7 +38,7 @@ open class NXTableView: UITableView {
         self.estimatedRowHeight = 0
         self.estimatedSectionFooterHeight = 0
         self.estimatedSectionHeaderHeight = 0
-        self.backgroundColor = NX.tableViewBackgroundColor
+        self.backgroundColor = NX.contentViewBackgroundColor
         self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.separatorColor = NX.separatorColor
         if #available(iOS 11.0, *) {
@@ -52,10 +52,10 @@ open class NXTableView: UITableView {
             self.sectionHeaderHeight = 10
             self.sectionFooterHeight = 0
         }
-        self.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: 0.01))
+        self.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: NX.width, height: 0.01))
         self.tableHeaderView?.backgroundColor = UIColor.clear
         
-        self.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: NXUI.width, height: 0.01))
+        self.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: NX.width, height: 0.01))
         self.tableFooterView?.backgroundColor = UIColor.clear
     }
     
@@ -81,12 +81,12 @@ open class NXTableView: UITableView {
     //是否显示默认图
     open func updateSubviews(_ action:String, _ value:Any?) {
         if let __value = value as? NXTableDescriptor {
-            self.value?.placeholderView.ctxs.isHidden = !__value.placeholder
-            self.value?.calcAt = __value.calc
+            self.data?.placeholderView.ctxs.isHidden = !__value.placeholder
+            self.data?.calcAt = __value.calc
         }
         else {
-            self.value?.placeholderView.ctxs.isHidden = false
-            self.value?.calcAt = true
+            self.data?.placeholderView.ctxs.isHidden = false
+            self.data?.calcAt = true
         }
         
         self.reloadData()
@@ -95,17 +95,17 @@ open class NXTableView: UITableView {
     //加载的时候看是否需要显示默认图
     override open func reloadData() {
         
-        if let __tableWrapper = self.value {
-            if __tableWrapper.sections.isEmpty {
+        if let __tableWrapper = self.data {
+            if __tableWrapper.elements.isEmpty {
                 
                 if __tableWrapper.placeholderView.ctxs.isHidden == false {
 
-                    var size  = CGSize(width: NXUI.width, height: 0)
+                    var size  = CGSize(width: NX.width, height: 0)
                     if __tableWrapper.placeholderView.ctxs.frame.width > 0 && __tableWrapper.placeholderView.ctxs.frame.height > 0 {
                         size.height = __tableWrapper.placeholderView.ctxs.frame.height
                     }
                     else {
-                        var ___remainder = self.h - (self.tableHeaderView?.h ?? 0) - (self.tableFooterView?.h ?? 0)
+                        var ___remainder = self.height - (self.tableHeaderView?.height ?? 0) - (self.tableFooterView?.height ?? 0)
                         ___remainder = ___remainder - self.contentInset.top - self.contentInset.bottom
                         size.height = max(___remainder, 250)
                     }
@@ -114,13 +114,13 @@ open class NXTableView: UITableView {
             }
             
             if __tableWrapper.calcAt {
-                __tableWrapper.sections.forEach { (__section) in
-                    __section.items.forEach { (__element) in
+                __tableWrapper.elements.forEach { (__section) in
+                    __section.elements.forEach { (__element) in
                         __element.ctxs.at.first = false
                         __element.ctxs.at.last = false
                     }
-                    __section.items.first?.ctxs.at.first = true
-                    __section.items.last?.ctxs.at.last = true
+                    __section.elements.first?.ctxs.at.first = true
+                    __section.elements.last?.ctxs.at.last = true
                 }
             }
         }

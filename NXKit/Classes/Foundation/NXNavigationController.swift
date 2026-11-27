@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/5/8.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -109,6 +109,14 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
         return self.topViewController?.shouldAutorotate ?? false
     }
     
+    open override var childForStatusBarStyle: UIViewController? {
+        return self.presentedViewController ?? self.topViewController
+    }
+    
+    open override var childForStatusBarHidden: UIViewController? {
+        return self.presentedViewController ?? self.topViewController
+    }
+    
     
     /// 重写父类push方法
     override open func pushViewController(_ viewController: UIViewController, animated: Bool) {
@@ -120,7 +128,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     }
     
     ///当push完成后回触发completion
-    open func pushViewController(_ viewController: NXViewController, animated: Bool, completion:NX.Completion<String, NXViewController>?){
+    open func pushViewController(_ viewController: NXViewController, animated: Bool, completion:NX.Event<String, NXViewController>?){
         viewController.ctxs.didAppear = completion
         self.pushViewController(viewController, animated: animated)
     }
@@ -178,7 +186,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     /// - Parameters:
     ///   - viewController: 要弹出的视图控制器
     ///   - animated: 是否需要动画，动画方向默认从右侧进入
-    open func showSubviewController(_ viewController: NXViewController, animated: Bool){
+    open func openViewController(_ viewController: NXViewController, animated: Bool){
         //添加到的父视图控制器:必须栈顶的视图控制器
         guard let to = self.topViewController as? NXViewController else {return}
         
@@ -192,54 +200,54 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
         viewController.view.backgroundColor = UIColor.clear
         
         viewController.ctxs.transitionView = NXTransitionView(frame: to.view.bounds, owner:viewController)
-        viewController.ctxs.transitionView?.backgroundColor = NX.minAlphaOfColor
+        viewController.ctxs.transitionView?.backgroundColor = NX.transitionInoutBackgroundColor
         to.view.addSubview(viewController.ctxs.transitionView!)
         viewController.ctxs.transitionView?.addSubview(viewController.view)
         
         if viewController.ctxs.orientation == .left {
-            viewController.view.x = -to.view.w
+            viewController.view.x = -to.view.width
             UIView.animate(withDuration: animated ? self.ctxs.duration : 0.0,
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NX.maxAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionBackgroundColor
             },completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
         }
         else if viewController.ctxs.orientation == .right {
-            viewController.view.x = to.view.w
+            viewController.view.x = to.view.width
             UIView.animate(withDuration: animated ? self.ctxs.duration:0.0,
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.x = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NX.maxAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionBackgroundColor
             }, completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
         }
         else if viewController.ctxs.orientation == .top {
-            viewController.view.y = -to.view.h
+            viewController.view.y = -to.view.height
             UIView.animate(withDuration: animated ? self.ctxs.duration:0.0,
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NX.maxAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionBackgroundColor
             }, completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
         }
         else if viewController.ctxs.orientation == .bottom {
-            viewController.view.y = to.view.h
+            viewController.view.y = to.view.height
             UIView.animate(withDuration: animated ? self.ctxs.duration:0.0,
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
                             viewController.view.y = 0.0
-                            viewController.ctxs.transitionView?.backgroundColor = NX.maxAlphaOfColor
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionBackgroundColor
             }, completion: {(_) in
                 self.ctxs.semaphore.signal()
             })
@@ -255,7 +263,7 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
     /// - Parameters:
     ///   - viewController: 要移除的视图控制器
     ///   - animated: 是否需要动画
-    open func removeSubviewController(_ viewController: NXViewController, animated: Bool){
+    open func closeViewController(_ viewController: NXViewController, animated: Bool){
         guard let parentViewController = viewController.ctxs.superviewController else {return}
         guard let index = parentViewController.ctxs.subviewControllers.lastIndex(of: viewController) else { return }
         self.ctxs.semaphore.wait()
@@ -265,8 +273,8 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
-                            viewController.view.x = -viewController.view.w
-                            viewController.ctxs.transitionView?.backgroundColor = NX.minAlphaOfColor
+                            viewController.view.x = -viewController.view.width
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionInoutBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -286,8 +294,8 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
-                            viewController.view.x = viewController.view.w
-                            viewController.ctxs.transitionView?.backgroundColor = NX.minAlphaOfColor
+                            viewController.view.x = viewController.view.width
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionInoutBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -307,8 +315,8 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
-                            viewController.view.y = -viewController.view.h
-                            viewController.ctxs.transitionView?.backgroundColor = NX.minAlphaOfColor
+                            viewController.view.y = -viewController.view.height
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionInoutBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -328,8 +336,8 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
                            delay: 0.0,
                            options: [.curveEaseInOut],
                            animations: {
-                            viewController.view.y = viewController.view.h
-                            viewController.ctxs.transitionView?.backgroundColor = NX.minAlphaOfColor
+                            viewController.view.y = viewController.view.height
+                            viewController.ctxs.transitionView?.backgroundColor = NX.transitionInoutBackgroundColor
             }, completion:{ (completed) in
                 viewController.ctxs.transitionView?.removeFromSuperview()
                 viewController.ctxs.transitionView = nil
@@ -388,7 +396,6 @@ open class NXNavigationController: UINavigationController, UIGestureRecognizerDe
         }
         else {
             //这种情况没有模态控制器
-            
             if let vc = __returnViewController as? NXViewController {
                 if let __vc = vc.ctxs.subviewControllers.last {
                     //先查找自定义加上去的视图控制器
@@ -414,10 +421,10 @@ extension NXNavigationController {
         public let semaphore = DispatchSemaphore(value: 1)
         open var duration : TimeInterval = 0.3
         
-        open var willAppear : NX.Completion<String, NXNavigationController>? = nil
-        open var didAppear: NX.Completion<String, NXNavigationController>? = nil
-        open var willDisappear: NX.Completion<String, NXNavigationController>? = nil
-        open var didDisappear: NX.Completion<String, NXNavigationController>? = nil
+        open var willAppear : NX.Event<String, NXNavigationController>? = nil
+        open var didAppear: NX.Event<String, NXNavigationController>? = nil
+        open var willDisappear: NX.Event<String, NXNavigationController>? = nil
+        open var didDisappear: NX.Event<String, NXNavigationController>? = nil
         
         ///初始化方法
         public init(){}

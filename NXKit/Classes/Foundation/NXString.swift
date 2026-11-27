@@ -3,6 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/1/12.
+//  Copyright (c) 2020 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -18,7 +19,7 @@ open class NXString {
 }
 
 extension NXString {
-    open class func string(_ text:String, _ font:UIFont, _ color:UIColor, _ lineSpacing:CGFloat) -> NXString {
+    public class func string(_ text:String, _ font:UIFont, _ color:UIColor, _ lineSpacing:CGFloat) -> NXString {
         let textWrapper = NXString()
         textWrapper.text = text
         textWrapper.font = font
@@ -27,7 +28,7 @@ extension NXString {
         return textWrapper
     }
     
-    open class func string(_ text:String, _ font:UIFont, _ color:UIColor, _ lineSpacing:CGFloat, _ query:[String:Any]) -> NXString {
+    public class func string(_ text:String, _ font:UIFont, _ color:UIColor, _ lineSpacing:CGFloat, _ query:[String:Any]) -> NXString {
         let textWrapper = NXString()
         textWrapper.text = text
         textWrapper.font = font
@@ -37,7 +38,7 @@ extension NXString {
         return textWrapper
     }
     
-    open class func attributedString(_ text:String, _ font:UIFont, _ color:UIColor, _ lineSpacing:CGFloat) -> NSMutableAttributedString {
+    public class func attributedString(_ text:String, _ font:UIFont, _ color:UIColor, _ lineSpacing:CGFloat) -> NSMutableAttributedString {
         var mapValue = [NSAttributedString.Key:Any]()
         mapValue[NSAttributedString.Key.font] = font
         mapValue[NSAttributedString.Key.foregroundColor] = color
@@ -50,7 +51,7 @@ extension NXString {
         return attributedText
     }
     
-    open class func attributedString(_ strings:[NXString], _ lineSpacing:CGFloat) -> NSMutableAttributedString {
+    public class func attributedString(_ strings:[NXString], _ lineSpacing:CGFloat) -> NSMutableAttributedString {
         let attributedText = NSMutableAttributedString()
         for string in strings {
             var mapValue = [NSAttributedString.Key:Any]()
@@ -65,7 +66,7 @@ extension NXString {
             
             let subattributedText = NSMutableAttributedString(string: string.text, attributes: mapValue)
             if string.query.count > 0 {
-                subattributedText.addAttribute(NSAttributedString.Key.link, value: "yyjk://query?query="+NXSerialization.JSONObject(toString: string.query, encode: true), range: NSMakeRange(0, (string.text as NSString).length))
+                subattributedText.addAttribute(NSAttributedString.Key.link, value: "app://query?query="+NXSerialization.JSONObject(toString: string.query, encode: true), range: NSMakeRange(0, (string.text as NSString).length))
             }
             attributedText.append(subattributedText)
         }

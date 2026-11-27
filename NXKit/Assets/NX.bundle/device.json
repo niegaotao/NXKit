@@ -2,9 +2,9 @@
     "iPhone1,1":"iPhone 1G",
     "iPhone1,2":"iPhone 3G",
     "iPhone2,1":"iPhone 3GS",
-    "iPhone3,1":"iPhone 4 (GSM)",
+    "iPhone3,1":"iPhone 4",
     "iPhone3,2":"iPhone 4",
-    "iPhone3,3":"iPhone 4 (CDMA)",
+    "iPhone3,3":"iPhone 4",
     "iPhone4,1":"iPhone 4S",
     "iPhone5,1":"iPhone 5",
     "iPhone5,2":"iPhone 5",
@@ -25,7 +25,7 @@
     "iPhone10,2":"iPhone 8 Plus",
     "iPhone10,3":"iPhone X",
     "iPhone10,4":"iPhone 8",
-    "iPhone10,5":"iPhone 8Plus",
+    "iPhone10,5":"iPhone 8 Plus",
     "iPhone10,6":"iPhone X",
     "iPhone11,2":"iPhone XS",
     "iPhone11,4":"iPhone XS Max",
@@ -39,11 +39,15 @@
     "iPhone13,2":"iPhone 12",
     "iPhone13,3":"iPhone 12 Pro",
     "iPhone13,4":"iPhone 12 Pro Max",
-    "iPhone14,4":"iPhone 13 mini",
-    "iPhone14,5":"iPhone 13",
     "iPhone14,2":"iPhone 13 Pro",
     "iPhone14,3":"iPhone 13 Pro Max",
-
+    "iPhone14,4":"iPhone 13 mini",
+    "iPhone14,5":"iPhone 13",
+    "iPhone14,6":"iPhone SE (3rd generation)",
+    "iPhone14,7":"iPhone 14",
+    "iPhone14,8":"iPhone 14 Plus",
+    "iPhone15,2":"iPhone 14 Pro",
+    "iPhone15,3":"iPhone 14 Pro Max",
     "iPad1,1":"iPad 1",
     "iPad2,1":"iPad 2",
     "iPad2,2":"iPad 2",
@@ -65,7 +69,6 @@
     "iPad11,7":"iPad (8th generation)",
     "iPad12,1":"iPad (9th generation)",
     "iPad12,2":"iPad (9th generation)",
-    
     "iPad4,1":"iPad Air",
     "iPad4,2":"iPad Air",
     "iPad4,3":"iPad Air",
@@ -75,7 +78,6 @@
     "iPad11,4":"iPad Air (3th generation)",
     "iPad13,1":"iPad Air (4th generation)",
     "iPad13,2":"iPad Air (4th generation)",
-    
     "iPad6,7":"iPad Pro (12.9 inch)",
     "iPad6,8":"iPad Pro (12.9 inch)",
     "iPad6,3":"iPad Pro (9.7 inch)",
@@ -104,7 +106,6 @@
     "iPad13,9":"iPad Pro (12.9-inch)(5th generation)",
     "iPad13,10":"iPad Pro (12.9-inch)(5th generation)",
     "iPad13,11":"iPad Pro (12.9-inch)(5th generation)",
-    
     "iPad2,5":"iPad mini",
     "iPad2,6":"iPad mini",
     "iPad2,7":"iPad mini",
@@ -120,7 +121,541 @@
     "iPad11,2":"iPad mini (5th generation)",
     "iPad14,1":"iPad mini (6th generation)",
     "iPad14,2":"iPad mini (6th generation)",
-    
     "i386":"Simulator x86",
-    "x86_64":"Simulator x64"
+    "x86_64":"Simulator x64",
+    
+    "specifications":[
+        {
+            "name":"iPhone 1G",
+            "resolution":{
+                "width":320,
+                "height":480,
+                "ppi":326
+            },
+            "size":{
+                "width":320,
+                "height":480
+            },
+            "scale":1,
+            "inches":"3.5"
+        },
+        {
+            "name":"iPhone 3G",
+            "resolution":{
+                "width":320,
+                "height":480,
+                "ppi":326
+            },
+            "size":{
+                "width":320,
+                "height":480
+            },
+            "scale":1,
+            "inches":"3.5"
+        },
+        {
+            "name":"iPhone 3GS",
+            "resolution":{
+                "width":320,
+                "height":480,
+                "ppi":326
+            },
+            "size":{
+                "width":320,
+                "height":480
+            },
+            "scale":1,
+            "inches":"3.5"
+        },
+        {
+            "name":"iPhone 4",
+            "resolution":{
+                "width":640,
+                "height":960,
+                "ppi":326
+            },
+            "size":{
+                "width":320,
+                "height":480
+            },
+            "scale":2,
+            "inches":"3.5"
+        },
+        {
+            "name":"iPhone 4S",
+            "resolution":{
+                "width":640,
+                "height":960,
+                "ppi":326
+            },
+            "size":{
+                "width":320,
+                "height":480
+            },
+            "scale":2,
+            "inches":"3.5"
+        },
+        {
+            "name":"iPhone 5",
+            "resolution":{
+                "width":640,
+                "height":1136,
+                "ppi":326
+            },
+            "size":{
+                "width":320,
+                "height":568
+            },
+            "scale":2,
+            "inches":"4.0"
+        },
+        {
+            "name":"iPhone 5c",
+            "resolution":{
+                "width":640,
+                "height":1136,
+                "ppi":326
+            },
+            "size":{
+                "width":320,
+                "height":568
+            },
+            "scale":2,
+            "inches":"4.0"
+        },
+        {
+            "name":"iPhone 5s",
+            "resolution":{
+                "width":640,
+                "height":1136,
+                "ppi":326
+            },
+            "size":{
+                "width":320,
+                "height":568
+            },
+            "scale":2,
+            "inches":"4.0"
+        },
+        {
+            "name":"iPhone 6",
+            "resolution":{
+                "width":750,
+                "height":1334,
+                "ppi":326
+            },
+            "size":{
+                "width":375,
+                "height":667
+            },
+            "scale":2,
+            "inches":"4.7"
+        },
+        {
+            "name":"iPhone 6 Plus",
+            "resolution":{
+                "width":1080,
+                "height":1920,
+                "ppi":401
+            },
+            "size":{
+                "width":414,
+                "height":736
+            },
+            "scale":3,
+            "inches":"5.5"
+        },
+        {
+            "name":"iPhone 6s",
+            "resolution":{
+                "width":750,
+                "height":1334,
+                "ppi":326
+            },
+            "size":{
+                "width":375,
+                "height":667
+            },
+            "scale":2,
+            "inches":"4.7"
+        },
+        {
+            "name":"iPhone 6s Plus",
+            "resolution":{
+                "width":1080,
+                "height":1920,
+                "ppi":401
+            },
+            "size":{
+                "width":414,
+                "height":736
+            },
+            "scale":3,
+            "inches":"5.5"
+        },
+        {
+            "name":"iPhone SE (1st generation)",
+            "resolution":{
+                "width":640,
+                "height":1136,
+                "ppi":326
+            },
+            "size":{
+                "width":320,
+                "height":568
+            },
+            "scale":2,
+            "inches":"4.0"
+        },
+        {
+            "name":"iPhone 7",
+            "resolution":{
+                "width":750,
+                "height":1334,
+                "ppi":326
+            },
+            "size":{
+                "width":375,
+                "height":667
+            },
+            "scale":2,
+            "inches":"4.7"
+        },
+        {
+            "name":"iPhone 7 Plus",
+            "resolution":{
+                "width":1080,
+                "height":1920,
+                "ppi":401
+            },
+            "size":{
+                "width":414,
+                "height":736
+            },
+            "scale":3,
+            "inches":"5.5"
+        },
+        {
+            "name":"iPhone 8",
+            "resolution":{
+                "width":750,
+                "height":1334,
+                "ppi":326
+            },
+            "size":{
+                "width":375,
+                "height":667
+            },
+            "scale":2,
+            "inches":"4.7"
+        },
+        {
+            "name":"iPhone 8 Plus",
+            "resolution":{
+                "width":1080,
+                "height":1920,
+                "ppi":401
+            },
+            "size":{
+                "width":414,
+                "height":736
+            },
+            "scale":3,
+            "inches":"5.5"
+        },
+        {
+            "name":"iPhone X",
+            "resolution":{
+                "width":1125,
+                "height":2436,
+                "ppi":458
+            },
+            "size":{
+                "width":375,
+                "height":812
+            },
+            "scale":3,
+            "inches":"5.8"
+        },
+        {
+            "name":"iPhone XS",
+            "resolution":{
+                "width":1125,
+                "height":2436,
+                "ppi":458
+            },
+            "size":{
+                "width":375,
+                "height":812
+            },
+            "scale":3,
+            "inches":"5.8"
+        },
+        {
+            "name":"iPhone XS Max",
+            "resolution":{
+                "width":1242,
+                "height":2688,
+                "ppi":458
+            },
+            "size":{
+                "width":414,
+                "height":896
+            },
+            "scale":3,
+            "inches":"6.5"
+        },
+        {
+            "name":"iPhone XR",
+            "resolution":{
+                "width":828,
+                "height":1792,
+                "ppi":326
+            },
+            "size":{
+                "width":414,
+                "height":896
+            },
+            "scale":2,
+            "inches":"6.1"
+        },
+        {
+            "name":"iPhone 11",
+            "resolution":{
+                "width":828,
+                "height":1792,
+                "ppi":326
+            },
+            "size":{
+                "width":414,
+                "height":896
+            },
+            "scale":2,
+            "inches":"6.1"
+        },
+        {
+            "name":"iPhone 11 Pro",
+            "resolution":{
+                "width":1125,
+                "height":2436,
+                "ppi":458
+            },
+            "size":{
+                "width":375,
+                "height":812
+            },
+            "scale":3,
+            "inches":"5.8"
+        },
+        {
+            "name":"iPhone 11 Pro Max",
+            "resolution":{
+                "width":1242,
+                "height":2688,
+                "ppi":458
+            },
+            "size":{
+                "width":414,
+                "height":896
+            },
+            "scale":3,
+            "inches":"6.5"
+        },
+        {
+            "name":"iPhone SE (2nd generation)",
+            "resolution":{
+                "width":750,
+                "height":1334,
+                "ppi":326
+            },
+            "size":{
+                "width":375,
+                "height":667
+            },
+            "scale":2,
+            "inches":"4.7"
+        },
+        {
+            "name":"iPhone 12 mini",
+            "resolution":{
+                "width":1080,
+                "height":2340,
+                "ppi":476
+            },
+            "size":{
+                "width":375,
+                "height":812
+            },
+            "scale":3,
+            "inches":"5.4"
+        },
+        {
+            "name":"iPhone 12",
+            "resolution":{
+                "width":1170,
+                "height":2532,
+                "ppi":460
+            },
+            "size":{
+                "width":390,
+                "height":844
+            },
+            "scale":3,
+            "inches":"6.1"
+        },
+        {
+            "name":"iPhone 12 Pro",
+            "resolution":{
+                "width":1170,
+                "height":2532,
+                "ppi":460
+            },
+            "size":{
+                "width":390,
+                "height":844
+            },
+            "scale":3,
+            "inches":"6.1"
+        },
+        {
+            "name":"iPhone 12 Pro Max",
+            "resolution":{
+                "width":1284,
+                "height":2778,
+                "ppi":458
+            },
+            "size":{
+                "width":428,
+                "height":926
+            },
+            "scale":3,
+            "inches":"6.7"
+        },
+        {
+            "name":"iPhone 13 mini",
+            "resolution":{
+                "width":1080,
+                "height":2340,
+                "ppi":476
+            },
+            "size":{
+                "width":375,
+                "height":812
+            },
+            "scale":3,
+            "inches":"5.4"
+        },
+        {
+            "name":"iPhone 13",
+            "resolution":{
+                "width":1170,
+                "height":2532,
+                "ppi":460
+            },
+            "size":{
+                "width":390,
+                "height":844
+            },
+            "scale":3,
+            "inches":"6.1"
+        },
+        {
+            "name":"iPhone 13 Pro",
+            "resolution":{
+                "width":1170,
+                "height":2532,
+                "ppi":460
+            },
+            "size":{
+                "width":390,
+                "height":844
+            },
+            "scale":3,
+            "inches":"6.1"
+        },
+        {
+            "name":"iPhone 13 Pro Max",
+            "resolution":{
+                "width":1284,
+                "height":2778,
+                "ppi":458
+            },
+            "size":{
+                "width":428,
+                "height":926
+            },
+            "scale":3,
+            "inches":"6.7"
+        },
+        {
+            "name":"iPhone SE (3rd generation)",
+            "resolution":{
+                "width":750,
+                "height":1334,
+                "ppi":326
+            },
+            "size":{
+                "width":375,
+                "height":667
+            },
+            "scale":2,
+            "inches":"4.7"
+        },
+        {
+            "name":"iPhone 14",
+            "resolution":{
+                "width":1170,
+                "height":2532,
+                "ppi":460
+            },
+            "size":{
+                "width":390,
+                "height":844
+            },
+            "scale":3,
+            "inches":"6.1"
+        },
+        {
+            "name":"iPhone 14 Plus",
+            "resolution":{
+                "width":1284,
+                "height":2778,
+                "ppi":458
+            },
+            "size":{
+                "width":428,
+                "height":926
+            },
+            "scale":3,
+            "inches":"6.7"
+        },
+        {
+            "name":"iPhone 14 Pro",
+            "resolution":{
+                "width":1179,
+                "height":2556,
+                "ppi":460
+            },
+            "size":{
+                "width":393,
+                "height":852
+            },
+            "scale":3,
+            "inches":"6.1"
+        },
+        {
+            "name":"iPhone 14 Pro Max",
+            "resolution":{
+                "width":1290,
+                "height":2796,
+                "ppi":460
+            },
+            "size":{
+                "width":430,
+                "height":932
+            },
+            "scale":3,
+            "inches":"6.7"
+        }
+    ]
 }

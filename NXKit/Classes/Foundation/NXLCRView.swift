@@ -3,6 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2021/3/8.
+//  Copyright (c) 2021 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -27,18 +28,18 @@ open class NXHeaderView: NXLCRView<NXButton, UILabel, NXButton> {
     open override func setupSubviews() {
         super.setupSubviews()
         
-        lhsView.frame = CGRect(x: 16, y: (self.h-44)/2, width: 84, height: 44)
+        lhsView.frame = CGRect(x: 16, y: (self.height-44)/2, width: 84, height: 44)
         lhsView.contentHorizontalAlignment = .left
         lhsView.titleLabel?.font = NX.font(16)
         self.addSubview(lhsView)
         
-        centerView.frame = CGRect(x: 100, y: (self.h-44)/2, width:self.w - 100 * 2 , height: 44)
+        centerView.frame = CGRect(x: 100, y: (self.height-44)/2, width:self.width - 100 * 2 , height: 44)
         centerView.textAlignment = .center
-        centerView.font = NX.font(17,true)
+        centerView.font = NX.font(17, .bold)
         centerView.textColor = NX.darkBlackColor
         self.addSubview(centerView)
         
-        rhsView.frame = CGRect(x: self.w-16-84, y: (self.h-44)/2, width: 84, height: 44)
+        rhsView.frame = CGRect(x: self.width-16-84, y: (self.height-44)/2, width: 84, height: 44)
         rhsView.contentHorizontalAlignment = .right
         rhsView.titleLabel?.font = NX.font(16)
         self.addSubview(rhsView)
@@ -51,7 +52,7 @@ open class NXFooterView: NXLCRView<NXButton, NXButton, NXButton> {
         
         self.backgroundColor = NX.backgroundColor
         
-        let itemWidth : CGFloat = (self.w - NX.insets.right * 3.0)/2.0
+        let itemWidth : CGFloat = (self.width - NX.insets.right * 3.0)/2.0
         
         lhsView.frame = CGRect(x: NX.insets.left, y: 10, width: itemWidth, height: 40)
         lhsView.titleLabel?.font = NX.font(14)
@@ -64,7 +65,7 @@ open class NXFooterView: NXLCRView<NXButton, NXButton, NXButton> {
         self.addSubview(rhsView)
         
         //初始化一个button
-        centerView.frame = CGRect(x: NX.insets.left, y: 10, width: self.w-NX.insets.left - NX.insets.right, height: 40)
+        centerView.frame = CGRect(x: NX.insets.left, y: 10, width: self.width-NX.insets.left - NX.insets.right, height: 40)
         centerView.titleLabel?.font = NX.font(15)
         centerView.layer.masksToBounds = true
         self.addSubview(centerView)

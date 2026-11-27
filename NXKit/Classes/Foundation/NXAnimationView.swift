@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/7/19.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -89,6 +89,6 @@ open class NXAnimationWrappedView: NXAutoresizeView<NXAnimationView> {
     
     //布局
     open override func layoutSubviews() {
-        self.contentView.frame = CGRect(x: (self.w-self.animation.width)/2, y: (self.h-self.animation.height)/2, width: self.animation.width, height: self.animation.height)
+        self.contentView.frame = CGRect(x: (self.width-self.animation.width)/2, y: (self.height-self.animation.height)/2, width: self.animation.width, height: self.animation.height)
     }
 }

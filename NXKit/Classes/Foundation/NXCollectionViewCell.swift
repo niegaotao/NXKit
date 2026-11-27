@@ -3,7 +3,7 @@
 //  NXKit
 //
 //  Created by niegaotao on 2020/6/20.
-//  Copyright © 2020年 TIMESCAPE. All rights reserved.
+//  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
 import UIKit
@@ -20,7 +20,7 @@ open class NXCollectionViewCell: UICollectionViewCell {
     }
     
     open func setup(){
-        arrowView.frame = CGRect(x: contentView.w-NX.insets.right-6, y: (contentView.h-12)/2, width: 6, height: 12)
+        arrowView.frame = CGRect(x: contentView.width-NX.insets.right-6, y: (contentView.height-12)/2, width: 6, height: 12)
         arrowView.image = NX.image(named:"icon-arrow.png")
         arrowView.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin]
         arrowView.contentMode = .scaleAspectFill
@@ -29,7 +29,7 @@ open class NXCollectionViewCell: UICollectionViewCell {
         
         if self.backgroundView == nil {
             self.backgroundView = UIView(frame: CGRect.zero)
-            self.backgroundView?.backgroundColor = NX.backgroundColor
+            self.backgroundView?.backgroundColor = NX.unselectedBackgroundColor
             self.backgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
         
@@ -51,5 +51,10 @@ open class NXCollectionViewCell: UICollectionViewCell {
     
     open func updateSubviews(_ action:String, _ value: Any?){
         
+    }
+    
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.separator.backgroundColor = NX.separatorColor.cgColor
     }
 }
