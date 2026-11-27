@@ -25,9 +25,6 @@ open class NXWebView: WKWebView {
         __config.preferences.javaScriptCanOpenWindowsAutomatically = true;
         __config.processPool = WKProcessPool()
         __config.userContentController = WKUserContentController()
-        if #available(iOS 11.0, *) {
-            WKWebsiteDataStore.default().httpCookieStore
-        }
         self.init(frame: frame, configuration: __config)
     }
     

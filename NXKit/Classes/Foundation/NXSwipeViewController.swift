@@ -99,7 +99,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
             vc.didMove(toParent: self)
         }
         
-        self.swipeView.updateSubviews("update", ["index":index,"items":elements])
+        self.swipeView.updateSubviews("update", ["index":index,"items":elements] as [String : Any])
         
         if index >= 1 {
             self.collectionView.setContentOffset(CGPoint(x: self.view.width * CGFloat(index), y: 0), animated: false)
@@ -115,7 +115,7 @@ open class NXSwipeViewController: NXContainerController, UICollectionViewDelegat
                     __owner.view.frame = cell.contentView.bounds
                     cell.contentView.addSubview(__owner.view)
                 }
-                NX.log { return "index=\(indexPath),self.view=\(self.view.frame), \ncontent=\(self.contentView.frame),\ncollection=\(self.collectionView.frame ?? CGRect.zero), \ncell=\(cell.frame), \ncell.content=\(cell.contentView.frame)"}
+                NX.log("index=\(indexPath),self.view=\(self.view.frame), \ncontent=\(self.contentView.frame),\ncollection=\(self.collectionView.frame), \ncell=\(cell.frame), \ncell.content=\(cell.contentView.frame)")
             }
             else {
                 rs.cell.updateSubviews("update", rs.element)

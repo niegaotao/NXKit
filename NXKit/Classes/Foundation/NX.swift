@@ -154,52 +154,37 @@ extension NX {
         return NXSerialization.file(toDictionary: NX.Association.root + "/NXKit.bundle/NX.bundle/device.json")
     }()
     
-    public struct UI {
-        let width : CGFloat
-        let height : CGFloat
-        let resultions : [Resultion]
-    }
+    public static let is320x480 = CGSize(width: 320, height: 480)
+    // 1x [iPhone,iPhone3GS]
+    // 2x [iPhone4,iPhone4S]
     
-    public struct Resultion {
-        let scale : CGFloat
-        let inch : CGFloat
-    }
-    
-    public static let is320x480x1 : [String : Any] =  ["width":320,"height":480,"scale":1,"inches":[3.5]]
-    //[iPhone,iPhone3GS]
-
-    public static var is320x480x2 : [String : Any] = ["width":320,"height":480,"scale":2,"inches":[3.5]]
-    //[iPhone4,iPhone4S]
-    
-    public static var is320x568x2 : [String : Any] = ["width":320,"height":568,"scale":2,"inches":[4.0]]
-    //[iPhone5,iPhone5c,iPhone5S,iPhoneSE1]
+    public static var is320x568 = CGSize(width: 320, height: 568)
+    //2x [iPhone5,iPhone5c,iPhone5S,iPhoneSE1]
         
-    public static var is375x667x2 : [String : Any] = ["width":375,"height":667,"scale":2,"inches":[4.7]]
-    //[iPhone6,iPhone6s,iPhone7,iPhone8,iPhoneSE2,iPhoneSE3]
+    public static var is375x667 = CGSize(width: 375, height: 667)
+    //2x [iPhone6,iPhone6s,iPhone7,iPhone8,iPhoneSE2,iPhoneSE3]
     
-    public static var is375x812x3 : [String : Any] = ["width":375,"height":812,"scale":3,"inches":[5.4, 5.8]]
-    //[iPhone12mini,iPhone13mini],[iPhoneX,iPhoneXs,iPhone11Pro]
+    public static var is375x812 = CGSize(width: 375, height: 812)
+    //3x: [iPhone12mini,iPhone13mini],[iPhoneX,iPhoneXs,iPhone11Pro]
     
-    public static var is390x844x3 : [String : Any] = ["width":390,"height":844,"scale":3,"inches":[6.1]]
-    //[iPhone12,iPhone12Pro,iPhone13,iPhone13Pro,iPhone14]
+    public static var is390x844 = CGSize(width: 390, height: 844)
+    //3x:[iPhone12,iPhone12Pro,iPhone13,iPhone13Pro,iPhone14]
     
-    public static var is393x852x3 : [String : Any] = ["width":393,"height":852,"scale":3,"inches":[6.1]]
-    //[iPhone14Pro]
+    public static var is393x852 = CGSize(width: 393, height: 852)
+    //3x:[iPhone14Pro]
     
-    public static var is414x736x3 : [String : Any] = ["width":414,"height":736,"scale":3,"inches":[5.5]]
-    //[iPhone6Plus,iPhone6sPlus,iPhone7Plus,iPhone8Plus]
+    public static var is414x736 = CGSize(width: 414, height: 736)
+    //3x:[iPhone6Plus,iPhone6sPlus,iPhone7Plus,iPhone8Plus]
     
-    public static var is414x896x2 : [String : Any] = ["width":414,"height":896,"scale":2,"inches":[6.1]]
-    //[iPhoneXr,iPhone11]
+    public static var is414x896 = CGSize(width: 414, height: 896)
+    //2x:[iPhoneXr,iPhone11]
+    //3x:[iPhoneXs max,iPhone11ProMax]
     
-    public static var is414x896x3 : [String : Any] = ["width":414,"height":896,"scale":3,"inches":[6.5]]
-    //[iPhoneXs max,iPhone11ProMax]
+    public static var is428x926 = CGSize(width: 428, height: 926)
+    //3x:[iPhone12ProMax,iPhone13ProMax,iPhone14Plus]
     
-    public static var is428x926x3 : [String : Any] = ["width":428,"height":926,"scale":3,"inches":[6.7]]
-    //[iPhone12ProMax,iPhone13ProMax,iPhone14Plus]
-    
-    public static var is430x932x3 : [String : Any] = ["width":430,"height":932,"scale":3,"inches":[6.7]]
-    //[iPhone14ProMax]
+    public static var is430x932 = CGSize(width: 430, height: 932)
+    //3x:[iPhone14ProMax]
 }
 
 
@@ -543,9 +528,6 @@ extension NX {
     }
 }
 
-
-
-
 extension NX {
     public static var isLoggable : Bool = true
     private static let formatter = DateFormatter()
@@ -553,15 +535,16 @@ extension NX {
         guard NX.isLoggable, let value = items else {
             return
         }
-        Swift.print("\((file as NSString).lastPathComponent)[\(line)],\(method):\n\(value)\n")
+        let time = NX.descriptionOf(date: Date(), format: "YYYY-MM-dd HH:mm:ss.SSSSSSZ")
+        Swift.print("\(time) \((file as NSString).lastPathComponent)[\(line)],\(method):\n\(value)\n")
     }
     
-    public class func log(_ get:(() -> Any?)?, _ file:String = #file, _ method: String = #function, _ line: Int = #line){
-        guard NX.isLoggable, let value = get?() else {
+    public class func log(_ get: @autoclosure () -> Any?, _ file:String = #file, _ method: String = #function, _ line: Int = #line){
+        guard NX.isLoggable , let value = get() else {
             return
         }
-        let time = NX.descriptionOf(date: Date(), format: "YYYY-MM-dd HH:mm:ss SSS")
-        Swift.print("\((file as NSString).lastPathComponent)[\(line)],\(method):--💚💚\(time)--\n\(value)\n")
+        let time = NX.descriptionOf(date: Date(), format: "YYYY-MM-dd HH:mm:ss.SSSSSSZ")
+        Swift.print("\(time) \((file as NSString).lastPathComponent)[\(line)],\(method):\n\(value)\n")
     }
     
     //yyyy-MM-dd HH:mm
@@ -667,7 +650,10 @@ extension NX {
         //处理网络请求
         static public var request:((_ request:NXRequest, _ completion:NX.Event<String, NXResponse>?) -> ())?
     }
-    
+}
+
+//request
+extension NX {
     //request
     class public func request(_ request:NXRequest, _ completion:NX.Event<String, NXResponse>?) {
         NX.Imp.request?(request, completion)
