@@ -29,7 +29,7 @@ open class NXCollectionViewCell: UICollectionViewCell {
         
         if self.backgroundView == nil {
             self.backgroundView = UIView(frame: CGRect.zero)
-            self.backgroundView?.backgroundColor = NX.unselectedBackgroundColor
+            self.backgroundView?.backgroundColor = NX.cellBackgroundColor
             self.backgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
         

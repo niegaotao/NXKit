@@ -16,7 +16,7 @@ open class NXAbstract: NXItem {
     }
     
     public let asset = NX.Attribute(completion:{(__sender) in
-        __sender.color = NX.darkGrayColor
+        __sender.color = NX.lightGrayColor
         __sender.backgroundColor = UIColor.clear
     })
     
@@ -28,14 +28,14 @@ open class NXAbstract: NXItem {
     
     public let subtitle = NX.Attribute(completion: {(__sender) in
         __sender.font = NX.font(13)
-        __sender.color = NX.darkGrayColor
+        __sender.color = NX.lightGrayColor
         __sender.textAlignment = NSTextAlignment.left
         __sender.backgroundColor = UIColor.clear
     })
     
     public let value = NX.Attribute(completion: {(__sender) in
         __sender.font = NX.font(13)
-        __sender.color = NX.darkGrayColor
+        __sender.color = NX.lightGrayColor
         __sender.textAlignment = NSTextAlignment.right
         __sender.backgroundColor = UIColor.clear
     })

@@ -36,7 +36,7 @@ open class NXHeaderView: NXLCRView<NXButton, UILabel, NXButton> {
         centerView.frame = CGRect(x: 100, y: (self.height-44)/2, width:self.width - 100 * 2 , height: 44)
         centerView.textAlignment = .center
         centerView.font = NX.font(17, .bold)
-        centerView.textColor = NX.darkBlackColor
+        centerView.textColor = NX.blackColor
         self.addSubview(centerView)
         
         rhsView.frame = CGRect(x: self.width-16-84, y: (self.height-44)/2, width: 84, height: 44)

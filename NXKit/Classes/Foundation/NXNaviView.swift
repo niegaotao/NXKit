@@ -165,41 +165,8 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
 }
 
 extension NXNaviView {
-    
-    open class Wrapped {
-        
-        public init(){}
-        
-        ///记录点击事件的变量
-        public weak var target : NSObject?
-        public var selector : Selector?
-        ///ui
-        public var image: UIImage?
-        public var title : String?
-        
-        
-        ///记录owner
-        weak var owner: NXNaviView.Bar?
-        ///block
-        public var completion : ((_ owner: NXNaviView.Bar) -> ())?
-        ///采用block方式添加点击事件
-        open func update(_ owner:NXNaviView.Bar, completion:((_ owner: NXNaviView.Bar) -> ())?){
-            self.owner = owner
-            self.completion = completion
-            owner.addTarget(self, action: #selector(callback), for: .touchUpInside)
-        }
-        
-        @objc open func callback(){
-            if let __owner = self.owner {
-                self.completion?(__owner)
-            }
-        }
-    }
-    
     open class Bar: UIButton {
         open var dicValue : [String: Any]?
-        public let ctxs = NXNaviView.Wrapped()
-        
         public override init(frame: CGRect) {
             super.init(frame: frame)
             self.backgroundColor = UIColor.clear
@@ -215,7 +182,7 @@ extension NXNaviView {
         open func setupSubviews(){
             self.frame.size = CGSize(width:70.0, height:44.0)
             self.setTitleColor(NX.barForegroundColor, for: .normal)
-            self.setTitleColor(NX.darkGrayColor, for: .highlighted)
+            self.setTitleColor(NX.lightGrayColor, for: .highlighted)
             self.tintColor = NX.barForegroundColor;
             self.titleLabel?.font = NX.font(17)
         }
@@ -260,24 +227,23 @@ extension NXNaviView {
         
         open func addTarget(_ target: Any?, action: Selector?, completion:((_ owner:NXNaviView.Bar) -> ())?) {
             if let __completion = completion {
-                self.ctxs.update(self, completion: __completion)
+                self.setupEvent(UIControl.Event.touchUpInside) { event, value in
+                    __completion(self)
+                }
+            }
+            else if let __target = target as? NSObject, let __action = action {
+                self.setupEvent(UIControl.Event.touchUpInside) { event, value in
+                    if __target.responds(to: __action) {
+                        __target.perform(__action)
+                    }
+                }
             }
             else {
-                if self.ctxs.target != nil && self.ctxs.selector != nil {
-                    self.removeTarget(self.ctxs.target, action: self.ctxs.selector, for: UIControl.Event.touchUpInside)
-                }
-                if let __action = action {
-                    super.addTarget(target, action: __action, for: UIControl.Event.touchUpInside)
-                }
-                self.ctxs.target = target as? NSObject
-                self.ctxs.selector = action
+                self.association?.removeTarget(self, UIControl.Event.touchUpInside)
             }
         }
         
         open func updateSubviews(_ image: UIImage?, _ title:String?){
-            self.ctxs.image = image
-            self.ctxs.title = title
-            
             self.setImage(image, for: .normal)
             self.setTitle(title, for: .normal)
         }

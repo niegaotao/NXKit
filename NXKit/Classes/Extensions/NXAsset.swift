@@ -149,12 +149,12 @@ open class NXAlbumAssetViewCell: NXCollectionViewCell {
             indexView.isHidden = false
             if asset.index.isEmpty {
                 indexView.text = ""
-                indexView.backgroundColor = UIColor.clear
+                indexView.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
                 indexView.layer.borderColor = UIColor.white.cgColor
             }
             else {
                 indexView.text = asset.index
-                indexView.backgroundColor = NX.mainColor
+                indexView.backgroundColor = NX.mainColor.withAlphaComponent(0.5)
                 indexView.layer.borderColor = NX.mainColor.cgColor
             }
             maskedView.isHidden = true
@@ -668,7 +668,7 @@ extension NXAsset {
                 }
             }
             else {
-                if isReturnedOrRequestingiCloud == true { return }//只要已回调过或者已开启iCloud下载，这里的回调流程终止
+                if isReturnedOrRequestingiCloud == true { return}//只要已回调过或者已开启iCloud下载，这里的回调流程终止
                 isReturnedOrRequestingiCloud = true
                 
                 completion?(true, result)

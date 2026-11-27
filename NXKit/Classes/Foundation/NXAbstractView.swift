@@ -24,19 +24,19 @@ open class NXAbstractView: NXView {
         
         titleView.font = NX.font(16)
         titleView.textAlignment = .left
-        titleView.textColor = NX.darkBlackColor
+        titleView.textColor = NX.blackColor
         titleView.layer.masksToBounds = true
         self.addSubview(titleView)
         
         subtitleView.font = NX.font(14)
         subtitleView.textAlignment = .left
-        subtitleView.textColor = NX.darkGrayColor
+        subtitleView.textColor = NX.lightGrayColor
         subtitleView.layer.masksToBounds = true
         self.addSubview(subtitleView)
         
         valueView.font = NX.font(14)
         valueView.textAlignment = .right
-        valueView.textColor = NX.darkGrayColor
+        valueView.textColor = NX.lightGrayColor
         valueView.layer.masksToBounds = true
         self.addSubview(valueView)
         

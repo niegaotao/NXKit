@@ -134,7 +134,7 @@ open class NXTextView: UITextView {
                     self.accessoryView.bytesView.textColor = NX.color(0xFF3B74, 1)
                 }
                 else {
-                    self.accessoryView.bytesView.textColor = NX.color(0x92929B, 1)
+                    self.accessoryView.bytesView.textColor = NX.lightGrayColor
                 }
             }
         }

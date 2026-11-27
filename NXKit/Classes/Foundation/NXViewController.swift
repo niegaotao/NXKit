@@ -24,17 +24,17 @@ open class NXViewController: UIViewController  {
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
+        initialize()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
+        initialize()
     }
     
     ///子类中有需要在viewDidLoad之前的逻辑放在这个函数中，而不用重写构造函数
-    open func setup() {
-        NX.print(NSStringFromClass(self.classForCoder))
+    open func initialize() {
+        NX.print("\(NSStringFromClass(self.classForCoder)), \(Unmanaged<AnyObject>.passUnretained(self as AnyObject).toOpaque())")
         self.extendedLayoutIncludesOpaqueBars = true
         self.edgesForExtendedLayout = UIRectEdge.all
         if #available(iOS 11.0, *) {
@@ -51,7 +51,7 @@ open class NXViewController: UIViewController  {
         
         self.contentView.frame = CGRect(x: 0, y: NX.topOffset, width: self.view.width, height: self.view.height-NX.topOffset)
         self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.contentView.backgroundColor = NX.contentViewBackgroundColor
+        self.contentView.backgroundColor = NX.viewBackgroundColor
         self.view.addSubview(self.contentView)
         
         
@@ -65,14 +65,16 @@ open class NXViewController: UIViewController  {
         self.naviView.separator.isHidden = self.ctxs.separator.isHidden
         self.naviView.separator.backgroundColor = self.ctxs.separator.backgroundColor.cgColor
         self.view.addSubview(self.naviView)
-        self.naviView.updateSubviews("update", nil)
+        self.naviView.updateSubviews("", nil)
     }
     
     override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.ctxs.willAppear?("", self)
-        self.ctxs.willAppear = nil
+        if !self.ctxs.lifecycleValue.contains(NX.Lifecycle.viewWillAppear){
+            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NX.Lifecycle.viewWillAppear)
+            self.ctxs.lifecycle?(NX.Lifecycle.viewWillAppear, self)
+        }
         
         //更新状态栏样式
         self.updateNavigationBar()
@@ -81,22 +83,28 @@ open class NXViewController: UIViewController  {
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.ctxs.didAppear?("", self)
-        self.ctxs.didAppear = nil
+        if !self.ctxs.lifecycleValue.contains(NX.Lifecycle.viewDidAppear){
+            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NX.Lifecycle.viewDidAppear)
+            self.ctxs.lifecycle?(NX.Lifecycle.viewDidAppear, self)
+        }
     }
     
     override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.ctxs.willDisappear?("", self)
-        self.ctxs.willDisappear = nil
+        if !self.ctxs.lifecycleValue.contains(NX.Lifecycle.viewWillDisappear){
+            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NX.Lifecycle.viewWillDisappear)
+            self.ctxs.lifecycle?(NX.Lifecycle.viewWillDisappear, self)
+        }
     }
     
     override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
-        self.ctxs.didDisappear?("", self)
-        self.ctxs.didDisappear = nil
+        if !self.ctxs.lifecycleValue.contains(NX.Lifecycle.viewDidDisappear){
+            self.ctxs.lifecycleValue = self.ctxs.lifecycleValue.union(NX.Lifecycle.viewDidDisappear)
+            self.ctxs.lifecycle?(NX.Lifecycle.viewDidDisappear, self)
+        }
     }
     
     //开始动画
@@ -236,7 +244,7 @@ open class NXViewController: UIViewController  {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        NX.print(NSStringFromClass(self.classForCoder))
+        NX.print("\(NSStringFromClass(self.classForCoder)), \(Unmanaged<AnyObject>.passUnretained(self as AnyObject).toOpaque())")
     }
 }
 
@@ -255,11 +263,8 @@ extension NXViewController {
         open var y: Int = 0
         open var z: Int = 0
         
-        open var willAppear : NX.Event<String, NXViewController>? = nil
-        open var didAppear: NX.Event<String, NXViewController>? = nil
-        open var willDisappear: NX.Event<String, NXViewController>? = nil
-        open var didDisappear: NX.Event<String, NXViewController>? = nil
-        
+        open var lifecycleValue = NX.Lifecycle.initialized;
+        open var lifecycle : NX.Event<NX.Lifecycle, NXViewController>? = nil;
         
         ///状态栏样式
         open var shouldAutorotate = false
@@ -312,5 +317,6 @@ open class NXWrappedViewController<C:UIViewController>: NXViewController {
         }
         self.addChild(viewController)
         self.view.addSubview(viewController.view)
+        viewController.didMove(toParent: self)
     }
 }

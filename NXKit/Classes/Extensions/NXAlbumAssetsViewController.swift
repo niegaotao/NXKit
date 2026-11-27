@@ -26,8 +26,8 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
     //观察者
     public let observer = NXAsset.Observer()
     
-    override open func setup(){
-        super.setup()
+    override open func initialize(){
+        super.initialize()
         
         self.observer.completion = {[weak self] _, _ in
             self?.request("", nil, nil)
@@ -376,7 +376,7 @@ open class NXAlbumAssetsViewController: NXViewController,UICollectionViewDelegat
                 NX.showToast(message: "您的相册没有图片/视频，或者您没有授权\(NX.name)访问您的相册。", .center, self.contentView)
                 return
             }
-            NXActionView.action(actions: self.wrapped.albums, header: .header(false, false, true, true, "请选择相册"), footer: .whitespace(32)) { (_, index) in
+            NXActionView.action(actions: self.wrapped.albums, header: .header(false, false, true, true, "请选择相册",""), footer: .whitespace(32)) { (_, index) in
                 guard index != self.ctxs.x else {
                     return;
                 }

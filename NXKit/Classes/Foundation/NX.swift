@@ -30,8 +30,8 @@ extension NX {
     static public let width = UIScreen.main.bounds.size.width
     static public let height = UIScreen.main.bounds.size.height
     static public let size = CGSize(width: NX.width, height: NX.height)
-    static public let scale = UIScreen.main.scale
-    static public let pixel = 1.0 / UIScreen.main.scale //一个像素的宽度
+    static public let scale = max(UIScreen.main.scale, 1.0)
+    static public let pixel = 1.0 / NX.scale //一个像素的宽度
     
     //页面缩进
     static public var safeAreaInsets : UIEdgeInsets = {
@@ -77,9 +77,10 @@ extension NX {
     static public var backgroundColor = NX.color(255, 255, 255, 1)
     //view背景色
     static public var viewBackgroundColor = NX.color(247, 247, 247, 1)
-    //contentView背景色
-    static public var contentViewBackgroundColor = NX.color(247, 247, 247, 1)
-    
+    //未选中背景色
+    static public var cellBackgroundColor = NX.color(255, 255, 255, 1.0)
+    //选中背景色
+    static public var cellSelectedBackgroundColor = NX.color(234, 234, 234, 0.3)
     //naviView背景色
     static public var barBackgroundColor = NX.color(255, 255, 255, 1)
     //naviView背景色
@@ -88,11 +89,6 @@ extension NX {
     //overlay背景色
     static public var overlayBackgroundColor = NX.color(255, 225, 225, 1)
     
-    //未选中背景色
-    static public var unselectedBackgroundColor = NX.color(255, 255, 255, 1.0)
-    //选中背景色
-    static public var selectedBackgroundColor = NX.color(234, 234, 234, 0.3)
-    
     //分割线颜色
     static public var separatorColor = NX.color(235, 235, 240, 1)
     //阴影颜色
@@ -100,13 +96,11 @@ extension NX {
     // 主色
     static public var mainColor = NX.color(51, 120, 246, 1)
     // 深黑
-    static public var darkBlackColor = NX.color(51, 51, 51, 1)
-    // 浅黑
-    static public var lightBlackColor = NX.color(102, 102, 102, 1)
+    static public var blackColor = NX.color(51, 51, 51, 1)
     // 深灰
-    static public var darkGrayColor = NX.color(153, 153, 153, 1)
+    static public var darkGrayColor = NX.color(102, 102, 102, 1)
     // 浅灰
-    static public var lightGrayColor = NX.color(192, 192, 192, 1)
+    static public var lightGrayColor = NX.color(153, 153, 153, 1)
     // 转场前容器视图的Alpha值
     static public var transitionInoutBackgroundColor = NX.color(0, 0, 0, 0)
     // 转场后容器视图的Alpha值
@@ -160,40 +154,51 @@ extension NX {
         return NXSerialization.file(toDictionary: NX.Association.root + "/NXKit.bundle/NX.bundle/device.json")
     }()
     
-    public static var is320x480x1 : Any = ["width":320,"height":480,"scale":1,"inches":[3.5]]
+    public struct UI {
+        let width : CGFloat
+        let height : CGFloat
+        let resultions : [Resultion]
+    }
+    
+    public struct Resultion {
+        let scale : CGFloat
+        let inch : CGFloat
+    }
+    
+    public static let is320x480x1 : [String : Any] =  ["width":320,"height":480,"scale":1,"inches":[3.5]]
     //[iPhone,iPhone3GS]
 
-    public static var is320x480x2 : Any = ["width":320,"height":480,"scale":2,"inches":[3.5]]
+    public static var is320x480x2 : [String : Any] = ["width":320,"height":480,"scale":2,"inches":[3.5]]
     //[iPhone4,iPhone4S]
     
-    public static var is320x568x2 : Any = ["width":320,"height":568,"scale":2,"inches":[4.0]]
+    public static var is320x568x2 : [String : Any] = ["width":320,"height":568,"scale":2,"inches":[4.0]]
     //[iPhone5,iPhone5c,iPhone5S,iPhoneSE1]
         
-    public static var is375x667x2 : Any = ["width":375,"height":667,"scale":2,"inches":[4.7]]
+    public static var is375x667x2 : [String : Any] = ["width":375,"height":667,"scale":2,"inches":[4.7]]
     //[iPhone6,iPhone6s,iPhone7,iPhone8,iPhoneSE2,iPhoneSE3]
     
-    public static var is375x812x3 : Any = ["width":375,"height":812,"scale":3,"inches":[5.4, 5.8]]
+    public static var is375x812x3 : [String : Any] = ["width":375,"height":812,"scale":3,"inches":[5.4, 5.8]]
     //[iPhone12mini,iPhone13mini],[iPhoneX,iPhoneXs,iPhone11Pro]
     
-    public static var is390x844x3 : Any = ["width":390,"height":844,"scale":3,"inches":[6.1]]
+    public static var is390x844x3 : [String : Any] = ["width":390,"height":844,"scale":3,"inches":[6.1]]
     //[iPhone12,iPhone12Pro,iPhone13,iPhone13Pro,iPhone14]
     
-    public static var is393x852x3 : Any = ["width":393,"height":852,"scale":3,"inches":[6.1]]
+    public static var is393x852x3 : [String : Any] = ["width":393,"height":852,"scale":3,"inches":[6.1]]
     //[iPhone14Pro]
     
-    public static var is414x736x3 : Any = ["width":414,"height":736,"scale":3,"inches":[5.5]]
+    public static var is414x736x3 : [String : Any] = ["width":414,"height":736,"scale":3,"inches":[5.5]]
     //[iPhone6Plus,iPhone6sPlus,iPhone7Plus,iPhone8Plus]
     
-    public static var is414x896x2 : Any = ["width":414,"height":896,"scale":2,"inches":[6.1]]
+    public static var is414x896x2 : [String : Any] = ["width":414,"height":896,"scale":2,"inches":[6.1]]
     //[iPhoneXr,iPhone11]
     
-    public static var is414x896x3 : Any = ["width":414,"height":896,"scale":3,"inches":[6.5]]
+    public static var is414x896x3 : [String : Any] = ["width":414,"height":896,"scale":3,"inches":[6.5]]
     //[iPhoneXs max,iPhone11ProMax]
     
-    public static var is428x926x3 : Any = ["width":428,"height":926,"scale":3,"inches":[6.7]]
+    public static var is428x926x3 : [String : Any] = ["width":428,"height":926,"scale":3,"inches":[6.7]]
     //[iPhone12ProMax,iPhone13ProMax,iPhone14Plus]
     
-    public static var is430x932x3 : Any = ["width":430,"height":932,"scale":3,"inches":[6.7]]
+    public static var is430x932x3 : [String : Any] = ["width":430,"height":932,"scale":3,"inches":[6.7]]
     //[iPhone14ProMax]
 }
 
@@ -521,6 +526,21 @@ extension NX {
         case update      //下拉刷新
         case more        //上拉加载更多
     }
+    
+    public struct Lifecycle : OptionSet {
+        
+        public private(set) var rawValue : Int = -1
+        public init(rawValue:Int) {
+            self.rawValue = rawValue
+        }
+        
+        public static var initialized = NX.Lifecycle(rawValue: 0)
+        
+        public static var viewWillAppear = NX.Lifecycle(rawValue: 1)
+        public static var viewDidAppear = NX.Lifecycle(rawValue: 2)
+        public static var viewWillDisappear = NX.Lifecycle(rawValue: 4)
+        public static var viewDidDisappear = NX.Lifecycle(rawValue: 8)
+    }
 }
 
 
@@ -769,7 +789,7 @@ extension NX {
     }
     
     open class Appearance : NX.View {
-        open var selectedBackgroundColor = NX.selectedBackgroundColor
+        open var selectedBackgroundColor = NX.cellSelectedBackgroundColor
         open var isHighlighted = false
         open var isEnabled = true
         open var isCloseable = true
@@ -790,7 +810,7 @@ extension NX {
     }
     
     open class Image : NX.View {
-        open var color = NX.darkBlackColor
+        open var color = NX.blackColor
         open var value : UIImage? = nil
         open var renderingMode = UIImage.RenderingMode.alwaysOriginal
         open var layer : NX.Layer? = nil
@@ -805,7 +825,7 @@ extension NX {
     }
     
     open class Attribute : NX.View {
-        open var color = NX.darkBlackColor
+        open var color = NX.blackColor
         
         open var textAlignment = NSTextAlignment.center
         open var numberOfLines: Int = 1
@@ -1265,9 +1285,3 @@ extension NX.Separator : NXInitialValue {
         return NX.Separator() as! Self
     }
 }
-
-
-
-
-
-

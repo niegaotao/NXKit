@@ -267,8 +267,8 @@ extension NXSwipeView {
         
         //颜色
         open var color = NX.Selectable<UIColor>{ (__sender) in
-            __sender.selected = NX.darkBlackColor
-            __sender.unselected = NX.darkGrayColor
+            __sender.selected = NX.blackColor
+            __sender.unselected = NX.lightGrayColor
         }
         
         //是否等分
@@ -306,8 +306,8 @@ extension NXSwipeView {
         }
         
         open var color = NX.Selectable<UIColor>{ (__sender) in
-            __sender.selected = NX.darkBlackColor
-            __sender.unselected = NX.darkGrayColor
+            __sender.selected = NX.blackColor
+            __sender.unselected = NX.lightGrayColor
         }
         
         open var size = NX.Selectable<CGSize>{ (__sender) in
@@ -335,7 +335,7 @@ extension NXSwipeView {
             self.titleView.frame = self.bounds
             self.titleView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             self.titleView.font = NX.font(16, .bold)
-            self.titleView.textColor = NX.darkBlackColor
+            self.titleView.textColor = NX.blackColor
             self.titleView.textAlignment = .center
             self.contentView.addSubview(self.titleView)
         }
