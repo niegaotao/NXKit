@@ -88,16 +88,23 @@
 - `NXAssetClipViewController`
 
 ## 二、如何使用
-代码全部开源，[点击查看代码](https://github.com/niegaotao/NXKit.git)。
-```
-//仅使用Foundation部分功能：
+### Swift Package Manager
+
+支持 iOS 15 及以上。在 Xcode 中选择 **File → Add Package Dependencies**，输入 `https://github.com/niegaotao/NXKit.git`，选择包含 `Package.swift` 的分支或版本，并将 `NXKit` 产品添加到 App target。Swift Package 包含 Foundation 和 Extensions，代码中使用 `import NXKit`。
+
+### CocoaPods
+
+支持 iOS 15 及以上。在 `Podfile` 中选择需要的内容：
+
+```ruby
+# 仅安装基础组件
 pod 'NXKit/Foundation'
 
-//或使用全部功能
+# 或安装全部组件
 pod 'NXKit'
 ```
-你也可以下载代码后修改作为本地`pod`去使用。
-使用案例，可以下载查看`Example`.
+
+也可以通过 Git 或本地路径接入。例如在仓库内使用 `pod 'NXKit', :path => '../'`。示例在 `Example` 下，运行 `pod install` 后打开 `NXKit.xcworkspace`。
 
 ## 三、其他
 - Author：niegaotao, 247268158@qq.com

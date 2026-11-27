@@ -144,7 +144,9 @@ public extension NXKit {
 // 设备-其他
 public extension NXKit {
     // 设备model与产品的映射表
-    static var devices: [String: Any] = NXSerialization.file(toDictionary: NXKit.Association.root + "/NXKit.bundle/NXKit.bundle/device.json")
+    static var devices: [String: Any] = NXSerialization.file(
+        toDictionary: resourceBundle?.path(forResource: "device", ofType: "json", inDirectory: "NXKit.bundle")
+    )
 
     static let is320x480 = CGSize(width: 320, height: 480)
     // 1x [iPhone,iPhone3GS]
@@ -186,13 +188,28 @@ public extension NXKit {
 
 // 获取框架中的资源文件
 public extension NXKit {
-    // 加载获取bundle中图片
-    class func image(named name: String, mode: UIImage.RenderingMode = .automatic) -> UIImage? {
-        guard name.count > 0 else { return nil }
-        if NXKit.Association.root.count > 0 {
-            return UIImage(named: "\(NXKit.Association.root)/NXKit.bundle/NXKit.bundle/\(name)")?.withRenderingMode(mode)
+    private static var resourceBundle: Bundle? {
+        #if SWIFT_PACKAGE
+        return Bundle.module
+        #else
+        if !Association.root.isEmpty {
+            let url = URL(fileURLWithPath: Association.root, isDirectory: true)
+                .appendingPathComponent("NXKit.bundle", isDirectory: true)
+            if let bundle = Bundle(url: url) {
+                return bundle
+            }
         }
-        return UIImage(named: name)?.withRenderingMode(mode)
+        // 静态链接时，CocoaPods 可能把资源包放在宿主应用中。
+        return Bundle.main.url(forResource: "NXKit", withExtension: "bundle").flatMap(Bundle.init(url:))
+        #endif
+    }
+
+    class func image(named name: String, mode: UIImage.RenderingMode = .automatic) -> UIImage? {
+        guard !name.isEmpty else { return nil }
+        let image = resourceBundle.flatMap {
+            UIImage(named: "NXKit.bundle/\(name)", in: $0, compatibleWith: nil)
+        } ?? UIImage(named: name)
+        return image?.withRenderingMode(mode)
     }
 
     // 处理图片浏览

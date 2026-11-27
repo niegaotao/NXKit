@@ -6,6 +6,8 @@
 //  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
+import Foundation
+
 public extension NXRouter {
     // *注册信息*/
     class URI: NXAny {

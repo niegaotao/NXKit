@@ -8,6 +8,7 @@
 
 import CommonCrypto
 import Foundation
+import UIKit
 
 /*
  字符串的扩展，返回其他数据

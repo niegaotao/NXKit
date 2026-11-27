@@ -6,6 +6,8 @@
 //  Copyright (c) 2020年 niegaotao. All rights reserved.
 //
 
+import Foundation
+
 open class NXSerialization {
     public static let `Any` = "Any"
     public static let Dictionary = "Dictionary"
