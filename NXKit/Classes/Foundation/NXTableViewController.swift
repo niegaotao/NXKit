@@ -15,12 +15,6 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
     //数据源管理对象
     public let data = NXCollection<NXTableView>()
     
-    override open func initialize() {
-        super.initialize()
-        self.ctxs.index = 1 //用以记录分页加载的索引（从1开始）
-        self.ctxs.next = 1 //记录下一页的索引
-    }
-    
     override open func viewDidLoad() {
         super.viewDidLoad()
         
@@ -75,14 +69,14 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         }
         
         if let rs = self.data.dequeue(tableView, index, NXItem.View.header.rawValue) {
-            rs.reusableView.updateSubviews("update", rs.element)
+            rs.reusableView.updateSubviews(rs.element)
             return rs.reusableView
         }
         else {
             if let header = self.data[index]?.header {
                 if let cls = header.ctxs.cls as? NXTableReusableView.Type {
                     let reusableView = cls.init(reuseIdentifier:header.ctxs.reuse)
-                    reusableView.updateSubviews("update", header)
+                    reusableView.updateSubviews(header)
                     return reusableView
                 }
                 else if let cls = header.ctxs.cls as? UIView.Type {
@@ -100,7 +94,7 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
     
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let rs = self.data.dequeue(self.tableView, indexPath) {
-            rs.cell.updateSubviews("update", rs.element)
+            rs.cell.updateSubviews(rs.element)
             return rs.cell
         }
         return NXTableViewCell()
@@ -121,14 +115,14 @@ open class NXTableViewController: NXViewController, UITableViewDelegate, UITable
         }
         
         if let rs = self.data.dequeue(tableView, index, NXItem.View.footer.rawValue) {
-            rs.reusableView.updateSubviews("update", rs.element)
+            rs.reusableView.updateSubviews(rs.element)
             return rs.reusableView
         }
         else {
             if let footer = self.data[index]?.footer {
                 if let cls = footer.ctxs.cls as? NXTableReusableView.Type {
                     let reusableView = cls.init(reuseIdentifier:footer.ctxs.reuse)
-                    reusableView.updateSubviews("update", footer)
+                    reusableView.updateSubviews(footer)
                     return reusableView
                 }
                 else if let cls = footer.ctxs.cls as? UIView.Type {

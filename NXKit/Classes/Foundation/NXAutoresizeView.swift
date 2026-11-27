@@ -22,8 +22,8 @@ open class NXAutoresizeView<C:UIView>: NXView {
         self.addSubview(self.contentView)
     }
     
-    open override func updateSubviews(_ action: String, _ value: Any?) {
-        super.updateSubviews(action, value)
+    open override func updateSubviews(_ value: Any?) {
+        super.updateSubviews(value)
         
         self.completion?("updateSubviews", self)
     }

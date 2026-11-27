@@ -13,12 +13,6 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
     public var collectionView = NXCollectionView(frame: CGRect.zero)
     public let data = NXCollection<NXCollectionView>()
     
-    override open func initialize() {
-        super.initialize()
-        self.ctxs.index = 1 //用以记录分页加载的索引（从1开始）
-        self.ctxs.next = 1 //记录下一页的索引
-    }
-    
     override open func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,14 +44,14 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
     open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
             if let rs = self.data.dequeue(collectionView, indexPath, NXItem.View.header.rawValue) {
-                rs.reusableView.updateSubviews("update", rs.elelment)
+                rs.reusableView.updateSubviews(rs.elelment)
                 return rs.reusableView
             }
             //
         }
         else if kind == UICollectionView.elementKindSectionFooter {
             if let rs = self.data.dequeue(collectionView, indexPath, NXItem.View.footer.rawValue) {
-                rs.reusableView.updateSubviews("update", rs.elelment)
+                rs.reusableView.updateSubviews(rs.elelment)
                 return rs.reusableView
             }
         }
@@ -66,7 +60,7 @@ open class NXCollectionViewController: NXViewController, UICollectionViewDelegat
     
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let rs = self.data.dequeue(collectionView, indexPath) {
-            rs.cell.updateSubviews("update", rs.element)
+            rs.cell.updateSubviews(rs.element)
             return rs.cell
         }
         return NXCollectionViewCell()

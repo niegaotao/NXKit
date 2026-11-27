@@ -74,7 +74,7 @@ open class NXWebView: WKWebView {
         }
     }
     
-    open func updateSubviews(_ action:String, _ value:Any?){
+    open func updateSubviews(_ value:Any?){
         if let request = value as? URLRequest {
             self.load(request)
         }

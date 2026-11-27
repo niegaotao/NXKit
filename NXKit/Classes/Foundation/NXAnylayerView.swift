@@ -23,27 +23,30 @@ open class NXAnylayerView<T:CALayer>: NXView {
         }
     }
     
-    open override func updateSubviews(_ action: String, _ value: Any?) {
+    open override func updateSubviews(_ value: Any?) {
+        let dicValue = value as? [String: Any] ?? [:]
+        let key = dicValue["key"] as? String ?? ""
+        let value = dicValue["value"]
         if let __layer = self.layer as? CAGradientLayer {
-            if action == "colors" {
+            if key == "colors" {
                 guard let __colors = value as? [CGColor] else {
                     return
                 }
                 __layer.colors = __colors
             }
-            else if action == "locations" {
+            else if key == "locations" {
                 guard let __locations = value as? [NSNumber] else {
                     return
                 }
                 __layer.locations = __locations
             }
-            else if action == "startPoint" {
+            else if key == "startPoint" {
                 guard let __startPoint = value as? CGPoint else {
                     return
                 }
                 __layer.startPoint = __startPoint
             }
-            else if action == "endPoint" {
+            else if key == "endPoint" {
                 guard let __endPoint = value as? CGPoint else {
                     return
                 }

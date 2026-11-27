@@ -1,5 +1,5 @@
 //
-//  NXNaviView.swift
+//  NXNavigationView.swift
 //  NXKit
 //
 //  Created by niegaotao on 2020/6/23.
@@ -8,41 +8,41 @@
 
 import UIKit
 
-open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
+open class NXNavigationView: NXBackgroundView<UIImageView, UIView> {
     open weak var controller : NXViewController?
     
-    open var backBar = NXNaviView.Bar.back(image:NX.image(named:"navi-back.png", mode: .alwaysTemplate), title: nil) //默认
+    open var backBar = NXNavigationView.Bar.back(image:NX.image(named:"navi-back.png", mode: .alwaysTemplate), title: nil) //默认
     open var backView : UIView? {
         willSet{
             backView?.removeFromSuperview()
         }
         didSet {
-            self.updateSubviews("", nil)
+            self.updateSubviews(nil)
         }
     }
     
     open var title : String = "" {
         didSet {
-            self.updateSubviews("", nil)
+            self.updateSubviews(nil)
         }
     }
     
-    open var titleView = UILabel(frame: CGRect(x: 75.0, y: NX.safeAreaInsets.top, width: NX.width-75.0*2, height: NX.topOffset-NX.safeAreaInsets.top))
+    open var titleView = UILabel(frame: CGRect(x: 75.0, y: NX.safeAreaInsets.top, width: NX.width-75.0*2, height: 44.0))
     open var centerView : UIView? {
         willSet{
             centerView?.removeFromSuperview()
         }
         didSet {
-            self.updateSubviews("", nil)
+            self.updateSubviews(nil)
         }
     }
     
-    open var forwardBar: NXNaviView.Bar? {
+    open var forwardBar: NXNavigationView.Bar? {
         willSet {
             forwardBar?.removeFromSuperview()
         }
         didSet {
-            self.updateSubviews("", nil)
+            self.updateSubviews(nil)
         }
     }
     
@@ -51,7 +51,7 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
             forwardView?.removeFromSuperview()
         }
         didSet {
-            self.updateSubviews("", nil)
+            self.updateSubviews(nil)
         }
     }
     
@@ -96,7 +96,7 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
         self.contentView.layer.addSublayer(self.separator)
     }
     
-    open override func updateSubviews(_ action:String, _ value:Any?){
+    open override func updateSubviews(_ value:Any?){
         self.separator.frame = CGRect(x: 0, y: self.contentView.height-NX.pixel, width: self.contentView.width, height: NX.pixel)
         
         if true {
@@ -164,7 +164,7 @@ open class NXNaviView: NXBackgroundView<UIImageView, UIView> {
     }
 }
 
-extension NXNaviView {
+extension NXNavigationView {
     open class Bar: UIButton {
         open var dicValue : [String: Any]?
         public override init(frame: CGRect) {
@@ -187,45 +187,45 @@ extension NXNaviView {
             self.titleLabel?.font = NX.font(17)
         }
         
-        open class  func back(image: UIImage?, title: String?) -> NXNaviView.Bar {
-            let element = NXNaviView.Bar(frame: CGRect.zero)
+        open class  func back(image: UIImage?, title: String?) -> NXNavigationView.Bar {
+            let element = NXNavigationView.Bar(frame: CGRect.zero)
             element.contentHorizontalAlignment = .left
             element.updateSubviews(image, title)
             return element
         }
         
-        open class  func back(image: UIImage?, title: String?, target:Any?, action:Selector?) -> NXNaviView.Bar {
-            let element = NXNaviView.Bar.back(image:image, title:title)
+        open class  func back(image: UIImage?, title: String?, target:Any?, action:Selector?) -> NXNavigationView.Bar {
+            let element = NXNavigationView.Bar.back(image:image, title:title)
             element.addTarget(target, action:action, completion:nil)
             return element
         }
         
-        open class func back(image: UIImage?, title: String?, completion:((_ owner:NXNaviView.Bar) -> ())?) -> NXNaviView.Bar {
-            let element = NXNaviView.Bar.back(image:image, title:title)
+        open class func back(image: UIImage?, title: String?, completion:((_ owner:NXNavigationView.Bar) -> ())?) -> NXNavigationView.Bar {
+            let element = NXNavigationView.Bar.back(image:image, title:title)
             element.addTarget(nil, action:nil, completion:completion)
             return element
         }
         
-        open class func forward(image: UIImage?, title: String?) -> NXNaviView.Bar {
-            let element = NXNaviView.Bar(frame: CGRect.zero)
+        open class func forward(image: UIImage?, title: String?) -> NXNavigationView.Bar {
+            let element = NXNavigationView.Bar(frame: CGRect.zero)
             element.contentHorizontalAlignment = .right
             element.updateSubviews(image, title)
             return element
         }
         
-        open class func forward(image: UIImage?, title: String?, target:Any?, action:Selector?) -> NXNaviView.Bar {
-            let element = NXNaviView.Bar.forward(image:image, title:title)
+        open class func forward(image: UIImage?, title: String?, target:Any?, action:Selector?) -> NXNavigationView.Bar {
+            let element = NXNavigationView.Bar.forward(image:image, title:title)
             element.addTarget(target, action:action, completion:nil)
             return element
         }
         
-        open class func forward(image: UIImage?, title: String?, completion:((_ owner:NXNaviView.Bar) -> ())?) -> NXNaviView.Bar {
-            let element = NXNaviView.Bar.forward(image:image, title:title)
+        open class func forward(image: UIImage?, title: String?, completion:((_ owner:NXNavigationView.Bar) -> ())?) -> NXNavigationView.Bar {
+            let element = NXNavigationView.Bar.forward(image:image, title:title)
             element.addTarget(nil, action:nil, completion:completion)
             return element
         }
         
-        open func addTarget(_ target: Any?, action: Selector?, completion:((_ owner:NXNaviView.Bar) -> ())?) {
+        open func addTarget(_ target: Any?, action: Selector?, completion:((_ owner:NXNavigationView.Bar) -> ())?) {
             if let __completion = completion {
                 self.setupEvent(UIControl.Event.touchUpInside) { event, value in
                     __completion(self)
@@ -239,7 +239,7 @@ extension NXNaviView {
                 }
             }
             else {
-                self.association?.removeTarget(self, UIControl.Event.touchUpInside)
+                self.association?.removeTarget(self, event: UIControl.Event.touchUpInside)
             }
         }
         

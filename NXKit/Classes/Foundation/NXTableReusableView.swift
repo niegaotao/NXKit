@@ -29,7 +29,7 @@ open class NXTableReusableView: UITableViewHeaderFooterView {
         self.contentView.backgroundColor = UIColor.clear
     }
     
-    open func updateSubviews(_ action:String, _ value: Any?) {
+    open func updateSubviews(_ value: Any?) {
         if let element = value as? NXItem {
             self.value = element
             self.contentView.backgroundColor = element.ctxs.backgroundColor ?? UIColor.clear

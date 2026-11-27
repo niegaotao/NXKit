@@ -60,6 +60,18 @@ public protocol NXCollectionViewAttributesProtocol {
     var attributes : UICollectionViewLayoutAttributes {set get}
 }
 
+open class NXWrappable<T>: NXItem {
+    open var wrappedValue: T
+    public init(wrappedValue: T) {
+        self.wrappedValue = wrappedValue
+        super.init()
+    }
+    
+    public required init() {
+        fatalError("init() has not been implemented")
+    }
+}
+
 
 open class NXElementArray<Element:NXItem> : NXItem {
     //分组下所有的单元格对象

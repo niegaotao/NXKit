@@ -52,20 +52,20 @@ open class NXFooterView: NXLCRView<NXButton, NXButton, NXButton> {
         
         self.backgroundColor = NX.backgroundColor
         
-        let itemWidth : CGFloat = (self.width - NX.insets.right * 3.0)/2.0
+        let itemWidth : CGFloat = (self.width - 16.0 * 3.0)/2.0
         
-        lhsView.frame = CGRect(x: NX.insets.left, y: 10, width: itemWidth, height: 40)
+        lhsView.frame = CGRect(x: 16.0, y: 10, width: itemWidth, height: 40)
         lhsView.titleLabel?.font = NX.font(14)
         lhsView.layer.masksToBounds = true
         self.addSubview(lhsView)
         
-        rhsView.frame = CGRect(x: NX.insets.left * 2.0 + itemWidth, y: 10, width: itemWidth, height: 40)
+        rhsView.frame = CGRect(x: 16.0 * 2.0 + itemWidth, y: 10, width: itemWidth, height: 40)
         rhsView.titleLabel?.font = NX.font(14)
         rhsView.layer.masksToBounds = true
         self.addSubview(rhsView)
         
         //初始化一个button
-        centerView.frame = CGRect(x: NX.insets.left, y: 10, width: self.width-NX.insets.left - NX.insets.right, height: 40)
+        centerView.frame = CGRect(x: 16.0, y: 10, width: self.width-16.0 - 16.0, height: 40)
         centerView.titleLabel?.font = NX.font(15)
         centerView.layer.masksToBounds = true
         self.addSubview(centerView)

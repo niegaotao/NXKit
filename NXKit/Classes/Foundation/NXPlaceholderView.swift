@@ -26,7 +26,7 @@ open class NXPlaceholderView : NXCView<NXLCRView<UIImageView, UILabel, UIButton>
         }
     }
     
-    open override func updateSubviews(_ action: String, _ value: Any?) {
+    open override func updateSubviews(_ value: Any?) {
         if self.ctxs.isHidden == false {
             if let __customizableView = customizableView {
                 __customizableView.isHidden = false
@@ -119,12 +119,12 @@ open class NXTablePlaceholderViewCell : NXTableViewCell {
         self.arrowView.isHidden = true
     }
     
-    override open func updateSubviews(_ action:String, _ value: Any?) {
+    override open func updateSubviews(_ value: Any?) {
         guard let item = value as? NXPlaceholderDescriptor, let placeholderView = item.placeholderView else {
             return;
         }
         placeholderView.frame = CGRect(x: 0, y: 0, width: item.ctxs.width, height: item.ctxs.height)
-        placeholderView.updateSubviews(action, value)
+        placeholderView.updateSubviews(value)
         self.backgroundView?.backgroundColor = placeholderView.backgroundColor
         self.contentView.addSubview(placeholderView)
     }
@@ -135,13 +135,13 @@ open class NXCollectionPlaceholderViewCell : NXCollectionViewCell {
         super.setupSubviews()
     }
     
-    override open func updateSubviews(_ action:String, _ value: Any?) {
+    override open func updateSubviews(_ value: Any?) {
         guard let item = value as? NXPlaceholderDescriptor, let placeholderView = item.placeholderView else {
             return;
         }
         
         placeholderView.frame = CGRect(x: 0, y: 0, width: item.ctxs.width, height: item.ctxs.height)
-        placeholderView.updateSubviews(action, value)
+        placeholderView.updateSubviews(value)
         self.backgroundView?.backgroundColor = placeholderView.backgroundColor
         self.contentView.addSubview(placeholderView)
     }

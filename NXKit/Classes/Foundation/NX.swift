@@ -58,11 +58,6 @@ extension NX {
         return NX.safeAreaInsets.bottom > 0.0
     }
     
-    //根据isXDisplay处理UI常量信息
-    static public var topOffset : CGFloat {
-        return NX.safeAreaInsets.top + 44.0
-    }
-    
     static public var bottomOffset : CGFloat {
         return NX.safeAreaInsets.bottom
     }
@@ -81,9 +76,9 @@ extension NX {
     static public var cellBackgroundColor = NX.color(255, 255, 255, 1.0)
     //选中背景色
     static public var cellSelectedBackgroundColor = NX.color(234, 234, 234, 0.3)
-    //naviView背景色
+    //navigationView背景色
     static public var barBackgroundColor = NX.color(255, 255, 255, 1)
-    //naviView背景色
+    //navigationView背景色
     static public var barForegroundColor = NX.color(51, 51, 51, 1)
     
     //overlay背景色
@@ -466,9 +461,7 @@ extension NX {
 }
 
 //内容横向纵向边缘缩进
-extension NX {
-    static public var insets = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
-    
+extension NX {    
     public struct Ats : OptionSet {
         public private(set) var rawValue : Int = 0
         public init(rawValue:Int) {
@@ -508,8 +501,8 @@ extension NX {
     
     public enum Reload : Int {
         case initialized //初始状态
-        case update      //下拉刷新
-        case more        //上拉加载更多
+        case pulldown      //下拉刷新
+        case pullup        //上拉加载更多
     }
     
     public struct Lifecycle : OptionSet {
@@ -613,7 +606,7 @@ extension NX {
         static public var scripts = [WKUserScript]()
         
         //alert/action的单元格最大宽度、高度
-        static public var size = CGSize(width: NX.width*0.8, height: 48.0)
+        static public var size = CGSize(width: min(NX.width - 40 * 2, 350), height: 48.0)
     }
     
     public class Imp {
@@ -1269,5 +1262,11 @@ extension NX.Layer : NXInitialValue {
 extension NX.Separator : NXInitialValue {
     public static var initialValue: Self {
         return NX.Separator() as! Self
+    }
+}
+
+extension UIImage.RenderingMode: NXInitialValue {
+    public static var initialValue: Self {
+        return UIImage.RenderingMode.alwaysOriginal
     }
 }

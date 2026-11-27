@@ -18,11 +18,12 @@ open class NXSuspendView<T:UIView>: NXView {
         self.addSubview(self.contentView)
     }
         
-    open override func updateSubviews(_ action: String, _ value: Any?) {
-        guard let isDisplay = value as? Bool else {
+    open override func updateSubviews(_ value: Any?) {
+        let dicValue = value as? [String: Any] ?? [:]
+        guard let isDisplay = dicValue["isDisplay"] as? Bool else {
             return
         }
-        let animation = action == "animation"
+        let animation = (dicValue["action"] as? String ?? "") == "animation"
         if isDisplay {
             self.isAnimated = false
             
